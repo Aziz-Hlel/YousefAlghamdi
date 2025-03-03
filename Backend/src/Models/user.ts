@@ -9,30 +9,28 @@ import mongoose, { mongo, Schema } from "mongoose";
 
 const userSchema = new Schema({
 
-    firstName : {
-        type : String,
-        required : true,
+    firstName: {
+        type: String,
+        required: true,
         minlength: 3,
         maxlength: 50,
-        trim:true
+        trim: true
     },
 
-    lastName : {
-        tpye : String,
-        required : true,
+    lastName: {
+        tpye: String,
+        required: true,
         minlength: 3,
         maxlength: 50,
-        trim:true
+        trim: true
 
     },
 
-    
-    
-    
-    
-    
+
+
+
 },
-    { timestamps: true}
+    { timestamps: true }
 )
 
 
