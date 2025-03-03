@@ -1,0 +1,12 @@
+{
+    "__comment": "This tells nodemon to monitor the src directory for changes",
+    "watch": ["src"], 
+
+    "__comment2": "This specifies that nodemon should only watch for files with the .ts extension It prevents unnecessary restarts caused by other file types (like .json or .md)",
+    "ext": "ts",
+
+    "__comment3": "This command tells nodemon how to execute the application when a change is detected, ts-node is used to run TypeScript files directly without compiling them into JavaScript first",
+    "exec": "ts-node src/index.ts"
+
+
+}
