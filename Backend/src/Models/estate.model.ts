@@ -1,7 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-
-
-
+import filterFieldsTypes from "./filterFields.type";
 
 
 
@@ -18,6 +16,10 @@ const estateSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true,
+    },
+
+    filterFields: {
+        ...filterFieldsTypes
     },
 
     description: {
