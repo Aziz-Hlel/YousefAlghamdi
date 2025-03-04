@@ -18,9 +18,7 @@ const estateSchema = new mongoose.Schema({
         required: true,
     },
 
-    filterFields: {
-        ...filterFieldsTypes
-    },
+    filterFields: filterFieldsTypes,
 
     description: {
         type: String,
