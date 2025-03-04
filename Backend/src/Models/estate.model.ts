@@ -47,16 +47,13 @@ const estateSchema = new mongoose.Schema({
         required: true,
     },
 
-    owner: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
+    clientId: {
+        type: String,
         required: true
     },
 
-    agent: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
+    agentId: {
+        type: String,
         default: null,
     },
 
