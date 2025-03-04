@@ -13,7 +13,7 @@ const userSchema = new Schema({
     },
 
     lastName: {
-        tpye: String,
+        type: String,
         required: true,
         minlength: 3,
         maxlength: 50,

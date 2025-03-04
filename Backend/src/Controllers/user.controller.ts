@@ -1,12 +1,12 @@
 
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response } from "express";
 import { errorHandler } from '../utils/error'
 import User from '../Models/user.model';
 
 
 
 
-export const register = async (req: Request, res: Response, next: NextFunction) => {
+export const register = async (req: any, res: any, next: any) => {
 
     const { firstName, lastName, password } = req.body
 
@@ -27,3 +27,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
 
 
 }
+
+export const test = (req: Request, res: Response) => {
+    res.json({ message: 'API is working!' });
+};
