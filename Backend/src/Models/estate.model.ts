@@ -15,6 +15,11 @@ const estateSchema = new mongoose.Schema({
         trim: true
     },
 
+    type: {
+        type: String,
+        required: true,
+    },
+
     description: {
         type: String,
         required: true,

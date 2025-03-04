@@ -10,8 +10,8 @@ export const register = async (req: any, res: any, next: any) => {
 
     const { firstName, lastName, password } = req.body
 
-    if (!firstName || !lastName || !password) next(errorHandler(403, 'You are not allowed to update this user'));
-
+    if (!firstName || !lastName || !password) return next(errorHandler(403, 'You are not allowed to update this user'));
+    console.log('ousilllllll ?')
     const newUser = new User({
         firstName,
         lastName,
