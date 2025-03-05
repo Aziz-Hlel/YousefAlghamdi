@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import Estate from "../Models/estate.model";
+import { errorHandler } from "../utils/error";
+import mongoose from "mongoose";
 
 
 
@@ -22,3 +24,23 @@ export const createEstate = async (req: Request, res: Response, next: NextFuncti
 
 
 }
+
+
+export const getEstate = async (req: Request, res: Response, next: NextFunction) => {
+
+    const estateId = req.params.estateId;
+    if (!estateId || !mongoose.Types.ObjectId.isValid(estateId)) return next(errorHandler(404, "Bad request"));
+
+    try {
+        const estate = await Estate.findById(estateId)
+        res.json({
+
+            "result": estate,
+        });
+    } catch (error) {
+        next(error);
+    }
+
+
+}
+

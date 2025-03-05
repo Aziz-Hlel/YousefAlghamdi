@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/api/user', userRouter);
-app.use('api/estate', estateRouter);
+app.use('/api/estate', estateRouter);
 
 
 app.get('', (req, res) => {

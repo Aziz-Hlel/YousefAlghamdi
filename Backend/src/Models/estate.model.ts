@@ -59,7 +59,6 @@ const estateSchema = new mongoose.Schema({
 
 
 
-
 },
     { timestamps: true },
 );
