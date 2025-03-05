@@ -41,7 +41,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     const { firstName, password } = req.body;
 
     if (!firstName || !password) return next(errorHandler(404, errorMessages.COMMON.BAD_Request));
-    console.log(req.body)
+
     const user = await User.findOne({ firstName });
 
     if (!user) return next(errorHandler(401, errorMessages.COMMON.Invalid_Credentials));

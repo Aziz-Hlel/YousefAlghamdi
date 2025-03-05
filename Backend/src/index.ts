@@ -15,7 +15,7 @@ connectDB()
 
 
 const port = process.env.PORT
-
+ 
 
 app.listen(port,()=>{
     console.log(`Now listening on port ${port} \n go to http://localhost:50/ `);
