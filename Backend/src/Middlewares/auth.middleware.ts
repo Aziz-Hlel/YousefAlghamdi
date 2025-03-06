@@ -11,13 +11,14 @@ const protect = async (req: Request, res: Response, next: NextFunction) => {
 
     const accessToken = req.headers["authorization"]?.split(" ")[1] || null;
 
-    // const refreshToken = req.cookies["refreshToken"];
-    // console.log(refreshToken)
+    const refreshToken = req.cookies?.refreshToken;
+
     if (!accessToken) return next(errorHandler(401, errorMessages.AUTH.INVALID_TOKEN));
-    // if (!refreshToken) return next(errorHandler(401, errorMessages.AUTH.INVALID_TOKEN));
+    if (!refreshToken) return next(errorHandler(401, errorMessages.AUTH.INVALID_TOKEN));
 
 
     try {
+        
         const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET as string;
         const decoded = jwt.verify(accessToken, JWT_ACCESS_SECRET);
         const userId = (decoded as any).userId
