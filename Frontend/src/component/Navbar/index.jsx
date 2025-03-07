@@ -57,10 +57,6 @@ function Navbar({ handleSidebar, secondNav }) {
                           <NavBtn link="/our-agent" text="Our Agent" />
                           <NavBtn link="/agent-detail" text="Agent Details" />
                         </NavBtn>
-                        <NavBtn text="News" link="#">
-                          <NavBtn link="/blog" text="News" />
-                          <NavBtn link="/blog-single" text="News Single" />
-                        </NavBtn>
                         <NavBtn link="/contact" text="Contact" />
                       </ul>
                       {/* End Main Menu */}

@@ -1,5 +1,5 @@
 import AOS from "aos";
-import "aos/dist/aos.css";
+// import "aos/dist/aos.css";
 import React, { useEffect } from 'react'
 import Home from './component/Home'
 import PaymentMethod from "./component/PaymentMethod";
@@ -13,8 +13,6 @@ import EditProperty from "./component/Edit Property";
 import ErrorPage from "./component/Error";
 import Faq from "./component/Faq";
 import Login from "./component/Login";
-import News from "./component/News";
-import NewsSingle from "./component/NewsSingle.jsx";
 import OurAgents from "./component/OurAgents";
 import Pricing from "./component/Pricing.jsx";
 import PropertySingle from "./component/Property Single";
@@ -57,14 +55,6 @@ const App2 = () => {
         {
             path: "/dashboard",
             element: <Dashboard />,
-        },
-        {
-            path: "/blog-single",
-            element: <NewsSingle />,
-        },
-        {
-            path: "/blog",
-            element: <News />,
         },
         {
             path: "/agent-detail",

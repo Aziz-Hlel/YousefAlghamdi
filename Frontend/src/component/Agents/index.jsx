@@ -1,6 +1,7 @@
 import AgentCardV2 from "../Cards/AgentCardV2";
 import AboutShapeImg from "../About/AboutShapeImg";
 import agents from "../../data/agents";
+import AgentCardV2_2 from "../Cards/AgentCardV2_2";
 
 function Agents() {
   return (
@@ -36,16 +37,19 @@ function Agents() {
           </div>
         </div>
         <div className="row">
+    
           {agents?.map((agent) => (
-            <AgentCardV2
+            <AgentCardV2_2
               key={agent.id}
-              img={agent.img}
+              img={"https://placehold.co/175x300"}
               name={agent.name}
               position={agent.position}
               propertiesLink={agent.propertiesLink}
               detailsLink={agent.detailsLink}
             />
+
           ))}
+
         </div>
       </div>
     </section>

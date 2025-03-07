@@ -3,6 +3,8 @@ import Title from "../Title";
 import SingleList from "./SingleList";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import TitleBtn from "../Button/TitleBtn";
+import dubai_central from "../../assets/img/dubai_central.jpg";
+import deira from "../../assets/img/deira.jpg"
 
 function PropertyListing() {
   return (
@@ -26,42 +28,42 @@ function PropertyListing() {
             {/* Homec Listing  */}
             <div className=" mg-top-40 container w-full cursor-pointer ">
               <div className=" w-full flex  gap-6 cursor-pointer " >
-             
-                  <SingleList 
-                    listing="4"
-                    place="Dubai central"
-                    img="https://placehold.co/274x567"
-                    link="#"
-                  />
-             
-                  <SingleList
-                    listing="4"
-                    place="Deira"
-                    img="https://placehold.co/274x567"
-                    link="#"
-                  />
 
-                  <SingleList
-                    listing="4"
-                    place="Bur Dubai"
-                    img="https://placehold.co/274x567"
-                    link="#"
-                  />
+                <SingleList
+                  listing="4"
+                  place="Dubai central"
+                  img={dubai_central}
+                  link="#"
+                />
 
-                  <SingleList
-                    listing="4"
-                    place="Al Awir"
-                    img="https://placehold.co/274x567"
-                    link="#"
-                  />
+                <SingleList
+                  listing="4"
+                  place="Deira"
+                  img={deira}
+                  link="#"
+                />
 
-                  <SingleList
-                    listing="4"
-                    place="Al Qusais"
-                    img="https://placehold.co/274x567"
-                    link="#"
-                  />
-                
+                <SingleList
+                  listing="4"
+                  place="Bur Dubai"
+                  img="https://placehold.co/274x567"
+                  link="#"
+                />
+
+                <SingleList
+                  listing="4"
+                  place="Al Awir"
+                  img="https://placehold.co/274x567"
+                  link="#"
+                />
+
+                <SingleList
+                  listing="4"
+                  place="Al Qusais"
+                  img="https://placehold.co/274x567"
+                  link="#"
+                />
+
               </div>
             </div>
             {/* Homec listing end  */}

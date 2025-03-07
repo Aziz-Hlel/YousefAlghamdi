@@ -4,14 +4,15 @@ import GoTopBtn from "../Button/GoTopBtn";
 import About from "../About/About";
 import Agents from "../Agents";
 import Blog from "../Blog";
-import DownloadApp from "../DownloadApp";
-import Features from "../Features";
+import DownloadApp from "../DownloadApp2";
+import Features2 from "../Features2";
 import Header from "../Header";
 import HomecHero from "../HomecHero";
 import LatestProperty from "../LatestProperty";
 import PropertyListing from "../PropertyListing2";
 import Preloader from "../Loader";
 import FaqSection from "../Faq/FaqSection";
+import LatestPropertyV2 from "../LatestProperty/LatestPropertyV2";
 
 function Home() {
   const [isLoading, setisLoadingg] = useState(true);
@@ -29,14 +30,17 @@ function Home() {
         <Header />
         <HomecHero />
         <PropertyListing />
+        <LatestPropertyV2 />
+
+
+        <Features2 />
+
         <About />
-        <LatestProperty />
-        <Features />
         <Agents />
         <FaqSection />
         <DownloadApp />
         <Footer />
-        <GoTopBtn />
+
       </>
     );
   }

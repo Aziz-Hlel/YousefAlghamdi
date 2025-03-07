@@ -15,11 +15,8 @@ function AgentCardV2({ img, propertiesLink, name, position, detailsLink }) {
           <img src={img} alt="#" />
         </div>
         {/* Agent Body */}
-        <div className="homec-agent__body">
-          <Link className="homec-agent__body--btn" to={propertiesLink}>
-            See Properties
-          </Link>
-          <ul className="homec-agent__social list-none">
+        <div className="homec-agent__body  ">
+          <div className="flex flex-col homec-agent__social list-none w-fit">
             <li>
               <a href="#">
                 <svg
@@ -78,8 +75,11 @@ function AgentCardV2({ img, propertiesLink, name, position, detailsLink }) {
                 </svg>
               </a>
             </li>
-          </ul>
-          <h4 className="homec-agent__title">
+          </div>
+
+
+
+          <h4 className="homec-agent__title ">
             <Link to={detailsLink}>
               {name}
               <span>{position}</span>

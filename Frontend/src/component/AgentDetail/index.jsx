@@ -105,11 +105,10 @@ function AgentDetail() {
                   { img: "img/bath-icon.svg", name: "2 Bathroom" },
                   { img: "img/size-icon.svg", name: "5x9 m2" },
                 ]}
-                classes={`${
-                  gridStyle === "grid"
-                    ? "col-md-4 col-12 mg-top-30"
-                    : "col-12 mg-top-30"
-                } `}
+                classes={`${gridStyle === "grid"
+                  ? "col-md-4 col-12 mg-top-30"
+                  : "col-12 mg-top-30"
+                  } `}
                 view={gridStyle}
               />
               <LatestPropertyCard
@@ -130,11 +129,10 @@ function AgentDetail() {
                   { img: "img/bath-icon.svg", name: "2 Bathroom" },
                   { img: "img/size-icon.svg", name: "5x9 m2" },
                 ]}
-                classes={`${
-                  gridStyle === "grid"
-                    ? "col-md-4 col-12 mg-top-30"
-                    : "col-12 mg-top-30"
-                } `}
+                classes={`${gridStyle === "grid"
+                  ? "col-md-4 col-12 mg-top-30"
+                  : "col-12 mg-top-30"
+                  } `}
                 view={gridStyle}
               />
               <LatestPropertyCard
@@ -155,11 +153,10 @@ function AgentDetail() {
                   { img: "img/bath-icon.svg", name: "2 Bathroom" },
                   { img: "img/size-icon.svg", name: "5x9 m2" },
                 ]}
-                classes={`${
-                  gridStyle === "grid"
-                    ? "col-md-4 col-12 mg-top-30"
-                    : "col-12 mg-top-30"
-                } `}
+                classes={`${gridStyle === "grid"
+                  ? "col-md-4 col-12 mg-top-30"
+                  : "col-12 mg-top-30"
+                  } `}
                 view={gridStyle}
               />
               <LatestPropertyCard
@@ -180,11 +177,10 @@ function AgentDetail() {
                   { img: "img/bath-icon.svg", name: "2 Bathroom" },
                   { img: "img/size-icon.svg", name: "5x9 m2" },
                 ]}
-                classes={`${
-                  gridStyle === "grid"
-                    ? "col-md-4 col-12 mg-top-30"
-                    : "col-12 mg-top-30"
-                } `}
+                classes={`${gridStyle === "grid"
+                  ? "col-md-4 col-12 mg-top-30"
+                  : "col-12 mg-top-30"
+                  } `}
                 view={gridStyle}
               />
               <LatestPropertyCard
@@ -205,11 +201,10 @@ function AgentDetail() {
                   { img: "img/bath-icon.svg", name: "2 Bathroom" },
                   { img: "img/size-icon.svg", name: "5x9 m2" },
                 ]}
-                classes={`${
-                  gridStyle === "grid"
-                    ? "col-md-4 col-12 mg-top-30"
-                    : "col-12 mg-top-30"
-                } `}
+                classes={`${gridStyle === "grid"
+                  ? "col-md-4 col-12 mg-top-30"
+                  : "col-12 mg-top-30"
+                  } `}
                 view={gridStyle}
               />
               {gridStyle === "grid" && (
@@ -231,11 +226,10 @@ function AgentDetail() {
                     { img: "img/bath-icon.svg", name: "2 Bathroom" },
                     { img: "img/size-icon.svg", name: "5x9 m2" },
                   ]}
-                  classes={`${
-                    gridStyle === "grid"
-                      ? " col-md-4 col-12 mg-top-30"
-                      : "col-12 mg-top-30"
-                  } `}
+                  classes={`${gridStyle === "grid"
+                    ? " col-md-4 col-12 mg-top-30"
+                    : "col-12 mg-top-30"
+                    } `}
                 />
               )}
             </div>

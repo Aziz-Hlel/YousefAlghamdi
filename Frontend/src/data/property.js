@@ -1,7 +1,12 @@
+import popertyimg from "../assets/img/property_img12.png"
+import popertyimg2 from "../assets/img/property_img13.png"
+import popertyimg3 from "../assets/img/property_img14.png"
+
+
 const property = [
   {
     id: 1,
-    img: "https://placehold.co/350x220",
+    img:  popertyimg ,
     likeLink: "#",
     detailsLink: "/agent-detail",
     agentName: "Wade Wirren",
@@ -24,7 +29,7 @@ const property = [
   },
   {
     id: 2,
-    img: "https://placehold.co/350x220",
+    img:  popertyimg2 ,
     likeLink: "#",
     detailsLink: "/agent-detail",
     agentName: "Wade Wirren",
@@ -47,7 +52,7 @@ const property = [
   },
   {
     id: 3,
-    img: "https://placehold.co/350x220",
+    img:  popertyimg3 ,
     likeLink: "#",
     detailsLink: "/agent-detail",
     agentName: "Wade Wirren",
@@ -70,7 +75,7 @@ const property = [
   },
   {
     id: 4,
-    img: "https://placehold.co/350x220",
+    img:  popertyimg ,
     likeLink: "#",
     detailsLink: "/agent-detail",
     agentName: "Wade Wirren",
@@ -93,7 +98,7 @@ const property = [
   },
   {
     id: 5,
-    img: "https://placehold.co/350x220",
+    img:  popertyimg2 ,
     likeLink: "#",
     detailsLink: "/agent-detail",
     agentName: "Wade Wirren",
@@ -116,7 +121,7 @@ const property = [
   },
   {
     id: 6,
-    img: "https://placehold.co/350x220",
+    img:  popertyimg3 ,
     likeLink: "#",
     detailsLink: "/agent-detail",
     agentName: "Wade Wirren",

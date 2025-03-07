@@ -2902,6 +2902,8 @@ input[type="checkbox"]:checked::before {
   background: #eceaff;
   width: 30px;
   display: flex;
+  flex-direction: column;
+
   justify-content: center;
   align-items: center;
   border-radius: 100%;
@@ -2943,7 +2945,7 @@ input[type="checkbox"]:checked::before {
   opacity: 1;
   visibility: visible;
   display: flex;
-  flex-direction: initial;
+  flex-direction: column;
   gap: 10px;
   transform: none;
 }
@@ -2952,7 +2954,8 @@ input[type="checkbox"]:checked::before {
   background: #fff;
   padding: 10px 20px;
   position: relative;
-  left: -50%;
+  
+  left: -75%;
   width: 150%;
   font-size: 22px;
   border-radius: 4px 4px 0px 0px;
@@ -3086,7 +3089,7 @@ input[type="checkbox"]:checked::before {
   opacity: 1;
   visibility: visible;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   top: 0;
   left: 0;
   margin-top: 25px;
@@ -4011,9 +4014,9 @@ blockquote::before {
 
 .homec-listing__title {
   position: absolute;
-  left: 25px;
-  bottom: 25px;
-  font-size: 32px;
+  left: 0px;
+  bottom: 0px;
+  font-size: 25px;
   display: flex;
   flex-direction: column;
   color: #fff;
