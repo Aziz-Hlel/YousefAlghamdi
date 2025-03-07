@@ -35,14 +35,6 @@ function App() {
       errorElement: <ErrorPage />,
     },
     {
-      path: "/Home2",
-      element: <Home2 />,
-    },
-    {
-      path: "/Home3",
-      element: <Home3 />,
-    },
-    {
       path: "/property",
       element: <Property />,
     },
@@ -118,8 +110,6 @@ function App() {
 
   return (
     <>
-      <h1 className="bg-blue-900 px-5   w-full border text-pink-500">hi from taildwind :</h1>
-
       <RouterProvider router={router} />{" "}
     </>
   );

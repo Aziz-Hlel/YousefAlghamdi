@@ -2,11 +2,12 @@ import ProtoTypes from "prop-types";
 import NavBtn from "./NavBtn";
 import { Link } from "react-router-dom";
 function Navbar({ handleSidebar, secondNav }) {
+  
   return (
     <div className={"homec-header__middle"}>
       <div className={"container"}>
         <div className="row align-items-center">
-          <div className="col-12">
+          <div className="col-12 ">
             <div
               className="homec-header__inside"
               style={{ background: secondNav && "transparent" }}
@@ -14,7 +15,7 @@ function Navbar({ handleSidebar, secondNav }) {
               <div className="homec-header__group">
                 <div className="homec-header__logo">
                   <Link to="/">
-                    <img src="img/logo.png" alt="#" />
+                    <img src="img/logo.jpg" alt="#" />
                   </Link>
                 </div>
                 <div className="homec-header__menu">
@@ -22,11 +23,10 @@ function Navbar({ handleSidebar, secondNav }) {
                     <div className="nav-item">
                       {/* Main Menu  */}
                       <ul className="nav-menu menu navigation list-none">
+
                         <NavBtn text="Home" link="/">
-                          <NavBtn link="/" text="Homepage 01" />
-                          <NavBtn link="/home2" text="Homepage 02" />
-                          <NavBtn link="/home3" text="Homepage 03" />
                         </NavBtn>
+
                         <NavBtn text="Properties" link="#">
                           <NavBtn link="/property" text="Properties" />
                           <NavBtn

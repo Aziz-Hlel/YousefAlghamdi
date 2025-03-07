@@ -5,7 +5,7 @@ function HomecHero() {
   return (
     <section
       id="hero"
-      className="homec-hero homec-hero__v2 p-relative"
+      className="homec-hero homec-hero__v2 p-relative xl:-translate-y-14"
       style={{ backgroundImage: "url('img/map.svg')" }}
     >
       <div className="container">

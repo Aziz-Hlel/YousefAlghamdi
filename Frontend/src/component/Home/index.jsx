@@ -9,7 +9,7 @@ import Features from "../Features";
 import Header from "../Header";
 import HomecHero from "../HomecHero";
 import LatestProperty from "../LatestProperty";
-import PropertyListing from "../PropertyListing";
+import PropertyListing from "../PropertyListing2";
 import Preloader from "../Loader";
 import FaqSection from "../Faq/FaqSection";
 
@@ -26,19 +26,15 @@ function Home() {
   } else {
     component = (
       <>
-        <h1 className="bg-blue-900 px-5   w-full border text-pink-500">hi from taildwind :</h1>
         <Header />
         <HomecHero />
         <PropertyListing />
         <About />
         <LatestProperty />
-        <h1 className="bg-blue-900 px-5   w-full border text-pink-500">hi from taildwind :</h1>
-
         <Features />
         <Agents />
         <FaqSection />
         <DownloadApp />
-        <Blog />
         <Footer />
         <GoTopBtn />
       </>

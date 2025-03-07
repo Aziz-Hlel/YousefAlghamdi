@@ -4,24 +4,49 @@ import Select from "react-dropdown-select";
 const options = [
   {
     id: 1,
-    name: "Dhaka",
+    name: "Dubai (the central city)",
   },
   {
     id: 2,
-    name: "New York",
+    name: "Deira",
   },
   {
-    id: 2,
-    name: "Sydney",
+    id: 3,
+    name: "Bur Dubai",
+  },
+  {
+    id: 4,
+    name: "Al Awir",
+  },
+  {
+    id: 5,
+    name: "Al Qusais",
+  },
+  {
+    id: 6,
+    name: "Al Barsha",
+  },
+  {
+    id: 7,
+    name: "Jumeirah",
+  },
+  {
+    id: 8,
+    name: "Riyadh",
+  },
+  {
+    id: 9,
+    name: "Al Karama",
   },
 ];
+
 
 function HomeSearch() {
   const [value, setValue] = useState(options[0]);
 
   return (
     <div
-      className="homec-search-form mg-top-10"
+      className="homec-search-form mg-top-10 z-50"
       data-aos="fade-up"
       data-aos-delay="500"
     >
@@ -61,7 +86,7 @@ function HomeSearch() {
             </g>
           </svg>
           {/* Form Group */}
-          <div className="form-group">
+          <div className="form-group z-50">
             <Select
               values={[value]}
               options={options}
