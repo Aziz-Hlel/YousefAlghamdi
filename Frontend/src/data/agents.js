@@ -1,7 +1,12 @@
+import agent1 from "../assets/img/agents/agent1.jpg"
+import agent2 from "../assets/img/agents/agent2.jpg"
+import agent3 from "../assets/img/agents/agent3.jpg"
+
+
 const agents = [
   {
     id: 1,
-    img: "https://placehold.co/285x500",
+    img: agent1,
     img2: "https://placehold.co/35x35",
     img3: "https://placehold.co/405x440",
     name: "Floyd Miles",
@@ -15,7 +20,7 @@ const agents = [
   },
   {
     id: 2,
-    img: "https://placehold.co/285x500",
+    img: agent2,
     img2: "https://placehold.co/35x35",
     img3: "https://placehold.co/405x440",
     name: "Robert Fox",
@@ -29,7 +34,7 @@ const agents = [
   },
   {
     id: 3,
-    img: "https://placehold.co/285x500",
+    img: agent3,
     img2: "https://placehold.co/35x35",
     img3: "https://placehold.co/405x440",
     name: "Dianne Russell",

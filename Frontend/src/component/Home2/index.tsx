@@ -27,7 +27,7 @@ function Home() {
   } else {
     component = (
       <>
-        <Header />
+        <Header v2={null} />
         <HomecHero />
         <PropertyListing />
         <LatestPropertyV2 />

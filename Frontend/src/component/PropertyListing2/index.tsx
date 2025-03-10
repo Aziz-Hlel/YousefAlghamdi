@@ -27,42 +27,37 @@ function PropertyListing() {
           <div className="col-12" data-aos="fade-up" data-aos-delay="600">
             {/* Homec Listing  */}
             <div className=" mg-top-40 container w-full cursor-pointer ">
-              <div className=" w-full flex  gap-6 cursor-pointer " >
+              <div className=" w-full flex  gap-6 cursor-pointer h-full flex-wrap justify-center " >
 
                 <SingleList
                   listing="4"
                   place="Dubai central"
-                  img={dubai_central}
+                  img={"https://placehold.co/254x467"}
                   link="#"
                 />
 
                 <SingleList
                   listing="4"
                   place="Deira"
-                  img={deira}
+                  img={"https://placehold.co/254x467"}
                   link="#"
                 />
 
                 <SingleList
                   listing="4"
                   place="Bur Dubai"
-                  img="https://placehold.co/274x567"
+                  img="https://placehold.co/254x467"
                   link="#"
                 />
 
                 <SingleList
                   listing="4"
                   place="Al Awir"
-                  img="https://placehold.co/274x567"
+                  img="https://placehold.co/254x467"
                   link="#"
                 />
 
-                <SingleList
-                  listing="4"
-                  place="Al Qusais"
-                  img="https://placehold.co/274x567"
-                  link="#"
-                />
+
 
               </div>
             </div>

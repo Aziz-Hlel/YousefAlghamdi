@@ -19,29 +19,23 @@ function Agents() {
         <div className="row">
           <div className="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
             <div className="homec-section__head text-center mg-btm-30">
-              <span
-                className="homec-section__badge homec-section__badge--small homec-primary-color m-0"
-                data-aos="fade-in"
-                data-aos-delay="300"
-              >
-                View All 234 Agent
-              </span>
+
               <h2
                 className="homec-section__title"
                 data-aos="fade-in"
                 data-aos-delay="400"
               >
-                Meet Properties Agents
+                Meet Our Properties Agents
               </h2>
             </div>
           </div>
         </div>
-        <div className="row">
-    
+        <div className="flex  items-center flex-col lg:flex-row ">
+
           {agents?.map((agent) => (
             <AgentCardV2_2
               key={agent.id}
-              img={"https://placehold.co/175x300"}
+              img={agent.img}
               name={agent.name}
               position={agent.position}
               propertiesLink={agent.propertiesLink}

@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 function AgentCardV2_2({ img, propertiesLink, name, position, detailsLink }: { img: any, propertiesLink: any, name: any, position: any, detailsLink: any }) {
   return (
     <div
-      className="col-lg-4 col-md-6 col-12 mg-top-30  transition-transform transform hover:animate-hoverUp  "
+      className="col-lg-4 col-md-6 col-12 mg-top-30 flex items-center justify-center  transition-transform transform hover:animate-hoverUp  "
       data-aos="fade-in"
       data-aos-delay="900"
       
     >
       {/* Single agent */}
-      <div className=" bg-white w-72 py-2.5 pl-5  rounded-lg shadow-xl ">
+      <div className=" bg-white w-72 py-2.5 pl-5  rounded-lg shadow-xl  ">
 
 
         <div className="flex ">
@@ -20,7 +20,7 @@ function AgentCardV2_2({ img, propertiesLink, name, position, detailsLink }: { i
             <img src={img} alt="#" className="  rounded-2xl" />
           </div>
 
-          <div className=" flex flex-col ml-5 gap-1.5">
+          <div className=" flex flex-col  ml-5 gap-1.5">
 
             <div className="  rounded-full  w-fit h-fit p-1.5 bg-violet-200 hover:bg-violet-500 hover:cursor-pointer">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" className=" fill-gray-400" viewBox="0 0 1920 1920" >

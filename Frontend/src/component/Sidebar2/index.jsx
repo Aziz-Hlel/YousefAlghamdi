@@ -8,6 +8,14 @@ function index() {
     <div className="col-lg-4 col-12 mg-top-30">
       <div className="property-sidebar">
         <SelectiveInput
+          title="Country"
+          options={[
+            { id: 1, name: "Bangladesh" },
+            { id: 2, name: "United Kingdom" },
+            { id: 3, name: "United State" },
+          ]}
+        />
+        <SelectiveInput
           title="City"
           options={[
             { id: 1, name: "Dhaka City" },
