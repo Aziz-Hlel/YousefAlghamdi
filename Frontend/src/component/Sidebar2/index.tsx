@@ -76,8 +76,9 @@ function index() {
           symbol="$"
           standard={null}
         />
-
-        <TitleBtn link="property" text="Apply filter" delay="0" />
+        <div className="w-full flex justify-center pt-4">
+          <button className="homec-btn">Apply filter</button>
+        </div>
       </div>
       <AgentsSidebarSlider />
     </div>
