@@ -23,37 +23,37 @@ function PropertyListing() {
           </div>
         </div>
 
-        <div className="row  " >
+        <div className="row  pb-10" >
           <div className="col-12" data-aos="fade-up" data-aos-delay="600">
             {/* Homec Listing  */}
-            <div className=" mg-top-40 container w-full cursor-pointer ">
+            <div className=" mg-top-40 container h-full w-full cursor-pointer ">
               <div className=" w-full flex  gap-6 cursor-pointer h-full flex-wrap justify-center " >
 
                 <SingleList
                   listing="4"
                   place="Dubai central"
-                  img={"https://placehold.co/254x467"}
+                  img={deira}
                   link="#"
                 />
 
                 <SingleList
                   listing="4"
                   place="Deira"
-                  img={"https://placehold.co/254x467"}
+                  img={dubai_central}
                   link="#"
                 />
 
                 <SingleList
                   listing="4"
                   place="Bur Dubai"
-                  img="https://placehold.co/254x467"
+                  img="https://placehold.co/256x529"
                   link="#"
                 />
 
                 <SingleList
                   listing="4"
                   place="Al Awir"
-                  img="https://placehold.co/254x467"
+                  img="https://placehold.co/256x529"
                   link="#"
                 />
 
@@ -64,7 +64,7 @@ function PropertyListing() {
             {/* Homec listing end  */}
           </div>
         </div>
-        <div className="row">
+        <div className="row ">
           <TitleBtn link="property" text="See all City" delay="700" />
         </div>
       </div>

@@ -4,6 +4,7 @@ import RangeInput from "../Form/RangeInput";
 import AgentsSidebarSlider from "../Agents/AgentsSidebarSlider";
 import imarates from "../../imarates";
 import estateTypes from "../../estateType";
+import TitleBtn from "../Button/TitleBtn";
 
 function index() {
   return (
@@ -42,6 +43,8 @@ function index() {
           defaultMaxRange={10}
           title="Number Of Rooms"
           standard="rooms"
+          symbol={null}
+          text={null}
         />
         <RangeInput
           minRange={0}
@@ -50,6 +53,8 @@ function index() {
           defaultMaxRange={5}
           title="Number Of Bathrooms"
           standard="bathrooms"
+          symbol={null}
+          text={null}
         />
         <RangeInput
           minRange={0}
@@ -58,6 +63,8 @@ function index() {
           defaultMaxRange={1200}
           title="Square feet"
           standard="sq. ft."
+          symbol={null}
+          text={null}
         />
         <RangeInput
           minRange={0}
@@ -67,7 +74,10 @@ function index() {
           title="Price"
           text="Range: "
           symbol="$"
+          standard={null}
         />
+
+        <TitleBtn link="property" text="Apply filter" delay="0" />
       </div>
       <AgentsSidebarSlider />
     </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropertyBar from "./PropertyBar";
-import Sidebar from "../Sidebar";
+import Sidebar from "../Sidebar2";
 import LatestPropertyCard from "../Cards/LatestPropertyCard";
 import Pagination from "../Pagination";
 import properties from "../../data/property";
