@@ -1,4 +1,5 @@
 import ProtoTypes from "prop-types";
+import br from "./bread_overlay.jpg";
 
 function Breadcrumbs({ title, children, titlePosition, background, overlay }) {
   return (
@@ -7,7 +8,7 @@ function Breadcrumbs({ title, children, titlePosition, background, overlay }) {
       style={{
         backgroundImage: background
           ? background
-          : "url(https://placehold.co/1920x455)",
+          : `url(${br})`,
       }}
     >
       {overlay && <div className="homec-overlay"></div>}
