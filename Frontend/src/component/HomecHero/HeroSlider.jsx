@@ -4,6 +4,10 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { responsiveHeroSlider } from "../../utils/responsiveSlider";
 import { CustomDot } from "../CustomDot/CustomDot";
+import property_featured from "@img/featured/property_featured.jpg"
+import property_featured2 from "@img/featured/property_featured2.jpg"
+
+
 function HeroSlider() {
   return (
     <div className="homec-slider-property-slider">
@@ -14,7 +18,7 @@ function HeroSlider() {
         showDots={true}
         infinite={true}
         autoPlay={true}
-        autoPlaySpeed={3000}
+        autoPlaySpeed={2000}
         removeArrowOnDeviceType={[
           "superLargeDesktop",
           "desktop",
@@ -25,7 +29,7 @@ function HeroSlider() {
       >
         <HeroSliderSlide
           link="property-single"
-          img="https://placehold.co/495x500"
+          img={property_featured}
           price="3,976"
           pricePeriod="month"
           title="Modern House With Pool"
@@ -39,7 +43,7 @@ function HeroSlider() {
         />
         <HeroSliderSlide
           link="property-single"
-          img="https://placehold.co/495x500"
+          img={property_featured2}
           price="3,976"
           pricePeriod="month"
           title="Diamond Mn Apartment"
@@ -53,7 +57,7 @@ function HeroSlider() {
         />
         <HeroSliderSlide
           link="property-single"
-          img="https://placehold.co/495x500"
+          img={property_featured2}
           price="3,976"
           pricePeriod="month"
           title="Northwest Office Space"
