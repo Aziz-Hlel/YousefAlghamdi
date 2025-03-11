@@ -1,7 +1,7 @@
 import FooterList from "./FooterList";
 import SubscribeForm from "../Subscribe";
 import { Link } from "react-router-dom";
-
+import logo_img from "@img/logo.png"
 function Footer() {
   return (
     <footer className="footer-area p-relative">
@@ -25,9 +25,9 @@ function Footer() {
                 <div className="col-lg-4 col-md-3 col-12">
                   {/* Footer Widget  */}
                   <div className="footer-about-widget">
-                    <div className="footer-logo homec-header__logo">
+                    <div className="">
                       <Link className="logo" href="/">
-                        <img src="img/logo-footer.png" alt="#" />
+                        <img src={logo_img} alt="#" className=" w-72 h-64" />
                       </Link>
                     </div>
                     <p className="footer-about-text">

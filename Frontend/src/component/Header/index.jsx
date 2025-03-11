@@ -4,7 +4,7 @@ import Navbar from "../Navbar";
 import Topbar from "../Topbar";
 import ProtoTypes from "prop-types";
 
-function Header({ v2 }) {
+function  Header({ v2 }) {
   const [scrollPosition, setScrollPosition] = useState(0);
 
   const handleScroll = () => {

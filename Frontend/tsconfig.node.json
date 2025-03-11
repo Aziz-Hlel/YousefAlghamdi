@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+
+        /* path config */
+        "baseUrl": ".", 
+    "paths": {
+      "@img/*": ["src/assets/img/*"]
+    },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "ES2022",
     "lib": ["ES2023"],
@@ -18,7 +24,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
   },
-  "include": ["vite.config.ts"]
+  "include": ["vite.config.ts"],
 }

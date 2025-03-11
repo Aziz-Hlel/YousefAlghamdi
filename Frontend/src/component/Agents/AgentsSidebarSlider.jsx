@@ -3,6 +3,7 @@ import AgentCard from "../Cards/AgentCard";
 import Carousel from "react-multi-carousel";
 import { responsiveSmallAgentsSlider } from "../../utils/responsiveSlider";
 
+
 function AgentsSidebarSlider() {
   return (
     <div className="mg-top-30">

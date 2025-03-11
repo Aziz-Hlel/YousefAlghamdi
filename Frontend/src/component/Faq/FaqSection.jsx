@@ -1,5 +1,7 @@
 import { useState } from "react";
 import According from "./According";
+import support_img from "@img/support/support_img.png";
+
 
 function FaqSection() {
   const [collapse, setCollapse] = useState(1);
@@ -90,7 +92,7 @@ function FaqSection() {
           >
             {/* Support Img   */}
             <div className="homec-support-img">
-              <img src="https://placehold.co/615x665" alt="#" />
+              <img src={support_img} alt="#" />
               <div className="homec-support-img__content">
                 <img src="img/support-icon-white.svg" alt="#" />
                 <h4 className="homec-support-img__title">

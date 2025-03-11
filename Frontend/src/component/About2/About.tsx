@@ -1,7 +1,7 @@
 import AboutCard from "../Cards/AboutCard";
 import AboutShapeImg from "./AboutShapeImg";
-import about_img from "@img/about/about_img.jpg";
-import ceo_img from "@img/about/ceo_img.png"
+import about_img from "./../../assets/img/about/about_img.jpg"
+import ceo_img from "./../../assets/img/about/ceo_img.png"
 
 
 function About() {
@@ -25,7 +25,7 @@ function About() {
             {/* Homec Image Group */}
             <div className="homec-image-group homec-image-group--v2">
               <div className="homec-image-group__main">
-                {/* <img src={about_img} alt="#" /> */}
+                <img src={about_img} alt="#" />
                 <div className="homec-experiences">
                   <h4 className="homec-experiences__title">
                     12 Years <span>Experience</span>
