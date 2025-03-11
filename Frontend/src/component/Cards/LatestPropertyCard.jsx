@@ -27,9 +27,8 @@ function LatestPropertyCard({
     >
       {/* Single property */}
       <div
-        className={`homec-property ${
-          view === "list" && "homec-property__list-style"
-        }`}
+        className={`homec-property ${view === "list" && "homec-property__list-style"
+          }`}
       >
         {/* Property Head  */}
         <div className="homec-property__head">
@@ -66,7 +65,13 @@ function LatestPropertyCard({
             <div className="homec-property__price">
               ${price} <span>/{period}</span>
             </div>
-            <span className="homec-property__salebadge">{whatFor}</span>
+
+            <div className=" flex justify-center items-center gap-2 ">
+              <span className="homec-property__salebadge pr-0 mr-0">{whatFor}</span>
+              {(name === "Brand New Shopping Mall" || name === "Countryside Lake View")
+                && <span className="  bg-violet-200 text-xs py-1 px-2 rounded-xl">To rent</span>}
+            </div>
+
           </div>
           <h3 className="homec-property__title">
             <Link to={propertyLink}>{name.length > 22 ? name : name}</Link>

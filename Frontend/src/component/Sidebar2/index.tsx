@@ -59,8 +59,8 @@ function index() {
         <RangeInput
           minRange={0}
           maxRange={2000}
-          defaultMinRange={400}
-          defaultMaxRange={1200}
+          defaultMinRange={0}
+          defaultMaxRange={2000}
           title="Square feet"
           standard="sq. ft."
           symbol={null}
@@ -69,15 +69,16 @@ function index() {
         <RangeInput
           minRange={0}
           maxRange={600}
-          defaultMinRange={120}
-          defaultMaxRange={450}
+          defaultMinRange={0}
+          defaultMaxRange={600}
           title="Price"
           text="Range: "
           symbol="$"
           standard={null}
         />
-        <div className="w-full flex justify-center pt-4">
+        <div className="w-full flex flex-col justify-center items-center gap-2 pt-4">
           <button className="homec-btn">Apply filter</button>
+          <div className="underline font-extralight hover:cursor-pointer  ">reset filter</div>
         </div>
       </div>
       <AgentsSidebarSlider />

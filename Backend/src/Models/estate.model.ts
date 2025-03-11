@@ -38,7 +38,7 @@ const estateSchema = new mongoose.Schema({
         required: false,
     },
 
-    state: {
+    city: {
         type: String,
     },
 
