@@ -19,13 +19,6 @@ function Property() {
 
 
 
-
-
-
-
-
-
-
   let component = undefined;
   if (isLoading) {
     component = <Preloader />;

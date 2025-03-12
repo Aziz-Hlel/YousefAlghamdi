@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropertyBar from "./PropertyBar";
 import Sidebar from "../Sidebar2";
 import LatestPropertyCard from "../Cards/LatestPropertyCard";
 import Pagination from "../Pagination";
 import properties from "../../data/property";
+import { useFormContext } from "./FilterProvider.context";
+import Http from "../../services/Http";
+import apiGateway from "../../apiGateway";
 
 function PropertyGrid() {
   //handle grid style
@@ -28,6 +31,21 @@ function PropertyGrid() {
       setCurrentPage(page);
     }
   };
+
+  const { filterObject, } = useFormContext();
+
+
+
+
+  const fetch = async () => {
+    const reponse = await Http.get(apiGateway.estate, { params: filterObject });
+    console.log(reponse.data)
+
+  }
+  useEffect(()=>{
+    fetch()
+  },[])
+
 
   return (
     <section className="homec-propertys pd-top-80 pd-btm-80">

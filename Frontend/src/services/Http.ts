@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "http://localhost:50/",
+    baseURL: "http://localhost:50/api/",
     withCredentials: true
 });
 
@@ -28,7 +28,7 @@ const Http = {
 
     delete: <T>(url: string, config: HTTPRequestConfig = {}) => {
         return axiosInstance.delete<T>(url, config);
-    },
+    },  
 
 }
 
