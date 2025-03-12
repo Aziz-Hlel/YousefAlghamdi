@@ -29,8 +29,22 @@ const filterFieldsTypes = {
     bathrooms: {
         type: Number,
         required: false,
-        default: null
+        default: null,
     },
+
+    toSale:{
+        type:Number,
+        required:true,
+        default:null,
+    },
+    
+    toRent:{
+        type:String,
+        required:true,
+        default:null,
+    },
+
+    
 
 
 };

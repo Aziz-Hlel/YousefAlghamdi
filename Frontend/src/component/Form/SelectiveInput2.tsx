@@ -1,5 +1,4 @@
 import ProtoTypes from "prop-types";
-import { useState } from "react";
 import Select from "react-dropdown-select";
 import { IfilterProperty } from "src/models/filterProperty";
 import { useFormContext } from "../Property2/FilterProvider.context";
