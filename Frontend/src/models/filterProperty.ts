@@ -1,7 +1,7 @@
 export type IfilterProperty = {
 
-    city: string,
-    type: string,
+    city?: string,
+    type?: string,
     maxNumberOfRooms: number,
     minNumberOfRooms: number,
     maxNumberOfBathrooms: number,

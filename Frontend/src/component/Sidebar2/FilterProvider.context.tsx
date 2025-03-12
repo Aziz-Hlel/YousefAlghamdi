@@ -2,9 +2,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 import { IfilterProperty } from "src/models/filterProperty";
 
 
-const defaultFilter: IfilterProperty = {
-    city: "All",
-    type: "All",
+export const defaultFilter: IfilterProperty = {
     forRent: true,
     forSale: true,
     maxNumberOfRooms: 10,
@@ -18,7 +16,14 @@ const defaultFilter: IfilterProperty = {
 
 }
 
-export const FormContext = createContext<{ filterObject: IfilterProperty, updateField: (field: keyof IfilterProperty, value: any) => void } | undefined>(undefined);
+
+interface IFormContext {
+    filterObject: IfilterProperty,
+    updateField: (field: keyof IfilterProperty, value: any) => void,
+    resetFilter: () => void
+}
+
+export const FormContext = createContext<IFormContext | undefined>(undefined);
 
 
 
@@ -34,9 +39,12 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
         }));
     };
 
+    const resetFilter = () => {
+        setFilter((_) => defaultFilter)
+    }
 
     return (
-        <FormContext.Provider value={{ filterObject, updateField }}>
+        <FormContext.Provider value={{ filterObject, updateField, resetFilter }}>
             {children}
         </FormContext.Provider>
     );

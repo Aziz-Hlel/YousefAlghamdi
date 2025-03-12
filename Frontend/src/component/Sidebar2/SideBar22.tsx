@@ -8,7 +8,7 @@ import { useFormContext } from "./FilterProvider.context";
 
 const SideBar22 = () => {
 
-  const { filterObject } = useFormContext();
+  const { filterObject, resetFilter } = useFormContext();
 
 
 
@@ -24,7 +24,7 @@ const SideBar22 = () => {
             })}
           classes="mg-top-20"
           value={filterObject.city}
-          key="city"
+          formkey="city"
         />
         <SelectiveInput
           title="Property Category"
@@ -35,7 +35,7 @@ const SideBar22 = () => {
           }
           classes="mg-top-20"
           value={filterObject.type}
-          key="type"
+          formkey="type"
         />
         <CheckInput
           title="For rent/sale"
@@ -87,8 +87,8 @@ const SideBar22 = () => {
           symbol="$"
         />
         <div className="w-full flex flex-col justify-center items-center gap-2 pt-4">
-          <button className="homec-btn">Apply filter</button>
-          <div className="underline font-extralight hover:cursor-pointer ">reset filter</div>
+          <button className="homec-btn" onClick={() => console.log(filterObject)}>Apply filter</button>
+          {/* <div className="underline font-extralight hover:cursor-pointer " onClick={() => resetFilter()}>reset filter</div> */}
         </div>
       </div>
       <AgentsSidebarSlider />

@@ -1,5 +1,4 @@
 const estateTypes = [
-    "All",
     "apartement",
     "house",
     "Office",

@@ -1,5 +1,4 @@
 const imarates = [
-  "All",
   "Dubai (the central city)",
   "Deira",
   "Bur Dubai",

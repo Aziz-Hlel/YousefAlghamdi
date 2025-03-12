@@ -4,7 +4,7 @@ import Select from "react-dropdown-select";
 import { useFormContext } from "../Sidebar2/FilterProvider.context";
 import { IfilterProperty } from "src/models/filterProperty";
 
-function SelectiveInput({ title, options, classes, value, key }: { title: string, options: any, classes: string, value: string, key: keyof IfilterProperty }) {
+function SelectiveInput({ title, options, classes, value, formkey }: { title: string, options: any, classes: string, value?: string, formkey: keyof IfilterProperty }) {
   const { updateField } = useFormContext();
 
   return (
@@ -13,11 +13,11 @@ function SelectiveInput({ title, options, classes, value, key }: { title: string
         <h4 className="property-sidebar__title">{title}</h4>
         <div className="form-group">
           <Select
-            values={[value]}
+            values={[value ?? ""]}
             options={options}
             labelField="name"
             valueField="id"
-            onChange={(values) => updateField(key, values)}
+            onChange={(values) => { console.log((values[0] as any).id), updateField(formkey, (values[0] as any).id) }}
             searchable={true}
             // handle={true}
             placeholder="Select"
