@@ -24,7 +24,7 @@ const estateSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 3,
-        maxlength: 50,
+        maxlength: 200,
         trim: true,
     },
 
@@ -49,12 +49,12 @@ const estateSchema = new mongoose.Schema({
 
     clientId: {
         type: String,
-        required: true
+        required: true,
     },
 
     agentId: {
         type: String,
-        default: null,
+        required: true,
     },
 
 

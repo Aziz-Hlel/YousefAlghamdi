@@ -14,7 +14,8 @@ export const createEstate = async (req: Request, res: Response, next: NextFuncti
 
     const estate = new Estate({
         ...req.body,
-        clientId: "67c6dc27b388f464b07342ad",
+        clientId: "67d18af6bb05549959f8ae3d",
+        agentId:"67d18b2d7c34baab7b87c4d8"
     })
 
     try {
@@ -39,6 +40,7 @@ const filterFunc = (minVal: any, maxVal: any, filters: any) => {
 
 export const listEstates = async (req: Request, res: Response, next: NextFunction) => {
 
+    
     const { city, type, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
 
     let filters: any = {};
@@ -50,6 +52,8 @@ export const listEstates = async (req: Request, res: Response, next: NextFunctio
 
     if (typeof forSale === "boolean") filters.forSale = forSale;
     if (typeof forRent === "boolean") filters.forRent = forRent;
+    if (city) filters.city = new RegExp(String(city), "i"); // Case-insensitive search
+    if (type) filters.type = new RegExp(String(type), "i"); // Case-insensitive search
 
     const page = Number(req.query.page);
     if (!page || isNaN(page)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
