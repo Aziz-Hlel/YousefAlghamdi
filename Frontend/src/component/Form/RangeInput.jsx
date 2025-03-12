@@ -11,7 +11,7 @@ function RangeSlider({
   text,
   symbol,
 }) {
-  const [minValue, set_minValue] = useState(defaultMinRange || 25);
+  const [minValue, set_minValue] = useState(defaultMinRange || 0);
   const [maxValue, set_maxValue] = useState(defaultMaxRange || 75);
   const handleInput = (e) => {
     set_minValue(e.minValue);
@@ -29,7 +29,7 @@ function RangeSlider({
               min={minRange || 0}
               max={maxRange || 100}
               step={1}
-              minValue={minValue}
+              minValue={0}
               maxValue={maxValue}
               onInput={(e) => {
                 handleInput(e);

@@ -8,14 +8,14 @@ import properties from "../../data/property";
 function PropertyGrid() {
   //handle grid style
   const [gridStyle, setGridStyle] = useState("grid");
-  const handleGridStyle = (style:any) => {
+  const handleGridStyle = (style: any) => {
     setGridStyle(style);
   };
   //handle page
   const [currentPage, setCurrentPage] = useState(1);
   const totalPage = 24;
 
-  const handelPage = (page:any) => {
+  const handelPage = (page: any) => {
     if (page === "prev") {
       if (currentPage > 1) {
         setCurrentPage(currentPage - 1);
@@ -59,11 +59,10 @@ function PropertyGrid() {
                       name={property.name}
                       address={property.address}
                       detailsList={property.detailsList}
-                      classes={`${
-                        gridStyle === "grid"
-                          ? "col-md-6 col-12 mg-top-30"
-                          : "col-12 mg-top-30"
-                      } `}
+                      classes={`${gridStyle === "grid"
+                        ? "col-md-6 col-12 mg-top-30"
+                        : "col-12 mg-top-30"
+                        } `}
                       view={gridStyle}
                       style={null}
                     />

@@ -1,88 +1,17 @@
 import SelectiveInput from "../Form/SelectiveInput";
 import CheckInput from "../Form/CheckInput";
-import RangeInput from "../Form/RangeInput";
+import RangeInput from "../Form/RangeInput2";
 import AgentsSidebarSlider from "../Agents/AgentsSidebarSlider";
 import imarates from "../../imarates";
 import estateTypes from "../../estateType";
-import TitleBtn from "../Button/TitleBtn";
+import { FormProvider } from "./FilterProvider.context";
+import SideBar22 from "./SideBar22";
 
 function index() {
   return (
-    <div className="col-lg-4 col-12 mg-top-30">
-      <div className="property-sidebar">
-
-        <SelectiveInput
-          title="City"
-          options={
-            imarates.map((imarate, idx) => {
-              return { id: idx, name: imarate }
-            })}
-          classes="mg-top-20"
-        />
-        <SelectiveInput
-          title="Property Category"
-          options={
-            estateTypes.map((estateType, idx) => {
-              return { id: idx, name: estateType }
-            })
-          }
-          classes="mg-top-20"
-        />
-        <CheckInput
-          title="For rent/sale"
-          properties={[
-            "For rent",
-            "For sale",
-          ]}
-          name="rent_sale"
-        />
-        <RangeInput
-          minRange={0}
-          maxRange={10}
-          defaultMinRange={1}
-          defaultMaxRange={10}
-          title="Number Of Rooms"
-          standard="rooms"
-          symbol={null}
-          text={null}
-        />
-        <RangeInput
-          minRange={0}
-          maxRange={5}
-          defaultMinRange={1}
-          defaultMaxRange={5}
-          title="Number Of Bathrooms"
-          standard="bathrooms"
-          symbol={null}
-          text={null}
-        />
-        <RangeInput
-          minRange={0}
-          maxRange={2000}
-          defaultMinRange={0}
-          defaultMaxRange={2000}
-          title="Square feet"
-          standard="sq. ft."
-          symbol={null}
-          text={null}
-        />
-        <RangeInput
-          minRange={0}
-          maxRange={600}
-          defaultMinRange={0}
-          defaultMaxRange={600}
-          title="Price"
-          text="Range: "
-          symbol="$"
-          standard={null}
-        />
-        <div className="w-full flex flex-col justify-center items-center gap-2 pt-4">
-          <button className="homec-btn">Apply filter</button>
-          <div className="underline font-extralight hover:cursor-pointer  ">reset filter</div>
-        </div>
-      </div>
-      <AgentsSidebarSlider />
-    </div>
+    <FormProvider >
+      <SideBar22 />
+    </FormProvider>
   );
 }
 

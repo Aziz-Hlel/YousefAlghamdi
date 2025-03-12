@@ -1,9 +1,12 @@
 import ProtoTypes from "prop-types";
 import { useState } from "react";
 import Select from "react-dropdown-select";
+import { useFormContext } from "../Sidebar2/FilterProvider.context";
+import { IfilterProperty } from "src/models/filterProperty";
 
-function SelectiveInput({ title, options, classes }) {
-  const [value, setValue] = useState(options[0]);
+function SelectiveInput({ title, options, classes, value, key }: { title: string, options: any, classes: string, value: string, key: keyof IfilterProperty }) {
+  const { updateField } = useFormContext();
+
   return (
     <div className={`property-sidebar__single ${classes}`}>
       <div className="property-sidebar__filters">
@@ -14,10 +17,9 @@ function SelectiveInput({ title, options, classes }) {
             options={options}
             labelField="name"
             valueField="id"
-            onChange={(values) => setValue(values)}
-            searchBy="name"
+            onChange={(values) => updateField(key, values)}
             searchable={true}
-            handle={true}
+            // handle={true}
             placeholder="Select"
             closeOnSelect={true}
             dropdownPosition="auto"
@@ -27,7 +29,6 @@ function SelectiveInput({ title, options, classes }) {
               color: "#828ea3",
               cursor: "pointer",
             }}
-            className=""
           />
         </div>
       </div>

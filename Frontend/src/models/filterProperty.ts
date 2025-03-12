@@ -1,7 +1,7 @@
 export type IfilterProperty = {
 
-    city?: string,
-    type?: string,
+    city: string,
+    type: string,
     maxNumberOfRooms: number,
     minNumberOfRooms: number,
     maxNumberOfBathrooms: number,
@@ -10,8 +10,8 @@ export type IfilterProperty = {
     minNumberOfSquareFeet: number,
     minPrice: number,
     maxPrice: number,
-    forRent:boolean,
-    forSale:boolean,
+    forRent: boolean,
+    forSale: boolean,
 
 
 
