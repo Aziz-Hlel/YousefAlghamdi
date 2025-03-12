@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from 'express'
 import userRouter from './Routes/user.route'
 import estateRouter from './Routes/estate.route';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 
 
 
@@ -13,6 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/user', userRouter);
 app.use('/api/estate', estateRouter);
+
+// Serve static files
+app.use('/images', express.static(path.join(__dirname, '../public/images')));
 
 
 app.get('', (req, res) => {
