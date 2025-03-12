@@ -32,19 +32,19 @@ const filterFieldsTypes = {
         default: null,
     },
 
-    toSale:{
-        type:Number,
+    forSale:{
+        type:Boolean,
         required:true,
         default:null,
     },
     
-    toRent:{
-        type:String,
+    forRent:{
+        type:Boolean,
         required:true,
         default:null,
     },
 
-    
+
 
 
 };
