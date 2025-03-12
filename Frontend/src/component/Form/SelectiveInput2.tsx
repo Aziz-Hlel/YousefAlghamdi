@@ -1,8 +1,8 @@
 import ProtoTypes from "prop-types";
 import { useState } from "react";
 import Select from "react-dropdown-select";
-import { useFormContext } from "../Sidebar2/FilterProvider.context";
 import { IfilterProperty } from "src/models/filterProperty";
+import { useFormContext } from "../Property2/FilterProvider.context";
 
 function SelectiveInput({ title, options, classes, value, formkey }: { title: string, options: any, classes: string, value?: string, formkey: keyof IfilterProperty }) {
   const { updateField } = useFormContext();

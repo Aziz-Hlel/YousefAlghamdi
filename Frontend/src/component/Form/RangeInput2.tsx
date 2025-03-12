@@ -1,8 +1,6 @@
-import { useState } from "react";
-import ProtoTypes from "prop-types";
 import MultiRangeSlider from "multi-range-slider-react";
-import { useFormContext } from "../Sidebar2/FilterProvider.context";
 import { IfilterProperty } from "src/models/filterProperty";
+import { useFormContext } from "../Property2/FilterProvider.context";
 
 interface IRangeSlider {
   title: string;

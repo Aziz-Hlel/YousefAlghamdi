@@ -2,7 +2,9 @@ import CustomDot from "../CustomDot/CustomDot2";
 import AgentCard from "../Cards/AgentCard";
 import Carousel from "react-multi-carousel";
 import { responsiveSmallAgentsSlider } from "../../utils/responsiveSlider";
-
+import agent_img1 from "@img/agents35x35/agent_1.jpg"
+import agent_img2 from "@img/agents35x35/agent_2.jpg"
+import agent_img3 from "@img/agents35x35/agent_3.jpg"
 
 function AgentsSidebarSlider() {
   return (
@@ -31,7 +33,7 @@ function AgentsSidebarSlider() {
           customDot={<CustomDot />}
         >
           <AgentCard
-            img="https://placehold.co/35x35"
+            img={agent_img1}
             phone="#"
             linkedin="#"
             twitter="#"
@@ -41,7 +43,7 @@ function AgentsSidebarSlider() {
             fullWidth={true}
           />
           <AgentCard
-            img="https://placehold.co/35x35"
+            img={agent_img2}
             phone="#"
             linkedin="#"
             twitter="#"
@@ -51,7 +53,7 @@ function AgentsSidebarSlider() {
             desc="Real Estate Broker"
           />
           <AgentCard
-            img="https://placehold.co/35x35"
+            img={agent_img3}
             phone="#"
             linkedin="#"
             twitter="#"
@@ -60,16 +62,7 @@ function AgentsSidebarSlider() {
             fullWidth={true}
             desc="Real Estate Broker"
           />
-          <AgentCard
-            img="https://placehold.co/35x35"
-            phone="#"
-            linkedin="#"
-            twitter="#"
-            insta="#"
-            name="Arlene McCoy"
-            fullWidth={true}
-            desc="Real Estate Broker"
-          />
+
         </Carousel>
       </div>
     </div>

@@ -6,6 +6,7 @@ import GoTopBtn from "../Button/GoTopBtn";
 import Footer from "../Footer";
 import HistoryLinks from "../Breadcrumbs/HistoryLinks";
 import PropertyGrid from "./PropertyGrid";
+import { FormProvider } from "./FilterProvider.context";
 
 function Property() {
   const [isLoading, setisLoadingg] = useState(true);
@@ -24,7 +25,7 @@ function Property() {
 
 
 
-  
+
   let component = undefined;
   if (isLoading) {
     component = <Preloader />;
@@ -40,7 +41,11 @@ function Property() {
             isActive={true} />
 
         </Breadcrumbs>
-        <PropertyGrid />
+
+        <FormProvider>
+          <PropertyGrid />
+        </FormProvider>
+
         <Footer />
         <GoTopBtn />
       </>

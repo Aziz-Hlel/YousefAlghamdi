@@ -4,7 +4,7 @@ import RangeInput from "../Form/RangeInput2";
 import AgentsSidebarSlider from "../Agents/AgentsSidebarSlider";
 import imarates from "../../imarates";
 import estateTypes from "../../estateType";
-import { useFormContext } from "./FilterProvider.context";
+import { useFormContext } from "../Property2/FilterProvider.context";
 
 const SideBar22 = () => {
 
@@ -26,6 +26,7 @@ const SideBar22 = () => {
           value={filterObject.city}
           formkey="city"
         />
+
         <SelectiveInput
           title="Property Category"
           options={
@@ -37,6 +38,7 @@ const SideBar22 = () => {
           value={filterObject.type}
           formkey="type"
         />
+
         <CheckInput
           title="For rent/sale"
           properties={[
@@ -44,6 +46,7 @@ const SideBar22 = () => {
             { key: "forSale", value: filterObject.forSale, name: "For sale" },
           ]}
         />
+
         <RangeInput
           minRange={0}
           maxRange={10}
@@ -54,6 +57,7 @@ const SideBar22 = () => {
           title="Number Of Rooms"
           standard="rooms"
         />
+
         <RangeInput
           minRange={0}
           maxRange={5}
@@ -64,6 +68,7 @@ const SideBar22 = () => {
           title="Number Of Bathrooms"
           standard="bathrooms"
         />
+
         <RangeInput
           minRange={0}
           maxRange={2000}
@@ -86,6 +91,7 @@ const SideBar22 = () => {
           text="Range: "
           symbol="$"
         />
+
         <div className="w-full flex flex-col justify-center items-center gap-2 pt-4">
           <button className="homec-btn" onClick={() => console.log(filterObject)}>Apply filter</button>
           {/* <div className="underline font-extralight hover:cursor-pointer " onClick={() => resetFilter()}>reset filter</div> */}

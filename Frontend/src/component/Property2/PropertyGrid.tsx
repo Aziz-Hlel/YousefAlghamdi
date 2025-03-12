@@ -18,7 +18,7 @@ function PropertyGrid() {
   const handelPage = (page: any) => {
     if (page === "prev") {
       if (currentPage > 1) {
-        setCurrentPage(currentPage - 1);
+        setCurrentPage(currentPage - 1);  
       }
     } else if (page === "next") {
       if (currentPage < totalPage) {

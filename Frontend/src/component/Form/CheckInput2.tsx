@@ -1,6 +1,6 @@
 import ProtoTypes from "prop-types";
-import { useFormContext } from "../Sidebar2/FilterProvider.context";
 import { IfilterProperty } from "src/models/filterProperty";
+import { useFormContext } from "../Property2/FilterProvider.context";
 
 function CheckInput({ title, properties }: { title: string, properties: { key: keyof IfilterProperty, value: boolean, name: string }[] }) {
 

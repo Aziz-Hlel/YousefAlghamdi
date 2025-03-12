@@ -41,7 +41,7 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
     const resetFilter = () => {
         setFilter((_) => defaultFilter)
-    }
+    };
 
     return (
         <FormContext.Provider value={{ filterObject, updateField, resetFilter }}>
