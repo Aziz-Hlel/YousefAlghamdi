@@ -18,7 +18,10 @@ const estateSchema = new mongoose.Schema({
         required: true,
     },
 
-    filterFields: filterFieldsTypes,
+    city: {
+        type: String,
+    },
+
 
     description: {
         type: String,
@@ -38,9 +41,12 @@ const estateSchema = new mongoose.Schema({
         required: false,
     },
 
-    city: {
-        type: String,
-    },
+    filterFields: filterFieldsTypes,
+
+    additionalDetails: { type: Map, of: String },
+
+    nearestPlaces: { type: Map, of: String },
+
 
     productTier: {
         type: String,
@@ -48,13 +54,13 @@ const estateSchema = new mongoose.Schema({
     },
 
     clientId: {
-        type: String,
-        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
     },
 
     agentId: {
-        type: String,
-        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
     },
 
     available: {

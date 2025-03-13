@@ -6,12 +6,7 @@ const filterFieldsTypes = {
         required: true,
     },
 
-    height: {
-        type: Number,
-        required: true,
-    },
-
-    width: {
+    area: {
         type: Number,
         required: true,
     },
@@ -28,16 +23,16 @@ const filterFieldsTypes = {
         default: null,
     },
 
-    forSale:{
-        type:Boolean,
-        required:true,
-        default:null,
+    forSale: {
+        type: Boolean,
+        required: true,
+        default: null,
     },
-    
-    forRent:{
-        type:Boolean,
-        required:true,
-        default:null,
+
+    forRent: {
+        type: Boolean,
+        required: true,
+        default: null,
     },
 
 
