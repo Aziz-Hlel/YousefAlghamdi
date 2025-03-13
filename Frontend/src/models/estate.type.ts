@@ -19,7 +19,7 @@ type Iestate = {
         forSale: boolean,
         forRent: boolean,
     }
-
+    available: Date | undefined, // badl undefined b null b3d 
 }
 
 

@@ -1,6 +1,9 @@
+import apiGateway from "@src/apiGateway";
+import Iestate from "@src/models/estate.type";
 import { Link } from "react-router-dom";
 
 interface ILatestPropertyCard {
+  estate: Iestate;
   _id: string,
   img: string,
   likeLink: string,
@@ -19,12 +22,13 @@ interface ILatestPropertyCard {
 }
 
 const atrToImg = {
-  room: "img/room-icon.svg",
-
+  rooms: "img/room-icon.svg",
+  bathroom: "img/bath-icon.svg",
+  square: "img/size-icon.svg",
 
 }
 
-function LatestPropertyCard({ _id, img, likeLink, detailsLink, price, period, whatFor, propertyLink, name, address, detailsList, style, classes, view, }: ILatestPropertyCard) {
+function LatestPropertyCard({ estate, _id, img, likeLink, detailsLink, price, period, whatFor, propertyLink, name, address, detailsList, style, classes, view, }: ILatestPropertyCard) {
 
 
 
@@ -42,8 +46,8 @@ function LatestPropertyCard({ _id, img, likeLink, detailsLink, price, period, wh
       >
         {/* Property Head  */}
         <div className="homec-property__head">
-          <Link to={"/property-single/" + _id}>
-            <img src={img} alt="#" />
+          <Link to={"/property-single/" + estate._id}>
+            <img src={apiGateway.localhost.images + estate.imgs[0]} alt="#" />
           </Link >
           {/* Top Sticky  */}
           <div className="homec-property__hsticky">
@@ -69,7 +73,7 @@ function LatestPropertyCard({ _id, img, likeLink, detailsLink, price, period, wh
         <div className="homec-property__body">
           <div className="homec-property__topbar">
             <div className="homec-property__price">
-              ${price} <span>/{period}</span>
+              ${estate.filterFields.price} <span>/{period}</span>
             </div>
 
             <div className=" flex justify-center items-center gap-2 ">
@@ -90,12 +94,38 @@ function LatestPropertyCard({ _id, img, likeLink, detailsLink, price, period, wh
           </div>
           {/* Property List */}
           <ul className="homec-property__list homec-border-top list-none">
-            {detailsList?.map((details: any, index: number) => (
+            {/* {detailsList?.map((details: any, index: number) => {
+
+              return (
+                <>
+                  {details &&
+                    <li key={details.name + index}>
+                      <img src={details.img} alt="#" />
+                      {details.name}
+                    </li>
+                  }
+
+                </>
+              )
+            })} */}
+            {estate.filterFields.rooms && <li>
+              <img src={atrToImg.rooms} alt="#" />
+              {estate.filterFields.rooms} Room
+            </li>}
+            {estate.filterFields.bathrooms && <li>
+              <img src={atrToImg.bathroom} alt="#" />
+              {estate.filterFields.bathrooms} Bathroom
+            </li>}
+            {estate.filterFields.width && <li>
+              <img src={atrToImg.square} alt="#" />
+              {estate.filterFields.width * estate.filterFields.height} m2
+            </li>}
+            {/* {detailsList?.map((details: any, index: number) => (
               <li key={details.name + index}>
                 <img src={details.img} alt="#" />
                 {details.name}
               </li>
-            ))}
+            ))} */}
           </ul>
         </div>
       </div>

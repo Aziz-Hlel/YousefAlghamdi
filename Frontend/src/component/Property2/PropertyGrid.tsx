@@ -65,12 +65,13 @@ function PropertyGrid() {
                 <div className="row">
                   {estates && estates.map((estate, index) =>
                     <LatestPropertyCard
+                      estate={estate}
                       key={estate._id}
                       _id={estate._id}
                       img={apiGateway.localhost.images + estate.imgs[0]}
                       likeLink={properties[index].likeLink}
                       detailsLink={properties[index].detailsLink}
-                      price={properties[index].price}
+                      price={estate.filterFields.price}
                       period={properties[index].period}
                       whatFor={properties[index].whatFor}
                       propertyLink={properties[index].propertyLink}

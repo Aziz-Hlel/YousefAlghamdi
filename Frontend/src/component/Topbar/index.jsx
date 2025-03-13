@@ -11,33 +11,29 @@ function Topbar({ v2 }) {
               className={`homec-topbar-flex ${v2 && "homec-topbar-flex--v2"}`}
             >
               {/* Contact  */}
-              <ul
-                className={`homec-header__list ${
-                  v2 && "homec-header__list--v2"
-                }`}
+              <ul className={`homec-header__list ${v2 && "homec-header__list--v2"}`}
               >
                 <TopbarBtn
-                  link="mailto:HomeC34@gmail.com"
+                  link="mailto:yousefAlghamdi@gmail.com"
                   img="/img/email-icon.svg"
-                  text="HomeC34@gmail.com"
+                  text="yousefAlghamdi@gmail.com"
                 />
                 <TopbarBtn
-                  link="tel:+00239040248"
+                  link="tel:+971 50 123 4567"
                   img="/img/phone-icon.svg"
                   text="+00 23904 0248"
                 />
                 <TopbarBtn
-                  link="mailto:HomeC34@gmail.com"
+                  link="mailto:yousefAlghamdi@gmail.com"
                   img="/img/locations-icon.svg"
-                  text="1901 Thornridge Cir. Shiloh, Hawaii 81063"
+                  text="1901 Palm Jumeirah Rd, Palm Jumeirah, Dubai, UAE 12345"
                 />
               </ul>
               {/* End Contact  */}
               {/* Social  */}
               <ul
-                className={`homec-social homec-social__topbar ${
-                  v2 && "homec-social__topbar--v2"
-                }`}
+                className={`homec-social homec-social__topbar ${v2 && "homec-social__topbar--v2"
+                  }`}
               >
                 <li>
                   <a href="#">

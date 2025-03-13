@@ -57,7 +57,11 @@ const estateSchema = new mongoose.Schema({
         required: true,
     },
 
-
+    available: {
+        type: Date,
+        required: false,
+        default: null,
+    }
 
 },
     { timestamps: true },
