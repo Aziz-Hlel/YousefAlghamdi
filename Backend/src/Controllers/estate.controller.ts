@@ -69,10 +69,6 @@ export const listEstates = async (req: Request, res: Response, next: NextFunctio
         console.log("estates", estates.length)
 
 
-        res.header('Access-Control-Allow-Origin', 'http://localhost:70');
-        res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-        res.header('Access-Control-Allow-Credentials', 'true');
 
         // res.set('Content-Range', `products/women/categorie`);
         // res.set('X-Total-Count', "");

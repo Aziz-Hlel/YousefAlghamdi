@@ -15,7 +15,7 @@ import Faq from "./component/Faq";
 import Login from "./component/Login";
 import OurAgents from "./component/OurAgents";
 import Pricing from "./component/Pricing.jsx";
-import PropertySingle from "./component/Property Single";
+import PropertySingle from "./component/Property Single2";
 import SignUp from "./component/SignUp";
 import SubmitProperty from "./component/SubmitProperty";
 import Property from "./component/Property2/";

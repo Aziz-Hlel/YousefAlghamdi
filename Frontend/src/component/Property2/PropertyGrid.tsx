@@ -5,10 +5,9 @@ import LatestPropertyCard from "../Cards/LatestPropertyCard2";
 import Pagination from "../Pagination";
 import properties from "../../data/property";
 import { useFormContext } from "./FilterProvider.context";
-import Http, { axiosInstance } from "../../services/Http";
+import Http from "../../services/Http";
 import apiGateway from "../../apiGateway";
-import axios from "axios";
-import { Iestate } from "src/models/estate.type";
+import Iestate from "@src/models/estate.type";
 
 function PropertyGrid() {
   //handle grid style

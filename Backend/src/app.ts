@@ -13,12 +13,6 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.use('/api/user', userRouter);
-app.use('/api/estate', estateRouter);
-
-// Serve static files
-app.use('/images', express.static(path.join(__dirname, '../public/images')));
-
 app.use(cors({
     origin: 'http://localhost:70', // Allow only your frontend origin
     credentials: true,               // Allow cookies if needed
@@ -26,6 +20,16 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     exposedHeaders: ['Content-Range','X-Total-Count',"Content-Type", "Authorization"],
   }));
+
+  
+
+app.use('/api/user', userRouter);
+app.use('/api/estate', estateRouter);
+
+// Serve static files
+app.use('/images', express.static(path.join(__dirname, '../public/images')));
+
+
 
 app.get('', (req, res) => {
     res.send('Works ')

@@ -10,7 +10,8 @@
         
         "baseUrl": ".", 
         "paths": {
-          "@img/*": ["src/assets/img/*"]
+          "@img/*": ["src/assets/img/*"],
+          "@src/*": ["src/*"]
         }
   },
 }

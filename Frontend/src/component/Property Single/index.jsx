@@ -9,9 +9,19 @@ import SingleSlider from "./SingleSlider";
 import ThumbnailsSlider from "./ThumbnilsSlider";
 import PropertyDetails from "./PropertyDetails";
 
+
 function PropertySingle() {
   const [isLoading, setIsLoading] = useState(true);
+  const { id } = useParams();
+
+  const [estate, setEstate] = useState < Iestate | undefined > (undefined);
+  const fetch = async () => {
+    const api = (await Http.get(apiGateway.estate + "/" + id)).data.result
+    console.log(api)
+
+  }
   useEffect(() => {
+    fetch()
     setIsLoading(false);
   }, []);
 

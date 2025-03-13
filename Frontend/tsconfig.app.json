@@ -4,7 +4,9 @@
     /* path config */
     "baseUrl": ".", 
     "paths": {
-      "@img/*": ["src/assets/img/*"]
+      "@img/*": ["src/assets/img/*"],
+      "@src/*": ["src/*"]
+
     },
 
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",

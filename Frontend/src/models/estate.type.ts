@@ -1,5 +1,5 @@
-export type Iestate = {
-    _id:string
+type Iestate = {
+    _id: string
     title: string,
     type: string,
     description: string,
@@ -21,3 +21,6 @@ export type Iestate = {
     }
 
 }
+
+
+export default Iestate;
