@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PropertyBar from "./PropertyBar";
 import Sidebar from "../Sidebar2";
-import LatestPropertyCard from "../Cards/LatestPropertyCard";
+import LatestPropertyCard from "../Cards/LatestPropertyCard2";
 import Pagination from "../Pagination";
 import properties from "../../data/property";
 import { useFormContext } from "./FilterProvider.context";
@@ -34,19 +34,26 @@ function PropertyGrid() {
     }
   };
 
+
+
+
+
+
+
+
+
+
   const { filterObject, } = useFormContext();
-
-
-
+  const [estates, setEstates] = useState<Iestate[] | null>(null);
 
   const fetch = async () => {
 
     const reponse = await Http.get<any>(apiGateway.estate, { params: filterObject });
 
-    const estates: Iestate = reponse.data
+    const estates: Iestate[] = reponse.data.data
 
     console.log(estates);
-
+    setEstates(estates);
   }
   useEffect(() => {
     fetch()
@@ -68,19 +75,18 @@ function PropertyGrid() {
                 role="tabpanel"
               >
                 <div className="row">
-                  {Array.from({ length: 6 }, (_, index) => 
+                  {estates && estates.map((estate, index) =>
                     <LatestPropertyCard
-                      key={properties[index].id}
-                      img={properties[index].img}
+                      key={estate._id}
+                      _id={estate._id}
+                      img={apiGateway.localhost.images + estate.imgs[0]}
                       likeLink={properties[index].likeLink}
                       detailsLink={properties[index].detailsLink}
-                      agentName={properties[index].agentName}
-                      agentImg={properties[index].agentImg}
                       price={properties[index].price}
                       period={properties[index].period}
                       whatFor={properties[index].whatFor}
                       propertyLink={properties[index].propertyLink}
-                      name={properties[index].name}
+                      name={estate.title}
                       address={properties[index].address}
                       detailsList={properties[index].detailsList}
                       classes={`${gridStyle === "grid"

@@ -1,4 +1,5 @@
 export type Iestate = {
+    _id:string
     title: string,
     type: string,
     description: string,
@@ -13,8 +14,8 @@ export type Iestate = {
         price: number,
         height: number,
         width: number,
-        rooms: number,
-        bathrooms: number,
+        rooms?: number,
+        bathrooms?: number,
         forSale: boolean,
         forRent: boolean,
     }

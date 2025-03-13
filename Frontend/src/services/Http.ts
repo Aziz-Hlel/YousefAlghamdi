@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 export const axiosInstance = axios.create({
-    baseURL: "http://localhost:50/api/",
+    baseURL: "http://localhost:50/api",
     withCredentials: true
 });
 
