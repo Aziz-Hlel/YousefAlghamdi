@@ -15,7 +15,7 @@ export const createEstate = async (req: Request, res: Response, next: NextFuncti
     const estate = new Estate({
         ...req.body,
         clientId: "67d18af6bb05549959f8ae3d",
-        agentId:"67d18b2d7c34baab7b87c4d8"
+        agentId: "67d18b2d7c34baab7b87c4d8"
     })
 
     try {
@@ -28,11 +28,11 @@ export const createEstate = async (req: Request, res: Response, next: NextFuncti
 
 }
 
-const filterFunc = (minVal: any, maxVal: any, filters: any) => {
+const filterFunc = (minVal: any, maxVal: any, filterKeyName: string, filters: any) => {
     if (minVal && maxVal && !isNaN(Number(minVal)) && !isNaN(Number(maxVal))) {
-        filters.price = {};
-        filters.price.$gte = Number(minVal);
-        filters.price.$lte = Number(maxVal);
+        filters[filterKeyName] = {};
+        filters[filterKeyName].$gte = Number(minVal);
+        filters[filterKeyName].$lte = Number(maxVal);
     }
 
 }
@@ -40,26 +40,25 @@ const filterFunc = (minVal: any, maxVal: any, filters: any) => {
 
 export const listEstates = async (req: Request, res: Response, next: NextFunction) => {
 
-    
     const { city, type, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
-
+    console.log('req.query', req.query)
     let filters: any = {};
 
-    filterFunc(minPrice, maxPrice, filters);
-    filterFunc(minNumberOfRooms, maxNumberOfRooms, filters);
-    filterFunc(minNumberOfBathrooms, maxNumberOfBathrooms, filters);
-    filterFunc(minNumberOfSquareFeet, maxNumberOfSquareFeet, filters);
+    filterFunc(minPrice, maxPrice, "filterFields.price", filters);
+    filterFunc(minNumberOfRooms, maxNumberOfRooms, "filterFields.rooms", filters);
+    filterFunc(minNumberOfBathrooms, maxNumberOfBathrooms, "filterFields.bathrooms", filters);
+    // filterFunc(minNumberOfSquareFeet, maxNumberOfSquareFeet, "", filters);
 
-    if (typeof forSale === "boolean") filters.forSale = forSale;
-    if (typeof forRent === "boolean") filters.forRent = forRent;
-    if (city) filters.city = new RegExp(String(city), "i"); // Case-insensitive search
-    if (type) filters.type = new RegExp(String(type), "i"); // Case-insensitive search
+    if (typeof forSale === "boolean") filters["filterFields.forSale"] = forSale;
+    if (typeof forRent === "boolean") filters["filterFields.forRent"] = forRent;
+    if (city) filters.city = city;
+    if (type) filters.type = type;
 
     const page = Number(req.query.page);
     if (!page || isNaN(page)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     const limit = 6;
-
+    console.log('filters', filters)
     try {
 
         const estates = await Estate.find(filters)
@@ -67,6 +66,16 @@ export const listEstates = async (req: Request, res: Response, next: NextFunctio
             .skip((Number(page) - 1) * Number(limit));
 
         const total = await Estate.countDocuments(filters);
+        console.log("estates", estates.length)
+
+
+        res.header('Access-Control-Allow-Origin', 'http://localhost:70');
+        res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        res.header('Access-Control-Allow-Credentials', 'true');
+
+        // res.set('Content-Range', `products/women/categorie`);
+        // res.set('X-Total-Count', "");
 
         res.json({
             data: estates,
@@ -77,7 +86,8 @@ export const listEstates = async (req: Request, res: Response, next: NextFunctio
 
 
     } catch (error) {
-        next(error);
+        console.log('fama 8alta !!!!')
+        next(errorHandler(error, "501"));
     }
 
 

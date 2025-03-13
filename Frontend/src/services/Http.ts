@@ -1,6 +1,6 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
     baseURL: "http://localhost:50/api/",
     withCredentials: true
 });
@@ -10,12 +10,12 @@ type HTTPRequestConfig = AxiosRequestConfig;
 
 const Http = {
 
-    get: <T>(url: string, config: HTTPRequestConfig = {}) => {
-        return axiosInstance.get<T>(url, config);
+    get: async <T>(url: string, config: HTTPRequestConfig = {}) => {
+        return await axiosInstance.get<T>(url, config);
     },
 
-    post: <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {
-        return axiosInstance.post<T>(url, body, config);
+    post: async <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {
+        return await axiosInstance.post<T>(url, body, config);
     },
 
     put: <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {
@@ -28,7 +28,7 @@ const Http = {
 
     delete: <T>(url: string, config: HTTPRequestConfig = {}) => {
         return axiosInstance.delete<T>(url, config);
-    },  
+    },
 
 }
 

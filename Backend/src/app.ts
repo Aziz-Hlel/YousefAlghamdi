@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from 'express'
 import userRouter from './Routes/user.route'
 import estateRouter from './Routes/estate.route';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import path from 'path';
 
 
@@ -18,6 +19,13 @@ app.use('/api/estate', estateRouter);
 // Serve static files
 app.use('/images', express.static(path.join(__dirname, '../public/images')));
 
+app.use(cors({
+    origin: 'http://localhost:70', // Allow only your frontend origin
+    credentials: true,               // Allow cookies if needed
+    
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    exposedHeaders: ['Content-Range','X-Total-Count',"Content-Type", "Authorization"],
+  }));
 
 app.get('', (req, res) => {
     res.send('Works ')

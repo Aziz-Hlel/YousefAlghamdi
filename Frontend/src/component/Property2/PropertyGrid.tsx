@@ -5,8 +5,10 @@ import LatestPropertyCard from "../Cards/LatestPropertyCard";
 import Pagination from "../Pagination";
 import properties from "../../data/property";
 import { useFormContext } from "./FilterProvider.context";
-import Http from "../../services/Http";
+import Http, { axiosInstance } from "../../services/Http";
 import apiGateway from "../../apiGateway";
+import axios from "axios";
+import { Iestate } from "src/models/estate.type";
 
 function PropertyGrid() {
   //handle grid style
@@ -21,7 +23,7 @@ function PropertyGrid() {
   const handelPage = (page: any) => {
     if (page === "prev") {
       if (currentPage > 1) {
-        setCurrentPage(currentPage - 1);  
+        setCurrentPage(currentPage - 1);
       }
     } else if (page === "next") {
       if (currentPage < totalPage) {
@@ -38,13 +40,17 @@ function PropertyGrid() {
 
 
   const fetch = async () => {
-    const reponse = await Http.get(apiGateway.estate, { params: filterObject });
-    console.log(reponse.data)
+
+    const reponse = await Http.get<any>(apiGateway.estate, { params: filterObject });
+
+    const estates: Iestate = reponse.data
+
+    console.log(estates);
 
   }
-  useEffect(()=>{
+  useEffect(() => {
     fetch()
-  },[])
+  }, [])
 
 
   return (
@@ -62,21 +68,21 @@ function PropertyGrid() {
                 role="tabpanel"
               >
                 <div className="row">
-                  {properties?.map((property) => (
+                  {Array.from({ length: 6 }, (_, index) => 
                     <LatestPropertyCard
-                      key={property.id}
-                      img={property.img}
-                      likeLink={property.likeLink}
-                      detailsLink={property.detailsLink}
-                      agentName={property.agentName}
-                      agentImg={property.agentImg}
-                      price={property.price}
-                      period={property.period}
-                      whatFor={property.whatFor}
-                      propertyLink={property.propertyLink}
-                      name={property.name}
-                      address={property.address}
-                      detailsList={property.detailsList}
+                      key={properties[index].id}
+                      img={properties[index].img}
+                      likeLink={properties[index].likeLink}
+                      detailsLink={properties[index].detailsLink}
+                      agentName={properties[index].agentName}
+                      agentImg={properties[index].agentImg}
+                      price={properties[index].price}
+                      period={properties[index].period}
+                      whatFor={properties[index].whatFor}
+                      propertyLink={properties[index].propertyLink}
+                      name={properties[index].name}
+                      address={properties[index].address}
+                      detailsList={properties[index].detailsList}
                       classes={`${gridStyle === "grid"
                         ? "col-md-6 col-12 mg-top-30"
                         : "col-12 mg-top-30"
@@ -84,7 +90,7 @@ function PropertyGrid() {
                       view={gridStyle}
                       style={null}
                     />
-                  ))}
+                  )}
                 </div>
                 <Pagination
                   totalPage={totalPage}

@@ -13,6 +13,8 @@ export type IfilterProperty = {
     forRent: boolean,
     forSale: boolean,
 
+    
+    page:number,
 
 
 };

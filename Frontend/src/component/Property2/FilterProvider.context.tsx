@@ -11,9 +11,10 @@ export const defaultFilter: IfilterProperty = {
     minNumberOfBathrooms: 1,
     maxNumberOfSquareFeet: 2000,
     minNumberOfSquareFeet: 1,
-    maxPrice: 600,
+    maxPrice: 60000000,
     minPrice: 1,
 
+    page: 1,
 }
 
 
