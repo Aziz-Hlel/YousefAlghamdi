@@ -42,21 +42,10 @@ function PropertyGrid() {
 
 
 
-  const { filterObject, } = useFormContext();
-  const [estates, setEstates] = useState<Iestate[] | null>(null);
+  const { filterObject, estates, updateEstate } = useFormContext();
 
-  const fetch = async () => {
 
-    const reponse = await Http.get<any>(apiGateway.estate, { params: filterObject });
 
-    const estates: Iestate[] = reponse.data.data
-
-    console.log(estates);
-    setEstates(estates);
-  }
-  useEffect(() => {
-    fetch()
-  }, [])
 
 
   return (
