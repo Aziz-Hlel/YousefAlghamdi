@@ -15,7 +15,7 @@ function Navbar({ handleSidebar, secondNav }) {
               <div className="homec-header__group">
                 <div className="homec-header__logo">
                   <Link to="/">
-                    <img src="img/logo.jpg" alt="#" />
+                    <img src="/img/logo.jpg" alt="#" />
                   </Link>
                 </div>
                 <div className="homec-header__menu">

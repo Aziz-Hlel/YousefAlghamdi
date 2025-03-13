@@ -27,7 +27,6 @@ const atrToImg = {
 
 function LatestPropertyCard({ _id, img, likeLink, detailsLink, price, period, whatFor, propertyLink, name, address, detailsList, style, classes, view, }: ILatestPropertyCard) {
 
-  const navigate = useNavigate();
 
 
   return (
@@ -44,10 +43,9 @@ function LatestPropertyCard({ _id, img, likeLink, detailsLink, price, period, wh
       >
         {/* Property Head  */}
         <div className="homec-property__head">
-          <div onClick={() => navigate(`/property-single/${_id}`)}
-          >
+          <Link to={"/property-single/" + _id}>
             <img src={img} alt="#" />
-          </div >
+          </Link >
           {/* Top Sticky  */}
           <div className="homec-property__hsticky">
             <a href={likeLink} className="homec-heart">
@@ -83,7 +81,9 @@ function LatestPropertyCard({ _id, img, likeLink, detailsLink, price, period, wh
 
           </div>
           <h3 className="homec-property__title">
-            <Link to={propertyLink}>{name.length > 22 ? name : name}</Link>
+            <Link to={"/property-single/" + _id}>
+              {name.length > 22 ? name : name}
+            </Link>
           </h3>
           <div className="homec-property__text">
             <img src="img/location-icon.svg" alt="#" />
@@ -101,7 +101,7 @@ function LatestPropertyCard({ _id, img, likeLink, detailsLink, price, period, wh
         </div>
       </div>
       {/* End Single property */}
-    </div>
+    </div >
   );
 }
 
