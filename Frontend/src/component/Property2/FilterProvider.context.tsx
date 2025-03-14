@@ -1,4 +1,4 @@
-import Iestate from "src/models/estate.type";
+import Iproperty from "src/models/estate.type";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { IfilterProperty } from "src/models/filterProperty";
 import Http from "@src/services/Http";
@@ -26,7 +26,7 @@ interface IFormContext {
     updateField: (field: keyof IfilterProperty, value: any) => void,
     resetFilter: () => void,
 
-    estates: Iestate[] | null,
+    estates: Iproperty[] | null,
     updateEstate: () => void,
 }
 
@@ -39,7 +39,7 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
     const [filterObject, setFilter] = useState(defaultFilter);
 
-    const [estates, setEstates] = useState<Iestate[] | null>(null);
+    const [estates, setEstates] = useState<Iproperty[] | null>(null);
 
 
 
@@ -57,7 +57,7 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
     const updateEstate = async () => {
         const response = await Http.get<any>(apiGateway.estate, { params: filterObject });
-        const estates: Iestate[] = response.data.data
+        const estates: Iproperty[] = response.data.result
 
         setEstates(estates);
     };

@@ -72,10 +72,7 @@ export const listEstates = async (req: Request, res: Response, next: NextFunctio
         res.set("X-Total-Count", total.toString()); // Optional, useful for frontend
 
         res.json({
-            data: estates,
-            total,
-            page: Number(page),
-            totalPages: Math.ceil(total / Number(limit)),
+            result: estates,
         })
 
 
@@ -98,7 +95,7 @@ export const getEstate = async (req: Request, res: Response, next: NextFunction)
         const estate = await Estate.findById(estateId)
         res.json({
 
-            "result": estate,
+            result: estate,
         });
     } catch (error) {
         next(error);

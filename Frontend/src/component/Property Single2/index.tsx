@@ -9,26 +9,23 @@ import SingleSlider from "./SingleSlider";
 import ThumbnailsSlider from "./ThumbnilsSlider";
 import PropertyDetails from "./PropertyDetails";
 import { useParams } from "react-router-dom";
-import Iestate from "src/models/estate.type";
+import Iproperty from "src/models/estate.type";
 import Http from "@src/services/Http";
 import apiGateway from "@src/apiGateway";
+import { useGetProperty } from "@src/useApi/useGetProperty";
 
 
 function PropertySingle() {
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
 
-  const [estate, setEstate] = useState<Iestate | undefined>(undefined);
-  const fetch = async () => {
-    const api = (await Http.get(apiGateway.estate + "/" + id) as any).data.result
+  const { property } = useGetProperty(id ?? "");
 
-    setEstate(api);
-
-  }
+  console.log("estate", property)
   useEffect(() => {
-    fetch()
     setIsLoading(false);
   }, []);
+  
   let component = undefined;
   if (isLoading) {
     component = <Preloader />;

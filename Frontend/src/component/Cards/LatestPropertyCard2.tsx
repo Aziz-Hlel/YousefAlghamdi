@@ -1,9 +1,9 @@
 import apiGateway from "@src/apiGateway";
-import Iestate from "@src/models/estate.type";
+import Iproperty from "@src/models/estate.type";
 import { Link } from "react-router-dom";
 
 interface ILatestPropertyCard {
-  estate: Iestate;
+  estate: Iproperty;
   _id: string,
   img: string,
   likeLink: string,

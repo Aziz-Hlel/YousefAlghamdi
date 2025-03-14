@@ -1,4 +1,4 @@
-type Iestate = {
+type Iproperty = {
     _id: string
     title: string,
     type: string,
@@ -22,4 +22,4 @@ type Iestate = {
 }
 
 
-export default Iestate;
+export default Iproperty;
