@@ -58,6 +58,7 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
     const updateEstate = async () => {
         const response = await Http.get<any>(apiGateway.estate, { params: filterObject });
         const estates: Iproperty[] = response.data.result
+        console.log("response estates", estates);
 
         setEstates(estates);
     };

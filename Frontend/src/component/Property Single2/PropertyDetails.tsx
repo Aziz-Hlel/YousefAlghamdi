@@ -9,6 +9,7 @@ import PropertyReview from "../PropertyReview";
 import PropertyAgents from "../Agents/PropertyAgents";
 import { useSinglePropertyContext } from "./PropertySingleProvider.context";
 import OtherDetailsTabFeatures from "./OtherDetailsTabFeatures";
+import apiGateway from "@src/apiGateway";
 
 function PropertyDetails() {
   const [activeTab, setActiveTab] = useState("Property Details");
@@ -86,7 +87,7 @@ function PropertyDetails() {
             </div>
           </div>
           <PropertyAgents
-            image="https://placehold.co/90x90"
+            image={apiGateway.localhost.images + "agent_small.png"}
             name="Wade De Warren"
             position="Real Estate Broker"
           />

@@ -1,11 +1,13 @@
 import Header from "../Header";
-import Breadcrumbs from "../Breadcrumbs";
+import Breadcrumbs from "../Breadcrumbs2";
 import HistoryLinks from "../Breadcrumbs/HistoryLinks";
 import DownloadApp from "../DownloadApp";
 import Footer from "../Footer";
 import GoTopBtn from "../Button/GoTopBtn";
 import { useEffect, useState } from "react";
 import Preloader from "../Loader";
+import notFoundImg from "@img/404.png"
+
 
 function ErrorPage() {
   const [isLoading, setisLoadingg] = useState(true);
@@ -21,8 +23,8 @@ function ErrorPage() {
       <>
         <Header />
         <Breadcrumbs title="404 Page" titlePosition="bottom">
-          <HistoryLinks link="/home" text="Home" />
-          <HistoryLinks link="/404" text="Error Page" isActive={true} />
+          <HistoryLinks link="/" text="Home" />
+          <HistoryLinks link="/" text="Error Page" isActive={true} />
         </Breadcrumbs>
         <section className="homec-error section-padding">
           <div className="container">
@@ -31,7 +33,7 @@ function ErrorPage() {
                 <div className="homec-error-inner">
                   {/* Error Content Image */}
                   <div className="homec-error-inner__img">
-                    <img src="https://placehold.co/1000x565" alt="#" />
+                    <img src={notFoundImg} alt="#" />
                   </div>
                   <h1 className="homec-error-inner__title">
                     Oops! Page Not Found.

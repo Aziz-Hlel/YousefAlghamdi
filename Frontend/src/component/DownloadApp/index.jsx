@@ -1,6 +1,5 @@
 import AboutShapeImg from "../About/AboutShapeImg";
 import DownloadAppBtn from "../Button/DownloadAppBtn";
-
 function DownloadApp() {
   return (
     <section
@@ -8,9 +7,9 @@ function DownloadApp() {
       style={{ backgroundImage: "url('img/download-vector.svg')" }}
     >
       <div className="homec-shape">
-        <AboutShapeImg img="img/anim-shape-10.svg" design="homec-shape-11" />
-        <AboutShapeImg img="img/anim-shape-10.svg" design="homec-shape-12" />
-        <AboutShapeImg img="img/anim-shape-10.svg" design="homec-shape-13" />
+        <AboutShapeImg img="/img/anim-shape-10.svg" design="homec-shape-11" />
+        <AboutShapeImg img="/img/anim-shape-10.svg" design="homec-shape-12" />
+        <AboutShapeImg img="/img/anim-shape-10.svg" design="homec-shape-13" />
       </div>
       <div className="container">
         <div className="row">

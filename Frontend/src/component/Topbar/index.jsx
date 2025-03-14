@@ -26,7 +26,7 @@ function Topbar({ v2 }) {
                 <TopbarBtn
                   link="mailto:yousefAlghamdi@gmail.com"
                   img="/img/locations-icon.svg"
-                  text="1901 Palm Jumeirah Rd, Palm Jumeirah, Dubai, UAE 12345"
+                  text="1901 Palm Jumeirah Rd, Palm Jumeirah, Dubai"
                 />
               </ul>
               {/* End Contact  */}

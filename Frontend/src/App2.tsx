@@ -121,7 +121,7 @@ const App2 = () => {
                     <Route path="/faq" element={<Faq />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
-                    <Route path="/404" element={<ErrorPage />} />
+                    <Route path="*" element={<ErrorPage />} />
                     <Route path="/contact" element={<Contact />} />
 
 

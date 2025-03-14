@@ -6,7 +6,6 @@ import Footer from "../Footer";
 import GoTopBtn from "../Button/GoTopBtn";
 import Preloader from "../Loader";
 import SingleSlider from "./SingleSlider";
-import ThumbnailsSlider from "./ThumbnilsSlider";
 import PropertyDetails from "./PropertyDetails";
 import { useParams } from "react-router-dom";
 import Iproperty from "src/models/estate.type";
@@ -14,6 +13,7 @@ import Http from "@src/services/Http";
 import apiGateway from "@src/apiGateway";
 import { useGetProperty } from "@src/useApi/useGetProperty";
 import { SinglePropertyProvider } from "./PropertySingleProvider.context";
+import ThumbnailsSlider from "./ThumbnilsSlider";
 
 
 function PropertySingle() {

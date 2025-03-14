@@ -41,11 +41,11 @@ function LatestPropertyCard({ estate, _id, likeLink, period, whatFor, name, addr
     >
       {/* Single property */}
       <div
-        className={`homec-property ${view === "list" && "homec-property__list-style"
+        className={`homec-property [@media(min-width:500px)]:w-fit md:w-auto ${view === "list" && "homec-property__list-style"
           }`}
       >
         {/* Property Head  */}
-        <div className="homec-property__head">
+        <div className="homec-property__head [@media(min-width:500px)]:w-fit md:w-auto">
           <Link to={"/property-single/" + estate._id}>
             <img src={apiGateway.localhost.images + estate.imgs[0]} alt="#" />
           </Link >
@@ -70,16 +70,16 @@ function LatestPropertyCard({ estate, _id, likeLink, period, whatFor, name, addr
           {/* End Top Sticky  */}
         </div>
         {/* Property Body */}
-        <div className="homec-property__body">
+        <div className="homec-property__body [@media(min-width:500px)]:w-fit md:w-auto">
           <div className="homec-property__topbar">
             <div className="homec-property__price">
               ${estate.filterFields.price} <span>/{period}</span>
             </div>
 
-            <div className=" flex justify-center items-center gap-2 ">
-              <span className="homec-property__salebadge pr-0 mr-0">{whatFor}</span>
-              {(name === "Brand New Shopping Mall" || name === "Countryside Lake View")
-                && <span className="  bg-violet-200 text-xs py-1 px-2 rounded-xl">To rent</span>}
+            <div className=" flex justify-center items-center  [@media(min-width:500px)]:w-fit md:w-auto ">
+              {whatFor === "To sale" ?
+                <span className="homec-property__salebadge pr-0 mr-0">{whatFor}</span> :
+                <span className="  bg-violet-200 text-xs py-1 px-2 rounded-xl">To rent</span>}
             </div>
 
           </div>
@@ -97,20 +97,20 @@ function LatestPropertyCard({ estate, _id, likeLink, period, whatFor, name, addr
 
             {estate.filterFields.rooms && <li className=" h-fit mx-0 p-0">
               <img src={atrToImg.rooms} alt="#" className=" " />
-              <span className="  text-sm font-medium">
+              <span className="  sm:text-sm sm:font-medium">
                 {estate.filterFields.rooms} Room
               </span>
 
             </li>}
             {estate.filterFields.bathrooms && <li>
               <img src={atrToImg.bathroom} alt="#" className=" " />
-              <span className="  text-sm font-medium">
+              <span className="  sm:text-sm sm:font-medium">
                 {estate.filterFields.bathrooms} Bathroom
               </span>
             </li>}
             {estate.filterFields.area && <li>
               <img src={atrToImg.square} alt="#" className=" " />
-              <span className="  text-sm font-medium">
+              <span className="  sm:text-sm sm:font-medium">
 
                 {estate.filterFields.area} m2
               </span>

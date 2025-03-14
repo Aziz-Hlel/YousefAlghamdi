@@ -4,6 +4,7 @@ import { errorHandler } from "../utils/error";
 import mongoose from "mongoose";
 import errorMessages from "../utils/errorMessages";
 import statusCode from "../utils/statusCode";
+import { log } from "console";
 
 
 
@@ -41,7 +42,7 @@ const filterFunc = (minVal: any, maxVal: any, filterKeyName: string, filters: an
 export const listEstates = async (req: Request, res: Response, next: NextFunction) => {
 
     const { city, type, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
-    console.log('req.query', req.query)
+    // console.log('req.query', req.query)
     let filters: any = {};
 
     filterFunc(minPrice, maxPrice, "filterFields.price", filters);
@@ -49,8 +50,11 @@ export const listEstates = async (req: Request, res: Response, next: NextFunctio
     filterFunc(minNumberOfBathrooms, maxNumberOfBathrooms, "filterFields.bathrooms", filters);
     // filterFunc(minNumberOfSquareFeet, maxNumberOfSquareFeet, "", filters);
 
-    if (typeof forSale === "boolean") filters["filterFields.forSale"] = forSale;
-    if (typeof forRent === "boolean") filters["filterFields.forRent"] = forRent;
+    if (forSale === "true" && forRent === "true") { }
+    else if (forSale === "true") filters["filterFields.forSale"] = forSale;
+    else if (forRent === "true") filters["filterFields.forRent"] = forRent;
+
+
     if (city) filters.city = city;
     if (type) filters.type = type;
 
@@ -58,7 +62,7 @@ export const listEstates = async (req: Request, res: Response, next: NextFunctio
     if (!page || isNaN(page)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     const limit = 6;
-    console.log('filters', filters)
+    // console.log('filters', filters)
     try {
 
         const [estates, total] = await Promise.all([
