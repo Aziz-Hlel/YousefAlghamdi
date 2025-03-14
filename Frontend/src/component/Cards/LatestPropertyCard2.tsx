@@ -28,7 +28,7 @@ const atrToImg = {
 
 }
 
-function LatestPropertyCard({ estate, _id, img, likeLink, detailsLink, price, period, whatFor, propertyLink, name, address, detailsList, style, classes, view, }: ILatestPropertyCard) {
+function LatestPropertyCard({ estate, _id, likeLink, period, whatFor, name, address, style, classes, view, }: ILatestPropertyCard) {
 
 
 
@@ -93,32 +93,27 @@ function LatestPropertyCard({ estate, _id, img, likeLink, detailsLink, price, pe
             <p>{address}</p>
           </div>
           {/* Property List */}
-          <ul className="homec-property__list homec-border-top list-none">
-            {/* {detailsList?.map((details: any, index: number) => {
+          <ul className="homec-property__list homec-border-top list-none ">
 
-              return (
-                <>
-                  {details &&
-                    <li key={details.name + index}>
-                      <img src={details.img} alt="#" />
-                      {details.name}
-                    </li>
-                  }
+            {estate.filterFields.rooms && <li className=" h-fit mx-0 p-0">
+              <img src={atrToImg.rooms} alt="#" className=" " />
+              <span className="  text-sm font-medium">
+                {estate.filterFields.rooms} Room
+              </span>
 
-                </>
-              )
-            })} */}
-            {estate.filterFields.rooms && <li>
-              <img src={atrToImg.rooms} alt="#" />
-              {estate.filterFields.rooms} Room
             </li>}
             {estate.filterFields.bathrooms && <li>
-              <img src={atrToImg.bathroom} alt="#" />
-              {estate.filterFields.bathrooms} Bathroom
+              <img src={atrToImg.bathroom} alt="#" className=" " />
+              <span className="  text-sm font-medium">
+                {estate.filterFields.bathrooms} Bathroom
+              </span>
             </li>}
-            {estate.filterFields.width && <li>
-              <img src={atrToImg.square} alt="#" />
-              {estate.filterFields.width * estate.filterFields.height} m2
+            {estate.filterFields.area && <li>
+              <img src={atrToImg.square} alt="#" className=" " />
+              <span className="  text-sm font-medium">
+
+                {estate.filterFields.area} m2
+              </span>
             </li>}
             {/* {detailsList?.map((details: any, index: number) => (
               <li key={details.name + index}>

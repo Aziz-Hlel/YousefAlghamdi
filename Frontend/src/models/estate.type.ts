@@ -12,8 +12,7 @@ type Iestate = {
 
     filterFields: {
         price: number,
-        height: number,
-        width: number,
+        area: number,
         rooms?: number,
         bathrooms?: number,
         forSale: boolean,

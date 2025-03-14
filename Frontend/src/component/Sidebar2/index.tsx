@@ -82,7 +82,7 @@ const SideBar22 = () => {
 
         <RangeInput
           minRange={0}
-          maxRange={600}
+          maxRange={3000000}
           minValue={filterObject.minPrice}
           maxValue={filterObject.maxPrice}
           minKey={"minPrice"}

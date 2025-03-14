@@ -67,6 +67,10 @@ const estateSchema = new mongoose.Schema({
         type: Date,
         required: false,
         default: null,
+    },
+    addresse:{
+        type:String,
+        required:false,
     }
 
 },

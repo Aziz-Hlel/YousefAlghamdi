@@ -61,17 +61,15 @@ export const listEstates = async (req: Request, res: Response, next: NextFunctio
     console.log('filters', filters)
     try {
 
-        const estates = await Estate.find(filters)
-            .limit(Number(limit))
-            .skip((Number(page) - 1) * Number(limit));
-
-        const total = await Estate.countDocuments(filters);
-        console.log("estates", estates.length)
-
-
+        const [estates, total] = await Promise.all([
+            Estate.find(filters)
+                .limit(limit)
+                .skip((page - 1) * limit),
+            Estate.countDocuments(filters)
+        ]);
 
         // res.set('Content-Range', `products/women/categorie`);
-        // res.set('X-Total-Count', "");
+        res.set("X-Total-Count", total.toString()); // Optional, useful for frontend
 
         res.json({
             data: estates,

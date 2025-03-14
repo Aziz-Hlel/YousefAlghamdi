@@ -3,7 +3,7 @@ import AOS from "aos";
 import React, { useEffect } from 'react'
 import Home from './component/Home'
 import PaymentMethod from "./component/PaymentMethod";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Route, BrowserRouter as Router, RouterProvider, Routes } from "react-router-dom";
 import AboutUs from "./component/About";
 import AddProperty from "./component/AddProperty";
 import AgentDetail from "./component/AgentDetail";
@@ -39,7 +39,7 @@ const App2 = () => {
 
         {
             path: "/property-single/:id",
-            element: <PropertySingle  />,
+            element: <PropertySingle />,
         },
         {
             path: "/edit-property",
@@ -100,7 +100,32 @@ const App2 = () => {
     ]);
     return (
         <>
-            <RouterProvider router={router} />{" "}
+            {/* <RouterProvider router={router} />{" "} */}
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/property" element={<Property />} />
+                    <Route path="/property-single/:id" element={<PropertySingle />} />
+                    <Route path="/edit-property" element={<EditProperty />} />
+                    <Route path="/add-property" element={<AddProperty />} />
+                    <Route path="/submit-property" element={<SubmitProperty />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+
+                    <Route path="/agent-detail" element={<AgentDetail />} />
+                    <Route path="/our-agent" element={<OurAgents />} />
+                    <Route path="/about" element={<AboutUs />} />
+                    <Route path="/pricing" element={<Pricing />} />
+                    <Route path="/payment-method" element={<PaymentMethod />} />
+                    <Route path="/faq" element={<Faq />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/404" element={<ErrorPage />} />
+                    <Route path="/contact" element={<Contact />} />
+
+
+
+                </Routes>
+            </Router>
         </>
     )
 }

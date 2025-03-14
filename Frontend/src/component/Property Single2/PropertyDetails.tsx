@@ -14,6 +14,8 @@ function PropertyDetails() {
     setActiveTab(title);
   };
 
+  
+
   return (
     <section
       className="pd-top-0 homec-bg-third-color pd-btm-80 homec-bg-cover"
