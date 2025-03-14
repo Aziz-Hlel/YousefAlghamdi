@@ -7,6 +7,8 @@ import PropertyVideo from "../PropertyVideo";
 import PropertyLocation from "../PropertyLocation";
 import PropertyReview from "../PropertyReview";
 import PropertyAgents from "../Agents/PropertyAgents";
+import { useSinglePropertyContext } from "./PropertySingleProvider.context";
+import OtherDetailsTabFeatures from "./OtherDetailsTabFeatures";
 
 function PropertyDetails() {
   const [activeTab, setActiveTab] = useState("Property Details");
@@ -14,7 +16,25 @@ function PropertyDetails() {
     setActiveTab(title);
   };
 
-  
+  type IPropertyDetail = {
+    [key: string]: string | number;
+  };
+
+  const { property } = useSinglePropertyContext();
+
+  const propertyDetails: IPropertyDetail[] = [
+    { "Type": property.type },
+    { City: property.city },
+    { Area: property.filterFields.area },]
+
+  property.filterFields.rooms && propertyDetails.push({ Rooms: property.filterFields.rooms });
+  property.filterFields.bathrooms && propertyDetails.push({ bathrooms: property.filterFields.bathrooms });
+
+  const nearestPlaces = Object.keys(property.nearestPlaces).map((key) => ({
+    [key]: property.nearestPlaces[key],
+  }))
+
+  const additionalDetails = Object.keys(property.additionalDetails).map((key) => key)
 
   return (
     <section
@@ -30,48 +50,23 @@ function PropertyDetails() {
               <div className="tab-content">
                 <DetailsTab
                   isActive={activeTab === "Property Details"}
-                  text={"Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature,"}
+                  text={property.description}
                 >
 
-                  <DetailsTabFeatures check={null}
-                    title="Additional Details"
-                    property={[
-                      { ["Building age"]: "2 Years" },
-                      { Cooling: "Yes" },
-                      { Gas: "Yes" },
-                      { Parking: "Yes" },
-                      { Sewer: "Yes" },
-                      { ["Exercise Room"]: "Yes" },
-                      { Heating: "Yes" },
-                      { Water: "Yes" },
-                      { Storage: "Yes" },
-                    ]}
-                  />
-
-
-                  <DetailsTabFeatures check={null}
-                    title="Nearest Place"
-                    property={[
-                      { Airport: "3 KM" },
-                      { Hospital: "2 KM" },
-                      { Breach: "3 KM" },
-                      { School: "4 KM" },
-                      { Park: "2 KM" },
-                    ]}
-                  />
-
                   <DetailsTabFeatures
+                    title="Details"
+                    property={propertyDetails}
+                  />
+
+
+                  <OtherDetailsTabFeatures check={null}
                     title="Nearest Place"
-                    property={[
-                      "Elevator in building",
-                      "Alcohol",
-                      "Reservations",
-                      "Free coffe and tea",
-                      "Accepts Credit Cards",
-                      "Air Condition",
-                      "Cable Tv",
-                      "Balcony",
-                    ]}
+                    property={nearestPlaces}
+                  />
+
+                  <OtherDetailsTabFeatures
+                    title="Additional details"
+                    property={additionalDetails}
                     check={true}
                   />
                 </DetailsTab>

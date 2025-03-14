@@ -13,47 +13,48 @@ import Iproperty from "src/models/estate.type";
 import Http from "@src/services/Http";
 import apiGateway from "@src/apiGateway";
 import { useGetProperty } from "@src/useApi/useGetProperty";
+import { SinglePropertyProvider } from "./PropertySingleProvider.context";
 
 
 function PropertySingle() {
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
 
-  const { property } = useGetProperty(id ?? "");
-
-  console.log("estate", property)
   useEffect(() => {
     setIsLoading(false);
   }, []);
-  
+
   let component = undefined;
   if (isLoading) {
     component = <Preloader />;
   } else {
     component = (
       <>
-        <Header v2={null} />
-        <Breadcrumbs title="Latest Properties" background={null} overlay={null} titlePosition={null}>
-          <HistoryLinks link="home" text="Home" isActive={null} />
-          <HistoryLinks
-            link="property"
-            text="Latest Properties"
-            isActive={true}
-          />
-        </Breadcrumbs>
-        <section className="pd-top-80 pd-btm-80">
-          <div className="container">
-            <div className="row">
-              <div className="col-12">
-                <SingleSlider />
-                <ThumbnailsSlider />
+        <SinglePropertyProvider id={id}>
+
+          <Header v2={null} />
+          <Breadcrumbs title="Latest Properties" background={null} overlay={null} titlePosition={null}>
+            <HistoryLinks link="home" text="Home" isActive={null} />
+            <HistoryLinks
+              link="property"
+              text="Latest Properties"
+              isActive={true}
+            />
+          </Breadcrumbs>
+          <section className="pd-top-80 pd-btm-80">
+            <div className="container">
+              <div className="row">
+                <div className="col-12">
+                  <SingleSlider />
+                  <ThumbnailsSlider />
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-        <PropertyDetails />
-        <Footer />
-        <GoTopBtn />
+          </section>
+          <PropertyDetails />
+          <Footer />
+          <GoTopBtn />
+        </SinglePropertyProvider>
       </>
     );
   }

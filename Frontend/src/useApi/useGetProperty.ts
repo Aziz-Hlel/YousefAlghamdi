@@ -4,14 +4,41 @@ import Http from "@src/services/Http";
 import { useEffect, useState } from "react";
 
 
+const initialProperty: Iproperty = {
+    _id: "",
+    title: "",
+    type: "",
+    description: "",
+    imgs: [],
+    videos: [],
+    city: "",
+    productTier: "",
+    clientId: "",
+    agentId: "",
 
-export const useGetProperty = ( id :string ) => {
+    filterFields: {
+        price: 0,
+        area: 0,
+        rooms: 0,
+        bathrooms: 0,
+        forSale: true,
+        forRent: true,
+    },
+    nearestPlaces: {},
+    additionalDetails: {},
+    available: undefined, // badl undefined b null b3d 
+}
 
-    const [property, setProperty] = useState<Iproperty | null>(null);
+export const useGetProperty = (id: string) => {
+
+    const [property, setProperty] = useState<Iproperty>(initialProperty);
 
     const updateProperty = async () => {
-        const response = await Http.get<any>(`${apiGateway.estate}\\${id}`);
-        const property: Iproperty = response.data.result
+        const property: Iproperty = await (await Http.get<any>(`${apiGateway.estate}\\${id}`)).data.result;
+        console.log("property", typeof property);
+        console.log(property)
+
+        // const property: Iproperty = response.data.result
 
         setProperty(property);
     };
@@ -21,5 +48,5 @@ export const useGetProperty = ( id :string ) => {
     }, []);
 
 
-    return {  property }
+    return { property }
 }

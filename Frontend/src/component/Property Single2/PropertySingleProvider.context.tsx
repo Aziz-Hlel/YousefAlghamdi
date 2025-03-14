@@ -5,7 +5,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 
 interface IpropertySingleProvider {
 
-    property: Iproperty | null,
+    property: Iproperty ,
 }
 
 export const SinglePropertyContext = createContext<IpropertySingleProvider | undefined>(undefined);
@@ -13,10 +13,10 @@ export const SinglePropertyContext = createContext<IpropertySingleProvider | und
 
 
 
-export const SinglePropertyProvider = ({ children, id }: { children: ReactNode, id: string | null }) => {
+export const SinglePropertyProvider = ({ children, id }: { children: ReactNode, id: string | undefined }) => {
 
 
-    const { property } = useGetProperty(id ?? "");
+    const { property } = useGetProperty(id ?? "0");
 
 
     return (

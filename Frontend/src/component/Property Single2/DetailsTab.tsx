@@ -1,6 +1,6 @@
 import ProtoTypes from "prop-types";
 
-function DetailsTab({ text, isActive, children }: { text: string, isActive: boolean, children: any }) {
+function DetailsTab({ text, isActive, children }: { text: string | undefined, isActive: boolean, children: any }) {
   return (
     <div className="">
 
@@ -17,9 +17,9 @@ function DetailsTab({ text, isActive, children }: { text: string, isActive: bool
 
           <div className="bg-white rounded-xl p-4 m-4" >
             <h4 className="homec-ptdetails-features__title ">description</h4>
-           
+
             <p className="">
-              {text}
+              {text ?? ""}
             </p>
 
           </div>

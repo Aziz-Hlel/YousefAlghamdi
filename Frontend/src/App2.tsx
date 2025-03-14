@@ -104,6 +104,8 @@ const App2 = () => {
             <Router>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    {/* <Route path="/home" element={<Home />} /> */}
+
                     <Route path="/property" element={<Property />} />
                     <Route path="/property-single/:id" element={<PropertySingle />} />
                     <Route path="/edit-property" element={<EditProperty />} />

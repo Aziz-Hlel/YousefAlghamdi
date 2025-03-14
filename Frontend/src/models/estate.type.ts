@@ -19,6 +19,12 @@ type Iproperty = {
         forRent: boolean,
     }
     available: Date | undefined, // badl undefined b null b3d 
+    nearestPlaces: {
+        [key: string]: string;
+    }
+    additionalDetails: {
+        [key: string]: string,
+    }
 }
 
 
