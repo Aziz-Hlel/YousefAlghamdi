@@ -9,7 +9,7 @@ export const defaultFilter: IfilterProperty = {
     forRent: true,
     forSale: true,
     maxNumberOfRooms: 10,
-    minNumberOfRooms: 1,
+    minNumberOfRooms: 0,
     maxNumberOfBathrooms: 5,
     minNumberOfBathrooms: 1,
     maxNumberOfSquareFeet: 2000,
@@ -41,9 +41,14 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
     const [estates, setEstates] = useState<Iproperty[] | null>(null);
 
+    useEffect(()=>{
+        console.log(filterObject);
+      
+          },[filterObject])
 
 
     const updateField = (field: keyof IfilterProperty, value: any) => {
+        console.log("field",field)
         setFilter((prev) => ({
             ...prev,
             [field]: value,
@@ -58,7 +63,8 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
     const updateEstate = async () => {
         const response = await Http.get<any>(apiGateway.estate, { params: filterObject });
         const estates: Iproperty[] = response.data.result
-        console.log("response estates", estates);
+        // console.log("response estates", estates);
+console.log("t5l ????????????");
 
         setEstates(estates);
     };

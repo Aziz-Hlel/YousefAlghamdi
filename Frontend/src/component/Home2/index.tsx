@@ -7,7 +7,7 @@ import Blog from "../Blog";
 import DownloadApp from "../DownloadApp2";
 import Features2 from "../Features2";
 import Header from "../Header";
-import HomecHero from "../HomecHero";
+import HomecHero from "../HomecHero2";
 import LatestProperty from "../LatestProperty";
 import PropertyListing from "../PropertyListing2";
 import Preloader from "../Loader";

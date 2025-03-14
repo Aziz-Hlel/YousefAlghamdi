@@ -5,17 +5,22 @@ import AgentsSidebarSlider from "../Agents/AgentsSidebarSlider";
 import imarates from "../../imarates";
 import estateTypes from "../../estateType";
 import { useFormContext } from "../Property2/FilterProvider.context";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const SideBar22 = () => {
 
-  const { filterObject, updateEstate } = useFormContext();
+  const { filterObject, updateEstate, updateField } = useFormContext();
+  const [aa, setAa] = useState(false)
 
-
+  useEffect(() => {
+console.log("t5l ????????????");
+  }, [aa])
 
   return (
     <div className="col-lg-4 col-12 mg-top-30">
       <div className="property-sidebar">
- 
+
         <SelectiveInput
           title="City"
           options={
@@ -93,7 +98,10 @@ const SideBar22 = () => {
         />
 
         <div className="w-full flex flex-col justify-center items-center gap-2 pt-4">
-          <button className="homec-btn" onClick={() => updateEstate()}>Apply filter</button>
+          <button className="homec-btn" onClick={() => {
+            updateEstate();
+            setAa(!aa)
+          }}>Apply filter</button>
           {/* <div className="underline font-extralight hover:cursor-pointer " onClick={() => resetFilter()}>reset filter</div> */}
         </div>
       </div>

@@ -40,7 +40,7 @@ function PropertyListing() {
                   listing="4"
                   place="Deira"
                   img={dubai_central}
-                  link="#"
+                  link="/property/Deira"
                 />
 
                 <SingleList
@@ -54,7 +54,7 @@ function PropertyListing() {
                   listing="4"
                   place="Al Awir"
                   img="https://placehold.co/256x529"
-                  link="#"
+                  link="/property/Al Awir"
                 />
 
 
@@ -64,9 +64,9 @@ function PropertyListing() {
             {/* Homec listing end  */}
           </div>
         </div>
-        <div className="row ">
+        {/* <div className="row ">
           <TitleBtn link="property" text="See all City" delay="700" />
-        </div>
+        </div> */}
       </div>
     </section>
   );

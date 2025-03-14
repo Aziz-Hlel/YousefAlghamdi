@@ -22,9 +22,9 @@ interface ILatestPropertyCard {
 }
 
 const atrToImg = {
-  rooms: "img/room-icon.svg",
-  bathroom: "img/bath-icon.svg",
-  square: "img/size-icon.svg",
+  rooms: "/img/room-icon.svg",
+  bathroom: "/img/bath-icon.svg",
+  square: "/img/size-icon.svg",
 
 }
 
@@ -89,7 +89,7 @@ function LatestPropertyCard({ estate, _id, likeLink, period, whatFor, name, addr
             </Link>
           </h3>
           <div className="homec-property__text">
-            <img src="img/location-icon.svg" alt="#" />
+            <img src="/img/location-icon.svg" alt="#" />
             <p>{address}</p>
           </div>
           {/* Property List */}
@@ -97,20 +97,20 @@ function LatestPropertyCard({ estate, _id, likeLink, period, whatFor, name, addr
 
             {estate.filterFields.rooms && <li className=" h-fit mx-0 p-0">
               <img src={atrToImg.rooms} alt="#" className=" " />
-              <span className="  sm:text-sm sm:font-medium">
+              <span className=" sm:text-sm sm:font-medium">
                 {estate.filterFields.rooms} Room
               </span>
 
             </li>}
             {estate.filterFields.bathrooms && <li>
               <img src={atrToImg.bathroom} alt="#" className=" " />
-              <span className="  sm:text-sm sm:font-medium">
+              <span className=" sm:text-sm sm:font-medium">
                 {estate.filterFields.bathrooms} Bathroom
               </span>
             </li>}
             {estate.filterFields.area && <li>
               <img src={atrToImg.square} alt="#" className=" " />
-              <span className="  sm:text-sm sm:font-medium">
+              <span className=" sm:text-sm sm:font-medium">
 
                 {estate.filterFields.area} m2
               </span>
