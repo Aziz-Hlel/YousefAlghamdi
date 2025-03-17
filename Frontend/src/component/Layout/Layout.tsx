@@ -7,7 +7,7 @@ import Header from "../Header";
 const Layout = () => {
     return (
         <>
-            <Header v2={null} />
+            <Header v2={false} />
             <Outlet />
         </>
     );
