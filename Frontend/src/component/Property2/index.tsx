@@ -26,7 +26,7 @@ function Property() {
     component = (
       <>
 
-        <Header v2={undefined} />
+        {/* <Header v2={undefined} /> */}
         <Breadcrumbs title="Latest Properties" background={undefined} overlay={undefined} titlePosition={undefined}>
           <HistoryLinks link="home" text="Home" isActive={undefined} />
           <HistoryLinks

@@ -20,7 +20,7 @@ function SubmitProperty() {
   } else {
     component = (
       <>
-        <Header />
+
         <Breadcrumbs
           title="Submit Property"
           titlePosition="bottom"

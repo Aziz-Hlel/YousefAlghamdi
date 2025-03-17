@@ -41,7 +41,7 @@ function Dashboard() {
   } else {
     component = (
       <>
-        <Header />
+
         <Breadcrumbs
           title={activeComponent}
           titlePosition="bottom"

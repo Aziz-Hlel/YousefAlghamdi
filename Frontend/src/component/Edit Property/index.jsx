@@ -20,7 +20,7 @@ function EditProperty() {
   } else {
     component = (
       <>
-        <Header />
+
         <Breadcrumbs
           title="Edit Property"
           titlePosition="bottom"

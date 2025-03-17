@@ -21,7 +21,7 @@ function ErrorPage() {
   } else {
     component = (
       <>
-        <Header />
+
         <Breadcrumbs title="404 Page" titlePosition="bottom">
           <HistoryLinks link="/" text="Home" />
           <HistoryLinks link="/" text="Error Page" isActive={true} />

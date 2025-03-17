@@ -21,7 +21,7 @@ function PaymentMethod() {
   } else {
     component = (
       <>
-        <Header />
+
         <Breadcrumbs
           title="Payment Method"
           titlePosition="bottom"

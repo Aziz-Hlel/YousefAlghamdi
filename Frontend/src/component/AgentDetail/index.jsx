@@ -49,7 +49,7 @@ function AgentDetail() {
   } else {
     component = (
       <>
-        <Header />
+
         <Breadcrumbs title="Our Agents Details" titlePosition="bottom">
           <HistoryLinks link="/home" text="Home" />
           <HistoryLinks

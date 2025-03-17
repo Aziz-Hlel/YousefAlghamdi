@@ -21,7 +21,7 @@ function AddProperty() {
   } else {
     component = (
       <>
-        <Header />
+
         <Breadcrumbs title="Add Property" titlePosition="bottom">
           <HistoryLinks link="/home" text="Home" />
           <HistoryLinks

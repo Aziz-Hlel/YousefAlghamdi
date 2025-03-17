@@ -42,7 +42,7 @@ function OurAgents() {
   } else {
     component = (
       <>
-        <Header />
+
         <Breadcrumbs title="Our Agents" titlePosition="bottom">
           <HistoryLinks link="home" text="Home" />
           <HistoryLinks link="/our-agent" text="Our Agents" isActive={true} />

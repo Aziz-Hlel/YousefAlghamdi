@@ -21,7 +21,7 @@ function Contact() {
   } else {
     component = (
       <>
-        <Header />
+
         <Breadcrumbs title="Contact US" titlePosition="bottom">
           <HistoryLinks link="/home" text="Home" />
           <HistoryLinks link="/contact" text="Contact US" isActive={true} />

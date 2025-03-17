@@ -22,7 +22,7 @@ function Faq() {
   } else {
     component = (
       <>
-        <Header />
+
         <Breadcrumbs title="Faq's" titlePosition="bottom">
           <HistoryLinks link="/home" text="Home" />
           <HistoryLinks link="/faq" text="Faq's" isActive={true} />

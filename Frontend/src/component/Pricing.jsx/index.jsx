@@ -21,7 +21,7 @@ function Pricing() {
   } else {
     component = (
       <>
-        <Header />
+
         <Breadcrumbs title="Our Package" titlePosition="bottom">
           <HistoryLinks link="/home" text="Home" />
           <HistoryLinks link="/pricing" text="Our Package" isActive={true} />

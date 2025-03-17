@@ -32,7 +32,7 @@ function PropertySingle() {
       <>
         <SinglePropertyProvider id={id}>
 
-          <Header v2={null} />
+          {/* <Header v2={null} /> */}
           <Breadcrumbs title="Latest Properties" background={null} overlay={null} titlePosition={null}>
             <HistoryLinks link="home" text="Home" isActive={null} />
             <HistoryLinks

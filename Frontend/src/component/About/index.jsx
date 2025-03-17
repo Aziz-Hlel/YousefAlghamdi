@@ -25,7 +25,7 @@ function AboutUs() {
   } else {
     component = (
       <>
-        <Header />
+
         <Breadcrumbs title="About US" titlePosition="bottom">
           <HistoryLinks link="/home" text="Home" />
           <HistoryLinks link="/about" text="About US" isActive={true} />

@@ -27,14 +27,10 @@ function Home() {
   } else {
     component = (
       <>
-        <Header />
         <HomecHero />
         <CitiesListing />
         <LatestPropertyV2 />
-
-
         <Features2 />
-
         <About />
         <Agents />
         <FaqSection />
