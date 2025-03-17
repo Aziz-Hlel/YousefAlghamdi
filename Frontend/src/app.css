@@ -1,6 +1,14 @@
 @import "tailwindcss";
 
 
+#range-slider .range-slider__range {
+    background: rgb(113, 102, 240);
+}
+#range-slider .range-slider__thumb {
+  background: rgb(113, 102, 240);
+}
+
+
 
 
 .carusole-dot {

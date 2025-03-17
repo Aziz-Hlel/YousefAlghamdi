@@ -42,7 +42,7 @@ function PropertyGrid() {
 
 
 
-  const { filterObject, estates, updateEstate } = useFormContext();
+  const { estates, } = useFormContext();
 
 
 

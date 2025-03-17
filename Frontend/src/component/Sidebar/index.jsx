@@ -2,8 +2,8 @@ import SelectiveInput from "../Form/SelectiveInput";
 import CheckInput from "../Form/CheckInput";
 import RangeInput from "../Form/RangeInput";
 import AgentsSidebarSlider from "../Agents/AgentsSidebarSlider";
-import imarates from "../../imarates";
-import estateTypes from "../../estateType";
+import imarates from "../../types/imarates";
+import estateTypes from "../../types/estateType";
 
 function index() {
   return (

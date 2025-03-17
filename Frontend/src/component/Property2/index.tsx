@@ -25,9 +25,10 @@ function Property() {
   } else {
     component = (
       <>
-        <Header  />
-        <Breadcrumbs title="Latest Properties" >
-          <HistoryLinks link="home" text="Home"  />
+
+        <Header v2={undefined} />
+        <Breadcrumbs title="Latest Properties" background={undefined} overlay={undefined} titlePosition={undefined}>
+          <HistoryLinks link="home" text="Home" isActive={undefined} />
           <HistoryLinks
             link="property"
             text="Latest Properties"

@@ -3,6 +3,7 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 import { IfilterProperty } from "src/models/filterProperty";
 import Http from "@src/services/Http";
 import apiGateway from "@src/apiGateway";
+import { useParams } from "react-router-dom";
 
 
 export const defaultFilter: IfilterProperty = {
@@ -23,7 +24,7 @@ export const defaultFilter: IfilterProperty = {
 
 interface IFormContext {
     filterObject: IfilterProperty,
-    updateField: (field: keyof IfilterProperty, value: any) => void,
+    updateField: (field: keyof IfilterProperty, value: any, mnin?: string) => void,
     resetFilter: () => void,
 
     estates: Iproperty[] | null,
@@ -41,14 +42,47 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
     const [estates, setEstates] = useState<Iproperty[] | null>(null);
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(filterObject);
-      
-          },[filterObject])
+
+    }, [filterObject])
 
 
-    const updateField = (field: keyof IfilterProperty, value: any) => {
-        console.log("field",field)
+
+    const { city } = useParams();
+
+
+
+
+    useEffect(() => {
+        const handleCityChange = async (city: string) => {
+            await updateField("city", city);
+            console.log("cityyyyy", city);
+
+            // Make sure this is called after the state is updated
+        };
+        // console.log('mountedddddddddd');
+        const aa = async () => {
+            if (city !== undefined && city !== "undefined") {
+
+                await handleCityChange(city);
+                defaultFilter.city = city
+                updateEstate(defaultFilter);
+            }
+        }
+        aa()
+
+    }, [city])
+
+    const updateField = (field: keyof IfilterProperty, value: any, mnin?: string) => {
+        // console.log("field", field).
+        if (field === "city") {
+            console.log("city bch ytbadel jey mnin :", mnin);
+            console.log("value", value);
+
+        }
+
+
         setFilter((prev) => ({
             ...prev,
             [field]: value,
@@ -60,16 +94,20 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
     };
 
 
-    const updateEstate = async () => {
-        const response = await Http.get<any>(apiGateway.estate, { params: filterObject });
+    const updateEstate = async (defaultFilter?: IfilterProperty) => {
+        if (filterObject.city === "All") delete filterObject.city;
+        if (filterObject.type === "All") delete filterObject.type;
+        const filterSend = defaultFilter ? defaultFilter : filterObject
+        const response = await Http.get<any>(apiGateway.estate, { params: filterSend });
         const estates: Iproperty[] = response.data.result
-        // console.log("response estates", estates);
-console.log("t5l ????????????");
+        // console.log("estates", estates);
+        console.log("t5l ????????????");
 
         setEstates(estates);
     };
 
     useEffect(() => {
+        console.log("mounta context");
         updateEstate();
     }, []);
 

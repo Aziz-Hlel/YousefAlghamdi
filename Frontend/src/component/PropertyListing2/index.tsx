@@ -1,4 +1,4 @@
-import HomeSearch from "../Filter/HomeSearch";
+import HomeSearch from "../Filter2/HomeSearch";
 import Title from "../Title";
 import SingleList from "./SingleList";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
@@ -33,7 +33,7 @@ function PropertyListing() {
                   listing="4"
                   place="Dubai central"
                   img={deira}
-                  link="#"
+                  link="/property/Dubai (the central city)"
                 />
 
                 <SingleList
@@ -47,7 +47,7 @@ function PropertyListing() {
                   listing="4"
                   place="Bur Dubai"
                   img="https://placehold.co/256x529"
-                  link="#"
+                  link="/property/Bur Dubai"
                 />
 
                 <SingleList

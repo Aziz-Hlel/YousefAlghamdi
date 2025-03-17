@@ -1,49 +1,13 @@
 import { useState } from "react";
 import Select from "react-dropdown-select";
 import imarates from "../../types/imarates";
-const options = [
-  {
-    id: 1,
-    name: "Dubai (the central city)",
-  },
-  {
-    id: 2,
-    name: "Deira",
-  },
-  {
-    id: 3,
-    name: "Bur Dubai",
-  },
-  {
-    id: 4,
-    name: "Al Awir",
-  },
-  {
-    id: 5,
-    name: "Al Qusais",
-  },
-  {
-    id: 6,
-    name: "Al Barsha",
-  },
-  {
-    id: 7,
-    name: "Jumeirah",
-  },
-  {
-    id: 8,
-    name: "Riyadh",
-  },
-  {
-    id: 9,
-    name: "Al Karama",
-  },
-];
+import { useNavigate } from "react-router-dom";
+
 
 
 function HomeSearch() {
-  const [value, setValue] = useState(options[0]);
-
+  const [value, setValue] = useState<string | undefined>(undefined);
+  const navigate = useNavigate();
   return (
     <div
       className="homec-search-form mg-top-10 z-50 flex justify-center"
@@ -88,7 +52,7 @@ function HomeSearch() {
           {/* Form Group */}
           <div className="form-group z-50">
 
-            <select onChange={(e) => updateField(formkey, e.target.value)} value={value}
+            <select onChange={(e) => setValue(e.target.value)} value={value}
               className="py-3 px-4 pe-9 block outline-none border-none  w-full border-white rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
               <option ></option>
               {imarates.map((item) => <option key={item} value={item}>{item}</option>)}
@@ -116,7 +80,7 @@ function HomeSearch() {
         <div className=" flex justify-center w-full lg:w-fit  lg:grid">
 
 
-          <button type="submit" className="homec-btn " aria-label="search">
+          <button className="homec-btn " aria-label="search" onClick={() => { if (value) navigate("/property/" + value) }}>
             <span className="homec-btn__inside">
               <svg
                 width="21"

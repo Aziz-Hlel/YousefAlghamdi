@@ -1,4 +1,5 @@
 const imarates = [
+  // "All",
   "Dubai (the central city)",
   "Deira",
   "Bur Dubai",
@@ -10,5 +11,5 @@ const imarates = [
   "Al Karama",
 ];
 
-
+export type Imarate = (typeof imarates)[number];
 export default imarates;

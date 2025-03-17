@@ -1,7 +1,10 @@
+import { IestateTypes as IestateTypes } from "@src/types/estateType";
+import { Imarate } from "@src/types/imarates";
+
 export type IfilterProperty = {
 
-    city?: string,
-    type?: string,
+    city?: Imarate,
+    type?: IestateTypes,
     maxNumberOfRooms: number,
     minNumberOfRooms: number,
     maxNumberOfBathrooms: number,
@@ -13,8 +16,8 @@ export type IfilterProperty = {
     forRent: boolean,
     forSale: boolean,
 
-    
-    page:number,
+
+    page: number,
 
 
 };
