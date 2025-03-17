@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import WelcomeCard from "../Cards/WelcomeCard";
 import PropertyTextInput from "../Form/PropertyTextInput";
 import Preloader from "../Loader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import apiGateway from "@src/apiGateway";
+import Http from "@src/services/Http";
 
 function Login() {
   const [input, setInput] = useState({
@@ -17,6 +19,22 @@ function Login() {
   useEffect(() => {
     setisLoadingg(false);
   }, []);
+
+
+  const navigate = useNavigate();
+
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const response = await Http.post(apiGateway.user.sigIn, input)
+
+    response.status === 200 ? navigate("/") : console.log(response);
+    response.status === 200 && console.log("true");
+    console.log(response.status, typeof response.status);
+
+
+  };
+
 
   let component = undefined;
   if (isLoading) {
@@ -70,11 +88,11 @@ function Login() {
                       <div className="ecom-wc__button ecom-wc__button--bottom">
                         <button
                           className="homec-btn homec-btn__second"
-                          type="submit"
+                          onClick={handleSubmit}
                         >
                           <span>Login</span>
                         </button>
-                        <button
+                        {/* <button
                           className="homec-btn homec-btn__second homec-btn__social"
                           type="submit"
                         >
@@ -82,7 +100,7 @@ function Login() {
                             <img src="img/google.svg" alt="#" />
                           </span>
                           <span>Sign In with Google</span>
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                     {/* Form Group  */}
