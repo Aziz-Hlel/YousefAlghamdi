@@ -14,7 +14,7 @@ function HomeSearch() {
       data-aos="fade-up"
       data-aos-delay="500"
     >
-      <form className="homec-search-form__form homec-search-form__form--city flex justify-center items-center">
+      <div className="homec-search-form__form homec-search-form__form--city flex justify-center items-center">
         <div className="homec-search-form__group ">
           <svg
             width="24"
@@ -95,7 +95,7 @@ function HomeSearch() {
             </span>
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

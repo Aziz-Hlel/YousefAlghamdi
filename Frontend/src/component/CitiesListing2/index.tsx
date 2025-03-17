@@ -6,7 +6,7 @@ import TitleBtn from "../Button/TitleBtn";
 import dubai_central from "../../assets/img/dubai_central.jpg";
 import deira from "../../assets/img/deira.jpg"
 
-function PropertyListing() {
+function CitiesListing() {
   return (
     <section className="pd-top-120 pd-btm-120 xl:-translate-y-20 z-50">
       <div className="container homec-listing__container ">
@@ -72,4 +72,4 @@ function PropertyListing() {
   );
 }
 
-export default PropertyListing;
+export default CitiesListing;

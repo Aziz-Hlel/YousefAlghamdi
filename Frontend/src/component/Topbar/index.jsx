@@ -21,7 +21,7 @@ function Topbar({ v2 }) {
                 <TopbarBtn
                   link="tel:+971 50 123 4567"
                   img="/img/phone-icon.svg"
-                  text="+00 23904 0248"
+                  text="+971 50 123 4567"
                 />
                 <TopbarBtn
                   link="mailto:yousefAlghamdi@gmail.com"

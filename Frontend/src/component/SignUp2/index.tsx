@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import WelcomeCard from "../Cards/WelcomeCard";
 import PropertyTextInput from "../Form/PropertyTextInput";
 import Preloader from "../Loader";
-import { Link } from "react-router-dom";
-
-function SignUp() {
+import { Link, useNavigate } from "react-router-dom";
+import logo_img from "@img/logo_sign_in.jpg"
+import Http from "@src/services/Http";
+import apiGateway from "@src/apiGateway";
+const SignUp = () => {
   const [input, setInput] = useState({
     firstName: "",
     lastName: "",
@@ -24,13 +26,27 @@ function SignUp() {
   }, []);
 
   let component = undefined;
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const response = await Http.post(apiGateway.user.signUp, input)
+
+    response.status === 200 ? navigate("/login") : console.log(response);
+    response.status === 200 && console.log("true");
+    console.log(response.status, typeof response.status);
+
+
+  };
+
   if (isLoading) {
     component = <Preloader />;
   } else {
     component = (
       <section
         className="ecom-wc ecom-wc__full ecom-bg-cover"
-      style={{ backgroundImage: "url('/img/credential-bg.svg')" }}
+        style={{ backgroundImage: `url('/img/credential-bg.svg')` }}
       >
         <div className="container-fluid p-0">
           <div className="row g-0">
@@ -78,7 +94,7 @@ function SignUp() {
                         name="phoneNumber"
                         value={input.phoneNumber}
                         handleChange={handleChange}
-                        placeholder="+884401895493"
+                        placeholder="+971 50 123 4567"
                         margin="-10px"
                         type={null}
                       />
@@ -117,11 +133,10 @@ function SignUp() {
                       <div className="ecom-wc__button ecom-wc__button--bottom">
                         <button
                           className="homec-btn homec-btn__second"
-                          type="submit"
-                        >
+                          onClick={handleSubmit}                        >
                           <span>Login</span>
                         </button>
-                        <button
+                        {/* <button
                           className="homec-btn homec-btn__second homec-btn__social"
                           type="submit"
                         >
@@ -129,7 +144,7 @@ function SignUp() {
                             <img src="img/google.svg" alt="#" />
                           </span>
                           <span>Sign Up with Google</span>
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                     {/* Form Group  */}
@@ -152,7 +167,7 @@ function SignUp() {
                 { link: "#", name: "Privacy Policy" },
                 { link: "#", name: "Help" },
               ]}
-              image="https://placehold.co/600x600"
+              image={logo_img}
               brunches="120"
               builtHouse="150k"
             />

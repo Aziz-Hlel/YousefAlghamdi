@@ -4,7 +4,12 @@
 
 
 const apiGateway = {
-    user: "/user",
+    
+    user: {
+        signUp: "/user/register",
+        sigIn: "/user/login",
+    },
+    
     estate: "/estate",
 
 

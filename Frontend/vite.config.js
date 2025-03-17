@@ -15,6 +15,11 @@ export default defineConfig({
   ],
   server: {
     port: 70,
+    allowedHosts: ['a30d-197-15-72-205.ngrok-free.app'],  // change it l8er
+    hmr: {
+      clientPort: 443, // Force WebSocket to use ngrok's HTTPS port
+      protocol: 'wss'  // Force secure WebSocket (wss)
+    }
   },
   resolve: {
     alias: {

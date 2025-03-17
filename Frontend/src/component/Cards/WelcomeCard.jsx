@@ -19,14 +19,15 @@ function WelcomeCard({ languages, links, image, brunches, builtHouse }) {
             <a href="/">
               <img src={image} alt="#" />
             </a>
-            <div className="ecom-wc__countdown--title">
+            <div className="ecom-wc__countdown--title -translate-y-20">
               {brunches}
               <span>Brunches</span>
             </div>
-            <div className="ecom-wc__countdown--title ecom-wc__countdown--title--v2">
+
+            <div className="ecom-wc__countdown--title ecom-wc__countdown--title--v2 translate-y-14 border border-gray-400 outline-gray-400">
               {builtHouse}
               <span>Built House</span>
-            </div>
+            </ div>
           </div>
           <div className="ecom-wc__footer">
             <ul className="ecom-wc__footer--list list-none">

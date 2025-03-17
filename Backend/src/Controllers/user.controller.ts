@@ -15,14 +15,16 @@ export const test = (req: Request, res: Response) => {
 
 export const register = async (req: Request, res: Response, next: NextFunction) => {
 
-    const { firstName, lastName, password } = req.body
+    const { firstName, lastName, password, email, role, phoneNumber } = req.body
 
-    if (!firstName || !lastName || !password) return next(errorHandler(403, 'You are not allowed to update this user'));
+    if (!firstName || !lastName || !password || !email || !phoneNumber) return next(errorHandler(403, 'You are not allowed to update this user'));
 
     const newUser = new User({
         firstName,
         lastName,
         password,
+        email,
+        phoneNumber,
     })
 
     try {
@@ -48,7 +50,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
     if (!await user.matchPassword(password)) return next(errorHandler(401, errorMessages.COMMON.Invalid_Credentials));
 
-    generateToken(res, user); 
+    generateToken(res, user);
     res.status(statusCode.OK);
 
 }

@@ -9,7 +9,7 @@ import Features2 from "../Features2";
 import Header from "../Header";
 import HomecHero from "../HomecHero2";
 import LatestProperty from "../LatestProperty";
-import PropertyListing from "../PropertyListing2";
+import CitiesListing from "../CitiesListing2";
 import Preloader from "../Loader";
 import FaqSection from "../Faq/FaqSection";
 import LatestPropertyV2 from "../LatestProperty/LatestPropertyV2";
@@ -29,7 +29,7 @@ function Home() {
       <>
         <Header v2={null} />
         <HomecHero />
-        <PropertyListing />
+        <CitiesListing />
         <LatestPropertyV2 />
 
 

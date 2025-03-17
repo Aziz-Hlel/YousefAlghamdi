@@ -1,8 +1,8 @@
 import ProtoTypes from "prop-types";
 function AboutShapeImg({ img, design }) {
   return (
-    <div className={`homec-shape-single ${design}`}>
-      <img src={img} alt="#" />
+    <div className={`group block homec-shape-single ${design}`}>
+      <img src={img} alt="#" className=" group-hover:scale-105" />
     </div>
   );
 }
