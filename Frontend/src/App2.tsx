@@ -5,7 +5,7 @@ import Home from './component/Home'
 import PaymentMethod from "./component/PaymentMethod";
 import { createBrowserRouter, Route, BrowserRouter as Router, RouterProvider, Routes } from "react-router-dom";
 import AboutUs from "./component/About";
-import AddProperty from "./component/AddProperty";
+import AddProperty from "./component/AddProperty2";
 import AgentDetail from "./component/AgentDetail";
 import Contact from "./component/Contact";
 import Dashboard from "./component/Dashboard";
@@ -17,7 +17,7 @@ import OurAgents from "./component/OurAgents";
 import Pricing from "./component/Pricing.jsx";
 import PropertySingle from "./component/Property Single2";
 import SignUp from "./component/SignUp2";
-import SubmitProperty from "./component/SubmitProperty";
+import SubmitProperty from "./component/SubmitProperty2";
 import Property from "./component/Property2/";
 import Header from "./component/Header/index.jsx";
 import HomecHero from "./component/HomecHero2/index.jsx";
@@ -54,7 +54,7 @@ const App2 = () => {
         },
         {
             path: "/submit-property",
-            element: <SubmitProperty />,
+            element: <SubmitProperty whatFor="sale" />,
         },
         {
             path: "/dashboard",
@@ -118,7 +118,10 @@ const App2 = () => {
                         <Route path="/property-single/:id" element={<PropertySingle />} />
                         <Route path="/edit-property" element={<EditProperty />} />
                         <Route path="/add-property" element={<AddProperty />} />
-                        <Route path="/submit-property" element={<SubmitProperty />} />
+
+                        <Route path="/submit-property" element={<SubmitProperty whatFor="rent" />} />
+                        <Route path="/submit-property" element={<SubmitProperty whatFor="sale" />} />
+
                         <Route path="/dashboard" element={<Dashboard />} />  {/* hedha dhhrli mehichi footer */}
                         <Route path="/agent-detail" element={<AgentDetail />} />
                         <Route path="/our-agent" element={<OurAgents />} />
@@ -126,11 +129,12 @@ const App2 = () => {
                         <Route path="/pricing" element={<Pricing />} />
                         <Route path="/payment-method" element={<PaymentMethod />} />
                         <Route path="/faq" element={<Faq />} />
-                        <Route path="*" element={<ErrorPage />} />
                         <Route path="/contact" element={<Contact />} />
 
-                    </Route>
+                        <Route path="*" element={<ErrorPage />} />
 
+                    </Route>
+                    
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
 

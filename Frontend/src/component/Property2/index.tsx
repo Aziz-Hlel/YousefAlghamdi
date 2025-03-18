@@ -28,6 +28,7 @@ function Property() {
 
         {/* <Header v2={undefined} /> */}
         <Breadcrumbs title="Latest Properties" background={undefined} overlay={undefined} titlePosition={undefined}>
+        
           <HistoryLinks link="home" text="Home" isActive={undefined} />
           <HistoryLinks
             link="property"

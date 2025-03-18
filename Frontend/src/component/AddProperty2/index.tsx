@@ -22,7 +22,7 @@ function AddProperty() {
     component = (
       <>
 
-        <Breadcrumbs title="Add Property" titlePosition="bottom"  background={undefined} overlay={undefined}>
+        <Breadcrumbs title="Add Property" titlePosition="bottom" background={undefined} overlay={undefined}>
           <HistoryLinks link="/home" text="Home" isActive={undefined} />
           <HistoryLinks
             link="/add-property"
@@ -34,16 +34,18 @@ function AddProperty() {
         <section className="homec-error pd-top-90 pd-btm-120">
           <div className="container">
             <div className="row">
+
               <PropertyAddCard
                 img="img/property-rent.png"
                 why="Rent"
                 link="/submit-property" btn={undefined} />
+
               <PropertyAddCard
                 img="img/property-sale.png"
                 why="Sale"
                 link="/submit-property"
-                btn="second"
-              />
+                btn="second" />
+
             </div>
           </div>
         </section>
