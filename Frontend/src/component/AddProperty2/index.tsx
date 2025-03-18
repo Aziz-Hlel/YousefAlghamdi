@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import Preloader from "../Loader";
 import GoTopBtn from "../Button/GoTopBtn";
 
-function AddProperty() {
   const [isLoading, setisLoadingg] = useState(true);
 
   useEffect(() => {

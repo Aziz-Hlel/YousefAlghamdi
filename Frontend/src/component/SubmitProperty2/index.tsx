@@ -19,12 +19,12 @@ const SubmitProperty = ({ whatFor }: { whatFor: string }) => {
     component = <Preloader />;
   } else {
     component = (
-      <>
 
+      <>
         <Breadcrumbs
           title="Submit Property"
           titlePosition="bottom"
-          background="url(img/bread-overlay.jpg)" overlay={undefined}        >
+          background="url(img/bread-overlay.jpg)" overlay={undefined} >
           <HistoryLinks link="/home" text="Home" isActive={undefined} />
           <HistoryLinks
             link="/submit-property"
@@ -32,11 +32,13 @@ const SubmitProperty = ({ whatFor }: { whatFor: string }) => {
             isActive={true}
           />
         </Breadcrumbs>
-        <PropertyFrom whatFor={whatFor}/>
+        <PropertyFrom whatFor={whatFor} />
         <DownloadApp />
         <GoTopBtn />
       </>
+
     );
+
   }
   return component;
 }

@@ -18,13 +18,13 @@ function AgentCard({
         widthClasses
           ? {}
           : {
-              width: fullWidth ? "100%" : "92%",
-              marginBottom: fullWidth ? "50px" : "82px",
-            }
+            width: fullWidth ? "100%" : "92%",
+            marginBottom: fullWidth ? "50px" : "82px",
+          }
       }
       className={widthClasses}
     >
-      <div className={`homec-agent ${classes}`}>
+      <div className={`homec-agent ease-out duration-1000 hover:translate-x-20 ${classes}`}>
         {/*  Agent Head */}
         <div className="homec-agent__head">
           <img src={img} alt="#" />

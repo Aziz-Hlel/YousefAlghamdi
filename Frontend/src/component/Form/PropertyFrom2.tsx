@@ -161,19 +161,15 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                 </h4>
                 <div className="homec-submit-form__inner">
                   <div className="row">
+
                     <PropertyTextInput
                       title="Property Title*"
+                      size="col-lg-6 col-md-6"
                       name="title"
                       value={property.title}
                       handleChange={handleTextChange}
-                      placeholder="Title" size={undefined} type={undefined} margin={undefined} />
-                    {/* <PropertyTextInput
-                      title="Slug*"
-                      name="slug"
-                      value={property.slug}
-                      handleChange={handleTextChange}
-                      placeholder="Here is dmeo text"
-                    /> */}
+                      placeholder="Title" type={undefined} margin={undefined} />
+                      
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Property Type*"
@@ -182,6 +178,15 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       handleChange={handleTextChange}
                       placeholder="Apartment"
                     />
+
+                    {/* <PropertyTextInput
+                      title="Slug*"
+                      name="slug"
+                      value={property.slug}
+                      handleChange={handleTextChange}
+                      placeholder="Here is dmeo text"
+                    /> */}
+
                     {/* <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Purpose*"

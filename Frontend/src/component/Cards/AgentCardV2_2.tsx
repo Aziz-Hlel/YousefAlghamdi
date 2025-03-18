@@ -10,7 +10,7 @@ function AgentCardV2_2({ img, propertiesLink, name, position, detailsLink }: { i
       
     >
       {/* Single agent */}
-      <div className="group  bg-white w-72 py-2.5 pl-5  rounded-lg shadow-xl ease-in duration-1000  ">
+      <div className="group  bg-white w-72 py-2.5 pl-5  rounded-lg shadow-xl hover:-translate-y-5 ease-out duration-1000  ">
 
 
         <div className="flex ">
