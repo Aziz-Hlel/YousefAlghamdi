@@ -36,7 +36,6 @@ function AboutUs() {
         <AgentsV2 />
         <FaqSection />
         <DownloadApp />
-        <Footer />
         <GoTopBtn />
       </>
     );

@@ -35,7 +35,7 @@ function Navbar({ handleSidebar, secondNav }) {
                             text="Property Single"
                           /> */}
                           <NavBtn link="/add-property" text="Add Property" />
-                          <NavBtn link="/dashboard" text="Dashboard" />
+                          {/* <NavBtn link="/dashboard" text="Dashboard" /> */}
                           {/* <NavBtn
                             link="/submit-property"
                             text="Submit Property"

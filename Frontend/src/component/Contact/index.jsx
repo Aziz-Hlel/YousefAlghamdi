@@ -117,7 +117,7 @@ function Contact() {
           </div>
         </section>
         <DownloadApp />
-        <Footer />
+      
         <GoTopBtn />
       </>
     );

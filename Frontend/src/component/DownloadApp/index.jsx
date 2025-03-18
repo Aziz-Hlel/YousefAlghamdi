@@ -1,10 +1,12 @@
 import AboutShapeImg from "../About/AboutShapeImg";
 import DownloadAppBtn from "../Button/DownloadAppBtn";
+import screen_app from "../../assets/img/app-screen.png";
+
 function DownloadApp() {
   return (
     <section
       className="download-app homec-bg-cover homec-bg-primary-color pd-top-15 pd-btm-15"
-      style={{ backgroundImage: "url('img/download-vector.svg')" }}
+      style={{ backgroundImage: "url('/img/download-vector.svg')" }}
     >
       <div className="homec-shape">
         <AboutShapeImg img="/img/anim-shape-10.svg" design="homec-shape-11" />
@@ -56,7 +58,7 @@ function DownloadApp() {
                 data-aos="fade-up"
                 data-aos-delay="700"
               >
-                <img src="https://placehold.co/425x425" alt="#" />
+                <img src={screen_app} alt="#" />
               </div>
             </div>
           </div>

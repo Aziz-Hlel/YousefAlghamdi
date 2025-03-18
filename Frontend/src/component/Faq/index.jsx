@@ -33,7 +33,6 @@ function Faq() {
           <FunFacts v2={true} />
         </div>
         <DownloadApp />
-        <Footer />
         <GoTopBtn />
       </>
     );

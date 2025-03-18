@@ -241,7 +241,6 @@ function AgentDetail() {
           </div>
         </section>
         <DownloadApp />
-        <Footer />
         <GoTopBtn />
       </>
     );

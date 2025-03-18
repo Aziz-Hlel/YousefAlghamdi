@@ -119,7 +119,7 @@ const App2 = () => {
                         <Route path="/edit-property" element={<EditProperty />} />
                         <Route path="/add-property" element={<AddProperty />} />
                         <Route path="/submit-property" element={<SubmitProperty />} />
-                        <Route path="/dashboard" element={<Dashboard />} />
+                        <Route path="/dashboard" element={<Dashboard />} />  {/* hedha dhhrli mehichi footer */}
                         <Route path="/agent-detail" element={<AgentDetail />} />
                         <Route path="/our-agent" element={<OurAgents />} />
                         <Route path="/about" element={<AboutUs />} />

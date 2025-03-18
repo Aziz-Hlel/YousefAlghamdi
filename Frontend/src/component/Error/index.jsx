@@ -49,7 +49,6 @@ function ErrorPage() {
           </div>
         </section>
         <DownloadApp />
-        <Footer />
         <GoTopBtn />
       </>
     );

@@ -47,7 +47,6 @@ function PaymentMethod() {
         </section>
 
         <DownloadApp />
-        <Footer />
         <GoTopBtn />
       </>
     );

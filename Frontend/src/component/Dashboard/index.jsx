@@ -77,7 +77,6 @@ function Dashboard() {
           </div>
         </section>
         <DownloadApp />
-        <Footer />
         <GoTopBtn />
       </>
     );

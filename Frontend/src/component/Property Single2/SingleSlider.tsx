@@ -34,7 +34,7 @@ function SingleSlider() {
             img={apiGateway.localhost.images + img} />
         )}
 
-      <ImageCard
+      {/* <ImageCard
         price="3,976"
         duration="Month"
         title="Modern House With Pool"
@@ -61,7 +61,7 @@ function SingleSlider() {
         title="Affordable Green Villa House"
         text="1901 Thornridge Cir. Shiloh, Hawaii 81063"
         img="https://placehold.co/1170x600"
-      />
+      /> */}
     </Carousel>
   );
 }

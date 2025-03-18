@@ -78,7 +78,6 @@ function OurAgents() {
 
         <FaqSection />
         <DownloadApp />
-        <Footer />
         <GoTopBtn />
       </>
     );

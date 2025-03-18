@@ -78,7 +78,6 @@ function Pricing() {
         </section>
         <FaqSection />
         <DownloadApp />
-        <Footer />
         <GoTopBtn />
       </>
     );
