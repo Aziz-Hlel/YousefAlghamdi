@@ -2,14 +2,19 @@ import ProtoTypes from "prop-types";
 import Search from "../Form/Search";
 import ShowingResult from "./ShowingResult";
 import ListBtn from "../Button/ListBtn";
+import { useFormContext } from "./FilterProvider.context";
 
 function PropertyBar({ gridStyle, handleGridStyle }:{gridStyle:any, handleGridStyle:any}) {
+
+    const { totalCount } = useFormContext();
+  
+    
   return (
     <div className="homec-property-bar">
       <div className="homec-property-bar__single">
         <Search />
         {/* Show Results   */}
-        <ShowingResult currentPage="1-2" totalPages="17" />
+        <ShowingResult currentPage={`dsq`} totalPages={totalCount} />
         {/* End Show Results  */}
       </div>
       <div className="homec-property-bar__single">

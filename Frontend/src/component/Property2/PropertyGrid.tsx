@@ -10,13 +10,16 @@ import Iproperty from "@src/models/property.type";
 import apiGateway from "@src/apiGateway";
 
 function PropertyGrid() {
+
+  const { properties: estates, filterObject, totalCount } = useFormContext();
+
   //handle grid style
   const [gridStyle, setGridStyle] = useState("grid");
   const handleGridStyle = (style: any) => {
     setGridStyle(style);
   };
   //handle page
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(filterObject.page);
   const totalPage = 24;
 
   const handelPage = (page: any) => {
@@ -34,6 +37,9 @@ function PropertyGrid() {
   };
 
 
+  useEffect(() => {
+    console.log(totalCount);
+  }, [totalCount])
 
 
 
@@ -41,8 +47,6 @@ function PropertyGrid() {
 
 
 
-
-  const { estates, } = useFormContext();
 
 
 

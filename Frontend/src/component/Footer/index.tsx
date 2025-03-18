@@ -26,7 +26,7 @@ function Footer() {
                   {/* Footer Widget  */}
                   <div className="footer-about-widget">
                     <div className="">
-                      <Link className="logo" href="/">
+                      <Link className="logo" to={"/"}>
                         <img src={logo_img} alt="#" className=" w-72 h-64" />
                       </Link>
                     </div>
@@ -38,7 +38,7 @@ function Footer() {
                     {/* Social   */}
                     <ul className="homec-social homec-social__v2">
                       <li>
-                        <Link href="#">
+                        <Link to={"#"}>
                           <svg
                             width="24"
                             height="24"
@@ -132,7 +132,7 @@ function Footer() {
                           />
                           <FooterList
                             link="/submit-property"
-                            title="Submit Property"
+                            title="Edit Property"
                           />
                           <FooterList link="/login" title="Login" />
                           <FooterList link="/signup" title="Signup" />
@@ -146,9 +146,8 @@ function Footer() {
                         <h3 className="widget-title">Importants</h3>
                         <ul className="f-need-helps-inner list-none">
                           <FooterList link="/about" title="About Us" />
-                          <FooterList link="/pricing" title="Pricing" />
-                          <FooterList link="/blog" title="Blog" />
-                          <FooterList link="/faq" title="Faq's" />
+                          Our Agents
+                          <FooterList link="/our-agents" title="Our Agent" />
                           <FooterList link="/contact" title="Contact Us" />
                         </ul>
                       </div>
@@ -162,17 +161,17 @@ function Footer() {
                           <ul className="f-contact-list list-none">
                             <li>
                               <img src="/img/footer-phone.svg" alt="#" />
-                              <a href="tel:+(323)750-1234">+(323) 750-1234</a>
+                              <a href="tel:+(323)750-1234">+(971) 50 123 4567</a>
                             </li>
                             <li>
                               <img src="/img/footer-message.png" alt="#" />
-                              <a href="mailto:infoyour@gmail.com">
-                                infoyour@gmail.com
+                              <a href="mailto:yousefAlghamdi@gmail.com">
+                                yousefAlghamdi@gmail.com
                               </a>
                             </li>
                             <li>
                               <img src="/img/footer-location.png" alt="#" />
-                              <p>374 FA Tower, William S Blvd 2721, IL, USA</p>
+                              <p>1901 Palm Jumeirah Rd, Dubai</p>
                             </li>
                           </ul>
                         </div>

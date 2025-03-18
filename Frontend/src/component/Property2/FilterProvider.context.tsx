@@ -24,11 +24,13 @@ export const defaultFilter: IfilterProperty = {
 
 interface IFormContext {
     filterObject: IfilterProperty,
+    properties: Iproperty[] | null,
+    totalCount: number,
+
     updateField: (field: keyof IfilterProperty, value: any, mnin?: string) => void,
     resetFilter: () => void,
-
-    estates: Iproperty[] | null,
     updateEstate: () => void,
+
 }
 
 export const FormContext = createContext<IFormContext | undefined>(undefined);
@@ -40,7 +42,9 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
     const [filterObject, setFilter] = useState(defaultFilter);
 
-    const [estates, setEstates] = useState<Iproperty[] | null>(null);
+    const [properties, setProperties] = useState<Iproperty[] | null>(null);
+
+    const [totalCount, setTotalCount] = useState(0);
 
     useEffect(() => {
         console.log(filterObject);
@@ -99,11 +103,13 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
         if (filterObject.type === "All") delete filterObject.type;
         const filterSend = defaultFilter ? defaultFilter : filterObject
         const response = await Http.get<any>(apiGateway.estate, { params: filterSend });
-        const estates: Iproperty[] = response.data.result
+        const properties: Iproperty[] = response.data.result
+        const totalCount = Number(response.headers["x-total-count"]);
+        setTotalCount(totalCount)
         // console.log("estates", estates);
         console.log("t5l ????????????");
 
-        setEstates(estates);
+        setProperties(properties);
     };
 
     useEffect(() => {
@@ -113,7 +119,7 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
 
     return (
-        <FormContext.Provider value={{ filterObject, updateField, resetFilter, estates, updateEstate }}>
+        <FormContext.Provider value={{ properties, filterObject, totalCount, updateField, resetFilter, updateEstate }}>
             {children}
         </FormContext.Provider>
     );

@@ -1,7 +1,7 @@
 import ProtoTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-function FooterList({ link, title }) {
+const FooterList = ({ link, title }: { link: string, title: string }) => {
   return (
     <li>
       <Link to={link}>
@@ -12,9 +12,6 @@ function FooterList({ link, title }) {
   );
 }
 
-FooterList.propTypes = {
-  link: ProtoTypes.string.isRequired,
-  title: ProtoTypes.string.isRequired,
-};
+
 
 export default FooterList;

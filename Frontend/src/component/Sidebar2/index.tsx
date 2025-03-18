@@ -1,31 +1,14 @@
 import SelectiveInput from "../Form/SelectiveInput2";
 import CheckInput from "../Form/CheckInput2";
 import RangeInput from "../Form/RangeInput2";
-import AgentsSidebarSlider from "../Agents/AgentsSidebarSlider";
 import imarates from "../../types/imarates";
 import estateTypes from "../../types/estateType";
 import { useFormContext } from "../Property2/FilterProvider.context";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 const SideBar22 = () => {
 
-  const { filterObject, updateEstate, updateField } = useFormContext();
-  const { city } = useParams();
+  const { filterObject, updateEstate } = useFormContext();
 
-
-  const handleCityChange = (city: string) => {
-    updateField("city", city);
-    console.log("cityyyyy", city);
-    
-    updateEstate();  // Make sure this is called after the state is updated
-  };
-
-
-
-  // console.log('city', city);
-
-  // console.log(filterObject);
 
   return (
     <div className="col-lg-4 col-12 mg-top-30">

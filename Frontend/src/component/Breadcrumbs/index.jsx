@@ -12,7 +12,7 @@ function Breadcrumbs({ title, children, titlePosition, background, overlay }) {
       }}
     >
       {overlay && <div className="homec-overlay"></div>}
-      <div className="container">
+      <div className="container ">
         <div className="row">
           {/* Breadcrumb-Content */}
           <div className="col-12">

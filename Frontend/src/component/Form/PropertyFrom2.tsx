@@ -168,7 +168,9 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       name="title"
                       value={property.title}
                       handleChange={handleTextChange}
-                      placeholder="Title" type={undefined} margin={undefined} />
+                      placeholder="Title"
+                      
+                      />
                       
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
@@ -210,6 +212,7 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       value={property.filterFields.price}
                       handleChange={handleTextChange}
                       placeholder="24345"
+                      type="number"
                     />
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
@@ -218,6 +221,7 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       value={property.filterFields.area}
                       handleChange={handleTextChange}
                       placeholder="Here is demo text"
+                      type="number"
                     />
                     {/* <PropertyTextInput
                       size="col-lg-6 col-md-6"
