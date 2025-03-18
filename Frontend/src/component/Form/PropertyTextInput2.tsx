@@ -3,7 +3,7 @@ interface IPropertyTextInput {
   size?: string,
   title?: string,
   name: string,
-  value: string,
+  value: string | number,
   handleChange: (e: any) => void,
   placeholder?: string,
   type?: string,
@@ -28,7 +28,7 @@ const PropertyTextInput = ({ size, title, name, value, handleChange, placeholder
             value={value}
             name={name}
             placeholder={placeholder}
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               handleChange(e);
             }}
             required

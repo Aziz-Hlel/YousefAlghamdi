@@ -1,5 +1,5 @@
 import apiGateway from "@src/apiGateway";
-import Iproperty from "@src/models/estate.type";
+import Iproperty from "@src/models/property.type";
 import Http from "@src/services/Http";
 import { useEffect, useState } from "react";
 

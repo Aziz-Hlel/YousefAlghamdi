@@ -119,8 +119,8 @@ const App2 = () => {
                         <Route path="/edit-property" element={<EditProperty />} />
                         <Route path="/add-property" element={<AddProperty />} />
 
-                        <Route path="/submit-property" element={<SubmitProperty whatFor="rent" />} />
-                        <Route path="/submit-property" element={<SubmitProperty whatFor="sale" />} />
+                        <Route path="/submit-property" element={<SubmitProperty whatFor="forRent" />} />
+                        <Route path="/submit-property" element={<SubmitProperty whatFor="forSale" />} />
 
                         <Route path="/dashboard" element={<Dashboard />} />  {/* hedha dhhrli mehichi footer */}
                         <Route path="/agent-detail" element={<AgentDetail />} />
@@ -134,7 +134,7 @@ const App2 = () => {
                         <Route path="*" element={<ErrorPage />} />
 
                     </Route>
-                    
+
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
 

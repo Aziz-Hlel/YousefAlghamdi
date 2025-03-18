@@ -7,7 +7,7 @@ import properties from "../../data/property";
 import { useFormContext } from "./FilterProvider.context";
 import Http from "../../services/Http";
 import apiGateway from "../../apiGateway";
-import Iproperty from "@src/models/estate.type";
+import Iproperty from "@src/models/property.type";
 
 function PropertyGrid() {
   //handle grid style

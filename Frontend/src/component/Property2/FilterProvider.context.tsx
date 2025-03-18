@@ -1,4 +1,4 @@
-import Iproperty from "src/models/estate.type";
+import Iproperty from "@src/models/property.type";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { IfilterProperty } from "src/models/filterProperty";
 import Http from "@src/services/Http";

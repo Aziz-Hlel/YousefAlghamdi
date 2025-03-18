@@ -1,5 +1,5 @@
 import apiGateway from "@src/apiGateway";
-import Iproperty from "@src/models/estate.type";
+import Iproperty from "@src/models/property.type";
 import { Link } from "react-router-dom";
 
 interface ILatestPropertyCard {

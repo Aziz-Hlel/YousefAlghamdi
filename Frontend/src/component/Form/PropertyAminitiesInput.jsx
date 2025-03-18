@@ -1,6 +1,9 @@
 import ProtoTypes from "prop-types";
 import PropertyCheckInput from "./PropertyCheckInput";
 
+
+
+
 function PropertyAminitiesInput({ aminities, handleChange }) {
   return (
     <div className="homec-submit-form mg-top-40">

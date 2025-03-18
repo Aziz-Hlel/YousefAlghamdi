@@ -9,180 +9,144 @@ import KeyValueInput from "./KeyValueInput2";
 import PropertyPlan from "./PropertyPlan";
 import PropertyTextAreaV2 from "./PropertyTextAreaV2";
 import SwitcherBtn from "./SwitcherBtn";
+import IaddProperty from "@src/models/addProperty.type";
 
-function PropertyFrom() {
-  const [input, setInput] = useState({
+const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
+  const [property, setProperty] = useState<IaddProperty>({
+    city: "",
+    filterFields: {
+      area: 0,
+      forRent: whatFor === "forRent",
+      forSale: whatFor === "forSale",
+      price: 0,
+      rooms: 0,
+      bathrooms: 0,
+
+    },
+    productTier: "",
     title: "",
-    slug: "",
-    propertyType: "",
-    purpose: "",
-    rentPeriod: "",
-    propertyPrice: "",
-    area: "",
-    unit: "",
-    bedroom: "",
-    bathroom: "",
-    garage: "",
-    kitchen: "",
+    type: "",
     description: "",
-    propertyImage: [
-      { id: 1, img: "https://placehold.co/165x205" },
-      { id: 2, img: "https://placehold.co/165x205" },
-      { id: 3, img: "https://placehold.co/165x205" },
+
+    imgs: [
+      "https://placehold.co/165x205",
+      "https://placehold.co/165x205",
+      "https://placehold.co/165x205",
     ],
-    video: { video: "", description: "", YTVideoId: "" },
-    location: { city: "", address: "", addressDetails: "", googleMap: "" },
-    aminities: {
-      Breakfast: true,
-      Lunch: false,
-      ["Free Wifi"]: false,
-      ["Swimming Pool"]: false,
-      Cleaning: false,
-    },
-    nearestLocation: [
-      { id: 1, key: "", value: "" },
-      { id: 2, key: "", value: "" },
-      { id: 3, key: "", value: "" },
-    ],
-    additionalInformation: [
-      { id: 1, key: "", value: "" },
-      { id: 2, key: "", value: "" },
-      { id: 3, key: "", value: "" },
-    ],
-    propertyPlan: [
-      {
-        id: 1,
-        videoId: "",
-        thumbnail: "https://placehold.co/528x196",
-        desc: "",
-      },
-      {
-        id: 2,
-        videoId: "",
-        thumbnail: "https://placehold.co/528x196",
-        desc: "",
-      },
-      {
-        id: 3,
-        videoId: "",
-        thumbnail: "https://placehold.co/528x196",
-        desc: "",
-      },
-    ],
-    seoInfo: {
-      title: "",
-      desc: "",
-      status: true,
-      urgentProperty: false,
-      featured: true,
-      topProperty: false,
-    },
+    videos: [],
+    // location: { city: "", address: "", addressDetails: "", googleMap: "" }, mouch t3ml hakka 5ir ?
+
+    nearestPlaces: {},
+
+    additionalDetails: {},
+
+
   });
 
   // handle property information
 
-  const handleTextChange = (e: any) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProperty({ ...property, [e.target.name]: e.target.value });
   };
 
   // handle editable textarea
   const handleTextArea = (e: any) => {
-    setInput({ ...input, [e.name]: e.value });
+    setProperty({ ...property, [e.name]: e.value });
   };
 
   // delete property image
 
-  const handleImageDelete = (id: any) => {
-    setInput({
-      ...input,
-      propertyImage: input.propertyImage.filter((image) => image.id !== id),
-    });
-  };
+  // const handleImageDelete = (id: any) => {
+  //   setProperty({
+  //     ...property,
+  //     propertyImage: property.propertyImage.filter((image) => image.id !== id),
+  //   });
+  // };
 
   // handle property video input sector
 
 
-  const handleVideoChange = (e: any) => {
-    setInput({
-      ...input,
-      video: { ...input.video, [e.target.name]: e.target.value },
-    });
-  };
+  // const handleVideoChange = (e: any) => {
+  //   setProperty({
+  //     ...property,
+  //     video: { ...property.video, [e.target.name]: e.target.value },
+  //   });
+  // };
 
   // handle property location input sector
 
-  const handleLocationChange = (e: any) => {
-    setInput({
-      ...input,
-      location: { ...input.location, [e.target.name]: e.target.value },
-    });
-  };
+  // const handleLocationChange = (e: any) => {
+  //   setProperty({
+  //     ...property,
+  //     location: { ...property.location, [e.target.name]: e.target.value },
+  //   });
+  // };
 
-  // handle property image input sector
+  // // handle property image input sector
 
-  const handleImageInput = (img: any) => {
-    const updatedImg = [...input.propertyImage];
-    updatedImg.push({
-      id: updatedImg.reduce((total, current) => total > current.id, 0) + 1,
-      img,
-    });
-  };
+  // const handleImageInput = (img: any) => {
+  //   const updatedImg = [...property.propertyImage];
+  //   updatedImg.push({
+  //     id: updatedImg.reduce((total, current) => total > current.id, 0) + 1,
+  //     img,
+  //   });
+  // };
 
   // handle aminities
 
-  const handleCheckBox = (e: any) => {
-    setInput({
-      ...input,
-      aminities: { ...input.aminities, [e.target.name]: e.target.checked },
-    });
-  };
+  // const handleCheckBox = (e: any) => {
+  //   setProperty({
+  //     ...property,
+  //     aminities: { ...property.aminities, [e.target.name]: e.target.checked },
+  //   });
+  // };
   // handle Property Plan, additionalInformation, nearestLocation add new item or delete item
 
-  const handleAddOrDelete = (type: string, id: any, keyType: string | number) => {
-    if (type === "add") {
-      const newId =
-        input[keyType].reduce(
-          (max, current) => (max < current.id ? current.id : max),
-          0
-        ) + 1;
-      setInput({
-        ...input,
-        [keyType]: [{ id: newId, key: "", value: "" }, ...input[keyType]],
-      });
-    } else {
-      setInput({
-        ...input,
-        [keyType]: input[keyType].filter((item) => item.id != id),
-      });
-    }
-  };
+  // const handleAddOrDelete = (type: string, id: any, keyType: string | number) => {
+  //   if (type === "add") {
+  //     const newId =
+  //       property[keyType].reduce(
+  //         (max, current) => (max < current.id ? current.id : max),
+  //         0
+  //       ) + 1;
+  //     setProperty({
+  //       ...property,
+  //       [keyType]: [{ id: newId, key: "", value: "" }, ...property[keyType]],
+  //     });
+  //   } else {
+  //     setProperty({
+  //       ...property,
+  //       [keyType]: property[keyType].filter((item) => item.id != id),
+  //     });
+  //   }
+  // };
   // handle Property Plan, additionalInformation, nearestLocation input filled
-  const handleKeyValueChange = ({ id, keyType, inputType, value }: any) => {
-    setInput({
-      ...input,
-      [keyType]: input[keyType].map((item) =>
-        item.id === id ? { ...item, [inputType]: value } : item
-      ),
-    });
-  };
+  // const handleKeyValueChange = ({ id, keyType, inputType, value }: any) => {
+  //   setProperty({
+  //     ...property,
+  //     [keyType]: property[keyType].map((item) =>
+  //       item.id === id ? { ...item, [inputType]: value } : item
+  //     ),
+  //   });
+  // };
   //handle SEO Sector input
-  const handleSEO = (e, value) => {
-    if (typeof value === "undefined") {
-      setInput({
-        ...input,
-        seoInfo: { ...input.seoInfo, [e.target.name]: e.target.value },
-      });
-    } else {
-      setInput({
-        ...input,
-        seoInfo: { ...input.seoInfo, [e]: value },
-      });
-    }
-  };
+  // const handleSEO = (e, value) => {
+  //   if (typeof value === "undefined") {
+  //     setProperty({
+  //       ...property,
+  //       seoInfo: { ...property.seoInfo, [e.target.name]: e.target.value },
+  //     });
+  //   } else {
+  //     setProperty({
+  //       ...property,
+  //       seoInfo: { ...property.seoInfo, [e]: value },
+  //     });
+  //   }
+  // };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(input);
+    console.log(property);
   };
 
   return (
@@ -200,101 +164,101 @@ function PropertyFrom() {
                     <PropertyTextInput
                       title="Property Title*"
                       name="title"
-                      value={input.title}
+                      value={property.title}
                       handleChange={handleTextChange}
                       placeholder="Title" size={undefined} type={undefined} margin={undefined} />
-                    <PropertyTextInput
+                    {/* <PropertyTextInput
                       title="Slug*"
                       name="slug"
-                      value={input.slug}
+                      value={property.slug}
                       handleChange={handleTextChange}
                       placeholder="Here is dmeo text"
-                    />
+                    /> */}
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Property Type*"
-                      name="propertyType"
-                      value={input.propertyType}
+                      name="type"
+                      value={property.type}
                       handleChange={handleTextChange}
                       placeholder="Apartment"
                     />
-                    <PropertyTextInput
+                    {/* <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Purpose*"
                       name="purpose"
-                      value={input.purpose}
+                      value={property.purpose}
                       handleChange={handleTextChange}
                       placeholder="For Rent"
-                    />
-                    <PropertyTextInput
+                    /> */}
+                    {/* <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Rent Period*"
                       name="rentPeriod"
-                      value={input.rentPeriod}
+                      value={property.rentPeriod}
                       handleChange={handleTextChange}
                       placeholder="Monthly"
-                    />
+                    /> */}
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Property Price"
-                      name="propertyPrice"
-                      value={input.propertyPrice}
+                      name="filterFields.price"
+                      value={property.filterFields.price}
                       handleChange={handleTextChange}
                       placeholder="24345"
                     />
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Total Area (sq:Ft)*"
-                      name="area"
-                      value={input.area}
+                      name="filterFields.area"
+                      value={property.filterFields.area}
                       handleChange={handleTextChange}
                       placeholder="Here is demo text"
                     />
-                    <PropertyTextInput
+                    {/* <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Total Unit*"
                       name="unit"
-                      value={input.unit}
+                      value={property.unit}
                       handleChange={handleTextChange}
                       placeholder="1"
                       type="number"
-                    />
+                    /> */}
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Total Bedroom*"
                       name="bedroom"
-                      value={input.bedroom}
+                      value={0}
                       handleChange={handleTextChange}
                       placeholder="2"
                       type="number"
                     />
-                    <PropertyTextInput
+                    {property.filterFields.bathrooms && <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Total Bathroom*"
-                      name="bathroom"
-                      value={input.bathroom}
+                      name="filterFields.bathrooms"
+                      value={property.filterFields.bathrooms}
                       handleChange={handleTextChange}
                       placeholder="2"
                       type="number"
-                    />
-                    <PropertyTextInput
+                    />}
+                    {/* <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Total Garage*"
                       name="garage"
-                      value={input.garage}
+                      value={property.garage}
                       handleChange={handleTextChange}
                       placeholder="1"
                       type="number"
-                    />
-                    <PropertyTextInput
+                    /> */}
+                    {/* <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Total Kitchen*"
                       name="kitchen"
-                      value={input.kitchen}
+                      value={property.kitchen}
                       handleChange={handleTextChange}
                       placeholder="1"
                       type="number"
-                    />
+                    /> */}
                   </div>
                   {/* Single Form Element  */}
                   <PropertyTextArea
@@ -306,25 +270,26 @@ function PropertyFrom() {
                   />
                 </div>
               </div>
-              <ImageInput
-                uploadedImg={input.propertyImage}
+              {/* <ImageInput
+                uploadedImg={property.imgs}
                 handleDelete={handleImageDelete}
                 handleImage={handleImageInput}
-              />
-              <PropertyVideoInput
+              /> */}
+              {/* <PropertyVideoInput
                 handleVideoInput={handleVideoChange}
-                video={input.video}
-              />
-              <PropertyLocationInput
-                location={input.location}
+                video={property.videos}
+              /> */}
+              {/* <PropertyLocationInput
+                location={property.location}
                 handleLocation={handleLocationChange}
-              />
-              <PropertyAminitiesInput
-                aminities={input.aminities}
+              /> */}
+              {/* <PropertyAminitiesInput
+                aminities={property.additionalDetails}
                 handleChange={handleCheckBox}
-              />
-              <KeyValueInput
-                info={input.nearestLocation}
+              /> */}
+
+              {/* <KeyValueInput
+                info={property.nearestLocation}
                 handleAddOrDelete={handleAddOrDelete}
                 handleChange={handleKeyValueChange}
                 title="Nearest Location"
@@ -347,10 +312,10 @@ function PropertyFrom() {
                   },
                 ]}
                 keyType="nearestLocation"
-              />
+              /> */}
 
-              <KeyValueInput
-                info={input.additionalInformation}
+              {/* <KeyValueInput
+                info={property.additionalInformation}
                 handleAddOrDelete={handleAddOrDelete}
                 handleChange={handleKeyValueChange}
                 title="Additional Information"
@@ -373,12 +338,13 @@ function PropertyFrom() {
                   },
                 ]}
                 keyType="additionalInformation"
-              />
-              <PropertyPlan
-                info={input.propertyPlan}
+              /> */}
+
+              {/* <PropertyPlan
+                info={property.propertyPlan}
                 handleChange={handleKeyValueChange}
                 handleAddOrDelete={handleAddOrDelete}
-              />
+              /> */}
 
               <div className="homec-submit-form mg-top-40">
                 <h4 className="homec-submit-form__title">
@@ -388,55 +354,55 @@ function PropertyFrom() {
                   <div className="row">
                     <div className="col-lg-6 col-md-6 col-12">
                       {/* Single Form Element   */}
-                      <PropertyTextInput
+                      {/* <PropertyTextInput
                         title="SEO Title*"
                         placeholder="Type Here"
                         name="title"
-                        value={input.seoInfo.title}
+                        value={property.seoInfo.title}
                         handleChange={handleSEO}
-                      />
+                      /> */}
                       {/* Single Form Element   */}
-                      <PropertyTextAreaV2
+                      {/* <PropertyTextAreaV2
                         title="SEO Description"
-                        value={input.seoInfo.desc}
+                        value={property.seoInfo.desc}
                         handleChange={handleSEO}
                         name="desc"
                         placeHolder="Type Here"
                         sizeFull={true}
-                      />
+                      /> */}
                     </div>
                     <div className="col-lg-6 col-md-6 col-12">
                       <div className="homeco-switcher-group mg-top-20">
                         <div className="homeco-switcher-group__single">
                           {/* Single Switcher  */}
-                          <SwitcherBtn
+                          {/* <SwitcherBtn
                             title="Status"
                             name="status"
-                            isChecked={input.seoInfo.status}
+                            isChecked={property.seoInfo.status}
                             handleChange={handleSEO}
-                          />
-                          <SwitcherBtn
+                          /> */}
+                          {/* <SwitcherBtn
                             title="Urgent Property"
-                            isChecked={input.seoInfo.urgentProperty}
+                            isChecked={property.seoInfo.urgentProperty}
                             name="urgentProperty"
                             handleChange={handleSEO}
-                          />
+                          /> */}
 
                           {/* End Single Switcher  */}
                         </div>
                         <div className="homeco-switcher-group__single">
-                          <SwitcherBtn
+                          {/* <SwitcherBtn
                             title="Featured"
                             name="featured"
-                            isChecked={input.seoInfo.featured}
+                            isChecked={property.seoInfo.featured}
                             handleChange={handleSEO}
-                          />
-                          <SwitcherBtn
+                          /> */}
+                          {/* <SwitcherBtn
                             title="Top Property"
                             name="topProperty"
-                            isChecked={input.seoInfo.topProperty}
+                            isChecked={property.seoInfo.topProperty}
                             handleChange={handleSEO}
-                          />
+                          /> */}
                         </div>
                       </div>
                     </div>

@@ -1,7 +1,7 @@
 import Header from "../Header";
 import Breadcrumbs from "../Breadcrumbs";
 import HistoryLinks from "../Breadcrumbs/HistoryLinks";
-import PropertyFrom from "../Form/PropertyFrom";
+import PropertyFrom from "../Form/PropertyFrom2";
 import DownloadApp from "../DownloadApp";
 import Footer from "../Footer";
 import Preloader from "../Loader";
@@ -32,7 +32,7 @@ const SubmitProperty = ({ whatFor }: { whatFor: string }) => {
             isActive={true}
           />
         </Breadcrumbs>
-        <PropertyFrom />
+        <PropertyFrom whatFor={whatFor}/>
         <DownloadApp />
         <GoTopBtn />
       </>

@@ -1,11 +1,11 @@
-import Iproperty from "@src/models/estate.type";
+import Iproperty from "@src/models/property.type";
 import { useGetProperty } from "@src/useApi/useGetProperty";
 import { createContext, ReactNode, useContext, useState } from "react";
 
 
 interface IpropertySingleProvider {
 
-    property: Iproperty ,
+    property: Iproperty,
 }
 
 export const SinglePropertyContext = createContext<IpropertySingleProvider | undefined>(undefined);
