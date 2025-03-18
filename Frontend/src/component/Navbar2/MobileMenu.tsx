@@ -23,7 +23,7 @@ const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
       style={{ display: "block", zIndex: show ? "" : "-1" }}
       aria-modal={true}
       role="dialog"
-    // onClick={(e: any) => e.target.role === "dialog" && handleSidebar()}
+    onClick={(e: any) => e.target.role === "dialog" && handleSidebar()}
     >
       <div className="modal-dialog offcanvas-dialog">
         <div className="modal-content">
@@ -51,7 +51,7 @@ const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
             <ul className="nav-menu menu navigation list-none">
 
               <li>
-                <Link to="/home" onClick={(e) => handleActive(e)}>
+                <Link to="/home" onClick={handleSidebar}>
                   Home
                 </Link>
               </li>
@@ -64,26 +64,14 @@ const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
                   Properties
                 </Link>
 
-                <ul className="sub-menu">
+                <ul className="sub-menu"  onClick={handleSidebar}>
 
                   <li>
                     <Link to="/property">Properties</Link>
                   </li>
 
                   <li>
-                    <Link to="/property-single">Property Single</Link>
-                  </li>
-
-                  <li>
                     <Link to="/add-property">Add Property</Link>
-                  </li>
-
-                  <li>
-                    <Link to="/dashboard">Dashboard</Link>
-                  </li>
-
-                  <li>
-                    <Link to="/submit-property">Submit Property</Link>
                   </li>
 
                   <li>
@@ -101,7 +89,7 @@ const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
                 <Link to="#" onClick={(_) => handleActive("agents")}>
                   Agents
                 </Link>
-                <ul className="sub-menu">
+                <ul className="sub-menu" onClick={handleSidebar}>
                   <li>
                     <Link to="/our-agent">Our Agent</Link>
                   </li>
