@@ -40,7 +40,6 @@ function Property() {
           <PropertyGrid />
         </FormProvider>
 
-        <Footer />
         <GoTopBtn />
       </>
     );

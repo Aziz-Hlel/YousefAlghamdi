@@ -53,7 +53,6 @@ function AddProperty() {
         </section>
 
         <DownloadApp />
-        <Footer />
         <GoTopBtn />
       </>
     );

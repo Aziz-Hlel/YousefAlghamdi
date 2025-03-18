@@ -35,7 +35,6 @@ function EditProperty() {
         </Breadcrumbs>
         <PropertyFrom />
         <DownloadApp />
-        <Footer />
         <GoTopBtn />
       </>
     );

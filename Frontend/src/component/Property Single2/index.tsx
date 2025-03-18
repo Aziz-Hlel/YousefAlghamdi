@@ -52,7 +52,6 @@ function PropertySingle() {
             </div>
           </section>
           <PropertyDetails />
-          <Footer />
           <GoTopBtn />
         </SinglePropertyProvider>
       </>

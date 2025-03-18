@@ -35,7 +35,6 @@ function SubmitProperty() {
         </Breadcrumbs>
         <PropertyFrom />
         <DownloadApp />
-        <Footer />
         <GoTopBtn />
       </>
     );

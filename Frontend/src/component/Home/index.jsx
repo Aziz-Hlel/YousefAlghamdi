@@ -35,7 +35,6 @@ function Home() {
         <Agents />
         <FaqSection />
         <DownloadApp />
-        <Footer />
       </>
     );
   }
