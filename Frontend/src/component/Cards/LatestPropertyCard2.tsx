@@ -47,7 +47,7 @@ function LatestPropertyCard({ estate, _id, likeLink, period, whatFor, name, addr
         {/* Property Head  */}
         <div className="homec-property__head [@media(min-width:500px)]:w-fit md:w-auto">
           <Link to={"/property-single/" + estate._id}>
-            <img src={apiGateway.localhost.images + estate.imgs[0]} alt="#" />
+            <img src={apiGateway.images + estate.imgs[0]} alt="#" />
           </Link >
           {/* Top Sticky  */}
           <div className="homec-property__hsticky">

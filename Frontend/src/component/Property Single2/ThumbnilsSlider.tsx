@@ -7,8 +7,8 @@ import apiGateway from "@src/apiGateway";
 
 function ThumbnailsSlider() {
 
-    const { property } = useSinglePropertyContext();
-  
+  const { property } = useSinglePropertyContext();
+
 
   return (
     <div className="mg-top-10">
@@ -22,7 +22,7 @@ function ThumbnailsSlider() {
 
         {
           property.imgs.map((img, index) =>
-            <ThumbnilsCard img={apiGateway.localhost.images + img} />
+            <ThumbnilsCard img={apiGateway.images + img} />
           )
         }
         <ThumbnilsCard img="https://placehold.co/270x180" />

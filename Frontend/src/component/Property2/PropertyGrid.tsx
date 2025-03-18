@@ -6,8 +6,8 @@ import Pagination from "../Pagination";
 import properties from "../../data/property";
 import { useFormContext } from "./FilterProvider.context";
 import Http from "../../services/Http";
-import apiGateway from "../../apiGateway";
 import Iproperty from "@src/models/property.type";
+import apiGateway from "@src/apiGateway";
 
 function PropertyGrid() {
   //handle grid style
@@ -68,7 +68,7 @@ function PropertyGrid() {
                       estate={estate}
                       key={estate._id}
                       _id={estate._id}
-                      img={apiGateway.localhost.images + estate.imgs[0]}
+                      img={apiGateway.images + estate.imgs[0]}
                       likeLink={properties[index].likeLink}
                       detailsLink={properties[index].detailsLink}
                       price={estate.filterFields.price}

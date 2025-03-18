@@ -29,7 +29,7 @@ function Contact() {
         </Breadcrumbs>
         <section
           className="homec-contact-form homec-bg-cover pd-top-80 pd-btm-80 mg-top-100"
-          style={{ backgroundImage: `url('https://placehold.co/1920x800')` }}
+          style={{ backgroundImage: `url(${contact_img})` }}
         >
           <div className="container">
             <div className="row">

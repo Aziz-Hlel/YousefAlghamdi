@@ -114,7 +114,7 @@ const SideBar22 = () => {
           {/* <div className="underline font-extralight hover:cursor-pointer " onClick={() => resetFilter()}>reset filter</div> */}
         </div>
       </div>
-      <AgentsSidebarSlider />
+      {/* <AgentsSidebarSlider /> */}
     </div>
   );
 }

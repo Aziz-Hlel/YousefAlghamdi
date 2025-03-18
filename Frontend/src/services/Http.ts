@@ -1,8 +1,10 @@
+import { baseUrl } from "@src/apiGateway";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
-const nginx_ngrokUrl = "https://4d3e-197-15-72-205.ngrok-free.app/"
+
+
 export const axiosInstance = axios.create({
-    baseURL: nginx_ngrokUrl + "api",
+    baseURL: baseUrl + "/api",
     withCredentials: true
 });
 

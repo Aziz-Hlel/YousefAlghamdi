@@ -44,14 +44,13 @@ function MobileMenu({ handleSidebar, show }) {
           <nav id="offcanvas-menu" className="offcanvas-menu">
             {/* <!-- Main Menu --> */}
             <ul className="nav-menu menu navigation list-none">
+              
               <li
-                className={`menu-item-has-children ${
-                  activeSubmenu === "home" && "active"
-                }`}
-              >
-                <Link href="#" name={"home"} onClick={(e) => handleActive(e)}>
-                  Home
-                </Link>
+                className={`menu-item-has-children ${activeSubmenu === "home" && "active"}`}
+                onClick={(e) => handleActive("home")}>
+
+                Home
+
                 <ul className="sub-menu">
                   <li>
                     <Link to="/">Homepage 01</Link>
@@ -63,11 +62,12 @@ function MobileMenu({ handleSidebar, show }) {
                     <Link to="/home3">Homepage 03</Link>
                   </li>
                 </ul>
+
               </li>
+
               <li
-                className={`menu-item-has-children ${
-                  activeSubmenu === "properties" && "active"
-                }`}
+                className={`menu-item-has-children ${activeSubmenu === "properties" && "active"
+                  }`}
               >
                 <Link
                   to="#"
@@ -98,9 +98,8 @@ function MobileMenu({ handleSidebar, show }) {
                 </ul>
               </li>
               <li
-                className={`menu-item-has-children ${
-                  activeSubmenu === "pages" && "active"
-                }`}
+                className={`menu-item-has-children ${activeSubmenu === "pages" && "active"
+                  }`}
               >
                 <Link to="#" name={"pages"} onClick={(e) => handleActive(e)}>
                   Pages
@@ -130,9 +129,8 @@ function MobileMenu({ handleSidebar, show }) {
                 </ul>
               </li>
               <li
-                className={`menu-item-has-children ${
-                  activeSubmenu === "agents" && "active"
-                }`}
+                className={`menu-item-has-children ${activeSubmenu === "agents" && "active"
+                  }`}
               >
                 <Link to="#" name={"agents"} onClick={(e) => handleActive(e)}>
                   Agents
@@ -147,9 +145,8 @@ function MobileMenu({ handleSidebar, show }) {
                 </ul>
               </li>
               <li
-                className={`menu-item-has-children ${
-                  activeSubmenu === "news" && "active"
-                }`}
+                className={`menu-item-has-children ${activeSubmenu === "news" && "active"
+                  }`}
               >
                 <Link to="#" name={"news"} onClick={(e) => handleActive(e)}>
                   News

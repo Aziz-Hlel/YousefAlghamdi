@@ -8,7 +8,7 @@ import HistoryLinks from "../Breadcrumbs/HistoryLinks";
 import PropertyGrid from "./PropertyGrid";
 import { FormProvider } from "./FilterProvider.context";
 
-function Property() {
+const Property = () => {
   const [isLoading, setisLoadingg] = useState(true);
   useEffect(() => {
     setisLoadingg(false);
@@ -28,7 +28,7 @@ function Property() {
 
         {/* <Header v2={undefined} /> */}
         <Breadcrumbs title="Latest Properties" background={undefined} overlay={undefined} titlePosition={undefined}>
-        
+
           <HistoryLinks link="home" text="Home" isActive={undefined} />
           <HistoryLinks
             link="property"
