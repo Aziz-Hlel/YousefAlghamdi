@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function HomeSearch() {
-  const [value, setValue] = useState<string | undefined>(undefined);
+  const [value, setValue] = useState<string | undefined>(imarates[0]);
   const navigate = useNavigate();
   return (
     <div

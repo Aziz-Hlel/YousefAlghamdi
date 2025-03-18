@@ -8,6 +8,7 @@ import ContactForm from "../Form/ContactForm";
 import SingleContact from "./SingleContact";
 import Preloader from "../Loader";
 import { useEffect, useState } from "react";
+import contact_img from "/img/contact-bg.jpg"
 
 function Contact() {
   const [isLoading, setisLoadingg] = useState(true);
@@ -28,7 +29,7 @@ function Contact() {
         </Breadcrumbs>
         <section
           className="homec-contact-form homec-bg-cover pd-top-80 pd-btm-80 mg-top-100"
-          style={{ backgroundImage: "url('https://placehold.co/1920x800')" }}
+          style={{ backgroundImage: `url('https://placehold.co/1920x800')` }}
         >
           <div className="container">
             <div className="row">

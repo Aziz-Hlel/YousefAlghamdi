@@ -30,35 +30,36 @@ function Navbar({ handleSidebar, secondNav }) {
 
                         <NavBtn text="Properties" link="#">
                           <NavBtn link="/property" text="Properties" />
-                          <NavBtn
+                          {/* <NavBtn
                             link="/property-single"
                             text="Property Single"
-                          />
+                          /> */}
                           <NavBtn link="/add-property" text="Add Property" />
                           <NavBtn link="/dashboard" text="Dashboard" />
-                          <NavBtn
+                          {/* <NavBtn
                             link="/submit-property"
                             text="Submit Property"
-                          />
+                          /> */}
                           <NavBtn link="/edit-property" text="Edit Property" />
                         </NavBtn>
-                        <NavBtn text="Pages" link="#">
-                          <NavBtn link="/about" text="About Us" />
+                        {/* <NavBtn text="Pages" link="#">
                           <NavBtn link="/pricing" text="Pricing" />
                           <NavBtn
-                            link="/payment-method"
-                            text="Payment Method"
+                          link="/payment-method"
+                          text="Payment Method"
                           />
                           <NavBtn link="/faq" text="Faq's" />
                           <NavBtn link="/login" text="Login" />
                           <NavBtn link="/signup" text="Sign Up" />
                           <NavBtn link="/404" text="Error Page" />
-                        </NavBtn>
+                          </NavBtn> */}
                         <NavBtn text="Agents" link="#">
                           <NavBtn link="/our-agent" text="Our Agent" />
-                          <NavBtn link="/agent-detail" text="Agent Details" />
+                          <NavBtn link="/about" text="About Us" />
+                          {/* <NavBtn link="/agent-detail" text="Agent Details" /> */}
                         </NavBtn>
                         <NavBtn link="/contact" text="Contact" />
+                        <NavBtn link="/dashboard" text="Dashboard" />
                       </ul>
                       {/* End Main Menu */}
                     </div>

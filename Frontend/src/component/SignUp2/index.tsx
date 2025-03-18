@@ -15,6 +15,8 @@ const SignUp = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const [wrongCredentials , setWrongCredentials] = useState(false);
   const handleChange = (e: any) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };

@@ -16,7 +16,7 @@ function DetailsTab({ text, isActive, children }: { text: string | undefined, is
 
 
           <div className="bg-white rounded-xl p-4 m-4" >
-            <h4 className="homec-ptdetails-features__title ">description</h4>
+            <h4 className="homec-ptdetails-features__title ">Description</h4>
 
             <p className="">
               {text ?? ""}

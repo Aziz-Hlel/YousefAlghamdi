@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import WelcomeCard from "../Cards/WelcomeCard";
-import PropertyTextInput from "../Form/PropertyTextInput";
+import PropertyTextInput from "../Form/PropertyTextInput2";
 import Preloader from "../Loader";
 import { Link, useNavigate } from "react-router-dom";
 import apiGateway from "@src/apiGateway";
 import Http from "@src/services/Http";
+import logo_img from "@img/logo_sign_in.jpg"
 
 function Login() {
   const [input, setInput] = useState({
@@ -15,22 +16,28 @@ function Login() {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
   // loading handler
-  const [isLoading, setisLoadingg] = useState(true);
+  const [isLoading, setisLoadingg] = useState<boolean>(true);
   useEffect(() => {
     setisLoadingg(false);
   }, []);
 
+
+  const [wrongCredentials, setWrongCredentials] = useState(false);
+  const errorMessage = "Invalid email or password";
 
   const navigate = useNavigate();
 
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setWrongCredentials(false)
     const response = await Http.post(apiGateway.user.sigIn, input)
 
-    response.status === 200 ? navigate("/") : console.log(response);
-    response.status === 200 && console.log("true");
-    console.log(response.status, typeof response.status);
+    response?.status === 200 ? navigate("/") : console.log(response);
+    response?.status !== 200 && setWrongCredentials(true);
+    response?.status !== 200 && console.log('mrgl je 8alt');
+
+    console.log(response?.status, typeof response?.status);
 
 
   };
@@ -69,9 +76,7 @@ function Login() {
                       value={input.email}
                       handleChange={handleChange}
                       placeholder="demo3243@gmail.com"
-                      margin={null}
-                      size={null}
-                      type={null}
+                      wrongCrendentials={wrongCredentials}
                     />
                     <PropertyTextInput
                       title="Password*"
@@ -80,10 +85,10 @@ function Login() {
                       handleChange={handleChange}
                       placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                       type="password"
-                      margin={null}
-                      size={null}
+                      wrongCrendentials={wrongCredentials}
 
                     />
+                    <div className=" h-6 p-2 mb-4"> {wrongCredentials && <p style={{ color: "red" }}>{errorMessage}</p>}</div>
                     <div className="form-group form-mg-top-30">
                       <div className="ecom-wc__button ecom-wc__button--bottom">
                         <button
@@ -109,7 +114,7 @@ function Login() {
                         <p className="ecom-wc__text">
                           Dont’t have an account ?{" "}
                           <Link to="/signup">Create Account</Link>
-                          
+
                         </p>
                       </div>
                     </div>
@@ -125,7 +130,7 @@ function Login() {
                 { link: "#", name: "Privacy Policy" },
                 { link: "#", name: "Help" },
               ]}
-              image="https://placehold.co/600x600"
+              image={logo_img}
               brunches="120"
               builtHouse="150k"
             />

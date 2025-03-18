@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(cors({
-    origin: ['http://localhost:70',"https://a30d-197-15-72-205.ngrok-free.app"], // Allow only your frontend origin
+    origin: ['http://localhost:70',"https://4d3e-197-15-72-205.ngrok-free.app",'4d3e-197-15-72-205.ngrok-free.app'], // Allow only your frontend origin
     credentials: true,               // Allow cookies if needed
     
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -28,7 +28,7 @@ app.use('/api/user', userRouter);
 app.use('/api/estate', estateRouter);
 
 // Serve static files
-app.use('/images', express.static(path.join(__dirname, '../public/images')));
+app.use('/api/images', express.static(path.join(__dirname, '../public/images')));
 
 
 

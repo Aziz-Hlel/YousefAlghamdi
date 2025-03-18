@@ -1,13 +1,20 @@
 import ProtoTypes from "prop-types";
 
-function ImageCard({ price, duration, title, text, img }) {
+interface IimageCard {
+  price: number|string;
+  duration?: string;
+  title: string;
+  text: string;
+  img: string;
+}
+function ImageCard({ price, duration, title, text, img }: IimageCard) {
   return (
     <div className="homec-image-gallery">
       {/* Amount Card  */}
       <div className="homec-amount-card homec-amount-card__sticky">
         <h4 className="homec-amount-card__amount">
           ${price}
-          <span>Per {duration && duration}</span>
+          <span> {duration && ("Per" + duration)}</span>
         </h4>
       </div>
       {/* End Amount Card  */}

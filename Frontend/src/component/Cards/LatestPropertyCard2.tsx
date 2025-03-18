@@ -73,7 +73,7 @@ function LatestPropertyCard({ estate, _id, likeLink, period, whatFor, name, addr
         <div className="homec-property__body [@media(min-width:500px)]:w-fit md:w-auto">
           <div className="homec-property__topbar">
             <div className="homec-property__price">
-              ${estate.filterFields.price} <span>/{period}</span>
+              ${estate.filterFields.price} <span>{whatFor === "To rent" && "/" + period}</span>
             </div>
 
             <div className=" flex justify-center items-center  [@media(min-width:500px)]:w-fit md:w-auto ">

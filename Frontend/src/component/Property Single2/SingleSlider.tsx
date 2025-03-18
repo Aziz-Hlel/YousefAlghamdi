@@ -1,5 +1,5 @@
 import { responsiveSmallAgentsSlider } from "../../utils/responsiveSlider";
-import ImageCard from "../Cards/ImageCard";
+import ImageCard from "../Cards/ImageCard2";
 import Carousel from "react-multi-carousel";
 import { useSinglePropertyContext } from "./PropertySingleProvider.context";
 import apiGateway from "@src/apiGateway";
@@ -28,7 +28,7 @@ function SingleSlider() {
           <ImageCard
             key={index}
             price={property.filterFields.price}
-            duration={property.filterFields.forRent && "Month"}
+            duration={property.filterFields.forRent ? "Month":""}
             title={property.title}
             text="1901 Thornridge Cir. Shiloh, Hawaii 81063"
             img={apiGateway.localhost.images + img} />

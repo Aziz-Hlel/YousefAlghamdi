@@ -14,7 +14,7 @@ const apiGateway = {
 
 
     localhost: {
-        images: "http://localhost:50/images/"
+        images: "https://4d3e-197-15-72-205.ngrok-free.app/api/images/"
     }
 }
 
