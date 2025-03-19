@@ -6,6 +6,8 @@ import path from 'path';
 
 const root = path.resolve(__dirname, "src");
 
+// const ngrokUrl = '6a40-197-15-72-205.ngrok-free.app';
+const ngrokUrl = 'localhost:50';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,7 +17,7 @@ export default defineConfig({
   ],
   server: {
     port: 70,
-    allowedHosts: ['http://localhost:50',  '6a40-197-15-72-205.ngrok-free.app'],  // change it l8er
+    allowedHosts: ['http://localhost:50', ngrokUrl],  // change it l8er
     // hmr: {
     //   clientPort: 443, // Force WebSocket to use ngrok's HTTPS port
     //   protocol: 'wss'  // Force secure WebSocket (wss)

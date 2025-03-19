@@ -17,7 +17,7 @@ type LoginFormFields = {
 const Login = () => {
 
 
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormFields>();
+  const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<LoginFormFields>();
 
   const emailRegister = register("email", {
     required: "Email is required",
@@ -36,12 +36,21 @@ const Login = () => {
       message: "Password must be at least 8 characters",
 
     }
-    
+
   });
 
 
 
-  const onSubmit: SubmitHandler<LoginFormFields> = (data) => {
+  const onSubmit: SubmitHandler<LoginFormFields> = async (data) => {
+
+    const response = await Http.post(apiGateway.user.sigIn, data)
+
+    response?.status === 200 ? navigate("/") : console.log(response);
+    if (response?.status !== 200) {
+      setError("email", { message: "" })
+      setError("password", { message: "" })
+      setError("root", { message: "Invalid credentials" })
+    }
 
   }
 
@@ -112,18 +121,19 @@ const Login = () => {
                       fieldError={errors.password}
                       placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                       type="password"
-
-
                     />
-                    <div className=" h-6 p-2 mb-4"> {wrongCredentials && <p style={{ color: "red" }}>{errorMessage}</p>}</div>
+
+                    {errors.root && <span className="pl-2 text-red-600 ">{errors.root.message}</span>}
+
                     <div className="form-group form-mg-top-30">
                       <div className="ecom-wc__button ecom-wc__button--bottom">
                         <button
                           className="homec-btn homec-btn__second"
                           // onClick={handleSubmit2}
                           type="submit"
+                          disabled={isSubmitting}
                         >
-                          <span>Login</span>
+                          <span>{isSubmitting ? "Loading" : "Login"}</span>
                         </button>
                         {/* <button
                           className="homec-btn homec-btn__second homec-btn__social"

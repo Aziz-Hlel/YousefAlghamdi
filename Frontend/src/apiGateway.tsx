@@ -3,7 +3,7 @@
 const localhostUrl = "http://localhost:50";
 const nginxUrl = "https://6a40-197-15-72-205.ngrok-free.app";
 
-export const baseUrl = nginxUrl;
+export const baseUrl = localhostUrl;
 
 
 const apiGateway = {

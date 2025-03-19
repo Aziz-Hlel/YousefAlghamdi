@@ -28,7 +28,7 @@ const PropertyTextInput = ({ size, title, fieldError: errors, placeholder, type,
             placeholder={placeholder}
           />
         </div>
-        <span className="text-red-600 p-2">{errors?.message}</span>
+        <span className="text-red-600 p-2 inline-block">{errors?.message}</span>
       </div>
     </div>
   );
