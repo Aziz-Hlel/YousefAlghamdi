@@ -56,7 +56,7 @@ const SignUp = () => {
 
     response.status === 200 ? navigate("/") : console.log(response);
     response.status === 409 && setError("email", { message: "Email already exists" })
-console.log(response.status, typeof response.status);
+    console.log(response.status, typeof response.status);
 
     if (response?.status !== 200 && response.status !== 409) {
       setError("root", { message: "no edge case for this one" })

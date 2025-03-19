@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PropertyBar from "./PropertyBar";
 import Sidebar from "../Sidebar2";
 import LatestPropertyCard from "../Cards/LatestPropertyCard2";
-import Pagination from "../Pagination";
+import Pagination from "../Pagination2";
 import properties from "../../data/property";
 import { useFormContext } from "./FilterProvider.context";
 import Http from "../../services/Http";
@@ -11,29 +11,16 @@ import apiGateway from "@src/apiGateway";
 
 function PropertyGrid() {
 
-  const { properties: estates, filterObject, totalCount } = useFormContext();
+  const { properties: estates, filterObject, totalCount,updateField } = useFormContext();
 
   //handle grid style
   const [gridStyle, setGridStyle] = useState("grid");
   const handleGridStyle = (style: any) => {
     setGridStyle(style);
   };
-  //handle page
-  const [currentPage, setCurrentPage] = useState(filterObject.page);
-  const totalPage = 24;
 
-  const handelPage = (page: any) => {
-    if (page === "prev") {
-      if (currentPage > 1) {
-        setCurrentPage(currentPage - 1);
-      }
-    } else if (page === "next") {
-      if (currentPage < totalPage) {
-        setCurrentPage(currentPage + 1);
-      }
-    } else {
-      setCurrentPage(page);
-    }
+  const handelPage = (page: number) => {
+    updateField("page", page);
   };
 
 
@@ -92,9 +79,9 @@ function PropertyGrid() {
                   )}
                 </div>
                 <Pagination
-                  totalPage={totalPage}
+                  totalPage={totalCount / 5}
                   handlePage={handelPage}
-                  currentPage={currentPage}
+                  currentPage={filterObject.page}
                 />
               </div>
             </div>

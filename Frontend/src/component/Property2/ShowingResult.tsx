@@ -1,6 +1,6 @@
 import ProtoTypes from "prop-types";
 
-function ShowingResult({ currentPage, totalPages }: { currentPage: any, totalPages: any }) {
+function ShowingResult({ currentPage, totalPages }: { currentPage: string, totalPages: number }) {
   return (
     <div className="hoemc-showing-results">
       <p className="hoemc-showing-results__text">
@@ -10,9 +10,5 @@ function ShowingResult({ currentPage, totalPages }: { currentPage: any, totalPag
   );
 }
 
-ShowingResult.propTypes = {
-  currentPage: ProtoTypes.string.isRequired || ProtoTypes.number.isRequired,
-  totalPages: ProtoTypes.string.isRequired,
-};
 
 export default ShowingResult;

@@ -4,17 +4,19 @@ import ShowingResult from "./ShowingResult";
 import ListBtn from "../Button/ListBtn";
 import { useFormContext } from "./FilterProvider.context";
 
-function PropertyBar({ gridStyle, handleGridStyle }:{gridStyle:any, handleGridStyle:any}) {
+function PropertyBar({ gridStyle, handleGridStyle }: { gridStyle: any, handleGridStyle: any }) {
 
-    const { totalCount } = useFormContext();
-  
-    
+  const { totalCount, filterObject } = useFormContext();
+
+  const idxFirstProperty = (filterObject.page - 1) * 6 + 1
+
+  const idxLastProperty = filterObject.page * 6 > totalCount ? totalCount : filterObject.page * 6
   return (
     <div className="homec-property-bar">
       <div className="homec-property-bar__single">
         <Search />
         {/* Show Results   */}
-        <ShowingResult currentPage={`1`} totalPages={totalCount} />
+        <ShowingResult currentPage={`${idxFirstProperty}-${idxLastProperty}`} totalPages={totalCount} />
         {/* End Show Results  */}
       </div>
       <div className="homec-property-bar__single">
@@ -63,10 +65,5 @@ function PropertyBar({ gridStyle, handleGridStyle }:{gridStyle:any, handleGridSt
     </div>
   );
 }
-
-PropertyBar.propTypes = {
-  gridStyle: ProtoTypes.string.isRequired,
-  handleGridStyle: ProtoTypes.func.isRequired,
-};
 
 export default PropertyBar;

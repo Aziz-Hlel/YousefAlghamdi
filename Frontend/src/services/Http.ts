@@ -25,7 +25,6 @@ const Http = {
         } catch (e) {
             axios.isAxiosError(e) && console.log(e.response?.data);
             if (axios.isAxiosError(e)) return e.response
-            else console.log("Http");
         }
         
     },
