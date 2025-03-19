@@ -19,7 +19,6 @@ const registerBodySchema = z.object({
         .min(2, { message: "First name must be at least 2 characters long" })
         .max(25, { message: "First name must be at most 25 characters long" }),
 
-
     lastName: z.string({ required_error: "Last name is required" })
         .min(2, { message: "Last name must be at least 2 characters long" })
         .max(25, { message: "Last name must be at most 25 characters long" }),
@@ -31,11 +30,11 @@ const registerBodySchema = z.object({
     email: z.string({ required_error: "Email is required" }).email({ message: "Invalid email address" }),
 
     password: z.string({ required_error: "Password is required" })
-        .min(6, { message: "Password must be at least 6 characters long" })
+        .min(1, { message: "Password must be at least 6 characters long" })
         .max(25, { message: "Password must be at most 25 characters long" }),
 
     confirmPassword: z.string({ required_error: "Confirm password is required" })
-        .min(6, { message: "Confirm password must be at least 6 characters long" })
+        .min(1, { message: "Confirm password must be at least 6 characters long" })
         .max(25, { message: "Confirm password must be at most 25 characters long" }),
 
 }).refine((data) => data.password === data.confirmPassword, {
@@ -46,15 +45,18 @@ const registerBodySchema = z.object({
 
 export const register = async (req: Request, res: Response, next: NextFunction) => {
 
-    const newUser = req.body;
+    const newUser: any = req.body;
 
     const validBody = registerBodySchema.safeParse(newUser)
 
-    if (!validBody.success) return next(errorHandler(statusCode.BAD_REQUEST ,errorMessages.COMMON.BAD_Request, validBody.error.errors));
+    if (!validBody.success) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request, validBody.error.errors));
 
 
     newUser.role = "user";
+    const { email } = newUser;
+    const userExist = await User.findOne({ email });
 
+    if (userExist) return next(errorHandler(statusCode.CONFLICT, errorMessages.COMMON.User_Already_Exists));
 
     const user = new User(newUser);
 
@@ -78,7 +80,7 @@ const loginBodySchema = z.object({
         .email({ message: "Invalid email address" }),
 
     password: z.string({ required_error: "Password is required" })
-        .min(6, { message: "Password must be at least 6 characters long" })
+        .min(1, { message: "Password must be at least 6 characters long" })
         .max(25, { message: "Password must be at most 25 characters long" }),
 
 })
@@ -86,14 +88,14 @@ const loginBodySchema = z.object({
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {
 
-    const { firstName, password } = req.body;
+    const { email, password } = req.body;
 
     const validBody = loginBodySchema.safeParse(req.body)
 
     if (!validBody.success) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request, validBody.error.errors));
 
 
-    const user = await User.findOne({ firstName });
+    const user = await User.findOne({ email });
 
     if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.COMMON.Invalid_Credentials));
 
