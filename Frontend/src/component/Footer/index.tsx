@@ -1,5 +1,5 @@
 import FooterList from "./FooterList";
-import SubscribeForm from "../Subscribe";
+import SubscribeForm from "../Subscribe2";
 import { Link } from "react-router-dom";
 import logo_img from "@img/logo.png"
 function Footer() {

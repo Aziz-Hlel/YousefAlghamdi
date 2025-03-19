@@ -18,13 +18,16 @@ const Http = {
     },
 
     post: async <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {
+    
         try {
-
             return await axiosInstance.post<T>(url, body, config);
+
         } catch (e) {
             axios.isAxiosError(e) && console.log(e.response?.data);
-            if (axios.isAxiosError(e)) return e.response?.data
+            if (axios.isAxiosError(e)) return e.response
+            else console.log("Http");
         }
+        
     },
 
     put: <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {
