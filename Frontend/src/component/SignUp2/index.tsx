@@ -1,25 +1,72 @@
 import { useEffect, useState } from "react";
 import WelcomeCard from "../Cards/WelcomeCard";
-import PropertyTextInput from "../Form/PropertyTextInput";
+import PropertyTextInput from "../Form/PropertyTextInput2";
 import Preloader from "../Loader";
 import { Link, useNavigate } from "react-router-dom";
 import logo_img from "@img/logo_sign_in.jpg"
 import Http from "@src/services/Http";
 import apiGateway from "@src/apiGateway";
-const SignUp = () => {
-  const [input, setInput] = useState({
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-  const [wrongCredentials , setWrongCredentials] = useState(false);
-  const handleChange = (e: any) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-  };
+
+
+
+
+const SignUpSchema = z.object({
+  firstName: z.string()
+    .min(2, { message: "First name must be at least 2 characters long" })
+    .max(25, { message: "First name must be at most 25 characters long" }),
+
+  lastName: z.string()
+    .min(2, { message: "Last name must be at least 2 characters long" })
+    .max(25, { message: "Last name must be at most 25 characters long" }),
+
+  phoneNumber: z.string()
+    .min(5, { message: "Phone number must be at least 5 characters long" })
+    .max(17, { message: "Phone number must be at most 17 characters long" }),
+
+  email: z.string().email({ message: "Invalid email address" }),
+
+  password: z.string()
+    .min(6, { message: "Password must be at least 6 characters long" })
+    .max(25, { message: "Password must be at most 25 characters long" }),
+
+  confirmPassword: z.string()
+    .min(6, { message: "Confirm password must be at least 6 characters long" })
+    .max(25, { message: "Confirm password must be at most 25 characters long" }),
+
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+});
+
+
+type SignUpSchemaType = z.infer<typeof SignUpSchema>
+
+
+const SignUp = () => {
+
+  const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
+
+  const submitHandler: SubmitHandler<SignUpSchemaType> = async (data) => {
+
+    const response = await Http.post(apiGateway.user.signUp, data);
+
+    response.status === 200 ? navigate("/login") : console.log(response);
+    response.status === 200 && console.log("true");
+    console.log(response.status, typeof response.status);
+
+    if (response?.status !== 200) {
+      setError("email", { message: "" })
+      setError("password", { message: "" })
+      setError("root", { message: "Invalid credentials" })
+    }
+
+  }
+
+
 
   // Loading Handle
   const [isLoading, setisLoadingg] = useState(true);
@@ -31,16 +78,16 @@ const SignUp = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    const response = await Http.post(apiGateway.user.signUp, input)
+  // const handleSubmit = async (e: any) => {
+  //   e.preventDefault();
+  //   const response = await Http.post(apiGateway.user.signUp, input)
 
-    response.status === 200 ? navigate("/login") : console.log(response);
-    response.status === 200 && console.log("true");
-    console.log(response.status, typeof response.status);
+  //   response.status === 200 ? navigate("/login") : console.log(response);
+  //   response.status === 200 && console.log("true");
+  //   console.log(response.status, typeof response.status);
 
 
-  };
+  // };
 
   if (isLoading) {
     component = <Preloader />;
@@ -65,78 +112,72 @@ const SignUp = () => {
                   {/* Sign in Form  */}
                   <form
                     className="ecom-wc__form-main p-0  "
-                    action="index.html"
                     method="post"
+                    onSubmit={handleSubmit(submitHandler)}
                   >
                     <div className="row">
                       <PropertyTextInput
                         size="col-lg-6 col-md-6"
                         title="First Name*"
-                        name="firstName"
-                        value={input.firstName}
-                        handleChange={handleChange}
                         placeholder="Jhon"
                         margin="-10px"
-                        type={null}
+                        fieldRegister={register('firstName')}
+                        fieldError={errors.firstName}
                       />
                       <PropertyTextInput
                         size="col-lg-6 col-md-6"
                         title="Last Name*"
-                        name="lastName"
-                        value={input.lastName}
-                        handleChange={handleChange}
                         placeholder="Doe"
                         margin="-10px"
-                        type={null}
+                        fieldRegister={register('lastName')}
+                        fieldError={errors.lastName}
                       />
 
                       <PropertyTextInput
                         size="col-lg-6 col-md-6"
                         title="Phone Number*"
-                        name="phoneNumber"
-                        value={input.phoneNumber}
-                        handleChange={handleChange}
                         placeholder="+971 50 123 4567"
                         margin="-10px"
-                        type={null}
+                        fieldRegister={register('phoneNumber')}
+                        fieldError={errors.phoneNumber}
                       />
                       <PropertyTextInput
                         size="col-lg-6 col-md-6"
                         title="Email Address*"
-                        name="email"
-                        value={input.email}
-                        handleChange={handleChange}
                         placeholder="demo3243@gmail.com"
                         margin="-10px"
-                        type={null}
+                        fieldRegister={register('email')}
+                        fieldError={errors.email}
                       />
                       <PropertyTextInput
                         size="col-lg-6 col-md-6"
                         title="Password*"
-                        name="password"
-                        value={input.password}
-                        handleChange={handleChange}
                         placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                         type="password"
                         margin="-10px"
+                        fieldRegister={register('password')}
+                        fieldError={errors.password}
                       />
                       <PropertyTextInput
                         size="col-lg-6 col-md-6"
                         title="Confirm Password*"
-                        name="confirmPassword"
-                        value={input.confirmPassword}
-                        handleChange={handleChange}
                         placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                         type="password"
                         margin="-10px"
+                        fieldRegister={register('confirmPassword')}
+                        fieldError={errors.confirmPassword}
                       />
                     </div>
+
+                    {<span className="pl-2 text-red-600 ">{errors.root?.message}</span>}
+
                     <div className="form-group form-mg-top-30">
                       <div className="ecom-wc__button ecom-wc__button--bottom">
                         <button
                           className="homec-btn homec-btn__second"
-                          onClick={handleSubmit}                        >
-                          <span>Login</span>
+                          type="submit"
+                        >
+                          <span>{isSubmitting ? "Loading" : "Sign up"}</span>
                         </button>
                         {/* <button
                           className="homec-btn homec-btn__second homec-btn__social"
@@ -174,8 +215,8 @@ const SignUp = () => {
               builtHouse="150k"
             />
           </div>
-        </div>
-      </section>
+        </div >
+      </section >
     );
   }
   return component;

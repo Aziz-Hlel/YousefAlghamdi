@@ -61,28 +61,9 @@ const Login = () => {
     setisLoadingg(false);
   }, []);
 
-
-  const [wrongCredentials, setWrongCredentials] = useState(false);
-  const errorMessage = "Invalid email or password";
-
   const navigate = useNavigate();
 
-
-  const handleSubmit2 = async (e: any) => {
-    e.preventDefault();
-    setWrongCredentials(false)
-    const response = await Http.post(apiGateway.user.sigIn, {})
-
-    response?.status === 200 ? navigate("/") : console.log(response);
-    response?.status !== 200 && setWrongCredentials(true);
-    response?.status !== 200 && console.log('mrgl je 8alt');
-
-    console.log(response?.status, typeof response?.status);
-
-
-  };
-
-
+  
   let component = undefined;
   if (isLoading) {
     component = <Preloader />;
