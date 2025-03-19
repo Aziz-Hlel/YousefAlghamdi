@@ -1,10 +1,24 @@
 import { ZodIssue } from "zod";
 
-export const errorHandler = (statusCode: any, message: string, erros?: ZodIssue[]) => {
-    { erros && console.log(erros) }
-    let error: any = {};
-    error.statusCode = statusCode;
-    error.message = message;
-    error.errors = erros;
-    return error;
+
+interface IApiErrorResponse {
+    statusCode: number;
+    message: string;
+    errors?: string[];
+}
+
+
+export const errorHandler = (statusCode: any, message: string, errors?: ZodIssue[]) => {
+
+
+    const ApiErrorResponse: IApiErrorResponse = { statusCode, message };
+
+
+    if (errors && errors.length > 0) {
+        const errorMessages = errors.map(err => err.message);
+        ApiErrorResponse.errors = errorMessages;
+    }
+
+    return ApiErrorResponse;
+
 };

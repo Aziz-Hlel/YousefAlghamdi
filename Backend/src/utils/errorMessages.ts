@@ -1,13 +1,14 @@
 
 
 const errorMessages = {
-    "COMMON": {
-        "BAD_Request": "bad request",
-        "Invalid_Credentials": "Invalid credentials",
+
+    COMMON: {
+        BAD_Request: "bad request",
+        Invalid_Credentials: "Invalid credentials",
     },
-    
-    "AUTH": {
-        "INVALID_TOKEN": "invalid token",
+
+    AUTH: {
+        INVALID_TOKEN: "invalid token",
     }
 };
 

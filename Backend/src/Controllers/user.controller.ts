@@ -14,25 +14,27 @@ export const test = (req: Request, res: Response) => {
 
 
 const registerBodySchema = z.object({
-    firstName: z.string()
+    firstName: z.string({ required_error: "First name is required" })
+        .min(1, { message: "First name is required" })  // Custom message for required field
         .min(2, { message: "First name must be at least 2 characters long" })
         .max(25, { message: "First name must be at most 25 characters long" }),
 
-    lastName: z.string()
+
+    lastName: z.string({ required_error: "Last name is required" })
         .min(2, { message: "Last name must be at least 2 characters long" })
         .max(25, { message: "Last name must be at most 25 characters long" }),
 
-    phoneNumber: z.string()
+    phoneNumber: z.string({ required_error: "Phone number is required" })
         .min(5, { message: "Phone number must be at least 5 characters long" })
         .max(17, { message: "Phone number must be at most 17 characters long" }),
 
-    email: z.string().email({ message: "Invalid email address" }),
+    email: z.string({ required_error: "Email is required" }).email({ message: "Invalid email address" }),
 
-    password: z.string()
+    password: z.string({ required_error: "Password is required" })
         .min(6, { message: "Password must be at least 6 characters long" })
         .max(25, { message: "Password must be at most 25 characters long" }),
 
-    confirmPassword: z.string()
+    confirmPassword: z.string({ required_error: "Confirm password is required" })
         .min(6, { message: "Confirm password must be at least 6 characters long" })
         .max(25, { message: "Confirm password must be at most 25 characters long" }),
 
@@ -44,36 +46,51 @@ const registerBodySchema = z.object({
 
 export const register = async (req: Request, res: Response, next: NextFunction) => {
 
-    const { firstName, lastName, password, email, role, phoneNumber } = req.body
+    const newUser = req.body;
 
-    // if (!firstName || !lastName || !password || !email || !phoneNumber) return next(errorHandler(403, 'You are not allowed to update this user'));
+    const validBody = registerBodySchema.safeParse(newUser)
 
-    const validBody = registerBodySchema.safeParse(req.body)
+    if (!validBody.success) return next(errorHandler(401, "heyyyy", validBody.error.errors));
 
-    if (!validBody.success) return next(errorHandler(404, "heyyyy", validBody.error.errors));
 
-    const newUser = new User({
-        firstName,
-        lastName,
-        password,
-        email,
-        phoneNumber,
-    })
+    newUser.role = "user";
+
+
+    const user = new User(newUser);
 
     try {
-        await newUser.save();
-        res.json('Signup successful');
+        const userr = await user.save();
+
+        generateToken(res, userr);
+        res.status(statusCode.OK).json('Signup successful');
     } catch (error) {
         next(error);
     }
 
 
-}
+};
+
+
+
+
+const loginBodySchema = z.object({
+    email: z.string({ required_error: "Email is required" })
+        .email({ message: "Invalid email address" }),
+
+    password: z.string({ required_error: "Password is required" })
+        .min(6, { message: "Password must be at least 6 characters long" })
+        .max(25, { message: "Password must be at most 25 characters long" }),
+
+})
 
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {
 
     const { firstName, password } = req.body;
+
+    const validBody = loginBodySchema.safeParse(req.body)
+    console.log(validBody.error?.errors)
+    if (!validBody.success) return next(errorHandler(423, "heyyyy", validBody.error.errors));
 
     if (!firstName || !password) return next(errorHandler(404, errorMessages.COMMON.BAD_Request));
 
