@@ -50,7 +50,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
 
     const validBody = registerBodySchema.safeParse(newUser)
 
-    if (!validBody.success) return next(errorHandler(401, "heyyyy", validBody.error.errors));
+    if (!validBody.success) return next(errorHandler(statusCode.BAD_REQUEST ,errorMessages.COMMON.BAD_Request, validBody.error.errors));
 
 
     newUser.role = "user";
@@ -89,16 +89,15 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     const { firstName, password } = req.body;
 
     const validBody = loginBodySchema.safeParse(req.body)
-    console.log(validBody.error?.errors)
-    if (!validBody.success) return next(errorHandler(423, "heyyyy", validBody.error.errors));
 
-    if (!firstName || !password) return next(errorHandler(404, errorMessages.COMMON.BAD_Request));
+    if (!validBody.success) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request, validBody.error.errors));
+
 
     const user = await User.findOne({ firstName });
 
-    if (!user) return next(errorHandler(401, errorMessages.COMMON.Invalid_Credentials));
+    if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.COMMON.Invalid_Credentials));
 
-    if (!await user.matchPassword(password)) return next(errorHandler(401, errorMessages.COMMON.Invalid_Credentials));
+    if (!await user.matchPassword(password)) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.COMMON.Invalid_Credentials));
 
     generateToken(res, user);
     res.status(statusCode.OK);
