@@ -146,7 +146,6 @@ function Footer() {
                         <h3 className="widget-title">Importants</h3>
                         <ul className="f-need-helps-inner list-none">
                           <FooterList link="/about" title="About Us" />
-                          Our Agents
                           <FooterList link="/our-agents" title="Our Agent" />
                           <FooterList link="/contact" title="Contact Us" />
                         </ul>
@@ -192,9 +191,9 @@ function Footer() {
             <div className="col-lg-6 col-12">
               {/* Copyright Text   */}
               <p className="copyright-text">
-                © 2023 Homeco. All rights reserved by
-                <a href="#" target="_blank">
-                  QuomodoTheme
+                © 2023 Yousef Alghamdi Properties. All rights reserved by
+                <a href="https://technoshark.org/" target="_blank">
+                  TecknoShark
                 </a>
               </p>
             </div>
