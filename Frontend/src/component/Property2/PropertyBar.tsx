@@ -14,7 +14,7 @@ function PropertyBar({ gridStyle, handleGridStyle }:{gridStyle:any, handleGridSt
       <div className="homec-property-bar__single">
         <Search />
         {/* Show Results   */}
-        <ShowingResult currentPage={`dsq`} totalPages={totalCount} />
+        <ShowingResult currentPage={`1`} totalPages={totalCount} />
         {/* End Show Results  */}
       </div>
       <div className="homec-property-bar__single">

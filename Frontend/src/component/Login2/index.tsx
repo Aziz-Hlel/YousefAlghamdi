@@ -6,15 +6,46 @@ import { Link, useNavigate } from "react-router-dom";
 import apiGateway from "@src/apiGateway";
 import Http from "@src/services/Http";
 import logo_img from "@img/logo_sign_in.jpg"
+import { SubmitHandler, useForm } from "react-hook-form";
 
-function Login() {
-  const [input, setInput] = useState({
-    email: "",
-    password: "",
+type LoginFormFields = {
+  email: string;
+  password: string;
+};
+
+
+const Login = () => {
+
+
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormFields>();
+
+  const emailRegister = register("email", {
+    required: "Email is required",
+    validate: (value) => {
+      if (!value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i)) {
+        return "Invalid email";
+      }
+      return true;
+    },
   });
-  const handleChange = (e: any) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-  };
+
+  const passwordRegister = register("password", {
+    required: "Password is required",
+    minLength: {
+      value: 8,
+      message: "Password must be at least 8 characters",
+
+    }
+    
+  });
+
+
+
+  const onSubmit: SubmitHandler<LoginFormFields> = (data) => {
+
+  }
+
+
   // loading handler
   const [isLoading, setisLoadingg] = useState<boolean>(true);
   useEffect(() => {
@@ -28,10 +59,10 @@ function Login() {
   const navigate = useNavigate();
 
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit2 = async (e: any) => {
     e.preventDefault();
     setWrongCredentials(false)
-    const response = await Http.post(apiGateway.user.sigIn, input)
+    const response = await Http.post(apiGateway.user.sigIn, {})
 
     response?.status === 200 ? navigate("/") : console.log(response);
     response?.status !== 200 && setWrongCredentials(true);
@@ -67,25 +98,21 @@ function Login() {
                   {/* Sign in Form  */}
                   <form
                     className="ecom-wc__form-main p-0"
-                    action="index.html"
-                    method="post"
+                    onSubmit={handleSubmit(onSubmit)}
                   >
                     <PropertyTextInput
                       title="Email*"
-                      name="email"
-                      value={input.email}
-                      handleChange={handleChange}
+                      fieldRegister={emailRegister}
+                      fieldError={errors.email}
                       placeholder="demo3243@gmail.com"
-                      wrongCrendentials={wrongCredentials}
                     />
                     <PropertyTextInput
                       title="Password*"
-                      name="password"
-                      value={input.password}
-                      handleChange={handleChange}
+                      fieldRegister={passwordRegister}
+                      fieldError={errors.password}
                       placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                       type="password"
-                      wrongCrendentials={wrongCredentials}
+
 
                     />
                     <div className=" h-6 p-2 mb-4"> {wrongCredentials && <p style={{ color: "red" }}>{errorMessage}</p>}</div>
@@ -93,7 +120,8 @@ function Login() {
                       <div className="ecom-wc__button ecom-wc__button--bottom">
                         <button
                           className="homec-btn homec-btn__second"
-                          onClick={handleSubmit}
+                          // onClick={handleSubmit2}
+                          type="submit"
                         >
                           <span>Login</span>
                         </button>

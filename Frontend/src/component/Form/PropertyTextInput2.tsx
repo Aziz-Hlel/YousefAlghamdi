@@ -1,17 +1,16 @@
+import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 
 interface IPropertyTextInput {
   size?: string,
   title?: string,
-  name: string,
-  value: string | number,
-  handleChange: (e: any) => void,
   placeholder?: string,
   type?: string,
   margin?: string,
-  wrongCrendentials?: boolean,
+  fieldRegister: UseFormRegisterReturn<string>,
+  fieldError: FieldError | undefined,
 }
 
-const PropertyTextInput = ({ size, title, name, value, handleChange, placeholder, type, margin, wrongCrendentials }: IPropertyTextInput) => {
+const PropertyTextInput = ({ size, title, fieldError: errors, placeholder, type, margin, fieldRegister }: IPropertyTextInput) => {
   return (
     <div className={`${size && size} col-12 `}>
       {/* Single Form Element */}
@@ -22,18 +21,14 @@ const PropertyTextInput = ({ size, title, name, value, handleChange, placeholder
         >
           {title}
         </h4>
-        <div className={`form-group homec-form-input ${wrongCrendentials && 'border-2  border-red-600 rounded-sm'}`}>
+        <div className={`form-group homec-form-input ${errors && 'border-2  border-red-600 rounded-sm'}`}>
           <input
             type={type ? type : "text"}
-            value={value}
-            name={name}
+            {...fieldRegister}
             placeholder={placeholder}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              handleChange(e);
-            }}
-            required
           />
         </div>
+        <span className="text-red-600 p-2">{errors?.message}</span>
       </div>
     </div>
   );
