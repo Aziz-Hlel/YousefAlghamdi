@@ -87,7 +87,7 @@ function PropertyDetails() {
             </div>
           </div>
           <PropertyAgents
-            image={apiGateway.images.images + "agent_small.png"}
+            image={apiGateway.images + "agent_small.png"}
             name="Wade De Warren"
             position="Real Estate Broker"
           />
