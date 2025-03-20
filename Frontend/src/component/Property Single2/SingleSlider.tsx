@@ -31,7 +31,7 @@ function SingleSlider() {
             duration={property.filterFields.forRent ? "Month" : ""}
             title={property.title}
             text="1901 Thornridge Cir. Shiloh, Hawaii 81063"
-            img={apiGateway.images.images + img} />
+            img={apiGateway.images + img} />
         )}
 
       {/* <ImageCard

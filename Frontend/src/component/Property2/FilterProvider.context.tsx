@@ -51,7 +51,9 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
     }, [filterObject])
 
-
+useEffect(() => {
+    updateEstate()
+},[filterObject.page])
 
     const { city } = useParams();
 

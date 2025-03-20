@@ -11,16 +11,20 @@ import apiGateway from "@src/apiGateway";
 
 function PropertyGrid() {
 
-  const { properties: estates, filterObject, totalCount,updateField } = useFormContext();
+  const { properties: estates, filterObject, totalCount, updateField, updateEstate } = useFormContext();
 
+  const totalPage = Math.ceil(totalCount / 6);
   //handle grid style
   const [gridStyle, setGridStyle] = useState("grid");
   const handleGridStyle = (style: any) => {
     setGridStyle(style);
   };
 
-  const handelPage = (page: number) => {
-    updateField("page", page);
+  const handelPage = async (page: number) => {
+    console.log('page', page);
+
+    await updateField("page", page);
+    // updateEstate();
   };
 
 
@@ -79,7 +83,7 @@ function PropertyGrid() {
                   )}
                 </div>
                 <Pagination
-                  totalPage={totalCount / 5}
+                  totalPage={totalPage}
                   handlePage={handelPage}
                   currentPage={filterObject.page}
                 />

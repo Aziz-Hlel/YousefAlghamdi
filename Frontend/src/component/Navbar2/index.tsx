@@ -79,7 +79,7 @@ function Navbar({ handleSidebar, secondNav }: any) {
                 <span className="line"></span>
               </button>
               <div className="homec-header__button">
-                <Link to="/dashboard" className="homec-header__icon">
+                <Link to="/login" className="homec-header__icon">
                   <svg
                     width="28"
                     height="32"

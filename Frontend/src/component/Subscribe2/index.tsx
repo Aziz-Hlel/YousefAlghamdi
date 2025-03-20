@@ -2,7 +2,7 @@ const SubscribeForm = () => {
   return (
     <div className="homec-form mg-top-100">
       <div className="homec-form__content">
-        <span className="homec-form__label">For Rant house offer</span>
+        <span className="homec-form__label">For exclusive house offer</span>
         <h3 className="homec-form__title ">Join Yousef Alghamdi Properties Community</h3>
       </div>
       <form className="homec-form__form">

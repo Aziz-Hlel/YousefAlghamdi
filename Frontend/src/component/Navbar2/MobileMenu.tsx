@@ -23,7 +23,7 @@ const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
       style={{ display: "block", zIndex: show ? "" : "-1" }}
       aria-modal={true}
       role="dialog"
-    onClick={(e: any) => e.target.role === "dialog" && handleSidebar()}
+      onClick={(e: any) => e.target.role === "dialog" && handleSidebar()}
     >
       <div className="modal-dialog offcanvas-dialog">
         <div className="modal-content">
@@ -64,7 +64,7 @@ const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
                   Properties
                 </Link>
 
-                <ul className="sub-menu"  onClick={handleSidebar}>
+                <ul className="sub-menu" onClick={handleSidebar}>
 
                   <li>
                     <Link to="/property">Properties</Link>
@@ -103,7 +103,11 @@ const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
                 <Link to="/contact" onClick={handleSidebar}>Contact</Link>
               </li>
 
-
+              <li>
+                <Link to="/login" onClick={handleSidebar}>
+                  Login
+                </Link>
+              </li>
 
             </ul>
             {/* <!-- End Main Menu --> */}

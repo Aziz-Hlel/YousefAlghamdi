@@ -1,6 +1,9 @@
 import ProtoTypes from "prop-types";
 
 function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number, handlePage: any, currentPage: number }) {
+  console.log("totalPage", totalPage);
+  console.log("currentPage", currentPage);
+  
   return (
     <div className="row mg-top-40">
       <div className="homec-pagination">
@@ -9,17 +12,17 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
             <a
               style={{ cursor: "pointer" }}
               onClick={() => {
-                handlePage(currentPage-1);
+                handlePage(currentPage - 1);
               }}
             >
               Prev
             </a>
           </li>
-          {/* doin a problem check it out
-           {Array.from(Array(totalPage).keys()).map((item, index) =>
+
+          {Array.from({ length: totalPage }, (_, index) => (
             index === 0 || index + 1 === totalPage ? (
               <li
-                key={item + 1}
+                key={index + 1}
                 className={currentPage === index + 1 ? "active" : ""}
               >
                 <a
@@ -33,7 +36,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
             ) : (index < 5 && currentPage < 5) ||
               (index > totalPage - 6 && currentPage > totalPage - 4) ? (
               <li
-                key={item + 1}
+                key={index + 1}
                 className={currentPage === index + 1 ? "active" : ""}
               >
                 <a
@@ -48,7 +51,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               index === currentPage - 1 ||
               index === currentPage ? (
               <li
-                key={item + 1}
+                key={index + 1}
                 className={currentPage === index + 1 ? "active" : ""}
               >
                 <a
@@ -61,7 +64,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               </li>
             ) : currentPage > 4 && index === 2 ? (
               <li
-                key={item + 1}
+                key={index + 1}
                 className={currentPage === index + 1 ? "active" : ""}
               >
                 <a
@@ -76,7 +79,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               currentPage < totalPage - 2 &&
               index === totalPage - 2 && (
                 <li
-                  key={item + 1}
+                  key={index + 1}
                   className={currentPage === index + 1 ? "active" : ""}
                 >
                   <a
@@ -89,7 +92,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
                 </li>
               )
             )
-          )} */}
+          ))}
 
           <li
             style={{ cursor: "pointer" }}
@@ -97,7 +100,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
           >
             <a
               onClick={() => {
-                handlePage("next");
+                handlePage(currentPage + 1);
               }}
             >
               Next
