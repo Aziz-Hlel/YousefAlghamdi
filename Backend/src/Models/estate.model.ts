@@ -13,15 +13,32 @@ const estateSchema = new mongoose.Schema({
         trim: true
     },
 
-    type: {
+    category: {
+        type: String,
+        required: true,
+    },
+
+    sub_category: {
         type: String,
         required: true,
     },
 
     city: {
         type: String,
+        required: false,
+
     },
 
+    delegation: {
+        type: String,
+        required: false,
+
+    },
+
+    addresse: {
+        type: String,
+        required: false,
+    },
 
     description: {
         type: String,
@@ -68,10 +85,7 @@ const estateSchema = new mongoose.Schema({
         required: false,
         default: null,
     },
-    addresse:{
-        type:String,
-        required:false,
-    }
+
 
 },
     { timestamps: true },
