@@ -8,7 +8,7 @@ const RasAlKhaimahEmirate = "Ras Al Khaimah Emirate";
 const FujairahEmirate = "Fujairah Emirate";
 
 // Export the Emirates as categories
-export const emirates = {
+export const cities = {
   [AbuDhabiEmirate]: AbuDhabiEmirate,
   [DubaiEmirate]: DubaiEmirate,
   [SharjahEmirate]: SharjahEmirate,
