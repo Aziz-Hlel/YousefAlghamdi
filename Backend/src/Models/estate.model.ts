@@ -32,7 +32,6 @@ const estateSchema = new mongoose.Schema({
     delegation: {
         type: String,
         required: false,
-
     },
 
     addresse: {
@@ -77,12 +76,12 @@ const estateSchema = new mongoose.Schema({
 
     clientId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'user',
     },
 
     agentId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'user',
     },
 
     available: {
