@@ -2954,7 +2954,7 @@ input[type="checkbox"]:checked::before {
   background: #fff;
   padding: 10px 20px;
   position: relative;
-  
+
   left: -75%;
   width: 150%;
   font-size: 22px;
@@ -8461,9 +8461,9 @@ div.ck-editor.ck-rounded-corners {
   animation: moving 15s linear infinite;
 }
 
-.homec-search-form__form--city .homec-search-form__group {
-  min-width: 68%;
-}
+/* .homec-search-form__form--city .homec-search-form__group {
+  min-width: fit-content;
+} */
 
 .homec-search-form__form--city .homec-search-form__group .form-group {
   width: 100% !important;

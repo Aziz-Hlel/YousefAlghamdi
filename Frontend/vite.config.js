@@ -6,7 +6,7 @@ import path from 'path';
 
 const root = path.resolve(__dirname, "src");
 
-const ngrokUrl = '28a3-197-14-119-224.ngrok-free.app';
+const ngrokUrl = '4c8f-41-225-176-145.ngrok-free.app';
 // const ngrokUrl = 'localhost:50';
 
 // https://vitejs.dev/config/

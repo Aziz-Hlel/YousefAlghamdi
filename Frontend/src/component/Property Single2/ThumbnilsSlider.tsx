@@ -1,5 +1,5 @@
 import Carousel from "react-multi-carousel";
-import ThumbnilsCard from "../Cards/ThumbnilsCard";
+import ThumbnailsCard from "../Cards/ThumbnilsCard";
 import { responsiveLogoSlider2 } from "../../utils/responsiveSlider";
 import ButtonGroup from "../CustomDot/CustomArrow";
 import { useSinglePropertyContext } from "./PropertySingleProvider.context";
@@ -22,20 +22,20 @@ function ThumbnailsSlider() {
 
         {
           property.imgs.map((img, index) =>
-            <ThumbnilsCard img={apiGateway.images + img} />
+            <ThumbnailsCard key={index} img={apiGateway.images + img} />
           )
         }
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
       </Carousel>
     </div>
   );

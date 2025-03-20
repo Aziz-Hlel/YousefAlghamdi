@@ -10,6 +10,25 @@ import PropertyPlan from "./PropertyPlan";
 import PropertyTextAreaV2 from "./PropertyTextAreaV2";
 import SwitcherBtn from "./SwitcherBtn";
 import IaddProperty from "@src/models/addProperty.type";
+import { z } from "zod";
+
+
+const SubmitPropertyForm = z.object({
+  title: z.string()
+    .min(2, { message: "Title must be at least 2 characters long" })
+    .max(25, { message: "Title must be at most 25 characters long" }),
+
+    type: z.string()
+    .min(2, { message: "Type must be at least 2 characters long" })
+    .max(25, { message: "Type must be at most 25 characters long" }),
+
+    filterFields:z.object({
+      
+    })
+
+
+})
+
 
 const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   const [property, setProperty] = useState<IaddProperty>({
@@ -169,9 +188,9 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       value={property.title}
                       handleChange={handleTextChange}
                       placeholder="Title"
-                      
-                      />
-                      
+
+                    />
+
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Property Type*"

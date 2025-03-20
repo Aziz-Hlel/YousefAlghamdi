@@ -1,5 +1,5 @@
 import Carousel from "react-multi-carousel";
-import ThumbnilsCard from "../Cards/ThumbnilsCard";
+import ThumbnailsCard from "../Cards/ThumbnilsCard";
 import { responsiveLogoSlider2 } from "../../utils/responsiveSlider";
 import ButtonGroup from "../CustomDot/CustomArrow";
 
@@ -13,17 +13,17 @@ function ThumbnailsSlider() {
         arrows={false}
         customButtonGroup={<ButtonGroup />}
       >
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
-        <ThumbnilsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
+        <ThumbnailsCard img="https://placehold.co/270x180" />
       </Carousel>
     </div>
   );

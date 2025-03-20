@@ -6,7 +6,7 @@ import TitleBtn from "../Button/TitleBtn";
 import dubai_central from "../../assets/img/dubai_central.jpg";
 import deira from "../../assets/img/deira.jpg"
 
-function CitiesListing() {
+const CitiesListing = () => {
   return (
     <section className="pd-top-120 pd-btm-120 xl:-translate-y-20 z-50">
       <div className="container homec-listing__container ">
@@ -20,6 +20,7 @@ function CitiesListing() {
               styleSecond={undefined}
             />
             <HomeSearch />
+            
           </div>
         </div>
 

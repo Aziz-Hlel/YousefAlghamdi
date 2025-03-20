@@ -54,11 +54,11 @@ const SignUp = () => {
 
     const response = await Http.post(apiGateway.user.signUp, data);
 
-    response.status === 200 ? navigate("/") : console.log(response);
-    response.status === 409 && setError("email", { message: "Email already exists" })
-    console.log(response.status, typeof response.status);
+    response?.status === 200 ? navigate("/") : console.log(response);
+    response?.status === 409 && setError("email", { message: "Email already exists" })
+    console.log(response?.status, typeof response?.status);
 
-    if (response?.status !== 200 && response.status !== 409) {
+    if (response?.status !== 200 && response?.status !== 409) {
       setError("root", { message: "no edge case for this one" })
     }
 
@@ -76,16 +76,6 @@ const SignUp = () => {
 
   const navigate = useNavigate();
 
-  // const handleSubmit = async (e: any) => {
-  //   e.preventDefault();
-  //   const response = await Http.post(apiGateway.user.signUp, input)
-
-  //   response.status === 200 ? navigate("/login") : console.log(response);
-  //   response.status === 200 && console.log("true");
-  //   console.log(response.status, typeof response.status);
-
-
-  // };
 
   if (isLoading) {
     component = <Preloader />;

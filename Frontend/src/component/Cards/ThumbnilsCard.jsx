@@ -1,6 +1,6 @@
 import ProtoTypes from "prop-types";
 
-function ThumbnilsCard({ img }) {
+function ThumbnailsCard({ img }) {
   return (
     <div style={{ margin: "10px" }}>
       <div className="single-thumbs">
@@ -10,8 +10,8 @@ function ThumbnilsCard({ img }) {
   );
 }
 
-ThumbnilsCard.propTypes = {
+ThumbnailsCard.propTypes = {
   img: ProtoTypes.string.isRequired,
 };
 
-export default ThumbnilsCard;
+export default ThumbnailsCard;
