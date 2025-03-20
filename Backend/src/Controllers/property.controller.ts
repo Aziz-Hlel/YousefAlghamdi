@@ -1,10 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import Estate from "../Models/estate.model";
+import Estate from "../Models/property.model";
 import { errorHandler } from "../utils/error";
 import mongoose from "mongoose";
 import errorMessages from "../utils/errorMessages";
 import statusCode from "../utils/statusCode";
-import { log } from "console";
 
 
 
@@ -12,22 +11,21 @@ import { log } from "console";
 
 export const createEstate = async (req: Request, res: Response, next: NextFunction) => {
 
-
-    const estate = new Estate({
+    const property = new Estate({
         ...req.body,
         clientId: "67d18af6bb05549959f8ae3d",
         agentId: "67d18b2d7c34baab7b87c4d8"
     })
 
     try {
-        await estate.save();
-        res.json('Estate created successful');
+        await property.save();
+        res.json('Property created successful');
     } catch (error) {
         next(error);
     }
 
-
 }
+
 
 const filterFunc = (minVal: any, maxVal: any, filterKeyName: string, filters: any) => {
     if (minVal && maxVal && !isNaN(Number(minVal)) && !isNaN(Number(maxVal))) {
@@ -65,7 +63,7 @@ export const listEstates = async (req: Request, res: Response, next: NextFunctio
     // console.log('filters', filters)
     try {
 
-        const [estates, total] = await Promise.all([
+        const [properties, total] = await Promise.all([
             Estate.find(filters)
                 .limit(limit)
                 .skip((page - 1) * limit),
@@ -76,7 +74,7 @@ export const listEstates = async (req: Request, res: Response, next: NextFunctio
         res.set("X-Total-Count", total.toString()); // Optional, useful for frontend
 
         res.json({
-            result: estates,
+            result: properties,
         })
 
 

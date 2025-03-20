@@ -3,7 +3,7 @@ import filterFieldsTypes from "./filterFields.type";
 
 
 
-const estateSchema = new mongoose.Schema({
+const propertySchema = new mongoose.Schema({
 
     title: {
         type: String,
@@ -96,6 +96,6 @@ const estateSchema = new mongoose.Schema({
 );
 
 
-const Estate = mongoose.model('Estate', estateSchema);
+const Estate = mongoose.model('Estate', propertySchema);
 
 export default Estate;

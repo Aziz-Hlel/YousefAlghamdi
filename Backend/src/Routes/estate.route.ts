@@ -1,5 +1,5 @@
 import express from 'express';
-import { createEstate, getEstate, listEstates } from '../Controllers/estate.controller';
+import { createEstate, getEstate, listEstates } from '../Controllers/property.controller';
 
 
 
