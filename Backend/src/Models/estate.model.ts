@@ -60,6 +60,11 @@ const estateSchema = new mongoose.Schema({
 
     filterFields: filterFieldsTypes,
 
+    listing_type: {
+        type: String,
+        required: false,
+    },
+
     additionalDetails: { type: Map, of: String },
 
     nearestPlaces: { type: Map, of: String },

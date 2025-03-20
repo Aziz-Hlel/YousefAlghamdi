@@ -1,3 +1,5 @@
+import { categories } from "./categories.subcategories.types";
+
 const estateTypes = [
     "apartement",
     "house",
@@ -6,3 +8,6 @@ const estateTypes = [
 ]
 
 export default estateTypes;
+
+
+categories["Commercial Properties"]
