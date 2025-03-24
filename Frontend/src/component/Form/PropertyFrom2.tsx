@@ -11,26 +11,57 @@ import PropertyTextAreaV2 from "./PropertyTextAreaV2";
 import SwitcherBtn from "./SwitcherBtn";
 import IaddProperty from "@src/models/addProperty.type";
 import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import CheckInput from "./CheckInput2";
+import SelectiveInputForm from "./SelectiveInputForm";
+import { categoriesType, ResidentialProperties, sub_categories } from "@src/types/categories.subcategories.types";
 
 
-const SubmitPropertyForm = z.object({
-  title: z.string()
+const SubmitPropertySchema = z.object({
+  title: z.string({ required_error: "Title is required" })
     .min(2, { message: "Title must be at least 2 characters long" })
     .max(25, { message: "Title must be at most 25 characters long" }),
 
-    type: z.string()
+  category: z.string({ required_error: "Type is required" })
     .min(2, { message: "Type must be at least 2 characters long" })
     .max(25, { message: "Type must be at most 25 characters long" }),
 
-    filterFields:z.object({
-      
-    })
+  sub_category: z.string({ required_error: "Sub category is required" }),
 
 
-})
+  filterFields: z.object({
+    price: z.number({ required_error: "Price is required" }),
+    area: z.number({ required_error: "Area is required" }),
+    rooms: z.number({ required_error: "Rooms is required" }),
+    bathrooms: z.number({ required_error: "Bathrooms is required" }),
+  }),
+
+  description: z.string({ required_error: "Description is required" })
+    .min(2, { message: "Description must be at least 2 characters long" })
+    .max(200, { message: "Description must be at most 200 characters long" }),
+
+  // imgs: z.array(z.string({ required_error: "Image is required" })),
+  // videos: z.array(z.string({ required_error: "Video is required" })),
+  listing_type: z.string({ required_error: "Listing type is required" }),
+
+  additionalDetails: z.record(z.string()),
+  nearestPlaces: z.record(z.string()),
+
+
+
+});
+
+type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
 
 const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
+
+  const { register, watch, handleSubmit: handleSubmit2, formState: { errors, isSubmitting }, setError } = useForm<SubmitPropertyType>({ resolver: zodResolver(SubmitPropertySchema) });
+
+
+  const propertyCategoryValue = watch('category');
+
   const [property, setProperty] = useState<IaddProperty>({
     city: "",
     filterFields: {
@@ -182,23 +213,30 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                   <div className="row">
 
                     <PropertyTextInput
+
                       title="Property Title*"
-                      size="col-lg-6 col-md-6"
-                      name="title"
-                      value={property.title}
-                      handleChange={handleTextChange}
                       placeholder="Title"
+                      fieldRegister={register('title')}
+                      fieldError={errors.title}
 
                     />
 
-                    <PropertyTextInput
+                    <SelectiveInputForm
                       size="col-lg-6 col-md-6"
-                      title="Property Type*"
-                      name="type"
-                      value={property.type}
-                      handleChange={handleTextChange}
-                      placeholder="Apartment"
+                      title={"Category"}
+                      options={Object.keys(categoriesType)}
+                      fieldRegister={register('category')}
+                      fieldError={errors.category}
                     />
+
+                    <SelectiveInputForm
+                      size="col-lg-6 col-md-6"
+                      title={"Sub Category"}
+                      options={propertyCategoryValue && Object.keys(categoriesType).includes(propertyCategoryValue) ? sub_categories[propertyCategoryValue as keyof typeof sub_categories] : []}
+                      fieldRegister={register('sub_category')}
+                      fieldError={errors.category}
+                    />
+
 
                     {/* <PropertyTextInput
                       title="Slug*"
@@ -227,19 +265,17 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Property Price"
-                      name="filterFields.price"
-                      value={property.filterFields.price}
-                      handleChange={handleTextChange}
                       placeholder="24345"
+                      fieldRegister={register('filterFields.price')}
+                      fieldError={errors.filterFields?.price}
                       type="number"
                     />
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
-                      title="Total Area (sq:Ft)*"
-                      name="filterFields.area"
-                      value={property.filterFields.area}
-                      handleChange={handleTextChange}
-                      placeholder="Here is demo text"
+                      title="Total Area (sq:Mt)*"
+                      fieldRegister={register('filterFields.area')}
+                      fieldError={errors.filterFields?.area}
+                      placeholder="1200"
                       type="number"
                     />
                     {/* <PropertyTextInput
@@ -251,24 +287,29 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       placeholder="1"
                       type="number"
                     /> */}
-                    <PropertyTextInput
+                    {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
                       size="col-lg-6 col-md-6"
-                      title="Total Bedroom*"
-                      name="bedroom"
-                      value={0}
-                      handleChange={handleTextChange}
+                      title="Total Rooms*"
+                      fieldRegister={register('filterFields.rooms')}
+                      fieldError={errors.filterFields?.rooms}
                       placeholder="2"
                       type="number"
-                    />
-                    {property.filterFields.bathrooms && <PropertyTextInput
+
+                    />}
+                    {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Total Bathroom*"
-                      name="filterFields.bathrooms"
-                      value={property.filterFields.bathrooms}
-                      handleChange={handleTextChange}
+                      fieldRegister={register('filterFields.bathrooms')}
+                      fieldError={errors.filterFields?.bathrooms}
                       placeholder="2"
-                      type="number"
                     />}
+
+                    <PropertyTextArea
+                      title="Description*"
+                      fieldRegister={register('description')}
+                      fieldError={errors.description}
+                    />  
+
                     {/* <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Total Garage*"
@@ -289,13 +330,7 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                     /> */}
                   </div>
                   {/* Single Form Element  */}
-                  <PropertyTextArea
-                    title="Description*"
-                    name="description"
-                    // value={input.description}
-                    handleChange={handleTextArea}
-                  // placeholder="Description"
-                  />
+
                 </div>
               </div>
               {/* <ImageInput

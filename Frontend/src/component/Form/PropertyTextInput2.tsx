@@ -10,7 +10,7 @@ interface IPropertyTextInput {
   fieldError: FieldError | undefined,
 }
 
-const PropertyTextInput = ({ size, title, fieldError: errors, placeholder, type, margin, fieldRegister }: IPropertyTextInput) => {
+const PropertyTextInput = ({ size, title, fieldError, placeholder, type, margin, fieldRegister }: IPropertyTextInput) => {
   return (
     <div className={`${size && size} col-12 `}>
       {/* Single Form Element */}
@@ -21,14 +21,14 @@ const PropertyTextInput = ({ size, title, fieldError: errors, placeholder, type,
         >
           {title}
         </h4>
-        <div className={`form-group homec-form-input ${errors && 'border-2  border-red-600 rounded-sm'}`}>
+        <div className={`form-group homec-form-input ${fieldError && 'border-2  border-red-600 rounded-sm'}`}>
           <input
             type={type ? type : "text"}
             {...fieldRegister}
             placeholder={placeholder}
           />
         </div>
-        <span className="text-red-600 p-2 inline-block">{errors?.message}</span>
+        <span className="text-red-600 p-2 inline-block">{fieldError?.message}</span>
       </div>
     </div>
   );
