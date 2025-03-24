@@ -63,6 +63,9 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
 
   const propertyCategoryValue = watch('category');
 
+
+  const NearestLocation: { [key: string]: string }[] = [{ "": "" },]
+
   const [property, setProperty] = useState<IaddProperty>({
     city: "",
     filterFields: {
@@ -154,32 +157,32 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   // handle Property Plan, additionalInformation, nearestLocation add new item or delete item
 
   const handleAddOrDelete = (type: string, id: any, keyType: string | number) => {
-    if (type === "add") {
-      const newId =
-        property[keyType].reduce(
-          (max, current) => (max < current.id ? current.id : max),
-          0
-        ) + 1;
-      setProperty({
-        ...property,
-        [keyType]: [{ id: newId, key: "", value: "" }, ...property[keyType]],
-      });
-    } else {
-      setProperty({
-        ...property,
-        [keyType]: property[keyType].filter((item) => item.id != id),
-      });
-    }
+    // if (type === "add") {
+    //   const newId =
+    //     property[keyType].reduce(
+    //       (max, current) => (max < current.id ? current.id : max),
+    //       0
+    //     ) + 1;
+    //   setProperty({
+    //     ...property,
+    //     [keyType]: [{ id: newId, key: "", value: "" }, ...property[keyType]],
+    //   });
+    // } else {
+    //   setProperty({
+    //     ...property,
+    //     [keyType]: property[keyType].filter((item) => item.id != id),
+    //   });
+    // }
   };
   // handle Property Plan, additionalInformation, nearestLocation input filled
-  // const handleKeyValueChange = ({ id, keyType, inputType, value }: any) => {
-  //   setProperty({
-  //     ...property,
-  //     [keyType]: property[keyType].map((item) =>
-  //       item.id === id ? { ...item, [inputType]: value } : item
-  //     ),
-  //   });
-  // };
+  const handleKeyValueChange = (id: any, keyType: any, inputType: any, value: any) => {
+    // setProperty({
+    //   ...property,
+    //   [keyType]: property[keyType].map((item) =>
+    //     item.id === id ? { ...item, [inputType]: value } : item
+    //   ),
+    // });
+  };
   //handle SEO Sector input
   // const handleSEO = (e, value) => {
   //   if (typeof value === "undefined") {
@@ -319,30 +322,16 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
               <div className="homec-submit-form mg-top-40">
                 <h4 className="homec-submit-form__title">Nearest Location</h4>
                 <KeyValueInput
-                  info={[
-                    { id: 1, key: "", value: "" },
-                    { id: 2, key: "", value: "" },
-                    { id: 3, key: "", value: "" },
-                  ]}
+                  list={NearestLocation}
                   handleAddOrDelete={handleAddOrDelete}
                   handleChange={handleKeyValueChange}
                   title="Nearest Location"
                   filedTitle="Nearest Location*"
                   filedTitleTwo="Distance(KM)*"
-                  options={[
-                    {
-                      id: 1,
-                      name: "Dhaka",
-                    },
-                    {
-                      id: 2,
-                      name: "Chittagong",
-                    },
-                    {
-                      id: 2,
-                      name: "Khulna",
-                    },
-                  ]} placeholderOne={""} placeholderTwo={""} keyType="nearestLocation"
+
+                  placeholderOne={""}
+                  placeholderTwo={""}
+                  keyType="nearestLocation"
                 />
 
               </div>

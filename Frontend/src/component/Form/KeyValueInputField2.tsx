@@ -1,8 +1,18 @@
-import ProtoTypes from "prop-types";
-import Select from "react-dropdown-select";
+
+
+type KeyValueInputFieldProps = {
+  title: string,
+  titleTwo: string,
+  handleKeyValue: any,
+  value: any,
+  placeholderOne: string,
+  placeholderTwo: string,
+  handleAddOrDelete: any,
+  btnType: string,
+  keyType: string,
+}
 
 function KeyValueInputField({
-  options,
   title,
   titleTwo,
   handleKeyValue,
@@ -12,7 +22,8 @@ function KeyValueInputField({
   handleAddOrDelete,
   btnType,
   keyType,
-}) {
+}: KeyValueInputFieldProps) {
+
   return (
     <div className="row">
       <div className="col-lg-6 col-md-6 col-12">
@@ -20,33 +31,10 @@ function KeyValueInputField({
         <div className="mg-top-20">
           <h4 className="homec-submit-form__heading">{title}</h4>
           <div className="form-group homec-form-input">
-            {options ? (
-              <Select
-                values={[value]}
-                options={options}
-                labelField="name"
-                valueField="id"
-                onChange={(values) =>
-                  handleKeyValue({
-                    id: value.id,
-                    keyType,
-                    inputType: "key",
-                    value: values.name,
-                  })
-                }
-                searchBy="name"
-                searchable={true}
-                handle={true}
-                placeholder="Select"
-                closeOnSelect={true}
-                dropdownPosition="auto"
-                className="homec-form-select homec-border"
-              />
-            ) : (
+ 
               <div className="col-lg-6 col-md-6 col-12">
                 {/* Single Form Element */}
-                <div className="mg-top-20">
-                  <h4 className="homec-submit-form__heading">{title}</h4>
+                <div className="">
                   <div className="form-group homec-form-input">
                     <input
                       type="text"
@@ -66,7 +54,7 @@ function KeyValueInputField({
                   </div>
                 </div>
               </div>
-            )}
+        
           </div>
         </div>
       </div>
@@ -92,9 +80,8 @@ function KeyValueInputField({
               }
             />
             <button
-              className={`homec-form-add__button ${
-                btnType !== "add" && "homec-form-add__button--delete"
-              }`}
+              className={`homec-form-add__button flex items-center justify-center ${"homec-form-add__button--delete"
+                }`}
               onClick={() => handleAddOrDelete(btnType, value.id, keyType)}
             >
               <img
@@ -112,17 +99,6 @@ function KeyValueInputField({
   );
 }
 
-KeyValueInputField.propTypes = {
-  options: ProtoTypes.array,
-  title: ProtoTypes.string.isRequired,
-  titleTwo: ProtoTypes.string.isRequired,
-  handleKeyValue: ProtoTypes.func.isRequired,
-  value: ProtoTypes.object.isRequired,
-  placeholderOne: ProtoTypes.string,
-  placeholderTwo: ProtoTypes.string,
-  keyType: ProtoTypes.string.isRequired,
-  handleAddOrDelete: ProtoTypes.func.isRequired,
-  btnType: ProtoTypes.string.isRequired,
-};
+
 
 export default KeyValueInputField;
