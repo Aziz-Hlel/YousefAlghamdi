@@ -5,15 +5,13 @@ interface IKeyValueInput {
   list: { [key: string]: string }[];
   handleAddOrDelete: Function;
   handleChange: Function;
-  title: string;
   filedTitle: string;
   filedTitleTwo: string;
   placeholderOne: string;
   placeholderTwo: string;
-  keyType: string;
 }
 
-function KeyValueInput({ list, handleAddOrDelete, handleChange, filedTitle, filedTitleTwo, placeholderOne, placeholderTwo, keyType, }: IKeyValueInput) {
+function KeyValueInput({ list, handleAddOrDelete, handleChange, filedTitle, filedTitleTwo, placeholderOne, placeholderTwo, }: IKeyValueInput) {
   return (
 
     <div className="homec-submit-form__inner">
@@ -28,8 +26,8 @@ function KeyValueInput({ list, handleAddOrDelete, handleChange, filedTitle, file
             placeholderOne={placeholderOne}
             placeholderTwo={placeholderTwo}
             handleAddOrDelete={handleAddOrDelete}
-            btnType={index === 0 ? "add" : "delete"}
-            keyType={keyType}
+            btnType={index === list.length - 1 ? "add" : "delete"}
+            idx = {index}
           />
         ))}
     </div>
@@ -37,13 +35,6 @@ function KeyValueInput({ list, handleAddOrDelete, handleChange, filedTitle, file
   );
 }
 
-KeyValueInput.propTypes = {
-  filedTitle: ProtoTypes.string.isRequired,
-  filedTitleTwo: ProtoTypes.string.isRequired,
-  placeholderOne: ProtoTypes.string,
-  placeholderTwo: ProtoTypes.string,
-  keyType: ProtoTypes.string.isRequired,
-  options: ProtoTypes.array.isRequired,
-};
+
 
 export default KeyValueInput;

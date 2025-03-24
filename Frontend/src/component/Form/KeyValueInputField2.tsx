@@ -9,7 +9,7 @@ type KeyValueInputFieldProps = {
   placeholderTwo: string,
   handleAddOrDelete: any,
   btnType: string,
-  keyType: string,
+  idx: number
 }
 
 function KeyValueInputField({
@@ -21,7 +21,7 @@ function KeyValueInputField({
   placeholderTwo,
   handleAddOrDelete,
   btnType,
-  keyType,
+  idx
 }: KeyValueInputFieldProps) {
 
   return (
@@ -31,30 +31,30 @@ function KeyValueInputField({
         <div className="mg-top-20">
           <h4 className="homec-submit-form__heading">{title}</h4>
           <div className="form-group homec-form-input">
- 
-              <div className="col-lg-6 col-md-6 col-12">
-                {/* Single Form Element */}
-                <div className="">
-                  <div className="form-group homec-form-input">
-                    <input
-                      type="text"
-                      value={value.key}
-                      name="key"
-                      placeholder={placeholderOne}
-                      onChange={(e) => {
-                        handleKeyValue({
-                          id: value.id,
-                          keyType,
-                          inputType: "key",
-                          value: e.target.value,
-                        });
-                      }}
-                      required
-                    />
-                  </div>
+
+            <div className="col-lg-6 col-md-6 col-12">
+              {/* Single Form Element */}
+              <div className="">
+                <div className="form-group homec-form-input">
+                  <input
+                    type="text"
+                    value={value.key}
+                    name="key"
+                    placeholder={placeholderOne}
+                    onChange={(e) => {
+                      handleKeyValue({
+                        id: value.id,
+                        inputType: "key",
+                        value: e.target.value,
+                      });
+                    }}
+                    required
+                  />
                 </div>
+
               </div>
-        
+            </div>
+
           </div>
         </div>
       </div>
@@ -73,16 +73,15 @@ function KeyValueInputField({
               onChange={(e) =>
                 handleKeyValue({
                   id: value.id,
-                  keyType,
                   inputType: "value",
                   value: e.target.value,
                 })
               }
             />
             <button
-              className={`homec-form-add__button flex items-center justify-center ${"homec-form-add__button--delete"
+              className={`homec-form-add__button flex justify-center  ${btnType !== "add" && "homec-form-add__button--delete"
                 }`}
-              onClick={() => handleAddOrDelete(btnType, value.id, keyType)}
+              onClick={() => handleAddOrDelete(btnType, idx,)}
             >
               <img
                 src={

@@ -64,7 +64,8 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   const propertyCategoryValue = watch('category');
 
 
-  const NearestLocation: { [key: string]: string }[] = [{ "": "" },]
+  const [NearestLocation, setNearestLocation] = useState<{ [key: string]: string }[]>([{ "": "" },])
+
 
   const [property, setProperty] = useState<IaddProperty>({
     city: "",
@@ -156,24 +157,22 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   // };
   // handle Property Plan, additionalInformation, nearestLocation add new item or delete item
 
-  const handleAddOrDelete = (type: string, id: any, keyType: string | number) => {
-    // if (type === "add") {
-    //   const newId =
-    //     property[keyType].reduce(
-    //       (max, current) => (max < current.id ? current.id : max),
-    //       0
-    //     ) + 1;
-    //   setProperty({
-    //     ...property,
-    //     [keyType]: [{ id: newId, key: "", value: "" }, ...property[keyType]],
-    //   });
-    // } else {
-    //   setProperty({
-    //     ...property,
-    //     [keyType]: property[keyType].filter((item) => item.id != id),
-    //   });
-    // }
-  };
+  const handleAddOrDelete = (type: string, idx: any,) => {
+    if (type === "add") {
+      
+      if (Object.keys(NearestLocation[NearestLocation.length - 1])[0] !== "" && Object.values(NearestLocation[NearestLocation.length - 1])[0] !== "") {
+        setNearestLocation([...NearestLocation, { "": "" }]);
+      }
+      // if (NearestLocation[NearestLocation.length - 1].key !== "" && NearestLocation[NearestLocation.length - 1].value !== "") {
+      //   console.log(NearestLocation[NearestLocation.length - 1]);
+
+      //   setNearestLocation([...NearestLocation, { "": "" }]);
+      // }
+
+    } else {
+      setNearestLocation(NearestLocation.filter((_, index) => index !== idx));
+    };
+  }
   // handle Property Plan, additionalInformation, nearestLocation input filled
   const handleKeyValueChange = (id: any, keyType: any, inputType: any, value: any) => {
     // setProperty({
@@ -325,13 +324,11 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                   list={NearestLocation}
                   handleAddOrDelete={handleAddOrDelete}
                   handleChange={handleKeyValueChange}
-                  title="Nearest Location"
                   filedTitle="Nearest Location*"
                   filedTitleTwo="Distance(KM)*"
 
-                  placeholderOne={""}
-                  placeholderTwo={""}
-                  keyType="nearestLocation"
+                  placeholderOne={"Burj khalifa"}
+                  placeholderTwo={"15"}
                 />
 
               </div>
