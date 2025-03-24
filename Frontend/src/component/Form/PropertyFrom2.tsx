@@ -13,9 +13,10 @@ import IaddProperty from "@src/models/addProperty.type";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import CheckInput from "./CheckInput2";
+import CheckInput2 from "./CheckInput3";
 import SelectiveInputForm from "./SelectiveInputForm";
 import { categoriesType, ResidentialProperties, sub_categories } from "@src/types/categories.subcategories.types";
+import { additionalDetailsAttributes } from "@src/types/additionalDetails.types";
 
 
 const SubmitPropertySchema = z.object({
@@ -45,7 +46,7 @@ const SubmitPropertySchema = z.object({
   // videos: z.array(z.string({ required_error: "Video is required" })),
   listing_type: z.string({ required_error: "Listing type is required" }),
 
-  additionalDetails: z.record(z.string()),
+  additionalDetails: z.array(z.string()),
   nearestPlaces: z.record(z.string()),
 
 
@@ -152,24 +153,24 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   // };
   // handle Property Plan, additionalInformation, nearestLocation add new item or delete item
 
-  // const handleAddOrDelete = (type: string, id: any, keyType: string | number) => {
-  //   if (type === "add") {
-  //     const newId =
-  //       property[keyType].reduce(
-  //         (max, current) => (max < current.id ? current.id : max),
-  //         0
-  //       ) + 1;
-  //     setProperty({
-  //       ...property,
-  //       [keyType]: [{ id: newId, key: "", value: "" }, ...property[keyType]],
-  //     });
-  //   } else {
-  //     setProperty({
-  //       ...property,
-  //       [keyType]: property[keyType].filter((item) => item.id != id),
-  //     });
-  //   }
-  // };
+  const handleAddOrDelete = (type: string, id: any, keyType: string | number) => {
+    if (type === "add") {
+      const newId =
+        property[keyType].reduce(
+          (max, current) => (max < current.id ? current.id : max),
+          0
+        ) + 1;
+      setProperty({
+        ...property,
+        [keyType]: [{ id: newId, key: "", value: "" }, ...property[keyType]],
+      });
+    } else {
+      setProperty({
+        ...property,
+        [keyType]: property[keyType].filter((item) => item.id != id),
+      });
+    }
+  };
   // handle Property Plan, additionalInformation, nearestLocation input filled
   // const handleKeyValueChange = ({ id, keyType, inputType, value }: any) => {
   //   setProperty({
@@ -204,7 +205,10 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
       <div className="container">
         <div className="row">
           <div className="col-12">
+
             <form action="#" onSubmit={(e) => handleSubmit(e)}>
+
+
               <div className="homec-submit-form">
                 <h4 className="homec-submit-form__title">
                   Property Information
@@ -237,31 +241,6 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       fieldError={errors.category}
                     />
 
-
-                    {/* <PropertyTextInput
-                      title="Slug*"
-                      name="slug"
-                      value={property.slug}
-                      handleChange={handleTextChange}
-                      placeholder="Here is dmeo text"
-                    /> */}
-
-                    {/* <PropertyTextInput
-                      size="col-lg-6 col-md-6"
-                      title="Purpose*"
-                      name="purpose"
-                      value={property.purpose}
-                      handleChange={handleTextChange}
-                      placeholder="For Rent"
-                    /> */}
-                    {/* <PropertyTextInput
-                      size="col-lg-6 col-md-6"
-                      title="Rent Period*"
-                      name="rentPeriod"
-                      value={property.rentPeriod}
-                      handleChange={handleTextChange}
-                      placeholder="Monthly"
-                    /> */}
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Property Price"
@@ -270,6 +249,7 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       fieldError={errors.filterFields?.price}
                       type="number"
                     />
+
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Total Area (sq:Mt)*"
@@ -278,15 +258,8 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       placeholder="1200"
                       type="number"
                     />
-                    {/* <PropertyTextInput
-                      size="col-lg-6 col-md-6"
-                      title="Total Unit*"
-                      name="unit"
-                      value={property.unit}
-                      handleChange={handleTextChange}
-                      placeholder="1"
-                      type="number"
-                    /> */}
+
+
                     {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Total Rooms*"
@@ -308,106 +281,71 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       title="Description*"
                       fieldRegister={register('description')}
                       fieldError={errors.description}
-                    />  
+                    />
 
-                    {/* <PropertyTextInput
-                      size="col-lg-6 col-md-6"
-                      title="Total Garage*"
-                      name="garage"
-                      value={property.garage}
-                      handleChange={handleTextChange}
-                      placeholder="1"
-                      type="number"
-                    /> */}
-                    {/* <PropertyTextInput
-                      size="col-lg-6 col-md-6"
-                      title="Total Kitchen*"
-                      name="kitchen"
-                      value={property.kitchen}
-                      handleChange={handleTextChange}
-                      placeholder="1"
-                      type="number"
-                    /> */}
+
                   </div>
-                  {/* Single Form Element  */}
 
                 </div>
               </div>
-              {/* <ImageInput
-                uploadedImg={property.imgs}
-                handleDelete={handleImageDelete}
-                handleImage={handleImageInput}
-              /> */}
-              {/* <PropertyVideoInput
-                handleVideoInput={handleVideoChange}
-                video={property.videos}
-              /> */}
-              {/* <PropertyLocationInput
-                location={property.location}
-                handleLocation={handleLocationChange}
-              /> */}
-              {/* <PropertyAminitiesInput
-                aminities={property.additionalDetails}
-                handleChange={handleCheckBox}
-              /> */}
 
-              {/* <KeyValueInput
-                info={property.nearestLocation}
-                handleAddOrDelete={handleAddOrDelete}
-                handleChange={handleKeyValueChange}
-                title="Nearest Location"
-                filedTitle="Nearest Location*"
-                filedTitleTwo="Distance(KM)*"
-                placeholderOne=""
-                placeholderTwo="10km"
-                options={[
-                  {
-                    id: 1,
-                    name: "Dhaka",
-                  },
-                  {
-                    id: 2,
-                    name: "Chittagong",
-                  },
-                  {
-                    id: 2,
-                    name: "Khulna",
-                  },
-                ]}
-                keyType="nearestLocation"
-              /> */}
+              <div className="homec-submit-form mg-top-40">
+                <h4 className="homec-submit-form__title">
+                  Additional Details
+                </h4>
+                <div className="homec-submit-form__inner">
+                  <div className="row">
 
-              {/* <KeyValueInput
-                info={property.additionalInformation}
-                handleAddOrDelete={handleAddOrDelete}
-                handleChange={handleKeyValueChange}
-                title="Additional Information"
-                filedTitle="Key*"
-                filedTitleTwo="Value*"
-                placeholderTwo="Type Here"
-                placeholderOne="Type Here"
-                options={[
-                  {
-                    id: 1,
-                    name: "Dhaka",
-                  },
-                  {
-                    id: 2,
-                    name: "Chittagong",
-                  },
-                  {
-                    id: 2,
-                    name: "Khulna",
-                  },
-                ]}
-                keyType="additionalInformation"
-              /> */}
+                    <div className="flex  flex-wrap gap-12 w-full">
 
-              {/* <PropertyPlan
-                info={property.propertyPlan}
-                handleChange={handleKeyValueChange}
-                handleAddOrDelete={handleAddOrDelete}
-              /> */}
+                      {propertyCategoryValue && Object.keys(categoriesType).includes(propertyCategoryValue) &&
+                        additionalDetailsAttributes[propertyCategoryValue as keyof typeof additionalDetailsAttributes].map((item: string, index: number) => (
+                          <CheckInput2
+                            key={index}
+                            title={item}
+                            properties={additionalDetailsAttributes[propertyCategoryValue as keyof typeof additionalDetailsAttributes]}
+                            fieldRegister={register("additionalDetails")}
+                          />
+                        ))}
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div className="homec-submit-form mg-top-40">
+                <h4 className="homec-submit-form__title">Nearest Location</h4>
+                <KeyValueInput
+                  info={[
+                    { id: 1, key: "", value: "" },
+                    { id: 2, key: "", value: "" },
+                    { id: 3, key: "", value: "" },
+                  ]}
+                  handleAddOrDelete={handleAddOrDelete}
+                  handleChange={handleKeyValueChange}
+                  title="Nearest Location"
+                  filedTitle="Nearest Location*"
+                  filedTitleTwo="Distance(KM)*"
+                  options={[
+                    {
+                      id: 1,
+                      name: "Dhaka",
+                    },
+                    {
+                      id: 2,
+                      name: "Chittagong",
+                    },
+                    {
+                      id: 2,
+                      name: "Khulna",
+                    },
+                  ]} placeholderOne={""} placeholderTwo={""} keyType="nearestLocation"
+                />
+
+              </div>
 
               <div className="homec-submit-form mg-top-40">
                 <h4 className="homec-submit-form__title">
@@ -472,6 +410,8 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                   </div>
                 </div>
               </div>
+
+
               <div className="row">
                 <div className="col-12 d-flex justify-content-end mg-top-40">
                   <button type="submit" className="homec-btn homec-btn__second">

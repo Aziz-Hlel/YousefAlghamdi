@@ -24,7 +24,7 @@ const viewOfLandmark = "View of Landmark";
 
 
 
-export const additionalDetails: { [key in keyof typeof categoriesType]: string[] } = {
+export const additionalDetailsAttributes: { [key in keyof typeof categoriesType]: string[] } = {
     [ResidentialProperties]: [
         wifi,
         freeParking,

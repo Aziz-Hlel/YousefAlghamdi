@@ -14,13 +14,12 @@ interface IKeyValueInput {
   keyType: string;
 }
 
-function KeyValueInput({ info, handleAddOrDelete, handleChange, title, filedTitle, filedTitleTwo, placeholderOne, placeholderTwo, options, keyType, }: IKeyValueInput) {
+function  KeyValueInput({ info, handleAddOrDelete, handleChange, title, filedTitle, filedTitleTwo, placeholderOne, placeholderTwo, options, keyType, }: IKeyValueInput) {
   return (
-    <div className="homec-submit-form mg-top-40">
-      <h4 className="homec-submit-form__title">{title}</h4>
+
       <div className="homec-submit-form__inner">
-        {typeof info === "object" &&
-          info?.map((item: any, index: any) => (
+        {
+          info.map((item: any, index: any) => (
             <KeyValueInputField
               key={item.id}
               options={options ? options : false}
@@ -36,7 +35,7 @@ function KeyValueInput({ info, handleAddOrDelete, handleChange, title, filedTitl
             />
           ))}
       </div>
-    </div>
+
   );
 }
 

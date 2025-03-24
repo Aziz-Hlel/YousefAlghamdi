@@ -26,14 +26,6 @@ function KeyValueInputField({
                 options={options}
                 labelField="name"
                 valueField="id"
-                onChange={(values) =>
-                  handleKeyValue({
-                    id: value.id,
-                    keyType,
-                    inputType: "key",
-                    value: values.name,
-                  })
-                }
                 searchBy="name"
                 searchable={true}
                 handle={true}
@@ -92,8 +84,8 @@ function KeyValueInputField({
               }
             />
             <button
-              className={`homec-form-add__button ${
-                btnType !== "add" && "homec-form-add__button--delete"
+              className={`homec-form-add__button flex items-center justify-center ${
+              "homec-form-add__button--delete"
               }`}
               onClick={() => handleAddOrDelete(btnType, value.id, keyType)}
             >

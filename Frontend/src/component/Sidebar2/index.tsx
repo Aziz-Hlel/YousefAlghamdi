@@ -1,5 +1,5 @@
 import SelectiveInput from "../Form/SelectiveInput2";
-import CheckInput from "../Form/CheckInput2";
+import CheckInput2 from "../Form/CheckInput2";
 import RangeInput from "../Form/RangeInput2";
 import imarates from "../../types/imarates";
 import estateTypes from "../../types/estateType";
@@ -37,7 +37,7 @@ const SideBar22 = () => {
           formkey="type"
         />
 
-        <CheckInput
+        <CheckInput2
           title="For rent/sale"
           properties={[
             { key: "forRent", value: filterObject.forRent, name: "For rent" },
