@@ -7,12 +7,13 @@ import Blog from "../Blog";
 import DownloadApp from "../DownloadApp2";
 import Features2 from "../Features2";
 import Header from "../Header";
-import HomecHero from "../HomecHero2";
+import HomecHero from "../HomecHero2/";
 import LatestProperty from "../LatestProperty";
 import CitiesListing from "../CitiesListing2";
 import Preloader from "../Loader";
 import FaqSection from "../Faq/FaqSection";
 import LatestPropertyV2 from "../LatestProperty/LatestPropertyV2";
+
 
 function Home() {
   const [isLoading, setisLoadingg] = useState(true);

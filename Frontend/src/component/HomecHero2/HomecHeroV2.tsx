@@ -1,17 +1,17 @@
 import { useState } from "react";
 import FilterTabBtn from "../Filter/FilterTabBtn";
 import HomecFilter from "../Filter/HomecFilter";
+import logo from "/img/homeHeroV2.webp"
 
 function HomecHero() {
   const [filter, setFilter] = useState("Rent");
-  const handleFilter = (name) => {
+  const handleFilter = (name:any) => {
     setFilter(name);
   };
   return (
     <section
-      id="hero"
       className="homec-hero homec-bg-cover p-relative"
-      style={{ backgroundImage: "url('https://placehold.co/1920x950')" }}
+      style={{ backgroundImage: `url(${logo})` }}
     >
       <div className="homec-overlay"></div>
       <div className="container">
