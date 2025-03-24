@@ -15,32 +15,41 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 
 const SignUpSchema = z.object({
-  firstName: z.string()
+  firstName: z.string({ required_error: "First name is required" })
+    .min(1, { message: "First name is required" })  // Custom message for required field
     .min(2, { message: "First name must be at least 2 characters long" })
-    .max(25, { message: "First name must be at most 25 characters long" }),
+    .max(25, { message: "First name must be at most 25 characters long" })
+    .regex(/^[A-Za-z]+$/, { message: "First name can only contain letters" }),
 
-  lastName: z.string()
-    .min(2, { message: "Last name must be at least 2 characters long" })
-    .max(25, { message: "Last name must be at most 25 characters long" }),
 
-  phoneNumber: z.string()
-    .min(5, { message: "Phone number must be at least 5 characters long" })
+  lastName: z.string({ required_error: "Last name is required" })
+    .min(1, { message: "Last name must be at least 2 characters long" })
+    .max(25, { message: "Last name must be at most 25 characters long" })
+    .regex(/^[A-Za-z]+$/, { message: "Last name can only contain letters" }),
+
+
+  phoneNumber: z.string({ required_error: "Phone number is required" })
+    .min(1, { message: "Phone number must be at least 5 characters long" })
     .max(17, { message: "Phone number must be at most 17 characters long" }),
 
-  email: z.string().email({ message: "Invalid email address" }),
+  email: z.string({ required_error: "Email is required" })
+    .email({ message: "Invalid email address" }),
 
-  password: z.string()
+  password: z.string({ required_error: "Password is required" })
     .min(1, { message: "Password must be at least 6 characters long" })
     .max(25, { message: "Password must be at most 25 characters long" }),
 
-  confirmPassword: z.string()
+  confirmPassword: z.string({ required_error: "Confirm password is required" })
     .min(1, { message: "Confirm password must be at least 6 characters long" })
     .max(25, { message: "Confirm password must be at most 25 characters long" }),
 
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords do not match",
   path: ["confirmPassword"],
-});
+}
+
+
+);
 
 
 type SignUpSchemaType = z.infer<typeof SignUpSchema>
@@ -51,16 +60,20 @@ const SignUp = () => {
   const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
 
   const submitHandler: SubmitHandler<SignUpSchemaType> = async (data) => {
-
+    data.email = "sqd"
     const response = await Http.post(apiGateway.user.signUp, data);
 
-    response?.status === 200 ? navigate("/") : console.log(response);
+    response?.status === 200 && navigate("/");
     response?.status === 409 && setError("email", { message: "Email already exists" })
-    console.log(response?.status, typeof response?.status);
+    if (response && response?.status !== 200 && response?.status !== 409) {
+      console.log(response.data.errors);
 
-    if (response?.status !== 200 && response?.status !== 409) {
-      setError("root", { message: "no edge case for this one" })
+      Object.keys(response.data.errors).map((key: any) => {
+        setError(key, { message: response.data.errors[key] })
+      })
     }
+
+
 
   }
 
