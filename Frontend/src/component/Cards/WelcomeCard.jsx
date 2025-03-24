@@ -7,12 +7,7 @@ function WelcomeCard({ languages, links, image, brunches, builtHouse }) {
         className="ecom-wc__inner homec-bg-cover"
         style={{ backgroundImage: "url('img/welcome-bg.svg')" }}
       >
-        {/* Logo  */}
-        <div className="ecom-wc__logo">
-          <a href="/">
-            <img src="img/welcome-logo.png" alt="#" />
-          </a>
-        </div>
+
         <div className="ecom-wc__inside">
           {/* Middle Image  */}
           <div className="ecom-wc__middle">
