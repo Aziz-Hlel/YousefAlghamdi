@@ -1,6 +1,6 @@
 
 
-const localhostUrl = "http://localhost:50";
+const localhostUrl = "http://localhost:5000";
 const nginxUrl = "https://4c8f-41-225-176-145.ngrok-free.app";
 
 export const baseUrl = localhostUrl;

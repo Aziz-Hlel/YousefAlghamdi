@@ -16,7 +16,7 @@ export default defineConfig({
     tailwindcss()
   ],
   server: {
-    port: 70,
+    port: 3000,
     allowedHosts: ['http://localhost:5000', ngrokUrl],  // change it l8er
     // hmr: {
     //   clientPort: 443, // Force WebSocket to use ngrok's HTTPS port
