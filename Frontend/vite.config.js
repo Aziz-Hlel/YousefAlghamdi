@@ -17,8 +17,9 @@ export default defineConfig({
   ],
   server: {
     port: 3000,
-    allowedHosts: ['http://localhost:5000', ngrokUrl],  // change it l8er
-    // hmr: {
+    host: '0.0.0.0',  // Allows external access from AWS
+    strictPort: true, // Ensures the port is exactly 3000
+      // hmr: {
     //   clientPort: 443, // Force WebSocket to use ngrok's HTTPS port
     //   protocol: 'wss'  // Force secure WebSocket (wss)
     // }
