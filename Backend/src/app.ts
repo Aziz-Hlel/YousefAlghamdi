@@ -15,9 +15,11 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(cors({
-    origin: ['http://localhost:70','*', "https://4c8f-41-225-176-145.ngrok-free.app"], // Allow only your frontend origin
-    credentials: true,               // Allow cookies if needed
-
+    origin: (origin, callback) => {
+        callback(null, true); // Allows all origins dynamically
+    },
+    credentials: true,  // Necessary for cookies or authorization headers
+  
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     exposedHeaders: ['Content-Range', 'X-Total-Count', "Content-Type", "Authorization"],
 

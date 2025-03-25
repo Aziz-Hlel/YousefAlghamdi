@@ -60,7 +60,6 @@ const SignUp = () => {
   const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
 
   const submitHandler: SubmitHandler<SignUpSchemaType> = async (data) => {
-    data.email = "sqd"
     const response = await Http.post(apiGateway.user.signUp, data);
 
     response?.status === 200 && navigate("/");
