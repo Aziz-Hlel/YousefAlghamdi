@@ -17,7 +17,7 @@ export default defineConfig({
   ],
   server: {
     port: 70,
-    allowedHosts: ['http://localhost:50', ngrokUrl],  // change it l8er
+    allowedHosts: ['http://localhost:5000', ngrokUrl],  // change it l8er
     // hmr: {
     //   clientPort: 443, // Force WebSocket to use ngrok's HTTPS port
     //   protocol: 'wss'  // Force secure WebSocket (wss)
