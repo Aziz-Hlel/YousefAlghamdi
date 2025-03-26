@@ -3,11 +3,11 @@
 type KeyValueInputFieldProps = {
   title: string,
   titleTwo: string,
-  handleKeyValue: any,
-  value: any,
+  handleKeyValue: (idx: any, keyType: "placeName" | "distance", value: string) => void,
+  item: { placeName: string; distance: string; },
   placeholderOne: string,
   placeholderTwo: string,
-  handleAddOrDelete: any,
+  handleAddOrDelete: (type: string, idx: number) => void,
   btnType: string,
   idx: number
 }
@@ -16,7 +16,7 @@ function KeyValueInputField({
   title,
   titleTwo,
   handleKeyValue,
-  value,
+  item,
   placeholderOne,
   placeholderTwo,
   handleAddOrDelete,
@@ -38,16 +38,10 @@ function KeyValueInputField({
                 <div className="form-group homec-form-input">
                   <input
                     type="text"
-                    value={value.key}
-                    name="key"
+                    value={item.placeName}
+                    name="placeName"
                     placeholder={placeholderOne}
-                    onChange={(e) => {
-                      handleKeyValue({
-                        id: value.id,
-                        inputType: "key",
-                        value: e.target.value,
-                      });
-                    }}
+                    onChange={(e) => { handleKeyValue(idx, "placeName", e.target.value) }}
                     required
                   />
                 </div>
@@ -65,23 +59,16 @@ function KeyValueInputField({
           <div className="form-group homec-form-input homec-form-add">
             <input
               type="text"
-              value={value.value}
-              id={value.id}
-              name="value"
+              value={item.distance}
+              name="distance"
               placeholder={placeholderTwo}
               required
-              onChange={(e) =>
-                handleKeyValue({
-                  id: value.id,
-                  inputType: "value",
-                  value: e.target.value,
-                })
-              }
+              onChange={(e) => { handleKeyValue(idx, "distance", e.target.value) }}
             />
             <button
               className={`homec-form-add__button flex justify-center  ${btnType !== "add" && "homec-form-add__button--delete"
                 }`}
-              onClick={() => handleAddOrDelete(btnType, idx,)}
+              onClick={() => handleAddOrDelete(btnType, idx)}
             >
               <img
                 src={

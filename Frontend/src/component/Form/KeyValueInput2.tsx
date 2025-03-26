@@ -2,9 +2,9 @@ import ProtoTypes from "prop-types";
 import KeyValueInputField from "./KeyValueInputField2";
 
 interface IKeyValueInput {
-  list: { [key: string]: string }[];
-  handleAddOrDelete: Function;
-  handleChange: Function;
+  list: { placeName: string; distance: string; }[]
+  handleAddOrDelete: (type: string, idx: number) => void;
+  handleChange: (idx: any, keyType: "placeName" | "distance", value: string) => void;
   filedTitle: string;
   filedTitleTwo: string;
   placeholderOne: string;
@@ -22,12 +22,12 @@ function KeyValueInput({ list, handleAddOrDelete, handleChange, filedTitle, file
             title={filedTitle}
             titleTwo={filedTitleTwo}
             handleKeyValue={handleChange}
-            value={item}
+            item={item}
             placeholderOne={placeholderOne}
             placeholderTwo={placeholderTwo}
             handleAddOrDelete={handleAddOrDelete}
             btnType={index === list.length - 1 ? "add" : "delete"}
-            idx = {index}
+            idx={index}
           />
         ))}
     </div>

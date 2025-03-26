@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropertyTextInput from "./PropertyTextInput2";
 import PropertyTextArea from "./PropertyTextArea2";
 import ImageInput from "./ImageInput";
@@ -64,7 +64,7 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   const propertyCategoryValue = watch('category');
 
 
-  const [NearestLocation, setNearestLocation] = useState<{ [key: string]: string }[]>([{ "": "" },])
+  const [NearestLocation, setNearestLocation] = useState<{ placeName: string, distance: string }[]>([{ placeName: "", distance: "" }]);
 
 
   const [property, setProperty] = useState<IaddProperty>({
@@ -157,11 +157,11 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   // };
   // handle Property Plan, additionalInformation, nearestLocation add new item or delete item
 
-  const handleAddOrDelete = (type: string, idx: any,) => {
+  const handleAddOrDelete = (type: string, idx: number,) => {
     if (type === "add") {
-      
-      if (Object.keys(NearestLocation[NearestLocation.length - 1])[0] !== "" && Object.values(NearestLocation[NearestLocation.length - 1])[0] !== "") {
-        setNearestLocation([...NearestLocation, { "": "" }]);
+
+      if (NearestLocation[NearestLocation.length - 1].placeName !== "" && NearestLocation[NearestLocation.length - 1].distance !== "") {
+        setNearestLocation([...NearestLocation, { placeName: "", distance: "" }]);
       }
       // if (NearestLocation[NearestLocation.length - 1].key !== "" && NearestLocation[NearestLocation.length - 1].value !== "") {
       //   console.log(NearestLocation[NearestLocation.length - 1]);
@@ -172,9 +172,16 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
     } else {
       setNearestLocation(NearestLocation.filter((_, index) => index !== idx));
     };
+
   }
+  useEffect(() => {
+    console.log(NearestLocation);
+
+  }, [NearestLocation.length])
   // handle Property Plan, additionalInformation, nearestLocation input filled
-  const handleKeyValueChange = (id: any, keyType: any, inputType: any, value: any) => {
+  const handleKeyValueChange = (idx: any, keyType: "placeName" | "distance", value: string) => {
+
+    setNearestLocation(NearestLocation.map((item, index) => index === idx ? { ...item, [keyType]: value } : item));
     // setProperty({
     //   ...property,
     //   [keyType]: property[keyType].map((item) =>
