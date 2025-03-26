@@ -43,7 +43,7 @@ function KeyValueInputField({
                     name="placeName"
                     placeholder={placeholderOne}
                     onChange={(e) => { handleKeyValue(idx, "placeName", e.target.value) }}
-                    
+
                   />
                 </div>
 
@@ -59,11 +59,11 @@ function KeyValueInputField({
           <h4 className="homec-submit-form__heading">{titleTwo}</h4>
           <div className="form-group homec-form-input homec-form-add">
             <input
-              type="text"
+              type="number"
               value={item.distance}
               name="distance"
               placeholder={placeholderTwo}
-              
+
               onChange={(e) => { handleKeyValue(idx, "distance", e.target.value) }}
             />
             <button

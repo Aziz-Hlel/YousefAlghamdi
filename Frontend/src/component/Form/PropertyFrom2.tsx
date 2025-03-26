@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PropertyTextInput from "./PropertyTextInput2";
 import PropertyTextArea from "./PropertyTextArea2";
-import ImageInput from "./ImageInput";
+import ImageInput from "./ImageInput2";
 import PropertyVideoInput from "./PropertyVideoInput";
 import PropertyLocationInput from "./PropertyLocationInput";
 import PropertyAminitiesInput from "./PropertyAminitiesInput";
@@ -66,12 +66,12 @@ const SubmitPropertySchema = z.object({
     .max(200, { message: "Description must be at most 200 characters long" }),
 
 
-  additionalDetails: z.array(z.string()).optional(),
+  additionalDetails: z.array(z.string()).default([]),
   // imgs: z.array(z.string({ required_error: "Image is required" })),
   // videos: z.array(z.string({ required_error: "Video is required" })),
   // listing_type: z.string({ required_error: "Listing type is required" }),
 
-  nearestPlaces: z.array(z.object({ placeName: z.string(), distance: z.string() })).optional(),
+  nearestPlaces: z.array(z.object({ placeName: z.string(), distance: z.string() })).default([{ placeName: "", distance: "" }]),
 
 });
 
@@ -89,7 +89,7 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   const [NearestLocation, setNearestLocation] = useState<{ placeName: string, distance: string }[]>([{ placeName: "", distance: "" }]);
   const [additionalDetails, setAdditionalDetails] = useState<string[]>([])
 
-
+  const [imgs, setImgs] = useState();
 
   const setAdditionalDetailsWrapper = (event: any) => {
     event.target.checked ? setAdditionalDetails((prev) => [...prev, event.target.name]) : setAdditionalDetails((prev) => prev.filter((item) => item !== event.target.name));
@@ -196,7 +196,7 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
         setNearestLocation(NearestLocation.filter((_, index) => index !== idx));
     };
 
-     
+
   }
 
 
@@ -358,7 +358,19 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
 
               </div>
 
-
+              <ImageInput
+                uploadedImg={input.propertyImage}
+                handleDelete={handleImageDelete}
+                handleImage={handleImageInput}
+              />
+              <PropertyVideoInput
+                handleVideoInput={handleVideoChange}
+                video={input.video}
+              />
+              <PropertyLocationInput
+                location={input.location}
+                handleLocation={handleLocationChange}
+              />
               <div className="row">
                 <div className="col-12 d-flex justify-content-end mg-top-40">
                   <button onClickCapture={() => { console.log('t5ll') }} type="submit" className="homec-btn homec-btn__second">
