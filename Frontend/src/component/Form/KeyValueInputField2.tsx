@@ -12,6 +12,7 @@ type KeyValueInputFieldProps = {
   idx: number
 }
 
+
 function KeyValueInputField({
   title,
   titleTwo,
@@ -42,7 +43,7 @@ function KeyValueInputField({
                     name="placeName"
                     placeholder={placeholderOne}
                     onChange={(e) => { handleKeyValue(idx, "placeName", e.target.value) }}
-                    required
+                    
                   />
                 </div>
 
@@ -62,7 +63,7 @@ function KeyValueInputField({
               value={item.distance}
               name="distance"
               placeholder={placeholderTwo}
-              required
+              
               onChange={(e) => { handleKeyValue(idx, "distance", e.target.value) }}
             />
             <button

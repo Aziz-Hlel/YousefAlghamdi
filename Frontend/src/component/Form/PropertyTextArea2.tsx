@@ -1,8 +1,3 @@
-import ProtoTypes from "prop-types";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { useState } from "react";
-import { useEffect } from "react";
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 
 
@@ -26,6 +21,7 @@ const PropertyTextArea = ({ title, fieldRegister, fieldError }: IPropertyTextAre
         />
 
       </div>
+      <span className="text-red-600 p-2 inline-block">{fieldError?.message}</span>
     </div>
   );
 }

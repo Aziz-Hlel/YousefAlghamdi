@@ -88,7 +88,6 @@ const SignUp = () => {
 
   const navigate = useNavigate();
 
-
   if (isLoading) {
     component = <Preloader />;
   } else {

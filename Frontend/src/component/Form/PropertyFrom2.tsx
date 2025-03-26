@@ -11,7 +11,7 @@ import PropertyTextAreaV2 from "./PropertyTextAreaV2";
 import SwitcherBtn from "./SwitcherBtn";
 import IaddProperty from "@src/models/addProperty.type";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CheckInput2 from "./CheckInput3";
 import SelectiveInputForm from "./SelectiveInputForm";
@@ -24,7 +24,7 @@ const SubmitPropertySchema = z.object({
     .min(2, { message: "Title must be at least 2 characters long" })
     .max(25, { message: "Title must be at most 25 characters long" }),
 
-  category: z.string({ required_error: "Type is required" })
+  category: z.string({ required_error: "Category is required" })
     .min(2, { message: "Type must be at least 2 characters long" })
     .max(25, { message: "Type must be at most 25 characters long" }),
 
@@ -32,24 +32,46 @@ const SubmitPropertySchema = z.object({
 
 
   filterFields: z.object({
-    price: z.number({ required_error: "Price is required" }),
-    area: z.number({ required_error: "Area is required" }),
-    rooms: z.number({ required_error: "Rooms is required" }),
-    bathrooms: z.number({ required_error: "Bathrooms is required" }),
+
+    price: z.string({ required_error: "Price is required" })
+      .min(3, { message: "Price must be at least 100" })
+      .max(5, { message: "Price must be at most 100000" })
+      .regex(/^\d+$/, "Price must be a number")
+      .transform(Number),
+
+    area: z.string({ required_error: "Area is required" })
+      .min(1, { message: "Area must be at least 0" })
+      .max(5, { message: "Area must be at most 100000" })
+      .regex(/^\d+$/, "Price must be a number")
+      .transform(Number),
+
+    rooms: z.string({ required_error: "Rooms is required" })
+      .min(1, { message: "Rooms must be at least 0" })
+      .max(2, { message: "Rooms must be at most 99" })
+      .regex(/^\d+$/, "Price must be a number")
+      .optional()
+      .transform(Number),
+
+    bathrooms: z.string({ required_error: "Bathrooms is required" })
+      .min(1, { message: "Bathrooms must be at least 0" })
+      .max(2, { message: "Bathrooms must be at most 99" })
+      .regex(/^\d+$/, "Price must be a number")
+      .optional()
+      .transform(Number),
+
   }),
 
   description: z.string({ required_error: "Description is required" })
     .min(2, { message: "Description must be at least 2 characters long" })
     .max(200, { message: "Description must be at most 200 characters long" }),
 
+
+  additionalDetails: z.array(z.string()).optional(),
   // imgs: z.array(z.string({ required_error: "Image is required" })),
   // videos: z.array(z.string({ required_error: "Video is required" })),
-  listing_type: z.string({ required_error: "Listing type is required" }),
+  // listing_type: z.string({ required_error: "Listing type is required" }),
 
-  additionalDetails: z.array(z.string()),
-  nearestPlaces: z.record(z.string()),
-
-
+  nearestPlaces: z.array(z.object({ placeName: z.string(), distance: z.string() })).optional(),
 
 });
 
@@ -58,13 +80,21 @@ type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
 const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
 
-  const { register, watch, handleSubmit: handleSubmit2, formState: { errors, isSubmitting }, setError } = useForm<SubmitPropertyType>({ resolver: zodResolver(SubmitPropertySchema) });
+  const { register, watch, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<SubmitPropertyType>({ resolver: zodResolver(SubmitPropertySchema) });
 
 
   const propertyCategoryValue = watch('category');
 
 
   const [NearestLocation, setNearestLocation] = useState<{ placeName: string, distance: string }[]>([{ placeName: "", distance: "" }]);
+  const [additionalDetails, setAdditionalDetails] = useState<string[]>([])
+
+
+
+  const setAdditionalDetailsWrapper = (event: any) => {
+    event.target.checked ? setAdditionalDetails((prev) => [...prev, event.target.name]) : setAdditionalDetails((prev) => prev.filter((item) => item !== event.target.name));
+
+  };
 
 
   const [property, setProperty] = useState<IaddProperty>({
@@ -160,20 +190,16 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   const handleAddOrDelete = (type: string, idx: number,) => {
     if (type === "add") {
 
-      if (NearestLocation[NearestLocation.length - 1].placeName !== "" && NearestLocation[NearestLocation.length - 1].distance !== "") {
+      if (NearestLocation[NearestLocation.length - 1].placeName !== "" && NearestLocation[NearestLocation.length - 1].distance !== "")
         setNearestLocation([...NearestLocation, { placeName: "", distance: "" }]);
-      }
-      // if (NearestLocation[NearestLocation.length - 1].key !== "" && NearestLocation[NearestLocation.length - 1].value !== "") {
-      //   console.log(NearestLocation[NearestLocation.length - 1]);
-
-      //   setNearestLocation([...NearestLocation, { "": "" }]);
-      // }
-
-    } else {
-      setNearestLocation(NearestLocation.filter((_, index) => index !== idx));
+      else
+        setNearestLocation(NearestLocation.filter((_, index) => index !== idx));
     };
 
+     
   }
+
+
   useEffect(() => {
     console.log(NearestLocation);
 
@@ -182,32 +208,27 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   const handleKeyValueChange = (idx: any, keyType: "placeName" | "distance", value: string) => {
 
     setNearestLocation(NearestLocation.map((item, index) => index === idx ? { ...item, [keyType]: value } : item));
-    // setProperty({
-    //   ...property,
-    //   [keyType]: property[keyType].map((item) =>
-    //     item.id === id ? { ...item, [inputType]: value } : item
-    //   ),
-    // });
-  };
-  //handle SEO Sector input
-  // const handleSEO = (e, value) => {
-  //   if (typeof value === "undefined") {
-  //     setProperty({
-  //       ...property,
-  //       seoInfo: { ...property.seoInfo, [e.target.name]: e.target.value },
-  //     });
-  //   } else {
-  //     setProperty({
-  //       ...property,
-  //       seoInfo: { ...property.seoInfo, [e]: value },
-  //     });
-  //   }
-  // };
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log(property);
   };
+
+  useEffect(() => {
+    console.log(errors);
+
+  }, [errors])
+
+
+  const handleFormSubmit: SubmitHandler<SubmitPropertyType> = (data) => {
+    console.log('t5l form validée');
+
+    data.additionalDetails = additionalDetails;
+
+    if (NearestLocation.length === 1 && NearestLocation[0].placeName === "" && NearestLocation[0].distance === "") data.nearestPlaces = [];
+    else data.nearestPlaces = NearestLocation;
+
+    console.log(data);
+
+  };
+
 
   return (
     <section className="pd-top-80 pd-btm-80">
@@ -215,7 +236,9 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
         <div className="row">
           <div className="col-12">
 
-            <form action="#" onSubmit={(e) => handleSubmit(e)}>
+            <form
+              method="post"
+              onSubmit={handleSubmit(handleFormSubmit)}>
 
 
               <div className="homec-submit-form">
@@ -247,7 +270,7 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       title={"Sub Category"}
                       options={propertyCategoryValue && Object.keys(categoriesType).includes(propertyCategoryValue) ? sub_categories[propertyCategoryValue as keyof typeof sub_categories] : []}
                       fieldRegister={register('sub_category')}
-                      fieldError={errors.category}
+                      fieldError={errors.sub_category}
                     />
 
                     <PropertyTextInput
@@ -256,7 +279,6 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       placeholder="24345"
                       fieldRegister={register('filterFields.price')}
                       fieldError={errors.filterFields?.price}
-                      type="number"
                     />
 
                     <PropertyTextInput
@@ -265,9 +287,7 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       fieldRegister={register('filterFields.area')}
                       fieldError={errors.filterFields?.area}
                       placeholder="1200"
-                      type="number"
                     />
-
 
                     {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
                       size="col-lg-6 col-md-6"
@@ -275,9 +295,8 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       fieldRegister={register('filterFields.rooms')}
                       fieldError={errors.filterFields?.rooms}
                       placeholder="2"
-                      type="number"
-
                     />}
+
                     {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
                       size="col-lg-6 col-md-6"
                       title="Total Bathroom*"
@@ -291,7 +310,6 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                       fieldRegister={register('description')}
                       fieldError={errors.description}
                     />
-
 
                   </div>
 
@@ -312,8 +330,8 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                           <CheckInput2
                             key={index}
                             title={item}
-                            properties={additionalDetailsAttributes[propertyCategoryValue as keyof typeof additionalDetailsAttributes]}
-                            fieldRegister={register("additionalDetails")}
+                            setAdditionalDetails={setAdditionalDetailsWrapper}
+                            additionalDetails={additionalDetails}
                           />
                         ))}
 
@@ -340,74 +358,10 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
 
               </div>
 
-              <div className="homec-submit-form mg-top-40">
-                <h4 className="homec-submit-form__title">
-                  SEO Information and Others
-                </h4>
-                <div className="homec-submit-form__inner">
-                  <div className="row">
-                    <div className="col-lg-6 col-md-6 col-12">
-                      {/* Single Form Element   */}
-                      {/* <PropertyTextInput
-                        title="SEO Title*"
-                        placeholder="Type Here"
-                        name="title"
-                        value={property.seoInfo.title}
-                        handleChange={handleSEO}
-                      /> */}
-                      {/* Single Form Element   */}
-                      {/* <PropertyTextAreaV2
-                        title="SEO Description"
-                        value={property.seoInfo.desc}
-                        handleChange={handleSEO}
-                        name="desc"
-                        placeHolder="Type Here"
-                        sizeFull={true}
-                      /> */}
-                    </div>
-                    <div className="col-lg-6 col-md-6 col-12">
-                      <div className="homeco-switcher-group mg-top-20">
-                        <div className="homeco-switcher-group__single">
-                          {/* Single Switcher  */}
-                          {/* <SwitcherBtn
-                            title="Status"
-                            name="status"
-                            isChecked={property.seoInfo.status}
-                            handleChange={handleSEO}
-                          /> */}
-                          {/* <SwitcherBtn
-                            title="Urgent Property"
-                            isChecked={property.seoInfo.urgentProperty}
-                            name="urgentProperty"
-                            handleChange={handleSEO}
-                          /> */}
-
-                          {/* End Single Switcher  */}
-                        </div>
-                        <div className="homeco-switcher-group__single">
-                          {/* <SwitcherBtn
-                            title="Featured"
-                            name="featured"
-                            isChecked={property.seoInfo.featured}
-                            handleChange={handleSEO}
-                          /> */}
-                          {/* <SwitcherBtn
-                            title="Top Property"
-                            name="topProperty"
-                            isChecked={property.seoInfo.topProperty}
-                            handleChange={handleSEO}
-                          /> */}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
 
               <div className="row">
                 <div className="col-12 d-flex justify-content-end mg-top-40">
-                  <button type="submit" className="homec-btn homec-btn__second">
+                  <button onClickCapture={() => { console.log('t5ll') }} type="submit" className="homec-btn homec-btn__second">
                     <span>Submit Property Now</span>
                   </button>
                 </div>
@@ -416,7 +370,7 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 }
 
