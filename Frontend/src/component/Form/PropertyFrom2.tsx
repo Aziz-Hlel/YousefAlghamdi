@@ -78,6 +78,8 @@ const SubmitPropertySchema = z.object({
 type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
 
+type imageArray = (File|null)[];
+
 const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
 
   const { register, watch, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<SubmitPropertyType>({ resolver: zodResolver(SubmitPropertySchema) });
@@ -89,7 +91,8 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   const [NearestLocation, setNearestLocation] = useState<{ placeName: string, distance: string }[]>([{ placeName: "", distance: "" }]);
   const [additionalDetails, setAdditionalDetails] = useState<string[]>([])
 
-  const [imgs, setImgs] = useState();
+  const initialImgArray: imageArray = [null,null,null];
+  const [imgs, setImgs] = useState<imageArray>(initialImgArray);
 
   const setAdditionalDetailsWrapper = (event: any) => {
     event.target.checked ? setAdditionalDetails((prev) => [...prev, event.target.name]) : setAdditionalDetails((prev) => prev.filter((item) => item !== event.target.name));
@@ -141,12 +144,12 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
 
   // delete property image
 
-  // const handleImageDelete = (id: any) => {
-  //   setProperty({
-  //     ...property,
-  //     propertyImage: property.propertyImage.filter((image) => image.id !== id),
-  //   });
-  // };
+  const handleImageDelete = (id: any) => {
+    // setProperty({
+    //   ...property,
+    //   propertyImage: property.propertyImage.filter((image) => image.id !== id),
+    // });
+  };
 
   // handle property video input sector
 
@@ -169,13 +172,13 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
 
   // // handle property image input sector
 
-  // const handleImageInput = (img: any) => {
-  //   const updatedImg = [...property.propertyImage];
-  //   updatedImg.push({
-  //     id: updatedImg.reduce((total, current) => total > current.id, 0) + 1,
-  //     img,
-  //   });
-  // };
+  const handleImageInput = (img: any) => {
+    //   const updatedImg = [...property.propertyImage];
+    //   updatedImg.push({
+    //     id: updatedImg.reduce((total, current) => total > current.id, 0) + 1,
+    //     img,
+    //   });
+  };
 
   // handle aminities
 
@@ -359,18 +362,18 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
               </div>
 
               <ImageInput
-                uploadedImg={input.propertyImage}
+                uploadedImg={imgs}
                 handleDelete={handleImageDelete}
                 handleImage={handleImageInput}
               />
-              <PropertyVideoInput
+              {/* <PropertyVideoInput
                 handleVideoInput={handleVideoChange}
                 video={input.video}
               />
               <PropertyLocationInput
                 location={input.location}
                 handleLocation={handleLocationChange}
-              />
+              /> */}
               <div className="row">
                 <div className="col-12 d-flex justify-content-end mg-top-40">
                   <button onClickCapture={() => { console.log('t5ll') }} type="submit" className="homec-btn homec-btn__second">
