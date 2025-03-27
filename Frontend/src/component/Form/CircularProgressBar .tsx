@@ -6,7 +6,7 @@ const CircularProgressBar = ({ progress }: { progress: number }) => {
     const strokeDashoffset = circumference - ((100-progress) / 100) * circumference;
 
     return (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center z-50">
             <svg
                 className="w-5 h-5 -rotate-90"
                 viewBox="0 0 100 100"

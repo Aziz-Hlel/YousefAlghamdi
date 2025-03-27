@@ -2,15 +2,16 @@ import ProtoTypes from "prop-types";
 import UploadedImageCard from "../Cards/UploadedImageCard2";
 import CircularProgressBar from "./CircularProgressBar ";
 import UploadThumbnailCard from "./UploadThumbnailCard";
+import { FileWithPath } from "react-dropzone";
 
 
 type ImageInputProps = {
-  uploadedImg: (File | null)[];
+  imgs: (File | null)[];
   handleDelete: Function;
-  handleImage: Function;
+  handleImage: (uploadedImg: FileWithPath, idx: number) => void;
 };
 
-function ImageInput({ uploadedImg, handleDelete, handleImage }: ImageInputProps) {
+function ImageInput({ imgs, handleDelete, handleImage }: ImageInputProps) {
 
 
 
@@ -20,7 +21,7 @@ function ImageInput({ uploadedImg, handleDelete, handleImage }: ImageInputProps)
       <div className="homec-submit-form__inner">
         <div className="row">
 
-          <UploadThumbnailCard handleImage={handleImage} img={undefined} handleDelete={undefined} />
+          <UploadThumbnailCard handleImage={handleImage} img={imgs[0]} handleDelete={() => { }} />
 
 
           <div className="col-lg-6 col-md-6 col-12">
@@ -40,13 +41,14 @@ function ImageInput({ uploadedImg, handleDelete, handleImage }: ImageInputProps)
 
               <div className="homec-upload-images">
                 <div className="row">
-                  {uploadedImg.map((image, index) => (
+                  {imgs.map((image, index) => (
+                    index !== 0 &&
                     <UploadedImageCard
                       key={index + 1}
                       img={image}
                       handleDelete={handleDelete}
                       handleImage={handleImage}
-                      idx={index+1}
+                      idx={index }
                     />
                   ))}
                 </div>

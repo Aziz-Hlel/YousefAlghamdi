@@ -17,6 +17,7 @@ import CheckInput2 from "./CheckInput3";
 import SelectiveInputForm from "./SelectiveInputForm";
 import { categoriesType, ResidentialProperties, sub_categories } from "@src/types/categories.subcategories.types";
 import { additionalDetailsAttributes } from "@src/types/additionalDetails.types";
+import { FileWithPath } from "react-dropzone";
 
 
 const SubmitPropertySchema = z.object({
@@ -78,7 +79,7 @@ const SubmitPropertySchema = z.object({
 type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
 
-type imageArray = (File | null)[];
+type imageArray = (FileWithPath | null)[];
 
 const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
 
@@ -91,8 +92,9 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   const [NearestLocation, setNearestLocation] = useState<{ placeName: string, distance: string }[]>([{ placeName: "", distance: "" }]);
   const [additionalDetails, setAdditionalDetails] = useState<string[]>([])
 
-  const initialImgArray: imageArray = [null, null, null];
+  const initialImgArray: imageArray = [null, null, null, null];
   const [imgs, setImgs] = useState<imageArray>(initialImgArray);
+
 
   const setAdditionalDetailsWrapper = (event: any) => {
     event.target.checked ? setAdditionalDetails((prev) => [...prev, event.target.name]) : setAdditionalDetails((prev) => prev.filter((item) => item !== event.target.name));
@@ -144,11 +146,8 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
 
   // delete property image
 
-  const handleImageDelete = (id: any) => {
-    // setProperty({
-    //   ...property,
-    //   propertyImage: property.propertyImage.filter((image) => image.id !== id),
-    // });
+  const handleImageDelete = (idx: number) => {
+    setImgs((prev) => prev.map((_, index) => index === idx ? null : _));
   };
 
   // handle property video input sector
@@ -172,14 +171,23 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
 
   // // handle property image input sector
 
-  const handleImageInput = (img: any) => {
-    //   const updatedImg = [...property.propertyImage];
-    //   updatedImg.push({
-    //     id: updatedImg.reduce((total, current) => total > current.id, 0) + 1,
-    //     img,
-    //   });
-  };
+  const handleImageInput = (uploadedImg: FileWithPath, idx: number) => {
+    console.log("uploadedImg", uploadedImg);
 
+    const imgWithPreview = Object.assign(uploadedImg, {
+      preview: URL.createObjectURL(uploadedImg)
+    });
+
+    setImgs((prev) => {
+      const newArray = [...prev];
+      newArray[idx] = imgWithPreview;
+      return newArray;
+    });
+
+  };
+  useEffect(() => {
+    console.log(imgs);
+  }, [imgs])
   // handle aminities
 
   // const handleCheckBox = (e: any) => {
@@ -362,15 +370,12 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
               </div>
 
               <ImageInput
-                uploadedImg={imgs}
+                imgs={imgs}
                 handleDelete={handleImageDelete}
                 handleImage={handleImageInput}
               />
-              {/* <PropertyVideoInput
-                handleVideoInput={handleVideoChange}
-                video={input.video}
-              />
-              <PropertyLocationInput
+            
+            {/*   <PropertyLocationInput
                 location={input.location}
                 handleLocation={handleLocationChange}
               /> */}
