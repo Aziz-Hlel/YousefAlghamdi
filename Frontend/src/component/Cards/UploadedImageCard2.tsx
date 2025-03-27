@@ -37,7 +37,7 @@ const progress = 80;
       <div className="homec-upload-images__single bg-pink-200 outline-2 outline-black h-32 "
 
       >
-        <div className="outline-2 outline-blue-600 w-full h-full flex  justify-center  items-center p-15 bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-cover  bg-no-repeat  mt-7
+        <div className="outline-2 outline-blue-600 w-full h-full flex  justify-center  items-center p-15 bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-contain  bg-no-repeat  mt-7
                 "
           style={{
             backgroundImage: (img ? `url(${URL.createObjectURL(img)})` : "url('https://placehold.co/620x1720')"),
