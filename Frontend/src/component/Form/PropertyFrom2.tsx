@@ -78,7 +78,7 @@ const SubmitPropertySchema = z.object({
 type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
 
-type imageArray = (File|null)[];
+type imageArray = (File | null)[];
 
 const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
 
@@ -91,7 +91,7 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   const [NearestLocation, setNearestLocation] = useState<{ placeName: string, distance: string }[]>([{ placeName: "", distance: "" }]);
   const [additionalDetails, setAdditionalDetails] = useState<string[]>([])
 
-  const initialImgArray: imageArray = [null,null,null];
+  const initialImgArray: imageArray = [null, null, null];
   const [imgs, setImgs] = useState<imageArray>(initialImgArray);
 
   const setAdditionalDetailsWrapper = (event: any) => {
@@ -195,9 +195,9 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
 
       if (NearestLocation[NearestLocation.length - 1].placeName !== "" && NearestLocation[NearestLocation.length - 1].distance !== "")
         setNearestLocation([...NearestLocation, { placeName: "", distance: "" }]);
-      else
-        setNearestLocation(NearestLocation.filter((_, index) => index !== idx));
-    };
+    }
+    else
+      setNearestLocation(NearestLocation.filter((_, index) => index !== idx));
 
 
   }
@@ -217,7 +217,7 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   useEffect(() => {
     console.log(errors);
 
-  }, [errors])
+  }, [errors]);
 
 
   const handleFormSubmit: SubmitHandler<SubmitPropertyType> = (data) => {

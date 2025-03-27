@@ -24,6 +24,7 @@ function KeyValueInputField({
   btnType,
   idx
 }: KeyValueInputFieldProps) {
+  console.log("btnType", btnType);
 
   return (
     <div className="row">

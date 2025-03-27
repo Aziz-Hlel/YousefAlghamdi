@@ -1,5 +1,7 @@
 import ProtoTypes from "prop-types";
 import UploadedImageCard from "../Cards/UploadedImageCard2";
+import CircularProgressBar from "./CircularProgressBar ";
+import UploadThumbnailCard from "./UploadThumbnailCard";
 
 
 type ImageInputProps = {
@@ -9,46 +11,18 @@ type ImageInputProps = {
 };
 
 function ImageInput({ uploadedImg, handleDelete, handleImage }: ImageInputProps) {
+
+
+
   return (
     <div className="homec-submit-form mg-top-40">
       <h4 className="homec-submit-form__title">Property Image</h4>
       <div className="homec-submit-form__inner">
         <div className="row">
-        <div className="col-lg-6 col-md-6 col-12">
-            <div className="mg-top-20">
-              <p className="homec-img-video-label mg-btm-10">
-                Thumbnail Image* <span>(Max. limit 10 & Max. Size 10MB)</span>
-              </p>
-              {/* Image Input   */}
-              <div
-                className="homec-image-video-upload homec-border homec-bg-cover  mg-top-20"
-                style={{
-                  backgroundImage: "url('https://placehold.co/540x205')",
-                }}
-              >
-                <div className="homec-overlay homec-overlay--img-video"></div>
-                <input
-                  type="file"
-                  className="btn-check"
-                  name="options"
-                  id="input-video1"
-                  onChange={(e) => handleImage(e)}
-                />
-                <label
-                  className="homec-image-video-upload__label"
-                  htmlFor="input-video1"
-                >
-                  <img src="img/upload-file-2.svg" alt="#" />
-                  <span className="homec-image-video-upload__title homec-image-video-upload__title--v2">
-                    Drag & Drop or{" "}
-                    <span className="homec-primary-color">Choose File</span> to
-                    upload{" "}
-                  </span>
-                </label>
-              </div>
-            </div>
-          </div>
-          
+
+          <UploadThumbnailCard handleImage={handleImage} img={undefined} handleDelete={undefined} />
+
+
           <div className="col-lg-6 col-md-6 col-12">
             <div className="mg-top-20">
               <div className="homec-submit-form__upload mg-btm-10">
@@ -62,20 +36,24 @@ function ImageInput({ uploadedImg, handleDelete, handleImage }: ImageInputProps)
                 </div>
               </div>
               {/* Image Input   */}
+
+
               <div className="homec-upload-images">
                 <div className="row">
                   {uploadedImg.map((image, index) => (
                     <UploadedImageCard
-                      key={index + "img"}
+                      key={index + 1}
                       img={image}
                       handleDelete={handleDelete}
+                      handleImage={handleImage}
+                      idx={index+1}
                     />
                   ))}
                 </div>
               </div>
             </div>
           </div>
-      
+
         </div>
       </div>
     </div>
