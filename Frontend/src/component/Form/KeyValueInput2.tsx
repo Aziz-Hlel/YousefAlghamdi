@@ -3,7 +3,7 @@ import KeyValueInputField from "./KeyValueInputField2";
 
 interface IKeyValueInput {
   list: { placeName: string; distance: string; }[]
-  handleAddOrDelete: (type: string, idx: number) => void;
+  handleAddOrDelete: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, type: string, idx: number) => void;
   handleChange: (idx: any, keyType: "placeName" | "distance", value: string) => void;
   filedTitle: string;
   filedTitleTwo: string;

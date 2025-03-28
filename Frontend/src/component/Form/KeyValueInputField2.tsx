@@ -7,7 +7,7 @@ type KeyValueInputFieldProps = {
   item: { placeName: string; distance: string; },
   placeholderOne: string,
   placeholderTwo: string,
-  handleAddOrDelete: (type: string, idx: number) => void,
+  handleAddOrDelete: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, type: string, idx: number) => void,
   btnType: string,
   idx: number
 }
@@ -70,13 +70,13 @@ function KeyValueInputField({
             <button
               className={`homec-form-add__button flex justify-center  ${btnType !== "add" && "homec-form-add__button--delete"
                 }`}
-              onClick={() => handleAddOrDelete(btnType, idx)}
+              onClick={(e) => handleAddOrDelete(e, btnType, idx)}
             >
               <img
                 src={
                   btnType === "add"
-                    ? "img/plus-icon.svg"
-                    : "img/delete-icon.svg"
+                    ? "/img/plus-icon.svg"
+                    : "/img/delete-icon.svg"
                 }
               />
             </button>

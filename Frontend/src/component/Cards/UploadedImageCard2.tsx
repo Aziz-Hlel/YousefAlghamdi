@@ -1,4 +1,3 @@
-import ProtoTypes from "prop-types";
 import CircularProgressBar from "../Form/CircularProgressBar ";
 import { useEffect } from "react";
 import { useDropzone } from 'react-dropzone';
@@ -51,7 +50,7 @@ const progress = 80;
           className="homec-upload-images__single--edit flex justify-center group overflow-hidden"
           onClick={() => handleDelete(idx)}
         >
-          <img src="img/delete-icon.svg" className=" group-hover:scale-110" />
+          <img src="/img/delete-icon.svg" className=" group-hover:scale-110" />
         </button>}
       </div>
     </div>

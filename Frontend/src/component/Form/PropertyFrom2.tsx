@@ -18,6 +18,8 @@ import SelectiveInputForm from "./SelectiveInputForm";
 import { categoriesType, ResidentialProperties, sub_categories } from "@src/types/categories.subcategories.types";
 import { additionalDetailsAttributes } from "@src/types/additionalDetails.types";
 import { FileWithPath } from "react-dropzone";
+import { useParams } from "react-router-dom";
+import { listing_typesValues } from "@src/types/listing_type.types";
 
 
 const SubmitPropertySchema = z.object({
@@ -81,9 +83,11 @@ type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
 type imageArray = (FileWithPath | null)[];
 
-const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
+const PropertyFrom = () => {
 
   const { register, watch, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<SubmitPropertyType>({ resolver: zodResolver(SubmitPropertySchema) });
+
+  const { whatFor } = useParams();
 
 
   const propertyCategoryValue = watch('category');
@@ -102,47 +106,6 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   };
 
 
-  const [property, setProperty] = useState<IaddProperty>({
-    city: "",
-    filterFields: {
-      area: 0,
-      forRent: whatFor === "forRent",
-      forSale: whatFor === "forSale",
-      price: 0,
-      rooms: 0,
-      bathrooms: 0,
-
-    },
-    productTier: "",
-    title: "",
-    type: "",
-    description: "",
-
-    imgs: [
-      "https://placehold.co/165x205",
-      "https://placehold.co/165x205",
-      "https://placehold.co/165x205",
-    ],
-    videos: [],
-    // location: { city: "", address: "", addressDetails: "", googleMap: "" }, mouch t3ml hakka 5ir ?
-
-    nearestPlaces: {},
-
-    additionalDetails: {},
-
-
-  });
-
-  // handle property information
-
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProperty({ ...property, [e.target.name]: e.target.value });
-  };
-
-  // handle editable textarea
-  const handleTextArea = (e: any) => {
-    setProperty({ ...property, [e.name]: e.value });
-  };
 
   // delete property image
 
@@ -198,7 +161,8 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
   // };
   // handle Property Plan, additionalInformation, nearestLocation add new item or delete item
 
-  const handleAddOrDelete = (type: string, idx: number,) => {
+  const handleAddOrDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, type: string, idx: number,) => {
+    e.preventDefault();
     if (type === "add") {
 
       if (NearestLocation[NearestLocation.length - 1].placeName !== "" && NearestLocation[NearestLocation.length - 1].distance !== "")
@@ -240,6 +204,7 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
 
   };
 
+  if (whatFor && !listing_typesValues.includes(whatFor)) return <> </>
 
   return (
     <section className="pd-top-80 pd-btm-80">
@@ -374,8 +339,8 @@ const PropertyFrom = ({ whatFor }: { whatFor: string }) => {
                 handleDelete={handleImageDelete}
                 handleImage={handleImageInput}
               />
-            
-            {/*   <PropertyLocationInput
+
+              {/*   <PropertyLocationInput
                 location={input.location}
                 handleLocation={handleLocationChange}
               /> */}

@@ -3,10 +3,11 @@ import Footer from "../Footer";
 import DownloadApp from "../DownloadApp";
 import Breadcrumbs from "../Breadcrumbs";
 import HistoryLinks from "../Breadcrumbs/HistoryLinks";
-import PropertyAddCard from "../Cards/PropertyAddCard";
+import PropertyAddCard from "../Cards/PropertyAddCard2";
 import { useEffect, useState } from "react";
 import Preloader from "../Loader";
 import GoTopBtn from "../Button/GoTopBtn";
+import { listing_types } from "@src/types/listing_type.types";
 
 const AddProperty = () => {
   const [isLoading, setisLoadingg] = useState(true);
@@ -36,14 +37,26 @@ const AddProperty = () => {
             <div className="row">
 
               <PropertyAddCard
-                img="img/property-rent.png"
+                img="/img/property-rent.png"
                 why="Rent"
-                link="/submit-property" btn={undefined} />
+                link={"/submit-property/" + listing_types.rent} />
 
               <PropertyAddCard
-                img="img/property-sale.png"
+                img="/img/property-sale.png"
                 why="Sale"
-                link="/submit-property"
+                link={"/submit-property/" + listing_types.sale}
+                btn="second" />
+
+              <PropertyAddCard
+                img="/img/property-sale.png"
+                why={listing_types.commercialRent}
+                link={"/submit-property" + listing_types.commercialRent}
+               />
+
+              <PropertyAddCard
+                img="/img/property-sale.png"
+                why="Sale"
+                link={"/submit-property/" + listing_types.commercialSale}
                 btn="second" />
 
             </div>

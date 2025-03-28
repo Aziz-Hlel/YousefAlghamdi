@@ -54,7 +54,7 @@ const App2 = () => {
         },
         {
             path: "/submit-property",
-            element: <SubmitProperty whatFor="sale" />,
+            element: <SubmitProperty />,
         },
         {
             path: "/dashboard",
@@ -119,8 +119,7 @@ const App2 = () => {
                         <Route path="/edit-property" element={<EditProperty />} />
                         <Route path="/add-property" element={<AddProperty />} />
 
-                        <Route path="/submit-property" element={<SubmitProperty whatFor="forRent" />} />
-                        <Route path="/submit-property" element={<SubmitProperty whatFor="forsale" />} />
+                        <Route path="/submit-property/:whatFor" element={<SubmitProperty />} />
 
                         <Route path="/dashboard" element={<Dashboard />} />  {/* hedha dhhrli mehichi footer */}
                         <Route path="/agent-detail" element={<AgentDetail />} />

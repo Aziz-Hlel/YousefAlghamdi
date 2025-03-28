@@ -45,7 +45,7 @@ const UploadThumbnailCard = ({ img, handleImage, handleDelete, }: UploadThumbnai
                         className="homec-image-video-upload__label md:h-22"
                     >
                         {!img && <>
-                            <img src={"img/upload-file-2.svg"} alt="#" />
+                            <img src={"/img/upload-file-2.svg"} alt="#" />
                             <span className="homec-image-video-upload__title homec-image-video-upload__title--v2">
                                 Drag & Drop or{" "}
                                 <span className="homec-primary-color">Choose Image</span> to

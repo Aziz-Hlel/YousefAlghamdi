@@ -8,7 +8,7 @@ import Preloader from "../Loader";
 import { useEffect, useState } from "react";
 import GoTopBtn from "../Button/GoTopBtn";
 
-const SubmitProperty = ({ whatFor }: { whatFor: string }) => {
+const SubmitProperty = () => {
   const [isLoading, setisLoadingg] = useState(true);
   useEffect(() => {
     setisLoadingg(false);
@@ -24,7 +24,7 @@ const SubmitProperty = ({ whatFor }: { whatFor: string }) => {
         <Breadcrumbs
           title="Submit Property"
           titlePosition="bottom"
-          background="url(img/bread-overlay.jpg)" overlay={undefined} >
+          background="url(/img/bread-overlay.jpg)" overlay={undefined} >
           <HistoryLinks link="/home" text="Home" isActive={undefined} />
           <HistoryLinks
             link="/submit-property"
@@ -32,7 +32,7 @@ const SubmitProperty = ({ whatFor }: { whatFor: string }) => {
             isActive={true}
           />
         </Breadcrumbs>
-        <PropertyFrom whatFor={whatFor} />
+        <PropertyFrom  />
         <DownloadApp />
         <GoTopBtn />
       </>
