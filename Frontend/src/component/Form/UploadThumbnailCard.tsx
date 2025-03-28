@@ -18,8 +18,6 @@ const UploadThumbnailCard = ({ img, handleImage, handleDelete, }: UploadThumbnai
         if (acceptedFiles.length > 0) handleImage(acceptedFiles[acceptedFiles.length - 1], 0);
 
     }, [acceptedFiles])
-    console.log("img", img);
-    img && console.log(URL.createObjectURL(img));
 
 
     return (

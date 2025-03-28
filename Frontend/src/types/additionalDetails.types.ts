@@ -1,7 +1,6 @@
 import { categoriesType, CommercialProperties, LandAndPlots, ResidentialProperties } from "./categories.subcategories.types";
 
 const wifi = "Wi-Fi";
-const freeParking = "Parking";
 const swimmingPool = "Swimming Pool";
 const gym = "Gym";
 const airConditioning = "Air Conditioning";
@@ -27,7 +26,6 @@ const viewOfLandmark = "View of Landmark";
 export const additionalDetailsAttributes: { [key in keyof typeof categoriesType]: string[] } = {
     [ResidentialProperties]: [
         wifi,
-        freeParking,
         swimmingPool,
         gym,
         airConditioning,
@@ -49,7 +47,6 @@ export const additionalDetailsAttributes: { [key in keyof typeof categoriesType]
 
     [CommercialProperties]: [
         wifi,
-        freeParking,
         security,
         maintenance,
         cleaning,

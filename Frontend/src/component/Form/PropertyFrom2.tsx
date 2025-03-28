@@ -74,7 +74,7 @@ const SubmitPropertySchema = z.object({
 
 
   additionalDetails: z.array(z.string()).default([]),
-  // imgs: z.array(z.string({ required_error: "Image is required" })),
+  imgs: z.array(z.string({ required_error: "Image is required" })).optional(),
   // videos: z.array(z.string({ required_error: "Video is required" })),
   // listing_type: z.string({ required_error: "Listing type is required" }),
 
@@ -109,7 +109,9 @@ const PropertyFrom = () => {
     event.target.checked ? setAdditionalDetails((prev) => [...prev, event.target.name]) : setAdditionalDetails((prev) => prev.filter((item) => item !== event.target.name));
 
   };
-
+  const customErrors: Record<"imgs", string> = {
+    imgs: "Image is required",
+  }
 
 
   // delete property image
@@ -140,7 +142,6 @@ const PropertyFrom = () => {
   // // handle property image input sector
 
   const handleImageInput = (uploadedImg: FileWithPath, idx: number) => {
-    console.log("uploadedImg", uploadedImg);
 
     const imgWithPreview = Object.assign(uploadedImg, {
       preview: URL.createObjectURL(uploadedImg)
@@ -153,9 +154,8 @@ const PropertyFrom = () => {
     });
 
   };
-  useEffect(() => {
-    console.log(imgs);
-  }, [imgs])
+
+
   // handle aminities
 
   // const handleCheckBox = (e: any) => {
@@ -180,10 +180,6 @@ const PropertyFrom = () => {
   }
 
 
-  useEffect(() => {
-    console.log(NearestLocation);
-
-  }, [NearestLocation.length])
   // handle Property Plan, additionalInformation, nearestLocation input filled
   const handleKeyValueChange = (idx: any, keyType: "placeName" | "distance", value: string) => {
 
@@ -191,10 +187,7 @@ const PropertyFrom = () => {
 
   };
 
-  useEffect(() => {
-    console.log(errors);
 
-  }, [errors]);
 
 
   const handleFormSubmit: SubmitHandler<SubmitPropertyType> = (data) => {
@@ -205,6 +198,15 @@ const PropertyFrom = () => {
     if (NearestLocation.length === 1 && NearestLocation[0].placeName === "" && NearestLocation[0].distance === "") data.nearestPlaces = [];
     else data.nearestPlaces = NearestLocation;
 
+    if (imgs[0] === null) {
+      setError("imgs", { message: "Thumbnail Image is required" });
+      return;
+    }
+    // else data.imgs = imgs.filter((img) => img !== null).map((img) => img as FileWithPath);
+    // if (imgs[2] === null) {
+    //   setError("imgs", { message: "rest Image is required" });
+    //   return;
+    // }
     console.log(data);
 
   };
@@ -321,8 +323,8 @@ const PropertyFrom = () => {
                     <PropertyTextInput
                       size="col-md-4  flex justify-center items-center -mt-10"
                       title="Street adresse"
-                      fieldRegister={register('filterFields.area')}
-                      fieldError={errors.filterFields?.area}
+                      fieldRegister={register('addresse')}
+                      fieldError={errors.addresse}
                       placeholder="Emirates Towers, Sheikh Zayed Road"
                     />
 
@@ -360,6 +362,7 @@ const PropertyFrom = () => {
 
               <div className="homec-submit-form mg-top-40">
                 <h4 className="homec-submit-form__title">Nearest Location</h4>
+
                 <KeyValueInput
                   list={NearestLocation}
                   handleAddOrDelete={handleAddOrDelete}
@@ -377,6 +380,8 @@ const PropertyFrom = () => {
                 imgs={imgs}
                 handleDelete={handleImageDelete}
                 handleImage={handleImageInput}
+                fieldError={errors.imgs}
+
               />
 
               {/* <PropertyLocationInput
@@ -391,7 +396,7 @@ const PropertyFrom = () => {
 
               <div className="row">
                 <div className="col-12 d-flex justify-content-end mg-top-40">
-                  <button onClickCapture={() => { console.log('t5ll') }} type="submit" className="homec-btn homec-btn__second">
+                  <button type="submit" className="homec-btn homec-btn__second">
                     <span>Submit Property Now</span>
                   </button>
                 </div>
