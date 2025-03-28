@@ -75,8 +75,7 @@ const SubmitPropertySchema = z.object({
 
   additionalDetails: z.array(z.string()).default([]),
   imgs: z.array(z.string({ required_error: "Image is required" })).optional(),
-  // videos: z.array(z.string({ required_error: "Video is required" })),
-  // listing_type: z.string({ required_error: "Listing type is required" }),
+  listing_type: z.string({ required_error: "Listing type is required" }),
 
   nearestPlaces: z.array(z.object({ placeName: z.string(), distance: z.string() })).default([{ placeName: "", distance: "" }]),
 
@@ -89,14 +88,13 @@ type imageArray = (FileWithPath | null)[];
 
 const PropertyFrom = () => {
 
-  const { register, watch, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<SubmitPropertyType>({ resolver: zodResolver(SubmitPropertySchema) });
+  const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting, defaultValues }, setError } = useForm<SubmitPropertyType>({ resolver: zodResolver(SubmitPropertySchema) });
 
   const { whatFor } = useParams();
 
 
   const propertyCategoryValue = watch('category');
   const CityValueObserver = watch('city');
-
 
   const [NearestLocation, setNearestLocation] = useState<{ placeName: string, distance: string }[]>([{ placeName: "", distance: "" }]);
   const [additionalDetails, setAdditionalDetails] = useState<string[]>([])
@@ -109,35 +107,16 @@ const PropertyFrom = () => {
     event.target.checked ? setAdditionalDetails((prev) => [...prev, event.target.name]) : setAdditionalDetails((prev) => prev.filter((item) => item !== event.target.name));
 
   };
-  const customErrors: Record<"imgs", string> = {
-    imgs: "Image is required",
-  }
+  // const customErrors: Record<"imgs", string> = {
+  //   imgs: "Image is required",
+  // }
 
-
-  // delete property image
 
   const handleImageDelete = (idx: number) => {
     setImgs((prev) => prev.map((_, index) => index === idx ? null : _));
   };
 
-  // handle property video input sector
 
-
-  // const handleVideoChange = (e: any) => {
-  //   setProperty({
-  //     ...property,
-  //     video: { ...property.video, [e.target.name]: e.target.value },
-  //   });
-  // };
-
-  // handle property location input sector
-
-  // const handleLocationChange = (e: any) => {
-  //   setProperty({
-  //     ...property,
-  //     location: { ...property.location, [e.target.name]: e.target.value },
-  //   });
-  // };
 
   // // handle property image input sector
 
@@ -210,7 +189,10 @@ const PropertyFrom = () => {
     console.log(data);
 
   };
-
+  useEffect(() => {
+    whatFor && setValue("listing_type", whatFor)
+  }, [whatFor])
+  
   if (whatFor && !listing_typesValues.includes(whatFor)) return <> </>
 
   return (
