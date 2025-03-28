@@ -28,7 +28,7 @@ function SelectiveInputForm({ size, title, options, fieldRegister, fieldError }:
     <div className={`property-sidebar__single  w-fit *:w-fit  ${size} `}>
       <div className="">
         <h4 className={`homec-submit-form__heading ${options.length === 0 && "text-gray-300"}`}>{title}</h4>
-        <div className="form-group homec-form-input">  {/*l mochkla f homec-form-input */}
+        <div className="form-group homec-form-input w-fit">  {/*l mochkla f homec-form-input */}
           <select
             className="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
             {...fieldRegister}

@@ -3,7 +3,7 @@ import PropertyTextInput from "./PropertyTextInput2";
 import PropertyTextArea from "./PropertyTextArea2";
 import ImageInput from "./ImageInput2";
 import PropertyVideoInput from "./PropertyVideoInput";
-import PropertyLocationInput from "./PropertyLocationInput";
+import PropertyLocationInput from "./PropertyLocationInput2";
 import PropertyAminitiesInput from "./PropertyAminitiesInput";
 import KeyValueInput from "./KeyValueInput2";
 import PropertyPlan from "./PropertyPlan";
@@ -20,6 +20,7 @@ import { additionalDetailsAttributes } from "@src/types/additionalDetails.types"
 import { FileWithPath } from "react-dropzone";
 import { useParams } from "react-router-dom";
 import { listing_typesValues } from "@src/types/listing_type.types";
+import { cities, delegations } from "@src/types/cities.delegations.types";
 
 
 const SubmitPropertySchema = z.object({
@@ -33,6 +34,9 @@ const SubmitPropertySchema = z.object({
 
   sub_category: z.string({ required_error: "Sub category is required" }),
 
+  city: z.string({ required_error: "City is required" }),
+  delegation: z.string({ required_error: "Delegation is required" }),
+  addresse: z.string({ required_error: "Addresse is required" }).optional(),
 
   filterFields: z.object({
 
@@ -91,6 +95,7 @@ const PropertyFrom = () => {
 
 
   const propertyCategoryValue = watch('category');
+  const CityValueObserver = watch('city');
 
 
   const [NearestLocation, setNearestLocation] = useState<{ placeName: string, distance: string }[]>([{ placeName: "", distance: "" }]);
@@ -293,6 +298,40 @@ const PropertyFrom = () => {
               </div>
 
               <div className="homec-submit-form mg-top-40">
+                <h4 className="homec-submit-form__title">Property Location</h4>
+                <div className="homec-submit-form__inner">
+                  <div className="row ">
+                    {/* Single Form Element   */}
+                    <SelectiveInputForm
+                      size="col-md-4 flex justify-center items-center mg-top-20"
+                      title={"City"}
+                      options={Object.keys(cities)}
+                      fieldRegister={register('city')}
+                      fieldError={errors.city}
+                    />
+
+                    <SelectiveInputForm
+                      size="col-md-4 flex justify-center items-center mg-top-20"
+                      title={"Delegation"}
+                      options={CityValueObserver && Object.keys(cities).includes(CityValueObserver) ? delegations[CityValueObserver as keyof typeof delegations] : []}
+                      fieldRegister={register('delegation')}
+                      fieldError={errors.delegation}
+                    />
+
+                    <PropertyTextInput
+                      size="col-md-4  flex justify-center items-center -mt-10"
+                      title="Street adresse"
+                      fieldRegister={register('filterFields.area')}
+                      fieldError={errors.filterFields?.area}
+                      placeholder="Emirates Towers, Sheikh Zayed Road"
+                    />
+
+
+                  </div>
+                </div>
+              </div>
+
+              <div className="homec-submit-form mg-top-40">
                 <h4 className="homec-submit-form__title">
                   Additional Details
                 </h4>
@@ -340,10 +379,16 @@ const PropertyFrom = () => {
                 handleImage={handleImageInput}
               />
 
-              {/*   <PropertyLocationInput
+              {/* <PropertyLocationInput
                 location={input.location}
                 handleLocation={handleLocationChange}
               /> */}
+
+
+
+
+
+
               <div className="row">
                 <div className="col-12 d-flex justify-content-end mg-top-40">
                   <button onClickCapture={() => { console.log('t5ll') }} type="submit" className="homec-btn homec-btn__second">

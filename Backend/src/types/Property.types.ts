@@ -1,13 +1,13 @@
 import { categories } from "./categories.subcategories.types";
 
-const estateTypes = [
+const propertyTypes = [
     "apartement",
     "house",
     "Office",
     "land",
 ]
 
-export default estateTypes;
+export default propertyTypes;
 
 
 categories["Commercial Properties"]
