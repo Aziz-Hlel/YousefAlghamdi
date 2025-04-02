@@ -9,7 +9,7 @@ import PropertyReview from "../PropertyReview";
 import PropertyAgents from "../Agents/PropertyAgents";
 import { useSinglePropertyContext } from "./PropertySingleProvider.context";
 import OtherDetailsTabFeatures from "./OtherDetailsTabFeatures";
-import apiGateway from "@src/apiGateway";
+import apiGateway from "@src/utils/apiGateway";
 
 function PropertyDetails() {
   const [activeTab, setActiveTab] = useState("Property Details");

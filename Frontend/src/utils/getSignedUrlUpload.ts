@@ -1,9 +1,11 @@
-import apiGateway from "@src/apiGateway"
+import apiGateway from "@src/utils/apiGateway"
 
 
 
 
 const getSignedUrlUpload = () => {
 
-    apiGateway
+    const url = apiGateway.baseUrl + "/api/getSignedUrl"
+
+    return url;
 }

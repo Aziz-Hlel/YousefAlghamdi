@@ -1,4 +1,4 @@
-import { baseUrl } from "@src/apiGateway";
+import { baseUrl } from "@src/utils/apiGateway";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 
@@ -18,7 +18,7 @@ const Http = {
     },
 
     post: async <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {
-    
+
         try {
             return await axiosInstance.post<T>(url, body, config);
 
@@ -26,7 +26,7 @@ const Http = {
             axios.isAxiosError(e) && console.log(e.response?.data);
             if (axios.isAxiosError(e)) return e.response
         }
-        
+
     },
 
     put: <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {

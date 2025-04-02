@@ -5,7 +5,7 @@ import Preloader from "../Loader";
 import { Link, useNavigate } from "react-router-dom";
 import logo_img from "@img/logo_sign_in.jpg"
 import Http from "@src/services/Http";
-import apiGateway from "@src/apiGateway";
+import apiGateway from "@src/utils/apiGateway";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";

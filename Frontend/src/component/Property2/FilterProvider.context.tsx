@@ -2,7 +2,7 @@ import Iproperty from "@src/models/property.type";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { IfilterProperty } from "src/models/filterProperty";
 import Http from "@src/services/Http";
-import apiGateway from "@src/apiGateway";
+import apiGateway from "@src/utils/apiGateway";
 import { useParams } from "react-router-dom";
 
 
@@ -51,9 +51,9 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
     }, [filterObject])
 
-useEffect(() => {
-    updateEstate()
-},[filterObject.page])
+    useEffect(() => {
+        updateEstate()
+    }, [filterObject.page])
 
     const { city } = useParams();
 

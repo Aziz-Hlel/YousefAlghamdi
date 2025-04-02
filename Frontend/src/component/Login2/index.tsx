@@ -3,7 +3,7 @@ import WelcomeCard from "../Cards/WelcomeCard";
 import PropertyTextInput from "../Form/PropertyTextInput2";
 import Preloader from "../Loader";
 import { Link, useNavigate } from "react-router-dom";
-import apiGateway from "@src/apiGateway";
+import apiGateway from "@src/utils/apiGateway";
 import Http from "@src/services/Http";
 import logo_img from "@img/logo_sign_in.jpg"
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -63,7 +63,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  
+
   let component = undefined;
   if (isLoading) {
     component = <Preloader />;

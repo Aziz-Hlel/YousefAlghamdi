@@ -18,8 +18,10 @@ const apiGateway = {
     estate: "/estate",
 
 
+
+    images: baseUrl + "/api/images/",
     
-    images: baseUrl + "/api/images/"
+    getSignedUrl: baseUrl + "/api/getSignedUrl"
 
 }
 

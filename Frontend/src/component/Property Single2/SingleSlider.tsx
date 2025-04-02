@@ -2,7 +2,7 @@ import { responsiveSmallAgentsSlider } from "../../utils/responsiveSlider";
 import ImageCard from "../Cards/ImageCard2";
 import Carousel from "react-multi-carousel";
 import { useSinglePropertyContext } from "./PropertySingleProvider.context";
-import apiGateway from "@src/apiGateway";
+import apiGateway from "@src/utils/apiGateway";
 
 function SingleSlider() {
 

@@ -7,7 +7,7 @@ import properties from "../../data/property";
 import { useFormContext } from "./FilterProvider.context";
 import Http from "../../services/Http";
 import Iproperty from "@src/models/property.type";
-import apiGateway from "@src/apiGateway";
+import apiGateway from "@src/utils/apiGateway";
 
 function PropertyGrid() {
 

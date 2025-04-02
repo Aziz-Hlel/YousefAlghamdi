@@ -3,7 +3,7 @@ import ThumbnailsCard from "../Cards/ThumbnilsCard";
 import { responsiveLogoSlider2 } from "../../utils/responsiveSlider";
 import ButtonGroup from "../CustomDot/CustomArrow";
 import { useSinglePropertyContext } from "./PropertySingleProvider.context";
-import apiGateway from "@src/apiGateway";
+import apiGateway from "@src/utils/apiGateway";
 
 function ThumbnailsSlider() {
 

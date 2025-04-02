@@ -10,7 +10,7 @@ import PropertyDetails from "./PropertyDetails";
 import { useParams } from "react-router-dom";
 import Iproperty from "@src/models/property.type";
 import Http from "@src/services/Http";
-import apiGateway from "@src/apiGateway";
+import apiGateway from "@src/utils/apiGateway";
 import { useGetProperty } from "@src/useApi/useGetProperty";
 import { SinglePropertyProvider } from "./PropertySingleProvider.context";
 import ThumbnailsSlider from "./ThumbnilsSlider";
