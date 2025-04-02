@@ -1,4 +1,4 @@
-import HeroSliderSlide from "./HeroSliderSlide";
+import HeroSliderSlide from "./HeroSliderSlide2";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -6,6 +6,7 @@ import { responsiveHeroSlider } from "../../utils/responsiveSlider";
 import { CustomDot } from "../CustomDot/CustomDot";
 import property_featured from "@img/featured/property_featured.jpg"
 import property_featured2 from "@img/featured/property_featured2.jpg"
+import apiGateway from "@src/apiGateway";
 
 
 function HeroSlider() {
@@ -29,7 +30,7 @@ function HeroSlider() {
       >
         <HeroSliderSlide
           link="property-single"
-          img={property_featured}
+          img={apiGateway.images + "wallpaper.jpg"}
           price="3,976"
           pricePeriod="month"
           title="Modern House With Pool"

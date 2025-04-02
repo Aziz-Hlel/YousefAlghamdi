@@ -50,8 +50,8 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
     // filterFunc(minNumberOfSquareFeet, maxNumberOfSquareFeet, "", filters);
 
     if (forSale === "true" && forRent === "true") { }
-    else if (forSale === "true") filters["filterFields.forSale"] = forSale;
-    else if (forRent === "true") filters["filterFields.forRent"] = forRent;
+    // else if (forSale === "true") filters["filterFields.forSale"] = forSale;
+    // else if (forRent === "true") filters["filterFields.forRent"] = forRent;
 
 
     if (city) filters.city = city;
@@ -61,7 +61,7 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
     if (!page || isNaN(page)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     const limit = 6;
-    // console.log('filters', filters)
+    console.log('filters', filters)
     try {
 
         const [properties, total] = await Promise.all([
@@ -106,7 +106,6 @@ export const getProperty = async (req: Request, res: Response, next: NextFunctio
 
 
 }
-
 
 
 

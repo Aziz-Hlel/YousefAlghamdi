@@ -8,7 +8,7 @@ import AboutUs from "./component/About";
 import AddProperty from "./component/AddProperty2";
 import AgentDetail from "./component/AgentDetail";
 import Contact from "./component/Contact";
-import Dashboard from "./component/Dashboard";
+import Dashboard from "./component/Dashboard2";
 import EditProperty from "./component/Edit Property";
 import ErrorPage from "./component/Error";
 import Faq from "./component/Faq";
