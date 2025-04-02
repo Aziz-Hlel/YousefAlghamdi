@@ -16,8 +16,8 @@ export const createProperty = async (req: Request, res: Response, next: NextFunc
         ...req.body,
         clientId: new mongoose.Types.ObjectId("67e131037ada90f7bcda8e81"),
         agentId: new mongoose.Types.ObjectId("67ed13d95925a009ce7f3ae1"),
+        
     })
-
     try {
         await property.save();
         res.json('Property created successful');
@@ -115,7 +115,7 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
     const userId = req.user?._id;
     console.log('userId', userId)
 
-    
+
     if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     if (req.user?.role === "user")

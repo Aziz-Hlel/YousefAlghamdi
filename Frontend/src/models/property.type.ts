@@ -1,12 +1,22 @@
 type Iproperty = {
     _id: string
+
     title: string,
-    type: string,
     description: string,
+
+    category: string,
+    sub_category: string,
+
+    city: string,
+    delegation: string,
+    addresse: string,
+
     imgs: string[],
     videos: string[],
-    city: string,
+
+    listing_type: string,
     productTier: string,
+
     clientId: string,
     agentId: string,
 
@@ -15,17 +25,17 @@ type Iproperty = {
         area: number,
         rooms?: number,
         bathrooms?: number,
-        forSale: boolean,
-        forRent: boolean,
-    }
-    available: Date | undefined, // badl undefined b null b3d 
+    },
+
     nearestPlaces: {
         [key: string]: string;
     }
     additionalDetails: {
         [key: string]: string,
     }
+
+    available: Date | undefined, // badl undefined b null b3d 
 }
 
 
-export default Iproperty;
+    export default Iproperty;

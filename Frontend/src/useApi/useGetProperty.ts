@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const initialProperty: Iproperty = {
     _id: "",
     title: "",
-    type: "",
+    category: "",
     description: "",
     imgs: [],
     videos: [],

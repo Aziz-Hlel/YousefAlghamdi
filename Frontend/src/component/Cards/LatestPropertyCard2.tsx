@@ -10,7 +10,7 @@ interface ILatestPropertyCard {
   detailsLink: string,
   price: number,
   period: string,
-  whatFor: string,
+  listing_type: string,
   propertyLink: string,
   name: string,
   address: string,
@@ -27,10 +27,16 @@ const atrToImg = {
   square: "/img/size-icon.svg",
 
 }
+const listingTypeExprssion: { [key: string]: string; } = {
+  "rent": "For Rent",
+  "sale": "For Sale",
+  "commercial rent": "For Commercial Rent",
+  "commercial sale": "For Commercial Sale",
+}
 
-function LatestPropertyCard({ estate, _id, likeLink, period, whatFor, name, address, style, classes, view, }: ILatestPropertyCard) {
+function LatestPropertyCard({ estate, _id, likeLink, period, listing_type, name, address, style, classes, view, }: ILatestPropertyCard) {
 
-
+  const whatFor = listingTypeExprssion[listing_type];
 
   return (
     <div
@@ -73,19 +79,19 @@ function LatestPropertyCard({ estate, _id, likeLink, period, whatFor, name, addr
         <div className="homec-property__body [@media(min-width:500px)]:w-fit md:w-auto">
           <div className="homec-property__topbar">
             <div className="homec-property__price">
-              ${estate.filterFields.price} <span>{whatFor === "To rent" && "/" + period}</span>
+              ${estate.filterFields.price} <span>{listing_type === "To rent" && "/" + period}</span>
             </div>
 
             <div className=" flex justify-center items-center  [@media(min-width:500px)]:w-fit md:w-auto ">
-              {whatFor === "To sale" ?
+              {whatFor === "For sale" ?
                 <span className="homec-property__salebadge pr-0 mr-0">{whatFor}</span> :
-                <span className="  bg-violet-200 text-xs py-1 px-2 rounded-xl">To rent</span>}
+                <span className="  bg-violet-200 text-xs py-1 px-2 rounded-xl">{whatFor}</span>}
             </div>
 
           </div>
           <h3 className="homec-property__title">
             <Link to={"/property-single/" + _id}>
-              {name.length > 22 ? name : name}
+              {name}
             </Link>
           </h3>
           <div className="homec-property__text">

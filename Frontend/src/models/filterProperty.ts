@@ -1,4 +1,4 @@
-import { IestateTypes as IestateTypes } from "@src/types/estateType";
+import { IestateTypes as IestateTypes } from "@src/types/propertyType";
 import { Imarate } from "@src/types/imarates";
 
 export type IfilterProperty = {

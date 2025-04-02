@@ -3,7 +3,7 @@ import CheckInput from "../Form/CheckInput";
 import RangeInput from "../Form/RangeInput";
 import AgentsSidebarSlider from "../Agents/AgentsSidebarSlider";
 import imarates from "../../types/imarates";
-import estateTypes from "../../types/estateType";
+import propertyTypes from "../../types/propertyType";
 
 function index() {
   return (
@@ -21,7 +21,7 @@ function index() {
         <SelectiveInput
           title="Property Category"
           options={
-            estateTypes.map((estateType, idx) => {
+            propertyTypes.map((estateType, idx) => {
               return { id: idx, name: estateType }
             })
           }

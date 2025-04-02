@@ -23,19 +23,6 @@ const filterFieldsTypes = {
         default: null,
     },
 
-    forSale: {
-        type: Boolean,
-        required: true,
-        default: null,
-    },
-
-    forRent: {
-        type: Boolean,
-        required: true,
-        default: null,
-    },
-
-
 
 
 };

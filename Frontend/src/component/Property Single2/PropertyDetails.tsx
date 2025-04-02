@@ -24,7 +24,7 @@ function PropertyDetails() {
   const { property } = useSinglePropertyContext();
 
   const propertyDetails: IPropertyDetail[] = [
-    { "Type": property.type },
+    { "Type": property.category },
     { City: property.city },
     { Area: property.filterFields.area },]
 

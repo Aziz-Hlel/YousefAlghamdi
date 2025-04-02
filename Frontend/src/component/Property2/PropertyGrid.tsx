@@ -68,7 +68,7 @@ function PropertyGrid() {
                       detailsLink={properties[index].detailsLink}
                       price={estate.filterFields.price}
                       period={properties[index].period}
-                      whatFor={estate.filterFields.forRent ? "To rent" : "To sale"}
+                      listing_type={estate.listing_type}
                       propertyLink={properties[index].propertyLink}
                       name={estate.title}
                       address={properties[index].address}

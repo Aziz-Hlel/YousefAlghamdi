@@ -2,7 +2,7 @@ import SelectiveInput from "../Form/SelectiveInput2";
 import CheckInput2 from "../Form/CheckInput2";
 import RangeInput from "../Form/RangeInput2";
 import imarates from "../../types/imarates";
-import estateTypes from "../../types/estateType";
+import propertyTypes from "../../types/propertyType";
 import { useFormContext } from "../Property2/FilterProvider.context";
 
 const SideBar22 = () => {
@@ -28,7 +28,7 @@ const SideBar22 = () => {
         <SelectiveInput
           title="Property Category"
           options={
-            estateTypes.map((estateType) => {
+            propertyTypes.map((estateType) => {
               return { id: estateType, name: estateType }
             })
           }

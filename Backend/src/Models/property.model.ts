@@ -2,6 +2,45 @@ import mongoose, { Schema } from "mongoose";
 import filterFieldsTypes from "./filterFields.type";
 
 
+export interface Iproperty extends Document {
+    _id: mongoose.Types.ObjectId;
+
+    title: string,
+    description: string,
+
+    category: string,
+    sub_category: string,
+
+    city: string,
+    delegation: string,
+    addresse: string,
+
+    imgs: string[],
+    videos: string[],
+
+    listing_type: string,
+    productTier: string,
+
+    clientId: string,
+    agentId: string,
+
+    filterFields: {
+        price: number,
+        area: number,
+        rooms?: number,
+        bathrooms?: number,
+    },
+
+    nearestPlaces: {
+        [key: string]: string;
+    }
+    additionalDetails: {
+        [key: string]: string,
+    }
+
+    available: Date | undefined, // badl undefined b null b3d 
+}
+
 
 const propertySchema = new mongoose.Schema({
 
@@ -39,11 +78,6 @@ const propertySchema = new mongoose.Schema({
         required: false,
     },
 
-    whatFor: {
-        type: String,
-        required: false,
-    },
-
     description: {
         type: String,
         required: true,
@@ -55,11 +89,6 @@ const propertySchema = new mongoose.Schema({
     imgs: {
         type: [String],
         required: true,
-    },
-
-    videos: {
-        type: [String],
-        required: false,
     },
 
     filterFields: filterFieldsTypes,
@@ -99,10 +128,10 @@ const propertySchema = new mongoose.Schema({
 },
 
     { timestamps: true },
-    
+
 );
 
 
-const Property = mongoose.model('Estate', propertySchema);
+const Property = mongoose.model<Iproperty>('Estate', propertySchema);
 
 export default Property;
