@@ -3,3 +3,7 @@ how to handle permissions
 s3 & cdn proper img handling
 putting some variables like filter and page number as params (  )
 language translation
+
+
+
+Documentation !!!!

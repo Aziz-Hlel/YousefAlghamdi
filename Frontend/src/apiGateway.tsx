@@ -18,6 +18,7 @@ const apiGateway = {
     estate: "/estate",
 
 
+    
     images: baseUrl + "/api/images/"
 
 }
