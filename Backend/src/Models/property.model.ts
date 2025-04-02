@@ -39,6 +39,11 @@ const propertySchema = new mongoose.Schema({
         required: false,
     },
 
+    whatFor: {
+        type: String,
+        required: false,
+    },
+
     description: {
         type: String,
         required: true,
@@ -98,6 +103,6 @@ const propertySchema = new mongoose.Schema({
 );
 
 
-const Estate = mongoose.model('Estate', propertySchema);
+const Property = mongoose.model('Estate', propertySchema);
 
-export default Estate;
+export default Property;

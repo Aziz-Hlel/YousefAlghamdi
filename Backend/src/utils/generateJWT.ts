@@ -11,14 +11,15 @@ const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET ?? "secret";
 const __production__ = process.env.NODE_ENV;
 
 
-const accessTokenLifeSpan = "15m";
+const accessTokenLifeSpan = "1500m";
 const refreshTokenLifeSpan = "7d";
 
 
 const generateAccessToken = (user: IUser) => {
     const payload = {
-        userId: user._id,  // Or whichever identifier you want to include
+        _id: user._id,  // Or whichever identifier you want to include
         firstName: user.firstName,
+        role: user.role,
         // Any other fields you want to include in the token
     };
 
@@ -28,7 +29,7 @@ const generateAccessToken = (user: IUser) => {
 
 const generateRefreshToken = (user: IUser) => {
     const payload = {
-        userId: user._id,  // Or whichever identifier you want to include
+        _id: user._id,  // Or whichever identifier you want to include
         firstName: user.firstName,
         // Any other fields you want to include in the token
     };

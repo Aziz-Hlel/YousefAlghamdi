@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express'
 import userRouter from './Routes/user.route'
-import estateRouter from './Routes/estate.route';
+import propertyRouter from './Routes/property.route';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import path from 'path';
@@ -19,7 +19,7 @@ app.use(cors({
         callback(null, true); // Allows all origins dynamically
     },
     credentials: true,  // Necessary for cookies or authorization headers
-  
+
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     exposedHeaders: ['Content-Range', 'X-Total-Count', "Content-Type", "Authorization"],
 
@@ -28,7 +28,7 @@ app.use(cors({
 
 
 app.use('/api/user', userRouter);
-app.use('/api/estate', estateRouter);
+app.use('/api/estate', propertyRouter);
 
 // Serve static files
 app.use('/api/images', express.static(path.join(__dirname, '../public/images')));

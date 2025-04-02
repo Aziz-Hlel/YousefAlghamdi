@@ -1,20 +1,21 @@
 import { NextFunction, Request, Response } from "express";
-import Estate from "../Models/property.model";
+import Property from "../Models/property.model";
 import { errorHandler } from "../utils/error";
 import mongoose from "mongoose";
 import errorMessages from "../utils/errorMessages";
 import statusCode from "../utils/statusCode";
+import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
 
 
 
 
 
-export const createEstate = async (req: Request, res: Response, next: NextFunction) => {
+export const createProperty = async (req: Request, res: Response, next: NextFunction) => {
 
-    const property = new Estate({
+    const property = new Property({
         ...req.body,
-        clientId: "67d18af6bb05549959f8ae3d",
-        agentId: "67d18b2d7c34baab7b87c4d8"
+        clientId: new mongoose.Types.ObjectId("67e131037ada90f7bcda8e81"),
+        agentId: new mongoose.Types.ObjectId("67ed13d95925a009ce7f3ae1"),
     })
 
     try {
@@ -37,7 +38,7 @@ const filterFunc = (minVal: any, maxVal: any, filterKeyName: string, filters: an
 }
 
 
-export const listEstates = async (req: Request, res: Response, next: NextFunction) => {
+export const listProperties = async (req: Request, res: Response, next: NextFunction) => {
 
     const { city, type, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
     // console.log('req.query', req.query)
@@ -64,10 +65,10 @@ export const listEstates = async (req: Request, res: Response, next: NextFunctio
     try {
 
         const [properties, total] = await Promise.all([
-            Estate.find(filters)
+            Property.find(filters)
                 .limit(limit)
                 .skip((page - 1) * limit),
-            Estate.countDocuments(filters)
+            Property.countDocuments(filters)
         ]);
 
         // res.set('Content-Range', `products/women/categorie`);
@@ -88,13 +89,13 @@ export const listEstates = async (req: Request, res: Response, next: NextFunctio
 
 
 
-export const getEstate = async (req: Request, res: Response, next: NextFunction) => {
+export const getProperty = async (req: Request, res: Response, next: NextFunction) => {
 
     const estateId = req.params.estateId;
     if (!estateId || !mongoose.Types.ObjectId.isValid(estateId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     try {
-        const estate = await Estate.findById(estateId)
+        const estate = await Property.findById(estateId)
         res.json({
 
             result: estate,
@@ -106,3 +107,51 @@ export const getEstate = async (req: Request, res: Response, next: NextFunction)
 
 }
 
+
+
+
+export const getUserProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    const userId = req.user?._id;
+    console.log('userId', userId)
+
+    
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    if (req.user?.role === "user")
+        try {
+
+            const estate = await Property.find({ clientId: userId });
+            console.log(estate, estate.length)
+            res.json({
+
+                result: estate,
+
+            });
+
+
+        } catch (error) {
+            next(error);
+        }
+    console.log('t5l')
+    if (req.user?.role === "agent")
+        try {
+
+            const estate = await Property.find({ agentId: userId });
+
+            res.json({
+
+                result: estate,
+
+            });
+
+
+        } catch (error) {
+            next(error);
+        }
+
+
+
+
+    if (req.user?.role !== "user") return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+}

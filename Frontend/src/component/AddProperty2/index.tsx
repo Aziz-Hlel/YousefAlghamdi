@@ -48,7 +48,7 @@ const AddProperty = () => {
                 btn="second" />
 
               <PropertyAddCard
-                img="/img/property-sale.png"
+                img="/img/property-rent.png"
                 why={listing_types.commercialRent}
                 link={"/submit-property" + listing_types.commercialRent}
                />

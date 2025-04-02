@@ -101,6 +101,8 @@ const App2 = () => {
             element: <Contact />,
         },
     ]);
+
+
     return (
         <>
             {/* <RouterProvider router={router} />{" "} */}
@@ -117,8 +119,8 @@ const App2 = () => {
                         <Route path="/property" element={<Property />} />
                         <Route path="/property-single/:id" element={<PropertySingle />} />
                         <Route path="/edit-property" element={<EditProperty />} />
-                        <Route path="/add-property" element={<AddProperty />} />
 
+                        <Route path="/add-property" element={<AddProperty />} />
                         <Route path="/submit-property/:whatFor" element={<SubmitProperty />} />
 
                         <Route path="/dashboard" element={<Dashboard />} />  {/* hedha dhhrli mehichi footer */}

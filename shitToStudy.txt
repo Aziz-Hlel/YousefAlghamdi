@@ -1,0 +1,3 @@
+how to roll authentication
+how to handle permissions
+s3 & cdn proper img handling
