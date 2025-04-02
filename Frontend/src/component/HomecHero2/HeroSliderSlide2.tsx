@@ -14,14 +14,13 @@ type IHeroSliderSlide = {
 
 function HeroSliderSlide({ link, img, price, pricePeriod, title, propertyText, propertyImg, propertyList, }: IHeroSliderSlide) {
   return (
-    <div className="swiper-slide" style={{ marginBottom: "50px" }}>
+    <div className="swiper-slide px-2" style={{ marginBottom: "50px" }}>
       {/* Single property */}
       <Link to={link} className="homec-property homec-property__card">
         {/* Property Head */}
         <div className="homec-property__head">
           <div className="homec-overlay"></div>
-               <div className=" w-96 h-96 flex  justify-center  items-center p-15 bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-cover  bg-no-repeat  mt-7
-                "
+               <div className="w-[29rem]  h-[28rem] flex  justify-center  items-center  bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-cover  bg-no-repeat "
           style={{
             backgroundImage: (img ? `url(${img})` : "url('https://placehold.co/1720x1420')"),
           }}

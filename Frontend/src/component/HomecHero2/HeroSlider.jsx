@@ -44,7 +44,7 @@ function HeroSlider() {
         />
         <HeroSliderSlide
           link="property-single"
-          img={property_featured2}
+          img={apiGateway.images + "wallpaper.jpg"}
           price="3,976"
           pricePeriod="month"
           title="Diamond Mn Apartment"
@@ -58,7 +58,7 @@ function HeroSlider() {
         />
         <HeroSliderSlide
           link="property-single"
-          img={property_featured2}
+          img={apiGateway.images + "wallpaper.jpg"}
           price="3,976"
           pricePeriod="month"
           title="Northwest Office Space"
