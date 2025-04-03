@@ -6,16 +6,16 @@ import { useEffect, useState } from "react";
 
 const initialProperty: Iproperty = {
     _id: "",
-    
+
     title: "",
     description: "",
 
     category: "",
     sub_category: "",
-    
+
     city: "",
     delegation: "",
-    addresse:"",
+    addresse: "",
 
     imgs: [],
 
@@ -24,13 +24,13 @@ const initialProperty: Iproperty = {
 
     clientId: "",
     agentId: "",
-    
+
     filterFields: {
         price: 0,
         area: 0,
         rooms: 0,
         bathrooms: 0,
-        
+
     },
     nearestPlaces: {},
     additionalDetails: [],
@@ -42,7 +42,7 @@ export const useGetProperty = (id: string) => {
     const [property, setProperty] = useState<Iproperty>(initialProperty);
 
     const updateProperty = async () => {
-        const property: Iproperty = await (await Http.get<any>(`${apiGateway.estate}\\${id}`)).data.result;
+        const property: Iproperty = await (await Http.get<any>(`${apiGateway.property}\\${id}`)).data.result;
         console.log("property", typeof property);
         console.log(property)
 

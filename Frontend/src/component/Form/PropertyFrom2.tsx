@@ -22,6 +22,8 @@ import { useParams } from "react-router-dom";
 import { listing_typesValues } from "@src/types/listing_type.types";
 import { cities, delegations } from "@src/types/cities.delegations.types";
 import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
+import Http from "@src/services/Http";
+import apiGateway from "@src/utils/apiGateway";
 
 
 const SubmitPropertySchema = z.object({
@@ -191,6 +193,7 @@ const PropertyFrom = () => {
     //   setError("imgs", { message: "rest Image is required" });
     //   return;
     // }
+    Http.post(apiGateway.)
     console.log(data);
 
   };

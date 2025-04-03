@@ -15,12 +15,12 @@ const apiGateway = {
         sigIn: "/user/login",
     },
 
-    estate: "/estate",
+    property: "/estate",
 
 
 
     images: baseUrl + "/api/images/",
-    
+
     getSignedUrl: baseUrl + "/api/images/getSignedUrl"
 
 }

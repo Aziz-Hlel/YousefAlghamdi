@@ -91,11 +91,11 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
 
 export const getProperty = async (req: Request, res: Response, next: NextFunction) => {
 
-    const estateId = req.params.estateId;
-    if (!estateId || !mongoose.Types.ObjectId.isValid(estateId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+    const propertyId = req.params.propertyId;
+    if (!propertyId || !mongoose.Types.ObjectId.isValid(propertyId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     try {
-        const estate = await Property.findById(estateId)
+        const estate = await Property.findById(propertyId)
         res.json({
 
             result: estate,
