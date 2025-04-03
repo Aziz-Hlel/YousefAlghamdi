@@ -10,7 +10,13 @@ const errorMessages = {
 
     AUTH: {
         INVALID_TOKEN: "invalid token",
-    }
+    },
+
+    IMAGES: {
+        INVALID_TYPE: "invalid type",
+        MAX_SIZE: "max size",
+
+    },
 };
 
 

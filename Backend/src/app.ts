@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import path from 'path';
 import IApiErrorMiddleware from './Interfaces/ApiErrorResponse.interface';
+import imgHandlerRouter from './imgHandler';
 
 
 
@@ -33,21 +34,8 @@ app.use('/api/estate', propertyRouter);
 // Serve static files
 app.use('/api/images', express.static(path.join(__dirname, '../public/images')));
 
-app.post('/api/images/upload/:imgId', (req: Request, res: Response) => {
-    const img = req.body
+app.use('/api/images', imgHandlerRouter);
 
-});
-
-app.get('/api/getSignedUrl', (req: Request, res: Response) => {
-    // const userId = req.user?._id
-    const urserId = "userid"
-    const localhostUrl = "http://localhost:" + process.env.PORT + "/api/images/upload/";
-    const randomNumber = Math.floor(Math.random() * 1000);
-
-    res.json({
-        result: localhostUrl + urserId + "/" + String(randomNumber)
-    });
-})
 
 app.get('', (req, res) => {
     res.send('Works ')
