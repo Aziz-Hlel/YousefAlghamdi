@@ -15,24 +15,13 @@ const accessTokenLifeSpan = "1500m";
 const refreshTokenLifeSpan = "7d";
 
 
-const generateAccessToken = (user: IUser) => {
-    const payload = {
-        _id: user._id,  // Or whichever identifier you want to include
-        firstName: user.firstName,
-        role: user.role,
-        // Any other fields you want to include in the token
-    };
+const generateAccessToken = (payload: { [key: string]: any }) => {
 
     return jwt.sign(payload, ACCESS_SECRET, { expiresIn: accessTokenLifeSpan });
 };
 
 
-const generateRefreshToken = (user: IUser) => {
-    const payload = {
-        _id: user._id,  // Or whichever identifier you want to include
-        firstName: user.firstName,
-        // Any other fields you want to include in the token
-    };
+const generateRefreshToken = (payload: { [key: string]: any }) => {
 
     return jwt.sign(payload, REFRESH_SECRET, { expiresIn: refreshTokenLifeSpan });
 };
@@ -44,8 +33,21 @@ const generateRefreshToken = (user: IUser) => {
 const generateToken = (res: Response, user: IUser) => {
     console.log(ACCESS_SECRET)
 
-    const accessToken = generateAccessToken(user);
-    const refreshToken = generateRefreshToken(user);
+    const payload = {
+        _id: user._id,
+        firstName: user.firstName,
+        role: user.role,
+    };
+
+    const accessToken = generateAccessToken(payload);
+    const refreshToken = generateRefreshToken(payload);
+    
+    res.cookie("accessToken", accessToken, {
+        httpOnly: true,
+        secure: __production__ === "production",
+        // sameSite: "strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
 
     res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
@@ -54,7 +56,8 @@ const generateToken = (res: Response, user: IUser) => {
         maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    res.json({ accessToken });
+
+    res.json({ result: payload });
 
 }
 
