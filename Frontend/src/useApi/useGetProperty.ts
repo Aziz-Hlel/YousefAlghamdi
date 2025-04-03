@@ -6,26 +6,34 @@ import { useEffect, useState } from "react";
 
 const initialProperty: Iproperty = {
     _id: "",
+    
     title: "",
-    category: "",
     description: "",
-    imgs: [],
-    videos: [],
+
+    category: "",
+    sub_category: "",
+    
     city: "",
+    delegation: "",
+    addresse:"",
+
+    imgs: [],
+
+    listing_type: "",
     productTier: "",
+
     clientId: "",
     agentId: "",
-
+    
     filterFields: {
         price: 0,
         area: 0,
         rooms: 0,
         bathrooms: 0,
-        forSale: true,
-        forRent: true,
+        
     },
     nearestPlaces: {},
-    additionalDetails: {},
+    additionalDetails: [],
     available: undefined, // badl undefined b null b3d 
 }
 

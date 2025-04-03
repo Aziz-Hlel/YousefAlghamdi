@@ -85,7 +85,7 @@ const SubmitPropertySchema = z.object({
 type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
 
-type imageArray = (FileWithPath | null)[];
+type imageArray = (FileWithPath & { preview: string; key: string; } | null)[];
 
 const PropertyFrom = () => {
 
@@ -122,10 +122,13 @@ const PropertyFrom = () => {
   // // handle property image input sector
 
   const handleImageInput = async (uploadedImg: FileWithPath, idx: number) => {
-    const url = uploadImageToS3_SIMULATOR(uploadedImg);
+    const key = await uploadImageToS3_SIMULATOR(uploadedImg, "property");
     const imgWithPreview = Object.assign(uploadedImg, {
-      preview: URL.createObjectURL(uploadedImg)
+      preview: URL.createObjectURL(uploadedImg),
+      key: key
     });
+
+    console.log("imgWithPreview", imgWithPreview);
 
     setImgs((prev) => {
       const newArray = [...prev];
@@ -182,7 +185,8 @@ const PropertyFrom = () => {
       setError("imgs", { message: "Thumbnail Image is required" });
       return;
     }
-    // else data.imgs = imgs.filter((img) => img !== null).map((img) => img as FileWithPath);
+    else data.imgs = imgs.filter((img) => img !== null).map((img) => img.key);
+
     // if (imgs[2] === null) {
     //   setError("imgs", { message: "rest Image is required" });
     //   return;
@@ -194,7 +198,7 @@ const PropertyFrom = () => {
     whatFor && setValue("listing_type", whatFor)
   }, [whatFor])
 
-  if (whatFor && !listing_typesValues.includes(whatFor)) return <> </>
+  if (whatFor && !listing_typesValues.includes(whatFor)) return <></>
 
   return (
     <section className="pd-top-80 pd-btm-80">

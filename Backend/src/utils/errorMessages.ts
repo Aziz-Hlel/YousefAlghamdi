@@ -16,6 +16,8 @@ const errorMessages = {
         INVALID_IMAGE_TYPE: "invalid image type",
         MAX_SIZE: "max size",
         FILE_NOT_FOUND: "file not found",
+        INVALID_PURPOSE_TYPE: "invalid purpose type",
+
     },
 };
 

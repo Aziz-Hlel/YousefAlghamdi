@@ -5,19 +5,29 @@ import { FileWithPath } from "react-dropzone";
 
 
 
-export const getSignedUrlUpload = (fileName: string, fileType: string, fileSize: number) => {
+export const getSignedUrlUpload = async (fileName: string, fileType: string, fileSize: number, purpose: "property" | "profile") => {
 
-    const url = apiGateway.getSignedUrl
-    return url;
+    const response = await Http.post(apiGateway.getSignedUrl, { fileName, fileType, fileSize, purpose })
+
+    return response?.data.result;
 }
 
 
 
-export const uploadImageToS3_SIMULATOR = async (uploadedImg: FileWithPath) => {
+export const uploadImageToS3_SIMULATOR = async (uploadedImg: FileWithPath, purpose: "property" | "profile") => {
+
     const { name, type, size } = uploadedImg
-    const url = getSignedUrlUpload(name, type, size)
+    const { url, key } = await getSignedUrlUpload(name, type, size, purpose);
 
-    await Http.post(url, { fileName: name, fileType: type, fileSize: size })
+    console.log("url", url);
 
-    
+    const formData = new FormData();
+    formData.append("image", uploadedImg);
+
+    const response = await Http.post(url, formData)
+
+    console.log("response", response?.data);
+
+    return key
+
 }

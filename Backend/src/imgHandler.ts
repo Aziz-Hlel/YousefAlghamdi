@@ -31,7 +31,7 @@ const uploadImageToS3_SIMULATOR = ((req: Request, res: Response, next: NextFunct
 
 
 const allowedTypes = ["image/jpeg", "image/png", "image/jpg", "image/webp", "image/avif"];
-
+const imgPurpose = ["profile", "property"]
 const maxFileSizeInMB = 10 // MB
 
 const maxFileSize = 1024 * 1024 * maxFileSizeInMB;
@@ -39,20 +39,27 @@ const maxFileSize = 1024 * 1024 * maxFileSizeInMB;
 
 const getSignedUrl = (req: Request, res: Response, next: NextFunction) => {
 
-    const { fileName, fileType, fileSize } = req.body
+    const { fileName, fileType, fileSize, purpose } = req.body
 
     if (!allowedTypes.includes(fileType)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.IMAGES.INVALID_IMAGE_TYPE));
 
     if (fileSize > maxFileSize) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.IMAGES.MAX_SIZE));
 
+    if (!imgPurpose.includes(purpose)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     // const userId = req.user?._id
-    const urserId = "userid"
-    const localhostUrl = "http://localhost:" + process.env.PORT + "/api/images/upload/";
+    const userId = "userid"
+    const timestamp = Date.now(); // Get current timestamp in milliseconds
+
+    const key = `${userId}/${purpose}/${fileName.toLowerCase()}/${timestamp}`;
+    const localhostUrl = "http://localhost:" + process.env.PORT + "/api/images/uploadImageToS3_SIMULATOR/";
     const randomNumber = Math.floor(Math.random() * 1000);
 
     res.json({
-        result: localhostUrl + urserId + "/" + String(randomNumber)
+        result: {
+            url: localhostUrl + String(randomNumber),
+            key: key,
+        }
     });
 
 }

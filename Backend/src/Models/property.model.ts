@@ -98,7 +98,9 @@ const propertySchema = new mongoose.Schema({
         required: false,
     },
 
-    additionalDetails: { type: Map, of: String },
+    additionalDetails: {
+        type: [String],
+    },
 
     nearestPlaces: { type: Map, of: String },
 

@@ -12,7 +12,6 @@ type Iproperty = {
     addresse: string,
 
     imgs: string[],
-    videos: string[],
 
     listing_type: string,
     productTier: string,
@@ -30,9 +29,7 @@ type Iproperty = {
     nearestPlaces: {
         [key: string]: string;
     }
-    additionalDetails: {
-        [key: string]: string,
-    }
+    additionalDetails: string[]
 
     available: Date | undefined, // badl undefined b null b3d 
 }

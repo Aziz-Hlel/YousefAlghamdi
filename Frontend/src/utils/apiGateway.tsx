@@ -21,7 +21,7 @@ const apiGateway = {
 
     images: baseUrl + "/api/images/",
     
-    getSignedUrl: baseUrl + "/api/getSignedUrl"
+    getSignedUrl: baseUrl + "/api/images/getSignedUrl"
 
 }
 

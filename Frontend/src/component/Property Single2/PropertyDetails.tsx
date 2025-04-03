@@ -35,7 +35,8 @@ function PropertyDetails() {
     [key]: property.nearestPlaces[key],
   }))
 
-  const additionalDetails = Object.keys(property.additionalDetails).map((key) => key)
+  const additionalDetails = property.additionalDetails
+console.log("property.additionalDetails", property);
 
   return (
     <section

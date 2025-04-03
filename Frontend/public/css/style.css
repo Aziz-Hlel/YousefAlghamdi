@@ -672,8 +672,8 @@ Version:	1.0
 #homec-tabs.homec-gl-tabs a {
   width: 42px;
   height: 42px;
-  left: ;
-  line-height: ;
+  /* left: ; */
+  /* line-height: ; */
   padding: 0;
   display: flex;
   justify-content: center;
@@ -1236,7 +1236,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .homec-gallery-thumbs img {
-  border-radius: ;
+  /* border-radius: ; */
   border-radius: 8px;
 }
 
@@ -1793,7 +1793,7 @@ input[type="checkbox"]:checked::before {
   }
 
   .homec-rating--main {
-    flex-basis: ;
+    /* flex-basis: ; */
     flex-direction: column;
   }
 
@@ -1918,7 +1918,7 @@ input[type="checkbox"]:checked::before {
 #homec-tabs a:hover,
 #homec-tabs a.active {
   background: #7166f0;
-  color: ;
+  /* color: ; */
   border-color: transparent;
 }
 
@@ -1963,7 +1963,7 @@ input[type="checkbox"]:checked::before {
 .homec-filter-group .form-group .select2-container--default .select2-selection--single {
   background: transparent;
   border: none;
-  padding: ;
+  /* padding: ; */
   padding: 0;
   min-height: initial;
   height: initial;
@@ -2560,7 +2560,7 @@ input[type="checkbox"]:checked::before {
 
 .swiper-pagination.style-4 {
   display: flex;
-  justify-content: ;
+  /* justify-content: ; */
   justify-content: center;
   gap: 10px;
   margin-top: 55px;
@@ -3745,7 +3745,7 @@ blockquote::before {
 
 .homec-comments-form .homec-property-ag__button {
   margin-top: 30px;
-  display: ;
+  /* display: ; */
   text-align: right;
 }
 
@@ -3855,8 +3855,8 @@ blockquote::before {
   min-width: 90px;
   min-height: 90px;
   max-width: 90px;
-  margin: ;
-  max-width: ;
+  /* margin: ;
+  max-width: ; */
   max-height: 90px;
 }
 
@@ -4603,7 +4603,7 @@ blockquote::before {
 @media only screen and (max-width: 767px) {
   .homec-funfact {
     margin: 0;
-    padding: ;
+    /* padding: ; */
     top: -50px;
     padding: 20px;
   }
@@ -6241,7 +6241,7 @@ div.ck-editor.ck-rounded-corners {
 }
 
 .ecom-wc__form-profile textarea.ecom-wc__form-input {
-  display: ;
+  /* display: ; */
   height: 210px;
 }
 
