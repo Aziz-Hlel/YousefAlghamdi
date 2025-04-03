@@ -32,7 +32,7 @@ app.use('/api/user', userRouter);
 app.use('/api/estate', propertyRouter);
 
 // Serve static files
-app.use('/api/images', express.static(path.join(__dirname, '../public/images')));
+// app.use('/api/images', express.static(path.join(__dirname, '../public/images')));
 
 app.use('/api/images', imgHandlerRouter);
 

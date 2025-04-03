@@ -21,6 +21,7 @@ import { FileWithPath } from "react-dropzone";
 import { useParams } from "react-router-dom";
 import { listing_typesValues } from "@src/types/listing_type.types";
 import { cities, delegations } from "@src/types/cities.delegations.types";
+import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 
 
 const SubmitPropertySchema = z.object({
@@ -120,8 +121,8 @@ const PropertyFrom = () => {
 
   // // handle property image input sector
 
-  const handleImageInput = (uploadedImg: FileWithPath, idx: number) => {
-
+  const handleImageInput = async (uploadedImg: FileWithPath, idx: number) => {
+    const url = uploadImageToS3_SIMULATOR(uploadedImg);
     const imgWithPreview = Object.assign(uploadedImg, {
       preview: URL.createObjectURL(uploadedImg)
     });
@@ -192,7 +193,7 @@ const PropertyFrom = () => {
   useEffect(() => {
     whatFor && setValue("listing_type", whatFor)
   }, [whatFor])
-  
+
   if (whatFor && !listing_typesValues.includes(whatFor)) return <> </>
 
   return (
