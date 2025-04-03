@@ -20,14 +20,23 @@ const AuthContext = createContext<IAuthContext | undefined>(undefined);
 
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+    const login = () => {
+        console.log("Logged in");
+    };
 
+    const logout = () => {
+        console.log("Logged out");
+    };
 
-
+    const contextValue: IAuthContext = {
+        user: null,
+        login,
+        logout,
+    };
 
     return (
-        <AuthContext.Provider value= {{ user: null, login: () => { }, logout: () => { } }
-}>
-    { children }
-    </AuthContext.Provider>
-    )
+        <AuthContext.Provider value={contextValue}>
+            {children}
+        </AuthContext.Provider>
+    );
 }
