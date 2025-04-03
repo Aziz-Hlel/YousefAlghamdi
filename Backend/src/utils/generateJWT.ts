@@ -57,7 +57,7 @@ const generateToken = (res: Response, user: IUser) => {
     });
 
 
-    res.json({ result: payload });
+    res.json({ result: payload }); 
 
 }
 
