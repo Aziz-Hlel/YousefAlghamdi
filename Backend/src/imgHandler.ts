@@ -54,11 +54,12 @@ const getSignedUrl = (req: Request, res: Response, next: NextFunction) => {
     const key = `${userId}/${purpose}/${fileName.toLowerCase()}/${timestamp}`;
     const localhostUrl = "http://localhost:" + process.env.PORT + "/api/images/uploadImageToS3_SIMULATOR/";
     const randomNumber = Math.floor(Math.random() * 1000);
+    const localKey = `${fileName.toLowerCase()}`
 
     res.json({
         result: {
             url: localhostUrl + String(randomNumber),
-            key: key,
+            key: localKey,
         }
     });
 

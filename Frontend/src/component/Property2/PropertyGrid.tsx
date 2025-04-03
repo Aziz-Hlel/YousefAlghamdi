@@ -9,6 +9,8 @@ import Http from "../../services/Http";
 import Iproperty from "@src/models/property.type";
 import apiGateway from "@src/utils/apiGateway";
 
+
+
 function PropertyGrid() {
 
   const { properties: estates, filterObject, totalCount, updateField, updateEstate } = useFormContext();
@@ -63,7 +65,6 @@ function PropertyGrid() {
                       estate={estate}
                       key={estate._id}
                       _id={estate._id}
-                      img={apiGateway.images + estate.imgs[0]}
                       likeLink={properties[index].likeLink}
                       detailsLink={properties[index].detailsLink}
                       price={estate.filterFields.price}

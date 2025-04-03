@@ -15,5 +15,7 @@ propertyRouter.post('/', createProperty);
 propertyRouter.get('/', listProperties);
 propertyRouter.get('/getMyProperties', protect, getUserProperties);
 propertyRouter.get('/:propertyId', getProperty);
+
+
 export default propertyRouter;
 

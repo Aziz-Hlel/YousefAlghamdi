@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 interface ILatestPropertyCard {
   estate: Iproperty;
   _id: string,
-  img: string,
   likeLink: string,
   detailsLink: string,
   price: number,
@@ -34,6 +33,11 @@ const listingTypeExprssion: { [key: string]: string; } = {
   "commercial sale": "For Commercial Sale",
 }
 
+const pickRandomPhoto = () => {
+  return ["property_img1.png", "property_img2.png", "property_img3.png"][Math.floor(Math.random() * 3)]
+}
+
+
 function LatestPropertyCard({ estate, _id, likeLink, period, listing_type, name, address, style, classes, view, }: ILatestPropertyCard) {
 
   const whatFor = listingTypeExprssion[listing_type];
@@ -55,7 +59,7 @@ function LatestPropertyCard({ estate, _id, likeLink, period, listing_type, name,
           <Link to={"/property-single/" + estate._id}>
             <div className="w-[22rem] h-60 flex  justify-center  items-center  bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-cover  bg-no-repeat "
               style={{
-                backgroundImage: (`url(${apiGateway.images + estate.imgs[0]})`),
+                backgroundImage: (`url(${apiGateway.images + pickRandomPhoto()})`),
               }}>
             </div>
           </Link>
