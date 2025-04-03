@@ -27,7 +27,7 @@ type Iproperty = {
     },
 
     nearestPlaces: {
-        [key: string]: string;
+        [key: string]: number;
     }
     additionalDetails: string[]
 

@@ -104,7 +104,7 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
         if (filterObject.city === "All") delete filterObject.city;
         if (filterObject.type === "All") delete filterObject.type;
         const filterSend = defaultFilter ? defaultFilter : filterObject
-        const response = await Http.get<any>(apiGateway.property, { params: filterSend });
+        const response = await Http.get<any>(apiGateway.property.list, { params: filterSend });
         const properties: Iproperty[] = response.data.result
         const totalCount = Number(response.headers["x-total-count"]);
         setTotalCount(totalCount)

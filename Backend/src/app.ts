@@ -29,7 +29,7 @@ app.use(cors({
 
 
 app.use('/api/user', userRouter);
-app.use('/api/estate', propertyRouter);
+app.use('/api/property', propertyRouter);
 
 // Serve static files
 // app.use('/api/images', express.static(path.join(__dirname, '../public/images')));

@@ -42,7 +42,7 @@ export const useGetProperty = (id: string) => {
     const [property, setProperty] = useState<Iproperty>(initialProperty);
 
     const updateProperty = async () => {
-        const property: Iproperty = await (await Http.get<any>(`${apiGateway.property}\\${id}`)).data.result;
+        const property: Iproperty = await (await Http.get<any>(`${apiGateway.property.getById}/${id}`)).data.result;
         console.log("property", typeof property);
         console.log(property)
 

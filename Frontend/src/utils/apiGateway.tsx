@@ -15,7 +15,12 @@ const apiGateway = {
         sigIn: "/user/login",
     },
 
-    property: "/estate",
+    property: {
+        list: "/property",
+        create: "/property",
+        getById: "/property"
+
+    },
 
 
 

@@ -31,6 +31,10 @@ const SubmitPropertySchema = z.object({
     .min(2, { message: "Title must be at least 2 characters long" })
     .max(25, { message: "Title must be at most 25 characters long" }),
 
+  description: z.string({ required_error: "Description is required" })
+    .min(2, { message: "Description must be at least 2 characters long" })
+    .max(200, { message: "Description must be at most 200 characters long" }),
+
   category: z.string({ required_error: "Category is required" })
     .min(2, { message: "Type must be at least 2 characters long" })
     .max(25, { message: "Type must be at most 25 characters long" }),
@@ -71,16 +75,13 @@ const SubmitPropertySchema = z.object({
 
   }),
 
-  description: z.string({ required_error: "Description is required" })
-    .min(2, { message: "Description must be at least 2 characters long" })
-    .max(200, { message: "Description must be at most 200 characters long" }),
 
 
   additionalDetails: z.array(z.string()).default([]),
   imgs: z.array(z.string({ required_error: "Image is required" })).optional(),
   listing_type: z.string({ required_error: "Listing type is required" }),
-
-  nearestPlaces: z.array(z.object({ placeName: z.string(), distance: z.string() })).default([{ placeName: "", distance: "" }]),
+  productTier: z.string({ required_error: "Product tier is required" }).default("free"),
+  nearestPlaces: z.record(z.string(), z.string()).default({}),
 
 });
 
@@ -104,7 +105,6 @@ const PropertyFrom = () => {
 
   const initialImgArray: imageArray = [null, null, null, null];
   const [imgs, setImgs] = useState<imageArray>(initialImgArray);
-
 
   const setAdditionalDetailsWrapper = (event: any) => {
     event.target.checked ? setAdditionalDetails((prev) => [...prev, event.target.name]) : setAdditionalDetails((prev) => prev.filter((item) => item !== event.target.name));
@@ -175,13 +175,18 @@ const PropertyFrom = () => {
 
 
 
-  const handleFormSubmit: SubmitHandler<SubmitPropertyType> = (data) => {
+  const handleFormSubmit: SubmitHandler<SubmitPropertyType> = async (data) => {
     console.log('t5l form validée');
 
     data.additionalDetails = additionalDetails;
 
-    if (NearestLocation.length === 1 && NearestLocation[0].placeName === "" && NearestLocation[0].distance === "") data.nearestPlaces = [];
-    else data.nearestPlaces = NearestLocation;
+    if (NearestLocation.length === 1 && NearestLocation[0].placeName === "" && NearestLocation[0].distance === "") data.nearestPlaces = {};
+    else {
+      data.nearestPlaces = {};
+      NearestLocation.forEach((item) => {
+        if (item.placeName !== "" && item.distance !== "") data.nearestPlaces[item.placeName] = item.distance;
+      });
+    }
 
     if (imgs[0] === null) {
       setError("imgs", { message: "Thumbnail Image is required" });
@@ -193,7 +198,7 @@ const PropertyFrom = () => {
     //   setError("imgs", { message: "rest Image is required" });
     //   return;
     // }
-    Http.post(apiGateway.)
+    await Http.post(apiGateway.property.create, data);
     console.log(data);
 
   };

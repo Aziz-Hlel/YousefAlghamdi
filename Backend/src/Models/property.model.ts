@@ -51,6 +51,14 @@ const propertySchema = new mongoose.Schema({
         maxlength: 50,
         trim: true
     },
+    
+    description: {
+        type: String,
+        required: true,
+        minlength: 3,
+        maxlength: 200,
+        trim: true,
+    },
 
     category: {
         type: String,
@@ -76,14 +84,6 @@ const propertySchema = new mongoose.Schema({
     addresse: {
         type: String,
         required: false,
-    },
-
-    description: {
-        type: String,
-        required: true,
-        minlength: 3,
-        maxlength: 200,
-        trim: true,
     },
 
     imgs: {
