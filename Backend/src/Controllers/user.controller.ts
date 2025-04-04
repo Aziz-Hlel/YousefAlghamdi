@@ -6,6 +6,7 @@ import errorMessages from "../utils/errorMessages";
 import generateToken from "../utils/generateJWT";
 import statusCode from "../utils/statusCode";
 import z from "zod";
+import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
 
 
 export const test = (req: Request, res: Response) => {
@@ -117,5 +118,34 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
     generateToken(res, user);
     res.status(statusCode.OK);
+
+}
+
+
+
+
+
+export const whoAmI = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    const userId = req.user?._id
+
+    if (!userId) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+
+    const user = await User.findById(userId).select("-password");
+
+    if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+
+    const response = {
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        role: user.role
+
+    }
+
+    res.status(statusCode.OK).json({
+        result: response
+    });
 
 }

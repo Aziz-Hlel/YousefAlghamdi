@@ -11,7 +11,7 @@ import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
 const protect = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
 
-    const accessToken = req.headers["authorization"]?.split(" ")[1] || null;
+    const accessToken = req.cookies?.accessToken;
 
     const refreshToken = req.cookies?.refreshToken;
 

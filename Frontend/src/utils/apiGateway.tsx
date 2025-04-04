@@ -11,6 +11,7 @@ const apiGateway = {
     baseUrl: baseUrl,
 
     user: {
+        whoAmI: "/user/",
         signUp: "/user/register",
         sigIn: "/user/login",
     },
@@ -26,7 +27,7 @@ const apiGateway = {
 
     images: baseUrl + "/api/images/",
 
-    getSignedUrl: baseUrl + "/api/images/getSignedUrl"
+    getSignedUrl: baseUrl + "/api/images/getSignedUrl",
 
 }
 

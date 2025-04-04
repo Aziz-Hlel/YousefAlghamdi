@@ -22,6 +22,7 @@ import Property from "./component/Property2/";
 import Header from "./component/Header/index.jsx";
 import HomecHero from "./component/HomecHero2/index.jsx";
 import Layout from "./component/Layout/Layout.js";
+import { AuthProvider } from "./providers/AuthProvider.context.js";
 
 const App2 = () => {
 
@@ -105,43 +106,45 @@ const App2 = () => {
 
     return (
         <>
-            {/* <RouterProvider router={router} />{" "} */}
-            <Router>
+            <AuthProvider>
+
+                {/* <RouterProvider router={router} />{" "} */}
+                <Router>
+                    <Routes>
+
+                        <Route element={<Layout />} >
+
+                            <Route path="/" element={<Home />} />
+                            <Route path="/home" element={<Home />} />
+                            <Route path="/property/:city" element={<Property />} />
+                            <Route path="/property" element={<Property />} />
+                            <Route path="/property-single/:id" element={<PropertySingle />} />
+                            <Route path="/edit-property" element={<EditProperty />} />
+
+                            <Route path="/add-property" element={<AddProperty />} />
+                            <Route path="/submit-property/:whatFor" element={<SubmitProperty />} />
+
+                            <Route path="/dashboard" element={<Dashboard />} />  {/* hedha dhhrli mehichi footer */}
+                            <Route path="/agent-detail" element={<AgentDetail />} />
+                            <Route path="/our-agent" element={<OurAgents />} />
+                            <Route path="/about" element={<AboutUs />} />
+                            <Route path="/pricing" element={<Pricing />} />
+                            <Route path="/payment-method" element={<PaymentMethod />} />
+                            <Route path="/faq" element={<Faq />} />
+                            <Route path="/contact" element={<Contact />} />
+
+                            <Route path="*" element={<ErrorPage />} />
+
+                        </Route>
+
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/signup" element={<SignUp />} />
 
 
-                <Routes>
+                    </Routes>
+                </Router>
 
-                    <Route element={<Layout />} >
-
-                        <Route path="/" element={<Home />} />
-                        <Route path="/home" element={<Home />} />
-                        <Route path="/property/:city" element={<Property />} />
-                        <Route path="/property" element={<Property />} />
-                        <Route path="/property-single/:id" element={<PropertySingle />} />
-                        <Route path="/edit-property" element={<EditProperty />} />
-
-                        <Route path="/add-property" element={<AddProperty />} />
-                        <Route path="/submit-property/:whatFor" element={<SubmitProperty />} />
-
-                        <Route path="/dashboard" element={<Dashboard />} />  {/* hedha dhhrli mehichi footer */}
-                        <Route path="/agent-detail" element={<AgentDetail />} />
-                        <Route path="/our-agent" element={<OurAgents />} />
-                        <Route path="/about" element={<AboutUs />} />
-                        <Route path="/pricing" element={<Pricing />} />
-                        <Route path="/payment-method" element={<PaymentMethod />} />
-                        <Route path="/faq" element={<Faq />} />
-                        <Route path="/contact" element={<Contact />} />
-
-                        <Route path="*" element={<ErrorPage />} />
-
-                    </Route>
-
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/signup" element={<SignUp />} />
-
-
-                </Routes>
-            </Router>
+            </AuthProvider>
         </>
     )
 }

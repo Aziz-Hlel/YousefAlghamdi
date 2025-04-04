@@ -14,7 +14,12 @@ type HTTPRequestConfig = AxiosRequestConfig;
 const Http = {
 
     get: async <T>(url: string, config: HTTPRequestConfig = {}) => {
-        return await axiosInstance.get<T>(url, config);
+        try {
+            return await axiosInstance.get<T>(url, config);
+        } catch (e) {
+            axios.isAxiosError(e) && console.log(e.response?.data);
+            if (axios.isAxiosError(e)) return e.response
+        }
     },
 
     post: async <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {
