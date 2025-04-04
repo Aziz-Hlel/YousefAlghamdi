@@ -1,5 +1,7 @@
+import { LoginFormFields } from "@src/component/Login2";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
+import { AxiosResponse } from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
 
@@ -13,7 +15,7 @@ type IUser = {
 
 type IAuthContext = {
     user: IUser | null | undefined;
-    login: () => void;
+    login: (data: LoginFormFields) => Promise<AxiosResponse<any, any> | undefined>;
     logout: () => void;
 }
 
@@ -34,7 +36,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         const whoAmI = async () => {
             const response = await Http.get(apiGateway.user.whoAmI);
-            response?.status === 200 && console.log(response.data) && setUser(response.data.result);
+            response?.status === 200 && console.log(response.data.result) && setUser(response.data.result);
             response?.status !== 200 && setUser(null);
         }
 
@@ -44,8 +46,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
 
-    const login = async () => {
-        await whoAmI()
+    const login = async (data: LoginFormFields): Promise<AxiosResponse<any, any> | undefined> => {
+        const response = await Http.post(apiGateway.user.sigIn, data)
+        console.log("response", response?.data.result);
+        response?.status === 200 ? setUser(response.data.result) : setUser(null);
+        return response
     };
 
     const logout = () => {
@@ -53,7 +58,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const contextValue: IAuthContext = {
-        user: null,
+        user: user,
         login,
         logout,
     };

@@ -21,8 +21,9 @@ import SubmitProperty from "./component/SubmitProperty2";
 import Property from "./component/Property2/";
 import Header from "./component/Header/index.jsx";
 import HomecHero from "./component/HomecHero2/index.jsx";
-import Layout from "./component/Layout/Layout.js";
+import Layout from "./component/Layouts/Layout.js";
 import { AuthProvider } from "./providers/AuthProvider.context.js";
+import ProtectedLayouts from "./component/Layouts/ProtectedLayouts.js";
 
 const App2 = () => {
 
@@ -119,19 +120,24 @@ const App2 = () => {
                             <Route path="/property/:city" element={<Property />} />
                             <Route path="/property" element={<Property />} />
                             <Route path="/property-single/:id" element={<PropertySingle />} />
-                            <Route path="/edit-property" element={<EditProperty />} />
 
-                            <Route path="/add-property" element={<AddProperty />} />
-                            <Route path="/submit-property/:whatFor" element={<SubmitProperty />} />
 
-                            <Route path="/dashboard" element={<Dashboard />} />  {/* hedha dhhrli mehichi footer */}
                             <Route path="/agent-detail" element={<AgentDetail />} />
                             <Route path="/our-agent" element={<OurAgents />} />
                             <Route path="/about" element={<AboutUs />} />
-                            <Route path="/pricing" element={<Pricing />} />
-                            <Route path="/payment-method" element={<PaymentMethod />} />
+                            {/* <Route path="/pricing" element={<Pricing />} /> */}
+                            {/* <Route path="/payment-method" element={<PaymentMethod />} /> */}
                             <Route path="/faq" element={<Faq />} />
                             <Route path="/contact" element={<Contact />} />
+
+                            <Route element={<ProtectedLayouts />}>
+
+                                <Route path="/edit-property" element={<EditProperty />} />
+                                <Route path="/add-property" element={<AddProperty />} />
+                                <Route path="/submit-property/:whatFor" element={<SubmitProperty />} />
+                                <Route path="/dashboard" element={<Dashboard />} />  {/* hedha dhhrli mehichi footer */}
+
+                            </Route>
 
                             <Route path="*" element={<ErrorPage />} />
 

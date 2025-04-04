@@ -31,11 +31,13 @@ const generateRefreshToken = (payload: { [key: string]: any }) => {
 
 
 const generateToken = (res: Response, user: IUser) => {
-    console.log(ACCESS_SECRET)
 
+    
     const payload = {
         _id: user._id,
         firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
         role: user.role,
     };
 

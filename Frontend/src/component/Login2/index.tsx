@@ -7,8 +7,9 @@ import apiGateway from "@src/utils/apiGateway";
 import Http from "@src/services/Http";
 import logo_img from "@img/logo_sign_in.jpg"
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useAuth } from "@src/providers/AuthProvider.context";
 
-type LoginFormFields = {
+export type LoginFormFields = {
   email: string;
   password: string;
 };
@@ -18,6 +19,7 @@ const Login = () => {
 
 
   const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<LoginFormFields>();
+  const { login } = useAuth();
 
   const emailRegister = register("email", {
     required: "Email is required",
@@ -43,7 +45,8 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<LoginFormFields> = async (data) => {
 
-    const response = await Http.post(apiGateway.user.sigIn, data)
+    // const response = await Http.post(apiGateway.user.sigIn, data)
+    const response = await login(data)
 
     response?.status === 200 ? navigate("/") : console.log(response);
     if (response?.status !== 200) {

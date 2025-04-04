@@ -1,6 +1,7 @@
 import apiGateway from "@src/utils/apiGateway";
 import Iproperty from "@src/models/property.type";
 import { Link } from "react-router-dom";
+import { pickRandomPhoto } from "@src/pickRandomPhoto";
 
 interface ILatestPropertyCard {
   estate: Iproperty;
@@ -33,9 +34,6 @@ const listingTypeExprssion: { [key: string]: string; } = {
   "commercial sale": "For Commercial Sale",
 }
 
-const pickRandomPhoto = () => {
-  return ["property_img1.png", "property_img2.png", "property_img3.png"][Math.floor(Math.random() * 3)]
-}
 
 
 function LatestPropertyCard({ estate, _id, likeLink, period, listing_type, name, address, style, classes, view, }: ILatestPropertyCard) {

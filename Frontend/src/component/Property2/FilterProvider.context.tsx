@@ -105,8 +105,8 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
         if (filterObject.type === "All") delete filterObject.type;
         const filterSend = defaultFilter ? defaultFilter : filterObject
         const response = await Http.get<any>(apiGateway.property.list, { params: filterSend });
-        const properties: Iproperty[] = response.data.result
-        const totalCount = Number(response.headers["x-total-count"]);
+        const properties: Iproperty[] = response?.data.result
+        const totalCount = Number(response?.headers["x-total-count"]);
         setTotalCount(totalCount)
         // console.log("estates", estates);
         console.log("t5l ????????????");

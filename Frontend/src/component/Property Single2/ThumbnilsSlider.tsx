@@ -4,6 +4,8 @@ import { responsiveLogoSlider2 } from "../../utils/responsiveSlider";
 import ButtonGroup from "../CustomDot/CustomArrow";
 import { useSinglePropertyContext } from "./PropertySingleProvider.context";
 import apiGateway from "@src/utils/apiGateway";
+import { pickRandomPhoto } from "@src/pickRandomPhoto";
+
 
 function ThumbnailsSlider() {
 
@@ -22,7 +24,7 @@ function ThumbnailsSlider() {
 
         {
           property.imgs.map((img, index) =>
-            <ThumbnailsCard key={index} img={apiGateway.images + img} />
+            <ThumbnailsCard key={index} img={apiGateway.images + pickRandomPhoto()} />
           )
         }
         <ThumbnailsCard img="https://placehold.co/270x180" />
