@@ -29,16 +29,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const whoAmI = async () => {
         const response = await Http.get(apiGateway.user.whoAmI);
-        response?.status === 200 && console.log(response.data);
+        response?.status === 200 ? setUser(response.data.result) : setUser(null);
         response?.status !== 200 && setUser(null);
     }
 
     useEffect(() => {
-        const whoAmI = async () => {
-            const response = await Http.get(apiGateway.user.whoAmI);
-            response?.status === 200 && console.log(response.data.result) && setUser(response.data.result);
-            response?.status !== 200 && setUser(null);
-        }
+
 
         whoAmI()
         console.log("user", user);

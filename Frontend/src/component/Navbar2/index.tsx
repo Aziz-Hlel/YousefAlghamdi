@@ -2,9 +2,14 @@ import ProtoTypes from "prop-types";
 import NavBtn from "./NavBtn";
 import { Link } from "react-router-dom";
 import CustomLanguageOption from "./CustomLanguageOption";
-function Navbar({ handleSidebar, secondNav }: any) {
+import { useAuth } from "@src/providers/AuthProvider.context";
+const Navbar = ({ handleSidebar, secondNav }: any) => {
+
+  const { user } = useAuth();
 
   return (
+
+
     <div className={"homec-header__middle"}>
       <div className={"container"}>
         <div className="row align-items-center">
@@ -79,7 +84,7 @@ function Navbar({ handleSidebar, secondNav }: any) {
                 <span className="line"></span>
               </button>
               <div className="homec-header__button">
-                <Link to="/login" className="homec-header__icon">
+                <Link to={user === null || user === undefined ? "/login" : "/dashboard/personal-info"} className="homec-header__icon">
                   <svg
                     width="28"
                     height="32"

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import FilterTabBtn from "../Filter/FilterTabBtn";
-import HomecFilter from "../Filter/HomecFilter";
+import FilterTabBtn from "../Filter2/FilterTabBtn2";
+import HomecFilter from "../Filter2/HomecFilter2";
 import logo from "/img/homeHeroV2.webp"
 
 function HomecHero() {
   const [filter, setFilter] = useState("Rent");
-  const handleFilter = (name:any) => {
+  const handleFilter = (name: any) => {
     setFilter(name);
   };
   return (
@@ -58,7 +58,13 @@ function HomecHero() {
                     />
                     <FilterTabBtn
                       link="#homec-tab3"
-                      text="Pre-approval"
+                      text="Commercial Rent"
+                      isActive={filter}
+                      handleFilter={handleFilter}
+                    />
+                    <FilterTabBtn
+                      link="#homec-tab3"
+                      text="Commercial Sale"
                       isActive={filter}
                       handleFilter={handleFilter}
                     />

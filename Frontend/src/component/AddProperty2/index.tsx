@@ -50,7 +50,7 @@ const AddProperty = () => {
               <PropertyAddCard
                 img="/img/property-rent.png"
                 why={listing_types.commercialRent}
-                link={"/submit-property" + listing_types.commercialRent}
+                link={"/submit-property/" + listing_types.commercialRent}
                />
 
               <PropertyAddCard
@@ -64,7 +64,6 @@ const AddProperty = () => {
         </section>
 
         <DownloadApp />
-        <Footer />
         <GoTopBtn />
       </>
     );

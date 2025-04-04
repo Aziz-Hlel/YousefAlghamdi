@@ -12,7 +12,7 @@ import PersonalInfo from "./PersonalInfo2";
 import Saved from "./Saved";
 import Reviews from "./Reviews";
 import ChangePassword from "./ChangePassword";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import GoTopBtn from "../Button/GoTopBtn";
 import Preloader from "../Loader";
 
@@ -62,16 +62,18 @@ function Dashboard() {
                       activeComponent={activeComponent}
                       setComponent={setActiveComponent}
                     />
-                    {activeComponent === "Dashboard" && <DashboardComp />}
+                    {/* {activeComponent === "Dashboard" && <DashboardComp />} */}
 
-                    {activeComponent === "My Properties" && <MyProperties />}
+                    {/* {activeComponent === "My Properties" && <MyProperties />} */}
                     {/* {activeComponent === "Invoice" && <InvoiceTable />} */}
-                    {activeComponent === "Personals Info" && <PersonalInfo />}
+                    {/* {activeComponent === "Personals Info" && <PersonalInfo />} */}
                     {/* {activeComponent === "Saved" && <Saved />} */}
                     {/* {activeComponent === "Reviews" && <Reviews />} */}
-                    {activeComponent === "Change Password" && (
+                    {/* {activeComponent === "Change Password" && (
                       <ChangePassword />
-                    )}
+                    )} */}
+                    <Outlet />
+
                   </div>
                 </div>
               </div>

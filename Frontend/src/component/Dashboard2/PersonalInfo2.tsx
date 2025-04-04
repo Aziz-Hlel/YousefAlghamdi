@@ -27,14 +27,14 @@ function PersonalInfo() {
             </div>
             <ul className="homec-agent-detail__list mg-top-30">
               <li>
-                <img src="img/agent-phone.svg" alt="#" /> +0938 4937 23
+                <img src="/img/agent-phone.svg" alt="#" /> +0938 4937 23
               </li>
               <li>
-                <img src="img/agent-email.svg" alt="#" />{" "}
+                <img src="/img/agent-email.svg" alt="#" />{" "}
                 <a href="mailto:youremailad@gmail.com">Youremailad@gmail.com</a>
               </li>
               <li>
-                <img src="img/agent-location.svg" alt="#" /> 2972 Westheimer Rd.
+                <img src="/img/agent-location.svg" alt="#" /> 2972 Westheimer Rd.
                 Santa Ana, Illinois 85486{" "}
               </li>
             </ul>

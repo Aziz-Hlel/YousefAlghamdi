@@ -1,5 +1,5 @@
 import ProtoTypes from "prop-types";
-import DashboardSidebarBtn from "../Button/DashboardSidebarBtn";
+import DashboardSidebarBtn from "../Button2/DashboardSidebarBtn2";
 
 function Sidebar({ activeComponent, setComponent }) {
   return (
@@ -10,6 +10,7 @@ function Sidebar({ activeComponent, setComponent }) {
           active={activeComponent}
           handleActive={setComponent}
           title="Dashboard"
+          path="dashboard/"
         >
           <svg
             width="17"
@@ -30,6 +31,7 @@ function Sidebar({ activeComponent, setComponent }) {
           active={activeComponent}
           handleActive={setComponent}
           title="My Properties"
+          path="dashboard/my-properties"
         >
           <svg
             width="32"
@@ -67,7 +69,8 @@ function Sidebar({ activeComponent, setComponent }) {
         <DashboardSidebarBtn
           active={activeComponent}
           handleActive={setComponent}
-          title="Personals Info"
+          title="Personal Info"
+          path="dashboard/personal-info"
         >
           <svg
             width="15"
@@ -121,6 +124,7 @@ function Sidebar({ activeComponent, setComponent }) {
           active={activeComponent}
           handleActive={setComponent}
           title="Change Password"
+          path="dashboard/change-password"
         >
           <svg
             width="17"

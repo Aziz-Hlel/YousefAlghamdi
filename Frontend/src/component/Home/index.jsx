@@ -8,6 +8,7 @@ import DownloadApp from "../DownloadApp2";
 import Features2 from "../Features2";
 import Header from "../Header";
 import HomecHero from "../HomecHero2/";
+import HomecHeroV2 from "../HomecHero2/HomecHeroV2";
 import LatestProperty from "../LatestProperty";
 import CitiesListing from "../CitiesListing2";
 import Preloader from "../Loader";
@@ -28,8 +29,9 @@ function Home() {
   } else {
     component = (
       <>
-        <HomecHero />
-        <CitiesListing />
+        {/* <HomecHero /> */}
+        <HomecHeroV2/>
+        {/* <CitiesListing /> */}
         <LatestPropertyV2 />
         <Features2 />
         <About />

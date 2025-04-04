@@ -21,7 +21,7 @@ function DashboardPropertyCard({ status, image, why, title,   location, }: IDash
           <div className="homec-dashboard-property__badge">For {why}</div>
           <h3 className="homec-dashboard-property__title">{title}</h3>
           <div className="homec-property__text">
-            <img src="img/location-icon.svg" alt="#" />
+            <img src="/img/location-icon.svg" alt="#" />
             <p>{location}</p>
           </div>
 
