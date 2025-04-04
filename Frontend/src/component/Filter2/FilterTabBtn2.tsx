@@ -8,14 +8,14 @@ type FilterTabBtnProps = {
 };
 
 
-function FilterTabBtn({ link, text, isActive, handleFilter }:FilterTabBtnProps) {
+function FilterTabBtn({ link, text, isActive, handleFilter }: FilterTabBtnProps) {
   return (
     <a
       className={`list-group-item ${isActive === text && "active"}`}
       data-bs-toggle="list"
       href={link}
       role="tab"
-      onClick={() => handleFilter(text)}
+      onClick={(e) => { e.preventDefault(); handleFilter(text) }}
     >
       {text}
     </a>

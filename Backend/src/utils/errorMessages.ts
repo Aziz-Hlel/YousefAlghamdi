@@ -6,10 +6,14 @@ const errorMessages = {
         BAD_Request: "bad request",
         Invalid_Credentials: "Invalid credentials",
         User_Already_Exists: "User already exists",
+        FORBIDDEN: "forbidden",
     },
 
     AUTH: {
         INVALID_TOKEN: "invalid token",
+        PERMISSION_DENIED: "permission denied",
+        INVALID_CREDENTIALS: "invalid credentials",
+
     },
 
     IMAGES: {
@@ -19,6 +23,9 @@ const errorMessages = {
         INVALID_PURPOSE_TYPE: "invalid purpose type",
 
     },
+    // PERMISSION:{
+    //     FORBIDDEN: "forbidden",
+    // }
 };
 
 

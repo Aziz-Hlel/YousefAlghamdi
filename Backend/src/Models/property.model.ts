@@ -122,7 +122,7 @@ const propertySchema = new mongoose.Schema({
     },
 
 
-    status: {
+    active: {
         type: Boolean,
         default: false,
     },
