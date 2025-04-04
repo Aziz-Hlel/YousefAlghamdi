@@ -51,7 +51,7 @@ const propertySchema = new mongoose.Schema({
         maxlength: 50,
         trim: true
     },
-    
+
     description: {
         type: String,
         required: true,
@@ -118,16 +118,33 @@ const propertySchema = new mongoose.Schema({
     agentId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
-    },
-
-    available: {
-        type: Date,
-        required: false,
         default: null,
     },
 
 
+    status: {
+        type: Boolean,
+        default: false,
+    },
+
+    advanced: {
+        state: {
+            type: String,
+            required: true,
+        },
+        available: {
+            type: Date,
+            required: false,
+            default: null,
+        },
+        updated_version: { type: Map, of: Schema.Types.Mixed, } // allows any type for values 
+
+    },
+
+
+
 },
+
 
     { timestamps: true },
 
