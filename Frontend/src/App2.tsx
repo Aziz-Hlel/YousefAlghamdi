@@ -153,7 +153,6 @@ const App2 = () => {
 
 
 
-                                {/* hedha dhhrli mehichi footer */}
 
                             </Route>
 

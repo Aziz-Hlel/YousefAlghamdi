@@ -29,7 +29,7 @@ function DashboardPropertyCard({ status, image, why, title,   location, }: IDash
       </div>
       {/* Property Button */}
       <div className="homec-dashboard-property__buttons ">
-        <button className="homec-dashboard-property__btn flex justify-center items-center">
+        {/* <button className="homec-dashboard-property__btn flex justify-center items-center">
           <svg
             width="23"
             height="14"
@@ -39,7 +39,7 @@ function DashboardPropertyCard({ status, image, why, title,   location, }: IDash
           >
             <path d="M11.6793 0.0471191C7.48656 0.0471191 3.68437 2.341 0.878736 6.06688C0.649796 6.37213 0.649796 6.79859 0.878736 7.10384C3.68437 10.8342 7.48656 13.1281 11.6793 13.1281C15.872 13.1281 19.6742 10.8342 22.4799 7.10833C22.7088 6.80308 22.7088 6.37662 22.4799 6.07137C19.6742 2.341 15.872 0.0471191 11.6793 0.0471191ZM11.9801 11.1933C9.19687 11.3684 6.8985 9.07452 7.07357 6.28684C7.21722 3.98847 9.08016 2.12553 11.3785 1.98188C14.1617 1.80681 16.4601 4.10069 16.285 6.88837C16.1369 9.18225 14.2739 11.0452 11.9801 11.1933ZM11.8409 9.06554C10.3416 9.15981 9.1026 7.92533 9.20136 6.426C9.27767 5.18704 10.2832 4.18599 11.5222 4.10518C13.0215 4.01091 14.2605 5.24539 14.1617 6.74472C14.0809 7.98818 13.0754 8.98923 11.8409 9.06554Z" />
           </svg>
-        </button>
+        </button> */}
         <button className="homec-dashboard-property__btn  homec-dashboard-property__btn--edit flex justify-center items-center">
           <svg
             width="20"
