@@ -209,8 +209,8 @@ const PropertyFrom = () => {
   if (whatFor && !listing_typesValues.includes(whatFor)) return <></>
 
   return (
-    <section className="pd-top-80 pd-btm-80">
-      <div className="container">
+    <section className="pd-top-80 pd-btm-80"  style={{ pointerEvents: 'none', opacity: 0.5, }} >
+      <div className="container" aria-disabled>
         <div className="row">
           <div className="col-12">
 

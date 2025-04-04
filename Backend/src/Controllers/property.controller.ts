@@ -10,14 +10,23 @@ import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
 
 
 
-export const createProperty = async (req: Request, res: Response, next: NextFunction) => {
+export const createProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    const clientId = req.user?._id!;
+    req.body.active = false
+    req.body.advanced = {
+        state: "new",
+        available: null,
+        updated_version: {},
+    };
 
     const property = new Property({
         ...req.body,
-        clientId: new mongoose.Types.ObjectId("67e131037ada90f7bcda8e81"),
+        clientId: clientId,
         agentId: new mongoose.Types.ObjectId("67ed13d95925a009ce7f3ae1"),
 
-    })
+    });
+
     try {
         await property.save();
         res.json('Property created successful');
@@ -58,7 +67,7 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
     if (type) filters.type = type;
 
     const page = Number(req.query.page);
-    filters.shown = true;
+    filters.active = true;
     if (!page || isNaN(page)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     const limit = 6;

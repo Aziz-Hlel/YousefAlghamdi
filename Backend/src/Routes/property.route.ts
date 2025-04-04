@@ -11,7 +11,7 @@ const propertyRouter = express.Router();
 
 
 
-propertyRouter.post('/', createProperty);
+propertyRouter.post('/', protect, createProperty);
 propertyRouter.get('/', listProperties);
 propertyRouter.get('/getMyProperties', protect, getUserProperties);
 propertyRouter.get('/:propertyId', getProperty);
