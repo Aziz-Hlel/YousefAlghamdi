@@ -13,6 +13,7 @@ const errorMessages = {
         INVALID_TOKEN: "invalid token",
         PERMISSION_DENIED: "permission denied",
         INVALID_CREDENTIALS: "invalid credentials",
+        TOKEN_EXPIRED: "token expired",
 
     },
 
