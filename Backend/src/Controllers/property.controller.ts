@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import errorMessages from "../utils/errorMessages";
 import statusCode from "../utils/statusCode";
 import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
+import roles from "../types/roles.type";
 
 
 
@@ -69,18 +70,18 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
     if (!page || isNaN(page)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     const limit = 6;
-    console.log('filters', filters)
+    // console.log('filters', filters)
     try {
 
         const [properties, total] = await Promise.all([
             Property.find(filters)
                 .limit(limit)
-                .skip((page - 1) * limit),
+                .skip((page - 1) * limit)
+                .sort({ createdAt: -1 }),
             Property.countDocuments(filters)
         ]);
 
-        // res.set('Content-Range', `products/women/categorie`);
-        res.set("X-Total-Count", total.toString()); // Optional, useful for frontend
+        res.set("x-total-count", total.toString()); // Optional, useful for frontend
 
         res.json({
             result: properties,
@@ -120,38 +121,62 @@ export const getProperty = async (req: Request, res: Response, next: NextFunctio
 export const getUserProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
     const userId = req.user?._id;
-    console.log('userId', userId)
 
+    const page = Number(req.query.page) || 1;
+    const limit = 6;
 
     if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
-    if (req.user?.role === "user")
+    if (req.user?.role === roles.USER)
+
         try {
 
-            const estate = await Property.find({ clientId: userId });
-            console.log(estate, estate.length)
+            const [properties, total] = await Promise.all([
+
+
+                Property.find({ clientId: userId })
+                    .limit(limit)
+                    .skip((page - 1) * limit)
+                    .sort({ updatedAt: -1 }),
+                Property.countDocuments({ clientId: userId })
+            ]);
+
+
+            res.set("x-total-count", total.toString()); // Optional, useful for frontend
+
             res.json({
 
-                result: estate,
+                result: properties,
 
             });
+
 
             return
         } catch (error) {
             next(error);
         }
-    console.log('t5l')
-    if (req.user?.role === "agent")
+
+
+    if (req.user?.role === roles.AGENT)
 
         try {
 
-            const estate = await Property.find({ agentId: userId });
+            const [properties, total] = await Promise.all([
+                Property.find({ agentId: userId })
+                    .limit(limit)
+                    .skip((page - 1) * limit)
+                    .sort({ updatedAt: -1 }),
+                Property.countDocuments({ agentId: userId })
+            ]);
+
+            res.set("x-total-count", total.toString()); // Optional, useful for frontend
 
             res.json({
 
-                result: estate,
+                result: properties,
 
             });
+
             return
 
         } catch (error) {
@@ -162,4 +187,4 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
 
 
     return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
-}
+};

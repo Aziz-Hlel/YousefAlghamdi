@@ -3,7 +3,7 @@
 function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number, handlePage: any, currentPage: number }) {
   console.log("totalPage", totalPage);
   console.log("currentPage", currentPage);
-  
+
   return (
     <div className="row mg-top-40">
       <div className="homec-pagination">
@@ -12,7 +12,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
             <a
               style={{ cursor: "pointer" }}
               onClick={() => {
-                handlePage(currentPage - 1);
+                currentPage > 1 && handlePage(currentPage - 1);
               }}
             >
               Prev
@@ -101,7 +101,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
           >
             <a
               onClick={() => {
-                handlePage(currentPage + 1);
+                currentPage < totalPage && handlePage(currentPage + 1);
               }}
             >
               Next

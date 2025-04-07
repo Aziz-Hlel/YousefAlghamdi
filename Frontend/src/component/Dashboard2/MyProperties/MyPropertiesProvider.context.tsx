@@ -1,38 +1,47 @@
+import Iproperty from "@src/models/property.type";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import { createContext, useContext, useEffect, useState } from "react";
 
+type IMyPropertiesContext = {
+  properties: Iproperty[];
+  totalCount: number;
+  fetchProperties(page: number): Promise<void>;
+}
 
 
-
-const MyPropertiesContext = createContext({});
+const MyPropertiesContext = createContext<IMyPropertiesContext | undefined>(undefined);
 
 
 
 const MyPropertiesProvider = ({ children }: { children: React.ReactNode }) => {
 
-  const [properties, setProperties] = useState([]);
-  const totalCount: number = properties.length || 0;
+  const [properties, setProperties] = useState<Iproperty[]>([]);
+  const [totalCount, setTotalCount] = useState(0);
+
+  const fetchProperties = async (page?: number) => {
 
 
+    const response = await Http.get(apiGateway.property.myProperties.list, { params: { page: page ?? 1 } });
+    const properties: Iproperty[] = response?.data.result || [];
+    const totalCount = Number(response?.headers["x-total-count"]);
+
+    setTotalCount(totalCount);
+    setProperties(properties);
+
+  };
 
   useEffect(() => {
     // Fetch properties from API or any other source
-    const fetchProperties = async () => {
-      // Simulate an API call
-      
-      const response = await Http.get(apiGateway.property.myProperties.list);
-      const properties = response?.data.result || [];
-      setProperties(properties);
 
-      const totalCount = Number(response?.headers["x-total-count"]);
-    };
 
     fetchProperties();
-  }, [])
+
+  }, []);
+
 
   return (
-    <MyPropertiesContext.Provider value={{}}>
+    <MyPropertiesContext.Provider value={{ properties, fetchProperties,totalCount }}>
       {children}
     </MyPropertiesContext.Provider>
   );

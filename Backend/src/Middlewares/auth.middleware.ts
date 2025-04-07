@@ -40,7 +40,7 @@ const protect = async (req: AuthenticatedRequest, res: Response, next: NextFunct
     if (!refreshToken) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
 
 
-
+    // console.log("ousll ?")
 
     const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET as string;
     jwt.verify(accessToken, JWT_ACCESS_SECRET, (err: any, decoded: any) => {

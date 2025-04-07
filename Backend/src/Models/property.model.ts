@@ -16,13 +16,7 @@ export interface Iproperty extends Document {
     addresse: string,
 
     imgs: string[],
-    videos: string[],
-
-    listing_type: string,
-    productTier: string,
-
-    clientId: string,
-    agentId: string,
+    // videos: string[],
 
     filterFields: {
         price: number,
@@ -31,13 +25,23 @@ export interface Iproperty extends Document {
         bathrooms?: number,
     },
 
+    listing_type: string,
+
+    additionalDetails: string[];
+
     nearestPlaces: {
         [key: string]: string;
     }
-    additionalDetails: {
-        [key: string]: string,
-    }
-    show: boolean,
+
+    productTier: string,
+
+    clientId: string,
+    agentId: string,
+
+
+
+
+    active: boolean,
 
     advanced: {
         state: string,
@@ -77,18 +81,18 @@ const propertySchema = new mongoose.Schema({
 
     city: {
         type: String,
-        required: false,
+        required: true,
 
     },
 
     delegation: {
         type: String,
-        required: false,
+        required: true,
     },
 
     addresse: {
         type: String,
-        required: false,
+        required: true,
     },
 
     imgs: {
@@ -100,7 +104,7 @@ const propertySchema = new mongoose.Schema({
 
     listing_type: {
         type: String,
-        required: false,
+        required: true,
     },
 
     additionalDetails: {
@@ -117,12 +121,12 @@ const propertySchema = new mongoose.Schema({
 
     clientId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',
+        ref: 'User',
     },
 
     agentId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',
+        ref: 'User',
         default: null,
     },
 
@@ -144,7 +148,7 @@ const propertySchema = new mongoose.Schema({
         },
         updated_version: {
             type: Map, of: Schema.Types.Mixed,
-            default: {},
+            default: null,
         } // allows any type for values 
 
     },

@@ -14,13 +14,13 @@ const filterFieldsTypes = {
     rooms: {
         type: Number,
         required: false,
-        default: null,
+        default: undefined,
     },
 
     bathrooms: {
         type: Number,
         required: false,
-        default: null,
+        default: undefined,
     },
 
 
