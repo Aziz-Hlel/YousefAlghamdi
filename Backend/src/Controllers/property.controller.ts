@@ -50,17 +50,15 @@ const filterFunc = (minVal: any, maxVal: any, filterKeyName: string, filters: an
 export const listProperties = async (req: Request, res: Response, next: NextFunction) => {
 
     const { city, type, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
-    // console.log('req.query', req.query)
+
     let filters: any = {};
 
     filterFunc(minPrice, maxPrice, "filterFields.price", filters);
     filterFunc(minNumberOfRooms, maxNumberOfRooms, "filterFields.rooms", filters);
     filterFunc(minNumberOfBathrooms, maxNumberOfBathrooms, "filterFields.bathrooms", filters);
-    // filterFunc(minNumberOfSquareFeet, maxNumberOfSquareFeet, "", filters);
+
 
     if (forSale === "true" && forRent === "true") { }
-    // else if (forSale === "true") filters["filterFields.forSale"] = forSale;
-    // else if (forRent === "true") filters["filterFields.forRent"] = forRent;
 
 
     if (city) filters.city = city;
@@ -105,7 +103,7 @@ export const getProperty = async (req: Request, res: Response, next: NextFunctio
     if (!propertyId || !mongoose.Types.ObjectId.isValid(propertyId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     try {
-        const estate = await Property.findById(propertyId)
+        const estate = await Property.findById(propertyId);
         res.json({
 
             result: estate,
@@ -144,6 +142,7 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
         }
     console.log('t5l')
     if (req.user?.role === "agent")
+
         try {
 
             const estate = await Property.find({ agentId: userId });

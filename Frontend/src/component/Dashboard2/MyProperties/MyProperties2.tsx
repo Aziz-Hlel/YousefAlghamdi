@@ -1,8 +1,8 @@
 import Layout from "./Layout2";
-import DashboardPropertyCard from "../Cards/DashboardPropertyCard2";
-import Pagination from "../Pagination2";
+import DashboardPropertyCard from "../../Cards/DashboardPropertyCard2";
+import Pagination from "../../Pagination2";
 import { useState } from "react";
-import properties from "../../data/property";
+import properties from "../../../data/property";
 
 function MyProperties() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,7 +12,7 @@ function MyProperties() {
 
     setCurrentPage(page);
   };
-  
+
   return (
     <>
       <Layout title="My Properties">

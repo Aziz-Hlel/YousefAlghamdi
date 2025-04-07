@@ -31,8 +31,16 @@ type Iproperty = {
     }
     additionalDetails: string[]
 
-    available: Date | undefined, // badl undefined b null b3d 
+
+    show: boolean,
+
+    advanced: {
+        state: string,
+        available: Date,
+        updated_version: { [key: string]: any }
+    },
+    
 }
 
 
-    export default Iproperty;
+export default Iproperty;

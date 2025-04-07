@@ -6,7 +6,7 @@ import DownloadApp from "../DownloadApp";
 import Footer from "../Footer";
 import Sidebar from "./Sidebar";
 import DashboardComp from "./DashboardComp";
-import MyProperties from "./MyProperties2";
+import MyProperties from "./MyProperties/MyProperties2";
 import InvoiceTable from "./InvoiceTable";
 import PersonalInfo from "./PersonalInfo2";
 import Saved from "./Saved";

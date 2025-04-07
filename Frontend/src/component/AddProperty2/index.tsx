@@ -7,7 +7,7 @@ import PropertyAddCard from "../Cards/PropertyAddCard2";
 import { useEffect, useState } from "react";
 import Preloader from "../Loader";
 import GoTopBtn from "../Button/GoTopBtn";
-import { listing_types } from "@src/types/listing_type.types";
+import { listing_types } from "@src/types/listing_types.types";
 
 const AddProperty = () => {
   const [isLoading, setisLoadingg] = useState(true);
@@ -51,7 +51,7 @@ const AddProperty = () => {
                 img="/img/property-rent.png"
                 why={listing_types.commercialRent}
                 link={"/submit-property/" + listing_types.commercialRent}
-               />
+              />
 
               <PropertyAddCard
                 img="/img/property-sale.png"

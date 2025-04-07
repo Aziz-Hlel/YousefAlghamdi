@@ -19,7 +19,7 @@ import { categoriesType, ResidentialProperties, sub_categories } from "@src/type
 import { additionalDetailsAttributes } from "@src/types/additionalDetails.types";
 import { FileWithPath } from "react-dropzone";
 import { useParams } from "react-router-dom";
-import { listing_typesValues } from "@src/types/listing_type.types";
+import { listing_typesValues } from "@src/types/listing_types.types";
 import { cities, delegations } from "@src/types/cities.delegations.types";
 import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 import Http from "@src/services/Http";
@@ -209,7 +209,7 @@ const PropertyFrom = () => {
   if (whatFor && !listing_typesValues.includes(whatFor)) return <></>
 
   return (
-    <section className="pd-top-80 pd-btm-80"  style={{ pointerEvents: 'none', opacity: 0.5, }} >
+    <section className="pd-top-80 pd-btm-80"  >
       <div className="container" aria-disabled>
         <div className="row">
           <div className="col-12">

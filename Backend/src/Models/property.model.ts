@@ -37,8 +37,13 @@ export interface Iproperty extends Document {
     additionalDetails: {
         [key: string]: string,
     }
+    show: boolean,
 
-    available: Date | undefined, // badl undefined b null b3d 
+    advanced: {
+        state: string,
+        available: Date,
+        updated_version: { [key: string]: any }
+    },
 }
 
 
@@ -137,7 +142,10 @@ const propertySchema = new mongoose.Schema({
             required: false,
             default: null,
         },
-        updated_version: { type: Map, of: Schema.Types.Mixed, } // allows any type for values 
+        updated_version: {
+            type: Map, of: Schema.Types.Mixed,
+            default: {},
+        } // allows any type for values 
 
     },
 
