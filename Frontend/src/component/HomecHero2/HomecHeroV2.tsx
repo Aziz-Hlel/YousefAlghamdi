@@ -3,10 +3,13 @@ import FilterTabBtn from "../Filter2/FilterTabBtn2";
 import HomecFilter from "../Filter2/HomecFilter2";
 import logo from "/img/homeHeroV2.webp"
 
+
+
 function HomecHero() {
-  const [filter, setFilter] = useState("Rent");
-  const handleFilter = (name: any) => {
-    setFilter(name);
+  const [listing_Type, setListing_Type] = useState("Rent");
+
+  const handleListing_Type = (name: string) => {
+    setListing_Type(name);
   };
   return (
     <section
@@ -45,40 +48,20 @@ function HomecHero() {
                     role="tablist"
                   >
                     <FilterTabBtn
-                      link="#homec-tab1"
                       text="Rent"
-                      isActive={filter}
-                      handleFilter={handleFilter}
+                      isActive={listing_Type}
+                      handleListing_Type={handleListing_Type}
                     />
                     <FilterTabBtn
-                      link="#homec-tab2"
                       text="Sell"
-                      isActive={filter}
-                      handleFilter={handleFilter}
-                    />
-                    <FilterTabBtn
-                      link="#homec-tab3"
-                      text="Commercial Rent"
-                      isActive={filter}
-                      handleFilter={handleFilter}
-                    />
-                    <FilterTabBtn
-                      link="#homec-tab3"
-                      text="Commercial Sale"
-                      isActive={filter}
-                      handleFilter={handleFilter}
+                      isActive={listing_Type}
+                      handleListing_Type={handleListing_Type}
                     />
                   </div>
                 </div>
-                <div className="homec-hero__tabs--detail">
-                  <div className="tab-content" id="nav-tabContent">
-                    {filter === "Rent" ? (
-                      <HomecFilter />
-                    ) : filter === "Sell" ? (
-                      <HomecFilter />
-                    ) : (
-                      filter === "Pre-approval" && <HomecFilter />
-                    )}
+                <div className="homec-hero__tabs--detail  lg:w-[58rem] lg:ml-8 ">
+                  <div className="tab-content  " id="nav-tabContent">
+                    <HomecFilter />
                   </div>
                 </div>
               </div>

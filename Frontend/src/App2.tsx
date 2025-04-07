@@ -30,7 +30,7 @@ import Reviews from "./component/Dashboard2/Reviews2.js";
 import DashboardComp from "./component/Dashboard2/DashboardComp2.js";
 import ChangePassword from "./component/Dashboard2/ChangePassword2.js";
 import MyPropertiesProvider from "./component/Dashboard2/MyProperties/MyPropertiesProvider.context.js";
-import InvoiceTable from "./component/Dashboard2/InvoiceTable2.js";
+import NewClientsTable from "./component/Dashboard2/InvoiceTable2.js";
 
 const App2 = () => {
 
@@ -149,7 +149,7 @@ const App2 = () => {
                                     <Route index element={<DashboardComp />} />
                                     <Route path="my-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} />
                                     <Route path="personal-info" element={<PersonalInfo />} />
-                                    <Route path="new-clients" element={<InvoiceTable />} />
+                                    <Route path="new-clients" element={<NewClientsTable />} />
                                     <Route path="Reviews" element={<Reviews />} />
                                     <Route path="change-password" element={<ChangePassword />} />
 

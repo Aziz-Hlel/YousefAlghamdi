@@ -1,66 +1,57 @@
+import { z } from "zod";
 import FromField from "./FromField2";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { categoriesType, ResidentialProperties } from "@src/types/categories.subcategories.types";
+import { AbuDhabiEmirate, cities } from "@src/types/cities.delegations.types";
+import { useState } from "react";
+
+
+const HomeFilterSchema = z.object({
+  listing_type: z.string(),
+  category: z.string(),
+  city: z.string(),
+  price: z.string(),
+
+});
+
+type HomeFilterType = z.infer<typeof HomeFilterSchema>;
 
 function HomecFilter() {
+
+  const listing_Type = [
+    { name: "Non commercial", id: "non commercial" },
+    { name: "Commercial", id: "commercial" },
+
+  ]
+  const [commercial, setCommercial] = useState(false);
+  const [category, setCategory] = useState(categoriesType[ResidentialProperties]);
+  const [city, setCity] = useState(cities[AbuDhabiEmirate]);
+
   return (
     <div className="tab-pane fade show active " id="homec-tab1" role="tabpanel">
       <div className="homec-filters homec-filters__margin">
         <form action="#">
-          <div className="homec-filter-group">
+          <div className="homec-filter-group lg:justify-center">
+
             {/* Form Group   */}
+            <FromField
+              name="Listing Type"
+              options={listing_Type}
+            />
 
             <FromField
               name="Category"
-              options={[
-                {
-                  id: 1,
-                  name: "Apartment",
-                },
-                {
-                  id: 2,
-                  name: "Family House",
-                },
-                {
-                  id: 2,
-                  name: "Mordan Villa",
-                },
-              ]}
+              options={Object.keys(categoriesType).map((item: any) => { return { id: item, name: item } })}
             />
 
             <FromField
               name="City"
-              options={[
-                {
-                  id: 1,
-                  name: "Apartment",
-                },
-                {
-                  id: 2,
-                  name: "Family House",
-                },
-                {
-                  id: 2,
-                  name: "Mordan Villa",
-                },
-              ]}
+              options={Object.keys(cities).map((item: any) => { return { id: item, name: item } })}
+
             />
 
-            <FromField
-              name="Average Price"
-              options={[
-                {
-                  id: 1,
-                  name: "$400-$600",
-                },
-                {
-                  id: 2,
-                  name: "$600-$800",
-                },
-                {
-                  id: 2,
-                  name: "$800-$1000",
-                },
-              ]}
-            />
+
 
             {/* Button  */}
             <button type="submit" className="homec-btn homec-btn__second">

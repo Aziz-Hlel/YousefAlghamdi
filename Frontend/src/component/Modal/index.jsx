@@ -58,7 +58,7 @@ function InvoiceView({ isOpen, handleModal, invoice }) {
                     <span>Name:</span> {name}
                   </li>
                   <li>
-                    <span>Number:</span> {number}
+                    <span>Number:</span> {number }
                   </li>
                   <li>
                     <span>Email:</span> <a href={`mailto:${email}`}>{email}</a>

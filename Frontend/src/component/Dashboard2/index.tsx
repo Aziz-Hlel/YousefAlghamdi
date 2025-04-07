@@ -7,7 +7,7 @@ import Footer from "../Footer";
 import Sidebar from "./Sidebar2";
 import DashboardComp from "./DashboardComp";
 import MyProperties from "./MyProperties/MyProperties2";
-import InvoiceTable from "./InvoiceTable2";
+import NewClientsTable from "./InvoiceTable2";
 import PersonalInfo from "./PersonalInfo2";
 import Saved from "./Saved";
 import Reviews from "./Reviews";

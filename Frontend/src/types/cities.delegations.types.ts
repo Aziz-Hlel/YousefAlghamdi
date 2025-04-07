@@ -1,11 +1,11 @@
 // Define the main Emirates as constants
-const AbuDhabiEmirate = "Abu Dhabi Emirate";
-const DubaiEmirate = "Dubai Emirate";
-const SharjahEmirate = "Sharjah Emirate";
-const AjmanEmirate = "Ajman Emirate";
-const UmmAlQuwainEmirate = "Umm Al-Quwain Emirate";
-const RasAlKhaimahEmirate = "Ras Al Khaimah Emirate";
-const FujairahEmirate = "Fujairah Emirate";
+export const AbuDhabiEmirate = "Abu Dhabi Emirate";
+export const DubaiEmirate = "Dubai Emirate";
+export const SharjahEmirate = "Sharjah Emirate";
+export const AjmanEmirate = "Ajman Emirate";
+export const UmmAlQuwainEmirate = "Umm Al-Quwain Emirate";
+export const RasAlKhaimahEmirate = "Ras Al Khaimah Emirate";
+export const FujairahEmirate = "Fujairah Emirate";
 
 // Export the Emirates as categories
 export const cities = {

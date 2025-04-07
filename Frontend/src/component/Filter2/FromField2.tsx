@@ -2,27 +2,18 @@ import ProtoTypes from "prop-types";
 import { useState } from "react";
 import Select from "react-dropdown-select";
 
-function FromField({ name, options }) {
+function FromField({ name, options }: any) {
   const [value, setValue] = useState(options[0]);
   return (
-    <div className="form-group">
-      <span className="homec-filter-group__label">{name}</span>
+    <div className="form-group text-xs  font-light  lg:w-52">
+      <span className="homec-filter-group__label  text-xs">{name}</span>
       <select
-        values={[value]}
-        options={options}
-        labelField="name"
-        valueField="id"
+
         onChange={(values) => setValue(values)}
-        searchBy="name"
-        searchable={true}
-        handle={true}
-        placeholder="Select"
-        closeOnSelect={true}
-        dropdownPosition="auto"
         style={{ border: "none", outline: "none", zIndex: "999" }}
 
       >
-        {options.map((option) => (
+        {options.map((option: any) => (
           <option key={option.id} value={option.name}>
             {option.name}
           </option>

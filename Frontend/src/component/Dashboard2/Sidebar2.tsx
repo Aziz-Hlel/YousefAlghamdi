@@ -63,6 +63,7 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
             active={activeComponent}
             handleActive={setComponent}
             title="New clients"
+            path="dashboard/new-clients"
           >
             <svg
               width="35"

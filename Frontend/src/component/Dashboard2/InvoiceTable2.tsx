@@ -4,7 +4,7 @@ import TableData from "./TableData";
 import InvoiceView from "../Modal";
 import Pagination from "../Pagination";
 
-function InvoiceTable() {
+function NewClientsTable() {
   // open invoice in modal
   const [viewInvoice, setViewInvoice] = useState(false);
   const toggleModal = () => {
@@ -127,4 +127,4 @@ function InvoiceTable() {
   );
 }
 
-export default InvoiceTable;
+export default NewClientsTable;

@@ -1,19 +1,17 @@
 import ProtoTypes from "prop-types";
 
 type FilterTabBtnProps = {
-  link: string;
   text: string;
   isActive: string;
-  handleFilter: (text: string) => void;
+  handleListing_Type: (text: string) => void;
 };
 
 
-function FilterTabBtn({ link, text, isActive, handleFilter }: FilterTabBtnProps) {
+function FilterTabBtn({  text, isActive, handleListing_Type: handleFilter }: FilterTabBtnProps) {
   return (
     <a
-      className={`list-group-item ${isActive === text && "active"}`}
+      className={`list-group-item cursor-pointer ${isActive === text && "active"}`}
       data-bs-toggle="list"
-      href={link}
       role="tab"
       onClick={(e) => { e.preventDefault(); handleFilter(text) }}
     >
