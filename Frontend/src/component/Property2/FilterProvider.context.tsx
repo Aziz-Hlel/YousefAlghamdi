@@ -18,6 +18,7 @@ export const defaultFilter: IfilterProperty = {
     maxPrice: 3000000,
     minPrice: 1,
 
+    listingType: "",
     page: 1,
 }
 

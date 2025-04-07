@@ -13,10 +13,10 @@ export type IfilterProperty = {
     minNumberOfSquareFeet: number,
     minPrice: number,
     maxPrice: number,
-    forRent: boolean,
-    forSale: boolean,
+    forRent: boolean, // del
+    forSale: boolean, // del
 
-
+    listingType: string,
     page: number,
 
 

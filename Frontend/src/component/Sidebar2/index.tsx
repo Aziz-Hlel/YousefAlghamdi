@@ -4,12 +4,24 @@ import RangeInput from "../Form/RangeInput2";
 import imarates from "../../types/imarates";
 import propertyTypes from "../../types/propertyType";
 import { useFormContext } from "../Property2/FilterProvider.context";
+import { useSearchParams } from "react-router-dom";
+import { listing_types, listing_typesValues } from "@src/types/listing_types.types";
 
 const SideBar22 = () => {
 
   const { filterObject, updateEstate } = useFormContext();
+  const [searchParams, setSearchParams] = useSearchParams();
 
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 
+    const field = e.target.name
+    const newValue = e.target.value;
+    console.log("newValue", newValue);
+
+    if (newValue) searchParams.set(field, newValue); // update param
+    else searchParams.delete(field, newValue)
+    setSearchParams(searchParams, { replace: true });     // push to URL
+  };
   return (
     <div className="col-lg-4 col-12 mg-top-30">
       <div className="property-sidebar">
@@ -37,6 +49,17 @@ const SideBar22 = () => {
           formkey="type"
         />
 
+        <SelectiveInput
+          title="Lisiting type"
+          options={
+            listing_typesValues.map((estateType) => {
+              return { id: estateType, name: estateType }
+            })
+          }
+          classes="mg-top-20"
+          value={filterObject.listingType}
+          formkey="type"
+        />
         <CheckInput2
           title="For rent/sale"
           properties={[
