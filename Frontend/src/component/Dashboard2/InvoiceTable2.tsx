@@ -15,7 +15,7 @@ function InvoiceTable() {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPage = 24;
 
-  const handelPage = (page) => {
+  const handelPage = (page: any) => {
     if (page === "prev") {
       if (currentPage > 1) {
         setCurrentPage(currentPage - 1);

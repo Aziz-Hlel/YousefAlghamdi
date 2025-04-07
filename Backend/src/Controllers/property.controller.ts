@@ -7,6 +7,7 @@ import statusCode from "../utils/statusCode";
 import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
 import roles from "../types/roles.type";
 import statesTypes from "../types/states.types";
+import User from "../Models/user.model";
 
 
 
@@ -29,8 +30,16 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
 
     });
 
+
     try {
-        await property.save();
+        Promise.all([
+            User.findByIdAndUpdate(
+                clientId,
+                { role: roles.CLIENT },
+                { new: true, runValidators: true },
+            ),
+            property.save()
+        ])
         res.json('Property created successful');
     } catch (error) {
         next(error);
