@@ -5,7 +5,7 @@ function DashboardSidebarBtn({ active, handleActive, title, children,path }: any
   return (
     <Link  to={`/${path}`}
       className={`list-group-item  ${active === title && "active"}`}
-      // onClick={() => handleActive(title)}
+      onClick={() => handleActive(title)}
     >
       <div className="homec-dashboard__list--icon">{children}</div>
       {title}

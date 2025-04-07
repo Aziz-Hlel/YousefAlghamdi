@@ -25,6 +25,7 @@ function MyProperties() {
       <Layout title="My Properties">
         {properties?.map((property) => (
           <DashboardPropertyCard
+            _id={property._id}
             key={property._id}
             status={property.advanced.state}
             image={apiGateway.images + pickRandomPhoto()}

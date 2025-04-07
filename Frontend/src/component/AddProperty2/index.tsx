@@ -10,10 +10,10 @@ import GoTopBtn from "../Button/GoTopBtn";
 import { listing_types } from "@src/types/listing_types.types";
 
 const AddProperty = () => {
-  const [isLoading, setisLoadingg] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setisLoadingg(false);
+    setIsLoading(false);
   }, []);
 
   let component = undefined;

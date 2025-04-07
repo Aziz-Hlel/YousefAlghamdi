@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import Header from "../Header";
-import Breadcrumbs from "../Breadcrumbs";
+import Breadcrumbs from "../Breadcrumbs2";
 import HistoryLinks from "../Breadcrumbs2/HistoryLinks";
 import DownloadApp from "../DownloadApp";
 import Footer from "../Footer";
-import Sidebar from "./Sidebar";
+import Sidebar from "./Sidebar2";
 import DashboardComp from "./DashboardComp";
 import MyProperties from "./MyProperties/MyProperties2";
 import InvoiceTable from "./InvoiceTable";

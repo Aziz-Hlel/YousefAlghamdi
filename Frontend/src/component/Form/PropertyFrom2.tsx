@@ -2,14 +2,7 @@ import { useEffect, useState } from "react";
 import PropertyTextInput from "./PropertyTextInput2";
 import PropertyTextArea from "./PropertyTextArea2";
 import ImageInput from "./ImageInput2";
-import PropertyVideoInput from "./PropertyVideoInput";
-import PropertyLocationInput from "./PropertyLocationInput2";
-import PropertyAminitiesInput from "./PropertyAminitiesInput";
 import KeyValueInput from "./KeyValueInput2";
-import PropertyPlan from "./PropertyPlan";
-import PropertyTextAreaV2 from "./PropertyTextAreaV2";
-import SwitcherBtn from "./SwitcherBtn";
-import IaddProperty from "@src/models/addProperty.type";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -92,7 +85,7 @@ type imageArray = (FileWithPath & { preview: string; key: string; } | null)[];
 
 const PropertyFrom = () => {
 
-  const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting, defaultValues }, setError } = useForm<SubmitPropertyType>({ resolver: zodResolver(SubmitPropertySchema) });
+  const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting, }, setError } = useForm<SubmitPropertyType>({ resolver: zodResolver(SubmitPropertySchema) });
 
   const { whatFor } = useParams();
 
@@ -206,7 +199,7 @@ const PropertyFrom = () => {
     whatFor && setValue("listing_type", whatFor)
   }, [whatFor])
 
-  if (whatFor && !listing_typesValues.includes(whatFor)) return <></>
+  if (whatFor && !listing_typesValues.includes(whatFor)) return <> </>
 
   return (
     <section className="pd-top-80 pd-btm-80"  >
@@ -392,7 +385,7 @@ const PropertyFrom = () => {
               <div className="row">
                 <div className="col-12 d-flex justify-content-end mg-top-40">
                   <button type="submit" className="homec-btn homec-btn__second">
-                    <span>Submit Property Now</span>
+                    {isSubmitting ? <span>Loading...</span> : <span>Submit Property Now</span>}
                   </button>
                 </div>
               </div>

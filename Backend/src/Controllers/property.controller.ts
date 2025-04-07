@@ -6,6 +6,7 @@ import errorMessages from "../utils/errorMessages";
 import statusCode from "../utils/statusCode";
 import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
 import roles from "../types/roles.type";
+import statesTypes from "../types/states.types";
 
 
 
@@ -138,7 +139,7 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
                     .limit(limit)
                     .skip((page - 1) * limit)
                     .sort({ updatedAt: -1 }),
-                Property.countDocuments({ clientId: userId })
+                Property.countDocuments({ clientId: userId }),
             ]);
 
 
@@ -166,7 +167,7 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
                     .limit(limit)
                     .skip((page - 1) * limit)
                     .sort({ updatedAt: -1 }),
-                Property.countDocuments({ agentId: userId })
+                Property.countDocuments({ agentId: userId }),
             ]);
 
             res.set("x-total-count", total.toString()); // Optional, useful for frontend
@@ -184,6 +185,31 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
         }
 
 
+    if (req.user?.role === roles.ADMIN)
+
+        try {
+
+            const [properties, total] = await Promise.all([
+                Property.find({ "advanced.state": { $ne: statesTypes.active } })
+                    .limit(limit)
+                    .skip((page - 1) * limit)
+                    .sort({ updatedAt: -1 }),
+                Property.countDocuments({ "advanced.state": { $ne: statesTypes.active } }),
+            ]);
+
+            res.set("x-total-count", total.toString()); // Optional, useful for frontend
+
+            res.json({
+
+                result: properties,
+
+            });
+
+            return
+
+        } catch (error) {
+            next(error);
+        }
 
 
     return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
