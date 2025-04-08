@@ -8,6 +8,7 @@ import statusCode from "../utils/statusCode";
 import z from "zod";
 import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
 import mongoose from "mongoose";
+import roles from "../types/roles.type";
 
 
 export const test = (req: Request, res: Response) => {
@@ -65,7 +66,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
     }
 
 
-    newUser.role = "user";
+    newUser.role = roles.USER;
     const { email } = newUser;
     const userExist = await User.findOne({ email });
 
