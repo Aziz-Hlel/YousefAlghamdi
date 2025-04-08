@@ -6,6 +6,7 @@ import cors from 'cors';
 import path from 'path';
 import IApiErrorMiddleware from './Interfaces/ApiErrorResponse.interface';
 import imgHandlerRouter from './imgHandler';
+import agentRouter from './Routes/agent.route';
 
 
 
@@ -30,6 +31,8 @@ app.use(cors({
 
 app.use('/api/user', userRouter);
 app.use('/api/property', propertyRouter);
+app.use('/api/agent', agentRouter);
+
 
 // Serve static files
 // app.use('/api/images', express.static(path.join(__dirname, '../public/images')));

@@ -5,12 +5,11 @@ import { AxiosResponse } from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
 
-type IUser = {
+export type IUser = {
     username: string;
     email: string;
     id: string;
     role: string;
-    token: string;
 }
 
 type IAuthContext = {

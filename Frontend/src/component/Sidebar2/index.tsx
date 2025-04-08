@@ -114,9 +114,9 @@ const SideBar22 = () => {
         />
 
         <div className="w-full flex flex-col justify-center items-center gap-2 pt-4">
-          <button className="homec-btn" onClick={() => {
-            updateEstate();
-          }}>Apply filter</button>
+          <button className="homec-btn" onClick={() => { updateEstate(); }}>
+            Apply filter
+          </button>
           {/* <div className="underline font-extralight hover:cursor-pointer " onClick={() => resetFilter()}>reset filter</div> */}
         </div>
       </div>

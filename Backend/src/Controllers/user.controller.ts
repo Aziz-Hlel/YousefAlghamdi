@@ -7,6 +7,7 @@ import generateToken from "../utils/generateJWT";
 import statusCode from "../utils/statusCode";
 import z from "zod";
 import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
+import mongoose from "mongoose";
 
 
 export const test = (req: Request, res: Response) => {
@@ -149,3 +150,26 @@ export const whoAmI = async (req: AuthenticatedRequest, res: Response, next: Nex
     });
 
 }
+
+
+
+
+export const getUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    const userId = req.params.userId;
+
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+
+    try {
+        const user = await User.findById(userId).select("-password");
+        res.json({
+
+            result: user,
+        });
+
+    } catch (e) {
+        next(e);
+    }
+
+};

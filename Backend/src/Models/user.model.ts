@@ -1,5 +1,6 @@
 import mongoose, { mongo, Schema } from "mongoose";
 import bcrypt from "bcrypt";
+import roles from "../types/roles.type";
 
 
 export interface IUser extends Document {
@@ -7,8 +8,10 @@ export interface IUser extends Document {
     firstName: string;
     lastName: string;
     email: string;
+    phoneNumber: string;
     password: string;
     role: string;
+    clientId?: string;
     matchPassword(enteredPassword: string): Promise<boolean>;
 }
 
@@ -35,6 +38,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
+        select: false   
     },
 
     email: {
@@ -42,7 +46,7 @@ const userSchema = new Schema({
         required: true,
 
     },
-    
+
     phoneNumber: {
         type: String,
         required: true,
@@ -51,7 +55,13 @@ const userSchema = new Schema({
     role: {
         type: String,
         reuqired: true,
-        default: "user",
+        default: roles.USER,
+    },
+
+    agentId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        default: undefined,
     }
 },
     { timestamps: true }

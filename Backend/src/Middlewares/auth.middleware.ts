@@ -62,10 +62,10 @@ const protect = async (req: AuthenticatedRequest, res: Response, next: NextFunct
 
 
 
-const adminAuth = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+export const adminAuth = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     protect(req, res, next)
     if (req.user?.role !== "admin") return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.PERMISSION_DENIED));
-    next();
+    // next();
 }
 
 export default protect;
