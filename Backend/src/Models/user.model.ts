@@ -11,7 +11,7 @@ export interface IUser extends Document {
     phoneNumber: string;
     password: string;
     role: string;
-    clientId?: string;
+    agentId?: string;
     matchPassword(enteredPassword: string): Promise<boolean>;
 }
 
@@ -38,7 +38,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-        select: false   
+        select: false
     },
 
     email: {
@@ -60,7 +60,7 @@ const userSchema = new Schema({
 
     agentId: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'Agent',
         default: undefined,
     }
 },

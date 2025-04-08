@@ -3,6 +3,7 @@ import { useAgents } from "@src/providers/AgentsProvider.context";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import { createContext, useContext, useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
 
 type IMyPropertiesContext = {
   properties: Iproperty[];
@@ -45,6 +46,7 @@ const MyPropertiesProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <MyPropertiesContext.Provider value={{ properties, fetchProperties, totalCount }}>
       {children}
+      <Outlet />
     </MyPropertiesContext.Provider>
   );
 

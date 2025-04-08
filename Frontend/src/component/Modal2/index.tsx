@@ -1,6 +1,9 @@
 import { useAgents } from "@src/providers/AgentsProvider.context";
+import Http from "@src/services/Http";
+import apiGateway from "@src/utils/apiGateway";
 import ProtoTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 
 type IUser = {
@@ -14,51 +17,91 @@ type IUser = {
   agentId: string
 }
 
+const initUser = {
+  _id: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  phoneNumber: 0,
+  createdAt: "",
+  role: "",
+  agentId: "",
+}
+
 type IInvoice = {
   isOpen: boolean;
   handleModal: () => void;
-  invoice: IUser;
+  user: IUser;
 }
 
 
-const InvoiceView = ({ isOpen, handleModal, invoice: user }: IInvoice) => {
+const UserView = () => {
+
+
+  const { userId } = useParams();
+
+  const [userInspected, setUserInspected] = useState<IUser>(initUser);
+  const navigate = useNavigate();
+
+  const toggleModal = async () => {
+
+    // setViewInvoice(!viewInvoice);
+
+
+    const response = await Http.get(apiGateway.user.getById + userId);
+
+    setUserInspected(response?.data.result);
+
+  };
+
+
+  useEffect(() => {
+    if (!userId) return
+    console.log("ousl");
+
+    toggleModal()
+  }, [userId])
+
+
   const {
     firstName,
     lastName,
     phoneNumber,
     email,
     createdAt,
-  } = user;
-  console.log("type date", typeof createdAt);
-  console.log(createdAt);
+  } = userInspected;
 
-  const [currentAgent, setCurrentAgent] = useState(user.agentId)
+
+  const [currentAgent, setCurrentAgent] = useState<string | null>(null)
   const agents = useAgents();
-  console.log("invoice", user);
 
-  console.log("agents", agents);
+  const changeAgentOfUser = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+
+    navigate("../");
+
+  }
+
+
+
   console.log("currentAgent", currentAgent);
 
-  // useEffect(() => {
-  //   setAgent(user.agentId)
-  // }, [[user]])
   return (
     <div
-      className={`homec-modal modal fade ${isOpen && "show"}`}
+      className={`homec-modal modal fade ${true && "show"}`}
       id="invoice_view"
       tabIndex={-1}
       aria-labelledby="invoice_view"
-      aria-hidden="true"
-      style={{ display: isOpen ? "block" : "" }}
+      style={{ display: true ? "block" : "" }}
     >
       <div className="homec-modal__width modal-dialog modal-dialog-centered">
         <div className="modal-content">
-          <button
+          <Link
             type="button"
             className="homec-moal__close"
             data-bs-dismiss="modal"
             aria-label="Close"
-            onClick={handleModal}
+            to={"../"}
           >
             <svg
               width="22"
@@ -72,7 +115,7 @@ const InvoiceView = ({ isOpen, handleModal, invoice: user }: IInvoice) => {
                 fill="#EB5757"
               ></path>
             </svg>
-          </button>
+          </Link>
           <div className="homec-modal__inner">
             <div className="homec-header__logo">
               <a href="">
@@ -101,10 +144,13 @@ const InvoiceView = ({ isOpen, handleModal, invoice: user }: IInvoice) => {
                   <li>
                     <span>Sponsored agent: </span>
 
-                    <select name="sponsoredAgent" value={currentAgent} onChange={(e) => setCurrentAgent(e.target.value)}>
+                    <select name="sponsoredAgent" value={currentAgent ?? ""} onChange={(e) => {
+                      console.log("e.target.value", e.target.value);
+                      ; setCurrentAgent(e.target.value)
+                    }}>
 
                       {Object.keys(agents).map((agent) =>
-                        <option value={agent}>
+                        <option value={agent} key={agent}>
                           {`${agents[agent].firstName} ${agents[agent].lastName}`}
                         </option>
                       )}
@@ -114,7 +160,7 @@ const InvoiceView = ({ isOpen, handleModal, invoice: user }: IInvoice) => {
                   <li>
                     <div className=" w-full  flex justify-end">
 
-                      <button type="button" className="homec-invoice-table--btn w-20 h-10" disabled>
+                      <button type="button" className="homec-invoice-table--btn w-20 h-10" onClick={changeAgentOfUser} >
                         save
                       </button>
 
@@ -132,4 +178,4 @@ const InvoiceView = ({ isOpen, handleModal, invoice: user }: IInvoice) => {
 }
 
 
-export default InvoiceView;
+export default UserView;

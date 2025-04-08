@@ -6,7 +6,7 @@ import properties from "../../../data/property";
 import { useMyPropertiesContext } from "./MyPropertiesProvider.context";
 import apiGateway from "@src/utils/apiGateway";
 import { pickRandomPhoto } from "@src/pickRandomPhoto";
-import InvoiceView from "@src/component/Modal2";
+import UserView from "@src/component/Modal2";
 import Http from "@src/services/Http";
 
 
@@ -76,11 +76,12 @@ function MyProperties() {
             onInspectClient={toggleModal}
           />
         ))}
-        <InvoiceView
+        
+        {/* <UserView
           isOpen={viewInvoice}
           handleModal={toggleModal}
-          invoice={{ ...userInspected }}
-        />
+          user={{ ...userInspected }}
+        /> */}
         <Pagination
           totalPage={totalPage}
           currentPage={currentPage}

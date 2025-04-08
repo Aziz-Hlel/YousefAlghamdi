@@ -34,8 +34,8 @@ function DashboardPropertyCard({ _id, ownerId, status, image, why, title, locati
       {/* Property Button */}
       <div className="homec-dashboard-property__buttons ">
 
-        <button className="homec-dashboard-property__btn px-2 flex justify-center items-center" onClick={() => onInspectClient(ownerId)}>
-          {/* <Link to={""}> */}
+        <button className="homec-dashboard-property__btn px-2 flex justify-center items-center" >
+          <Link to={"inspect-user/" + ownerId}>
             <div className="flex  justify-center  items-center">
 
 
@@ -52,7 +52,7 @@ function DashboardPropertyCard({ _id, ownerId, status, image, why, title, locati
               {/* <div className="hidden md:block md:ml-2">inspect client</div> */}
 
             </div>
-          {/* </Link> */}
+          </Link>
         </button>
 
         <button className="homec-dashboard-property__btn px-2  homec-dashboard-property__btn--edit  flex justify-center items-center">
@@ -75,6 +75,7 @@ function DashboardPropertyCard({ _id, ownerId, status, image, why, title, locati
               {/* <div className="hidden md:block md:ml-2">inspect property</div> */}
 
             </div>
+
           </Link>
         </button>
         <button className="homec-dashboard-property__btn px-2 homec-dashboard-property__btn--delete flex justify-center items-center">

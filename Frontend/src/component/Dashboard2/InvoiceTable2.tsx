@@ -30,7 +30,7 @@ function NewClientsTable() {
   };
   return (
     <Layout title="Invoice">
-      <InvoiceView
+      {/* <InvoiceView
         isOpen={viewInvoice}
         handleModal={toggleModal}
         invoice={{
@@ -46,7 +46,7 @@ function NewClientsTable() {
           purchaseDate: "2023-02-23",
           expiredDate: "2023-02-23",
         }}
-      />
+      /> */}
       <div className="homec-invoices">
         <table className="homec-invoice-table">
           <thead className="homec-invoice-table__head">

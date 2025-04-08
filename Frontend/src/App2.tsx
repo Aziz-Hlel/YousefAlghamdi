@@ -32,6 +32,8 @@ import ChangePassword from "./component/Dashboard2/ChangePassword2.js";
 import MyPropertiesProvider from "./component/Dashboard2/MyProperties/MyPropertiesProvider.context.js";
 import NewClientsTable from "./component/Dashboard2/InvoiceTable2.js";
 import { AgentsProvider } from "./providers/AgentsProvider.context.js";
+import UpdatePersonalInfo from "./component/Modal2/updatePersonalInfo.js";
+import UserView from "./component/Modal2/index.js";
 
 const App2 = () => {
 
@@ -155,7 +157,12 @@ const App2 = () => {
                                         <Route path="Reviews" element={<Reviews />} />
                                         <Route path="change-password" element={<ChangePassword />} />
 
-                                        <Route path="pending-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} />
+
+                                        {/* Admin Routes */}
+                                        <Route path="pending-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} >
+                                            <Route path="inspect-user/:userId" element={<UserView/>} />
+                                        </Route>
+                                        <Route path="add-agent" element={<UpdatePersonalInfo isModalOpen={true} toggleModal={() => { }} />}></Route>
 
                                     </Route>
 

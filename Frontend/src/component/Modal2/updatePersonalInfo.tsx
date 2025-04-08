@@ -1,12 +1,12 @@
 import ProtoTypes from "prop-types";
 import PersonalInfo from "../Form/PersonalInfo";
 
-function UpdatePersonalInfo({ isModalOpen, toggleModal }) {
+function UpdatePersonalInfo({ isModalOpen, toggleModal }: any) {
   return (
     <div
       className={`homec-modal modal fade ${isModalOpen && "show"}`}
       id="profile_view"
-      tabIndex="-1"
+      tabIndex={-1}
       aria-labelledby="profile_view"
       aria-hidden="true"
       style={{ display: isModalOpen && "block" }}
