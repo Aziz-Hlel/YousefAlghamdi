@@ -38,8 +38,15 @@ const Http = {
         return axiosInstance.put<T>(url, body, config);
     },
 
-    patch: <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {
-        return axiosInstance.patch<T>(url, body, config);
+    patch: async <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {
+        try {
+            return await axiosInstance.patch<T>(url, body, config);
+
+        } catch (e) {
+            axios.isAxiosError(e) && console.log(e.response?.data);
+            if (axios.isAxiosError(e)) return e.response
+        }
+
     },
 
     delete: <T>(url: string, config: HTTPRequestConfig = {}) => {

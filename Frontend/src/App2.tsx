@@ -30,7 +30,7 @@ import Reviews from "./component/Dashboard2/Reviews2.js";
 import DashboardComp from "./component/Dashboard2/DashboardComp2.js";
 import ChangePassword from "./component/Dashboard2/ChangePassword2.js";
 import MyPropertiesProvider from "./component/Dashboard2/MyProperties/MyPropertiesProvider.context.js";
-import NewClientsTable from "./component/Dashboard2/InvoiceTable2.js";
+import AgentsTable from "./component/Dashboard2/InvoiceTable2.js";
 import { AgentsProvider } from "./providers/AgentsProvider.context.js";
 import UpdatePersonalInfo from "./component/Modal2/updatePersonalInfo.js";
 import UserView from "./component/Modal2/index.js";
@@ -153,16 +153,18 @@ const App2 = () => {
                                         <Route index element={<DashboardComp />} />
                                         <Route path="my-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} />
                                         <Route path="personal-info" element={<PersonalInfo />} />
-                                        <Route path="new-clients" element={<NewClientsTable />} />
                                         <Route path="Reviews" element={<Reviews />} />
                                         <Route path="change-password" element={<ChangePassword />} />
 
 
                                         {/* Admin Routes */}
                                         <Route path="pending-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} >
-                                            <Route path="inspect-user/:userId" element={<UserView/>} />
+                                            <Route path="inspect-user/:userId" element={<UserView />} />
                                         </Route>
-                                        <Route path="add-agent" element={<UpdatePersonalInfo isModalOpen={true} toggleModal={() => { }} />}></Route>
+                                        <Route path="agents" element={<AgentsTable />} >
+                                            <Route path="edit-agent/:agentId" element={<UpdatePersonalInfo />}></Route>
+                                        </Route>
+                                        {/* <Route path="add-agent" element={<UpdatePersonalInfo isModalOpen={true} toggleModal={() => { }} />}></Route> */}
 
                                     </Route>
 
@@ -184,7 +186,7 @@ const App2 = () => {
                     </Router>
 
                 </AgentsProvider>
-            </AuthProvider>
+            </AuthProvider >
         </>
     )
 }

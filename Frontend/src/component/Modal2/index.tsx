@@ -51,6 +51,7 @@ const UserView = () => {
     const response = await Http.get(apiGateway.user.getById + userId);
 
     setUserInspected(response?.data.result);
+    setCurrentAgent(response?.data.result.agentId)
 
   };
 
@@ -75,11 +76,21 @@ const UserView = () => {
   const [currentAgent, setCurrentAgent] = useState<string | null>(null)
   const agents = useAgents();
 
-  const changeAgentOfUser = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const changeAgentOfUser = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
-    navigate("../");
+    if (currentAgent === userInspected.agentId)
+      navigate("../");
+    else {
+      await Http.patch(apiGateway.user.updateAgent, {
+        userId: userInspected._id,
+        agentId: currentAgent,
+      })
 
+      navigate("../");
+
+
+    }
   }
 
 
@@ -88,10 +99,7 @@ const UserView = () => {
 
   return (
     <div
-      className={`homec-modal modal fade ${true && "show"}`}
-      id="invoice_view"
-      tabIndex={-1}
-      aria-labelledby="invoice_view"
+      className={`homec-modal show modal`}
       style={{ display: true ? "block" : "" }}
     >
       <div className="homec-modal__width modal-dialog modal-dialog-centered">
@@ -99,8 +107,7 @@ const UserView = () => {
           <Link
             type="button"
             className="homec-moal__close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
+
             to={"../"}
           >
             <svg
@@ -148,7 +155,7 @@ const UserView = () => {
                       console.log("e.target.value", e.target.value);
                       ; setCurrentAgent(e.target.value)
                     }}>
-
+                      {!userInspected.agentId && <option value=""></option>}
                       {Object.keys(agents).map((agent) =>
                         <option value={agent} key={agent}>
                           {`${agents[agent].firstName} ${agents[agent].lastName}`}

@@ -178,27 +178,26 @@ export const getUser = async (req: AuthenticatedRequest, res: Response, next: Ne
 
 
 
-export const updateSponsoredAgent = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+export const updateAgent = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
-    const userId = req.user?._id;
-    const agentId = req.params.agentId;
+    const { userId, agentId } = req.body;
 
     if (!userId) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
     if (!agentId || !mongoose.Types.ObjectId.isValid(agentId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
-    
-    
+
+
     try {
         const user = await User.findById(userId);
         if (!user) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
-        
+
         user.agentId = agentId;
-        
+
         await user.save();
-        
+
         Promise.all([
-            
+
             user.save(),
-            
+
             Property.bulkWrite([{
                 updateMany: {
                     filter: { clientId: userId },
@@ -206,7 +205,7 @@ export const updateSponsoredAgent = async (req: AuthenticatedRequest, res: Respo
                 }
             }])
         ]);
-        
+
         res.status(statusCode.OK).json('Agent updated successfully');
     } catch (e) {
         next(e);

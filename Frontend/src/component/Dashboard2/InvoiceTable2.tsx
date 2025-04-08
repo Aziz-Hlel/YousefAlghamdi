@@ -1,10 +1,11 @@
 import { useState } from "react";
 import Layout from "./Layout";
-import TableData from "./TableData";
+import TableData from "./TableData2";
 import InvoiceView from "../Modal";
 import Pagination from "../Pagination";
+import { Outlet } from "react-router-dom";
 
-function NewClientsTable() {
+const AgentsTable = () => {
   // open invoice in modal
   const [viewInvoice, setViewInvoice] = useState(false);
   const toggleModal = () => {
@@ -28,8 +29,11 @@ function NewClientsTable() {
       setCurrentPage(page);
     }
   };
+
+
+
   return (
-    <Layout title="Invoice">
+    <Layout title="Agents">
       {/* <InvoiceView
         isOpen={viewInvoice}
         handleModal={toggleModal}
@@ -47,72 +51,82 @@ function NewClientsTable() {
           expiredDate: "2023-02-23",
         }}
       /> */}
+      <Outlet />
       <div className="homec-invoices">
         <table className="homec-invoice-table">
           <thead className="homec-invoice-table__head">
             <tr>
-              <th className="homec-invoice-table__column1">Packages</th>
-              <th className="homec-invoice-table__column2">Purchase Date</th>
-              <th className="homec-invoice-table__column3">Expired Date</th>
-              <th className="homec-invoice-table__column4">Amount</th>
-              <th className="homec-invoice-table__column5">View</th>
+              <th className="homec-invoice-table__column1">First name</th>
+              <th className="homec-invoice-table__column2">Last name</th>
+              <th className="homec-invoice-table__column3">Email</th>
+              <th className="homec-invoice-table__column4">Phone</th>
+              <th className="homec-invoice-table__column5">Edit</th>
             </tr>
           </thead>
           <tbody className="homec-invoice-table__body">
+
             <TableData
-              packages="Pro"
-              purchaseDate="2023-02-23"
-              expiredDate="2023-02-23"
-              amount={600}
+              _id="1"
+              firstName="Pro"
+              lastName="2023-02-23"
+              email="2023-02-23"
+              phone={"600"}
               openModal={toggleModal}
             />
             <TableData
-              packages="Pro"
-              purchaseDate="2023-02-23"
-              expiredDate="2023-02-23"
-              amount={600}
+              _id="1"
+              firstName="Pro"
+              lastName="2023-02-23"
+              email="2023-02-23"
+              phone={"600"}
               openModal={toggleModal}
             />
             <TableData
-              packages="Pro"
-              purchaseDate="2023-02-23"
-              expiredDate="2023-02-23"
-              amount={600}
+              _id="1"
+              firstName="Pro"
+              lastName="2023-02-23"
+              email="2023-02-23"
+              phone={"600"}
               openModal={toggleModal}
             />
             <TableData
-              packages="Pro"
-              purchaseDate="2023-02-23"
-              expiredDate="2023-02-23"
-              amount={600}
+              _id="1"
+              firstName="Pro"
+              lastName="2023-02-23"
+              email="2023-02-23"
+              phone={"600"}
               openModal={toggleModal}
             />
             <TableData
-              packages="Pro"
-              purchaseDate="2023-02-23"
-              expiredDate="2023-02-23"
-              amount={600}
+              _id="1"
+              firstName="Pro"
+              lastName="2023-02-23"
+              email="2023-02-23"
+              phone={"600"}
               openModal={toggleModal}
             />
             <TableData
-              packages="Pro"
-              purchaseDate="2023-02-23"
-              expiredDate="2023-02-23"
-              amount={600}
+              _id="1"
+              firstName="Pro"
+              lastName="2023-02-23"
+              email="2023-02-23"
+              phone={"600"}
               openModal={toggleModal}
             />
             <TableData
-              packages="Pro"
-              purchaseDate="2023-02-23"
-              expiredDate="2023-02-23"
-              amount={600}
+              _id="1"
+              firstName="Pro"
+              lastName="2023-02-23"
+              email="2023-02-23"
+              phone={"600"}
               openModal={toggleModal}
             />
             <TableData
-              packages="Pro"
-              purchaseDate="2023-02-23"
-              expiredDate="2023-02-23"
-              amount={600}
+              _id="1"
+              firstName="Pro"
+              lastName="2023-02-23"
+              email="2023-02-23"
+              phone={"600"}
               openModal={toggleModal}
             />
           </tbody>
@@ -127,4 +141,4 @@ function NewClientsTable() {
   );
 }
 
-export default NewClientsTable;
+export default AgentsTable;

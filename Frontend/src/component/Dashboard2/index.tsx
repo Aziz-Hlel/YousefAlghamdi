@@ -7,7 +7,7 @@ import Footer from "../Footer";
 import Sidebar from "./Sidebar2";
 import DashboardComp from "./DashboardComp";
 import MyProperties from "./MyProperties/MyProperties2";
-import NewClientsTable from "./InvoiceTable2";
+import AgentsTable from "./InvoiceTable2";
 import PersonalInfo from "./PersonalInfo2";
 import Saved from "./Saved";
 import Reviews from "./Reviews";
@@ -58,10 +58,13 @@ function Dashboard() {
               <div className="col-12">
                 <div className="homec-dashboard__middle">
                   <div className="row">
+
+
                     <Sidebar
                       activeComponent={activeComponent}
                       setComponent={setActiveComponent}
                     />
+
                     {/* {activeComponent === "Dashboard" && <DashboardComp />} */}
 
                     {/* {activeComponent === "My Properties" && <MyProperties />} */}

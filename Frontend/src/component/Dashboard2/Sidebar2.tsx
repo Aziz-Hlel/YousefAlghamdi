@@ -62,8 +62,8 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
           user?.role === roles.ADMIN && <DashboardSidebarBtn
             active={activeComponent}
             handleActive={setComponent}
-            title="New clients"
-            path="dashboard/new-clients"
+            title="Agents"
+            path="dashboard/agents"
           >
             <svg
               width="35"

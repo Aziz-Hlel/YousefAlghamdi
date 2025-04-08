@@ -1,14 +1,23 @@
 import ProtoTypes from "prop-types";
 import PersonalInfo from "../Form/PersonalInfo";
+import { useNavigate, useParams } from "react-router-dom";
 
-function UpdatePersonalInfo({ isModalOpen, toggleModal }: any) {
+function UpdatePersonalInfo() {
+
+  const navigate = useNavigate();
+  
+  const { agentId } = useParams();
+
+  const isModalOpen = true;
+
+  const toggleModal = () => {
+    navigate("../");
+  }
+
   return (
     <div
       className={`homec-modal modal fade ${isModalOpen && "show"}`}
       id="profile_view"
-      tabIndex={-1}
-      aria-labelledby="profile_view"
-      aria-hidden="true"
       style={{ display: isModalOpen && "block" }}
     >
       <div className="homec-modal__width homec-modal__width--profile modal-dialog modal-dialog-centered">
@@ -16,8 +25,6 @@ function UpdatePersonalInfo({ isModalOpen, toggleModal }: any) {
           <button
             type="button"
             className="homec-moal__close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
             onClick={toggleModal}
           >
             <svg

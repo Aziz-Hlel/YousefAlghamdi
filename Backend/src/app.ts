@@ -22,7 +22,7 @@ app.use(cors({
     },
     credentials: true,  // Necessary for cookies or authorization headers
 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     exposedHeaders: ['Content-Range', 'X-Total-Count', "Content-Type", "Authorization"],
 
 }));

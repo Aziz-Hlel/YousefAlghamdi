@@ -14,7 +14,9 @@ const apiGateway = {
         whoAmI: "/user/",
         signUp: "/user/register",
         sigIn: "/user/login",
-        getById: "/user/"
+        getById: "/user/",
+        updateAgent: "/user/update-agent",
+
     },
 
 

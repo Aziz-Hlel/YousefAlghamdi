@@ -1,3 +1,5 @@
+import { useAuth } from "@src/providers/AuthProvider.context";
+import roles from "@src/types/roles.type";
 import { Link } from "react-router-dom";
 
 
@@ -14,6 +16,9 @@ type IDashboardPropertyCard = {
 
 
 function DashboardPropertyCard({ _id, ownerId, status, image, why, title, location, onInspectClient, }: IDashboardPropertyCard) {
+
+  const { user } = useAuth();
+
   return (
     <div className="homec-dashboard-property mg-top-30">
       <div className="homec-dashboard-property__label">{status}</div>
@@ -34,8 +39,8 @@ function DashboardPropertyCard({ _id, ownerId, status, image, why, title, locati
       {/* Property Button */}
       <div className="homec-dashboard-property__buttons ">
 
-        <button className="homec-dashboard-property__btn px-2 flex justify-center items-center" >
-          <Link to={"inspect-user/" + ownerId}>
+        {user?.role === roles.ADMIN && <Link to={"inspect-user/" + ownerId}>
+          <button className="homec-dashboard-property__btn px-2 flex justify-center items-center" >
             <div className="flex  justify-center  items-center">
 
 
@@ -52,8 +57,8 @@ function DashboardPropertyCard({ _id, ownerId, status, image, why, title, locati
               {/* <div className="hidden md:block md:ml-2">inspect client</div> */}
 
             </div>
-          </Link>
-        </button>
+          </button>
+        </Link>}
 
         <button className="homec-dashboard-property__btn px-2  homec-dashboard-property__btn--edit  flex justify-center items-center">
           <Link to={"/dashboard/my-properties/edit/" + _id}>
