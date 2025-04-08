@@ -1,4 +1,5 @@
 import Iproperty from "@src/models/property.type";
+import { useAgents } from "@src/providers/AgentsProvider.context";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -11,6 +12,7 @@ type IMyPropertiesContext = {
 
 
 const MyPropertiesContext = createContext<IMyPropertiesContext | undefined>(undefined);
+
 
 
 
@@ -41,7 +43,7 @@ const MyPropertiesProvider = ({ children }: { children: React.ReactNode }) => {
 
 
   return (
-    <MyPropertiesContext.Provider value={{ properties, fetchProperties,totalCount }}>
+    <MyPropertiesContext.Provider value={{ properties, fetchProperties, totalCount }}>
       {children}
     </MyPropertiesContext.Provider>
   );

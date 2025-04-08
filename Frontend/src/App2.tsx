@@ -31,6 +31,7 @@ import DashboardComp from "./component/Dashboard2/DashboardComp2.js";
 import ChangePassword from "./component/Dashboard2/ChangePassword2.js";
 import MyPropertiesProvider from "./component/Dashboard2/MyProperties/MyPropertiesProvider.context.js";
 import NewClientsTable from "./component/Dashboard2/InvoiceTable2.js";
+import { AgentsProvider } from "./providers/AgentsProvider.context.js";
 
 const App2 = () => {
 
@@ -116,64 +117,66 @@ const App2 = () => {
     return (
         <>
             <AuthProvider>
+                <AgentsProvider>
 
-                {/* <RouterProvider router={router} />{" "} */}
-                <Router>
-                    <Routes>
+                    {/* <RouterProvider router={router} />{" "} */}
+                    <Router>
+                        <Routes>
 
-                        <Route element={<Layout />} >
+                            <Route element={<Layout />} >
 
-                            <Route path="/" element={<Home />} />
-                            <Route path="/home" element={<Home />} />
-                            <Route path="/property/:city" element={<Property />} />
-                            <Route path="/property" element={<Property />} />
-                            <Route path="/property-single/:id" element={<PropertySingle />} />
+                                <Route path="/" element={<Home />} />
+                                <Route path="/home" element={<Home />} />
+                                <Route path="/property/:city" element={<Property />} />
+                                <Route path="/property" element={<Property />} />
+                                <Route path="/property-single/:id" element={<PropertySingle />} />
 
 
-                            <Route path="/agent-detail" element={<AgentDetail />} />
-                            <Route path="/our-agent" element={<OurAgents />} />
-                            <Route path="/about" element={<AboutUs />} />
-                            {/* <Route path="/pricing" element={<Pricing />} /> */}
-                            {/* <Route path="/payment-method" element={<PaymentMethod />} /> */}
-                            <Route path="/faq" element={<Faq />} />
-                            <Route path="/contact" element={<Contact />} />
+                                <Route path="/agent-detail" element={<AgentDetail />} />
+                                <Route path="/our-agent" element={<OurAgents />} />
+                                <Route path="/about" element={<AboutUs />} />
+                                {/* <Route path="/pricing" element={<Pricing />} /> */}
+                                {/* <Route path="/payment-method" element={<PaymentMethod />} /> */}
+                                <Route path="/faq" element={<Faq />} />
+                                <Route path="/contact" element={<Contact />} />
 
-                            <Route element={<ProtectedLayouts />}>
+                                <Route element={<ProtectedLayouts />}>
 
-                                <Route path="/edit-property" element={<EditProperty />} />
-                                <Route path="/add-property" element={<AddProperty />} />
-                                <Route path="/submit-property/:whatFor" element={<SubmitProperty />} />
+                                    <Route path="/edit-property" element={<EditProperty />} />
+                                    <Route path="/add-property" element={<AddProperty />} />
+                                    <Route path="/submit-property/:whatFor" element={<SubmitProperty />} />
 
-                                <Route path="/dashboard" element={<Dashboard />} >
+                                    <Route path="/dashboard" element={<Dashboard />} >
 
-                                    <Route index element={<DashboardComp />} />
-                                    <Route path="my-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} />
-                                    <Route path="personal-info" element={<PersonalInfo />} />
-                                    <Route path="new-clients" element={<NewClientsTable />} />
-                                    <Route path="Reviews" element={<Reviews />} />
-                                    <Route path="change-password" element={<ChangePassword />} />
+                                        <Route index element={<DashboardComp />} />
+                                        <Route path="my-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} />
+                                        <Route path="personal-info" element={<PersonalInfo />} />
+                                        <Route path="new-clients" element={<NewClientsTable />} />
+                                        <Route path="Reviews" element={<Reviews />} />
+                                        <Route path="change-password" element={<ChangePassword />} />
 
-                                    <Route path="pending-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} />
+                                        <Route path="pending-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} />
+
+                                    </Route>
+
+                                    <Route path="/dashboard/my-properties/edit/:propertyId" element={<EditProperty />} />
+
+
 
                                 </Route>
 
-                                <Route path="/dashboard/my-properties/edit/:propertyId" element={<EditProperty />} />
-
-
+                                <Route path="*" element={<ErrorPage />} />
 
                             </Route>
 
-                            <Route path="*" element={<ErrorPage />} />
-
-                        </Route>
-
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/signup" element={<SignUp />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/signup" element={<SignUp />} />
 
 
-                    </Routes>
-                </Router>
+                        </Routes>
+                    </Router>
 
+                </AgentsProvider>
             </AuthProvider>
         </>
     )

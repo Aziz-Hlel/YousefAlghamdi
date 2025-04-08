@@ -18,6 +18,7 @@ type IUser = {
   phoneNumber: number;
   createdAt: string;
   role: string;
+  agentId: string;
 }
 const initUser = {
   _id: "",
@@ -27,6 +28,7 @@ const initUser = {
   phoneNumber: 0,
   createdAt: "",
   role: "",
+  agentId: "",
 }
 
 function MyProperties() {
@@ -48,7 +50,7 @@ function MyProperties() {
     setViewInvoice(!viewInvoice);
 
     if (!clientId) return
-    
+
     const response = await Http.get(apiGateway.user.getById + clientId);
 
     setUserInspected(response?.data.result);

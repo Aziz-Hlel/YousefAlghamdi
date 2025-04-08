@@ -17,6 +17,7 @@ const apiGateway = {
         getById: "/user/"
     },
 
+
     property: {
         list: "/property",
         create: "/property",
@@ -28,7 +29,9 @@ const apiGateway = {
 
     },
 
-
+    agent: {
+        list: "/agent/"
+    },
 
 
 

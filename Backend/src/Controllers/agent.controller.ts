@@ -96,7 +96,7 @@ export const getAgents = async (req: Request, res: Response, next: NextFunction)
 
     try {
         const agents = await Agent.find().where('role').equals(roles.AGENT);
-
+        
         res.json({
             result: agents
         });

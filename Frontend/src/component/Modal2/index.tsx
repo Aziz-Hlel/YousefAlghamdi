@@ -1,4 +1,6 @@
+import { useAgents } from "@src/providers/AgentsProvider.context";
 import ProtoTypes from "prop-types";
+import { useEffect, useState } from "react";
 
 
 type IUser = {
@@ -9,26 +11,37 @@ type IUser = {
   phoneNumber: number;
   createdAt: string;
   role: string;
+  agentId: string
 }
 
 type IInvoice = {
   isOpen: boolean;
   handleModal: () => void;
-  invoice: IUser
+  invoice: IUser;
 }
 
 
-const InvoiceView = ({ isOpen, handleModal, invoice }: IInvoice) => {
+const InvoiceView = ({ isOpen, handleModal, invoice: user }: IInvoice) => {
   const {
     firstName,
     lastName,
     phoneNumber,
     email,
     createdAt,
-  } = invoice;
+  } = user;
   console.log("type date", typeof createdAt);
   console.log(createdAt);
 
+  const [currentAgent, setCurrentAgent] = useState(user.agentId)
+  const agents = useAgents();
+  console.log("invoice", user);
+
+  console.log("agents", agents);
+  console.log("currentAgent", currentAgent);
+
+  // useEffect(() => {
+  //   setAgent(user.agentId)
+  // }, [[user]])
   return (
     <div
       className={`homec-modal modal fade ${isOpen && "show"}`}
@@ -88,14 +101,27 @@ const InvoiceView = ({ isOpen, handleModal, invoice }: IInvoice) => {
                   <li>
                     <span>Sponsored agent: </span>
 
-                    <select name="sponsoredAgent" id="">
+                    <select name="sponsoredAgent" value={currentAgent} onChange={(e) => setCurrentAgent(e.target.value)}>
+
+                      {Object.keys(agents).map((agent) =>
+                        <option value={agent}>
+                          {`${agents[agent].firstName} ${agents[agent].lastName}`}
+                        </option>
+                      )}
 
                     </select>
                   </li>
+                  <li>
+                    <div className=" w-full  flex justify-end">
 
+                      <button type="button" className="homec-invoice-table--btn w-20 h-10" disabled>
+                        save
+                      </button>
+
+                    </div>
+                  </li>
                 </ul>
               </div>
-
             </div>
 
           </div>
@@ -105,10 +131,5 @@ const InvoiceView = ({ isOpen, handleModal, invoice }: IInvoice) => {
   );
 }
 
-InvoiceView.propTypes = {
-  isOpen: ProtoTypes.bool.isRequired,
-  handleModal: ProtoTypes.func.isRequired,
-  invoice: ProtoTypes.object.isRequired,
-};
 
 export default InvoiceView;
