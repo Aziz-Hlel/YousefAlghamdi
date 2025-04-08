@@ -1,12 +1,32 @@
 import ProtoTypes from "prop-types";
-import PersonalInfo from "../Form/PersonalInfo";
+import PersonalInfo from "../Form/PersonalInfo2";
 import { useNavigate, useParams } from "react-router-dom";
+import { z } from "zod";
 
-function UpdatePersonalInfo() {
+
+
+const CU_Agent = () => {
 
   const navigate = useNavigate();
-  
-  const { agentId } = useParams();
+
+
+  const initialValues = {
+    _id: "",
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    emailAddress: "",
+    location: "",
+    image: "",
+    socials: {
+      facebook: "",
+      twitter: "",
+      instagram: "",
+      linkedin: "",
+    },
+    about: "",
+  };
+
 
   const isModalOpen = true;
 
@@ -58,9 +78,5 @@ function UpdatePersonalInfo() {
   );
 }
 
-UpdatePersonalInfo.propTypes = {
-  isModalOpen: ProtoTypes.bool.isRequired,
-  toggleModal: ProtoTypes.func.isRequired,
-};
 
-export default UpdatePersonalInfo;
+export default CU_Agent;

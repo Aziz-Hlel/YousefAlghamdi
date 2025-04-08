@@ -3,7 +3,8 @@ import Layout from "./Layout";
 import TableData from "./TableData2";
 import InvoiceView from "../Modal";
 import Pagination from "../Pagination";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import { useAgents } from "@src/providers/AgentsProvider.context";
 
 const AgentsTable = () => {
   // open invoice in modal
@@ -30,27 +31,12 @@ const AgentsTable = () => {
     }
   };
 
+  const agents = useAgents();
 
 
   return (
     <Layout title="Agents">
-      {/* <InvoiceView
-        isOpen={viewInvoice}
-        handleModal={toggleModal}
-        invoice={{
-          name: "Abdullah Mamun",
-          number: "+0938 4937 23",
-          email: "Youremailad@gmail.com",
-          location: "2972 Westheimer Rd. Santa Ana, Illinois 85486 ",
-          orderId: "Abdullah Mamun",
-          amount: 600,
-          paymentMethod: "Paypal",
-          transactionId: "34344354532",
-          packages: "Pro",
-          purchaseDate: "2023-02-23",
-          expiredDate: "2023-02-23",
-        }}
-      /> */}
+
       <Outlet />
       <div className="homec-invoices">
         <table className="homec-invoice-table">
@@ -65,72 +51,30 @@ const AgentsTable = () => {
           </thead>
           <tbody className="homec-invoice-table__body">
 
-            <TableData
-              _id="1"
-              firstName="Pro"
-              lastName="2023-02-23"
-              email="2023-02-23"
-              phone={"600"}
-              openModal={toggleModal}
-            />
-            <TableData
-              _id="1"
-              firstName="Pro"
-              lastName="2023-02-23"
-              email="2023-02-23"
-              phone={"600"}
-              openModal={toggleModal}
-            />
-            <TableData
-              _id="1"
-              firstName="Pro"
-              lastName="2023-02-23"
-              email="2023-02-23"
-              phone={"600"}
-              openModal={toggleModal}
-            />
-            <TableData
-              _id="1"
-              firstName="Pro"
-              lastName="2023-02-23"
-              email="2023-02-23"
-              phone={"600"}
-              openModal={toggleModal}
-            />
-            <TableData
-              _id="1"
-              firstName="Pro"
-              lastName="2023-02-23"
-              email="2023-02-23"
-              phone={"600"}
-              openModal={toggleModal}
-            />
-            <TableData
-              _id="1"
-              firstName="Pro"
-              lastName="2023-02-23"
-              email="2023-02-23"
-              phone={"600"}
-              openModal={toggleModal}
-            />
-            <TableData
-              _id="1"
-              firstName="Pro"
-              lastName="2023-02-23"
-              email="2023-02-23"
-              phone={"600"}
-              openModal={toggleModal}
-            />
-            <TableData
-              _id="1"
-              firstName="Pro"
-              lastName="2023-02-23"
-              email="2023-02-23"
-              phone={"600"}
-              openModal={toggleModal}
-            />
+            {Object.keys(agents).map((agentId) => {
+              const agent = agents[agentId];
+              return <TableData
+                _id={agentId}
+                firstName={agent.firstName}
+                lastName={agent.lastName}
+                email={agent.email}
+                phone={agent.phoneNumber}
+                openModal={toggleModal}
+              />
+
+            })}
+
           </tbody>
         </table>
+      </div>
+      <div className=" w-full flex justify-end pt-2">
+
+        <Link to={"add-agent"}>
+          <button className=" ">
+
+            add agent
+          </button>
+        </Link>
       </div>
       <Pagination
         totalPage={totalPage}

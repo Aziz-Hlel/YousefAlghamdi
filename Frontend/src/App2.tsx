@@ -32,7 +32,7 @@ import ChangePassword from "./component/Dashboard2/ChangePassword2.js";
 import MyPropertiesProvider from "./component/Dashboard2/MyProperties/MyPropertiesProvider.context.js";
 import AgentsTable from "./component/Dashboard2/InvoiceTable2.js";
 import { AgentsProvider } from "./providers/AgentsProvider.context.js";
-import UpdatePersonalInfo from "./component/Modal2/updatePersonalInfo.js";
+import CU_Agent from "./component/Modal2/updatePersonalInfo.js";
 import UserView from "./component/Modal2/index.js";
 
 const App2 = () => {
@@ -162,7 +162,8 @@ const App2 = () => {
                                             <Route path="inspect-user/:userId" element={<UserView />} />
                                         </Route>
                                         <Route path="agents" element={<AgentsTable />} >
-                                            <Route path="edit-agent/:agentId" element={<UpdatePersonalInfo />}></Route>
+                                            <Route path="add-agent" element={<CU_Agent />}></Route>
+                                            <Route path="edit-agent/:agentId" element={<CU_Agent />}></Route>
                                         </Route>
                                         {/* <Route path="add-agent" element={<UpdatePersonalInfo isModalOpen={true} toggleModal={() => { }} />}></Route> */}
 

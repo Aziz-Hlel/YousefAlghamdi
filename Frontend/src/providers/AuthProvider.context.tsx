@@ -36,20 +36,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 
         whoAmI()
-        console.log("user", user);
+        // console.log("user", user);
 
     }, []);
 
 
     const login = async (data: LoginFormFields): Promise<AxiosResponse<any, any> | undefined> => {
         const response = await Http.post(apiGateway.user.sigIn, data)
-        console.log("response", response?.data.result);
+        // console.log("response", response?.data.result);
         response?.status === 200 ? setUser(response.data.result) : setUser(null);
         return response
     };
 
     const logout = () => {
-        console.log("Logged out");
+        // console.log("Logged out");
     };
 
     const contextValue: IAuthContext = {
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         login,
         logout,
     };
-    console.log("user", user);
+    // console.log("user", user);
 
     return (
         <AuthContext.Provider value={contextValue}>

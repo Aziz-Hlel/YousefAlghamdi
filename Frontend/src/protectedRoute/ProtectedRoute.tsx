@@ -11,7 +11,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    console.log("user f protected", user);
+    // console.log("user f protected", user);
 
     useEffect(() => {
         if (user === null) {
