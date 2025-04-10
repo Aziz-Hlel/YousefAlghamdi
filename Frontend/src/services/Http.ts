@@ -34,8 +34,14 @@ const Http = {
 
     },
 
-    put: <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {
-        return axiosInstance.put<T>(url, body, config);
+    put: async <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {
+        try {
+            return await axiosInstance.put<T>(url, body, config);
+
+        } catch (e) {
+            axios.isAxiosError(e) && console.log(e.response?.data);
+            if (axios.isAxiosError(e)) return e.response
+        }
     },
 
     patch: async <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {

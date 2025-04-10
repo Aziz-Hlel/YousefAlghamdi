@@ -1,37 +1,13 @@
-import { useState } from "react";
 import Layout from "./Layout";
 import TableData from "./TableData2";
-import InvoiceView from "../Modal";
-import Pagination from "../Pagination";
 import { Link, Outlet } from "react-router-dom";
 import { useAgents } from "@src/providers/AgentsProvider.context";
 
 const AgentsTable = () => {
-  // open invoice in modal
-  const [viewInvoice, setViewInvoice] = useState(false);
-  const toggleModal = () => {
-    setViewInvoice(!viewInvoice);
-  };
 
-  // handle pages
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPage = 24;
-
-  const handelPage = (page: any) => {
-    if (page === "prev") {
-      if (currentPage > 1) {
-        setCurrentPage(currentPage - 1);
-      }
-    } else if (page === "next") {
-      if (currentPage < totalPage) {
-        setCurrentPage(currentPage + 1);
-      }
-    } else {
-      setCurrentPage(page);
-    }
-  };
 
   const agents = useAgents();
+
 
 
   return (
@@ -59,7 +35,7 @@ const AgentsTable = () => {
                 lastName={agent.lastName}
                 email={agent.email}
                 phone={agent.phoneNumber}
-                openModal={toggleModal}
+                key={agentId}
               />
 
             })}
@@ -76,11 +52,11 @@ const AgentsTable = () => {
           </button>
         </Link>
       </div>
-      <Pagination
+      {/* <Pagination
         totalPage={totalPage}
         handlePage={handelPage}
         currentPage={currentPage}
-      />
+      /> */}
     </Layout>
   );
 }

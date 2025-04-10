@@ -1,5 +1,6 @@
 import express from 'express';
-import { createAgent, getAgents } from '../Controllers/agent.controller';
+import { createAgent, getAgents as listAgents, updateAgent } from '../Controllers/agent.controller';
+import { adminAuth } from '../Middlewares/auth.middleware';
 
 
 
@@ -9,9 +10,9 @@ import { createAgent, getAgents } from '../Controllers/agent.controller';
 const agentRouter = express.Router();
 
 
-agentRouter.get('/', getAgents);
-agentRouter.post('/', createAgent);
-agentRouter.post('/register', createAgent);
+agentRouter.get('/', listAgents);
+agentRouter.post('/', adminAuth, createAgent);
+agentRouter.put('/:agentId', adminAuth, updateAgent);
 
 
 

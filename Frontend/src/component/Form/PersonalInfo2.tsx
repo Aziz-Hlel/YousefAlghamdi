@@ -31,12 +31,13 @@ const agentSchema = z.object({
 
   password: z.string({ required_error: "Password is required" })
     .min(1, { message: "Password must be at least 6 characters long" })
-    .max(25, { message: "Password must be at most 25 characters long" }),
+    .max(25, { message: "Password must be at most 25 characters long" })
+    .optional(),
 
   confirmPassword: z.string({ required_error: "Confirm password is required" })
     .min(1, { message: "Confirm password must be at least 6 characters long" })
-    .max(25, { message: "Confirm password must be at most 25 characters long" }),
-
+    .max(25, { message: "Confirm password must be at most 25 characters long" })
+    .optional(),
 
   adresse: z.string({ required_error: "Adresse is required" })
     .min(1, { message: "Adresse is required" })  // Custom message for required field
@@ -66,9 +67,14 @@ const agentSchema = z.object({
 
   about: z.string({ required_error: "About text is required" })
     .min(1, { message: "About text is required" })  // Custom message for required field  
-    .max(50, { message: "About text must be at most 50 characters long" }),
+    .max(200, { message: "About text must be at most 200 characters long" }),
 
-})
+}).refine((data) =>
+  data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+}
+);
 
 type addAgentSchemaType = z.infer<typeof agentSchema>
 
@@ -79,7 +85,6 @@ function PersonalInfo() {
   const agents = useAgents();
   const { agentId } = useParams();
 
-  const agentToEdit = agentId ? agents[agentId] : {};
   const editMode = agentId ? true : false;
 
   const { register, handleSubmit, reset, formState: { errors, isSubmitting, }, setError } =
@@ -87,6 +92,8 @@ function PersonalInfo() {
       resolver: zodResolver(agentSchema),
       defaultValues: agentId ? agents[agentId] : undefined
     });
+
+  !editMode && agentSchema.innerType().omit({ password: true, confirmPassword: true });
 
   const navigate = useNavigate();;
   useEffect(() => {
@@ -105,7 +112,7 @@ function PersonalInfo() {
 
       const response = await Http.post(apiGateway.agent.create, data);
       response?.status === 201 && navigate("../")
-      response && response?.status !== 200 && Object.keys(response.data.errors).map((key: any) => {
+      response && response.status !== 200 && Object.keys(response.data.errors).map((key: any) => {
         console.log(response.data.errors[key]);
 
         setError(key, { message: response.data.errors[key] })
@@ -115,13 +122,18 @@ function PersonalInfo() {
 
     const updateAgent = async () => {
 
-      // Http.put(apiGateway.agent.updateAgent, data);
+      const response = await Http.put(`${apiGateway.agent.update}/${agentId}`, data);
+      response?.status === 200 && navigate("../")
+      response && response.status !== 200 && Object.keys(response.data.errors).map((key: any) => {
+        setError(key, { message: response.data.errors[key] })
+      })
     }
 
     editMode ? updateAgent() : createAgent();
 
   };
 
+  console.log(errors);
 
 
 
@@ -186,20 +198,20 @@ function PersonalInfo() {
           fieldRegister={register("email")}
           fieldError={errors.email}
         />
-        <PropertyTextInput
+        {!editMode && <PropertyTextInput
           title="Password*"
           placeholder="Password"
           fieldRegister={register("password")}
           fieldError={errors.password}
           type="password"
-        />
-        <PropertyTextInput
+        />}
+        {!editMode && <PropertyTextInput
           title="Confirm Password*"
           placeholder="Confirm Password"
           fieldRegister={register("confirmPassword")}
           fieldError={errors.confirmPassword}
           type="password"
-        />
+        />}
         <PropertyTextInput
           title="Location*"
           placeholder="Your Location"

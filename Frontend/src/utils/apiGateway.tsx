@@ -1,3 +1,4 @@
+import { update } from "lodash";
 
 
 const localhostUrl = "http://localhost:5000";
@@ -34,6 +35,7 @@ const apiGateway = {
     agent: {
         list: "/agent/",
         create: "/agent",
+        update: "/agent",
     },
 
 

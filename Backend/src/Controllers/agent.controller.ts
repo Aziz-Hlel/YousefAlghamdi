@@ -2,11 +2,12 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../Models/user.model";
 import roles from "../types/roles.type";
-import z from "zod";
+import { z, ZodEffects } from "zod";
 import { errorHandler } from "../utils/error";
 import statusCode from "../utils/statusCode";
 import errorMessages from "../utils/errorMessages";
 import Agent from "../Models/agent.model";
+import mongoose from "mongoose";
 
 
 const registerBodySchema = z.object({
@@ -62,6 +63,11 @@ const registerBodySchema = z.object({
 );
 
 
+const updateAgentSchema = registerBodySchema.innerType().omit({
+    password: true,
+    confirmPassword: true,
+});
+
 
 export const createAgent = async (req: Request, res: Response, next: NextFunction) => {
 
@@ -93,12 +99,46 @@ export const createAgent = async (req: Request, res: Response, next: NextFunctio
 
 
 
+
+export const updateAgent = async (req: Request, res: Response, next: NextFunction) => {
+
+    const { agentId } = req.params;
+    console.log(agentId)
+    if (!agentId || !mongoose.Types.ObjectId.isValid(agentId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.TEA_POT));
+
+    const updatedAgent = req.body;
+    updatedAgent.image = "https://example.com/images/john.jpg";
+    const validBody = updateAgentSchema.safeParse(updatedAgent);
+
+    if (!validBody.success) {
+        let zodErrors = {}
+        validBody.error.issues.forEach((issue) => zodErrors = { ...zodErrors, [issue.path[0]]: issue.message });
+        return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request, zodErrors));
+    }
+
+    try {
+        const updateResult = await Agent.findByIdAndUpdate(agentId, updatedAgent, { new: true });
+        if (!updateResult) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+        res.status(statusCode.OK).json({ result: updateResult });
+    } catch (error) {
+        next(error);
+    }
+
+
+
+}
+
 export const getAgents = async (req: Request, res: Response, next: NextFunction) => {
 
 
     try {
-        const agents = await Agent.find().where('role').equals(roles.AGENT);
+        const [agents, agentsCount] = await Promise.all([
+            Agent.find().where('role').equals(roles.AGENT),
+            Agent.countDocuments({ role: roles.AGENT })
+        ]);
 
+        res.set("x-total-count", agentsCount.toString());
         res.json({
             result: agents
         });

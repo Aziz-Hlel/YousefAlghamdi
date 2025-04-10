@@ -36,6 +36,7 @@ function MyProperties() {
   const { properties, totalCount, fetchProperties } = useMyPropertiesContext();
   const [currentPage, setCurrentPage] = useState(1);
   const totalPage = Math.ceil(totalCount / 6)
+console.log("total count", totalCount);
 
   const handelPage = (page: number) => {
     console.log('page', page);

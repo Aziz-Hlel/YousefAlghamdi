@@ -178,7 +178,7 @@ export const getUser = async (req: AuthenticatedRequest, res: Response, next: Ne
 
 
 
-export const updateAgent = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+export const updateAgentOfClient = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
     const { userId, agentId } = req.body;
 

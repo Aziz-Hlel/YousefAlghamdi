@@ -24,6 +24,7 @@ const errorMessages = {
         INVALID_PURPOSE_TYPE: "invalid purpose type",
 
     },
+    TEA_POT: "Teapot",
     // PERMISSION:{
     //     FORBIDDEN: "forbidden",
     // }

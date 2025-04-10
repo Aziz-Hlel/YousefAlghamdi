@@ -7,11 +7,10 @@ type ITableData = {
   lastName: string;
   email: string;
   phone: string;
-  openModal: () => void;
 
 }
 
-function TableData({ _id, firstName, lastName, email, phone, openModal }: ITableData) {
+function TableData({ _id, firstName, lastName, email, phone }: ITableData) {
   return (
     <tr>
       <td className="homec-invoice-table__column1">
@@ -31,9 +30,8 @@ function TableData({ _id, firstName, lastName, email, phone, openModal }: ITable
           data-bs-toggle="modal"
           data-bs-target="#invoice_view"
           className="homec-invoice-table--btn h-10"
-          onClick={() => openModal()}
         >
-          View
+          Edit
         </Link>
       </td>
     </tr>
