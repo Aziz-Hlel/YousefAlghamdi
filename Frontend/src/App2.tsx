@@ -34,88 +34,12 @@ import AgentsTable from "./component/Dashboard2/InvoiceTable2.js";
 import { AgentsProvider } from "./providers/AgentsProvider.context.js";
 import CU_Agent from "./component/Modal2/updatePersonalInfo.js";
 import UserView from "./component/Modal2/index.js";
-import { SinglePropertyProvider } from "./component/Property Single2/PropertySingleProvider.context.js";
 
 const App2 = () => {
 
     useEffect(() => {
         AOS.init();
     }, []);
-
-    const router = createBrowserRouter([
-        {
-            path: "/",
-            element: <Home />,
-            errorElement: <ErrorPage />,
-        },
-        {
-            path: "/property",
-            element: <Property />,
-        },
-
-        {
-            path: "/property-single/:id",
-            element: <PropertySingle />,
-        },
-        {
-            path: "/edit-property",
-            element: <EditProperty />,
-        },
-        {
-            path: "/add-property",
-            element: <AddProperty />,
-        },
-        {
-            path: "/submit-property",
-            element: <SubmitProperty />,
-        },
-        {
-            path: "/dashboard",
-            element: <Dashboard />,
-        },
-        {
-            path: "/agent-detail",
-            element: <AgentDetail />,
-        },
-        {
-            path: "/our-agent",
-            element: <OurAgents />,
-        },
-        {
-            path: "/about",
-            element: <AboutUs />,
-        },
-        {
-            path: "/pricing",
-            element: <Pricing />,
-        },
-        {
-            path: "/payment-method",
-            element: <PaymentMethod />,
-        },
-        {
-            path: "/faq",
-            element: <Faq />,
-        },
-        {
-            path: "/login",
-            element: <Login />,
-        },
-        {
-            path: "/signup",
-            element: <SignUp />,
-        },
-        {
-            path: "/404",
-            element: <ErrorPage />,
-        },
-        {
-            path: "/contact",
-            element: <Contact />,
-        },
-    ]);
-
-
 
     return (
         <>
@@ -145,10 +69,10 @@ const App2 = () => {
 
                                 <Route element={<ProtectedLayouts />}>
 
-                                    <Route path="edit-property" element={<EditProperty />} />
+                                    {/* <Route path="edit-property" element={<EditProperty />} /> */}
                                     <Route path="add-property" element={<AddProperty />} />
                                     <Route path="submit-property/:whatFor" element={<SubmitProperty />} />
-                                    <Route path="edit-property/:whatFor/:propertyId" element={<SinglePropertyProvider ><SubmitProperty /></SinglePropertyProvider>} />
+                                    {/* <Route path="edit-property/:whatFor/:propertyId" element={<SinglePropertyProvider ><SubmitProperty /></SinglePropertyProvider>} /> */}
 
                                     <Route path="dashboard" element={<Dashboard />} >
 

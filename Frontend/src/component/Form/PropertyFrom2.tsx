@@ -17,7 +17,6 @@ import { cities, delegations } from "@src/types/cities.delegations.types";
 import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
-import { useSinglePropertyContext } from "../Property Single2/PropertySingleProvider.context";
 
 
 const SubmitPropertySchema = z.object({
@@ -89,25 +88,16 @@ type imageArray = (FileWithPath & { preview: string; key: string; } | null)[];
 const PropertyFrom = () => {
 
 
-  const { property } = useSinglePropertyContext();
 
-  const { whatFor, propertyId } = useParams();
+  const { whatFor, } = useParams();
 
-  const { register, watch, handleSubmit, reset, setValue, formState: { errors, isSubmitting, }, setError } =
+  const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting, }, setError } =
     useForm<SubmitPropertyType>({
       resolver: zodResolver(SubmitPropertySchema),
-      defaultValues: property._id !== "" ? property : undefined
+   
     });
 
-  useEffect(() => {
-    if (propertyId) {
-      console.log("propertyId", propertyId);
-      console.log("property", property);
 
-
-      reset()
-    }
-  }, [property]);
 
   const navigate = useNavigate();
   const propertyCategoryValue = watch('category');

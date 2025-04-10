@@ -35,6 +35,7 @@ const initialProperty: Iproperty = {
     nearestPlaces: {},
     additionalDetails: [],
 
+
     show: false,
 
     advanced: {
@@ -42,30 +43,31 @@ const initialProperty: Iproperty = {
         state: "",
         updated_version: {},
     },
+
 }
 
 export const useGetProperty = (id: string) => {
 
-    const [property, setProperty] = useState<Iproperty>(initialProperty);
+    const [property, setProperty] = useState<any>(initialProperty);
 
     const updateProperty = async () => {
         // const property: Iproperty =  (await Http.get<Iproperty>(`${apiGateway.property.getById}/${id}`)).data.result;
-        const response = await Http.get<Iproperty>(`${apiGateway.property.getById}/${id}`);
+        const response = await Http.get<any>(`${apiGateway.property.getById}/${id}`);
         response?.status === 200 && setProperty(response.data.result)
         // console.log("property", typeof property);
         // console.log(property)
 
         // const property: Iproperty = response.data.result
 
-        // setProperty(property);
+        // setProperty(response.data.result);
     };
 
     useEffect(() => {
         id !== "0" && console.log("tbaddl") && updateProperty();
     }, [id]);
-
     useEffect(() => {
-        console.log("id f provider", id);
-    }, [id]);
+      console.log("rab om property = ", property);
+      
+    }, [property]);
     return { property }
 }

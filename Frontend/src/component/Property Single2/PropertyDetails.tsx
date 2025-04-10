@@ -36,7 +36,7 @@ function PropertyDetails() {
   }))
 
   const additionalDetails = property.additionalDetails
-console.log("property.additionalDetails", property);
+  console.log("property.additionalDetails", property);
 
   return (
     <section

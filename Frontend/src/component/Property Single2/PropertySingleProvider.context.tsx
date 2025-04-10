@@ -1,6 +1,6 @@
 import Iproperty from "@src/models/property.type";
 import { useGetProperty } from "@src/useApi/useGetProperty";
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 
@@ -14,11 +14,14 @@ export const SinglePropertyContext = createContext<IpropertySingleProvider | und
 
 
 
-export const SinglePropertyProvider = ({ children, }: { children: ReactNode }) => {
+export const SinglePropertyProvider = ({ children, id }: { children: ReactNode, id: string }) => {
 
-    const { propertyId } = useParams()
-    const { property } = useGetProperty(propertyId ?? "0");
+    // const { propertyId } = useParams()
+    const { property } = useGetProperty(id ?? "0");
 
+    useEffect(() => {
+        id !== "0" && console.log("nik din rbk ?", id);
+    }, [id]);
 
     return (
         <SinglePropertyContext.Provider value={{ property }}>

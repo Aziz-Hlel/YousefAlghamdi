@@ -11,18 +11,17 @@ import { useParams } from "react-router-dom";
 import Iproperty from "@src/models/property.type";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
-import { useGetProperty } from "@src/useApi/useGetProperty";
 import { SinglePropertyProvider } from "./PropertySingleProvider.context";
 import ThumbnailsSlider from "./ThumbnilsSlider";
 
 
 function PropertySingle() {
   const [isLoading, setIsLoading] = useState(true);
-  const id  = useParams().id;
+  const { propertyId } = useParams();
 
   useEffect(() => {
-    setIsLoading(false);
-  }, []);
+    propertyId && setIsLoading(false);
+  }, [propertyId]);
 
   let component = undefined;
   if (isLoading) {
@@ -30,7 +29,7 @@ function PropertySingle() {
   } else {
     component = (
       <>
-        <SinglePropertyProvider id={useParams().id}>
+        <SinglePropertyProvider id={propertyId ?? "0"}>
 
           {/* <Header v2={null} /> */}
           <Breadcrumbs title="Latest Properties" background={null} overlay={null} titlePosition={null}>
