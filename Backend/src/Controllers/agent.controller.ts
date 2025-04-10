@@ -30,6 +30,11 @@ const registerBodySchema = z.object({
     email: z.string({ required_error: "Email is required" })
         .email({ message: "Invalid email address" }),
 
+    adresse: z.string({ required_error: "Adresse is required" })
+        .min(1, { message: "Adresse is required" })  // Custom message for required field
+        .max(50, { message: "Adresse must be at most 50 characters long" }),
+
+
     password: z.string({ required_error: "Password is required" })
         .min(1, { message: "Password must be at least 6 characters long" })
         .max(25, { message: "Password must be at most 25 characters long" }),
@@ -37,10 +42,6 @@ const registerBodySchema = z.object({
     confirmPassword: z.string({ required_error: "Confirm password is required" })
         .min(1, { message: "Confirm password must be at least 6 characters long" })
         .max(25, { message: "Confirm password must be at most 25 characters long" }),
-
-    adresse: z.string({ required_error: "Adresse is required" })
-        .min(1, { message: "Adresse must be at least 6 characters long" })
-        .max(50, { message: "Adresse must be at most 50 characters long" }),
 
     image: z.string({ required_error: "Image is required" }),
 
@@ -65,7 +66,7 @@ const registerBodySchema = z.object({
 export const createAgent = async (req: Request, res: Response, next: NextFunction) => {
 
     const newAgent = req.body;
-
+    newAgent.image = "https://example.com/images/john.jpg";
     const validBody = registerBodySchema.safeParse(newAgent);
 
     if (!validBody.success) {
@@ -79,6 +80,7 @@ export const createAgent = async (req: Request, res: Response, next: NextFunctio
 
     if (agentExist) return next(errorHandler(statusCode.CONFLICT, errorMessages.COMMON.User_Already_Exists));
 
+    newAgent.role = roles.AGENT;
     const agent = new Agent(newAgent);
 
     try {
@@ -96,7 +98,7 @@ export const getAgents = async (req: Request, res: Response, next: NextFunction)
 
     try {
         const agents = await Agent.find().where('role').equals(roles.AGENT);
-        
+
         res.json({
             result: agents
         });

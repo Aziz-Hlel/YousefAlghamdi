@@ -10,24 +10,6 @@ const CU_Agent = () => {
   const navigate = useNavigate();
 
 
-  const initialValues = {
-    _id: "",
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    emailAddress: "",
-    location: "",
-    image: "",
-    socials: {
-      facebook: "",
-      twitter: "",
-      instagram: "",
-      linkedin: "",
-    },
-    about: "",
-  };
-
-
   const isModalOpen = true;
 
   const toggleModal = () => {

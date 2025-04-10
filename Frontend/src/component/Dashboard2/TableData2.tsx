@@ -40,12 +40,5 @@ function TableData({ _id, firstName, lastName, email, phone, openModal }: ITable
   );
 }
 
-TableData.propTypes = {
-  packages: ProtoTypes.string.isRequired,
-  purchaseDate: ProtoTypes.string.isRequired,
-  expiredDate: ProtoTypes.string.isRequired,
-  amount: ProtoTypes.number.isRequired,
-  openModal: ProtoTypes.func.isRequired,
-};
 
 export default TableData;

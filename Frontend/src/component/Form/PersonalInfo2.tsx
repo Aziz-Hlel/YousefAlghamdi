@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import PropertyTextInput from "./PropertyTextInput2";
 import PropertyTextAreaV2 from "./PropertyTextAreaV22";
 import { z } from "zod";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAgents } from "@src/providers/AgentsProvider.context";
+import Http from "@src/services/Http";
+import apiGateway from "@src/utils/apiGateway";
 
 
 const agentSchema = z.object({
 
-  _id: z.string().optional(),
 
   firstName: z.string({ required_error: "First name is required" })
     .min(1, { message: "First name is required" })  // Custom message for required field
@@ -28,17 +29,26 @@ const agentSchema = z.object({
     .min(1, { message: "Email address is required" })  // Custom message for required field
     .max(50, { message: "Email address must be at most 50 characters long" }),
 
-  location: z.string({ required_error: "Location is required" })
-    .min(1, { message: "Location is required" })  // Custom message for required field
-    .max(50, { message: "Location must be at most 50 characters long" }),
+  password: z.string({ required_error: "Password is required" })
+    .min(1, { message: "Password must be at least 6 characters long" })
+    .max(25, { message: "Password must be at most 25 characters long" }),
 
-  image: z.string({ required_error: "About text is required" }),
+  confirmPassword: z.string({ required_error: "Confirm password is required" })
+    .min(1, { message: "Confirm password must be at least 6 characters long" })
+    .max(25, { message: "Confirm password must be at most 25 characters long" }),
+
+
+  adresse: z.string({ required_error: "Adresse is required" })
+    .min(1, { message: "Adresse is required" })  // Custom message for required field
+    .max(50, { message: "Adresse must be at most 50 characters long" }),
+
+  // image: z.string({ required_error: "About text is required" }),
 
   socials: z.object({
 
-    facebook: z.string({ required_error: "Facebook is required" })
-      .min(1, { message: "Facebook is required" })  // Custom message for required field
-      .max(50, { message: "Facebook must be at most 50 characters long" }),
+    whatsApp: z.string({ required_error: "Whatsapp is required" })
+      .min(1, { message: "Whatsapp is required" })  // Custom message for required field
+      .max(50, { message: "Whatsapp must be at most 50 characters long" }),
 
     twitter: z.string({ required_error: "Twitter is required" })
       .min(1, { message: "Twitter is required" })  // Custom message for required field
@@ -75,23 +85,50 @@ function PersonalInfo() {
   const { register, handleSubmit, reset, formState: { errors, isSubmitting, }, setError } =
     useForm<addAgentSchemaType>({
       resolver: zodResolver(agentSchema),
-      defaultValues: agentToEdit
+      defaultValues: agentId ? agents[agentId] : undefined
     });
 
-
+  const navigate = useNavigate();;
   useEffect(() => {
 
     if (agentId) {
       console.log('t5ll5l5l5l5');
-      
+
       reset()
     }
 
   }, [agentId])
 
+  const onSubmit = (data: addAgentSchemaType) => {
+
+    const createAgent = async () => {
+
+      const response = await Http.post(apiGateway.agent.create, data);
+      response?.status === 201 && navigate("../")
+      response && response?.status !== 200 && Object.keys(response.data.errors).map((key: any) => {
+        console.log(response.data.errors[key]);
+
+        setError(key, { message: response.data.errors[key] })
+      })
+
+    }
+
+    const updateAgent = async () => {
+
+      // Http.put(apiGateway.agent.updateAgent, data);
+    }
+
+    editMode ? updateAgent() : createAgent();
+
+  };
+
+
+
 
   return (
-    <form className="ecom-wc__form-main p-0" action="index.html" method="post">
+    <form className="ecom-wc__form-main p-0" method="post"
+      onSubmit={handleSubmit(onSubmit)}>
+
       <div className="row">
         <div className="col-12">
           <div className="homec-profile__edit mg-top-20">
@@ -115,11 +152,11 @@ function PersonalInfo() {
               </span>
             </label>
             <input
-              id="file-input"
+
               type="file"
               name="image"
-              // value={input.image}
-          
+            // value={input.image}
+
             />
           </div>
         </div>
@@ -150,24 +187,41 @@ function PersonalInfo() {
           fieldError={errors.email}
         />
         <PropertyTextInput
+          title="Password*"
+          placeholder="Password"
+          fieldRegister={register("password")}
+          fieldError={errors.password}
+          type="password"
+        />
+        <PropertyTextInput
+          title="Confirm Password*"
+          placeholder="Confirm Password"
+          fieldRegister={register("confirmPassword")}
+          fieldError={errors.confirmPassword}
+          type="password"
+        />
+        <PropertyTextInput
           title="Location*"
           placeholder="Your Location"
-          fieldRegister={register("location")}
-          fieldError={errors.location}
+          fieldRegister={register("adresse")}
+          fieldError={errors.adresse}
+
         />
         <PropertyTextAreaV2
           title="About Text*"
           name="aboutText"
           sizeFull={true}
+          fieldRegister={register("about")}
+          fieldError={errors.about}
         />
         <h4 className="homec-modal-form__middle">Social Link</h4>
         <div className="row">
           <PropertyTextInput
             size="col-lg-6 col-md-6"
-            title="Facebook*"
-            placeholder="Facebook Link"
-            fieldRegister={register("socials.facebook")}
-            fieldError={errors.socials?.facebook}
+            title="Whatsapp*"
+            placeholder="Whatsapp Link"
+            fieldRegister={register("socials.whatsApp")}
+            fieldError={errors.socials?.whatsApp}
           />
           <PropertyTextInput
             size="col-lg-6 col-md-6"
@@ -191,12 +245,14 @@ function PersonalInfo() {
             fieldError={errors.socials?.linkedin}
           />
         </div>
+        {<span className="pl-2 text-red-600 ">{errors.root?.message}</span>}
+
       </div>
       {/* Form Group  */}
       <div className="form-group form-mg-top25">
         <div className="ecom-wc__button ecom-wc__button--bottom">
-          <button className="homec-btn homec-btn__second" type="submit">
-            <span>Update Profile</span>
+          <button className="homec-btn homec-btn__second" type="submit" >
+            <span>{isSubmitting ? "Loading" : "Update Profile"}</span>
           </button>
         </div>
       </div>

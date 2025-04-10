@@ -10,6 +10,7 @@ const agentRouter = express.Router();
 
 
 agentRouter.get('/', getAgents);
+agentRouter.post('/', createAgent);
 agentRouter.post('/register', createAgent);
 
 

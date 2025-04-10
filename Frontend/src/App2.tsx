@@ -162,8 +162,8 @@ const App2 = () => {
                                             <Route path="inspect-user/:userId" element={<UserView />} />
                                         </Route>
                                         <Route path="agents" element={<AgentsTable />} >
-                                            <Route path="add-agent" element={<CU_Agent />}></Route>
-                                            <Route path="edit-agent/:agentId" element={<CU_Agent />}></Route>
+                                            <Route path="add-agent" element={<CU_Agent />} />
+                                            <Route path="edit-agent/:agentId" element={<CU_Agent />} />
                                         </Route>
                                         {/* <Route path="add-agent" element={<UpdatePersonalInfo isModalOpen={true} toggleModal={() => { }} />}></Route> */}
 

@@ -32,7 +32,8 @@ const apiGateway = {
     },
 
     agent: {
-        list: "/agent/"
+        list: "/agent/",
+        create: "/agent",
     },
 
 
