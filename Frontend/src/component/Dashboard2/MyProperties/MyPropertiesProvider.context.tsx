@@ -21,6 +21,7 @@ const MyPropertiesProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [properties, setProperties] = useState<Iproperty[]>([]);
   const [totalCount, setTotalCount] = useState(0);
+  console.log('tal lalalal');
 
   const fetchProperties = async (page?: number) => {
 

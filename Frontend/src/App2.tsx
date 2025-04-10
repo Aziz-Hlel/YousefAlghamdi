@@ -3,7 +3,7 @@ import AOS from "aos";
 import React, { useEffect } from 'react'
 import Home from './component/Home/'
 import PaymentMethod from "./component/PaymentMethod";
-import { createBrowserRouter, Route, BrowserRouter as Router, RouterProvider, Routes } from "react-router-dom";
+import { createBrowserRouter, Route, BrowserRouter as Router, RouterProvider, Routes, useParams } from "react-router-dom";
 import AboutUs from "./component/About";
 import AddProperty from "./component/AddProperty2";
 import AgentDetail from "./component/AgentDetail";
@@ -34,6 +34,7 @@ import AgentsTable from "./component/Dashboard2/InvoiceTable2.js";
 import { AgentsProvider } from "./providers/AgentsProvider.context.js";
 import CU_Agent from "./component/Modal2/updatePersonalInfo.js";
 import UserView from "./component/Modal2/index.js";
+import { SinglePropertyProvider } from "./component/Property Single2/PropertySingleProvider.context.js";
 
 const App2 = () => {
 
@@ -127,28 +128,29 @@ const App2 = () => {
 
                             <Route element={<Layout />} >
 
-                                <Route path="/" element={<Home />} />
-                                <Route path="/home" element={<Home />} />
-                                <Route path="/property/:city" element={<Property />} />
-                                <Route path="/property" element={<Property />} />
-                                <Route path="/property-single/:id" element={<PropertySingle />} />
+                                <Route path="" element={<Home />} />
+                                <Route path="home" element={<Home />} />
+                                <Route path="property/:city" element={<Property />} />
+                                <Route path="property" element={<Property />} />
+                                <Route path="property-single/:propertyId" element={<PropertySingle />} />
 
 
-                                <Route path="/agent-detail" element={<AgentDetail />} />
-                                <Route path="/our-agent" element={<OurAgents />} />
-                                <Route path="/about" element={<AboutUs />} />
+                                <Route path="agent-detail" element={<AgentDetail />} />
+                                <Route path="our-agent" element={<OurAgents />} />
+                                <Route path="about" element={<AboutUs />} />
                                 {/* <Route path="/pricing" element={<Pricing />} /> */}
                                 {/* <Route path="/payment-method" element={<PaymentMethod />} /> */}
-                                <Route path="/faq" element={<Faq />} />
-                                <Route path="/contact" element={<Contact />} />
+                                <Route path="faq" element={<Faq />} />
+                                <Route path="contact" element={<Contact />} />
 
                                 <Route element={<ProtectedLayouts />}>
 
-                                    <Route path="/edit-property" element={<EditProperty />} />
-                                    <Route path="/add-property" element={<AddProperty />} />
-                                    <Route path="/submit-property/:whatFor" element={<SubmitProperty />} />
+                                    <Route path="edit-property" element={<EditProperty />} />
+                                    <Route path="add-property" element={<AddProperty />} />
+                                    <Route path="submit-property/:whatFor" element={<SubmitProperty />} />
+                                    <Route path="edit-property/:whatFor/:propertyId" element={<SinglePropertyProvider ><SubmitProperty /></SinglePropertyProvider>} />
 
-                                    <Route path="/dashboard" element={<Dashboard />} >
+                                    <Route path="dashboard" element={<Dashboard />} >
 
                                         <Route index element={<DashboardComp />} />
                                         <Route path="my-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} />
@@ -161,6 +163,7 @@ const App2 = () => {
                                         <Route path="pending-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} >
                                             <Route path="inspect-user/:userId" element={<UserView />} />
                                         </Route>
+
                                         <Route path="agents" element={<AgentsTable />} >
                                             <Route path="add-agent" element={<CU_Agent />} />
                                             <Route path="edit-agent/:agentId" element={<CU_Agent />} />

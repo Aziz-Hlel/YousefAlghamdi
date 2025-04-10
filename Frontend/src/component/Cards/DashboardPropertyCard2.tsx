@@ -8,14 +8,14 @@ type IDashboardPropertyCard = {
   ownerId: string;
   status: string;
   image: string;
-  why: string;
+  listing_type: string;
   title: string;
   location: string;
   onInspectClient: Function
 };
 
 
-function DashboardPropertyCard({ _id, ownerId, status, image, why, title, location, onInspectClient, }: IDashboardPropertyCard) {
+function DashboardPropertyCard({ _id, ownerId, status, image, listing_type, title, location, onInspectClient, }: IDashboardPropertyCard) {
 
   const { user } = useAuth();
 
@@ -27,7 +27,7 @@ function DashboardPropertyCard({ _id, ownerId, status, image, why, title, locati
         <img src={image} alt="#" />
         {/* Property Content */}
         <div className="homec-dashboard-property__content">
-          <div className="homec-dashboard-property__badge">For {why}</div>
+          <div className="homec-dashboard-property__badge">For {listing_type}</div>
           <h3 className="homec-dashboard-property__title">{title}</h3>
           <div className="homec-property__text">
             <img src="/img/location-icon.svg" alt="#" />
@@ -61,7 +61,7 @@ function DashboardPropertyCard({ _id, ownerId, status, image, why, title, locati
         </Link>}
 
         <button className="homec-dashboard-property__btn px-2  homec-dashboard-property__btn--edit  flex justify-center items-center">
-          <Link to={"/dashboard/my-properties/edit/" + _id}>
+          <Link to={`../../edit-property/${listing_type}/${_id}`}>
 
             <div className="flex  justify-center  items-center">
 
@@ -107,7 +107,7 @@ function DashboardPropertyCard({ _id, ownerId, status, image, why, title, locati
 
         </button>
       </div>
-    </div>
+    </div >
   );
 }
 

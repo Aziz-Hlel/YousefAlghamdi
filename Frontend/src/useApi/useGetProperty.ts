@@ -34,7 +34,14 @@ const initialProperty: Iproperty = {
     },
     nearestPlaces: {},
     additionalDetails: [],
-    available: undefined, // badl undefined b null b3d 
+
+    show: false,
+
+    advanced: {
+        available: new Date(),
+        state: "",
+        updated_version: {},
+    },
 }
 
 export const useGetProperty = (id: string) => {
@@ -42,19 +49,23 @@ export const useGetProperty = (id: string) => {
     const [property, setProperty] = useState<Iproperty>(initialProperty);
 
     const updateProperty = async () => {
-        const property: Iproperty = await (await Http.get<any>(`${apiGateway.property.getById}/${id}`)).data.result;
-        console.log("property", typeof property);
-        console.log(property)
+        // const property: Iproperty =  (await Http.get<Iproperty>(`${apiGateway.property.getById}/${id}`)).data.result;
+        const response = await Http.get<Iproperty>(`${apiGateway.property.getById}/${id}`);
+        response?.status === 200 && setProperty(response.data.result)
+        // console.log("property", typeof property);
+        // console.log(property)
 
         // const property: Iproperty = response.data.result
 
-        setProperty(property);
+        // setProperty(property);
     };
 
     useEffect(() => {
-        updateProperty();
-    }, []);
+        id !== "0" && console.log("tbaddl") && updateProperty();
+    }, [id]);
 
-
+    useEffect(() => {
+        console.log("id f provider", id);
+    }, [id]);
     return { property }
 }

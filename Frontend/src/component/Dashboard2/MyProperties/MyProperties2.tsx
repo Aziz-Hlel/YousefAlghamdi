@@ -36,7 +36,7 @@ function MyProperties() {
   const { properties, totalCount, fetchProperties } = useMyPropertiesContext();
   const [currentPage, setCurrentPage] = useState(1);
   const totalPage = Math.ceil(totalCount / 6)
-console.log("total count", totalCount);
+  console.log("total count", totalCount);
 
   const handelPage = (page: number) => {
     console.log('page', page);
@@ -70,14 +70,14 @@ console.log("total count", totalCount);
             key={property._id}
             status={property.advanced.state}
             image={apiGateway.images + pickRandomPhoto()}
-            why={property.listing_type}
+            listing_type={property.listing_type}
             title={property.title}
             location={property.city + ", " + property.delegation + ", " + property.addresse}
             // price={property.filterFields.price}
             onInspectClient={toggleModal}
           />
         ))}
-        
+
         {/* <UserView
           isOpen={viewInvoice}
           handleModal={toggleModal}

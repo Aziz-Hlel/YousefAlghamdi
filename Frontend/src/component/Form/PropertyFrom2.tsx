@@ -11,15 +11,18 @@ import SelectiveInputForm from "./SelectiveInputForm";
 import { categoriesType, ResidentialProperties, sub_categories } from "@src/types/categories.subcategories.types";
 import { additionalDetailsAttributes } from "@src/types/additionalDetails.types";
 import { FileWithPath } from "react-dropzone";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { listing_typesValues } from "@src/types/listing_types.types";
 import { cities, delegations } from "@src/types/cities.delegations.types";
 import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
+import { useSinglePropertyContext } from "../Property Single2/PropertySingleProvider.context";
 
 
 const SubmitPropertySchema = z.object({
+
+  _id: z.string().optional(),
   title: z.string({ required_error: "Title is required" })
     .min(2, { message: "Title must be at least 2 characters long" })
     .max(25, { message: "Title must be at most 25 characters long" }),
@@ -85,11 +88,28 @@ type imageArray = (FileWithPath & { preview: string; key: string; } | null)[];
 
 const PropertyFrom = () => {
 
-  const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting, }, setError } = useForm<SubmitPropertyType>({ resolver: zodResolver(SubmitPropertySchema) });
 
-  const { whatFor } = useParams();
+  const { property } = useSinglePropertyContext();
+
+  const { whatFor, propertyId } = useParams();
+
+  const { register, watch, handleSubmit, reset, setValue, formState: { errors, isSubmitting, }, setError } =
+    useForm<SubmitPropertyType>({
+      resolver: zodResolver(SubmitPropertySchema),
+      defaultValues: property._id !== "" ? property : undefined
+    });
+
+  useEffect(() => {
+    if (propertyId) {
+      console.log("propertyId", propertyId);
+      console.log("property", property);
 
 
+      reset()
+    }
+  }, [property]);
+
+  const navigate = useNavigate();
   const propertyCategoryValue = watch('category');
   const CityValueObserver = watch('city');
 

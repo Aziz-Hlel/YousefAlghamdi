@@ -12,7 +12,7 @@ function MyProperties() {
 
     setCurrentPage(page);
   };
-  
+
   return (
     <>
       <Layout title="My Properties">
@@ -21,7 +21,7 @@ function MyProperties() {
             key={property.id}
             status={property.status}
             image={property.img2}
-            why={property.whatFor}
+            listing_type={property.whatFor}
             title={property.name}
             location={property.address}
           />

@@ -1,4 +1,4 @@
-import PropertyFrom from "../Form/PropertyFrom";
+import PropertyFrom from "../Form/PropertyFrom2";
 import Header from "../Header";
 import Footer from "../Footer";
 import DownloadApp from "../DownloadApp";

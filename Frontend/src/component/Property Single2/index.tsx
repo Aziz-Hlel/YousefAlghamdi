@@ -18,7 +18,7 @@ import ThumbnailsSlider from "./ThumbnilsSlider";
 
 function PropertySingle() {
   const [isLoading, setIsLoading] = useState(true);
-  const { id } = useParams();
+  const id  = useParams().id;
 
   useEffect(() => {
     setIsLoading(false);
@@ -30,7 +30,7 @@ function PropertySingle() {
   } else {
     component = (
       <>
-        <SinglePropertyProvider id={id}>
+        <SinglePropertyProvider id={useParams().id}>
 
           {/* <Header v2={null} /> */}
           <Breadcrumbs title="Latest Properties" background={null} overlay={null} titlePosition={null}>
