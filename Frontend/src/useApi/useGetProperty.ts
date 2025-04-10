@@ -44,13 +44,17 @@ const initialProperty: Iproperty = {
     },
 }
 
-export const useGetProperty = (id: string) => {
+
+
+
+export const useGetProperty = (id: string | undefined) => {
 
     const [property, setProperty] = useState<Iproperty>(initialProperty);
 
     const updateProperty = async () => {
         // const property: Iproperty =  (await Http.get<Iproperty>(`${apiGateway.property.getById}/${id}`)).data.result;
         const response = await Http.get<Iproperty>(`${apiGateway.property.getById}/${id}`);
+        // response?.status === 200 && delete response.data.result.advanced
         response?.status === 200 && setProperty(response.data.result)
         // console.log("property", typeof property);
         // console.log(property)
@@ -61,11 +65,14 @@ export const useGetProperty = (id: string) => {
     };
 
     useEffect(() => {
-        id !== "0" && console.log("tbaddl") && updateProperty();
+        if (id) updateProperty();
+        if (id) console.log("id tbddl fl use hook", id);
+
     }, [id]);
 
     useEffect(() => {
         console.log("id f provider", id);
     }, [id]);
+    
     return { property }
 }

@@ -17,7 +17,7 @@ import { cities, delegations } from "@src/types/cities.delegations.types";
 import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
-import { useSinglePropertyContext } from "../Property Single2/PropertySingleProvider.context";
+import { useSingleProperty } from "../context/SinglePropertyContext/PropertySingleProvider.context";
 
 
 const SubmitPropertySchema = z.object({
@@ -52,22 +52,22 @@ const SubmitPropertySchema = z.object({
     area: z.string({ required_error: "Area is required" })
       .min(1, { message: "Area must be at least 0" })
       .max(5, { message: "Area must be at most 100000" })
-      .regex(/^\d+$/, "Price must be a number")
-      .transform(Number),
+      .regex(/^\d+$/, "Price must be a number"),
+    // .transform(Number),
 
     rooms: z.string({ required_error: "Rooms is required" })
       .min(1, { message: "Rooms must be at least 0" })
       .max(2, { message: "Rooms must be at most 99" })
       .regex(/^\d+$/, "Price must be a number")
-      .optional()
-      .transform(Number),
+      .optional(),
+    // .transform(Number),
 
     bathrooms: z.string({ required_error: "Bathrooms is required" })
       .min(1, { message: "Bathrooms must be at least 0" })
       .max(2, { message: "Bathrooms must be at most 99" })
       .regex(/^\d+$/, "Price must be a number")
-      .optional()
-      .transform(Number),
+      .optional(),
+    // .transform(Number),
 
   }),
 
@@ -89,25 +89,68 @@ type imageArray = (FileWithPath & { preview: string; key: string; } | null)[];
 const PropertyFrom = () => {
 
 
-  const { property } = useSinglePropertyContext();
+  const { property } = useSingleProperty();
 
   const { whatFor, propertyId } = useParams();
 
   const { register, watch, handleSubmit, reset, setValue, formState: { errors, isSubmitting, }, setError } =
     useForm<SubmitPropertyType>({
       resolver: zodResolver(SubmitPropertySchema),
-      defaultValues: property._id !== "" ? property : undefined
+      defaultValues: property._id !== "" ? {
+        _id: "property._id",
+        title: property.title,
+        description: property.description,
+        category: property.category,
+        sub_category: property.sub_category,
+        city: property.city,
+        delegation: property.delegation,
+        addresse: property.addresse,
+        filterFields: {
+          price: property.filterFields.price,
+          area: String(property.filterFields.area),
+          rooms: String(property.filterFields.rooms),
+          bathrooms: String(property.filterFields.bathrooms),
+        },
+        additionalDetails: property.additionalDetails,
+        imgs: property.imgs,
+        nearestPlaces: property.nearestPlaces,
+        listing_type: property.listing_type,
+        productTier: property.productTier
+      } : {
+        _id: "property._id",
+        title: property.title,
+        description: property.description,
+        category: property.category,
+        sub_category: property.sub_category,
+        city: property.city,
+        delegation: property.delegation,
+        addresse: property.addresse,
+        filterFields: {
+          price: property.filterFields.price,
+          area: String(property.filterFields.area),
+          rooms: String(property.filterFields.rooms),
+          bathrooms: String(property.filterFields.bathrooms),
+        },
+        additionalDetails: property.additionalDetails,
+        imgs: property.imgs,
+        nearestPlaces: property.nearestPlaces,
+        productTier: property.productTier,
+        listing_type: property.listing_type,
+
+      }
     });
 
   useEffect(() => {
-    if (propertyId) {
-      console.log("propertyId", propertyId);
-      console.log("property", property);
+    if (property._id !== "") {
+      console.log("property = ", property);
+
+      console.log("t5l lel reset", propertyId);
 
 
       reset()
     }
-  }, [property]);
+    reset()
+  }, [property._id]);
 
   const navigate = useNavigate();
   const propertyCategoryValue = watch('category');

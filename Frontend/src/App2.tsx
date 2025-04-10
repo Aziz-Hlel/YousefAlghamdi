@@ -15,7 +15,6 @@ import Faq from "./component/Faq";
 import Login from "./component/Login2";
 import OurAgents from "./component/OurAgents";
 import Pricing from "./component/Pricing.jsx";
-import PropertySingle from "./component/Property Single2";
 import SignUp from "./component/SignUp2";
 import SubmitProperty from "./component/SubmitProperty2";
 import Property from "./component/Property2/";
@@ -34,7 +33,8 @@ import AgentsTable from "./component/Dashboard2/InvoiceTable2.js";
 import { AgentsProvider } from "./providers/AgentsProvider.context.js";
 import CU_Agent from "./component/Modal2/updatePersonalInfo.js";
 import UserView from "./component/Modal2/index.js";
-import { SinglePropertyProvider } from "./component/Property Single2/PropertySingleProvider.context.js";
+import PropertySingle from "./component/PropertySingle2/index.js";
+import { SinglePropertyProvider } from "./component/context/SinglePropertyContext/PropertySingleProvider.context.js";
 
 const App2 = () => {
 
@@ -65,10 +65,10 @@ const App2 = () => {
             path: "/add-property",
             element: <AddProperty />,
         },
-        {
-            path: "/submit-property",
-            element: <SubmitProperty />,
-        },
+        // {
+        //     path: "/submit-property",
+        //     element: <SubmitProperty />,
+        // },
         {
             path: "/dashboard",
             element: <Dashboard />,
@@ -145,15 +145,15 @@ const App2 = () => {
 
                                 <Route element={<ProtectedLayouts />}>
 
-                                    <Route path="edit-property" element={<EditProperty />} />
+                                    {/* <Route path="edit-property" element={<EditProperty />} /> */}
                                     <Route path="add-property" element={<AddProperty />} />
                                     <Route path="submit-property/:whatFor" element={<SubmitProperty />} />
-                                    <Route path="edit-property/:whatFor/:propertyId" element={<SinglePropertyProvider ><SubmitProperty /></SinglePropertyProvider>} />
 
                                     <Route path="dashboard" element={<Dashboard />} >
 
                                         <Route index element={<DashboardComp />} />
                                         <Route path="my-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} />
+                                        <Route path="edit-property/:whatFor/:propertyId" element={<SinglePropertyProvider ><SubmitProperty /></SinglePropertyProvider>} />
                                         <Route path="personal-info" element={<PersonalInfo />} />
                                         <Route path="Reviews" element={<Reviews />} />
                                         <Route path="change-password" element={<ChangePassword />} />

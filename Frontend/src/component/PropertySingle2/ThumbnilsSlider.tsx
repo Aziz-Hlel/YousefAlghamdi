@@ -2,14 +2,14 @@ import Carousel from "react-multi-carousel";
 import ThumbnailsCard from "../Cards/ThumbnilsCard";
 import { responsiveLogoSlider2 } from "../../utils/responsiveSlider";
 import ButtonGroup from "../CustomDot/CustomArrow";
-import { useSinglePropertyContext } from "./PropertySingleProvider.context";
 import apiGateway from "@src/utils/apiGateway";
 import { pickRandomPhoto } from "@src/pickRandomPhoto";
+import { useSingleProperty } from "../context/SinglePropertyContext/PropertySingleProvider.context";
 
 
 function ThumbnailsSlider() {
 
-  const { property } = useSinglePropertyContext();
+  const { property } = useSingleProperty();
 
 
   return (

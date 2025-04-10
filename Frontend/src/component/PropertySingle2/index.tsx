@@ -12,8 +12,8 @@ import Iproperty from "@src/models/property.type";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import { useGetProperty } from "@src/useApi/useGetProperty";
-import { SinglePropertyProvider } from "./PropertySingleProvider.context";
 import ThumbnailsSlider from "./ThumbnilsSlider";
+import { SinglePropertyProvider } from "../context/SinglePropertyContext/PropertySingleProvider.context";
 
 
 function PropertySingle() {
@@ -30,7 +30,7 @@ function PropertySingle() {
   } else {
     component = (
       <>
-        <SinglePropertyProvider id={useParams().id}>
+        <SinglePropertyProvider>
 
           {/* <Header v2={null} /> */}
           <Breadcrumbs title="Latest Properties" background={null} overlay={null} titlePosition={null}>

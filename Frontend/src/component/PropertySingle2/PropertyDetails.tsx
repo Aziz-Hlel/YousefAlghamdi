@@ -7,9 +7,9 @@ import PropertyVideo from "../PropertyVideo";
 import PropertyLocation from "../PropertyLocation";
 import PropertyReview from "../PropertyReview";
 import PropertyAgents from "../Agents/PropertyAgents";
-import { useSinglePropertyContext } from "./PropertySingleProvider.context";
 import OtherDetailsTabFeatures from "./OtherDetailsTabFeatures";
 import apiGateway from "@src/utils/apiGateway";
+import { useSingleProperty } from "../context/SinglePropertyContext/PropertySingleProvider.context";
 
 function PropertyDetails() {
   const [activeTab, setActiveTab] = useState("Property Details");
@@ -21,7 +21,7 @@ function PropertyDetails() {
     [key: string]: string | number;
   };
 
-  const { property } = useSinglePropertyContext();
+  const { property } = useSingleProperty();
 
   const propertyDetails: IPropertyDetail[] = [
     { "Type": property.category },
@@ -36,7 +36,7 @@ function PropertyDetails() {
   }))
 
   const additionalDetails = property.additionalDetails
-console.log("property.additionalDetails", property);
+  console.log("property.additionalDetails", property);
 
   return (
     <section
