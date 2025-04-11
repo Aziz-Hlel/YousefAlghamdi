@@ -23,8 +23,8 @@ const PropertyTextInput = ({ size, title, fieldError, placeholder, type, margin,
         </h4>
         <div className={`form-group homec-form-input ${fieldError && 'border-2  border-red-600 rounded-sm'}`}>
           <input
-            type={type ? type : "text"}
             {...fieldRegister}
+            type={type ? type : "text"}
             placeholder={placeholder}
           />
         </div>

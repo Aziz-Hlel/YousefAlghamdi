@@ -23,22 +23,27 @@ const ApproveSubmitPropertySchema = z.object({
 
     filterFields: z.object({
 
-        price: z.number({ required_error: "Price is required" })
-            .min(100, { message: "Price must be at least 100" })
-            .max(10000000, { message: "Price must be at most 10000000" }),
 
-        area: z.number({ required_error: "Area is required" })
-            .min(0, { message: "Area must be at least 0" })
-            .max(100000, { message: "Area must be at most 100000" }),
+        price: z.string({ required_error: "Price is required" })
+            .min(3, { message: "Price must be at least 100" })
+            .max(7, { message: "Price must be at most 10000000" })
+            .regex(/^\d+$/, "Price must be a number"),
 
-        rooms: z.number({ required_error: "Rooms is required" })
-            .min(0, { message: "Rooms must be at least 0" })
-            .max(99, { message: "Rooms must be at most 99" })
+        area: z.string({ required_error: "Area is required" })
+            .min(1, { message: "Area must be at least 0" })
+            .max(5, { message: "Area must be at most 100000" })
+            .regex(/^\d+$/, "Price must be a number"),
+
+        rooms: z.string({ required_error: "Rooms is required" })
+            .min(1, { message: "Rooms must be at least 0" })
+            .max(2, { message: "Rooms must be at most 99" })
+            .regex(/^\d+$/, "Price must be a number")
             .optional(),
 
-        bathrooms: z.number({ required_error: "Bathrooms is required" })
-            .min(0, { message: "Bathrooms must be at least 0" })
-            .max(99, { message: "Bathrooms must be at most 99" })
+        bathrooms: z.string({ required_error: "Bathrooms is required" })
+            .min(1, { message: "Bathrooms must be at least 0" })
+            .max(2, { message: "Bathrooms must be at most 99" })
+            .regex(/^\d+$/, "Price must be a number")
             .optional(),
 
     }),

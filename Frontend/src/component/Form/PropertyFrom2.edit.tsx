@@ -49,28 +49,24 @@ export const SubmitPropertySchema = z.object({
     price: z.string({ required_error: "Price is required" })
       .min(3, { message: "Price must be at least 100" })
       .max(7, { message: "Price must be at most 10000000" })
-      .regex(/^\d+$/, "Price must be a number")
-      .transform(Number),
+      .regex(/^\d+$/, "Price must be a number"),
 
     area: z.string({ required_error: "Area is required" })
       .min(1, { message: "Area must be at least 0" })
       .max(5, { message: "Area must be at most 100000" })
-      .regex(/^\d+$/, "Price must be a number")
-      .transform(Number),
+      .regex(/^\d+$/, "Price must be a number"),
 
     rooms: z.string({ required_error: "Rooms is required" })
       .min(1, { message: "Rooms must be at least 0" })
       .max(2, { message: "Rooms must be at most 99" })
       .regex(/^\d+$/, "Price must be a number")
-      .optional()
-      .transform(Number),
+      .optional(),
 
     bathrooms: z.string({ required_error: "Bathrooms is required" })
       .min(1, { message: "Bathrooms must be at least 0" })
       .max(2, { message: "Bathrooms must be at most 99" })
       .regex(/^\d+$/, "Price must be a number")
-      .optional()
-      .transform(Number),
+      .optional(),
 
   }),
 
@@ -137,8 +133,8 @@ const PropertyFrom = () => {
       filterFields: {
         price: String(InspectedProperty.filterFields.price),
         area: String(InspectedProperty.filterFields.area),
-        rooms: String(InspectedProperty.filterFields.rooms) ?? undefined,
-        bathrooms: String(InspectedProperty.filterFields.bathrooms) ?? undefined,
+        rooms: InspectedProperty.filterFields.rooms ?? undefined,
+        bathrooms: InspectedProperty.filterFields.bathrooms ?? undefined,
       },
 
       additionalDetails: InspectedProperty.additionalDetails,
@@ -183,7 +179,9 @@ const PropertyFrom = () => {
     setImgs((prev) => prev.map((_, index) => index === idx ? null : _));
   };
 
-
+  useEffect(() => {
+    setValue("additionalDetails", [])
+  }, [propertyCategoryValue])
 
   // handle property image input sector
 
@@ -261,7 +259,7 @@ const PropertyFrom = () => {
 
   };
 
-  console.log(errors)
+  console.log("errrrrrrrrr:::::", errors)
 
 
   const handleFormSubmit: SubmitHandler<SubmitPropertyType> = async (data) => {
@@ -291,6 +289,13 @@ const PropertyFrom = () => {
 
     }
 
+    const checkProperVariables = (data: any) => {
+      if (data.category !== ResidentialProperties) {
+        delete data.filterFields.rooms
+        delete data.filterFields.bathrooms
+      }
+    }
+
     if (!InspectedProperty) return
 
     console.log('t5l form validée????????');
@@ -305,8 +310,9 @@ const PropertyFrom = () => {
         updateAdditionalDetails(refinedData)
         updateNearestLocation(refinedData)
         updateImages(refinedData)
+        checkProperVariables(refinedData)
         const response = await Http.post(apiGateway.property.approve, refinedData);
-        if (response?.status === 200) navigate("../../")
+        if (response?.status === 200) navigate("./../../")
         else console.log(response);
 
       }

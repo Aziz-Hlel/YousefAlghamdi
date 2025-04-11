@@ -20,10 +20,10 @@ type Iproperty = {
     agentId: string,
 
     filterFields: {
-        price: number,
-        area: number,
-        rooms?: number,
-        bathrooms?: number,
+        price: string,
+        area: string,
+        rooms?: string,
+        bathrooms?: string,
     },
 
     nearestPlaces: {

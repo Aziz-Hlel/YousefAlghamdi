@@ -45,30 +45,25 @@ export const SubmitPropertySchema = z.object({
 
     price: z.string({ required_error: "Price is required" })
       .min(3, { message: "Price must be at least 100" })
-      .max(5, { message: "Price must be at most 100000" })
-      .regex(/^\d+$/, "Price must be a number")
-      .transform(Number),
+      .max(7, { message: "Price must be at most 10000000" })
+      .regex(/^\d+$/, "Price must be a number"),
 
     area: z.string({ required_error: "Area is required" })
       .min(1, { message: "Area must be at least 0" })
       .max(5, { message: "Area must be at most 100000" })
-      .regex(/^\d+$/, "Price must be a number")
-      .transform(Number),
+      .regex(/^\d+$/, "Price must be a number"),
 
     rooms: z.string({ required_error: "Rooms is required" })
       .min(1, { message: "Rooms must be at least 0" })
       .max(2, { message: "Rooms must be at most 99" })
       .regex(/^\d+$/, "Price must be a number")
-      .optional()
-      .transform(Number),
+      .optional(),
 
     bathrooms: z.string({ required_error: "Bathrooms is required" })
       .min(1, { message: "Bathrooms must be at least 0" })
       .max(2, { message: "Bathrooms must be at most 99" })
       .regex(/^\d+$/, "Price must be a number")
-      .optional()
-      .transform(Number),
-
+      .optional(),
   }),
 
 
@@ -113,6 +108,11 @@ const PropertyFrom = () => {
     event.target.checked ? setAdditionalDetails((prev) => [...prev, event.target.name]) : setAdditionalDetails((prev) => prev.filter((item) => item !== event.target.name));
 
   };
+
+
+  useEffect(() => {
+    setValue("additionalDetails", [])
+  }, [propertyCategoryValue])
   // const customErrors: Record<"imgs", string> = {
   //   imgs: "Image is required",
   // }
@@ -143,6 +143,7 @@ const PropertyFrom = () => {
 
   };
 
+  console.log("reee: nik rabk", errors);
 
   // handle aminities
 
@@ -197,6 +198,10 @@ const PropertyFrom = () => {
     }
     else data.imgs = imgs.filter((img) => img !== null).map((img) => img.key);
 
+    if (data.category !== ResidentialProperties) {
+      delete data.filterFields.rooms
+      delete data.filterFields.bathrooms
+    }
     // if (imgs[2] === null) {
     //   setError("imgs", { message: "rest Image is required" });
     //   return;

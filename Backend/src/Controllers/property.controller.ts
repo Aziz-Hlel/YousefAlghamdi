@@ -17,6 +17,17 @@ import ApproveSubmitPropertySchema from "../schemas/ApproveSubmitPropertySchema"
 export const createProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
     const clientId = req.user?._id!;
+    let agentId: string | undefined | null = req.user?.agentId ?? null;
+
+    if (agentId === null) {
+        try {
+            const user = await User.findById(clientId);
+            if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+            agentId = user?.agentId;
+        } catch (e) {
+            next(e);
+        }
+    }
     req.body.active = false
     req.body.advanced = {
         state: statesTypes.toBeAdded,
@@ -24,9 +35,11 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
         updated_version: {},
     };
 
+
     const property = new Property({
         ...req.body,
         clientId: clientId,
+        agentId: agentId
 
     });
 
@@ -63,7 +76,7 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
     const { city, type, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
 
     let filters: any = {};
-
+    console.log(req.query)
     filterFunc(minPrice, maxPrice, "filterFields.price", filters);
     filterFunc(minNumberOfRooms, maxNumberOfRooms, "filterFields.rooms", filters);
     filterFunc(minNumberOfBathrooms, maxNumberOfBathrooms, "filterFields.bathrooms", filters);
@@ -238,6 +251,7 @@ export const approveProperty = async (req: Request, res: Response, next: NextFun
     const validBody = ApproveSubmitPropertySchema.safeParse(property);
 
     if (!validBody.success) {
+        console.log("validBody.error.issues", validBody.error.issues)
         let zodErrors = {}
         validBody.error.issues.forEach((issue) => zodErrors = { ...zodErrors, [issue.path[0]]: issue.message });
         return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request, zodErrors));
