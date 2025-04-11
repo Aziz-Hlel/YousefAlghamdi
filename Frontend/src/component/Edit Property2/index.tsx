@@ -40,12 +40,9 @@ const EditProperty = () => {
           />
         </Breadcrumbs>
 
-        {/* <EditPropertyProvider > */}
         <SinglePropertyProvider id={propertyId}>
           <PropertyFrom />
-
         </SinglePropertyProvider>
-        {/* </EditPropertyProvider> */}
 
         <DownloadApp />
         <GoTopBtn />

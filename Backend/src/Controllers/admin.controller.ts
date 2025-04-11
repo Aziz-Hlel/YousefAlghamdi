@@ -13,8 +13,6 @@ import statesTypes from '../types/states.types';
 
 export const getPendingProperties = async (req: Request, res: Response, next: NextFunction) => {
 
-
-
     // if (!userId) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     try {
@@ -35,7 +33,5 @@ export const getPendingProperties = async (req: Request, res: Response, next: Ne
 
 
 };
-
-
 
 

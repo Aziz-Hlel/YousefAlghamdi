@@ -10,7 +10,7 @@ export interface IAgent extends Document {
     email: string;
     phoneNumber: string;
     role: string;
-    adresse:string;
+    adresse: string;
     image: string;
     socials: {
         whatsApp: string;
@@ -18,7 +18,7 @@ export interface IAgent extends Document {
         twitter: string;
         instagram: string;
     }
-    about:string;    
+    about: string;
 
     matchPassword(enteredPassword: string): Promise<boolean>;
 }
@@ -102,8 +102,17 @@ const agentSchema = new Schema({
         required: false,
     },
 
+    clientsId: {
+        type: [String],
+        required: false,
+    },
+
 },
-    { timestamps: true }
+    {
+        timestamps: true,
+        toJSON: { virtuals: true, },
+        toObject: { virtuals: true }
+    }
 );
 
 agentSchema.pre('save', async function (next) {
@@ -122,6 +131,12 @@ agentSchema.pre('save', async function (next) {
 agentSchema.methods.matchPassword = async function (enteredPassword: string): Promise<boolean> {
     return bcrypt.compareSync(enteredPassword, this.password);
 }
+
+agentSchema.virtual('users', {
+    ref: 'User',
+    localField: '_id',
+    foreignField: 'agentId',
+});
 
 const Agent = mongoose.model<IAgent>('Agent', agentSchema);
 

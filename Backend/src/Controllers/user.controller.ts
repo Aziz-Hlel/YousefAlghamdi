@@ -113,11 +113,15 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
         return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request, zodErrors));
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+password');;
 
     if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.COMMON.Invalid_Credentials));
+    console.log("ousil",user.email,password)
+    if (!(await user.matchPassword(password))) {
+        console.log("ousil0.5")
 
-    if (!await user.matchPassword(password)) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.COMMON.Invalid_Credentials));
+        return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.COMMON.Invalid_Credentials));}
+    console.log("ousil2")
 
     generateToken(res, user);
     res.status(statusCode.OK);

@@ -20,6 +20,7 @@ import apiGateway from "@src/utils/apiGateway";
 import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
 import Iproperty from "@src/models/property.type";
 import statesTypes from "@src/types/states.types";
+import { pickRandomPhoto } from "@src/pickRandomPhoto";
 
 
 export const SubmitPropertySchema = z.object({
@@ -47,7 +48,7 @@ export const SubmitPropertySchema = z.object({
 
     price: z.string({ required_error: "Price is required" })
       .min(3, { message: "Price must be at least 100" })
-      .max(5, { message: "Price must be at most 100000" })
+      .max(7, { message: "Price must be at most 10000000" })
       .regex(/^\d+$/, "Price must be a number")
       .transform(Number),
 
@@ -72,7 +73,6 @@ export const SubmitPropertySchema = z.object({
       .transform(Number),
 
   }),
-
 
 
   additionalDetails: z.array(z.string()).default([]),
@@ -132,11 +132,13 @@ const PropertyFrom = () => {
       delegation: InspectedProperty.delegation,
       addresse: InspectedProperty.addresse,
 
+      listing_type: InspectedProperty.listing_type,
+
       filterFields: {
-        price: InspectedProperty.filterFields.price,
-        area: InspectedProperty.filterFields.area,
-        rooms: InspectedProperty.filterFields.rooms ?? undefined,
-        bathrooms: InspectedProperty.filterFields.bathrooms ?? undefined,
+        price: String(InspectedProperty.filterFields.price),
+        area: String(InspectedProperty.filterFields.area),
+        rooms: String(InspectedProperty.filterFields.rooms) ?? undefined,
+        bathrooms: String(InspectedProperty.filterFields.bathrooms) ?? undefined,
       },
 
       additionalDetails: InspectedProperty.additionalDetails,
@@ -149,7 +151,10 @@ const PropertyFrom = () => {
         distance,
       }))
     );
-    
+
+
+    InspectedProperty.imgs.map((img, index) => urlToFileWithPath(img, "aaa", index))
+
     console.log('InspectedProperty', InspectedProperty);
 
   }, [InspectedProperty]);
@@ -180,7 +185,7 @@ const PropertyFrom = () => {
 
 
 
-  // // handle property image input sector
+  // handle property image input sector
 
   const handleImageInput = async (uploadedImg: FileWithPath, idx: number) => {
     const key = await uploadImageToS3_SIMULATOR(uploadedImg, "property");
@@ -198,6 +203,32 @@ const PropertyFrom = () => {
     });
 
   };
+
+
+
+
+  async function urlToFileWithPath(url: string, filename: string, index: number) {
+    console.log("url", url);
+
+    const response = await fetch(apiGateway.images + pickRandomPhoto());
+    const blob = await response.blob();
+
+    const file: FileWithPath = new File([blob], blob.name, {
+      type: blob.type,
+    });
+
+    const file2: (FileWithPath & { preview: string; key: string }) = Object.assign(file, { preview: URL.createObjectURL(file), key: "" });
+    // Optional: add a fake path if needed by your uploader
+    // (file as FileWithPath).path = filename;
+
+    setImgs((prev) => {
+      const newArray = [...prev];
+      newArray[index] = file2;
+      return newArray;
+    });
+
+  }
+
 
 
   // handle aminities
@@ -223,7 +254,6 @@ const PropertyFrom = () => {
 
   }
 
-
   // handle Property Plan, additionalInformation, nearestLocation input filled
   const handleKeyValueChange = (idx: any, keyType: "placeName" | "distance", value: string) => {
 
@@ -231,28 +261,64 @@ const PropertyFrom = () => {
 
   };
 
-
+  console.log(errors)
 
 
   const handleFormSubmit: SubmitHandler<SubmitPropertyType> = async (data) => {
 
-    console.log('t5l form validée');
+    const updateAdditionalDetails = (data: any) => {
+      data.additionalDetails = additionalDetails;
 
-    data.additionalDetails = additionalDetails;
-
-    if (NearestLocation.length === 1 && NearestLocation[0].placeName === "" && NearestLocation[0].distance === "") data.nearestPlaces = {};
-    else {
-      data.nearestPlaces = {};
-      NearestLocation.forEach((item) => {
-        if (item.placeName !== "" && item.distance !== "") data.nearestPlaces[item.placeName] = item.distance;
-      });
     }
 
-    if (imgs[0] === null) {
-      setError("imgs", { message: "Thumbnail Image is required" });
-      return;
+    const updateNearestLocation = (data: any) => {
+      if (NearestLocation.length === 1 && NearestLocation[0].placeName === "" && NearestLocation[0].distance === "") data.nearestPlaces = {};
+      else {
+        data.nearestPlaces = {};
+        NearestLocation.forEach((item) => {
+          if (item.placeName !== "" && item.distance !== "") data.nearestPlaces[item.placeName] = item.distance;
+        });
+      }
+
     }
-    else data.imgs = imgs.filter((img) => img !== null).map((img) => img.key);
+
+    const updateImages = (data: any) => {
+      if (imgs[0] === null) {
+        setError("imgs", { message: "Thumbnail Image is required" });
+        return;
+      }
+      else data.imgs = imgs.filter((img) => img !== null).map((img) => img.key);
+
+    }
+
+    if (!InspectedProperty) return
+
+    console.log('t5l form validée????????');
+
+    const refinedData: any = data;
+    refinedData.clientId = InspectedProperty.clientId;
+    refinedData.agentId = InspectedProperty.agentId;
+    console.log('refinedData', refinedData);
+
+    switch (InspectedProperty.advanced.state) {
+      case statesTypes.toBeAdded: {
+        updateAdditionalDetails(refinedData)
+        updateNearestLocation(refinedData)
+        updateImages(refinedData)
+        const response = await Http.post(apiGateway.property.approve, refinedData);
+        if (response?.status === 200) navigate("../../")
+        else console.log(response);
+
+      }
+
+    }
+    return
+
+    updateAdditionalDetails(data)
+
+    updateNearestLocation(data)
+
+    updateImages(data)
 
     // if (imgs[2] === null) {
     //   setError("imgs", { message: "rest Image is required" });
@@ -465,14 +531,18 @@ const PropertyFrom = () => {
 
               <div className="row">
                 <div className="col-12 d-flex justify-content-end mg-top-40 gap-2">
-                  <button className="homec-btn homec-btn__second">
+                  <button className="homec-btn  bg-red-500">
                     <span onClick={handleCancel}>{isSubmitting ? "Loading..." : "Cancel"}</span>
                   </button>
                   <button onClick={handleDecline} value={propertyState} className="homec-btn homec-btn__second">
                     <span  >{isSubmitting ? "Loading..." : "Decline request"}</span>
                   </button>
-                  <button type="submit" className="homec-btn homec-btn__second">
-                    {isSubmitting ? <span>Loading...</span> : <span>Submit Property Now</span>}
+                  <button type="submit" className="homec-btn ">
+                    {propertyState === statesTypes.toBeAdded && <span>{isSubmitting ? "Loading..." : "Add Property"}</span>}
+                    {propertyState === statesTypes.toBeUpdated && <span>{isSubmitting ? "Loading..." : "Validate Property Now"}</span>}
+                    {propertyState === statesTypes.toBeDeleted && <span>{isSubmitting ? "Loading..." : "Delete Property"}</span>}
+                    {propertyState === statesTypes.unavailable && <span>{isSubmitting ? "Loading..." : "Make Property unavailable"}</span>}
+
                   </button>
                 </div>
               </div>

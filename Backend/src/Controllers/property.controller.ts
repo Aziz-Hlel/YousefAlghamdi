@@ -8,6 +8,7 @@ import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
 import roles from "../types/roles.type";
 import statesTypes from "../types/states.types";
 import User from "../Models/user.model";
+import ApproveSubmitPropertySchema from "../schemas/ApproveSubmitPropertySchema";
 
 
 
@@ -18,7 +19,7 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
     const clientId = req.user?._id!;
     req.body.active = false
     req.body.advanced = {
-        state: "new",
+        state: statesTypes.toBeAdded,
         available: null,
         updated_version: {},
     };
@@ -26,7 +27,6 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
     const property = new Property({
         ...req.body,
         clientId: clientId,
-        agentId: new mongoose.Types.ObjectId("67ed13d95925a009ce7f3ae1"),
 
     });
 
@@ -223,3 +223,42 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
 
     return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
 };
+
+
+
+export const approveProperty = async (req: Request, res: Response, next: NextFunction) => {
+
+
+    const property = req.body;
+
+    const propertyId = req.body._id;
+
+    if (!propertyId || !mongoose.Types.ObjectId.isValid(propertyId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    const validBody = ApproveSubmitPropertySchema.safeParse(property);
+
+    if (!validBody.success) {
+        let zodErrors = {}
+        validBody.error.issues.forEach((issue) => zodErrors = { ...zodErrors, [issue.path[0]]: issue.message });
+        return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request, zodErrors));
+    }
+
+
+    try {
+        const property = await Property.findById(propertyId);
+        if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
+
+        const validatedVersion: any = validBody.data
+        validatedVersion.active = true;
+        validatedVersion.advanced = {};
+        validatedVersion.advanced.state = statesTypes.active;
+        validatedVersion.advanced.available = null;
+        Object.assign(property, validatedVersion)
+        await property.save();
+
+        res.json('Property approved successfully');
+    } catch (error) {
+        next(error);
+    }
+
+}

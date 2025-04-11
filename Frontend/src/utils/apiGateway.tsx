@@ -30,6 +30,8 @@ const apiGateway = {
             list: "/property/my-properties",
         },
 
+        approve: "/property/approve",
+
     },
 
     agent: {
