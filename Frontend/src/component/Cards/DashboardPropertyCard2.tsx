@@ -61,7 +61,7 @@ function DashboardPropertyCard({ _id, ownerId, status, image, listing_type, titl
         </Link>}
 
         <button className="homec-dashboard-property__btn px-2  homec-dashboard-property__btn--edit  flex justify-center items-center">
-          <Link to={`../../edit-property/${listing_type}/${_id}`}>
+          <Link to={`edit-property/${_id}`}>
 
             <div className="flex  justify-center  items-center">
 

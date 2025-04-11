@@ -18,6 +18,8 @@ import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
+import Iproperty from "@src/models/property.type";
+import statesTypes from "@src/types/states.types";
 
 
 export const SubmitPropertySchema = z.object({
@@ -79,6 +81,7 @@ export const SubmitPropertySchema = z.object({
   productTier: z.string({ required_error: "Product tier is required" }).default("free"),
   nearestPlaces: z.record(z.string(), z.string()).default({}),
 
+
 });
 
 export type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
@@ -89,19 +92,72 @@ type imageArray = (FileWithPath & { preview: string; key: string; } | null)[];
 const PropertyFrom = () => {
 
 
-  const { whatFor, } = useParams();
+  const { property } = useSinglePropertyContext();
 
-  const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting, }, setError } =
+  const propertyState = property?.advanced.state
+
+  const [InspectedProperty, setInspectedProperty] = useState<Iproperty | undefined>();
+
+  const { register, watch, handleSubmit, setValue, reset, formState: { errors, isSubmitting, }, setError } =
     useForm<SubmitPropertyType>({
       resolver: zodResolver(SubmitPropertySchema),
-
     });
 
+  console.log('prrr', property);
+  useEffect(() => {
 
+    if (!property) return
+
+    property.advanced.state === statesTypes.toBeUpdated ?
+      setInspectedProperty(property.advanced.updated_version as any)
+      : setInspectedProperty(property);
+
+
+    setValue("listing_type", property?.listing_type)
+  }, [property]);
+
+  useEffect(() => {
+    if (!InspectedProperty) return
+    //walli na77i linspected property w3tih direct ml property
+    reset({
+      _id: InspectedProperty._id,
+
+      title: InspectedProperty.title,
+      description: InspectedProperty.description,
+
+      category: InspectedProperty.category,
+      sub_category: InspectedProperty.sub_category,
+
+      city: InspectedProperty.city,
+      delegation: InspectedProperty.delegation,
+      addresse: InspectedProperty.addresse,
+
+      filterFields: {
+        price: InspectedProperty.filterFields.price,
+        area: InspectedProperty.filterFields.area,
+        rooms: InspectedProperty.filterFields.rooms ?? undefined,
+        bathrooms: InspectedProperty.filterFields.bathrooms ?? undefined,
+      },
+
+      additionalDetails: InspectedProperty.additionalDetails,
+    })
+    setAdditionalDetails(InspectedProperty.additionalDetails)
+
+    setNearestLocation(() =>
+      Object.entries(InspectedProperty.nearestPlaces).map(([placeName, distance]) => ({
+        placeName,
+        distance,
+      }))
+    );
+    
+    console.log('InspectedProperty', InspectedProperty);
+
+  }, [InspectedProperty]);
 
   const navigate = useNavigate();
   const propertyCategoryValue = watch('category');
   const CityValueObserver = watch('city');
+  console.log("category:::::", propertyCategoryValue);
 
   const [NearestLocation, setNearestLocation] = useState<{ placeName: string, distance: string }[]>([{ placeName: "", distance: "" }]);
   const [additionalDetails, setAdditionalDetails] = useState<string[]>([])
@@ -179,6 +235,7 @@ const PropertyFrom = () => {
 
 
   const handleFormSubmit: SubmitHandler<SubmitPropertyType> = async (data) => {
+
     console.log('t5l form validée');
 
     data.additionalDetails = additionalDetails;
@@ -205,11 +262,25 @@ const PropertyFrom = () => {
     console.log(data);
 
   };
-  useEffect(() => {
-    whatFor && setValue("listing_type", whatFor)
-  }, [whatFor])
 
-  if (whatFor && !listing_typesValues.includes(whatFor)) return <> </>
+
+  const handleCancel = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    navigate("./../../")
+  }
+
+  const handleDecline = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+
+    e.preventDefault();
+    if (!propertyState) return
+    // u prob gone notifications for this to inform the client 
+    switch (propertyState) {
+      case statesTypes.toBeAdded:
+        "sd"
+
+    }
+    navigate("./../../")
+  }
 
   return (
     <section className="pd-top-80 pd-btm-80"  >
@@ -224,7 +295,7 @@ const PropertyFrom = () => {
 
               <div className="homec-submit-form">
                 <h4 className="homec-submit-form__title">
-                  Property Information
+                  Property Information {property?.clientId}
                 </h4>
                 <div className="homec-submit-form__inner">
                   <div className="row">
@@ -393,7 +464,13 @@ const PropertyFrom = () => {
 
 
               <div className="row">
-                <div className="col-12 d-flex justify-content-end mg-top-40">
+                <div className="col-12 d-flex justify-content-end mg-top-40 gap-2">
+                  <button className="homec-btn homec-btn__second">
+                    <span onClick={handleCancel}>{isSubmitting ? "Loading..." : "Cancel"}</span>
+                  </button>
+                  <button onClick={handleDecline} value={propertyState} className="homec-btn homec-btn__second">
+                    <span  >{isSubmitting ? "Loading..." : "Decline request"}</span>
+                  </button>
                   <button type="submit" className="homec-btn homec-btn__second">
                     {isSubmitting ? <span>Loading...</span> : <span>Submit Property Now</span>}
                   </button>

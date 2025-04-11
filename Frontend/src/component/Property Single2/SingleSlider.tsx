@@ -1,16 +1,16 @@
 import { responsiveSmallAgentsSlider } from "../../utils/responsiveSlider";
 import ImageCard from "../Cards/ImageCard2";
 import Carousel from "react-multi-carousel";
-import { useSinglePropertyContext } from "./PropertySingleProvider.context";
 import apiGateway from "@src/utils/apiGateway";
 import { pickRandomPhoto } from "@src/pickRandomPhoto";
+import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
 
 
 
 function SingleSlider() {
 
   const { property } = useSinglePropertyContext();
-
+  if (!property) return <></>
   return (
     <Carousel
       responsive={responsiveSmallAgentsSlider}
@@ -27,7 +27,7 @@ function SingleSlider() {
       ]}
     >
       {
-        property.imgs.map((img, index) =>
+        property && property.imgs.map((img, index) =>
           <ImageCard
             key={index}
             price={property.filterFields.price}

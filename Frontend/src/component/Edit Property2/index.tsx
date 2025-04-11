@@ -1,4 +1,3 @@
-import PropertyFrom from "../Form/PropertyFrom2";
 import Header from "../Header";
 import Footer from "../Footer";
 import DownloadApp from "../DownloadApp";
@@ -7,9 +6,14 @@ import HistoryLinks from "../Breadcrumbs2/HistoryLinks";
 import Preloader from "../Loader";
 import { useEffect, useState } from "react";
 import GoTopBtn from "../Button/GoTopBtn";
+import { SinglePropertyProvider } from "@src/providers/SingleProperty.context";
+import { useParams } from "react-router-dom";
+import PropertyFrom from "../Form/PropertyFrom2.edit";
 
 const EditProperty = () => {
   const [isLoading, setisLoadingg] = useState(true);
+  const { propertyId } = useParams();
+
   useEffect(() => {
     setisLoadingg(false);
   }, []);
@@ -24,7 +28,7 @@ const EditProperty = () => {
         <Breadcrumbs
           title="Edit Property"
           titlePosition="bottom"
-          background="url(img/bread-overlay.jpg)"
+          background="url(/img/bread-overlay.jpg)"
           overlay={false}
         >
 
@@ -35,7 +39,14 @@ const EditProperty = () => {
             isActive={true}
           />
         </Breadcrumbs>
-        <PropertyFrom />
+
+        {/* <EditPropertyProvider > */}
+        <SinglePropertyProvider id={propertyId}>
+          <PropertyFrom />
+
+        </SinglePropertyProvider>
+        {/* </EditPropertyProvider> */}
+
         <DownloadApp />
         <GoTopBtn />
       </>

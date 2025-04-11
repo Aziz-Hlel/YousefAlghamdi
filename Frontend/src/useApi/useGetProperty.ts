@@ -61,13 +61,13 @@ export const useGetProperty = (id: string) => {
 
         // setProperty(response.data.result);
     };
-
+    // updateProperty();
     useEffect(() => {
         id !== "0" && console.log("tbaddl") && updateProperty();
     }, [id]);
-    useEffect(() => {
-      console.log("rab om property = ", property);
+    // useEffect(() => {
+    //   console.log("rab om property = ", property);
       
-    }, [property]);
+    // }, [property]);
     return { property }
 }

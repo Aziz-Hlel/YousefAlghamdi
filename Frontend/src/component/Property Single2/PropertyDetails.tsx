@@ -7,9 +7,9 @@ import PropertyVideo from "../PropertyVideo";
 import PropertyLocation from "../PropertyLocation";
 import PropertyReview from "../PropertyReview";
 import PropertyAgents from "../Agents/PropertyAgents";
-import { useSinglePropertyContext } from "./PropertySingleProvider.context";
 import OtherDetailsTabFeatures from "./OtherDetailsTabFeatures";
 import apiGateway from "@src/utils/apiGateway";
+import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
 
 function PropertyDetails() {
   const [activeTab, setActiveTab] = useState("Property Details");
@@ -22,20 +22,21 @@ function PropertyDetails() {
   };
 
   const { property } = useSinglePropertyContext();
+  if (!property) return <></>
 
   const propertyDetails: IPropertyDetail[] = [
-    { "Type": property.category },
-    { City: property.city },
-    { Area: property.filterFields.area },]
+    { "Type": property ? property.category : "" },
+    { City: property ? property.city : "" },
+    { Area: property ? property.filterFields.area : "" },]
 
-  property.filterFields.rooms && propertyDetails.push({ Rooms: property.filterFields.rooms });
-  property.filterFields.bathrooms && propertyDetails.push({ bathrooms: property.filterFields.bathrooms });
+  property && property.filterFields.rooms && propertyDetails.push({ Rooms: property.filterFields.rooms });
+  property && property.filterFields.bathrooms && propertyDetails.push({ bathrooms: property.filterFields.bathrooms });
 
   const nearestPlaces = Object.keys(property.nearestPlaces).map((key) => ({
     [key]: property.nearestPlaces[key],
   }))
 
-  const additionalDetails = property.additionalDetails
+  const additionalDetails = property?.additionalDetails
   console.log("property.additionalDetails", property);
 
   return (

@@ -50,6 +50,7 @@ const App2 = () => {
                     <Router>
                         <Routes>
 
+
                             <Route element={<Layout />} >
 
                                 <Route path="" element={<Home />} />
@@ -74,6 +75,7 @@ const App2 = () => {
                                     <Route path="submit-property/:whatFor" element={<SubmitProperty />} />
                                     {/* <Route path="edit-property/:whatFor/:propertyId" element={<SinglePropertyProvider ><SubmitProperty /></SinglePropertyProvider>} /> */}
 
+
                                     <Route path="dashboard" element={<Dashboard />} >
 
                                         <Route index element={<DashboardComp />} />
@@ -95,8 +97,8 @@ const App2 = () => {
                                         {/* <Route path="add-agent" element={<UpdatePersonalInfo isModalOpen={true} toggleModal={() => { }} />}></Route> */}
 
                                     </Route>
+                                    <Route path="dashboard/pending-properties/edit-property/:propertyId" element={<EditProperty />} />
 
-                                    <Route path="/dashboard/my-properties/edit/:propertyId" element={<EditProperty />} />
 
 
 
