@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const logout = () => {
-        // console.log("Logged out");
+        setUser(null);
     };
 
     const contextValue: IAuthContext = {

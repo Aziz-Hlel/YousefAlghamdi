@@ -240,7 +240,7 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
 
 
 
-export const approveProperty = async (req: Request, res: Response, next: NextFunction) => {
+export const approveProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
 
     const property = req.body;
@@ -262,6 +262,10 @@ export const approveProperty = async (req: Request, res: Response, next: NextFun
     try {
         const property = await Property.findById(propertyId);
         if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
+        console.log("req.user", req.user)
+        console.log("property.agentId", property.agentId)
+
+        if (req.user && req.user.role === roles.AGENT && property.agentId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
 
         const validatedVersion: any = validBody.data
         validatedVersion.active = true;

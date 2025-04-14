@@ -8,6 +8,7 @@ import apiGateway from "@src/utils/apiGateway";
 import { pickRandomPhoto } from "@src/pickRandomPhoto";
 import UserView from "@src/component/Modal2";
 import Http from "@src/services/Http";
+import useRandomPhoto from "@src/useRandomPhoto";
 
 
 type IUser = {
@@ -31,7 +32,7 @@ const initUser = {
   agentId: "",
 }
 
-function MyProperties() {
+function MyProperties({ title }: { title: string }) {
 
   const { properties, totalCount, fetchProperties } = useMyPropertiesContext();
   const [currentPage, setCurrentPage] = useState(1);
@@ -62,14 +63,14 @@ function MyProperties() {
 
   return (
     <>
-      <Layout title="My Properties">
+      <Layout title={title}>
         {properties?.map((property) => (
           <DashboardPropertyCard
             _id={property._id}
             ownerId={property.clientId}
             formkey={property._id}
             status={property.advanced.state}
-            image={apiGateway.images + pickRandomPhoto()}
+            image={apiGateway.images + useRandomPhoto()}
             listing_type={property.listing_type}
             title={property.title}
             location={property.city + ", " + property.delegation + ", " + property.addresse}

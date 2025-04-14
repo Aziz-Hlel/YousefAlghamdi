@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import { isValidObjectId } from "mongoose";
 import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
 import statusCode from "../utils/statusCode";
+import roles from "../types/roles.type";
 
 
 
@@ -36,12 +37,13 @@ const protect = async (req: AuthenticatedRequest, res: Response, next: NextFunct
 
     const refreshToken = req.cookies?.refreshToken;
 
+    
     if (!accessToken) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
     if (!refreshToken) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
 
 
-    // console.log("ousll ?")
 
+    
     const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET as string;
     jwt.verify(accessToken, JWT_ACCESS_SECRET, (err: any, decoded: any) => {
         if (err) {
@@ -64,8 +66,18 @@ const protect = async (req: AuthenticatedRequest, res: Response, next: NextFunct
 
 export const adminAuth = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     protect(req, res, next)
-    if (req.user?.role !== "admin") return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.PERMISSION_DENIED));
+    if (req.user?.role !== roles.ADMIN) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.PERMISSION_DENIED));
     // next();
 }
+
+
+
+
+export const adminOrAgentAuth = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    protect(req, res, next)
+    if (req.user?.role !== roles.ADMIN && req.user?.role !== roles.AGENT) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.PERMISSION_DENIED));
+    // next();
+}
+
 
 export default protect;

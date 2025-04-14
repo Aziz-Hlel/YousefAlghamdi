@@ -63,8 +63,8 @@ const App2 = () => {
 
 
                                 <Route path="agent-detail" element={<AgentDetail />} />
-                                <Route path="our-agents" element={<OurAgents />} />
-                                <Route path="about" element={<AboutUs />} />
+                                {/* <Route path="our-agents" element={<OurAgents />} /> */}
+                                {/* <Route path="about" element={<AboutUs />} /> */}
                                 {/* <Route path="/pricing" element={<Pricing />} /> */}
                                 {/* <Route path="/payment-method" element={<PaymentMethod />} /> */}
                                 <Route path="faq" element={<Faq />} />
@@ -81,14 +81,14 @@ const App2 = () => {
                                     <Route path="dashboard" element={<Dashboard />} >
 
                                         <Route index element={<DashboardComp />} />
-                                        <Route path="my-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} />
+                                        <Route path="my-properties" element={<MyPropertiesProvider> <MyProperties title="My properties" /> </MyPropertiesProvider>} />
                                         <Route path="personal-info" element={<PersonalInfo />} />
                                         <Route path="Reviews" element={<Reviews />} />
                                         <Route path="change-password" element={<ChangePassword />} />
 
 
                                         {/* Admin Routes */}
-                                        <Route path="pending-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} >
+                                        <Route path="pending-properties" element={<MyPropertiesProvider> <MyProperties title="Pending Properties" /> </MyPropertiesProvider>} >
                                             <Route path="inspect-user/:userId" element={<UserView />} />
                                         </Route>
 

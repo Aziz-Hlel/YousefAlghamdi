@@ -21,6 +21,7 @@ import { useSinglePropertyContext } from "@src/providers/SingleProperty.context"
 import Iproperty from "@src/models/property.type";
 import statesTypes from "@src/types/states.types";
 import { pickRandomPhoto } from "@src/pickRandomPhoto";
+import useRandomPhoto from "@src/useRandomPhoto";
 
 
 export const SubmitPropertySchema = z.object({
@@ -218,7 +219,7 @@ const PropertyFrom = () => {
   async function urlToFileWithPath(url: string, filename: string, index: number) {
     console.log("url", url);
 
-    const response = await fetch(apiGateway.images + pickRandomPhoto());
+    const response = await fetch(apiGateway.images + useRandomPhoto());
     const blob = await response.blob();
 
     const file: FileWithPath = new File([blob], blob.name, {

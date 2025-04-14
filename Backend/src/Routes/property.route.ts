@@ -1,6 +1,6 @@
 import express from 'express';
 import { approveProperty, createProperty, getProperty, getUserProperties, listProperties } from '../Controllers/property.controller';
-import protect, { adminAuth } from '../Middlewares/auth.middleware';
+import protect, { adminAuth, adminOrAgentAuth } from '../Middlewares/auth.middleware';
 
 
 
@@ -16,7 +16,7 @@ propertyRouter.post('/', protect, createProperty);
 propertyRouter.get('/', listProperties);
 propertyRouter.get('/:propertyId', getProperty);
 
-propertyRouter.post('/approve',adminAuth,approveProperty)
+propertyRouter.post('/approve',adminOrAgentAuth,approveProperty)
 
 export default propertyRouter;
 

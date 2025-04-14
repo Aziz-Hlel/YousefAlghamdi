@@ -35,7 +35,7 @@ function LatestPropertyCard({
           <img src={img} alt="#" />
           {/* Top Sticky  */}
           <div className="homec-property__hsticky">
-            <a href={likeLink} className="homec-heart">
+            {/* <a href={likeLink} className="homec-heart">
               <svg
                 width="23"
                 height="20"
@@ -48,14 +48,14 @@ function LatestPropertyCard({
                   strokeWidth="1.2"
                 />
               </svg>
-            </a>
-            <Link to={detailsLink} className="homec-property__asticky">
+            </a> */}
+            {/* <Link to={detailsLink} className="homec-property__asticky">
               <img src={agentImg} alt="#" />
               <h4 className="homec-property__asticky--label">
                 {agentName}
                 <span>Agent</span>
               </h4>
-            </Link>
+            </Link> */}
           </div>
           {/* End Top Sticky  */}
         </div>

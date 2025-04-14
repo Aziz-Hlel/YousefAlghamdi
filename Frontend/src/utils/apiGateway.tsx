@@ -17,6 +17,7 @@ const apiGateway = {
         sigIn: "/user/login",
         getById: "/user/",
         updateAgent: "/user/update-agent",
+        logOut: "/user/log-out",
 
     },
 

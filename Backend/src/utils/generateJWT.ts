@@ -8,7 +8,7 @@ dotenv.config()
 
 const ACCESS_SECRET = process.env.JWT_ACCESS_SECRET ?? "secret";
 const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET ?? "secret";
-const __production__ = process.env.NODE_ENV;
+export const __production__ = process.env.NODE_ENV;
 
 
 const accessTokenLifeSpan = "1500m";

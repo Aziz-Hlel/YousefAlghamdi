@@ -5,6 +5,7 @@ import ButtonGroup from "../CustomDot/CustomArrow";
 import apiGateway from "@src/utils/apiGateway";
 import { pickRandomPhoto } from "@src/pickRandomPhoto";
 import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
+import useRandomPhoto from "@src/useRandomPhoto";
 
 
 function ThumbnailsSlider() {
@@ -24,7 +25,7 @@ function ThumbnailsSlider() {
 
         {
           property && property.imgs.map((img, index) =>
-            <ThumbnailsCard formkey={index} img={apiGateway.images + pickRandomPhoto()} />
+            <ThumbnailsCard formkey={index} img={apiGateway.images + useRandomPhoto()} />
           )
         }
         <ThumbnailsCard img="https://placehold.co/270x180" />

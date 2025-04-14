@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 import apiGateway from "@src/utils/apiGateway";
 import { pickRandomPhoto } from "@src/pickRandomPhoto";
 import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
+import useRandomPhoto from "@src/useRandomPhoto";
 
 
 
@@ -34,7 +35,7 @@ function SingleSlider() {
             duration={property.listing_type === "rent" || property.listing_type === "commercial rent" ? "Month" : ""}
             title={property.title}
             text="1901 Thornridge Cir. Shiloh, Hawaii 81063"
-            img={apiGateway.images + pickRandomPhoto()} />
+            img={apiGateway.images + useRandomPhoto()} />
         )}
 
       {/* <ImageCard

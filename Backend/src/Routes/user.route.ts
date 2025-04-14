@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUser, login, register, test, updateAgentOfClient, whoAmI } from '../Controllers/user.controller';
+import { getUser, login, logOut, register, test, updateAgentOfClient, whoAmI } from '../Controllers/user.controller';
 import protect, { adminAuth } from '../Middlewares/auth.middleware';
 
 
@@ -17,5 +17,6 @@ userRouter.post('/login', login);
 userRouter.get('/:userId', adminAuth, getUser);
 userRouter.patch('/update-agent', adminAuth, updateAgentOfClient)
 
+userRouter.post('/log-out', logOut);
 
 export default userRouter;
