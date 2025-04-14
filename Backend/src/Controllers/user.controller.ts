@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { errorHandler } from '../utils/error'
 import User from '../Models/user.model';
 import errorMessages from "../utils/errorMessages";
-import generateToken, { __production__ } from "../utils/generateJWT";
+import generateToken, { NODE_ENV } from "../utils/generateJWT";
 import statusCode from "../utils/statusCode";
 import z from "zod";
 import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
@@ -172,8 +172,8 @@ export const whoAmI = async (req: AuthenticatedRequest, res: Response, next: Nex
 
 
 export const logOut = async (req: Request, res: Response, next: NextFunction) => {
-    res.clearCookie("accessToken", { httpOnly: true, secure: __production__ === "production", sameSite: 'strict' });
-    res.clearCookie("refreshToken", { httpOnly: true, secure: __production__ === "production", sameSite: 'strict' });
+    res.clearCookie("accessToken", { httpOnly: true, secure: NODE_ENV === "production", sameSite: 'strict' });
+    res.clearCookie("refreshToken", { httpOnly: true, secure: NODE_ENV === "production", sameSite: 'strict' });
     res.status(statusCode.OK).json()
 }
 

@@ -4,6 +4,7 @@ import { errorHandler } from './utils/error';
 import statusCode from './utils/statusCode';
 import errorMessages from './utils/errorMessages';
 import path from 'path';
+import ENV from './utils/ENV.variables';
 
 
 
@@ -52,7 +53,7 @@ const getSignedUrl = (req: Request, res: Response, next: NextFunction) => {
     const timestamp = Date.now(); // Get current timestamp in milliseconds
 
     const key = `${userId}/${purpose}/${fileName.toLowerCase()}/${timestamp}`;
-    const localhostUrl = "http://localhost:" + process.env.PORT + "/api/images/uploadImageToS3_SIMULATOR/";
+    const localhostUrl = "http://localhost:" + ENV.PORT + "/api/images/uploadImageToS3_SIMULATOR/";
     const randomNumber = Math.floor(Math.random() * 1000);
     const localKey = `${fileName.toLowerCase()}`
 

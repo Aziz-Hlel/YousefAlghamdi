@@ -3,6 +3,50 @@ import bcrypt from "bcrypt";
 import roles from "../types/roles.type";
 
 
+interface Iagent {
+    _id: mongoose.Types.ObjectId;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    role: string;
+    adresse: string;
+    image: string;
+    socials: {
+        whatsApp: string;
+        linkedin: string;
+        twitter: string;
+        instagram: string;
+    }
+    about: string;
+    matchPassword(enteredPassword: string): Promise<boolean>;
+
+}
+
+
+interface IAgentModel extends Document, Iagent { }
+
+const a: IAgentModel = {
+    _id: new mongoose.Types.ObjectId(),
+    firstName: "test",
+    lastName: "test",
+    email: "test",
+    phoneNumber: "test",
+    role: "test",
+    adresse: "test",
+    image: "test",
+    socials: {
+        whatsApp: "test",
+        linkedin: "test",
+        twitter: "test",
+        instagram: "test",
+    },
+    about: "test",
+    matchPassword: async function (enteredPassword: string): Promise<boolean> {
+        return false;
+    }
+}
+
 export interface IAgent extends Document {
     _id: mongoose.Types.ObjectId;
     firstName: string;
