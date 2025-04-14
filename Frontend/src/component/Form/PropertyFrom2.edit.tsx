@@ -103,10 +103,19 @@ const PropertyFrom = () => {
   useEffect(() => {
 
     if (!property) return
+    //walli na77i linspected property w3tih direct ml property
+    (property.advanced.state === statesTypes.toBeAdded ||
+      property.advanced.state === statesTypes.toBeDeleted
+      // property.advanced.state === statesTypes.
+    )
+      ? setInspectedProperty(property)
 
-    property.advanced.state === statesTypes.toBeUpdated ?
-      setInspectedProperty(property.advanced.updated_version as any)
-      : setInspectedProperty(property);
+      // else taw tobedited valid , lo5riin n3rch
+      : setInspectedProperty(property.advanced.updated_version as any)
+
+    // property.advanced.state === statesTypes.toBeUpdated ?
+    //   setInspectedProperty(property.advanced.updated_version as any)
+    //   : setInspectedProperty(property);
 
 
     setValue("listing_type", property?.listing_type)
@@ -115,30 +124,31 @@ const PropertyFrom = () => {
   useEffect(() => {
     if (!InspectedProperty) return
     //walli na77i linspected property w3tih direct ml property
+
     reset({
-      _id: InspectedProperty._id,
+        _id: InspectedProperty._id,
 
-      title: InspectedProperty.title,
-      description: InspectedProperty.description,
+        title: InspectedProperty.title,
+        description: InspectedProperty.description,
 
-      category: InspectedProperty.category,
-      sub_category: InspectedProperty.sub_category,
+        category: InspectedProperty.category,
+        sub_category: InspectedProperty.sub_category,
 
-      city: InspectedProperty.city,
-      delegation: InspectedProperty.delegation,
-      addresse: InspectedProperty.addresse,
+        city: InspectedProperty.city,
+        delegation: InspectedProperty.delegation,
+        addresse: InspectedProperty.addresse,
 
-      listing_type: InspectedProperty.listing_type,
+        listing_type: InspectedProperty.listing_type,
 
-      filterFields: {
-        price: String(InspectedProperty.filterFields.price),
-        area: String(InspectedProperty.filterFields.area),
-        rooms: InspectedProperty.filterFields.rooms ?? undefined,
-        bathrooms: InspectedProperty.filterFields.bathrooms ?? undefined,
-      },
+        filterFields: {
+          price: String(InspectedProperty.filterFields.price),
+          area: String(InspectedProperty.filterFields.area),
+          rooms: InspectedProperty.filterFields.rooms ?? undefined,
+          bathrooms: InspectedProperty.filterFields.bathrooms ?? undefined,
+        },
 
-      additionalDetails: InspectedProperty.additionalDetails,
-    })
+        additionalDetails: InspectedProperty.additionalDetails,
+      })
     setAdditionalDetails(InspectedProperty.additionalDetails)
 
     setNearestLocation(() =>

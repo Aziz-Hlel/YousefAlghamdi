@@ -47,7 +47,7 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
 
                         </NavBtn>
                         <NavBtn text="Agents" link="#">
-                          <NavBtn link="/our-agent" text="Our Agent" />
+                          <NavBtn link="/our-agents" text="Our Agent" />
                           <NavBtn link="/about" text="About Us" />
                           {/* <NavBtn link="/agent-detail" text="Agent Details" /> */}
                         </NavBtn>

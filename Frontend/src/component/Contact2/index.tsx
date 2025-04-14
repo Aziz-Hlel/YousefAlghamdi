@@ -103,15 +103,27 @@ function Contact() {
                   </SingleContact>
                 </div>
               </div>
-              <div className="row mg-top-60">
+              <div className=" mg-top-60 col-12">
                 <div className="col-12">
                   <div className="homec-gmap-canvas homec-gmap-canvas--map">
+                    {/* <iframe
+                      className=" w-full h-96"
+                      frameBorder={0}
+                      title="map"
+                      marginHeight={0}
+                      marginWidth={0}
+                      scrolling="no"
+                      src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
+                      style={{ filter: "" }}
+                      
+                    /> */}
                     <iframe
-                      id="homec-gmap-contact"
-                      className="homec-gmap-iframe"
-                      src="https://maps.google.com/maps?q=&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                    ></iframe>
+                      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d24283.867113395823!2d55.27683941576713!3d25.2093445177991!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43348a67e24b%3A0xff45e502e1ceb7e2!2sBurj%20Khalifa!5e0!3m2!1sen!2stn!4v1744633414399!5m2!1sen!2stn"
+                      height="450" className=" w-full"
+                      loading="lazy" ></iframe>
+
                   </div>
+
                 </div>
               </div>
             </div>

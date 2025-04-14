@@ -1,6 +1,7 @@
 import ProtoTypes from "prop-types";
 import TopbarBtn from "./TopbarBtn";
 import companyInfo from "@src/data/companyInfo";
+import companySocials from "@src/data/companySocials";
 
 function Topbar({ v2 }: { v2: boolean }) {
   return (
@@ -33,11 +34,10 @@ function Topbar({ v2 }: { v2: boolean }) {
               {/* End Contact  */}
               {/* Social  */}
               <ul
-                className={`homec-social homec-social__topbar ${v2 && "homec-social__topbar--v2"
-                  }`}
+                className={`homec-social homec-social__topbar ${v2 && "homec-social__topbar--v2"}`}
               >
                 <li>
-                  <a href="#">
+                  <a href={companySocials.linkedin} target="_blank"  >
                     <svg
                       width="24"
                       height="24"
@@ -59,7 +59,7 @@ function Topbar({ v2 }: { v2: boolean }) {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href={companySocials.twitter} target="_blank" >
                     <svg
                       width="24"
                       height="24"
@@ -72,7 +72,7 @@ function Topbar({ v2 }: { v2: boolean }) {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href={companySocials.youtube} target="_blank" >
                     <svg
                       width="24"
                       height="24"
@@ -93,7 +93,7 @@ function Topbar({ v2 }: { v2: boolean }) {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href={companySocials.facebook} target="_blank" >
                     <svg
                       width="24"
                       height="24"

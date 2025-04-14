@@ -63,7 +63,7 @@ const App2 = () => {
 
 
                                 <Route path="agent-detail" element={<AgentDetail />} />
-                                <Route path="our-agent" element={<OurAgents />} />
+                                <Route path="our-agents" element={<OurAgents />} />
                                 <Route path="about" element={<AboutUs />} />
                                 {/* <Route path="/pricing" element={<Pricing />} /> */}
                                 {/* <Route path="/payment-method" element={<PaymentMethod />} /> */}
@@ -99,6 +99,7 @@ const App2 = () => {
                                         {/* <Route path="add-agent" element={<UpdatePersonalInfo isModalOpen={true} toggleModal={() => { }} />}></Route> */}
 
                                     </Route>
+                                    <Route path="dashboard/my-properties/edit-property/:propertyId" element={<EditProperty />} />
                                     <Route path="dashboard/pending-properties/edit-property/:propertyId" element={<EditProperty />} />
 
 

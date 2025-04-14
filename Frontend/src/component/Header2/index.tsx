@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import MobileMenu from "../Navbar2/MobileMenu";
 import Navbar from "../Navbar2";
-import Topbar from "../Topbar";
+import Topbar from "../Topbar2";
 
 function  Header({ v2 }:{v2:boolean}) {
   const [scrollPosition, setScrollPosition] = useState(0);
