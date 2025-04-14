@@ -51,7 +51,7 @@ function News() {
               <div className="row">
                 {blogs?.map((blog) => (
                   <BlogCard
-                    key={blog.id}
+                    formkey={blog.id}
                     blogLink={blog.blogLink}
                     blogImg={blog.blogImg}
                     date={blog.date}

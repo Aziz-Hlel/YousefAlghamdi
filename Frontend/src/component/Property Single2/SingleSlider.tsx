@@ -29,7 +29,7 @@ function SingleSlider() {
       {
         property && property.imgs.map((img, index) =>
           <ImageCard
-            key={index}
+            formkey={index}
             price={property.filterFields.price}
             duration={property.listing_type === "rent" || property.listing_type === "commercial rent" ? "Month" : ""}
             title={property.title}

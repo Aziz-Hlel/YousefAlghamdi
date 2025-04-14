@@ -6,7 +6,7 @@ function SidebarTags({ tags }) {
       <h3 className="homec-sidebar__title">Popular Tags</h3>
       <ul className="homec-sidebar__tags list-none">
         {tags?.map((tag, index) => (
-          <li key={tag + index}>
+          <li formkey={tag + index}>
             <a href="#">{tag}</a>
           </li>
         ))}

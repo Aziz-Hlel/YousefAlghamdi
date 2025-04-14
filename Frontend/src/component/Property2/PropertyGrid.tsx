@@ -63,7 +63,7 @@ function PropertyGrid() {
                   {estates && estates.map((estate, index) =>
                     <LatestPropertyCard
                       estate={estate}
-                      key={estate._id}
+                      formkey={estate._id}
                       _id={estate._id}
                       likeLink={properties[index].likeLink}
                       detailsLink={properties[index].detailsLink}

@@ -5,15 +5,14 @@ function ReviewCardV2({ rating, text, authorName, authorPosition, date, v2 }) {
     <div style={{ width: v2 ? "100%" : "96%", marginLeft: v2 ? "" : "10px" }}>
       {/* <!-- Testimonial Single --> */}
       <div
-        className={`homec-testimonial homec-border ${
-          v2 && "homec-testimonial--review mg-top-30"
-        }`}
+        className={`homec-testimonial homec-border ${v2 && "homec-testimonial--review mg-top-30"
+          }`}
       >
         {/* <!-- Author Rating --> */}
         <div className="homec-rating--main mg-btm-15">
           <ul className="homec-rating list-none mg-btm-15">
             {Array.apply(null, { length: rating }).map((item, index) => (
-              <li key={`item${+index}`}>
+              <li formkey={`item${+index}`}>
                 <i className="fa-solid fa-star"></i>
               </li>
             ))}

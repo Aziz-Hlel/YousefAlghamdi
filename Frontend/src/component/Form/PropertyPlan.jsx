@@ -103,7 +103,7 @@ function PropertyPlan({ info, handleChange, handleAddOrDelete }) {
           (item, index) =>
             index !== 0 && (
               <PropertyPlanVideo
-                key={item.id}
+                formkey={item.id}
                 id={item.id}
                 img={item.thumbnail}
                 YTVideoId={item.YTVideoId}

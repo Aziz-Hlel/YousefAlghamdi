@@ -67,7 +67,7 @@ function MyProperties() {
           <DashboardPropertyCard
             _id={property._id}
             ownerId={property.clientId}
-            key={property._id}
+            formkey={property._id}
             status={property.advanced.state}
             image={apiGateway.images + pickRandomPhoto()}
             listing_type={property.listing_type}

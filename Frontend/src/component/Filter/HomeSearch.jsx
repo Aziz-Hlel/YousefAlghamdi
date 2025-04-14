@@ -91,7 +91,7 @@ function HomeSearch() {
             <select onChange={(e) => updateField(formkey, e.target.value)} value={value}
               className="py-3 px-4 pe-9 block outline-none border-none  w-full border-white rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
               <option ></option>
-              {imarates.map((item) => <option key={item} value={item}>{item}</option>)}
+              {imarates.map((item) => <option formkey={item} value={item}>{item}</option>)}
 
             </select>        {/* <Select
               values={[value]}

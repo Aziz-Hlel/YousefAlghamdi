@@ -9,7 +9,7 @@ function DetailsTab({ text, isActive, children }) {
     >
       <div className="homec-pdetails-tab__inner">
         {text?.map((item, index) => (
-          <p key={index + "Fea"}>{item}</p>
+          <p formkey={index + "Fea"}>{item}</p>
         ))}
         {/* Homec Features  */}
         {children}

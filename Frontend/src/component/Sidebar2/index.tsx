@@ -1,11 +1,11 @@
 import SelectiveInput from "../Form/SelectiveInput2";
-import CheckInput2 from "../Form/CheckInput2";
 import RangeInput from "../Form/RangeInput2";
 import imarates from "../../types/imarates";
-import propertyTypes from "../../types/propertyType";
 import { useFormContext } from "../Property2/FilterProvider.context";
 import { useSearchParams } from "react-router-dom";
-import { listing_types, listing_typesValues } from "@src/types/listing_types.types";
+import { listing_typesValues } from "@src/types/listing_types.types";
+import { categoriesType } from "@src/types/categories.subcategories.types";
+import { cities, delegations } from "@src/types/cities.delegations.types";
 
 const SideBar22 = () => {
 
@@ -29,9 +29,22 @@ const SideBar22 = () => {
         <SelectiveInput
           title="City"
           options={
-            imarates.map((imarate) => {
-              return { id: imarate, name: imarate };
+            Object.keys(cities).map((city) => {
+              return { id: city, name: city };
             })}
+          classes="mg-top-20"
+          value={filterObject.city}
+          formkey="city"
+        />
+
+
+        <SelectiveInput
+          title="Delegation mouch kemla"
+          options={
+            filterObject.city ? delegations[(filterObject.city)].map((imarate) => {
+              return { id: imarate, name: imarate };
+            }) : []
+          }
           classes="mg-top-20"
           value={filterObject.city}
           formkey="city"
@@ -40,13 +53,13 @@ const SideBar22 = () => {
         <SelectiveInput
           title="Property Category"
           options={
-            propertyTypes.map((estateType) => {
+            Object.keys(categoriesType).map((estateType) => {
               return { id: estateType, name: estateType }
             })
           }
           classes="mg-top-20"
-          value={filterObject.type}
-          formkey="type"
+          value={filterObject.category}
+          formkey="category"
         />
 
         <SelectiveInput
@@ -58,14 +71,7 @@ const SideBar22 = () => {
           }
           classes="mg-top-20"
           value={filterObject.listingType}
-          formkey="type"
-        />
-        <CheckInput2
-          title="For rent/sale"
-          properties={[
-            { key: "forRent", value: filterObject.forRent, name: "For rent" },
-            { key: "forSale", value: filterObject.forSale, name: "For sale" },
-          ]}
+          formkey="listingType"
         />
 
         <RangeInput

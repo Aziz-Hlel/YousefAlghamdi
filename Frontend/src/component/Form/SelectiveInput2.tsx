@@ -26,10 +26,10 @@ function SelectiveInput({ title, options, classes, value, formkey }: { title: st
       <div className="property-sidebar__filters">
         <h4 className="property-sidebar__title">{title}</h4>
         <div className="form-group">
-          <select onChange={(e) => handleChange(formkey, e.target.value)} value={searchParams.get(formkey) ?? undefined}
+          <select onChange={(e) => handleChange(formkey, e.target.value)} value={searchParams.get(formkey) ?? ""}
             className="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
             <option value={""} ></option>
-            {options.map((item: any) => <option key={item.id} value={item.id}>{item.name}</option>)}
+            {options.map((item: any) => <option formkey={item.id} value={item.id}>{item.name}</option>)}
           </select>
 
         </div>
@@ -38,10 +38,7 @@ function SelectiveInput({ title, options, classes, value, formkey }: { title: st
   );
 }
 
-SelectiveInput.propTypes = {
-  title: ProtoTypes.string.isRequired,
-  options: ProtoTypes.array.isRequired,
-  classes: ProtoTypes.string,
-};
+
+
 
 export default SelectiveInput;

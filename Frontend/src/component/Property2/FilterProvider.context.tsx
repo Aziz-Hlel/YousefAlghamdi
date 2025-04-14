@@ -7,18 +7,19 @@ import { useParams } from "react-router-dom";
 
 
 export const defaultFilter: IfilterProperty = {
-    forRent: true,
-    forSale: true,
+
     maxNumberOfRooms: 10,
     minNumberOfRooms: 0,
+
     maxNumberOfBathrooms: 5,
     minNumberOfBathrooms: 1,
+
     maxNumberOfSquareFeet: 2000,
     minNumberOfSquareFeet: 1,
+
     maxPrice: 3000000,
     minPrice: 1,
 
-    listingType: "",
     page: 1,
 }
 

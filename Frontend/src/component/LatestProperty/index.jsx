@@ -33,7 +33,7 @@ function LatestProperty() {
         <div className="row">
           {properties?.map((property) => (
             <LatestPropertyCard
-              key={property.id}
+              formkey={property.id}
               img={property.img}
               likeLink={property.likeLink}
               detailsLink={property.detailsLink}

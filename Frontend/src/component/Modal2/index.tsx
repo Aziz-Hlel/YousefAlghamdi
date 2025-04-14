@@ -157,7 +157,7 @@ const UserView = () => {
                     }}>
                       {!userInspected.agentId && <option value=""></option>}
                       {Object.keys(agents).map((agent) =>
-                        <option value={agent} key={agent}>
+                        <option value={agent} formkey={agent}>
                           {`${agents[agent].firstName} ${agents[agent].lastName}`}
                         </option>
                       )}

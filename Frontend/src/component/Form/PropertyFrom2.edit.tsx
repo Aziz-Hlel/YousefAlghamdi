@@ -486,7 +486,7 @@ const PropertyFrom = () => {
                       {propertyCategoryValue && Object.keys(categoriesType).includes(propertyCategoryValue) &&
                         additionalDetailsAttributes[propertyCategoryValue as keyof typeof additionalDetailsAttributes].map((item: string, index: number) => (
                           <CheckInput2
-                            key={index}
+                            formkey={index}
                             title={item}
                             setAdditionalDetails={setAdditionalDetailsWrapper}
                             additionalDetails={additionalDetails}

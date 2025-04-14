@@ -9,7 +9,7 @@ function DetailsTabFeatures({ title, property }: { title: string, property: any 
         <div className=" flex flex-wrap  gap-y-2 lg:px-10  gap-x-20 ">
           {property?.map((item: any, index: number) =>
 
-            <div key={index + Object.keys(item)[0]}>
+            <div formkey={index + Object.keys(item)[0]}>
               <span className="  mr-5 " style={{ fontWeight: "400px", fontSize: "14px" }}>{Object.keys(item)[0]}:</span>
               <span style={{ color: "#7e8ba0" }}>{item[Object.keys(item)[0]]}</span>
             </div>

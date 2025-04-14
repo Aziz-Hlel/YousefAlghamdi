@@ -8,7 +8,7 @@ interface ILatestPropertyCard {
   _id: string,
   likeLink: string,
   detailsLink: string,
-  price: number,
+  price: string,
   period: string,
   listing_type: string,
   propertyLink: string,

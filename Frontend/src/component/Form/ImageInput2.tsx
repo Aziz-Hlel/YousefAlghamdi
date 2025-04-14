@@ -47,7 +47,7 @@ function ImageInput({ imgs, handleDelete, handleImage, fieldError }: ImageInputP
                   {imgs.map((image, index) => (
                     index !== 0 &&
                     <UploadedImageCard
-                      key={index + 1}
+                      formkey={index + 1}
                       img={image}
                       handleDelete={handleDelete}
                       handleImage={handleImage}

@@ -10,7 +10,7 @@ function ReviewCard({ rating, text, authorName, authorPosition, img }) {
         {/* <!-- Author Rating --> */}
         <ul className="homec-rating list-none mg-btm-15">
           {Array.apply(null, { length: rating }).map((item, index) => (
-            <li key={`item${+index}`}>
+            <li formkey={`item${+index}`}>
               <i className="fa-solid fa-star"></i>
             </li>
           ))}

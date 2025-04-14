@@ -24,7 +24,7 @@ function ThumbnailsSlider() {
 
         {
           property && property.imgs.map((img, index) =>
-            <ThumbnailsCard key={index} img={apiGateway.images + pickRandomPhoto()} />
+            <ThumbnailsCard formkey={index} img={apiGateway.images + pickRandomPhoto()} />
           )
         }
         <ThumbnailsCard img="https://placehold.co/270x180" />

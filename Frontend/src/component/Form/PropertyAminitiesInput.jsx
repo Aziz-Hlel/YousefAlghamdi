@@ -12,7 +12,7 @@ function PropertyAminitiesInput({ aminities, handleChange }) {
         <div className="form-group homec-form-input--list">
           {Object.keys(aminities).map((item, index) => (
             <PropertyCheckInput
-              key={item + index}
+              formkey={item + index}
               title={item}
               isChecked={aminities[item]}
               handleChange={handleChange}

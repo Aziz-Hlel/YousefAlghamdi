@@ -14,7 +14,7 @@ function ReviewCardV3({
         {/* Author Rating  */}
         <ul className="homec-rating list-none">
           {Array.apply(null, { length: rating }).map((item, index) => (
-            <li key={`item${+index}`}>
+            <li formkey={`item${+index}`}>
               <i className="fa-solid fa-star"></i>
             </li>
           ))}

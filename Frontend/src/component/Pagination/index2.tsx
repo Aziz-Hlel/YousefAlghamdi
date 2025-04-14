@@ -18,7 +18,7 @@ function Pagination({ totalPage, handlePage, currentPage }: any) {
           {Array.from(Array(totalPage).keys()).map((item, index) =>
             index === 0 || index + 1 === totalPage ? (
               <li
-                key={item + 1}
+                formkey={item + 1}
                 className={currentPage === index + 1 ? "active" : ""}
               >
                 <a
@@ -32,7 +32,7 @@ function Pagination({ totalPage, handlePage, currentPage }: any) {
             ) : (index < 5 && currentPage < 5) ||
               (index > totalPage - 6 && currentPage > totalPage - 4) ? (
               <li
-                key={item + 1}
+                formkey={item + 1}
                 className={currentPage === index + 1 ? "active" : ""}
               >
                 <a
@@ -47,7 +47,7 @@ function Pagination({ totalPage, handlePage, currentPage }: any) {
               index === currentPage - 1 ||
               index === currentPage ? (
               <li
-                key={item + 1}
+                formkey={item + 1}
                 className={currentPage === index + 1 ? "active" : ""}
               >
                 <a
@@ -60,7 +60,7 @@ function Pagination({ totalPage, handlePage, currentPage }: any) {
               </li>
             ) : currentPage > 4 && index === 2 ? (
               <li
-                key={item + 1}
+                formkey={item + 1}
                 className={currentPage === index + 1 ? "active" : ""}
               >
                 <a
@@ -75,7 +75,7 @@ function Pagination({ totalPage, handlePage, currentPage }: any) {
               currentPage < totalPage - 2 &&
               index === totalPage - 2 && (
                 <li
-                  key={item + 1}
+                  formkey={item + 1}
                   className={currentPage === index + 1 ? "active" : ""}
                 >
                   <a

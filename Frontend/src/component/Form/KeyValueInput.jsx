@@ -20,7 +20,7 @@ function KeyValueInput({
         {typeof info === "object" &&
           info?.map((item, index) => (
             <KeyValueInputField
-              key={item.id}
+              formkey={item.id}
               options={options ? options : false}
               title={filedTitle}
               titleTwo={filedTitleTwo}

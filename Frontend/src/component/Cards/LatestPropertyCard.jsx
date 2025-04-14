@@ -83,7 +83,7 @@ function LatestPropertyCard({
           {/* Property List */}
           <ul className="homec-property__list homec-border-top list-none">
             {detailsList?.map((details, index) => (
-              <li key={details.name + index}>
+              <li formkey={details.name + index}>
                 <img src={details.img} alt="#" />
                 {details.name}
               </li>

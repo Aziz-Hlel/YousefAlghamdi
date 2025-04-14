@@ -5,7 +5,7 @@ function BlogMetaList({ info }) {
     <div className="homec-blog-meta">
       <ul className="homec-blog-meta__list list-none">
         {info?.map((item, index) => (
-          <li key={item.name + index}>
+          <li formkey={item.name + index}>
             <img src={item.img} alt="#" />
             {item.link ? <a href={item.link}>{item.name}</a> : item.name}
           </li>

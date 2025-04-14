@@ -1,22 +1,27 @@
-import { IestateTypes as IestateTypes } from "@src/types/propertyType";
 import { Imarate } from "@src/types/imarates";
+import { ICategory } from "@src/types/categories.subcategories.types";
+import { citiesType } from "@src/types/cities.delegations.types";
 
 export type IfilterProperty = {
 
-    city?: Imarate,
-    type?: IestateTypes,
+    city?: citiesType,
+    category?: ICategory,
+    sub_category?: string,
+
     maxNumberOfRooms: number,
     minNumberOfRooms: number,
+
     maxNumberOfBathrooms: number,
     minNumberOfBathrooms: number,
+
     maxNumberOfSquareFeet: number,
     minNumberOfSquareFeet: number,
+
     minPrice: number,
     maxPrice: number,
-    forRent: boolean, // del
-    forSale: boolean, // del
 
-    listingType: string,
+    listingType?: string,
+
     page: number,
 
 
