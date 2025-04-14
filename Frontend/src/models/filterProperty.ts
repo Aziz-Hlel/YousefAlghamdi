@@ -5,6 +5,7 @@ import { citiesType } from "@src/types/cities.delegations.types";
 export type IfilterProperty = {
 
     city?: citiesType,
+    delegation?: string,
     category?: ICategory,
     sub_category?: string,
 

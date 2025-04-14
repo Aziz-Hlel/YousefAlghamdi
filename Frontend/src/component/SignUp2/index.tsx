@@ -9,6 +9,7 @@ import apiGateway from "@src/utils/apiGateway";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
+import companyInfo from "@src/data/companyInfo";
 
 
 
@@ -135,7 +136,7 @@ const SignUp = () => {
                       <PropertyTextInput
                         size="col-lg-6 col-md-6"
                         title="Phone Number*"
-                        placeholder="+971 50 123 4567"
+                        placeholder={companyInfo.phone}
                         margin="-10px"
                         fieldRegister={register('phoneNumber')}
                         fieldError={errors.phoneNumber}

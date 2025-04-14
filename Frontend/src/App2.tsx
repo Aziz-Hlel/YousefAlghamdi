@@ -7,7 +7,7 @@ import { createBrowserRouter, Route, BrowserRouter as Router, RouterProvider, Ro
 import AboutUs from "./component/About";
 import AddProperty from "./component/AddProperty2";
 import AgentDetail from "./component/AgentDetail";
-import Contact from "./component/Contact";
+import Contact from "./component/Contact2";
 import Dashboard from "./component/Dashboard2";
 import EditProperty from "./component/Edit Property2";
 import ErrorPage from "./component/Error";
@@ -57,6 +57,8 @@ const App2 = () => {
                                 <Route path="home" element={<Home />} />
                                 <Route path="property/:city" element={<Property />} />
                                 <Route path="property" element={<Property />} />
+
+
                                 <Route path="property-single/:propertyId" element={<PropertySingle />} />
 
 

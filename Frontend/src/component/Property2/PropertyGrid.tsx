@@ -3,17 +3,21 @@ import PropertyBar from "./PropertyBar";
 import Sidebar from "../Sidebar2";
 import LatestPropertyCard from "../Cards/LatestPropertyCard2";
 import Pagination from "../Pagination2";
-import properties from "../../data/property";
+import staticProperties from "../../data/property";
 import { useFormContext } from "./FilterProvider.context";
 import Http from "../../services/Http";
 import Iproperty from "@src/models/property.type";
 import apiGateway from "@src/utils/apiGateway";
+import { useSearchParams } from "react-router-dom";
 
 
 
 function PropertyGrid() {
 
-  const { properties: estates, filterObject, totalCount, updateField, updateEstate } = useFormContext();
+  const { properties: properties, filterObject, totalCount, updateField, updateEstate } = useFormContext();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
 
   const totalPage = Math.ceil(totalCount / 6);
   //handle grid style
@@ -24,9 +28,10 @@ function PropertyGrid() {
 
   const handelPage = async (page: number) => {
     console.log('page', page);
-
-    await updateField("page", page);
-    // updateEstate();
+    searchParams.set('page', page.toString());
+    setSearchParams(searchParams, { replace: true });
+    // await updateField("page", page);
+    updateEstate();
   };
 
 
@@ -47,7 +52,7 @@ function PropertyGrid() {
 
   return (
     <section className="homec-propertys pd-top-80 pd-btm-80">
-      <div className="container">
+      <div className=" container">
         <PropertyBar gridStyle={gridStyle} handleGridStyle={handleGridStyle} />
         <div className="row">
           <Sidebar />
@@ -56,24 +61,23 @@ function PropertyGrid() {
               {/* <!-- Grid Tab --> */}
               <div
                 className="tab-pane fade show active"
-                id="homec-grid"
                 role="tabpanel"
               >
                 <div className="row">
-                  {estates && estates.map((estate, index) =>
+                  {properties && properties.map((property, index) =>
                     <LatestPropertyCard
-                      estate={estate}
-                      formkey={estate._id}
-                      _id={estate._id}
-                      likeLink={properties[index].likeLink}
-                      detailsLink={properties[index].detailsLink}
-                      price={estate.filterFields.price}
-                      period={properties[index].period}
-                      listing_type={estate.listing_type}
-                      propertyLink={properties[index].propertyLink}
-                      name={estate.title}
-                      address={properties[index].address}
-                      detailsList={properties[index].detailsList}
+                      estate={property}
+                      formkey={property._id}
+                      _id={property._id}
+                      likeLink={staticProperties[index].likeLink}
+                      detailsLink={staticProperties[index].detailsLink}
+                      price={property.filterFields.price}
+                      period={staticProperties[index].period}
+                      listing_type={property.listing_type}
+                      propertyLink={staticProperties[index].propertyLink}
+                      name={property.title}
+                      address={`${property.city}, ${property.delegation}, ${property.addresse}`}
+                      detailsList={staticProperties[index].detailsList}
                       classes={`${gridStyle === "grid"
                         ? "col-md-6 col-12 mg-top-30"
                         : "col-12 mg-top-30"

@@ -3,7 +3,8 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 import { IfilterProperty } from "src/models/filterProperty";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
+import { citiesType } from "@src/types/cities.delegations.types";
 
 
 export const defaultFilter: IfilterProperty = {
@@ -48,39 +49,42 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
     const [totalCount, setTotalCount] = useState(0);
 
-    useEffect(() => {
-        console.log(filterObject);
+    const [searchParams, setSearchParams] = useSearchParams();
 
-    }, [filterObject])
+    
+    // useEffect(() => {
+    //     console.log(filterObject);
 
-    useEffect(() => {
-        updateEstate()
-    }, [filterObject.page])
+    // }, [filterObject])
+
+    // useEffect(() => {
+    //     updateEstate()
+    // }, [filterObject.page])
 
     const { city } = useParams();
 
 
 
 
-    useEffect(() => {
-        const handleCityChange = async (city: string) => {
-            await updateField("city", city);
-            console.log("cityyyyy", city);
+    // useEffect(() => {
+    //     const handleCityChange = async (city: string) => {
+    //         await updateField("city", city);
+    //         console.log("cityyyyy", city);
 
-            // Make sure this is called after the state is updated
-        };
-        // console.log('mountedddddddddd');
-        const aa = async () => {
-            if (city !== undefined && city !== "undefined") {
+    //         // Make sure this is called after the state is updated
+    //     };
+    //     // console.log('mountedddddddddd');
+    //     const aa = async () => {
+    //         if (city !== undefined && city !== "undefined") {
 
-                await handleCityChange(city);
-                defaultFilter.city = city
-                updateEstate(defaultFilter);
-            }
-        }
-        aa()
+    //             await handleCityChange(city);
+    //             defaultFilter.city = city as citiesType
+    //             updateEstate(defaultFilter);
+    //         }
+    //     }
+    //     aa()
 
-    }, [city])
+    // }, [city])
 
     const updateField = (field: keyof IfilterProperty, value: any, mnin?: string) => {
         // console.log("field", field).
@@ -103,10 +107,13 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
 
     const updateEstate = async (defaultFilter?: IfilterProperty) => {
-        if (filterObject.city === "All") delete filterObject.city;
-        if (filterObject.type === "All") delete filterObject.type;
+
+        let filter = {}
+        searchParams.forEach((value, key) => {
+            filter = { ...filter, [key]: value }
+        })
         const filterSend = defaultFilter ? defaultFilter : filterObject
-        const response = await Http.get<any>(apiGateway.property.list, { params: filterSend });
+        const response = await Http.get<any>(apiGateway.property.list, { params: filter });
         const properties: Iproperty[] = response?.data.result
         const totalCount = Number(response?.headers["x-total-count"]);
         setTotalCount(totalCount)

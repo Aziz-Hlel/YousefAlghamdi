@@ -5,6 +5,7 @@ putting some variables like filter and page number as params (  )
 language translation
 docker , how to make dummy data from the start
 make request like apiGateway and Http
-
+swagger
+logs
 
 Documentation !!!!

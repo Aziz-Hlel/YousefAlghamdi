@@ -2,6 +2,7 @@ import FooterList from "./FooterList";
 import SubscribeForm from "../Subscribe2";
 import { Link } from "react-router-dom";
 import logo_img from "@img/logo.png"
+import companyInfo from "@src/data/companyInfo";
 function Footer() {
   return (
     <footer className="footer-area p-relative">
@@ -164,13 +165,13 @@ function Footer() {
                             </li>
                             <li>
                               <img src="/img/footer-message.png" alt="#" />
-                              <a href="mailto:yousefAlghamdi@gmail.com">
-                                yousefAlghamdi@gmail.com
+                              <a href={`mailto:${companyInfo.email}`}>
+                                {companyInfo.email}
                               </a>
                             </li>
                             <li>
                               <img src="/img/footer-location.png" alt="#" />
-                              <p>1901 Palm Jumeirah Rd, Dubai</p>
+                              <p>{companyInfo.address}</p>
                             </li>
                           </ul>
                         </div>
@@ -204,7 +205,7 @@ function Footer() {
                   <a href="about.html">About Company</a>
                 </li>
                 <li>
-                  <a href="contact-us.html">Contact Us</a>
+                  <Link to={"/contact"}>Contact Us</Link>
                 </li>
               </ul>
             </div>

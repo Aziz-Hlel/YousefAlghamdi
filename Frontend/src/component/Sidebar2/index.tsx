@@ -4,8 +4,9 @@ import imarates from "../../types/imarates";
 import { useFormContext } from "../Property2/FilterProvider.context";
 import { useSearchParams } from "react-router-dom";
 import { listing_typesValues } from "@src/types/listing_types.types";
-import { categoriesType } from "@src/types/categories.subcategories.types";
-import { cities, delegations } from "@src/types/cities.delegations.types";
+import { categoriesType, ICategory, sub_categories } from "@src/types/categories.subcategories.types";
+import { cities, citiesType, delegations } from "@src/types/cities.delegations.types";
+import { useEffect } from "react";
 
 const SideBar22 = () => {
 
@@ -22,9 +23,38 @@ const SideBar22 = () => {
     else searchParams.delete(field, newValue)
     setSearchParams(searchParams, { replace: true });     // push to URL
   };
+
+  const city = searchParams.get('city');
+  const category = searchParams.get('category');
+
+  useEffect(() => {
+    searchParams.delete('delegation')
+    setSearchParams(searchParams, { replace: true });     // push to URL
+
+  }, [city])
+
+
+  useEffect(() => {
+    searchParams.delete('sub_category')
+    setSearchParams(searchParams, { replace: true });     // push to URL
+
+  }, [category])
+
   return (
     <div className="col-lg-4 col-12 mg-top-30">
       <div className="property-sidebar">
+
+        <SelectiveInput
+          title="Lisiting type"
+          options={
+            listing_typesValues.map((listingType) => {
+              return { id: listingType, name: listingType }
+            })
+          }
+          classes="mg-top-20"
+          value={filterObject.listingType}
+          formkey="listingType"
+        />
 
         <SelectiveInput
           title="City"
@@ -37,24 +67,23 @@ const SideBar22 = () => {
           formkey="city"
         />
 
-
         <SelectiveInput
-          title="Delegation mouch kemla"
+          title="Delegation"
           options={
-            filterObject.city ? delegations[(filterObject.city)].map((imarate) => {
-              return { id: imarate, name: imarate };
+            searchParams.get('city') ? delegations[(searchParams.get('city') as citiesType)].map((delegation) => {
+              return { id: delegation, name: delegation };
             }) : []
           }
           classes="mg-top-20"
           value={filterObject.city}
-          formkey="city"
+          formkey="delegation"
         />
 
         <SelectiveInput
           title="Property Category"
           options={
-            Object.keys(categoriesType).map((estateType) => {
-              return { id: estateType, name: estateType }
+            Object.keys(categoriesType).map((category) => {
+              return { id: category, name: category }
             })
           }
           classes="mg-top-20"
@@ -63,18 +92,22 @@ const SideBar22 = () => {
         />
 
         <SelectiveInput
-          title="Lisiting type"
+          title="Sub-category"
           options={
-            listing_typesValues.map((estateType) => {
-              return { id: estateType, name: estateType }
-            })
+            searchParams.get('category') ?
+              sub_categories[(searchParams.get('category') as ICategory)].map((estateType) => {
+                return { id: estateType, name: estateType }
+              }) : []
           }
           classes="mg-top-20"
-          value={filterObject.listingType}
-          formkey="listingType"
+          value={filterObject.sub_category}
+          formkey="sub_category"
         />
 
-        <RangeInput
+
+
+
+        {/* <RangeInput
           minRange={0}
           maxRange={10}
           minValue={filterObject.minNumberOfRooms}
@@ -94,7 +127,7 @@ const SideBar22 = () => {
           maxKey={"maxNumberOfBathrooms"}
           title="Number Of Bathrooms"
           standard="bathrooms"
-        />
+        /> */}
 
         <RangeInput
           minRange={0}
@@ -120,7 +153,7 @@ const SideBar22 = () => {
         />
 
         <div className="w-full flex flex-col justify-center items-center gap-2 pt-4">
-          <button className="homec-btn" onClick={() => { updateEstate(); }}>
+          <button className="homec-btn" onClick={updateEstate}>
             Apply filter
           </button>
           {/* <div className="underline font-extralight hover:cursor-pointer " onClick={() => resetFilter()}>reset filter</div> */}

@@ -73,22 +73,23 @@ const filterFunc = (minVal: any, maxVal: any, filterKeyName: string, filters: an
 
 export const listProperties = async (req: Request, res: Response, next: NextFunction) => {
 
-    const { city, type, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
+    const { city, delegation, category, sub_category, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
 
     let filters: any = {};
     console.log(req.query)
     filterFunc(minPrice, maxPrice, "filterFields.price", filters);
-    filterFunc(minNumberOfRooms, maxNumberOfRooms, "filterFields.rooms", filters);
-    filterFunc(minNumberOfBathrooms, maxNumberOfBathrooms, "filterFields.bathrooms", filters);
+    // filterFunc(minNumberOfRooms, maxNumberOfRooms, "filterFields.rooms", filters);
+    // filterFunc(minNumberOfBathrooms, maxNumberOfBathrooms, "filterFields.bathrooms", filters);
 
 
-    if (forSale === "true" && forRent === "true") { }
 
 
     if (city) filters.city = city;
-    if (type) filters.type = type;
+    if (delegation) filters.delegation = delegation;
+    if (category) filters.category = category;
+    if (sub_category) filters.sub_category = sub_category;
 
-    const page = Number(req.query.page);
+    const page = req.query.page ? Number(req.query.page) : 1;
     filters.active = true;
     if (!page || isNaN(page)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 

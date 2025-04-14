@@ -2,7 +2,7 @@ import ProtoTypes from "prop-types";
 import TopbarBtn from "./TopbarBtn";
 import companyInfo from "@src/data/companyInfo";
 
-function Topbar({ v2 }) {
+function Topbar({ v2 }: { v2: boolean }) {
   return (
     <div className={`homec-header__top ${v2 && "p-0"}`}>
       <div className="container">
@@ -122,8 +122,5 @@ function Topbar({ v2 }) {
   );
 }
 
-Topbar.propTypes = {
-  v2: ProtoTypes.bool,
-};
 
 export default Topbar;
