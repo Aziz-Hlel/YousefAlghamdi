@@ -1,8 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import filterFieldsTypes from "./filterFields.type";
 
-
-export interface Iproperty extends Document {
+export interface Iproperty {
     _id: mongoose.Types.ObjectId;
 
     title: string,
@@ -48,7 +47,13 @@ export interface Iproperty extends Document {
         available: Date,
         updated_version: { [key: string]: any }
     },
+
 }
+
+
+
+
+export interface Iproperty_model extends Document, Iproperty { }
 
 
 const propertySchema = new mongoose.Schema({
@@ -163,6 +168,6 @@ const propertySchema = new mongoose.Schema({
 );
 
 
-const Property = mongoose.model<Iproperty>('Estate', propertySchema);
+const Property = mongoose.model<Iproperty_model>('Estate', propertySchema);
 
 export default Property;

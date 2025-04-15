@@ -6,7 +6,7 @@ import { IAgentModel } from "../../Models/agent.model";
 
 
 
-interface Iuser_wPassword extends Iuser {
+export interface Iuser_wPassword extends Iuser {
     password: string;
 }
 

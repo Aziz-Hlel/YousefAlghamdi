@@ -4,6 +4,7 @@ import createAgents from "./data/Agents.dummyData";
 import Agent from "../Models/agent.model";
 import createUser from "./data/Users.dummyData";
 import User from "../Models/user.model";
+import createProperties from "./data/properties.dummy";
 
 
 
@@ -18,18 +19,17 @@ const seedData = async () => {
     // await Product.deleteMany();
     const agentsData = await createAgents();
 
-    const agents = await Agent.insertMany(agentsData);
+    const DBagents = await Agent.insertMany(agentsData);
 
-    const usersData = await createUser(agents);
+    const DBusers = await createUser(DBagents);
 
-    await User.insertMany(usersData);
+    await User.insertMany(DBusers);
 
-    
+    createProperties(DBusers, DBagents);
+
 
     await mongoose.disconnect();
 
 }
 
-
-
-// seedData();
+seedData();
