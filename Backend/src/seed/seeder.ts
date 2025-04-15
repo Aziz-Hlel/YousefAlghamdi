@@ -18,13 +18,18 @@ const seedData = async () => {
     // await Product.deleteMany();
     const agentsData = await createAgents();
 
-    const agents =await Agent.insertMany(agentsData);
+    const agents = await Agent.insertMany(agentsData);
 
     const usersData = await createUser(agents);
 
     await User.insertMany(usersData);
 
     
+
     await mongoose.disconnect();
 
 }
+
+
+
+// seedData();

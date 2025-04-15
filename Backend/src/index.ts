@@ -17,5 +17,5 @@ connectDB()
  
 
 app.listen(ENV.PORT,()=>{
-    console.log(`Now listening on port ${ENV.PORT} \n go to http://localhost:50/ `);
+    console.log(`Now listening on port ${ENV.PORT} \n go to http://localhost:${ENV.PORT}/ `);
 }); 

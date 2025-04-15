@@ -24,5 +24,6 @@ const ENV = {
 
 (Object.keys(ENV) as Array<keyof typeof ENV>).forEach((key) => { if (!ENV[key]) { throw new Error(`${key} is not defined in the .env file`) } })
 
+console.log(ENV);
 
 export default ENV;
