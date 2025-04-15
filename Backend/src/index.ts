@@ -9,7 +9,6 @@ import ENV from "./utils/ENV.variables"
 
 
 
-dotenv.config()
 connectDB() 
 
 

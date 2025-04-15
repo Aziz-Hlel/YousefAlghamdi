@@ -1,10 +1,10 @@
 import { Request } from "express";
-import { IUser } from "../Models/user.model";
+import { IUser_model } from "../Models/user.model";
 
 
 
 interface AuthenticatedRequest extends Request {
-    user?: IUser;
+    user?: IUser_model;
 }
 
 export default AuthenticatedRequest;

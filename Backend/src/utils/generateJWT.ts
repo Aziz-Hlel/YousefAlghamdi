@@ -1,10 +1,8 @@
 import { Response } from "express";
 import jwt from "jsonwebtoken";
-import { IUser } from "../Models/user.model";
-import dotenv from "dotenv"
+import { IUser_model } from "../Models/user.model";
 import ENV from "./ENV.variables";
 
-dotenv.config()
 
 
 const ACCESS_SECRET = ENV.JWT_ACCESS_SECRET
@@ -19,20 +17,21 @@ const refreshTokenLifeSpan = "7d";
 const generateAccessToken = (payload: { [key: string]: any }) => {
 
     return jwt.sign(payload, ACCESS_SECRET, { expiresIn: accessTokenLifeSpan });
+
 };
 
 
 const generateRefreshToken = (payload: { [key: string]: any }) => {
 
     return jwt.sign(payload, REFRESH_SECRET, { expiresIn: refreshTokenLifeSpan });
+
 };
 
 
 
 
 
-const generateToken = (res: Response, user: IUser) => {
-
+const generateToken = (res: Response, user: IUser_model) => {
 
     const payload = {
         _id: user._id,

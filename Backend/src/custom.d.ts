@@ -1,4 +1,4 @@
-import { IUser } from "./Models/user.model";
+import { IUser_model } from "./Models/user.model";
 
 
 declare global {
@@ -16,7 +16,7 @@ declare global {
 
     namespace Express {
         interface Request {
-            user?: IUser
+            user?: IUser_model
         }
     }
 
@@ -25,4 +25,4 @@ declare global {
 }
 
 
-export {};
+export { };

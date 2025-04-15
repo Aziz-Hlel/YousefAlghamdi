@@ -7,6 +7,7 @@ import path from 'path';
 import IApiErrorMiddleware from './Interfaces/ApiErrorResponse.interface';
 import imgHandlerRouter from './imgHandler';
 import agentRouter from './Routes/agent.route';
+import ENV from './utils/ENV.variables';
 
 
 
@@ -41,6 +42,7 @@ app.use('/api/images', imgHandlerRouter);
 
 
 app.get('', (req, res) => {
+    console.log(ENV)
     res.send('Works ')
 })
 
