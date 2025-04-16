@@ -18,10 +18,10 @@ export interface Iproperty {
     // videos: string[],
 
     filterFields: {
-        price: number,
-        area: number,
-        rooms?: number,
-        bathrooms?: number,
+        price: string,
+        area: string,
+        rooms: string | null,
+        bathrooms: string | null,
     },
 
     listing_type: string,
