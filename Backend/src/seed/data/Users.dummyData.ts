@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
-import { Iuser, IUser_model } from "../../Models/user.model";
+import { Iuser, } from "../../Models/user.model";
 import roles from "../../types/roles.type";
 import hashPassword from "../hashPassword";
 import { IAgentModel } from "../../Models/agent.model";
+import bcrypt from "bcrypt";
 
 
 
@@ -12,6 +13,9 @@ export interface Iuser_wPassword extends Iuser {
 
 
 const createUser = async (agents: IAgentModel[]): Promise<Iuser_wPassword[]> => {
+
+    const salt = await bcrypt.genSalt(10);
+
     return [
         {
             _id: new mongoose.Types.ObjectId(),

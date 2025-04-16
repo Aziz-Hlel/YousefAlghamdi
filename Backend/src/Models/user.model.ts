@@ -91,7 +91,7 @@ userSchema.methods.matchPassword = async function (enteredPassword: string): Pro
     if (!enteredPassword || !this.password) {
         throw new Error('Both enteredPassword and stored password are required.');
     }
-    return bcrypt.compareSync(enteredPassword, this.password);
+    return  bcrypt.compareSync(enteredPassword, this.password);
 }
 
 

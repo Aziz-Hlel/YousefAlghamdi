@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { IAgent } from "../../Models/agent.model";
 import roles from "../../types/roles.type";
 import hashPassword from "../hashPassword";
+import bcrypt from "bcrypt";
 
 
 interface IAgent_wPasswords extends IAgent {
@@ -9,6 +10,8 @@ interface IAgent_wPasswords extends IAgent {
 }
 
 const createAgents = async (): Promise<IAgent_wPasswords[]> => {
+
+
     return [
         {
             _id: new mongoose.Types.ObjectId(),
@@ -63,6 +66,24 @@ const createAgents = async (): Promise<IAgent_wPasswords[]> => {
             },
             image: "",
             about: "agent3 description"
+        },
+        {
+            _id: new mongoose.Types.ObjectId(),
+            firstName: 'admin',
+            lastName: 'Doe',
+            password: await hashPassword("admin"), // make sure to hash or use dummy
+            email: "admin@gmail.com",
+            phoneNumber: '1234567890',
+            adresse: '3 Agent St',
+            role: roles.AGENT,
+            socials: {
+                whatsApp: "+0000",
+                linkedin: "https://linkedin.com/",
+                twitter: "https://twitter.com/",
+                instagram: "https://instagram.com/"
+            },
+            image: "",
+            about: "admin description"
         },
 
     ];
