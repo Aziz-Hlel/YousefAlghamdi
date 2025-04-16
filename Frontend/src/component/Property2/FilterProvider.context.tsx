@@ -3,8 +3,7 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 import { IfilterProperty } from "src/models/filterProperty";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
-import { useParams, useSearchParams } from "react-router-dom";
-import { citiesType } from "@src/types/cities.delegations.types";
+import { useSearchParams } from "react-router-dom";
 
 
 export const defaultFilter: IfilterProperty = {
@@ -32,7 +31,7 @@ interface IFormContext {
 
     updateField: (field: keyof IfilterProperty, value: any, mnin?: string) => void,
     resetFilter: () => void,
-    updateEstate: () => void,
+    updateEstate: (page?: number) => void,
 
 }
 
@@ -51,40 +50,7 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    
-    // useEffect(() => {
-    //     console.log(filterObject);
 
-    // }, [filterObject])
-
-    // useEffect(() => {
-    //     updateEstate()
-    // }, [filterObject.page])
-
-    const { city } = useParams();
-
-
-
-
-    // useEffect(() => {
-    //     const handleCityChange = async (city: string) => {
-    //         await updateField("city", city);
-    //         console.log("cityyyyy", city);
-
-    //         // Make sure this is called after the state is updated
-    //     };
-    //     // console.log('mountedddddddddd');
-    //     const aa = async () => {
-    //         if (city !== undefined && city !== "undefined") {
-
-    //             await handleCityChange(city);
-    //             defaultFilter.city = city as citiesType
-    //             updateEstate(defaultFilter);
-    //         }
-    //     }
-    //     aa()
-
-    // }, [city])
 
     const updateField = (field: keyof IfilterProperty, value: any, mnin?: string) => {
         // console.log("field", field).
@@ -106,13 +72,25 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
     };
 
 
-    const updateEstate = async (defaultFilter?: IfilterProperty) => {
+    const updateEstate = async (page?: number) => {
 
-        let filter = {}
+        let filter: any = {}
+        console.log("nanana chouf 9addeh l pag mil prams l context :", page);
         searchParams.forEach((value, key) => {
+
+            console.log(value, key);
+
             filter = { ...filter, [key]: value }
         })
-        const filterSend = defaultFilter ? defaultFilter : filterObject
+        if (page) filter = { ...filter, page }
+        else {
+            filter["page"] = 1
+            searchParams.delete('page')
+            setSearchParams(searchParams, { replace: true });
+        };
+
+        console.log('rabk om l filter : ', filter);
+
         const response = await Http.get<any>(apiGateway.property.list, { params: filter });
         const properties: Iproperty[] = response?.data.result
         const totalCount = Number(response?.headers["x-total-count"]);

@@ -10,19 +10,19 @@ import { useEffect } from "react";
 
 const SideBar22 = () => {
 
-  const { filterObject, updateEstate } = useFormContext();
+  const {filterObject,  updateEstate } = useFormContext();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  // const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 
-    const field = e.target.name
-    const newValue = e.target.value;
-    console.log("newValue", newValue);
+  //   const field = e.target.name
+  //   const newValue = e.target.value;
+  //   console.log("newValue", newValue);
 
-    if (newValue) searchParams.set(field, newValue); // update param
-    else searchParams.delete(field, newValue)
-    setSearchParams(searchParams, { replace: true });     // push to URL
-  };
+  //   if (newValue) searchParams.set(field, newValue); // update param
+  //   else searchParams.delete(field, newValue)
+  //   setSearchParams(searchParams, { replace: true });     // push to URL
+  // };
 
   const city = searchParams.get('city');
   const category = searchParams.get('category');
@@ -52,7 +52,6 @@ const SideBar22 = () => {
             })
           }
           classes="mg-top-20"
-          value={filterObject.listingType}
           formkey="listingType"
         />
 
@@ -63,7 +62,6 @@ const SideBar22 = () => {
               return { id: city, name: city };
             })}
           classes="mg-top-20"
-          value={filterObject.city}
           formkey="city"
         />
 
@@ -75,7 +73,6 @@ const SideBar22 = () => {
             }) : []
           }
           classes="mg-top-20"
-          value={filterObject.city}
           formkey="delegation"
         />
 
@@ -87,7 +84,6 @@ const SideBar22 = () => {
             })
           }
           classes="mg-top-20"
-          value={filterObject.category}
           formkey="category"
         />
 
@@ -100,7 +96,6 @@ const SideBar22 = () => {
               }) : []
           }
           classes="mg-top-20"
-          value={filterObject.sub_category}
           formkey="sub_category"
         />
 
@@ -153,7 +148,7 @@ const SideBar22 = () => {
         />
 
         <div className="w-full flex flex-col justify-center items-center gap-2 pt-4">
-          <button className="homec-btn" onClick={updateEstate}>
+          <button className="homec-btn" onClick={()=> updateEstate()}>
             Apply filter
           </button>
           {/* <div className="underline font-extralight hover:cursor-pointer " onClick={() => resetFilter()}>reset filter</div> */}

@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import logo_img from "@img/logo.png"
 import companyInfo from "@src/data/companyInfo";
 import companySocials from "@src/data/companySocials";
+import logo2 from "@img/logo2.png"
+
+
 function Footer() {
   return (
     <footer className="footer-area p-relative">
@@ -29,7 +32,7 @@ function Footer() {
                   <div className="footer-about-widget">
                     <div className="">
                       <Link className="logo" to={"/"}>
-                        <img src={logo_img} alt="#" className=" w-72 h-64" />
+                        <img src={logo2} alt="#" className=" w-72 h-64" />
                       </Link>
                     </div>
                     <p className="footer-about-text">

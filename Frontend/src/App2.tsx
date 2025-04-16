@@ -25,7 +25,7 @@ import Layout from "./component/Layouts/Layout.js";
 import { AuthProvider } from "./providers/AuthProvider.context.js";
 import ProtectedLayouts from "./component/Layouts/ProtectedLayouts.js";
 import MyProperties from "./component/Dashboard2/MyProperties/MyProperties2.js";
-import PersonalInfo from "./component/Dashboard2/PersonalInfo2.js";
+import PersonalInfo from "./component/Dashboard2/MyProperties/PersonalInfo2/PersonalInfo2.js";
 import Reviews from "./component/Dashboard2/Reviews2.js";
 import DashboardComp from "./component/Dashboard2/DashboardComp2.js";
 import ChangePassword from "./component/Dashboard2/ChangePassword2.js";

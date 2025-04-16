@@ -74,7 +74,7 @@ const UserView = () => {
 
 
   const [currentAgent, setCurrentAgent] = useState<string | null>(null)
-  const agents = useAgents();
+  const { agents } = useAgents();
 
   const changeAgentOfUser = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();

@@ -1,4 +1,19 @@
 services:
   client:
-    ports:
-      - '50:50'
+    volumes:
+      - ./Frontend:/app
+      - /app/node_modules  # This creates an anonymous volume for node_modules
+
+  server:
+    volumes:
+      - ./Backend:/app
+      - /app/node_modules  # This creates an anonymous volume for node_modules
+
+
+  mongo:
+    volumes:
+      - mongo-data-dev:/data/db
+
+
+volumes:
+  mongo-data-dev:

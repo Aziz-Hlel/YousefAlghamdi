@@ -7,7 +7,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
   return (
     <div className="row mg-top-40">
       <div className="homec-pagination">
-        <ul className="homec-pagination__list list-none cursor-default">
+        {totalPage !== 0 && <ul className="homec-pagination__list list-none cursor-default">
           <li className="homec-pagination__button">
             <a
               style={{ cursor: "pointer" }}
@@ -24,6 +24,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               <li
                 formkey={index + 1}
                 className={currentPage === index + 1 ? "active" : ""}
+                key={index}
               >
                 <a
                   onClick={() => {
@@ -38,6 +39,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               <li
                 formkey={index + 1}
                 className={currentPage === index + 1 ? "active" : ""}
+                key={index}
               >
                 <a
                   onClick={() => {
@@ -107,7 +109,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               Next
             </a>
           </li>
-        </ul>
+        </ul>}
       </div>
     </div>
   );

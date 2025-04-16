@@ -75,7 +75,7 @@ const createAgents = async (): Promise<IAgent_wPasswords[]> => {
             email: "admin@gmail.com",
             phoneNumber: '1234567890',
             adresse: '3 Agent St',
-            role: roles.AGENT,
+            role: roles.ADMIN,
             socials: {
                 whatsApp: "+0000",
                 linkedin: "https://linkedin.com/",

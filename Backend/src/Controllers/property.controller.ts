@@ -145,7 +145,6 @@ export const getProperty = async (req: Request, res: Response, next: NextFunctio
 export const getUserProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
     const userId = req.user?._id;
-
     const page = Number(req.query.page) || 1;
     const limit = 6;
 
@@ -189,7 +188,7 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
                 Property.find({ agentId: userId })
                     .limit(limit)
                     .skip((page - 1) * limit)
-                    .sort({ updatedAt: -1 }),
+                    .sort({ createdAt: -1 }),
                 Property.countDocuments({ agentId: userId }),
             ]);
 
@@ -219,7 +218,6 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
                     .sort({ updatedAt: -1 }),
                 Property.countDocuments({ "advanced.state": { $ne: statesTypes.active } }),
             ]);
-
             res.set("x-total-count", total.toString()); // Optional, useful for frontend
 
             res.json({

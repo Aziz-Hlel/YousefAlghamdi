@@ -5,20 +5,17 @@ import LatestPropertyCard from "../Cards/LatestPropertyCard2";
 import Pagination from "../Pagination2";
 import staticProperties from "../../data/property";
 import { useFormContext } from "./FilterProvider.context";
-import Http from "../../services/Http";
-import Iproperty from "@src/models/property.type";
-import apiGateway from "@src/utils/apiGateway";
 import { useSearchParams } from "react-router-dom";
 
 
 
 function PropertyGrid() {
 
-  const { properties: properties, filterObject, totalCount, updateField, updateEstate } = useFormContext();
+  const { properties: properties, totalCount, updateEstate } = useFormContext();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-
+  const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1
   const totalPage = Math.ceil(totalCount / 6);
   //handle grid style
   const [gridStyle, setGridStyle] = useState("grid");
@@ -27,11 +24,13 @@ function PropertyGrid() {
   };
 
   const handelPage = async (page: number) => {
-    console.log('page', page);
+    console.log('page l jeya mil params: ', page);
     searchParams.set('page', page.toString());
     setSearchParams(searchParams, { replace: true });
+    console.log("haw 9addeh l pag :  ", searchParams.get("page"));
+
     // await updateField("page", page);
-    updateEstate();
+    updateEstate(page);
   };
 
 
@@ -44,6 +43,7 @@ function PropertyGrid() {
 
 
 
+  console.log("haw 9addeh l pag :  ", searchParams.get("page"));
 
 
 
@@ -90,7 +90,7 @@ function PropertyGrid() {
                 <Pagination
                   totalPage={totalPage}
                   handlePage={handelPage}
-                  currentPage={filterObject.page}
+                  currentPage={page}
                 />
               </div>
             </div>

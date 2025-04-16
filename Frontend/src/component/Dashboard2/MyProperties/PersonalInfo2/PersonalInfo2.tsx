@@ -1,8 +1,12 @@
 import { useState } from "react";
-import UpdatePersonalInfo from "../Modal/updatePersonalInfo";
+import UpdatePersonalInfo from "../../../Modal/updatePersonalInfo";
+import { useAuth } from "@src/providers/AuthProvider.context";
 
 function PersonalInfo() {
   const [modalOpen, setModalOpen] = useState(false);
+
+  const { user } = useAuth()
+  
   const toggleModal = () => {
     setModalOpen(!modalOpen);
   };

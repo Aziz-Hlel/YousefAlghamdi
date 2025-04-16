@@ -20,8 +20,8 @@ export interface Iproperty {
     filterFields: {
         price: string,
         area: string,
-        rooms: string | null,
-        bathrooms: string | null,
+        rooms?: string,
+        bathrooms?: string,
     },
 
     listing_type: string,
@@ -61,16 +61,12 @@ const propertySchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        minlength: 3,
-        maxlength: 50,
         trim: true
     },
 
     description: {
         type: String,
         required: true,
-        minlength: 3,
-        maxlength: 200,
         trim: true,
     },
 

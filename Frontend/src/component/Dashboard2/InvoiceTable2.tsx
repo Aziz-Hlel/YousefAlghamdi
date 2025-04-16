@@ -6,7 +6,7 @@ import { useAgents } from "@src/providers/AgentsProvider.context";
 const AgentsTable = () => {
 
 
-  const agents = useAgents();
+  const { agents } = useAgents();
 
 
 

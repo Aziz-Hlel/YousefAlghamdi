@@ -80,7 +80,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
         const userr = await user.save();
 
         generateToken(res, userr);
-        res.status(statusCode.OK).json('Signup successful');
+        res.status(statusCode.OK).json({ result: userr });
     } catch (error) {
         next(error);
     }

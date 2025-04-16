@@ -8,7 +8,7 @@ import Sidebar from "./Sidebar2";
 import DashboardComp from "./DashboardComp";
 import MyProperties from "./MyProperties/MyProperties2";
 import AgentsTable from "./InvoiceTable2";
-import PersonalInfo from "./PersonalInfo2";
+import PersonalInfo from "./MyProperties/PersonalInfo2/PersonalInfo2";
 import Saved from "./Saved";
 import Reviews from "./Reviews";
 import ChangePassword from "./ChangePassword";
@@ -24,18 +24,14 @@ function Dashboard() {
   const [activeComponent, setActiveComponent] = useState("Dashboard");
   const navigate = useNavigate();
 
-  const logOut = async () => {
-    Http.post(apiGateway.user.logOut, {})
-    useAuth().logout()
-  }
+  const logout = useAuth().logout
   // navigate to logout
-  useEffect(() => {
-    if (activeComponent === "Logout") {
-      logOut()
-      navigate("/");
-    }
-  }, [activeComponent, navigate]);
 
+
+  const setActiveComponentWrapper = async (value: string) => {
+    value === "Logout" && logout()
+    setActiveComponent(value);
+  }
   // loading handle
 
   const [isLoading, setisLoadingg] = useState(true);
@@ -70,7 +66,7 @@ function Dashboard() {
 
                     <Sidebar
                       activeComponent={activeComponent}
-                      setComponent={setActiveComponent}
+                      setComponent={setActiveComponentWrapper}
                     />
 
                     {/* {activeComponent === "Dashboard" && <DashboardComp />} */}
