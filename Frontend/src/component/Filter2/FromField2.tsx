@@ -14,8 +14,8 @@ function FromField({ name, options, state, setState }: any) {
         className=" text-xs "
         value={state}
       >
-        {options.map((option: any) => (
-          <option formkey={option} value={option}>
+        {options.map((option: any, index: number) => (
+          <option formkey={option} value={option} key={index}>
             {option}
           </option>
         ))}

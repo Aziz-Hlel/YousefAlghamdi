@@ -43,7 +43,7 @@ function HeroSliderSlide({ link, img, price, pricePeriod, title, propertyText, p
             {/* Property List */}
             <ul className="homec-property__list homec-border-top list-none">
               {propertyList?.map((property: any, index: number) => (
-                <li formkey={index}>
+                <li formkey={index} >
                   <img src={property.img} alt="#" />
                   {property.name}
                 </li>

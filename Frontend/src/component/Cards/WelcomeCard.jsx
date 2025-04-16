@@ -26,8 +26,8 @@ function WelcomeCard({ languages, links, image, brunches, builtHouse }) {
           </div>
           <div className="ecom-wc__footer">
             <ul className="ecom-wc__footer--list list-none">
-              {links?.map((link) => (
-                <li formkey={link.name}>
+              {links?.map((link,index) => (
+                <li formkey={link.name} key={index}>
                   <a href={link.link}>{link.name}</a>
                 </li>
               ))}
@@ -36,11 +36,11 @@ function WelcomeCard({ languages, links, image, brunches, builtHouse }) {
               <select className="ecom-wc__footer--language">
                 {languages?.map((language, index) =>
                   index === 0 ? (
-                    <option formkey={language} data-display={language}>
+                    <option formkey={language} data-display={language} key={index}>
                       {language}
                     </option>
                   ) : (
-                    <option formkey={language} value={index + 2}>
+                    <option formkey={language} value={index + 2} key={index}>
                       {language}
                     </option>
                   )

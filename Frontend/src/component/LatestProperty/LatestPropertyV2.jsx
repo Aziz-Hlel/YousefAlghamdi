@@ -37,9 +37,11 @@ function LatestPropertyV2() {
                   "tablet",
                   "mobile",
                 ]}
-                customDot={<CustomDotRound />}
+                customDot={<CustomDotRound />
+
+                }
               >
-                {properties?.map((property) => (
+                {properties?.map((property, index) => (
                   <LatestPropertyCard
                     formkey={property.id}
                     img={property.img}
@@ -55,14 +57,16 @@ function LatestPropertyV2() {
                     address={property.address}
                     detailsList={property.detailsList}
                     style={{ width: "95%", marginBottom: "60px" }}
+                    key={index}
+                    
                   />
                 ))}
               </Carousel>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }
 

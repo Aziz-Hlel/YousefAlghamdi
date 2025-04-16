@@ -81,9 +81,9 @@ function LatestPropertyCard({
             <p>{address}</p>
           </div>
           {/* Property List */}
-          <ul className="homec-property__list homec-border-top list-none">
+          <ul className="homec-property__list homec-border-top list-none" >
             {detailsList?.map((details, index) => (
-              <li formkey={details.name + index}>
+              <li formkey={details.name + index} key={index}>
                 <img src={details.img} alt="#" />
                 {details.name}
               </li>

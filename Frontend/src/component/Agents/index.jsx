@@ -40,6 +40,8 @@ function Agents() {
               position={agent.position}
               propertiesLink={agent.propertiesLink}
               detailsLink={agent.detailsLink}
+              key={agent.id}
+
             />
 
           ))}

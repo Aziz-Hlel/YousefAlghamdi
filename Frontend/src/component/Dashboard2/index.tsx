@@ -15,15 +15,23 @@ import ChangePassword from "./ChangePassword";
 import { Outlet, useNavigate } from "react-router-dom";
 import GoTopBtn from "../Button/GoTopBtn";
 import Preloader from "../Loader";
+import apiGateway from "@src/utils/apiGateway";
+import Http from "@src/services/Http";
+import { useAuth } from "@src/providers/AuthProvider.context";
 
 function Dashboard() {
   // Inner navigation
   const [activeComponent, setActiveComponent] = useState("Dashboard");
   const navigate = useNavigate();
 
+  const logOut = async () => {
+    Http.post(apiGateway.user.logOut, {})
+    useAuth().logout()
+  }
   // navigate to logout
   useEffect(() => {
     if (activeComponent === "Logout") {
+      logOut()
       navigate("/");
     }
   }, [activeComponent, navigate]);

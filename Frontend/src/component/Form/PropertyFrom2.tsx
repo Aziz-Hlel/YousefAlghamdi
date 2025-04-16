@@ -143,7 +143,6 @@ const PropertyFrom = () => {
 
   };
 
-  console.log("reee: nik rabk", errors);
 
   // handle aminities
 
