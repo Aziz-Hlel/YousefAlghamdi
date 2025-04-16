@@ -41,6 +41,8 @@ function LatestPropertyCard({ estate, _id, likeLink, period, listing_type, name,
 
   const whatFor = listingTypeExprssion[listing_type];
 
+  const randomPhoto = useRandomPhoto()
+
   return (
     <div
       className={` ${classes ? classes : "col-lg-4 col-md-6 col-12 mg-top-30"}`}
@@ -58,7 +60,7 @@ function LatestPropertyCard({ estate, _id, likeLink, period, listing_type, name,
           <Link to={"/property-single/" + estate._id}>
             <div className="w-[22rem] h-60 flex  justify-center  items-center  bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-cover  bg-no-repeat "
               style={{
-                backgroundImage: (`url(${apiGateway.images + useRandomPhoto()})`),
+                backgroundImage: (`url(${apiGateway.images + randomPhoto})`),
               }}>
             </div>
           </Link>

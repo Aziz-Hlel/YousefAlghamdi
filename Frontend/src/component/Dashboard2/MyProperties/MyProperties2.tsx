@@ -8,7 +8,6 @@ import apiGateway from "@src/utils/apiGateway";
 import { pickRandomPhoto } from "@src/pickRandomPhoto";
 import UserView from "@src/component/Modal2";
 import Http from "@src/services/Http";
-import useRandomPhoto from "@src/useRandomPhoto";
 
 
 type IUser = {
@@ -59,18 +58,26 @@ function MyProperties({ title }: { title: string }) {
 
   };
 
+  const randomPhotos = [
+    pickRandomPhoto(),
+    pickRandomPhoto(),
+    pickRandomPhoto(),
+    pickRandomPhoto(),
+    pickRandomPhoto(),
+    pickRandomPhoto(),
 
+  ];
 
   return (
     <>
       <Layout title={title}>
-        {properties?.map((property) => (
+        {properties?.map((property, index) => (
           <DashboardPropertyCard
             _id={property._id}
             ownerId={property.clientId}
             formkey={property._id}
             status={property.advanced.state}
-            image={apiGateway.images + useRandomPhoto()}
+            image={apiGateway.images + randomPhotos[index]}
             listing_type={property.listing_type}
             title={property.title}
             location={property.city + ", " + property.delegation + ", " + property.addresse}

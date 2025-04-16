@@ -9,6 +9,7 @@ import useRandomPhoto from "@src/useRandomPhoto";
 
 
 function SingleSlider() {
+  const randomPhoto = useRandomPhoto()
 
   const { property } = useSinglePropertyContext();
   if (!property) return <></>
@@ -35,7 +36,7 @@ function SingleSlider() {
             duration={property.listing_type === "rent" || property.listing_type === "commercial rent" ? "Month" : ""}
             title={property.title}
             text="1901 Thornridge Cir. Shiloh, Hawaii 81063"
-            img={apiGateway.images + useRandomPhoto()} />
+            img={apiGateway.images + randomPhoto} />
         )}
 
       {/* <ImageCard

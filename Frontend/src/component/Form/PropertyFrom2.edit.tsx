@@ -127,29 +127,29 @@ const PropertyFrom = () => {
     //walli na77i linspected property w3tih direct ml property
 
     reset({
-        _id: InspectedProperty._id,
+      _id: InspectedProperty._id,
 
-        title: InspectedProperty.title,
-        description: InspectedProperty.description,
+      title: InspectedProperty.title,
+      description: InspectedProperty.description,
 
-        category: InspectedProperty.category,
-        sub_category: InspectedProperty.sub_category,
+      category: InspectedProperty.category,
+      sub_category: InspectedProperty.sub_category,
 
-        city: InspectedProperty.city,
-        delegation: InspectedProperty.delegation,
-        addresse: InspectedProperty.addresse,
+      city: InspectedProperty.city,
+      delegation: InspectedProperty.delegation,
+      addresse: InspectedProperty.addresse,
 
-        listing_type: InspectedProperty.listing_type,
+      listing_type: InspectedProperty.listing_type,
 
-        filterFields: {
-          price: String(InspectedProperty.filterFields.price),
-          area: String(InspectedProperty.filterFields.area),
-          rooms: InspectedProperty.filterFields.rooms ?? undefined,
-          bathrooms: InspectedProperty.filterFields.bathrooms ?? undefined,
-        },
+      filterFields: {
+        price: String(InspectedProperty.filterFields.price),
+        area: String(InspectedProperty.filterFields.area),
+        rooms: InspectedProperty.filterFields.rooms ?? undefined,
+        bathrooms: InspectedProperty.filterFields.bathrooms ?? undefined,
+      },
 
-        additionalDetails: InspectedProperty.additionalDetails,
-      })
+      additionalDetails: InspectedProperty.additionalDetails,
+    })
     setAdditionalDetails(InspectedProperty.additionalDetails)
 
     setNearestLocation(() =>
@@ -215,11 +215,11 @@ const PropertyFrom = () => {
 
 
 
-
+  const randomPhoto = useRandomPhoto()
   async function urlToFileWithPath(url: string, filename: string, index: number) {
     console.log("url", url);
 
-    const response = await fetch(apiGateway.images + useRandomPhoto());
+    const response = await fetch(apiGateway.images + randomPhoto);
     const blob = await response.blob();
 
     const file: FileWithPath = new File([blob], blob.name, {
