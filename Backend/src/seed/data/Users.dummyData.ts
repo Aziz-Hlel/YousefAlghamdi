@@ -22,7 +22,7 @@ const createUser = async (agents: IAgentModel[]): Promise<Iuser_wPassword[]> => 
             firstName: 'user1',
             lastName: 'Johnson',
             password: await hashPassword("user1"),
-            email: 'user1@example.com',
+            email: 'user1@gmail.com',
             phoneNumber: '1112223333',
             role: roles.USER,
             agentId: String(agents[0]._id),
@@ -32,7 +32,7 @@ const createUser = async (agents: IAgentModel[]): Promise<Iuser_wPassword[]> => 
             firstName: 'user2',
             lastName: 'Johnson',
             password: await hashPassword("user2"),
-            email: 'user2@example.com',
+            email: 'user2@gmail.com',
             phoneNumber: '1112223333',
             role: roles.USER,
             agentId: String(agents[0]._id), // linking to John
@@ -42,7 +42,7 @@ const createUser = async (agents: IAgentModel[]): Promise<Iuser_wPassword[]> => 
             firstName: 'user3',
             lastName: 'Johnson',
             password: await hashPassword("user3"),
-            email: 'user3@example.com',
+            email: 'user3@gmail.com',
             phoneNumber: '1112223333',
             role: roles.USER,
             agentId: String(agents[0]._id), // linking to John
