@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import ENV from "../utils/ENV.variables";
 import createAgents from "./data/Agents.dummyData";
 import Agent from "../Models/agent.model";
@@ -6,6 +5,7 @@ import createUser from "./data/Users.dummyData";
 import User from "../Models/user.model";
 import createProperties from "./data/properties.dummy";
 import Property from "../Models/property.model";
+import mongoose from "mongoose";
 
 
 

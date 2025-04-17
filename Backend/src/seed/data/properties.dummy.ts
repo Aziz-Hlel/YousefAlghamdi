@@ -3,13 +3,14 @@ import { Iproperty } from "../../Models/property.model";
 import { Iuser_wPassword } from "./Users.dummyData";
 
 
+import data from './property.dummy.json';
 
 
 
 
 const createProperties = async (clients: Iuser_wPassword[], agents: IAgentModel[]): Promise<any[]> => {
 
-    const data = (await import('./property.dummy.json')).default;
+
 
     const properties = data.map((property: any) => {
         return {
