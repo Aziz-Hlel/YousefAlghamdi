@@ -205,7 +205,9 @@ const PropertyFrom = () => {
     //   setError("imgs", { message: "rest Image is required" });
     //   return;
     // }
-    await Http.post(apiGateway.property.create, data);
+    const response = await Http.post(apiGateway.property.create, data);
+
+    response?.status === 201 && navigate("/dashboard/my-properties")
     console.log(data);
 
   };
@@ -213,8 +215,8 @@ const PropertyFrom = () => {
     whatFor && setValue("listing_type", whatFor)
   }, [whatFor])
 
-  if (whatFor && !listing_typesValues.includes(whatFor)) return <> </>
 
+  if (whatFor && !listing_typesValues.includes(whatFor)) return <> </>
   return (
     <section className="pd-top-80 pd-btm-80"  >
       <div className="container" aria-disabled>

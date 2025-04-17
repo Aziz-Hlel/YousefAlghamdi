@@ -53,7 +53,7 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
             ),
             property.save()
         ])
-        res.json('Property created successful');
+        res.status(statusCode.CREATED).json('Property created successful');
     } catch (error) {
         next(error);
     }
@@ -73,7 +73,7 @@ const filterFunc = (minVal: any, maxVal: any, filterKeyName: string, filters: an
 
 export const listProperties = async (req: Request, res: Response, next: NextFunction) => {
 
-    const { city, delegation, category, sub_category, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
+    const { city, delegation, category, sub_category, listingType, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
 
     let filters: any = {};
     console.log(req.query)
@@ -88,7 +88,7 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
     if (delegation) filters.delegation = delegation;
     if (category) filters.category = category;
     if (sub_category) filters.sub_category = sub_category;
-
+    if (listingType) filters.listing_type = listingType;
     const page = req.query.page ? Number(req.query.page) : 1;
     filters.active = true;
     if (!page || isNaN(page)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
