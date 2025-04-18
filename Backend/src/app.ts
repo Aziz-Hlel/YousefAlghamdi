@@ -18,9 +18,8 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(cors({
-    origin: (origin, callback) => {
-        callback(null, true); // Allows all origins dynamically
-    },
+    origin: ["http://ygp.ae", "client"],  // Make sure to specify the exact frontend URL
+
     credentials: true,  // Necessary for cookies or authorization headers
 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
