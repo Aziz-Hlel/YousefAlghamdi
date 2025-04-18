@@ -18,7 +18,7 @@ export default defineConfig({
   server: {
     port: 3000,
     host: '0.0.0.0',  /* Allows external access from AWS */
-    // allowedHosts: ['ygp.ae'],
+    allowedHosts: ['ygp.ae', 'www.ygp.ae'],
     strictPort: true, // Ensures the port is exactly 3000
     // hmr: {
     //   clientPort: 443, // Force WebSocket to use ngrok's HTTPS port
