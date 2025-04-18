@@ -10,7 +10,7 @@ const REFRESH_SECRET = ENV.JWT_REFRESH_SECRET
 export const NODE_ENV = ENV.NODE_ENV;
 
 
-const accessTokenLifeSpan = "10m";
+const accessTokenLifeSpan = "1m";
 const refreshTokenLifeSpan = "1d";
 
 
@@ -46,16 +46,16 @@ const generateToken = (res: Response, user: IUser_model) => {
 
     res.cookie("accessToken", accessToken, {
         httpOnly: true,
-        secure: false,  // Since you're using HTTP for now
-        sameSite: "none",  // Necessary for cross-origin requests
+        secure: NODE_ENV === "production",
+        sameSite: "lax",
         maxAge: 7 * 24 * 60 * 60 * 1000,
 
     });
 
     res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
-        secure: false,  // Since you're using HTTP for now
-        sameSite: "none",  // Necessary for cross-origin requests
+        secure: NODE_ENV === "production",
+        sameSite: "lax",
         maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 

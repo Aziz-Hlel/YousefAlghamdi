@@ -61,4 +61,9 @@ app.use((err: IApiErrorMiddleware, req: Request, res: Response, next: NextFuncti
 });
 
 
+
+app.get('*', (req, res) => {
+    res.status(404).json({ message: 'Route not found', url: req.url });
+})
+
 export default app;
