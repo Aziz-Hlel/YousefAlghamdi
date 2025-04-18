@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from 'express'
+import express, { NextFunction, Request, Response } from 'express';
 import userRouter from './Routes/user.route'
 import propertyRouter from './Routes/property.route';
 import cookieParser from 'cookie-parser';

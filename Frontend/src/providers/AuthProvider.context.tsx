@@ -58,6 +58,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const logout = async () => {
+        console.log("🔥💀🚀🛸🔥💀🚀🛸 logoutaaaaaaaaaaaaaa!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
         await Http.post(apiGateway.user.logOut, {})
         setUser(null);
     };

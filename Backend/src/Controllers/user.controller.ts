@@ -133,6 +133,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
     user.set('password', undefined, { strict: false });
     generateToken(res, user);
+    console.log('res cookies ==>', res)
     res.status(statusCode.OK);
 
 }
@@ -142,7 +143,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
 
 export const whoAmI = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-
+    console.log('t5l l whoAmI w cokkies =', req.cookies)
     const userId = req.user?._id
 
     if (!userId) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));

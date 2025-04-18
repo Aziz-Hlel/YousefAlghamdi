@@ -130,7 +130,7 @@ export const updateAgent = async (req: Request, res: Response, next: NextFunctio
 }
 
 export const getAgents = async (req: Request, res: Response, next: NextFunction) => {
-
+    console.log('cookies : ', req.cookies)
 
     try {
         const [agents, agentsCount] = await Promise.all([

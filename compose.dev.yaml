@@ -12,8 +12,10 @@ services:
 
   mongo:
     volumes:
-      - mongo-data-dev:/data/db
+      # - mongo-data-dev:/data/db
+      - mongo-data:/data/db
 
 
 volumes:
-  mongo-data-dev:
+  # mongo-data-dev:
+  mongo-data:
