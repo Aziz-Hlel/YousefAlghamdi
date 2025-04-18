@@ -12,6 +12,8 @@ services:
     depends_on:
       - client
       - server
+    networks:
+      - app-network
 
   #############################
   # FRONT
@@ -22,7 +24,8 @@ services:
     image: ygp_client
     depends_on:
       - server
-
+    networks:
+      - app-network
     ports:
       - "3000:3000"
 
@@ -46,6 +49,8 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
       - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+    networks:
+      - app-network
     depends_on:
       - mongo
 
@@ -62,6 +67,8 @@ services:
       - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
     ports:
       - "27017:27017"
+    networks:
+      - app-network
 
 #############################
 # VOLUME PERSISTENT DATA
@@ -70,3 +77,6 @@ volumes:
   mongo-data:
 
 
+networks:
+  app-network:
+    driver: bridge
