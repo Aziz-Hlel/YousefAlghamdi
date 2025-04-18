@@ -72,7 +72,6 @@ const filterFunc = (minVal: any, maxVal: any, filterKeyName: string, filters: an
 
 
 export const listProperties = async (req: Request, res: Response, next: NextFunction) => {
-    console.log('cookies : ', req.cookies)
 
     const { city, delegation, category, sub_category, listingType, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
 

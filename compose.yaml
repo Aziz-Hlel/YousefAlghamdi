@@ -28,6 +28,12 @@ services:
       - ./env/client.dev.env
     networks:
       - app-network
+    volumes:
+      - ./Frontend:/app
+      - client-node-modules:/app/node_modules
+      # - /app/node_modules  # This creates an anonymous volume for node_modules 
+      #(apprently not recommended , it slows downs can create memory leak and would get recreated on each change)
+
     ports:
       - "3000:3000"
 
@@ -45,6 +51,9 @@ services:
       - ./env/server.dev.env
     networks:
       - app-network
+    volumes:
+      - ./Backend:/app
+      - server-node-modules:/app/node_modules
     depends_on:
       - mongo
 
@@ -66,6 +75,8 @@ services:
 # VOLUME PERSISTENT DATA
 #############################
 volumes:
+  client-node-modules:
+  server-node-modules:
   mongo-data:
 
 

@@ -17,7 +17,11 @@ export default defineConfig({
   ],
   server: {
     port: 3000,
-    host: '0.0.0.0',  /* Allows external access from AWS */
+    watch: {
+      usePolling: true,
+    },
+
+    host: true,  /* Allows external access from AWS */
     allowedHosts: ['ygp.ae', 'www.ygp.ae', 'client'],
     strictPort: true, // Ensures the port is exactly 3000
     // hmr: {

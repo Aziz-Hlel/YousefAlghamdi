@@ -5,7 +5,10 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "start": "node dist/index.js",
-    "dev": "nodemon"
+    "dev": "nodemon",
+
+    "comment": " --legacy-watch: This makes nodemon use polling, which works better with Docker-mounted volumes.",
+    "dev-docker":"nodemon --legacy-watch" 
   },
   "keywords": [],
   "author": "",

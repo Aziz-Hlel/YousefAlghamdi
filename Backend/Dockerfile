@@ -10,4 +10,5 @@ COPY . .
 
 EXPOSE 5000
 
-CMD [ "npm","run","dev" ]
+# the reason for the sh -c is Sometimes Node in Alpine doesn't handle signals properly unless it’s through a shell.
+CMD ["sh", "-c", "npm run dev-docker"]
