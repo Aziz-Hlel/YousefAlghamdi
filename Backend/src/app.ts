@@ -29,15 +29,15 @@ app.use(cors({
 
 
 
-app.use('/api/user', userRouter);
-app.use('/api/property', propertyRouter);
-app.use('/api/agent', agentRouter);
+app.use('/user', userRouter);
+app.use('/property', propertyRouter);
+app.use('/agent', agentRouter);
 
 
 // Serve static files
 // app.use('/api/images', express.static(path.join(__dirname, '../public/images')));
 
-app.use('/api/images', imgHandlerRouter);
+app.use('/images', imgHandlerRouter);
 
 
 app.get('', (req, res) => {
