@@ -1,13 +1,15 @@
 
+// const 
 
+// const localhostUrl = "http://localhost:80" + "/api";
+// const domain = "http://ygp.ae" + "/api";
+// const nginxUrl = "https://4c8f-41-225-176-145.ngrok-free.app";
 
-const localhostUrl = "http://localhost:80" + "/api";
-const domain = "http://ygp.ae"+ "/api";
-const nginxUrl = "https://4c8f-41-225-176-145.ngrok-free.app";
+// export const baseUrl = domain;
 
-export const baseUrl = domain;
+if (!import.meta.env.VITE_API_URL) throw new Error("VITE_API_URL is not defined in the env");
 
-
+export const baseUrl = import.meta.env.VITE_API_URL + "/api"
 const apiGateway = {
 
     baseUrl: baseUrl,
@@ -44,9 +46,9 @@ const apiGateway = {
 
 
 
-    images: baseUrl + "/api/images/",
+    images: baseUrl + "/images/",
 
-    getSignedUrl: baseUrl + "/api/images/getSignedUrl",
+    getSignedUrl: baseUrl + "/images/getSignedUrl",
 
 }
 

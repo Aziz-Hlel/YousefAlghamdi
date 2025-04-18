@@ -8,7 +8,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx.dev.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - client
       - server
@@ -24,6 +24,8 @@ services:
     image: ygp_client
     depends_on:
       - server
+    env_file:
+      - ./env/client.dev.env
     networks:
       - app-network
     ports:
@@ -39,16 +41,8 @@ services:
 
     ports:
       - "5000:5000"
-    environment:
-      - PORT=${PORT}
-      - MONGO_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/${MONGO_INITDB_DATABASE}?authSource=admin
-      - JWT_ACCESS_SECRET=${JWT_ACCESS_SECRET}
-      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
-      - ENVIOREMENT=${ENVIOREMENT}
-      - NODE_ENV=value=${NODE_ENV}
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
-      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+    env_file:
+      - ./env/server.dev.env
     networks:
       - app-network
     depends_on:
@@ -61,10 +55,8 @@ services:
     image: mongo:latest
     volumes:
       - mongo-data:/data/db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
-      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+    env_file:
+      - ./env/server.dev.env
     ports:
       - "27017:27017"
     networks:

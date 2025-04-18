@@ -3,6 +3,8 @@ services:
     volumes:
       - ./Frontend:/app
       - /app/node_modules  # This creates an anonymous volume for node_modules
+    
+    
 
   server:
     volumes:
