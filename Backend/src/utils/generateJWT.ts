@@ -46,16 +46,16 @@ const generateToken = (res: Response, user: IUser_model) => {
 
     res.cookie("accessToken", accessToken, {
         httpOnly: true,
-        secure: NODE_ENV === "production",
-        sameSite: "lax",
+        secure: false,  // Since you're using HTTP for now
+        sameSite: "none",  // Necessary for cross-origin requests
         maxAge: 7 * 24 * 60 * 60 * 1000,
 
     });
 
     res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
-        secure: NODE_ENV === "production",
-        sameSite: "lax",
+        secure: false,  // Since you're using HTTP for now
+        sameSite: "none",  // Necessary for cross-origin requests
         maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
