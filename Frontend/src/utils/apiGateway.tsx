@@ -1,10 +1,11 @@
-import { update } from "lodash";
 
 
-const localhostUrl = "http://ygp.ae";
+
+const localhostUrl = "http://localhost:80" + "/api";
+const domain = "http://ygp.ae"+ "/api";
 const nginxUrl = "https://4c8f-41-225-176-145.ngrok-free.app";
 
-export const baseUrl = localhostUrl;
+export const baseUrl = domain;
 
 
 const apiGateway = {
