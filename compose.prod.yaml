@@ -6,7 +6,7 @@ services:
   #     - ./certbot/conf:/etc/letsencrypt
   #     - ./certbot/www:/var/www/certbot
   #   restart: always
-  
+
   proxy:
     image: caddy:2.9.1-alpine
     ports:
@@ -50,5 +50,6 @@ services:
     restart: always
 
 volumes:
-  # mongo-data-dev:
+  caddy_data:
+  caddy_config:
   mongo-data:
