@@ -1,22 +1,31 @@
 ygp.ae {
-  # API routes
-    handle / api/ {
-    reverse_proxy server:5000/api/
+
+  # Match API routes and proxy to backend server
+  @api {
+    path /api/*
   }
-  
-  # Frontend static files (from mounted volume)
+  handle @api {
+    reverse_proxy server:5000
+  }
+
+  # Serve frontend (fallback to index.html for SPA routing)
   handle {
     root * /srv
     try_files {path} /index.html
     file_server
   }
-  
-  # Security headers and compression (same as before)
+
+  # Security headers (applied globally)
   header {
     Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
     X-Content-Type-Options "nosniff"
     X-Frame-Options "DENY"
     Referrer-Policy "strict-origin-when-cross-origin"
   }
-  
+
+  # Enable gzip compression
+  encode gzip
+
+  # TLS using automatic HTTPS with email for certs
+  tls tigana137@gmail.com
 }
