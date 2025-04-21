@@ -1,0 +1,38 @@
+############################################
+# ⛏️  STAGE 1: Build frontend static assets
+############################################
+FROM node:22.14.0-alpine AS builder
+
+# Set the working directory inside the container
+# All paths after this will be relative to /app
+WORKDIR /app
+
+# Copy only the package metadata first (better Docker layer caching)
+# This way, dependency installation can be cached as long as your dependencies don't change
+COPY package.json package-lock.json ./
+
+# Install exact dependencies listed in package-lock.json
+# `npm ci` is preferred in CI/CD and Docker since it avoids surprises
+RUN npm ci
+
+# Now copy the actual source code (after dependencies are installed)
+COPY . .
+
+# Run the frontend build (typically outputs to /app/build or /app/dist)
+# This assumes your build tool is configured (e.g., React, Vite, etc.)
+RUN npm run build
+
+
+##################################################
+# 📦 STAGE 2: Export only the build artifacts
+##################################################
+# Start a clean Alpine image to keep the final image lightweight and secure
+FROM alpine:latest AS exporter
+
+# Set the working directory in the final image
+# This will be used in Docker Compose or by another container (like Caddy)
+WORKDIR /export
+
+# Copy just the final built static files from the builder stage
+# This keeps the image minimal — no Node, no source code, no dev tools
+COPY --from=builder /app/build ./build

@@ -16,12 +16,16 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
+      - frontend-dist:/srv  # <-- Mount the build output here
+
       
   client:
-    volumes: []
     env_file:
       - ./env/client.prod.env
+    volumes:
+      - frontend-dist:/export/build  # <-- Mount the build output here
     restart: always
+    command: [ "true" ]  # This container is just for building — it exits after the build is done
 
   server:
     volumes: []
@@ -53,3 +57,4 @@ volumes:
   caddy_data:
   caddy_config:
   mongo-data:
+  frontend-dist:
