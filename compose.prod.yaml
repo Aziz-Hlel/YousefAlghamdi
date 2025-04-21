@@ -20,6 +20,9 @@ services:
 
       
   client:
+    build: 
+      context: ./Frontend
+      dockerfile: Dockerfile.prod
     env_file:
       - ./env/client.prod.env
     volumes:
@@ -28,6 +31,9 @@ services:
     command: [ "true" ]  # This container is just for building — it exits after the build is done
 
   server:
+    build: 
+      context: ./Backend
+      dockerfile: Dockerfile.prod
     volumes: []
     env_file:
       - ./env/server.prod.env
