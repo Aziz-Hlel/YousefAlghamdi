@@ -35,4 +35,4 @@ WORKDIR /export
 
 # Copy just the final built static files from the builder stage
 # This keeps the image minimal — no Node, no source code, no dev tools
-COPY --from=builder /app/build ./build
+COPY --from=builder /app/dist ./build
