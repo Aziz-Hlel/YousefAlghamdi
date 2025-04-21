@@ -24,7 +24,7 @@ services:
       - ./env/client.prod.env
     volumes:
       - frontend-dist:/export/build  # <-- Mount the build output here
-    restart: always
+    # restart: always
     command: [ "true" ]  # This container is just for building — it exits after the build is done
 
   server:

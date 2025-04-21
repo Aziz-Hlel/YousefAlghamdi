@@ -1,6 +1,6 @@
-ygp.ae {
+ygp.ae { 
   # API routes
-  handle /api/* {
+    handle / api/* {
     reverse_proxy server:5000/api/
   }
   
