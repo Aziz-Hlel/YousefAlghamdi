@@ -1,12 +1,15 @@
-ygp.ae {
+:80 {
 
   @api {
     path /api/*
   }
   reverse_proxy @api server:5000
 
-  @client {
-    path /*
+  # Serve frontend (fallback to index.html for SPA routing)
+  handle {
+    root * /srv
+    try_files {path} /index.html
+    file_server
   }
-  reverse_proxy @client client:3000
+
 }
