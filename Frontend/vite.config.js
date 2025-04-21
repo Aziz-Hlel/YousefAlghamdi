@@ -6,10 +6,6 @@ import path from 'path';
 
 const root = path.resolve(__dirname, "src");
 
-const ngrokUrl = '4c8f-41-225-176-145.ngrok-free.app';
-// const ngrokUrl = 'localhost:50';
-/*  */
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
@@ -17,9 +13,6 @@ export default defineConfig({
   ],
   server: {
     port: 3000,
-    watch: {
-      usePolling: true,
-    },
 
     host: true,  /* Allows external access from AWS */
     allowedHosts: ['ygp.ae', 'www.ygp.ae', 'client'],
