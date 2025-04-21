@@ -23,7 +23,6 @@ curl -I http://localhost || echo "Nginx may not be running correctly. Continuing
 # Step 5: Obtain SSL certificate
 echo "Attempting to obtain SSL certificate..."
 docker compose -f compose.yaml -f compose.prod.yaml run --rm certbot certonly --webroot -w /var/www/certbot --email tigana137@gmail.com -d ygp.ae --agree-tos --non-interactive --force-renewal
-
 # Step 6: Check if certificates were obtained
 if [ -f "certbot/conf/live/ygp.ae/fullchain.pem" ]; then
     echo "SSL certificates obtained successfully!"
