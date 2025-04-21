@@ -1,24 +1,38 @@
 services:
 
+  # proxy:
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+  #     - ./certbot/conf:/etc/letsencrypt
+  #     - ./certbot/www:/var/www/certbot
+  #   restart: always
+  
   proxy:
+    image: caddy:2.9.1-alpine
+    ports:
+      - 80:80
+      - 443:443
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+      
   client:
     volumes: []
     env_file:
       - ./env/client.prod.env
+    restart: always
 
   server:
     volumes: []
     env_file:
       - ./env/server.prod.env
+    restart: always
 
   mongo:
     env_file:
       - ./env/server.prod.env
+    restart: always
 
   #############################
   # CERT
@@ -33,6 +47,7 @@ services:
     environment:
       - CERTBOT_EMAIL=tigana137@gmail.com
       - CERTBOT_DOMAIN=ygp.ae
+    restart: always
 
 volumes:
   # mongo-data-dev:

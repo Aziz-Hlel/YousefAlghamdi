@@ -1,0 +1,4 @@
+ygp.ae {
+  reverse_proxy /api/* server:5000
+  reverse_proxy /* client:3000
+}
