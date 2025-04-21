@@ -27,7 +27,7 @@ const apiGateway = {
 
     property: {
         list: "/property",
-        create: "/property",
+        create: "/propert",
         getById: "/property",
 
         myProperties: {
