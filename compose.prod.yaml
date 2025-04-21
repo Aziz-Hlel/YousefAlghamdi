@@ -3,12 +3,12 @@ services:
   proxy:
 
   client:
-    volumes:
+    volumes: []
     env_file:
       - ./env/client.prod.env
 
   server:
-    volumes:
+    volumes: []
     env_file:
       - ./env/server.prod.env
 
