@@ -15,10 +15,10 @@ services:
       - ./dev.Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
-      - frontend-dist:/srv  # <-- Mount the build output here
+      - frontend-dist:/srv # <-- Mount the build output here
 
   client:
-    build: 
+    build:
       context: ./Frontend
       dockerfile: Dockerfile.dev
       args:
@@ -27,11 +27,19 @@ services:
     volumes:
       - frontend-dist:/export/build
     command: [ "true" ]
-      
+
   server:
-    build: 
+    build:
       context: ./Backend
       dockerfile: Dockerfile.dev
+      args:
+        - PORT: 5000
+        - JWT_ACCESS_SECRET: 🔥💀🚀🛸
+        - JWT_REFRESH_SECRET: mihyar2
+        - ENVIOREMENT: production
+        - NODE_ENV: production
+        - FRONT_URL: http://ygp.ae
+
     volumes: []
     env_file:
       - ./env/server.dev.env
@@ -41,7 +49,6 @@ services:
     env_file:
       - ./env/server.prod.env
     restart: always
-
   # #############################
   # # CERT
   # #############################

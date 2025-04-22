@@ -1,4 +1,4 @@
-:80 {
+ygp.ae {
   # Match API requests and proxy them to the backend server
   @api {
     path /api/*
