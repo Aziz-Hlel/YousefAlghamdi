@@ -1,21 +1,30 @@
-{
-  # for staing mode to not run out of certifcate limit
-  acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+:80 {
+
+	# Serve static frontend files from the volume-mounted directory
+	root * /srv
+	file_server
+
+	# SPA routing: handle client-side routes
+	@notStatic {
+		not path /api/*
+		file {
+			try_files {path} {path}/ /index.html
+		}
+	}
+	rewrite @notStatic /index.html
+
+	# Reverse proxy API requests to your backend server on host machine at port 5000
+	@api path /api/*
+	reverse_proxy @api server:5000
+
+	# Disable caching for easier local development
+	header {
+		Cache-Control "no-store"
+	}
 }
 
 
-
-ygp.ae {
-  # Match API routes and proxy to backend
-  @api {
-    path /api/*
-  }
-  reverse_proxy @api server:5000
-
-  # All other routes go to frontend (SPA)
-  reverse_proxy client:3000
-
-  # Enable gzip compression
-  encode gzip
-
-}
+# :443 {
+#   tls internal
+#   ...
+# }

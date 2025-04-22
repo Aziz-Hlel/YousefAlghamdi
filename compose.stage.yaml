@@ -1,66 +1,63 @@
 services:
 
-  # proxy:
-  #   volumes:
-  #     - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-  #     - ./certbot/conf:/etc/letsencrypt
-  #     - ./certbot/www:/var/www/certbot
-  #   restart: always
-
   proxy:
     image: caddy:2.9.1-alpine
+    container_name: proxy
     ports:
       - 80:80
       - 443:443
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./stage.Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
-      - frontend-dist:/srv  # <-- Mount the build output here
-
+      - frontend-stage-dist:/srv  # <-- Mount the build output here
+    networks:
+      - app-network
       
   client:
     build: 
       context: ./Frontend
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile.stage
     env_file:
-      - ./env/client.prod.env
+      - ./env/client.dev.env
     volumes:
-      - frontend-dist:/export/build  # <-- Mount the build output here
+      - frontend-stage-dist:/export/build  # <-- Mount the build output here
     # restart: always
     command: [ "true" ]  # This container is just for building — it exits after the build is done
+    networks:
+      - app-network
 
   server:
     build: 
       context: ./Backend
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile.stage
     volumes: []
     env_file:
-      - ./env/server.prod.env
+      - ./env/server.dev.env
     restart: always
+    networks:
+      - app-network
+
 
   mongo:
+    image: mongo:latest
+    volumes:
+      - mongo-stage-data:/data/db
     env_file:
-      - ./env/server.prod.env
+      - ./env/server.dev.env
     restart: always
-
-  # #############################
-  # # CERT
-  # #############################
-  # certbot:
-  #   image: certbot/certbot
-  #   container_name: certbot
-  #   volumes:
-  #     - ./certbot/conf:/etc/letsencrypt
-  #     - ./certbot/www:/var/www/certbot
-  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email tigana137@gmail.com -d ygp.ae --agree-tos
-  #   environment:
-  #     - CERTBOT_EMAIL=tigana137@gmail.com
-  #     - CERTBOT_DOMAIN=ygp.ae
-  #   restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
 
 volumes:
   caddy_data:
   caddy_config:
-  mongo-data:
-  frontend-dist:
+  mongo-stage-data:
+  frontend-stage-dist:
+
+networks:
+  app-network:
+    driver: bridge
+
