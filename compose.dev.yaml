@@ -22,7 +22,7 @@ services:
       context: ./Frontend
       dockerfile: Dockerfile.dev
       args:
-        VITE_API_URL: http://server:5000
+        VITE_API_URL: http://ygp.ae
         VITE_API_NODE_ENV: development
     volumes:
       - frontend-dist:/export/build
