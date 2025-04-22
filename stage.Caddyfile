@@ -1,0 +1,20 @@
+{
+  # for staing mode to not run out of certifcate limit
+  acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+
+ygp.ae {
+  # Match API requests and proxy them to the backend server
+  @api {
+    path /api/*
+  }
+  reverse_proxy @api server:5000
+
+  # Serve the frontend app (Single Page Application)
+  handle {
+    root * /srv
+    try_files {path} /index.html
+    file_server
+  }
+}
