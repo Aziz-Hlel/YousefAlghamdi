@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import WelcomeCard from "../Cards/WelcomeCard";
+import WelcomeCard from "../Cards/WelcomeCard2";
 import PropertyTextInput from "../Form/PropertyTextInput2";
 import Preloader from "../Loader";
 import { Link, useNavigate } from "react-router-dom";

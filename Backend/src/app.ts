@@ -41,7 +41,7 @@ app.use('/api/images', imgHandlerRouter);
 
 app.get('', (req, res) => {
     console.log(ENV)
-    res.send('Works well')
+    res.send('Works very well')
 })
 
 

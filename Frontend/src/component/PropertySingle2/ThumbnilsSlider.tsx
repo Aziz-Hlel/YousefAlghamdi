@@ -3,13 +3,8 @@ import ThumbnailsCard from "../Cards/ThumbnilsCard";
 import { responsiveLogoSlider2 } from "../../utils/responsiveSlider";
 import ButtonGroup from "../CustomDot/CustomArrow";
 import apiGateway from "@src/utils/apiGateway";
-<<<<<<< HEAD:Frontend/src/component/PropertySingle2/ThumbnilsSlider.tsx
-import { pickRandomPhoto } from "@src/pickRandomPhoto";
-import { useSingleProperty } from "../context/SinglePropertyContext/PropertySingleProvider.context";
-=======
 import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
 import useRandomPhoto from "@src/useRandomPhoto";
->>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71:Frontend/src/component/Property Single2/ThumbnilsSlider.tsx
 
 
 function ThumbnailsSlider() {

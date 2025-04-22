@@ -9,11 +9,7 @@ import PropertyReview from "../PropertyReview";
 import PropertyAgents from "../Agents/PropertyAgents";
 import OtherDetailsTabFeatures from "./OtherDetailsTabFeatures";
 import apiGateway from "@src/utils/apiGateway";
-<<<<<<< HEAD:Frontend/src/component/PropertySingle2/PropertyDetails.tsx
-import { useSingleProperty } from "../context/SinglePropertyContext/PropertySingleProvider.context";
-=======
 import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
->>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71:Frontend/src/component/Property Single2/PropertyDetails.tsx
 
 function PropertyDetails() {
   const [activeTab, setActiveTab] = useState("Property Details");
@@ -25,12 +21,8 @@ function PropertyDetails() {
     [key: string]: string | number;
   };
 
-<<<<<<< HEAD:Frontend/src/component/PropertySingle2/PropertyDetails.tsx
-  const { property } = useSingleProperty();
-=======
   const { property } = useSinglePropertyContext();
   if (!property) return <></>
->>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71:Frontend/src/component/Property Single2/PropertyDetails.tsx
 
   const propertyDetails: IPropertyDetail[] = [
     { "Type": property ? property.category : "" },
@@ -44,11 +36,7 @@ function PropertyDetails() {
     [key]: property.nearestPlaces[key],
   }))
 
-<<<<<<< HEAD:Frontend/src/component/PropertySingle2/PropertyDetails.tsx
-  const additionalDetails = property.additionalDetails
-=======
   const additionalDetails = property?.additionalDetails
->>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71:Frontend/src/component/Property Single2/PropertyDetails.tsx
   console.log("property.additionalDetails", property);
 
   return (

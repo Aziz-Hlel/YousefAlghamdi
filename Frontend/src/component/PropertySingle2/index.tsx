@@ -11,14 +11,8 @@ import { useParams } from "react-router-dom";
 import Iproperty from "@src/models/property.type";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
-<<<<<<< HEAD:Frontend/src/component/PropertySingle2/index.tsx
-import { useGetProperty } from "@src/useApi/useGetProperty";
-import ThumbnailsSlider from "./ThumbnilsSlider";
-import { SinglePropertyProvider } from "../context/SinglePropertyContext/PropertySingleProvider.context";
-=======
 import ThumbnailsSlider from "./ThumbnilsSlider";
 import { SinglePropertyProvider } from "@src/providers/SingleProperty.context";
->>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71:Frontend/src/component/Property Single2/index.tsx
 
 
 function PropertySingle() {
@@ -35,11 +29,7 @@ function PropertySingle() {
   } else {
     component = (
       <>
-<<<<<<< HEAD:Frontend/src/component/PropertySingle2/index.tsx
-        <SinglePropertyProvider>
-=======
         <SinglePropertyProvider id={propertyId }>
->>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71:Frontend/src/component/Property Single2/index.tsx
 
           {/* <Header v2={null} /> */}
           <Breadcrumbs title="Latest Properties" background={null} overlay={null} titlePosition={null}>

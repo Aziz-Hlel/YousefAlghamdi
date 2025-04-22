@@ -33,11 +33,7 @@ import AgentsTable from "./component/Dashboard2/InvoiceTable2.js";
 import { AgentsProvider } from "./providers/AgentsProvider.context.js";
 import CU_Agent from "./component/Modal2/updatePersonalInfo.js";
 import UserView from "./component/Modal2/index.js";
-<<<<<<< HEAD
 import PropertySingle from "./component/PropertySingle2/index.js";
-import { SinglePropertyProvider } from "./component/context/SinglePropertyContext/PropertySingleProvider.context.js";
-=======
->>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71
 
 const App2 = () => {
 
@@ -45,84 +41,6 @@ const App2 = () => {
         AOS.init();
     }, []);
 
-<<<<<<< HEAD
-    const router = createBrowserRouter([
-        {
-            path: "/",
-            element: <Home />,
-            errorElement: <ErrorPage />,
-        },
-        {
-            path: "/property",
-            element: <Property />,
-        },
-
-        {
-            path: "/property-single/:id",
-            element: <PropertySingle />,
-        },
-        {
-            path: "/edit-property",
-            element: <EditProperty />,
-        },
-        {
-            path: "/add-property",
-            element: <AddProperty />,
-        },
-        // {
-        //     path: "/submit-property",
-        //     element: <SubmitProperty />,
-        // },
-        {
-            path: "/dashboard",
-            element: <Dashboard />,
-        },
-        {
-            path: "/agent-detail",
-            element: <AgentDetail />,
-        },
-        {
-            path: "/our-agent",
-            element: <OurAgents />,
-        },
-        {
-            path: "/about",
-            element: <AboutUs />,
-        },
-        {
-            path: "/pricing",
-            element: <Pricing />,
-        },
-        {
-            path: "/payment-method",
-            element: <PaymentMethod />,
-        },
-        {
-            path: "/faq",
-            element: <Faq />,
-        },
-        {
-            path: "/login",
-            element: <Login />,
-        },
-        {
-            path: "/signup",
-            element: <SignUp />,
-        },
-        {
-            path: "/404",
-            element: <ErrorPage />,
-        },
-        {
-            path: "/contact",
-            element: <Contact />,
-        },
-    ]);
-
-
-
-=======
->>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71
     return (
         <>
             <AuthProvider>
@@ -157,21 +75,13 @@ const App2 = () => {
                                     {/* <Route path="edit-property" element={<EditProperty />} /> */}
                                     <Route path="add-property" element={<AddProperty />} />
                                     <Route path="submit-property/:whatFor" element={<SubmitProperty />} />
-<<<<<<< HEAD
-=======
                                     {/* <Route path="edit-property/:whatFor/:propertyId" element={<SinglePropertyProvider ><SubmitProperty /></SinglePropertyProvider>} /> */}
 
->>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71
 
                                     <Route path="dashboard" element={<Dashboard />} >
 
                                         <Route index element={<DashboardComp />} />
-<<<<<<< HEAD
-                                        <Route path="my-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} />
-                                        <Route path="edit-property/:whatFor/:propertyId" element={<SinglePropertyProvider ><SubmitProperty /></SinglePropertyProvider>} />
-=======
                                         <Route path="my-properties" element={<MyPropertiesProvider> <MyProperties title="My properties" /> </MyPropertiesProvider>} />
->>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71
                                         <Route path="personal-info" element={<PersonalInfo />} />
                                         <Route path="Reviews" element={<Reviews />} />
                                         <Route path="change-password" element={<ChangePassword />} />

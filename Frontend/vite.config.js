@@ -11,17 +11,22 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+
   server: {
-    port: 3000,
+    port: 5173,
 
     host: true,  /* Allows external access from AWS */
     allowedHosts: ['ygp.ae', 'www.ygp.ae', 'client'],
     strictPort: true, // Ensures the port is exactly 3000
-    // hmr: {
-    //   clientPort: 443, // Force WebSocket to use ngrok's HTTPS port
-    //   protocol: 'wss'  // Force secure WebSocket (wss)
-    // }
+    watch: {
+      usePolling: true
+    }
+
   },
+  watch: {
+    usePolling: true
+  },
+
   resolve: {
     alias: {
       '@img': path.resolve(__dirname, 'src/assets/img'),
