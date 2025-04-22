@@ -82,7 +82,7 @@ const Login = () => {
               <div className="ecom-wc__form">
                 <div className="ecom-wc__form-inner">
                   <h3 className="ecom-wc__form-title ecom-wc__form-title__one">
-                    Login x
+                    Login
                     <span>
                       Your email address will not be published. Required fields
                       are marked *
