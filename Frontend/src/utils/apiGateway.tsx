@@ -9,7 +9,7 @@
 
 if (!import.meta.env.VITE_API_URL) throw new Error("VITE_API_URL is not defined in the env");
 
-export const baseUrl = import.meta.env.VITE_API_URL + "/api"
+export const baseUrl = "http://ygp.ae" + "/api"
 const apiGateway = {
 
     baseUrl: baseUrl,

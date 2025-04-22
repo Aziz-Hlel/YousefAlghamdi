@@ -14,4 +14,8 @@ ygp.ae {
 
   # All other routes go to frontend (SPA)
   reverse_proxy client:3000
+
+  # Enable gzip compression
+  encode gzip
+
 }
