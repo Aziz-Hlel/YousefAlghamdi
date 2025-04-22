@@ -2,23 +2,23 @@
 const filterFieldsTypes = {
 
     price: {
-        type: Number,
+        type: String,
         required: true,
     },
 
     area: {
-        type: Number,
+        type: String,
         required: true,
     },
 
     rooms: {
-        type: Number,
+        type: String,
         required: false,
         default: undefined,
     },
 
     bathrooms: {
-        type: Number,
+        type: String,
         required: false,
         default: undefined,
     },

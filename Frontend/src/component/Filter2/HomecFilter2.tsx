@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { categoriesType, ResidentialProperties } from "@src/types/categories.subcategories.types";
 import { AbuDhabiEmirate, cities } from "@src/types/cities.delegations.types";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { listing_types } from "@src/types/listing_types.types";
 
 
 const HomeFilterSchema = z.object({
@@ -17,16 +19,30 @@ const HomeFilterSchema = z.object({
 
 type HomeFilterType = z.infer<typeof HomeFilterSchema>;
 
-function HomecFilter() {
 
-  const listing_Type = [
-    { name: "Non commercial", id: "non commercial" },
-    { name: "Commercial", id: "commercial" },
 
-  ]
+function HomecFilter({ rentOrSale }: { rentOrSale: string }) {
+
+  const commercialOrNot = ["Non commercial", "Commercial"]
   const [commercial, setCommercial] = useState(false);
   const [category, setCategory] = useState(categoriesType[ResidentialProperties]);
   const [city, setCity] = useState(cities[AbuDhabiEmirate]);
+
+  const navigate = useNavigate();
+
+  const navigateToProperties = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+
+    let listing_type: string = ""
+
+    if (rentOrSale == "Rent" && commercial) listing_type = listing_types.commercialRent
+    if (rentOrSale == "Rent" && !commercial) listing_type = listing_types.rent
+    if (rentOrSale == "Sale" && commercial) listing_type = listing_types.commercialSale
+    if (rentOrSale == "Sale" && !commercial) listing_type = listing_types.sale
+
+    navigate(`/property?listingType=${listing_type}&city=${city}&category=${category}`)
+
+  }
 
   return (
     <div className="tab-pane fade show active " id="homec-tab1" role="tabpanel">
@@ -37,24 +53,29 @@ function HomecFilter() {
             {/* Form Group   */}
             <FromField
               name="Listing Type"
-              options={listing_Type}
+              options={commercialOrNot}
+              state={commercial}
+              setState={setCommercial}
             />
 
             <FromField
               name="Category"
-              options={Object.keys(categoriesType).map((item: any) => { return { id: item, name: item } })}
+              options={Object.keys(categoriesType)}
+              state={category}
+              setState={setCategory}
             />
 
             <FromField
               name="City"
-              options={Object.keys(cities).map((item: any) => { return { id: item, name: item } })}
-
+              options={Object.keys(cities)}
+              state={city}
+              setState={setCity}
             />
 
 
 
             {/* Button  */}
-            <button type="submit" className="homec-btn homec-btn__second">
+            <button className="homec-btn homec-btn__second" onClick={navigateToProperties}>
               <span className="homec-btn__inside">
                 <span>
                   <svg

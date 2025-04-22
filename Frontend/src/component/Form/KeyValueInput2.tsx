@@ -18,7 +18,7 @@ function KeyValueInput({ list, handleAddOrDelete, handleChange, filedTitle, file
       {
         list.map((item, index) => (
           <KeyValueInputField
-            key={index}
+            formkey={index}
             title={filedTitle}
             titleTwo={filedTitleTwo}
             handleKeyValue={handleChange}

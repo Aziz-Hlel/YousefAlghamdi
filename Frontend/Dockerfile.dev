@@ -1,0 +1,36 @@
+############################################
+# Build frontend static assets
+############################################
+FROM node:22.14.0-alpine AS builder
+
+WORKDIR /app
+
+# Add ARG instructions to receive build arguments
+ARG VITE_API_URL
+ARG VITE_API_NODE_ENV
+
+# Echo the values to verify they're being received
+RUN echo "VITE_API_URL: $VITE_API_URL"
+RUN echo "VITE_API_NODE_ENV: $VITE_API_NODE_ENV"
+
+# Copy package files and install dependencies
+COPY package.json package-lock.json ./
+RUN npm ci
+
+# Copy source code
+COPY . .
+
+# Create .env file dynamically using ARGs
+RUN echo "VITE_API_URL=$VITE_API_URL" > .env
+RUN echo "VITE_API_NODE_ENV=$VITE_API_NODE_ENV" >> .env
+
+# Build the frontend
+RUN npm run build
+
+##################################################
+# Export only the build artifacts
+##################################################
+FROM alpine:latest AS exporter
+
+WORKDIR /export
+COPY --from=builder /app/dist ./build

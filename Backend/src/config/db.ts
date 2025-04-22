@@ -1,10 +1,11 @@
 import mongoose from "mongoose"
+import ENV from "../utils/ENV.variables";
 
 
 const connectDB = async() =>{
     try{
 
-        const MONGO_URI = process.env.MONGO_URI??  "mongodb://127.0.0.1:27017/testDB"
+        const MONGO_URI = ENV.MONGO_URI
         
         const conn = await mongoose.connect(MONGO_URI);
 

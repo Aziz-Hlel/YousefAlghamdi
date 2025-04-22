@@ -9,13 +9,13 @@ function DetailsTabFeatures({ title, property, check }) {
         <ul className="homec-ptdetails-features__list">
           {property?.map((item, index) =>
             check ? (
-              <li key={item + index}>
+              <li formkey={item + index}>
                 <b>
                   <i className="fas fa-check"></i> {item}
                 </b>
               </li>
             ) : (
-              <li key={index + Object.keys(item)[0]}>
+              <li formkey={index + Object.keys(item)[0]}>
                 <b>{Object.keys(item)[0]}:</b>{" "}
                 <span>{item[Object.keys(item)[0]]}</span>
               </li>

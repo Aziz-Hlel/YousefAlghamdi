@@ -17,10 +17,14 @@ import { cities, delegations } from "@src/types/cities.delegations.types";
 import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
+<<<<<<< HEAD
 import { useSingleProperty } from "../context/SinglePropertyContext/PropertySingleProvider.context";
+=======
+import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
+>>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71
 
 
-const SubmitPropertySchema = z.object({
+export const SubmitPropertySchema = z.object({
 
   _id: z.string().optional(),
   title: z.string({ required_error: "Title is required" })
@@ -45,30 +49,38 @@ const SubmitPropertySchema = z.object({
 
     price: z.string({ required_error: "Price is required" })
       .min(3, { message: "Price must be at least 100" })
-      .max(5, { message: "Price must be at most 100000" })
-      .regex(/^\d+$/, "Price must be a number")
-      .transform(Number),
+      .max(7, { message: "Price must be at most 10000000" })
+      .regex(/^\d+$/, "Price must be a number"),
 
     area: z.string({ required_error: "Area is required" })
       .min(1, { message: "Area must be at least 0" })
       .max(5, { message: "Area must be at most 100000" })
       .regex(/^\d+$/, "Price must be a number"),
+<<<<<<< HEAD
     // .transform(Number),
+=======
+>>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71
 
     rooms: z.string({ required_error: "Rooms is required" })
       .min(1, { message: "Rooms must be at least 0" })
       .max(2, { message: "Rooms must be at most 99" })
       .regex(/^\d+$/, "Price must be a number")
       .optional(),
+<<<<<<< HEAD
     // .transform(Number),
+=======
+>>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71
 
     bathrooms: z.string({ required_error: "Bathrooms is required" })
       .min(1, { message: "Bathrooms must be at least 0" })
       .max(2, { message: "Bathrooms must be at most 99" })
       .regex(/^\d+$/, "Price must be a number")
       .optional(),
+<<<<<<< HEAD
     // .transform(Number),
 
+=======
+>>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71
   }),
 
 
@@ -81,7 +93,7 @@ const SubmitPropertySchema = z.object({
 
 });
 
-type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
+export type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
 
 type imageArray = (FileWithPath & { preview: string; key: string; } | null)[];
@@ -89,13 +101,16 @@ type imageArray = (FileWithPath & { preview: string; key: string; } | null)[];
 const PropertyFrom = () => {
 
 
+<<<<<<< HEAD
   const { property } = useSingleProperty();
+=======
+  const { whatFor, } = useParams();
+>>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71
 
-  const { whatFor, propertyId } = useParams();
-
-  const { register, watch, handleSubmit, reset, setValue, formState: { errors, isSubmitting, }, setError } =
+  const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting, }, setError } =
     useForm<SubmitPropertyType>({
       resolver: zodResolver(SubmitPropertySchema),
+<<<<<<< HEAD
       defaultValues: property._id !== "" ? {
         _id: "property._id",
         title: property.title,
@@ -152,6 +167,13 @@ const PropertyFrom = () => {
     reset()
   }, [property._id]);
 
+=======
+
+    });
+
+
+
+>>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71
   const navigate = useNavigate();
   const propertyCategoryValue = watch('category');
   const CityValueObserver = watch('city');
@@ -166,6 +188,11 @@ const PropertyFrom = () => {
     event.target.checked ? setAdditionalDetails((prev) => [...prev, event.target.name]) : setAdditionalDetails((prev) => prev.filter((item) => item !== event.target.name));
 
   };
+
+
+  useEffect(() => {
+    setValue("additionalDetails", [])
+  }, [propertyCategoryValue])
   // const customErrors: Record<"imgs", string> = {
   //   imgs: "Image is required",
   // }
@@ -250,11 +277,17 @@ const PropertyFrom = () => {
     }
     else data.imgs = imgs.filter((img) => img !== null).map((img) => img.key);
 
+    if (data.category !== ResidentialProperties) {
+      delete data.filterFields.rooms
+      delete data.filterFields.bathrooms
+    }
     // if (imgs[2] === null) {
     //   setError("imgs", { message: "rest Image is required" });
     //   return;
     // }
-    await Http.post(apiGateway.property.create, data);
+    const response = await Http.post(apiGateway.property.create, data);
+
+    response?.status === 201 && navigate("/dashboard/my-properties")
     console.log(data);
 
   };
@@ -262,8 +295,8 @@ const PropertyFrom = () => {
     whatFor && setValue("listing_type", whatFor)
   }, [whatFor])
 
-  if (whatFor && !listing_typesValues.includes(whatFor)) return <> </>
 
+  if (whatFor && !listing_typesValues.includes(whatFor)) return <> </>
   return (
     <section className="pd-top-80 pd-btm-80"  >
       <div className="container" aria-disabled>
@@ -396,7 +429,7 @@ const PropertyFrom = () => {
                       {propertyCategoryValue && Object.keys(categoriesType).includes(propertyCategoryValue) &&
                         additionalDetailsAttributes[propertyCategoryValue as keyof typeof additionalDetailsAttributes].map((item: string, index: number) => (
                           <CheckInput2
-                            key={index}
+                            formkey={index}
                             title={item}
                             setAdditionalDetails={setAdditionalDetailsWrapper}
                             additionalDetails={additionalDetails}

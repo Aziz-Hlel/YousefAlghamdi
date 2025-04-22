@@ -8,7 +8,11 @@ export const categoriesType = {
     [ResidentialProperties]: ResidentialProperties,
     [CommercialProperties]: CommercialProperties,
     [LandAndPlots]: LandAndPlots,
-} ;
+} as const;
+
+export type ICategory = keyof typeof categoriesType;
+
+
 // categories.ResidentialProperties 
 export const sub_categories = {
 
@@ -37,3 +41,6 @@ export const sub_categories = {
 
 
 }
+
+
+

@@ -34,7 +34,7 @@ function Blog() {
               (blog) =>
                 blog.id < 4 && (
                   <BlogCard
-                    key={blog.id}
+                    formkey={blog.id}
                     blogLink={blog.blogLink}
                     blogImg={blog.blogImg}
                     date={blog.date}

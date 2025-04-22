@@ -74,7 +74,7 @@ const UserView = () => {
 
 
   const [currentAgent, setCurrentAgent] = useState<string | null>(null)
-  const agents = useAgents();
+  const { agents } = useAgents();
 
   const changeAgentOfUser = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -157,7 +157,7 @@ const UserView = () => {
                     }}>
                       {!userInspected.agentId && <option value=""></option>}
                       {Object.keys(agents).map((agent) =>
-                        <option value={agent} key={agent}>
+                        <option value={agent} formkey={agent}>
                           {`${agents[agent].firstName} ${agents[agent].lastName}`}
                         </option>
                       )}

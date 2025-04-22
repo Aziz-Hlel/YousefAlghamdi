@@ -6,7 +6,7 @@ function BlogCategories({ categories }) {
       <h3 className="homec-sidebar__title">Blog Categories</h3>
       <ul className="homec-sidebar__category list-none">
         {categories?.map((category, index) => (
-          <li key={category.title + index}>
+          <li formkey={category.title + index}>
             <a href={category.link}>
               {category.title}
               <span>({category.blogs})</span>

@@ -6,7 +6,7 @@ import { useAgents } from "@src/providers/AgentsProvider.context";
 const AgentsTable = () => {
 
 
-  const agents = useAgents();
+  const { agents } = useAgents();
 
 
 
@@ -35,7 +35,7 @@ const AgentsTable = () => {
                 lastName={agent.lastName}
                 email={agent.email}
                 phone={agent.phoneNumber}
-                key={agentId}
+                formkey={agentId}
               />
 
             })}
@@ -46,7 +46,7 @@ const AgentsTable = () => {
       <div className=" w-full flex justify-end pt-2">
 
         <Link to={"add-agent"}>
-          <button className=" ">
+          <button className=" homec-btn homec-btn__first">
 
             add agent
           </button>

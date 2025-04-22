@@ -7,7 +7,7 @@ import { createBrowserRouter, Route, BrowserRouter as Router, RouterProvider, Ro
 import AboutUs from "./component/About";
 import AddProperty from "./component/AddProperty2";
 import AgentDetail from "./component/AgentDetail";
-import Contact from "./component/Contact";
+import Contact from "./component/Contact2";
 import Dashboard from "./component/Dashboard2";
 import EditProperty from "./component/Edit Property2";
 import ErrorPage from "./component/Error";
@@ -24,7 +24,7 @@ import Layout from "./component/Layouts/Layout.js";
 import { AuthProvider } from "./providers/AuthProvider.context.js";
 import ProtectedLayouts from "./component/Layouts/ProtectedLayouts.js";
 import MyProperties from "./component/Dashboard2/MyProperties/MyProperties2.js";
-import PersonalInfo from "./component/Dashboard2/PersonalInfo2.js";
+import PersonalInfo from "./component/Dashboard2/MyProperties/PersonalInfo2/PersonalInfo2.js";
 import Reviews from "./component/Dashboard2/Reviews2.js";
 import DashboardComp from "./component/Dashboard2/DashboardComp2.js";
 import ChangePassword from "./component/Dashboard2/ChangePassword2.js";
@@ -33,8 +33,11 @@ import AgentsTable from "./component/Dashboard2/InvoiceTable2.js";
 import { AgentsProvider } from "./providers/AgentsProvider.context.js";
 import CU_Agent from "./component/Modal2/updatePersonalInfo.js";
 import UserView from "./component/Modal2/index.js";
+<<<<<<< HEAD
 import PropertySingle from "./component/PropertySingle2/index.js";
 import { SinglePropertyProvider } from "./component/context/SinglePropertyContext/PropertySingleProvider.context.js";
+=======
+>>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71
 
 const App2 = () => {
 
@@ -42,6 +45,7 @@ const App2 = () => {
         AOS.init();
     }, []);
 
+<<<<<<< HEAD
     const router = createBrowserRouter([
         {
             path: "/",
@@ -117,6 +121,8 @@ const App2 = () => {
 
 
 
+=======
+>>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71
     return (
         <>
             <AuthProvider>
@@ -126,18 +132,21 @@ const App2 = () => {
                     <Router>
                         <Routes>
 
+
                             <Route element={<Layout />} >
 
                                 <Route path="" element={<Home />} />
                                 <Route path="home" element={<Home />} />
                                 <Route path="property/:city" element={<Property />} />
                                 <Route path="property" element={<Property />} />
+
+
                                 <Route path="property-single/:propertyId" element={<PropertySingle />} />
 
 
                                 <Route path="agent-detail" element={<AgentDetail />} />
-                                <Route path="our-agent" element={<OurAgents />} />
-                                <Route path="about" element={<AboutUs />} />
+                                {/* <Route path="our-agents" element={<OurAgents />} /> */}
+                                {/* <Route path="about" element={<AboutUs />} /> */}
                                 {/* <Route path="/pricing" element={<Pricing />} /> */}
                                 {/* <Route path="/payment-method" element={<PaymentMethod />} /> */}
                                 <Route path="faq" element={<Faq />} />
@@ -148,19 +157,28 @@ const App2 = () => {
                                     {/* <Route path="edit-property" element={<EditProperty />} /> */}
                                     <Route path="add-property" element={<AddProperty />} />
                                     <Route path="submit-property/:whatFor" element={<SubmitProperty />} />
+<<<<<<< HEAD
+=======
+                                    {/* <Route path="edit-property/:whatFor/:propertyId" element={<SinglePropertyProvider ><SubmitProperty /></SinglePropertyProvider>} /> */}
+
+>>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71
 
                                     <Route path="dashboard" element={<Dashboard />} >
 
                                         <Route index element={<DashboardComp />} />
+<<<<<<< HEAD
                                         <Route path="my-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} />
                                         <Route path="edit-property/:whatFor/:propertyId" element={<SinglePropertyProvider ><SubmitProperty /></SinglePropertyProvider>} />
+=======
+                                        <Route path="my-properties" element={<MyPropertiesProvider> <MyProperties title="My properties" /> </MyPropertiesProvider>} />
+>>>>>>> dc239cbfd9fc1df60c3cf675db39597723751e71
                                         <Route path="personal-info" element={<PersonalInfo />} />
                                         <Route path="Reviews" element={<Reviews />} />
                                         <Route path="change-password" element={<ChangePassword />} />
 
 
                                         {/* Admin Routes */}
-                                        <Route path="pending-properties" element={<MyPropertiesProvider> <MyProperties /> </MyPropertiesProvider>} >
+                                        <Route path="pending-properties" element={<MyPropertiesProvider> <MyProperties title="Pending Properties" /> </MyPropertiesProvider>} >
                                             <Route path="inspect-user/:userId" element={<UserView />} />
                                         </Route>
 
@@ -171,8 +189,9 @@ const App2 = () => {
                                         {/* <Route path="add-agent" element={<UpdatePersonalInfo isModalOpen={true} toggleModal={() => { }} />}></Route> */}
 
                                     </Route>
+                                    <Route path="dashboard/my-properties/edit-property/:propertyId" element={<EditProperty />} />
+                                    <Route path="dashboard/pending-properties/edit-property/:propertyId" element={<EditProperty />} />
 
-                                    <Route path="/dashboard/my-properties/edit/:propertyId" element={<EditProperty />} />
 
 
 

@@ -1,12 +1,15 @@
-import { update } from "lodash";
 
+// const 
 
-const localhostUrl = "http://localhost:5000";
-const nginxUrl = "https://4c8f-41-225-176-145.ngrok-free.app";
+// const localhostUrl = "http://localhost:80" + "/api";
+// const domain = "http://ygp.ae" + "/api";
+// const nginxUrl = "https://4c8f-41-225-176-145.ngrok-free.app";
 
-export const baseUrl = localhostUrl;
+// export const baseUrl = domain;
 
+// if (!import.meta.env.VITE_API_URL) throw new Error("VITE_API_URL is not defined in the env");
 
+export const baseUrl = "https://ygp.ae" + "/api"
 const apiGateway = {
 
     baseUrl: baseUrl,
@@ -17,18 +20,21 @@ const apiGateway = {
         sigIn: "/user/login",
         getById: "/user/",
         updateAgent: "/user/update-agent",
+        logOut: "/user/log-out",
 
     },
 
 
     property: {
         list: "/property",
-        create: "/property",
+        create: "/propert",
         getById: "/property",
 
         myProperties: {
             list: "/property/my-properties",
         },
+
+        approve: "/property/approve",
 
     },
 
@@ -40,9 +46,9 @@ const apiGateway = {
 
 
 
-    images: baseUrl + "/api/images/",
+    images: baseUrl + "/images/",
 
-    getSignedUrl: baseUrl + "/api/images/getSignedUrl",
+    getSignedUrl: baseUrl + "/images/getSignedUrl",
 
 }
 

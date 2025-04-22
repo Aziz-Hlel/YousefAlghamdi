@@ -6,10 +6,10 @@ import logo from "/img/homeHeroV2.webp"
 
 
 function HomecHero() {
-  const [listing_Type, setListing_Type] = useState("Rent");
+  const [rentOrSale, setRentOrSale] = useState("Rent");
 
   const handleListing_Type = (name: string) => {
-    setListing_Type(name);
+    setRentOrSale(name);
   };
   return (
     <section
@@ -49,19 +49,19 @@ function HomecHero() {
                   >
                     <FilterTabBtn
                       text="Rent"
-                      isActive={listing_Type}
+                      isActive={rentOrSale}
                       handleListing_Type={handleListing_Type}
                     />
                     <FilterTabBtn
-                      text="Sell"
-                      isActive={listing_Type}
+                      text="Sale"
+                      isActive={rentOrSale}
                       handleListing_Type={handleListing_Type}
                     />
                   </div>
                 </div>
                 <div className="homec-hero__tabs--detail  lg:w-[58rem] lg:ml-8 ">
                   <div className="tab-content  " id="nav-tabContent">
-                    <HomecFilter />
+                    <HomecFilter rentOrSale={rentOrSale} />
                   </div>
                 </div>
               </div>

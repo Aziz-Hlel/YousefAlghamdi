@@ -20,14 +20,14 @@ function HeroSliderSlide({ link, img, price, pricePeriod, title, propertyText, p
         {/* Property Head */}
         <div className="homec-property__head">
           <div className="homec-overlay"></div>
-               <div className="w-[29rem]  h-[28rem] flex  justify-center  items-center  bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-cover  bg-no-repeat "
-          style={{
-            backgroundImage: (img ? `url(${img})` : "url('https://placehold.co/1720x1420')"),
-          }}
-     
-        >
-     
-        </div>
+          <div className="w-[29rem]  h-[28rem] flex  justify-center  items-center  bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-cover  bg-no-repeat "
+            style={{
+              backgroundImage: (img ? `url(${img})` : "url('https://placehold.co/1720x1420')"),
+            }}
+
+          >
+
+          </div>
         </div>
         {/* Property Body  */}
         <div className="homec-property__body">
@@ -43,7 +43,7 @@ function HeroSliderSlide({ link, img, price, pricePeriod, title, propertyText, p
             {/* Property List */}
             <ul className="homec-property__list homec-border-top list-none">
               {propertyList?.map((property: any, index: number) => (
-                <li key={index}>
+                <li formkey={index} >
                   <img src={property.img} alt="#" />
                   {property.name}
                 </li>

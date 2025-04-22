@@ -1,12 +1,12 @@
 import Header from "../Header";
 import Breadcrumbs from "../Breadcrumbs";
 import HistoryLinks from "../Breadcrumbs/HistoryLinks";
-import PropertyFrom from "../Form/PropertyFrom2";
 import DownloadApp from "../DownloadApp";
 import Footer from "../Footer";
 import Preloader from "../Loader";
 import { useEffect, useState } from "react";
 import GoTopBtn from "../Button/GoTopBtn";
+import PropertyFrom from "../Form/PropertyFrom2";
 
 const SubmitProperty = () => {
   const [isLoading, setisLoadingg] = useState(true);
@@ -32,7 +32,7 @@ const SubmitProperty = () => {
             isActive={true}
           />
         </Breadcrumbs>
-        <PropertyFrom  />
+        <PropertyFrom />
         <DownloadApp />
         <GoTopBtn />
       </>

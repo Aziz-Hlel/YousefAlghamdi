@@ -19,16 +19,14 @@ function PricingCard({ features, title, price, period, isActive }) {
         <div className="homec-psingle__body">
           <ul className="homec-psingle__list">
             {features?.map((feature, index) => (
-              <li key={feature.name + index}>
+              <li formkey={feature.name + index}>
                 <span
-                  className={`homec-psingle__icon ${
-                    feature.value ? "homec-check-color" : "homec-remove-color"
-                  } `}
+                  className={`homec-psingle__icon ${feature.value ? "homec-check-color" : "homec-remove-color"
+                    } `}
                 >
                   <i
-                    className={`fas ${
-                      feature.value ? "fa-check" : "fa-remove"
-                    } `}
+                    className={`fas ${feature.value ? "fa-check" : "fa-remove"
+                      } `}
                   ></i>
                 </span>
                 {feature.value && feature.value} {feature.name}

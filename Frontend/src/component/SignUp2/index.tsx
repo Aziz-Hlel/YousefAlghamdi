@@ -9,6 +9,8 @@ import apiGateway from "@src/utils/apiGateway";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
+import companyInfo from "@src/data/companyInfo";
+import { useAuth } from "@src/providers/AuthProvider.context";
 
 
 
@@ -52,16 +54,20 @@ const SignUpSchema = z.object({
 );
 
 
-type SignUpSchemaType = z.infer<typeof SignUpSchema>
+export type SignUpSchemaType = z.infer<typeof SignUpSchema>
 
 
 const SignUp = () => {
 
   const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
 
-  const submitHandler: SubmitHandler<SignUpSchemaType> = async (data) => {
-    const response = await Http.post(apiGateway.user.signUp, data);
+  const {  signup } = useAuth();
 
+
+  const submitHandler: SubmitHandler<SignUpSchemaType> = async (data) => {
+
+    const response = await signup(data);
+    
     response?.status === 200 && navigate("/");
     response?.status === 409 && setError("email", { message: "Email already exists" })
     if (response && response?.status !== 200 && response?.status !== 409) {
@@ -135,7 +141,7 @@ const SignUp = () => {
                       <PropertyTextInput
                         size="col-lg-6 col-md-6"
                         title="Phone Number*"
-                        placeholder="+971 50 123 4567"
+                        placeholder={companyInfo.phone}
                         margin="-10px"
                         fieldRegister={register('phoneNumber')}
                         fieldError={errors.phoneNumber}

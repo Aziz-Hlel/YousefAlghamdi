@@ -1,5 +1,7 @@
 import ProtoTypes from "prop-types";
 import TopbarBtn from "./TopbarBtn";
+import companyInfo from "@src/data/companyInfo";
+import companySocials from "@src/data/companySocials";
 
 function Topbar({ v2 }) {
   return (
@@ -14,29 +16,28 @@ function Topbar({ v2 }) {
               <ul className={`homec-header__list ${v2 && "homec-header__list--v2"}`}
               >
                 <TopbarBtn
-                  link="mailto:yousefAlghamdi@gmail.com"
+                  link={`mailto:${companyInfo.email}`}
                   img="/img/email-icon.svg"
-                  text="yousefAlghamdi@gmail.com"
+                  text={companyInfo.email}
                 />
                 <TopbarBtn
-                  link="tel:+971 50 123 4567"
+                  link={`tel:${companyInfo.phone}`}
                   img="/img/phone-icon.svg"
-                  text="+971 50 123 4567"
+                  text={companyInfo.phone}
                 />
                 <TopbarBtn
-                  link="mailto:yousefAlghamdi@gmail.com"
+                  link={`mailto:${companyInfo.email}`}
                   img="/img/locations-icon.svg"
-                  text="1901 Palm Jumeirah Rd, Dubai"
+                  text={companyInfo.address}
                 />
               </ul>
               {/* End Contact  */}
               {/* Social  */}
               <ul
-                className={`homec-social homec-social__topbar ${v2 && "homec-social__topbar--v2"
-                  }`}
+                className={`homec-social homec-social__topbar ${v2 && "homec-social__topbar--v2"}`}
               >
                 <li>
-                  <a href="#">
+                  <a href={companySocials.linkedin} target="_blank"  >
                     <svg
                       width="24"
                       height="24"
@@ -58,7 +59,7 @@ function Topbar({ v2 }) {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href={companySocials.twitter} target="_blank" >
                     <svg
                       width="24"
                       height="24"
@@ -71,7 +72,7 @@ function Topbar({ v2 }) {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href={companySocials.youtube} target="_blank" >
                     <svg
                       width="24"
                       height="24"
@@ -92,7 +93,7 @@ function Topbar({ v2 }) {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href={companySocials.facebook} target="_blank" >
                     <svg
                       width="24"
                       height="24"

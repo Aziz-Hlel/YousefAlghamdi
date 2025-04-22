@@ -1,0 +1,21 @@
+{
+  # for staing mode to not run out of certifcate limit
+  acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+
+
+ygp.ae {
+  # Match API routes and proxy to backend
+  @api {
+    path /api/*
+  }
+  reverse_proxy @api server:5000
+
+  # All other routes go to frontend (SPA)
+  reverse_proxy client:3000
+
+  # Enable gzip compression
+  encode gzip
+
+}

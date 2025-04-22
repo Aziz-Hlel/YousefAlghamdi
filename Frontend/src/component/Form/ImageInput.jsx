@@ -24,7 +24,7 @@ function ImageInput({ uploadedImg, handleDelete, handleImage }) {
                 <div className="row">
                   {uploadedImg?.map((image, index) => (
                     <UploadedImageCard
-                      key={index + "img"}
+                      formkey={index + "img"}
                       img={image}
                       handleDelete={handleDelete}
                     />

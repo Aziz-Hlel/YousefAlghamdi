@@ -1,4 +1,5 @@
 import { LoginFormFields } from "@src/component/Login2";
+import { SignUpSchemaType } from "@src/component/SignUp2";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import { AxiosResponse } from "axios";
@@ -14,6 +15,7 @@ export type IUser = {
 
 type IAuthContext = {
     user: IUser | null | undefined;
+    signup: (data: SignUpSchemaType) => Promise<AxiosResponse<any, any> | undefined>;
     login: (data: LoginFormFields) => Promise<AxiosResponse<any, any> | undefined>;
     logout: () => void;
 }
@@ -40,6 +42,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     }, []);
 
+    const signup = async (data: SignUpSchemaType): Promise<AxiosResponse<any, any> | undefined> => {
+        const response = await Http.post(apiGateway.user.signUp, data);
+
+        response?.status === 200 ? setUser(response.data.result) : setUser(null);
+        return response
+
+    }
 
     const login = async (data: LoginFormFields): Promise<AxiosResponse<any, any> | undefined> => {
         const response = await Http.post(apiGateway.user.sigIn, data)
@@ -48,12 +57,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         return response
     };
 
-    const logout = () => {
-        // console.log("Logged out");
+    const logout = async () => {
+        console.log("🔥💀🚀🛸🔥💀🚀🛸 logoutaaaaaaaaaaaaaa!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+        await Http.post(apiGateway.user.logOut, {})
+        setUser(null);
     };
 
     const contextValue: IAuthContext = {
         user: user,
+        signup,
         login,
         logout,
     };

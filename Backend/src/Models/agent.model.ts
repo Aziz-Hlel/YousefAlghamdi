@@ -3,25 +3,33 @@ import bcrypt from "bcrypt";
 import roles from "../types/roles.type";
 
 
-export interface IAgent extends Document {
-    _id: mongoose.Types.ObjectId;
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: string;
-    role: string;
-    adresse:string;
-    image: string;
-    socials: {
-        whatsApp: string;
-        linkedin: string;
-        twitter: string;
-        instagram: string;
-    }
-    about:string;    
+export interface IAgent {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       //sqqs
+    _id: mongoose.Types.ObjectId;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       //sqqs
+    firstName: string;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      //sqqs
+    lastName: string;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       //sqqs
+    email: string;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      //sqqs
+    phoneNumber: string;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        //sqqs
+    role: string;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       //sqqs
+    adresse: string;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        //sqqs
+    image: string;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      //sqqs
+    socials: {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      //sqqs
+        whatsApp: string;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       //sqqs
+        linkedin: string;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       //sqqs
+        twitter: string;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        //sqqs
+        instagram: string;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      //sqqs
+    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       //sqqs
+    about: string;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      //sqqs
 
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       //sqqs
+
+
+export interface IAgentModel extends Document, IAgent {
+    password: string;
     matchPassword(enteredPassword: string): Promise<boolean>;
+
 }
+
+
 
 
 
@@ -102,8 +110,17 @@ const agentSchema = new Schema({
         required: false,
     },
 
+    clientsId: {
+        type: [String],
+        required: false,
+    },
+
 },
-    { timestamps: true }
+    {
+        timestamps: true,
+        toJSON: { virtuals: true, },
+        toObject: { virtuals: true }
+    }
 );
 
 agentSchema.pre('save', async function (next) {
@@ -123,6 +140,12 @@ agentSchema.methods.matchPassword = async function (enteredPassword: string): Pr
     return bcrypt.compareSync(enteredPassword, this.password);
 }
 
-const Agent = mongoose.model<IAgent>('Agent', agentSchema);
+agentSchema.virtual('users', {
+    ref: 'User',
+    localField: '_id',
+    foreignField: 'agentId',
+});
+
+const Agent = mongoose.model<IAgentModel>('Agent', agentSchema);
 
 export default Agent;

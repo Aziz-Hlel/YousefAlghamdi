@@ -3,13 +3,14 @@ import { NextFunction, Request, Response } from "express";
 import { errorHandler } from '../utils/error'
 import User from '../Models/user.model';
 import errorMessages from "../utils/errorMessages";
-import generateToken from "../utils/generateJWT";
+import generateToken, { NODE_ENV } from "../utils/generateJWT";
 import statusCode from "../utils/statusCode";
 import z from "zod";
 import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
 import mongoose from "mongoose";
 import roles from "../types/roles.type";
 import Property from "../Models/property.model";
+import Agent from "../Models/agent.model";
 
 
 export const test = (req: Request, res: Response) => {
@@ -79,7 +80,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
         const userr = await user.save();
 
         generateToken(res, userr);
-        res.status(statusCode.OK).json('Signup successful');
+        res.status(statusCode.OK).json({ result: userr });
     } catch (error) {
         next(error);
     }
@@ -113,13 +114,26 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
         return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request, zodErrors));
     }
 
-    const user = await User.findOne({ email });
+    let user = await User.findOne({ email }).select('+password');;
 
-    if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.COMMON.Invalid_Credentials));
+    if (!user) {
+        user = await Agent.findOne({ email }).select('+password');
+        console.log('ousil w chay')
 
-    if (!await user.matchPassword(password)) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.COMMON.Invalid_Credentials));
+        if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.COMMON.Invalid_Credentials));
 
+    }
+    console.log("ousil", user.email, password)
+    if (!(await user.matchPassword(password))) {
+        console.log("ousil0.5")
+
+        return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.COMMON.Invalid_Credentials));
+    }
+    console.log("ousil2")
+
+    user.set('password', undefined, { strict: false });
     generateToken(res, user);
+    console.log('res cookies ==>', res)
     res.status(statusCode.OK);
 
 }
@@ -129,14 +143,17 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
 
 export const whoAmI = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-
+    console.log('t5l l whoAmI w cokkies =', req.cookies)
     const userId = req.user?._id
 
     if (!userId) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
 
-    const user = await User.findById(userId).select("-password");
+    let user = await User.findById(userId).select("-password");
 
-    if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+    if (!user) {
+        user = await Agent.findById(userId).select("-password");
+        if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+    }
 
     const response = {
         _id: user._id,
@@ -154,6 +171,12 @@ export const whoAmI = async (req: AuthenticatedRequest, res: Response, next: Nex
 }
 
 
+
+export const logOut = async (req: Request, res: Response, next: NextFunction) => {
+    res.clearCookie("accessToken", { httpOnly: true, secure: NODE_ENV === "production", sameSite: 'strict' });
+    res.clearCookie("refreshToken", { httpOnly: true, secure: NODE_ENV === "production", sameSite: 'strict' });
+    res.status(statusCode.OK).json()
+}
 
 
 export const getUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {

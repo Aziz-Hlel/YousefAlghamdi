@@ -6,7 +6,7 @@ function LatestBlog({ posts }) {
       <h3 className="homec-sidebar__title">Latest Blog</h3>
 
       {posts?.map((post, index) => (
-        <div className="homec-sidebar__post" key={post.title + index}>
+        <div className="homec-sidebar__post" formkey={post.title + index}>
           <div className="homec-sidebar__img">
             <img src={post.img} alt="#" />
           </div>

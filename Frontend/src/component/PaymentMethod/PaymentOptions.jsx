@@ -19,9 +19,8 @@ function PaymentOptions({ price }) {
     <div className="col-lg-4 col-12">
       <div className="homec-payment-method">
         <div
-          className={`payment-popup__top payment-popup__top--digital ${
-            selectedPaymentMethod === "credit-card" && "active"
-          }`}
+          className={`payment-popup__top payment-popup__top--digital ${selectedPaymentMethod === "credit-card" && "active"
+            }`}
         >
           {/* Payment Popup  */}
           <div
@@ -98,9 +97,8 @@ function PaymentOptions({ price }) {
           {/* End Payment Popup  */}
         </div>
         <div
-          className={`payment-popup__top payment-popup__top--bank ${
-            selectedPaymentMethod === "bank" && "active"
-          }`}
+          className={`payment-popup__top payment-popup__top--bank ${selectedPaymentMethod === "bank" && "active"
+            }`}
           onBlur={() => setSelectedPaymentMethod(false)}
         >
           {/* Payment Popup  */}
@@ -164,7 +162,7 @@ function PaymentOptions({ price }) {
         <ul className="homec-payment-method__list">
           {paymentMethod.map((method, index) => (
             <li
-              key={method.name + index}
+              formkey={method.name + index}
               onClick={() => {
                 setSelectedPaymentMethod(method.type);
               }}

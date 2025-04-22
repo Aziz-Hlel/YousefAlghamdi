@@ -31,7 +31,7 @@ const initUser = {
   agentId: "",
 }
 
-function MyProperties() {
+function MyProperties({ title }: { title: string }) {
 
   const { properties, totalCount, fetchProperties } = useMyPropertiesContext();
   const [currentPage, setCurrentPage] = useState(1);
@@ -58,23 +58,32 @@ function MyProperties() {
 
   };
 
+  const randomPhotos = [
+    pickRandomPhoto(),
+    pickRandomPhoto(),
+    pickRandomPhoto(),
+    pickRandomPhoto(),
+    pickRandomPhoto(),
+    pickRandomPhoto(),
 
+  ];
 
   return (
     <>
-      <Layout title="My Properties">
-        {properties?.map((property) => (
+      <Layout title={title}>
+        {properties?.map((property, index) => (
           <DashboardPropertyCard
             _id={property._id}
             ownerId={property.clientId}
-            key={property._id}
+            formkey={property._id}
             status={property.advanced.state}
-            image={apiGateway.images + pickRandomPhoto()}
+            image={apiGateway.images + randomPhotos[index]}
             listing_type={property.listing_type}
             title={property.title}
             location={property.city + ", " + property.delegation + ", " + property.addresse}
             // price={property.filterFields.price}
             onInspectClient={toggleModal}
+            tempToSeeIfUser = {title}
           />
         ))}
 

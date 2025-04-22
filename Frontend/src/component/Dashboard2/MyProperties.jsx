@@ -26,7 +26,7 @@ function MyProperties() {
       <Layout title="My Properties">
         {properties?.map((property) => (
           <DashboardPropertyCard
-            key={property.id}
+            formkey={property.id}
             status={property.status}
             image={property.img2}
             why={property.whatFor}

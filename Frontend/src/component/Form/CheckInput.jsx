@@ -7,7 +7,7 @@ function CheckInput({ title, properties, name }) {
         <h4 className="property-sidebar__title m-0">{title}</h4>
         <div className="row">
           {properties.map((item, index) => (
-            <div className="col-md-6 col-12" key={item + index}>
+            <div className="col-md-6 col-12" formkey={item + index}>
               <div className="form-group homec-form-checkbox mg-top-15">
                 <input type="checkbox" id={item} name={item} value={name} />
                 <label className="homec-form-label" htmlFor="room1">

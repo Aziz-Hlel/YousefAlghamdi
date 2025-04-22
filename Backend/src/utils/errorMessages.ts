@@ -7,6 +7,7 @@ const errorMessages = {
         Invalid_Credentials: "Invalid credentials",
         User_Already_Exists: "User already exists",
         FORBIDDEN: "forbidden",
+        NOT_FOUND: "not found",
     },
 
     AUTH: {

@@ -8,26 +8,30 @@ import Sidebar from "./Sidebar2";
 import DashboardComp from "./DashboardComp";
 import MyProperties from "./MyProperties/MyProperties2";
 import AgentsTable from "./InvoiceTable2";
-import PersonalInfo from "./PersonalInfo2";
+import PersonalInfo from "./MyProperties/PersonalInfo2/PersonalInfo2";
 import Saved from "./Saved";
 import Reviews from "./Reviews";
 import ChangePassword from "./ChangePassword";
 import { Outlet, useNavigate } from "react-router-dom";
 import GoTopBtn from "../Button/GoTopBtn";
 import Preloader from "../Loader";
+import apiGateway from "@src/utils/apiGateway";
+import Http from "@src/services/Http";
+import { useAuth } from "@src/providers/AuthProvider.context";
 
 function Dashboard() {
   // Inner navigation
   const [activeComponent, setActiveComponent] = useState("Dashboard");
   const navigate = useNavigate();
 
+  const logout = useAuth().logout
   // navigate to logout
-  useEffect(() => {
-    if (activeComponent === "Logout") {
-      navigate("/");
-    }
-  }, [activeComponent, navigate]);
 
+
+  const setActiveComponentWrapper = async (value: string) => {
+    value === "Logout" && logout()
+    setActiveComponent(value);
+  }
   // loading handle
 
   const [isLoading, setisLoadingg] = useState(true);
@@ -62,7 +66,7 @@ function Dashboard() {
 
                     <Sidebar
                       activeComponent={activeComponent}
-                      setComponent={setActiveComponent}
+                      setComponent={setActiveComponentWrapper}
                     />
 
                     {/* {activeComponent === "Dashboard" && <DashboardComp />} */}

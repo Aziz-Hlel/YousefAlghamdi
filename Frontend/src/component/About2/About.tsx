@@ -38,7 +38,7 @@ function About() {
                   <img src={ceo_img} alt="#" />
                 </div>
                 <h4 className="homec-ceo-quote__title">
-                  Wade De Warren<span>Homec Ceo & Founder</span>
+                  Yousef Alghamdi<span>Ceo & Founder</span>
                 </h4>
               </div>
             </div>
@@ -55,7 +55,7 @@ function About() {
                     data-aos="fade-down"
                     data-aos-delay="300"
                   >
-                    About Homeco
+                    About YGP
                   </span>
                 </div>
                 <h2

@@ -3,7 +3,8 @@ import bcrypt from "bcrypt";
 import roles from "../types/roles.type";
 
 
-export interface IUser extends Document {
+
+export interface Iuser {
     _id: mongoose.Types.ObjectId;
     firstName: string;
     lastName: string;
@@ -11,8 +12,14 @@ export interface IUser extends Document {
     phoneNumber: string;
     password: string;
     role: string;
-    agentId?: string;
+    agentId: string | null;
+}
+
+
+
+export interface IUser_model extends Document, Iuser {
     matchPassword(enteredPassword: string): Promise<boolean>;
+
 }
 
 
@@ -61,7 +68,7 @@ const userSchema = new Schema({
     agentId: {
         type: Schema.Types.ObjectId,
         ref: 'Agent',
-        default: undefined,
+        default: null,
     }
 },
     { timestamps: true }
@@ -81,9 +88,13 @@ userSchema.pre('save', async function (next) {
 })
 
 userSchema.methods.matchPassword = async function (enteredPassword: string): Promise<boolean> {
-    return bcrypt.compareSync(enteredPassword, this.password);
+    if (!enteredPassword || !this.password) {
+        throw new Error('Both enteredPassword and stored password are required.');
+    }
+    return  bcrypt.compareSync(enteredPassword, this.password);
 }
 
-const User = mongoose.model<IUser>('User', userSchema);
+
+const User = mongoose.model<IUser_model>('User', userSchema);
 
 export default User;

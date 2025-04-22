@@ -2,6 +2,11 @@ import FooterList from "./FooterList";
 import SubscribeForm from "../Subscribe2";
 import { Link } from "react-router-dom";
 import logo_img from "@img/logo.png"
+import companyInfo from "@src/data/companyInfo";
+import companySocials from "@src/data/companySocials";
+import logo2 from "@img/logo2.png"
+
+
 function Footer() {
   return (
     <footer className="footer-area p-relative">
@@ -27,7 +32,7 @@ function Footer() {
                   <div className="footer-about-widget">
                     <div className="">
                       <Link className="logo" to={"/"}>
-                        <img src={logo_img} alt="#" className=" w-72 h-64" />
+                        <img src={logo2} alt="#" className=" w-72 h-64" />
                       </Link>
                     </div>
                     <p className="footer-about-text">
@@ -38,7 +43,7 @@ function Footer() {
                     {/* Social   */}
                     <ul className="homec-social homec-social__v2">
                       <li>
-                        <Link to={"#"}>
+                        <a href={companySocials.linkedin} target="_blank">
                           <svg
                             width="24"
                             height="24"
@@ -57,10 +62,10 @@ function Footer() {
                               </clipPath>
                             </defs>
                           </svg>
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link to="#">
+                        <a href={companySocials.twitter} target="_blank" >
                           <svg
                             width="24"
                             height="24"
@@ -70,10 +75,10 @@ function Footer() {
                           >
                             <path d="M0.472992 19.5949C2.69499 21.0049 5.28099 21.7499 7.95099 21.7499C11.861 21.7499 15.444 20.2479 18.041 17.5209C20.526 14.9109 21.893 11.4039 21.825 7.84489C22.767 7.03889 23.875 5.49989 23.875 3.99989C23.875 3.42489 23.251 3.05989 22.745 3.35289C21.86 3.87289 21.053 4.00889 20.223 3.77589C18.528 2.12389 16.005 1.77589 13.879 2.92189C12.021 3.92189 10.988 5.75189 11.081 7.75189C7.94199 7.36889 5.04199 5.79489 3.01999 3.34889C2.68799 2.94989 2.05799 2.99689 1.79399 3.44889C0.819992 5.11689 0.829992 7.04989 1.67699 8.61089C1.27399 8.68189 1.02499 9.02089 1.02499 9.38789C1.02499 10.9569 1.73099 12.3989 2.86799 13.3829C2.65599 13.5869 2.58599 13.8899 2.67599 14.1599C3.17599 15.6619 4.30799 16.8359 5.72299 17.4239C4.18399 18.1589 2.48199 18.4039 0.966992 18.2179C0.182992 18.1119 -0.204008 19.1659 0.472992 19.5949ZM8.15599 17.6809C8.71699 17.2499 8.41899 16.3519 7.71499 16.3369C6.47499 16.3109 5.34599 15.6999 4.64299 14.7389C4.98199 14.7169 5.33299 14.6649 5.66699 14.5749C6.42799 14.3689 6.39199 13.2709 5.61899 13.1159C4.21599 12.8339 3.11499 11.8119 2.70199 10.4959C3.07899 10.5889 3.46299 10.6409 3.84599 10.6479C4.60499 10.6519 4.89199 9.67889 4.27299 9.27189C2.87799 8.35289 2.28299 6.72989 2.67699 5.20389C5.11299 7.67189 8.41799 9.15889 11.914 9.32689C12.415 9.35789 12.791 8.88689 12.681 8.40989C12.206 6.35089 13.356 4.90789 14.591 4.24289C15.813 3.58289 17.775 3.37689 19.279 4.95489C19.726 5.42589 21.234 5.44389 22.001 5.26489C21.657 5.91289 21.128 6.52789 20.633 6.87389C20.422 7.02189 20.301 7.26789 20.314 7.52489C20.475 10.8099 19.251 14.0759 16.956 16.4849C14.644 18.9119 11.447 20.2489 7.95199 20.2489C6.56199 20.2489 5.19899 20.0229 3.91099 19.5869C5.45099 19.2889 6.91399 18.6369 8.15599 17.6809Z" />
                           </svg>
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link to="#">
+                        <a href={companySocials.youtube} target="_blank"  >
                           <svg
                             width="24"
                             height="24"
@@ -91,10 +96,10 @@ function Footer() {
                               </clipPath>
                             </defs>
                           </svg>
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link to="#">
+                        <a href={companySocials.facebook} target="_blank" >
                           <svg
                             width="24"
                             height="24"
@@ -111,7 +116,7 @@ function Footer() {
                               </clipPath>
                             </defs>
                           </svg>
-                        </Link>
+                        </a>
                       </li>
                     </ul>
                     {/* End Social  */}
@@ -160,17 +165,17 @@ function Footer() {
                           <ul className="f-contact-list list-none">
                             <li>
                               <img src="/img/footer-phone.svg" alt="#" />
-                              <a href="tel:+(323)750-1234">+(971) 50 123 4567</a>
+                              <Link to={`tel:${companyInfo.phone}`}>{companyInfo.phone}</Link>
                             </li>
                             <li>
                               <img src="/img/footer-message.png" alt="#" />
-                              <a href="mailto:yousefAlghamdi@gmail.com">
-                                yousefAlghamdi@gmail.com
+                              <a href={`mailto:${companyInfo.email}`}>
+                                {companyInfo.email}
                               </a>
                             </li>
                             <li>
                               <img src="/img/footer-location.png" alt="#" />
-                              <p>1901 Palm Jumeirah Rd, Dubai</p>
+                              <p>{companyInfo.address}</p>
                             </li>
                           </ul>
                         </div>
@@ -201,10 +206,10 @@ function Footer() {
               {/* Footer Page List   */}
               <ul className="footer-pages list-none">
                 <li>
-                  <a href="about.html">About Company</a>
+                  <Link to={"/about"}>About Company</Link>
                 </li>
                 <li>
-                  <a href="contact-us.html">Contact Us</a>
+                  <Link to={"/contact"}>Contact Us</Link>
                 </li>
               </ul>
             </div>

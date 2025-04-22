@@ -34,12 +34,14 @@ function Agents() {
 
           {agents?.map((agent) => (
             <AgentCardV2_2
-              key={agent.id}
+              formkey={agent.id}
               img={agent.img}
               name={agent.name}
               position={agent.position}
               propertiesLink={agent.propertiesLink}
               detailsLink={agent.detailsLink}
+              key={agent.id}
+
             />
 
           ))}

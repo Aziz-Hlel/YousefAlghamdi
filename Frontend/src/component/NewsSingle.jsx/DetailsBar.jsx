@@ -9,7 +9,7 @@ function DetailsBar({ tags, social }) {
             <h4 className="homec-blog-detail__meta--title m-0">Tags:</h4>
             <ul className="homec-blog-detail__tag list-none">
               {tags?.map((tag, index) => (
-                <li key={tag.name + index}>
+                <li formkey={tag.name + index}>
                   <a href={tag.link}>#{tag.name}</a>
                 </li>
               ))}

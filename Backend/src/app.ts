@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from 'express'
+import express, { NextFunction, Request, Response } from 'express';
 import userRouter from './Routes/user.route'
 import propertyRouter from './Routes/property.route';
 import cookieParser from 'cookie-parser';
@@ -7,6 +7,7 @@ import path from 'path';
 import IApiErrorMiddleware from './Interfaces/ApiErrorResponse.interface';
 import imgHandlerRouter from './imgHandler';
 import agentRouter from './Routes/agent.route';
+import ENV from './utils/ENV.variables';
 
 
 
@@ -17,16 +18,14 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(cors({
-    origin: (origin, callback) => {
-        callback(null, true); // Allows all origins dynamically
-    },
+    origin: ["http://ygp.ae", "client", "http://localhost:3000", "localhost", ENV.FRONT_URL],  // Make sure to specify the exact frontend URL
+
     credentials: true,  // Necessary for cookies or authorization headers
 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     exposedHeaders: ['Content-Range', 'X-Total-Count', "Content-Type", "Authorization"],
 
 }));
-
 
 
 app.use('/api/user', userRouter);
@@ -41,7 +40,8 @@ app.use('/api/images', imgHandlerRouter);
 
 
 app.get('', (req, res) => {
-    res.send('Works ')
+    console.log(ENV)
+    res.send('Works well')
 })
 
 
@@ -59,5 +59,10 @@ app.use((err: IApiErrorMiddleware, req: Request, res: Response, next: NextFuncti
 
 });
 
+
+
+app.get('*', (req, res) => {
+    res.status(404).json({ message: 'Route not found', url: req.url });
+})
 
 export default app;

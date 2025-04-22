@@ -25,7 +25,7 @@ function Reviews() {
     <Layout title="Reviews">
       {reviews?.map((review) => (
         <ReviewCardV2
-          key={review.id}
+          formkey={review.id}
           rating={review.rating}
           date={review.date}
           text={review.text}

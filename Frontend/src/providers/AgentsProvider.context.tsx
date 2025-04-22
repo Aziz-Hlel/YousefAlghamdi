@@ -22,8 +22,13 @@ type IAgent = {
 
 }
 
-type IAgentProvider = {
+type IAgentDic = {
     [key: string]: IAgent
+}
+
+type IAgentProvider = {
+    agents: IAgentDic,
+    refreshAgents: () => Promise<void>
 }
 
 const AgentsContext = createContext<IAgentProvider | undefined>(undefined);
@@ -32,12 +37,12 @@ const AgentsContext = createContext<IAgentProvider | undefined>(undefined);
 
 export const AgentsProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const [agents, setAgents] = useState<IAgentProvider>();
+    const [agents, setAgents] = useState<IAgentDic>({});
 
     const fetchAgents = async () => {
 
         const response = await Http.get(apiGateway.agent.list);
-        const agentDic: IAgentProvider = {}
+        const agentDic: IAgentDic = {}
         response?.data.result.map((agent: any) => {
             agentDic[agent._id] = agent;
         })
@@ -56,9 +61,9 @@ export const AgentsProvider = ({ children }: { children: React.ReactNode }) => {
     }, [agents]);
     return (
         <>
-            <AgentsContext.Provider value={agents}>
+            <AgentsContext.Provider value={{ agents, refreshAgents: fetchAgents }}>
                 {children}
-            </AgentsContext.Provider>
+            </AgentsContext.Provider >
         </>
     )
 

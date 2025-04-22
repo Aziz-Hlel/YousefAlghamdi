@@ -5,7 +5,10 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "start": "node dist/index.js",
-    "dev": "nodemon"
+    "dev": "nodemon",
+
+    "comment": " --legacy-watch: This makes nodemon use polling, which works better with Docker-mounted volumes.",
+    "dev-docker":"nodemon --legacy-watch" 
   },
   "keywords": [],
   "author": "",
@@ -35,6 +38,7 @@
     "@types/node": "^22.13.9",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vite-node": "^3.1.1"
   }
 }

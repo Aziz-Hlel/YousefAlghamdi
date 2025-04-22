@@ -7,7 +7,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
   return (
     <div className="row mg-top-40">
       <div className="homec-pagination">
-        <ul className="homec-pagination__list list-none cursor-default">
+        {totalPage !== 0 && <ul className="homec-pagination__list list-none cursor-default">
           <li className="homec-pagination__button">
             <a
               style={{ cursor: "pointer" }}
@@ -22,8 +22,9 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
           {Array.from({ length: totalPage }, (_, index) => (
             index === 0 || index + 1 === totalPage ? (
               <li
-                key={index + 1}
+                formkey={index + 1}
                 className={currentPage === index + 1 ? "active" : ""}
+                key={index}
               >
                 <a
                   onClick={() => {
@@ -36,8 +37,9 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
             ) : (index < 5 && currentPage < 5) ||
               (index > totalPage - 6 && currentPage > totalPage - 4) ? (
               <li
-                key={index + 1}
+                formkey={index + 1}
                 className={currentPage === index + 1 ? "active" : ""}
+                key={index}
               >
                 <a
                   onClick={() => {
@@ -51,7 +53,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               index === currentPage - 1 ||
               index === currentPage ? (
               <li
-                key={index + 1}
+                formkey={index + 1}
                 className={currentPage === index + 1 ? "active" : ""}
 
               >
@@ -65,7 +67,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               </li>
             ) : currentPage > 4 && index === 2 ? (
               <li
-                key={index + 1}
+                formkey={index + 1}
                 className={currentPage === index + 1 ? "active" : ""}
               >
                 <a
@@ -80,7 +82,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               currentPage < totalPage - 2 &&
               index === totalPage - 2 && (
                 <li
-                  key={index + 1}
+                  formkey={index + 1}
                   className={currentPage === index + 1 ? "active" : ""}
                 >
                   <a
@@ -107,7 +109,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               Next
             </a>
           </li>
-        </ul>
+        </ul>}
       </div>
     </div>
   );

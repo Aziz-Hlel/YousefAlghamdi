@@ -82,7 +82,7 @@ type addAgentSchemaType = z.infer<typeof agentSchema>
 
 function PersonalInfo() {
 
-  const agents = useAgents();
+  const { agents, refreshAgents } = useAgents();
   const { agentId } = useParams();
 
   const editMode = agentId ? true : false;
@@ -111,8 +111,9 @@ function PersonalInfo() {
     const createAgent = async () => {
 
       const response = await Http.post(apiGateway.agent.create, data);
+      response?.status === 201 && await refreshAgents()
       response?.status === 201 && navigate("../")
-      response && response.status !== 200 && Object.keys(response.data.errors).map((key: any) => {
+      response && response.status !== 201 && Object.keys(response.data.errors).map((key: any) => {
         console.log(response.data.errors[key]);
 
         setError(key, { message: response.data.errors[key] })
@@ -123,6 +124,7 @@ function PersonalInfo() {
     const updateAgent = async () => {
 
       const response = await Http.put(`${apiGateway.agent.update}/${agentId}`, data);
+      response?.status === 200 && await refreshAgents()
       response?.status === 200 && navigate("../")
       response && response.status !== 200 && Object.keys(response.data.errors).map((key: any) => {
         setError(key, { message: response.data.errors[key] })
@@ -263,7 +265,7 @@ function PersonalInfo() {
       {/* Form Group  */}
       <div className="form-group form-mg-top25">
         <div className="ecom-wc__button ecom-wc__button--bottom">
-          <button className="homec-btn homec-btn__second" type="submit" >
+          <button className="homec-btn homec-btn__second" type="submit" disabled={isSubmitting}>
             <span>{isSubmitting ? "Loading" : "Update Profile"}</span>
           </button>
         </div>

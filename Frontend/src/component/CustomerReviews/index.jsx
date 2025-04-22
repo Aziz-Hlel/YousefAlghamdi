@@ -44,7 +44,7 @@ function CustomerReviews() {
             >
               {reviews?.map((review) => (
                 <ReviewCardV2
-                  key={review.id}
+                  formkey={review.id}
                   dating={review.rating}
                   text={review.text}
                   authorName={review.authorName}

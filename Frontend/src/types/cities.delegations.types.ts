@@ -18,6 +18,7 @@ export const cities = {
   [FujairahEmirate]: FujairahEmirate,
 };
 
+export type citiesType = keyof typeof cities;
 // Export the delegations (cities) as sub-categories
 export const delegations = {
   [AbuDhabiEmirate]: [

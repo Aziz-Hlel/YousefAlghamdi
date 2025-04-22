@@ -33,11 +33,11 @@ function ImageInput({ imgs, handleDelete, handleImage, fieldError }: ImageInputP
                 <p className="homec-img-video-label">
                   Slider Image* <span>(Max. limit 10 & Max. Size 10MB)</span>
                 </p>
-                <div className="homec-submit-form__upload-btn">
+                {/* <div className="homec-submit-form__upload-btn">
                   <button className="homec-btn homec-btn--upload">
                     <span>Upload New Image</span>
                   </button>
-                </div>
+                </div> */}
               </div>
               {/* Image Input   */}
 
@@ -47,7 +47,7 @@ function ImageInput({ imgs, handleDelete, handleImage, fieldError }: ImageInputP
                   {imgs.map((image, index) => (
                     index !== 0 &&
                     <UploadedImageCard
-                      key={index + 1}
+                      formkey={index + 1}
                       img={image}
                       handleDelete={handleDelete}
                       handleImage={handleImage}

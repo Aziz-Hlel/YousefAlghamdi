@@ -4,8 +4,11 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 
 export const axiosInstance = axios.create({
-    baseURL: baseUrl + "/api",
-    withCredentials: true
+    baseURL: baseUrl ,
+    withCredentials: true,
+    
+    // headers: { 'Content-Type': 'application/json' },
+    
 });
 
 type HTTPRequestConfig = AxiosRequestConfig;

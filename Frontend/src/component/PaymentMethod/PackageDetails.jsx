@@ -52,7 +52,7 @@ function PackageDetails() {
               </td>
             </tr>
             {data.features?.map((feature) => (
-              <tr key={feature.name}>
+              <tr formkey={feature.name}>
                 <td>
                   <h4 className="homec-package-detail__title">
                     {feature.name}
@@ -63,8 +63,8 @@ function PackageDetails() {
                     {typeof feature.value === "number"
                       ? feature.value
                       : typeof feature.value === "boolean" && feature.value
-                      ? "Available"
-                      : "Not Available"}
+                        ? "Available"
+                        : "Not Available"}
                   </span>
                 </td>
               </tr>

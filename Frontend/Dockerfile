@@ -1,14 +1,14 @@
-FROM    node:22.14.0-alpine
+FROM node:22.14.0-alpine
 
 WORKDIR /app
 
-COPY    package*.json ./
+COPY package*.json .
 
-RUN     npm install
+RUN npm install
 
-COPY    . .
+COPY . .
 
-EXPOSE 70
+EXPOSE 3000
 
 CMD ["npm", "run", "dev", "--", "--host"]
 

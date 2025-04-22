@@ -3,6 +3,7 @@ import NavBtn from "./NavBtn";
 import { Link } from "react-router-dom";
 import CustomLanguageOption from "./CustomLanguageOption";
 import { useAuth } from "@src/providers/AuthProvider.context";
+import { listing_types } from "@src/types/listing_types.types";
 const Navbar = ({ handleSidebar, secondNav }: any) => {
 
   const { user } = useAuth();
@@ -34,32 +35,19 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
                         </NavBtn>
 
                         <NavBtn text="Properties" link="#">
-                          <NavBtn link="/property" text="Properties" />
-                          {/* <NavBtn
-                            link="/property-single"
-                            text="Property Single"
-                          /> */}
-                          <NavBtn link="/add-property" text="Add Property" />
-                          {/* <NavBtn link="/dashboard" text="Dashboard" /> */}
-                          {/* <NavBtn
-                            link="/submit-property"
-                            text="Submit Property"
-                          /> */}
-                          <NavBtn link="/edit-property" text="Edit Property" />
+                          {/* <NavBtn link="/property" text="Properties" /> */}
+                          <NavBtn link={`/property?listingType=${listing_types.rent}`} text="Rent" />
+                          <NavBtn link={`/property?listingType=${listing_types.sale}`} text="Sale" />
+                          <NavBtn link={`/property?listingType=${listing_types.commercialRent}`} text="Commercial rent" />
+                          <NavBtn link={`/property?listingType=${listing_types.commercialSale}`} text="Commercial sale" />
+
+
+                          {/* <NavBtn link="/add-property" text="Add Property" />
+                          <NavBtn link="/edit-property" text="Edit Property" /> */}
+
                         </NavBtn>
-                        {/* <NavBtn text="Pages" link="#">
-                          <NavBtn link="/pricing" text="Pricing" />
-                          <NavBtn
-                          link="/payment-method"
-                          text="Payment Method"
-                          />
-                          <NavBtn link="/faq" text="Faq's" />
-                          <NavBtn link="/login" text="Login" />
-                          <NavBtn link="/signup" text="Sign Up" />
-                          <NavBtn link="/404" text="Error Page" />
-                          </NavBtn> */}
                         <NavBtn text="Agents" link="#">
-                          <NavBtn link="/our-agent" text="Our Agent" />
+                          <NavBtn link="/our-agents" text="Our Agent" />
                           <NavBtn link="/about" text="About Us" />
                           {/* <NavBtn link="/agent-detail" text="Agent Details" /> */}
                         </NavBtn>
