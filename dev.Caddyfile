@@ -1,8 +1,5 @@
 :80 {
 
-  @api {
-    path /api/*
-  }
   reverse_proxy @api server:5000
 
   # Serve frontend (fallback to index.html for SPA routing)
