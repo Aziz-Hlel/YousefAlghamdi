@@ -83,6 +83,7 @@ function MyProperties({ title }: { title: string }) {
             location={property.city + ", " + property.delegation + ", " + property.addresse}
             // price={property.filterFields.price}
             onInspectClient={toggleModal}
+            tempToSeeIfUser = {title}
           />
         ))}
 
