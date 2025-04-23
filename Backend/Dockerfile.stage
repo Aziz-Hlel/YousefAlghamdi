@@ -12,6 +12,7 @@ RUN npm ci
 # Copy source files
 COPY . .
 
+
 # Build TypeScript to JavaScript
 RUN npm run build
 
@@ -31,9 +32,6 @@ COPY --from=builder /app/dist ./dist
 # !!! just for now copy the public folder to serve static images
 COPY --from=builder /app/public ./public 
 
-
-# Set environment to production
-ENV NODE_ENV=development
 
 # Run the compiled code
 CMD ["node", "dist/index.js"]

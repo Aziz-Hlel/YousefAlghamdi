@@ -29,7 +29,7 @@ services:
     build:
       context: ./Backend
       dockerfile: Dockerfile.stage
-      args:
+    environment:
         - PORT=${STAGE___PORT}
         - JWT_ACCESS_SECRET=${STAGE___JWT_ACCESS_SECRET}
         - JWT_REFRESH_SECRET=${STAGE___JWT_REFRESH_SECRET}
