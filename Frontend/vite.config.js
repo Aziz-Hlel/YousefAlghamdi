@@ -11,10 +11,12 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  
+  envPrefix: 'VITE_',
 
   server: {
     port: 5173,
-
+    
     host: true,  /* Allows external access from AWS */
     allowedHosts: ['ygp.ae', 'www.ygp.ae', 'client'],
     strictPort: true, // Ensures the port is exactly 3000
@@ -32,6 +34,15 @@ export default defineConfig({
       '@img': path.resolve(__dirname, 'src/assets/img'),
       '@src': path.resolve(__dirname, 'src')
     }
+  },
+
+  // added this for caddy reverse proxy
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+    // For better debugging in development
+    sourcemap: true
   }
+
 
 })

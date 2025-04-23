@@ -1,30 +1,30 @@
-:80 {
+localhost:8443 {
 
-	# Serve static frontend files from the volume-mounted directory
-	root * /srv
-	file_server
+    root * /srv
 
-	# SPA routing: handle client-side routes
-	@notStatic {
-		not path /api/*
-		file {
-			try_files {path} {path}/ /index.html
-		}
-	}
-	rewrite @notStatic /index.html
+    log {
+        output stderr
+        format console
+        level DEBUG
+    }
 
-	# Reverse proxy API requests to your backend server on host machine at port 5000
-	@api path /api/*
-	reverse_proxy @api server:5000
+    @api path /api/*
+    reverse_proxy @api server:5000
 
-	# Disable caching for easier local development
-	header {
-		Cache-Control "no-store"
-	}
+    @spa {
+        not path /api/*
+        not file
+    }
+    rewrite @spa /index.html
+
+    file_server
+
+    header {
+        Cache-Control "no-store"
+    }
+
+    encode gzip
+
+    tls internal
+	
 }
-
-
-# :443 {
-#   tls internal
-#   ...
-# }

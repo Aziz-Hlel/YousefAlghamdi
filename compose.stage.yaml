@@ -1,63 +1,70 @@
+# secrets:
+#   MONGO_INITDB_ROOT_USERNAME:
+#     file: ./secrets/MONGO_INITDB_ROOT_USERNAME
+#   MONGO_INITDB_ROOT_PASSWORD:
+#     file: ./secrets/MONGO_INITDB_ROOT_PASSWORD
+
 services:
 
   proxy:
-    image: caddy:2.9.1-alpine
     container_name: proxy
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ./stage.Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
-      - frontend-stage-dist:/srv  # <-- Mount the build output here
-    networks:
-      - app-network
-      
-  client:
-    build: 
+    build:
       context: ./Frontend
       dockerfile: Dockerfile.stage
-    env_file:
-      - ./env/client.dev.env
+      args:
+        - VITE_API_URL=${STAGE___VITE_API_URL}
+        - VITE_API_NODE_ENV=${STAGE___VITE_API_NODE_ENV}
+    
+    ports:
+      - 8443:8443
     volumes:
-      - frontend-stage-dist:/export/build  # <-- Mount the build output here
+      - ./stage.Caddyfile:/etc/caddy/Caddyfile
+      - caddy-stage-data:/data
+      - caddy-stage-config:/config
     # restart: always
-    command: [ "true" ]  # This container is just for building — it exits after the build is done
     networks:
       - app-network
 
   server:
-    build: 
+    build:
       context: ./Backend
       dockerfile: Dockerfile.stage
-    volumes: []
-    env_file:
-      - ./env/server.dev.env
+      args:
+        - PORT=${STAGE___PORT}
+        - JWT_ACCESS_SECRET=${STAGE___JWT_ACCESS_SECRET}
+        - JWT_REFRESH_SECRET=${STAGE___JWT_REFRESH_SECRET}
+        - ENVIOREMENT=${STAGE___ENVIOREMENT}
+        - NODE_ENV=${STAGE___NODE_ENV}
+        - FRONT_URL=${STAGE___FRONT_URL}
+        - MONGO_INITDB_ROOT_USERNAME=${STAGE___MONGO_INITDB_ROOT_USERNAME}
+        - MONGO_INITDB_ROOT_PASSWORD=${STAGE___MONGO_INITDB_ROOT_PASSWORD}
+        - MONGO_INITDB_DATABASE=${STAGE___MONGO_INITDB_DATABASE}
+
     restart: always
     networks:
       - app-network
-
 
   mongo:
     image: mongo:latest
     volumes:
       - mongo-stage-data:/data/db
-    env_file:
-      - ./env/server.dev.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${STAGE___MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${STAGE___MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${STAGE___MONGO_INITDB_DATABASE}
     restart: always
     ports:
-      - "27017:27017"
+      - 27017:27017
     networks:
       - app-network
 
 volumes:
-  caddy_data:
-  caddy_config:
+  caddy-stage-data:
+  caddy-stage-config:
   mongo-stage-data:
-  frontend-stage-dist:
+  # frontend-stage-dist:
+
 
 networks:
   app-network:
     driver: bridge
-
