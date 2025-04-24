@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { errorHandler } from '../utils/error'
 import User from '../Models/user.model';
 import errorMessages from "../utils/errorMessages";
-import generateToken, { NODE_ENV } from "../utils/generateJWT";
+import generateToken from "../utils/generateJWT";
 import statusCode from "../utils/statusCode";
 import z from "zod";
 import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
@@ -11,6 +11,7 @@ import mongoose from "mongoose";
 import roles from "../types/roles.type";
 import Property from "../Models/property.model";
 import Agent from "../Models/agent.model";
+import ENV from "../utils/ENV.variables";
 
 
 export const test = (req: Request, res: Response) => {
@@ -173,8 +174,8 @@ export const whoAmI = async (req: AuthenticatedRequest, res: Response, next: Nex
 
 
 export const logOut = async (req: Request, res: Response, next: NextFunction) => {
-    res.clearCookie("accessToken", { httpOnly: true, secure: NODE_ENV === "production", sameSite: 'strict' });
-    res.clearCookie("refreshToken", { httpOnly: true, secure: NODE_ENV === "production", sameSite: 'strict' });
+    res.clearCookie("accessToken", { httpOnly: true, secure: ENV.NODE_ENV === "production", sameSite: 'strict' });
+    res.clearCookie("refreshToken", { httpOnly: true, secure: ENV.NODE_ENV === "production", sameSite: 'strict' });
     res.status(statusCode.OK).json()
 }
 
