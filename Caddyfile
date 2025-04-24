@@ -4,21 +4,18 @@ ygp.ae {  # Replace with your actual domain
     log {
         output file /var/log/caddy/access.log
         format json
-        level ERROR  # Only log errors in production
+        level ERROR
     }
     
     @api path /api/*
     reverse_proxy @api server:5000 {
-        # Add health checks and timeouts for reliability
         health_uri /health
         health_interval 30s
         health_timeout 5s
         fail_duration 10s
         
-        # Add load balancing if you have multiple backend servers
         lb_policy round_robin
         
-        # Add proper headers for proxying
         header_up Host {upstream_hostport}
         header_up X-Real-IP {remote}
         header_up X-Forwarded-For {remote}
@@ -33,25 +30,26 @@ ygp.ae {  # Replace with your actual domain
     
     file_server
     
+    # Define matchers for different file types
+    @static {
+        path_regexp \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$
+    }
+    
+    @html {
+        path_regexp \.html$
+    }
+    
+    # Apply headers based on matchers
+    header @static Cache-Control "public, max-age=604800, must-revalidate"
+    header @html Cache-Control "no-cache, must-revalidate"
+    
+    # Security headers for all responses
     header {
-        # Security headers
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
         X-Content-Type-Options "nosniff"
         X-Frame-Options "DENY"
         Referrer-Policy "strict-origin-when-cross-origin"
         Permissions-Policy "geolocation=(), microphone=(), camera=()"
-        
-        # Cache static assets but not HTML
-        @static {
-            path *.js *.css *.png *.jpg *.jpeg *.gif *.ico *.svg *.woff *.woff2
-        }
-        header @static Cache-Control "public, max-age=604800, must-revalidate"
-        
-        # Don't cache HTML files
-        @html {
-            path *.html
-        }
-        header @html Cache-Control "no-cache, must-revalidate"
     }
     
     # Compress responses
@@ -59,7 +57,6 @@ ygp.ae {  # Replace with your actual domain
     
     # Auto HTTPS with Let's Encrypt
     tls {
-        # Use production-ready settings
         protocols tls1.2 tls1.3
     }
     
