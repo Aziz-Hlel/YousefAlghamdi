@@ -2,6 +2,7 @@ import { use, useState } from "react";
 import UpdatePersonalInfo from "../../../Modal/updatePersonalInfo";
 import { useAuth } from "@src/providers/AuthProvider.context";
 import roles from "@src/types/roles.type";
+import agent1 from "@src/assets/img/agents/agent1.jpg"
 
 function PersonalInfo() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -20,9 +21,19 @@ function PersonalInfo() {
             isModalOpen={modalOpen}
             toggleModal={toggleModal}
           />
-          <div className="col-lg-6 col-12">
-            <div className="homec-agent-detail__img">
-              <img src="https://placehold.co/360x390" alt="#" />
+          <div className="col-lg-6 col-12 ">
+            <div className="homec-agent-detail__img w-full h-full flex justify-center ">
+
+            {/* <img src="https://placehold.co/360x390" alt="#" /> */}
+
+              <div className=" w-8/12 lg:h-11/12  h-72 object-fill flex  justify-center  items-center  bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-cover  bg-no-repeat "
+                style={{
+                  backgroundImage: (agent1 ? `url(${agent1})` : "url('https://placehold.co/1720x1420')"),
+                }}
+
+              >
+
+              </div>
             </div>
           </div>
           <div className="col-lg-6 col-12">

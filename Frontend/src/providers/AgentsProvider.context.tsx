@@ -3,7 +3,7 @@ import apiGateway from "@src/utils/apiGateway";
 import { createContext, useContext, useEffect, useState } from "react";
 
 
-type IAgent = {
+export type IAgent = {
     _id: string;
     firstName: string;
     lastName: string;

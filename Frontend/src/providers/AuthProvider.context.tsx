@@ -4,6 +4,7 @@ import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import { AxiosResponse } from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
+import { IAgent } from "./AgentsProvider.context";
 
 
 export type IUser = {
@@ -15,7 +16,7 @@ export type IUser = {
 }
 
 type IAuthContext = {
-    user: IUser | null | undefined;
+    user: IUser | IAgent | null | undefined;
     signup: (data: SignUpSchemaType) => Promise<AxiosResponse<any, any> | undefined>;
     login: (data: LoginFormFields) => Promise<AxiosResponse<any, any> | undefined>;
     logout: () => void;
@@ -27,7 +28,8 @@ const AuthContext = createContext<IAuthContext | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const [user, setUser] = useState<IUser | null | undefined>(undefined);
+
+    const [user, setUser] = useState<IUser | IAgent | null | undefined>(undefined);
 
     const whoAmI = async () => {
         const response = await Http.get(apiGateway.user.whoAmI);
@@ -66,7 +68,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const contextValue: IAuthContext = {
-        user: user,
+        user,
         signup,
         login,
         logout,
