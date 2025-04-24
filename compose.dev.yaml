@@ -7,18 +7,17 @@ services:
     build:
       context: ./Frontend
       dockerfile: Dockerfile.dev
-      # args:
-      #   VITE_API_URL: http://ygp.ae
-      #   VITE_API_NODE_ENV: development
+
     ports:
-      - 5173:5173
-    env_file:
-      - ./Frontend/.env
+      - 3000:3000
+    environment:
+      - VITE_API_URL=${DEV___VITE_API_URL}
+      - VITE_API_NODE_ENV=${DEV___VITE_API_NODE_ENV}
+      - CHOKIDAR_USEPOLLING=true
     volumes:
       - ./Frontend:/app
       - client-node-modules:/app/node_modules
-    environment:
-      - CHOKIDAR_USEPOLLING=true
+
     stdin_open: true # keeps the container running and allows for better terminal interaction
     tty: true
     
@@ -28,13 +27,16 @@ services:
     build:
       context: ./Backend
       dockerfile: Dockerfile.dev
-      # args:
-      #   - PORT: 5000
-      #   - JWT_ACCESS_SECRET: 🔥💀🚀🛸
-      #   - JWT_REFRESH_SECRET: mihyar2
-      #   - ENVIOREMENT: production
-      #   - NODE_ENV: production
-      #   - FRONT_URL: http://ygp.ae
+    environment:
+        - PORT=${DEV___PORT}
+        - JWT_ACCESS_SECRET=${DEV___JWT_ACCESS_SECRET}
+        - JWT_REFRESH_SECRET=${DEV___JWT_REFRESH_SECRET}
+        - ENVIOREMENT=${DEV___ENVIOREMENT}
+        - NODE_ENV=${DEV___NODE_ENV}
+        - FRONT_URL=${DEV___FRONT_URL}
+        - MONGO_INITDB_ROOT_USERNAME=${DEV___MONGO_INITDB_ROOT_USERNAME}
+        - MONGO_INITDB_ROOT_PASSWORD=${DEV___MONGO_INITDB_ROOT_PASSWORD}
+        - MONGO_INITDB_DATABASE=${DEV___MONGO_INITDB_DATABASE}
 
     ports:
       - 5000:5000

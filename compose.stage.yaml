@@ -7,7 +7,7 @@
 services:
 
   proxy:
-    container_name: proxy
+    container_name: proxy-stage
     build:
       context: ./Frontend
       dockerfile: Dockerfile.stage
@@ -26,6 +26,7 @@ services:
       - app-network
 
   server:
+    container_name: server-stage
     build:
       context: ./Backend
       dockerfile: Dockerfile.stage
@@ -45,6 +46,7 @@ services:
       - app-network
 
   mongo:
+    container_name: mongo-stage
     image: mongo:latest
     volumes:
       - mongo-stage-data:/data/db

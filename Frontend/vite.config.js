@@ -15,10 +15,10 @@ export default defineConfig({
   envPrefix: 'VITE_',
 
   server: {
-    port: 5173,
+    port: 3000,
     
     host: true,  /* Allows external access from AWS */
-    allowedHosts: ['ygp.ae', 'www.ygp.ae', 'client'],
+    allowedHosts: ['ygp.ae', 'www.ygp.ae', 'localhost', '127.0.0.1',"http://localhost:3000"],
     strictPort: true, // Ensures the port is exactly 3000
     watch: {
       usePolling: true
