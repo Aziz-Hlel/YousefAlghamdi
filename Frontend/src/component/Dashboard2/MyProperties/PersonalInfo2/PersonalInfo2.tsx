@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import UpdatePersonalInfo from "../../../Modal/updatePersonalInfo";
 import { useAuth } from "@src/providers/AuthProvider.context";
+import roles from "@src/types/roles.type";
 
 function PersonalInfo() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const { user } = useAuth()
-  
+
   const toggleModal = () => {
     setModalOpen(!modalOpen);
   };
@@ -26,8 +27,8 @@ function PersonalInfo() {
           </div>
           <div className="col-lg-6 col-12">
             <div className="homec-agent-detail__body">
-              <h3 className="homec-agent-detail__title">Wade De Warren</h3>
-              <p>Real Estate Broker</p>
+              <h3 className="homec-agent-detail__title">{`${user?.firstName} ${user?.lastName}`}</h3>
+              <p>{user?.role !== roles.USER && user?.role}</p>
             </div>
             <ul className="homec-agent-detail__list mg-top-30">
               <li>
@@ -35,12 +36,12 @@ function PersonalInfo() {
               </li>
               <li>
                 <img src="/img/agent-email.svg" alt="#" />{" "}
-                <a href="mailto:youremailad@gmail.com">Youremailad@gmail.com</a>
+                <a href={`mailto:${user?.email}`}>{user?.email}</a>
               </li>
-              <li>
+              {/* <li>
                 <img src="/img/agent-location.svg" alt="#" /> 2972 Westheimer Rd.
                 Santa Ana, Illinois 85486{" "}
-              </li>
+              </li> */}
             </ul>
             <ul className="homec-agent__social homec-agent__social--inline list-none mg-top-30">
               <li>

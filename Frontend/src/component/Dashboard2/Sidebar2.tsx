@@ -127,25 +127,25 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
         </DashboardSidebarBtn> */}
 
 
-          <DashboardSidebarBtn
-            active={activeComponent}
-            handleActive={setComponent}
-            title="Personal Info"
-            path="dashboard/personal-info"
-            onClick={() => useLogout()}
+        <DashboardSidebarBtn
+          active={activeComponent}
+          handleActive={setComponent}
+          title="Personal Info"
+          path="dashboard/personal-info"
+          onClick={() => useLogout()}
 
+        >
+          <svg
+            width="15"
+            height="19"
+            viewBox="0 0 15 19"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              width="15"
-              height="19"
-              viewBox="0 0 15 19"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M10.3159 11.0786H3.91996C1.75574 11.0786 0.00358314 12.8344 0 14.9986V18.9866H14.2394V14.9986C14.2358 12.8344 12.4801 11.0786 10.3159 11.0786Z" />
-              <path d="M7.12267 9.49533C9.74473 9.49533 11.8703 7.36973 11.8703 4.74767C11.8703 2.1256 9.74473 0 7.12267 0C4.5006 0 2.375 2.1256 2.375 4.74767C2.375 7.36973 4.5006 9.49533 7.12267 9.49533Z" />
-            </svg>
-          </DashboardSidebarBtn>
+            <path d="M10.3159 11.0786H3.91996C1.75574 11.0786 0.00358314 12.8344 0 14.9986V18.9866H14.2394V14.9986C14.2358 12.8344 12.4801 11.0786 10.3159 11.0786Z" />
+            <path d="M7.12267 9.49533C9.74473 9.49533 11.8703 7.36973 11.8703 4.74767C11.8703 2.1256 9.74473 0 7.12267 0C4.5006 0 2.375 2.1256 2.375 4.74767C2.375 7.36973 4.5006 9.49533 7.12267 9.49533Z" />
+          </svg>
+        </DashboardSidebarBtn>
 
         {/* <DashboardSidebarBtn
           active={activeComponent}
@@ -204,7 +204,7 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
           active={activeComponent}
           handleActive={setComponent}
           title="Logout"
-
+          path="../../"
         >
           <svg
             width="18"

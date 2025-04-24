@@ -38,14 +38,8 @@ const AddProperty = () => {
 
               <PropertyAddCard
                 img="/img/property-rent.png"
-                why="Rent"
+                why={listing_types.rent}
                 link={"/submit-property/" + listing_types.rent} />
-
-              <PropertyAddCard
-                img="/img/property-sale.png"
-                why="Sale"
-                link={"/submit-property/" + listing_types.sale}
-                btn="second" />
 
               <PropertyAddCard
                 img="/img/property-rent.png"
@@ -55,9 +49,17 @@ const AddProperty = () => {
 
               <PropertyAddCard
                 img="/img/property-sale.png"
-                why="Sale"
+                why={listing_types.sale}
+                link={"/submit-property/" + listing_types.sale}
+                btn="second"
+              />
+
+              <PropertyAddCard
+                img="/img/property-sale.png"
+                why={listing_types.commercialSale}
                 link={"/submit-property/" + listing_types.commercialSale}
-                btn="second" />
+                btn="second"
+              />
 
             </div>
           </div>

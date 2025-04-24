@@ -1,11 +1,4 @@
 
-// const 
-
-// const localhostUrl = "http://localhost:80" + "/api";
-// const domain = "http://ygp.ae" + "/api";
-// const nginxUrl = "https://4c8f-41-225-176-145.ngrok-free.app";
-
-// export const baseUrl = domain;
 
 const VITE_API_URL = import.meta.env.VITE_API_URL
 
@@ -30,7 +23,7 @@ const apiGateway = {
 
     property: {
         list: "/property",
-        create: "/propert",
+        create: "/property",
         getById: "/property",
 
         myProperties: {

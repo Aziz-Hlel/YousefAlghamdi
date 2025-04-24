@@ -16,7 +16,7 @@ services:
       - CHOKIDAR_USEPOLLING=true
     volumes:
       - ./Frontend:/app
-      - client-node-modules:/app/node_modules
+      - client-dev-node-modules:/app/node_modules
 
     stdin_open: true # keeps the container running and allows for better terminal interaction
     tty: true
@@ -42,7 +42,7 @@ services:
       - 5000:5000
     volumes:
       - ./Backend:/app
-      - server-node-modules:/app/node_modules
+      - server-dev-node-modules:/app/node_modules
     env_file:
       - ./Backend/.env
 
@@ -55,8 +55,8 @@ services:
       - ./Backend/.env
 
 volumes:
-  client-node-modules:
-  server-node-modules:
+  client-dev-node-modules:
+  server-dev-node-modules:
   mongo-dev-data:
 
 

@@ -33,7 +33,7 @@ const initUser = {
 
 function MyProperties({ title }: { title: string }) {
 
-  const { properties, totalCount, fetchProperties } = useMyPropertiesContext();
+  const { properties, totalCount, fetchProperties, listRef } = useMyPropertiesContext();
   const [currentPage, setCurrentPage] = useState(1);
   const totalPage = Math.ceil(totalCount / 6)
   console.log("total count", totalCount);
@@ -70,12 +70,12 @@ function MyProperties({ title }: { title: string }) {
 
   return (
     <>
-      <Layout title={title}>
+      <Layout title={title} ref={listRef}>
         {properties?.map((property, index) => (
           <DashboardPropertyCard
             _id={property._id}
             ownerId={property.clientId}
-            formkey={property._id}
+            key={property._id}
             status={property.advanced.state}
             image={apiGateway.images + randomPhotos[index]}
             listing_type={property.listing_type}
@@ -83,7 +83,7 @@ function MyProperties({ title }: { title: string }) {
             location={property.city + ", " + property.delegation + ", " + property.addresse}
             // price={property.filterFields.price}
             onInspectClient={toggleModal}
-            tempToSeeIfUser = {title}
+            tempToSeeIfUser={title}
           />
         ))}
 

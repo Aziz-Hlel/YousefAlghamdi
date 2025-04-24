@@ -55,7 +55,7 @@ const App2 = () => {
 
                                 <Route path="" element={<Home />} />
                                 <Route path="home" element={<Home />} />
-                                <Route path="property/:city" element={<Property />} />
+                                {/* <Route path="property/:city" element={<Property />} /> */}
                                 <Route path="property" element={<Property />} />
 
 

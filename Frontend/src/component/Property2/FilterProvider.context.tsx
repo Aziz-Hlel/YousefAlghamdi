@@ -1,5 +1,5 @@
 import Iproperty from "@src/models/property.type";
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, RefObject, useContext, useEffect, useRef, useState } from "react";
 import { IfilterProperty } from "src/models/filterProperty";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
@@ -33,6 +33,8 @@ interface IFormContext {
     resetFilter: () => void,
     updateEstate: (page?: number) => void,
 
+    listRef: RefObject<HTMLDivElement | null>
+
 }
 
 const FormContext = createContext<IFormContext | undefined>(undefined);
@@ -50,7 +52,7 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-
+    const listRef = useRef<HTMLDivElement | null>(null);
 
     const updateField = (field: keyof IfilterProperty, value: any, mnin?: string) => {
         // console.log("field", field).
@@ -73,7 +75,15 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
 
     const updateEstate = async (page?: number) => {
+        if (listRef?.current) {
+            const offset = 100; // Adjust this value to scroll a bit further
+            const elementTop = listRef.current.getBoundingClientRect().top + window.pageYOffset;
 
+            window.scrollTo({
+                top: elementTop - offset,
+                behavior: 'smooth',
+            });
+        }
         let filter: any = {}
         console.log("nanana chouf 9addeh l pag mil prams l context :", page);
         searchParams.forEach((value, key) => {
@@ -108,7 +118,7 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
 
     return (
-        <FormContext.Provider value={{ properties, filterObject, totalCount, updateField, resetFilter, updateEstate }}>
+        <FormContext.Provider value={{ properties, filterObject, totalCount, updateField, resetFilter, updateEstate, listRef }}>
             {children}
         </FormContext.Provider>
     );

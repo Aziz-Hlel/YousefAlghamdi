@@ -7,7 +7,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 
 export type IUser = {
-    username: string;
+    firstName: string;
+    lastName: string;
     email: string;
     id: string;
     role: string;

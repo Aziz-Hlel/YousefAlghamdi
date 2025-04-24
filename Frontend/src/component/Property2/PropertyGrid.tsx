@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PropertyBar from "./PropertyBar";
 import Sidebar from "../Sidebar2";
 import LatestPropertyCard from "../Cards/LatestPropertyCard2";
@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router-dom";
 
 function PropertyGrid() {
 
-  const { properties: properties, totalCount, updateEstate } = useFormContext();
+  const { properties, totalCount, updateEstate, listRef } = useFormContext();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -43,8 +43,6 @@ function PropertyGrid() {
 
 
 
-  console.log("haw 9addeh l pag :  ", searchParams.get("page"));
-
 
 
 
@@ -52,22 +50,23 @@ function PropertyGrid() {
 
   return (
     <section className="homec-propertys pd-top-80 pd-btm-80">
-      <div className=" container">
+      <div className=" container" >
         <PropertyBar gridStyle={gridStyle} handleGridStyle={handleGridStyle} />
         <div className="row">
           <Sidebar />
-          <div className="col-lg-8 col-12">
+          <div className="col-lg-8 col-12" >
             <div className="tab-content" id="nav-tabContent">
               {/* <!-- Grid Tab --> */}
               <div
                 className="tab-pane fade show active"
                 role="tabpanel"
+                ref={listRef}
               >
-                <div className="row">
+                <div className="row" >
                   {properties && properties.map((property, index) =>
                     <LatestPropertyCard
                       estate={property}
-                      formkey={property._id}
+                      key={property._id}
                       _id={property._id}
                       likeLink={staticProperties[index].likeLink}
                       detailsLink={staticProperties[index].detailsLink}
