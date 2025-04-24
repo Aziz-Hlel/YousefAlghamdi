@@ -40,7 +40,7 @@ ygp.ae {  # Replace with your actual domain
     }
     
     # Apply headers based on matchers
-    header @static Cache-Control "public, max-age=604800, must-revalidate"
+    header @static Cache-Control "public, max-age=1, must-revalidate"
     header @html Cache-Control "no-cache, must-revalidate"
     
     # Security headers for all responses
