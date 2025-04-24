@@ -1,100 +1,68 @@
+# secrets:
+#   MONGO_INITDB_ROOT_USERNAME:
+#     file: ./secrets/MONGO_INITDB_ROOT_USERNAME
+#   MONGO_INITDB_ROOT_PASSWORD:
+#     file: ./secrets/MONGO_INITDB_ROOT_PASSWORD
+
 services:
 
-  # #############################
-  # # NGINX
-  # #############################
-  # proxy:
-  #   image: nginx:latest
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   volumes:
-  #     - ./nginx.dev.conf:/etc/nginx/conf.d/default.conf:ro
-  #   depends_on:
-  #     - client
-  #     - server
-  #   networks:
-  #     - app-network
-
-
   proxy:
-    image: caddy:2.9.1-alpine
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ./stage.Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on:
-      - client
-      - server
-    networks:
-      - app-network
-
-  #############################
-  # FRONT
-  #############################
-  client:
-    container_name: ygp_client
+    container_name: proxy-prod
     build:
       context: ./Frontend
-    depends_on:
-      - server
-    env_file:
-      - ./env/client.dev.env
+      args:
+        - VITE_API_URL=${PROD___VITE_API_URL}
+        - VITE_API_NODE_ENV=${PROD___VITE_API_NODE_ENV}
+    
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy-prod-data:/data
+      - caddy-prod-config:/config
+    # restart: always
     networks:
       - app-network
-    volumes:
-      - ./Frontend:/app
-      - client-node-modules:/app/node_modules
 
-    ports:
-      - "3000:3000"
-
-  #############################
-  # BACK
-  #############################
   server:
-    container_name: ygp_server
+    container_name: server-prod
     build:
       context: ./Backend
+    environment:
+        - PORT=${PROD___PORT}
+        - JWT_ACCESS_SECRET=${PROD___JWT_ACCESS_SECRET}
+        - JWT_REFRESH_SECRET=${PROD___JWT_REFRESH_SECRET}
+        - ENVIOREMENT=${PROD___ENVIOREMENT}
+        - NODE_ENV=${PROD___NODE_ENV}
+        - FRONT_URL=${PROD___FRONT_URL}
+        - MONGO_INITDB_ROOT_USERNAME=${PROD___MONGO_INITDB_ROOT_USERNAME}
+        - MONGO_INITDB_ROOT_PASSWORD=${PROD___MONGO_INITDB_ROOT_PASSWORD}
+        - MONGO_INITDB_DATABASE=${PROD___MONGO_INITDB_DATABASE}
 
-    ports:
-      - "5000:5000"
-    env_file:
-      - ./env/server.dev.env
+    restart: always
     networks:
       - app-network
-    volumes:
-      - ./Backend:/app
-      - server-node-modules:/app/node_modules
-    depends_on:
-      - mongo
 
-  #############################
-  # DB
-  #############################
   mongo:
+    container_name: mongo-prod
     image: mongo:latest
     volumes:
-      - mongo-data:/data/db
-    env_file:
-      - ./env/server.dev.env
+      - mongo-prod-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${PROD___MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${PROD___MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${PROD___MONGO_INITDB_DATABASE}
+    restart: always
     ports:
-      - "27017:27017"
+      - 27017:27017
     networks:
       - app-network
 
-#############################
-# VOLUME PERSISTENT DATA
-#############################
 volumes:
-  caddy_data:
-  caddy_config:
-  client-node-modules:
-  server-node-modules:
-  mongo-data:
+  caddy-prod-data:
+  caddy-prod-config:
+  mongo-prod-data:
 
 
 networks:
