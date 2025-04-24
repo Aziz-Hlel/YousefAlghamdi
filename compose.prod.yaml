@@ -1,66 +1,70 @@
+# secrets:
+#   MONGO_INITDB_ROOT_USERNAME:
+#     file: ./secrets/MONGO_INITDB_ROOT_USERNAME
+#   MONGO_INITDB_ROOT_PASSWORD:
+#     file: ./secrets/MONGO_INITDB_ROOT_PASSWORD
+
 services:
 
-  # proxy:
-  #   volumes:
-  #     - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-  #     - ./certbot/conf:/etc/letsencrypt
-  #     - ./certbot/www:/var/www/certbot
-  #   restart: always
-
   proxy:
-    image: caddy:2.9.1-alpine
+    container_name: proxy-prod
+    build:
+      context: ./Frontend
+      args:
+        - VITE_API_URL=${PROD___VITE_API_URL}
+        - VITE_API_NODE_ENV=${PROD___VITE_API_NODE_ENV}
+    
     ports:
-      - 80:80
       - 443:443
+      - 80:80
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
-      - frontend-dist:/srv  # <-- Mount the build output here
-
-      
-  client:
-    build: 
-      context: ./Frontend
-      dockerfile: Dockerfile.prod
-    env_file:
-      - ./env/client.prod.env
-    volumes:
-      - frontend-dist:/export/build  # <-- Mount the build output here
+      - caddy-prod-data:/data
+      - caddy-prod-config:/config
     # restart: always
-    command: [ "true" ]  # This container is just for building — it exits after the build is done
+    networks:
+      - app-network
 
   server:
-    build: 
+    container_name: server-prod
+    build:
       context: ./Backend
-      dockerfile: Dockerfile.prod
-    volumes: []
-    env_file:
-      - ./env/server.prod.env
+    environment:
+        - PORT=${PROD___PORT}
+        - JWT_ACCESS_SECRET=${PROD___JWT_ACCESS_SECRET}
+        - JWT_REFRESH_SECRET=${PROD___JWT_REFRESH_SECRET}
+        - ENVIOREMENT=${PROD___ENVIOREMENT}
+        - NODE_ENV=${PROD___NODE_ENV}
+        - FRONT_URL=${PROD___FRONT_URL}
+        - MONGO_INITDB_ROOT_USERNAME=${PROD___MONGO_INITDB_ROOT_USERNAME}
+        - MONGO_INITDB_ROOT_PASSWORD=${PROD___MONGO_INITDB_ROOT_PASSWORD}
+        - MONGO_INITDB_DATABASE=${PROD___MONGO_INITDB_DATABASE}
+
     restart: always
+    networks:
+      - app-network
 
   mongo:
-    env_file:
-      - ./env/server.prod.env
+    container_name: mongo-prod
+    image: mongo:latest
+    volumes:
+      - mongo-prod-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${PROD___MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${PROD___MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${PROD___MONGO_INITDB_DATABASE}
     restart: always
-
-  # #############################
-  # # CERT
-  # #############################
-  # certbot:
-  #   image: certbot/certbot
-  #   container_name: certbot
-  #   volumes:
-  #     - ./certbot/conf:/etc/letsencrypt
-  #     - ./certbot/www:/var/www/certbot
-  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email tigana137@gmail.com -d ygp.ae --agree-tos
-  #   environment:
-  #     - CERTBOT_EMAIL=tigana137@gmail.com
-  #     - CERTBOT_DOMAIN=ygp.ae
-  #   restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - app-network
 
 volumes:
-  caddy_data:
-  caddy_config:
-  mongo-data:
-  frontend-dist:
+  caddy-prod-data:
+  caddy-prod-config:
+  mongo-prod-data:
+
+
+networks:
+  app-network:
+    driver: bridge
