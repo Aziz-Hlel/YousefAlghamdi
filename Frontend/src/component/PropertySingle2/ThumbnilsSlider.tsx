@@ -9,7 +9,7 @@ import useRandomPhoto from "@src/useRandomPhoto";
 
 function ThumbnailsSlider() {
 
-  const { property } = useSingleProperty();
+  const { property } = useSinglePropertyContext();
 
   const randomPhotos = [
     useRandomPhoto(),
@@ -32,7 +32,7 @@ function ThumbnailsSlider() {
 
         {
           property && property.imgs.map((img, index) =>
-            <ThumbnailsCard formkey={index} img={apiGateway.images + randomPhotos[0]} />
+            <ThumbnailsCard key={index} img={apiGateway.images + randomPhotos[0]} />
           )
         }
         <ThumbnailsCard img="https://placehold.co/270x180" />

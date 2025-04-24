@@ -26,10 +26,10 @@ const initialProperty: Iproperty = {
   agentId: "",
 
   filterFields: {
-    price: 0,
-    area: 0,
-    rooms: 0,
-    bathrooms: 0,
+    price: "0",
+    area: "0",
+    rooms: "0",
+    bathrooms: "0",
 
   },
   nearestPlaces: {},
