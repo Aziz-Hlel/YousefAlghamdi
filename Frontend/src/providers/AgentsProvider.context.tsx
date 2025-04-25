@@ -46,7 +46,6 @@ export const AgentsProvider = ({ children }: { children: React.ReactNode }) => {
         response?.data.result.map((agent: any) => {
             agentDic[agent._id] = agent;
         })
-        console.log("agentdic", agentDic);
 
         setAgents(agentDic);
 
@@ -56,9 +55,7 @@ export const AgentsProvider = ({ children }: { children: React.ReactNode }) => {
         fetchAgents()
     }, []);
 
-    useEffect(() => {
-        console.log('agent tbadl', agents);
-    }, [agents]);
+
     return (
         <>
             <AgentsContext.Provider value={{ agents, refreshAgents: fetchAgents }}>

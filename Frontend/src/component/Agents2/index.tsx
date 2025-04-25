@@ -13,7 +13,6 @@ const Agents = () => {
   const { agents } = useAgents();
 
   const agentImgs = [agent1, agent2, agent3]
-  console.log('agent nik omk',agents);
 
   return (
     <section className="homec-about homec-bg-third-color pd-top-120 pd-btm-120">

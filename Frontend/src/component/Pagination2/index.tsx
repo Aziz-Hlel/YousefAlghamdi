@@ -1,8 +1,6 @@
 
 
 function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number, handlePage: any, currentPage: number }) {
-  console.log("totalPage", totalPage);
-  console.log("currentPage", currentPage);
 
   return (
     <div className="row mg-top-40">
@@ -22,7 +20,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
           {Array.from({ length: totalPage }, (_, index) => (
             index === 0 || index + 1 === totalPage ? (
               <li
-                formkey={index + 1}
+              
                 className={currentPage === index + 1 ? "active" : ""}
                 key={index}
               >
@@ -37,7 +35,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
             ) : (index < 5 && currentPage < 5) ||
               (index > totalPage - 6 && currentPage > totalPage - 4) ? (
               <li
-                formkey={index + 1}
+              
                 className={currentPage === index + 1 ? "active" : ""}
                 key={index}
               >
@@ -53,7 +51,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               index === currentPage - 1 ||
               index === currentPage ? (
               <li
-                formkey={index + 1}
+              
                 className={currentPage === index + 1 ? "active" : ""}
 
               >
@@ -67,7 +65,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               </li>
             ) : currentPage > 4 && index === 2 ? (
               <li
-                formkey={index + 1}
+              
                 className={currentPage === index + 1 ? "active" : ""}
               >
                 <a
@@ -82,7 +80,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               currentPage < totalPage - 2 &&
               index === totalPage - 2 && (
                 <li
-                  formkey={index + 1}
+                
                   className={currentPage === index + 1 ? "active" : ""}
                 >
                   <a

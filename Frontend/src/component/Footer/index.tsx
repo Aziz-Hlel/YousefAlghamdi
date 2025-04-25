@@ -131,14 +131,7 @@ function Footer() {
                         <h3 className="widget-title">Listing</h3>
                         <ul className="f-useful-links-inner list-none">
                           <FooterList link="/property" title="Properties" />
-                          <FooterList
-                            link="/add-property"
-                            title="Add Properties"
-                          />
-                          <FooterList
-                            link="/submit-property"
-                            title="Edit Property"
-                          />
+                          <FooterList link="/add-property" title="Add Properties" />
                           <FooterList link="/login" title="Login" />
                           <FooterList link="/signup" title="Signup" />
                         </ul>
@@ -196,7 +189,7 @@ function Footer() {
             <div className="col-lg-6 col-12">
               {/* Copyright Text   */}
               <p className="copyright-text">
-                © 2023 Yousef Alghamdi Properties. All rights reserved by
+                © 2025 Yousef Alghamdi Properties. All rights reserved by
                 <a href="https://technoshark.org/" target="_blank">
                   TecknoShark
                 </a>

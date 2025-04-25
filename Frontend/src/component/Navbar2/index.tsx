@@ -17,8 +17,8 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
           <div className="col-12 ">
             <div
               className="homec-header__inside"
-              style={{ background: secondNav && "transparent" }}
-            >
+              style={{ background: secondNav && "transparent" }}>
+
               <div className="homec-header__group">
                 <div className="homec-header__logo">
                   <Link to="/">
@@ -31,11 +31,12 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
                       {/* Main Menu  */}
                       <ul className="nav-menu menu navigation list-none">
 
-                        <NavBtn text="Home" link="/" >
-                        </NavBtn>
+                        <NavBtn text="Home" link="/" />
+
 
                         <NavBtn text="Properties" link="#">
                           {/* <NavBtn link="/property" text="Properties" /> */}
+
                           <NavBtn link={`/property?listingType=${listing_types.rent}`} text="Rent" />
                           <NavBtn link={`/property?listingType=${listing_types.sale}`} text="Sale" />
                           <NavBtn link={`/property?listingType=${listing_types.commercialRent}`} text="Commercial rent" />
