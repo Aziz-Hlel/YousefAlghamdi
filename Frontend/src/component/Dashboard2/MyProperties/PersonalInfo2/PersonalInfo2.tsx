@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import UpdatePersonalInfo from "../../../Modal/updatePersonalInfo";
 import { useAuth } from "@src/providers/AuthProvider.context";
 import roles from "@src/types/roles.type";
@@ -24,7 +24,7 @@ function PersonalInfo() {
           <div className="col-lg-6 col-12 ">
             <div className="homec-agent-detail__img w-full h-full flex justify-center ">
 
-            {/* <img src="https://placehold.co/360x390" alt="#" /> */}
+              {/* <img src="https://placehold.co/360x390" alt="#" /> */}
 
               <div className=" w-8/12 lg:h-11/12  h-72 object-fill flex  justify-center  items-center  bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-cover  bg-no-repeat "
                 style={{

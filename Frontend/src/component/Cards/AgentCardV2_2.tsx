@@ -1,13 +1,13 @@
 import ProtoTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-function AgentCardV2_2({ img, propertiesLink, name, position, detailsLink }: { img: any, propertiesLink: any, name: any, position: any, detailsLink: any }) {
+function AgentCardV2_2({ agentId, img, name, position, detailsLink }: { agentId: string, img: any, name: string, position: string, detailsLink: any }) {
   return (
     <div
       className=" col-lg-4 col-md-6 col-12 mg-top-30 flex items-center justify-center  transition-transform transform hover:animate-hoverUp  "
       data-aos="fade-in"
       data-aos-delay="1000"
-      
+
     >
       {/* Single agent */}
       <div className="group  bg-white w-72 py-2.5 pl-5  rounded-lg shadow-xl hover:-translate-y-5 ease-out duration-1000  ">
@@ -16,9 +16,10 @@ function AgentCardV2_2({ img, propertiesLink, name, position, detailsLink }: { i
         <div className="flex ">
 
 
-          <div className="  rounded-2xl overflow-hidden">
+          <Link className="  rounded-2xl overflow-hidden"
+            to={"/agent-detail/" + agentId} >
             <img src={img} alt="#" className=" group-hover:scale-105 rounded-2xl" />
-          </div>
+          </Link>
 
           <div className=" flex flex-col  ml-5 gap-1.5">
 
@@ -50,12 +51,14 @@ function AgentCardV2_2({ img, propertiesLink, name, position, detailsLink }: { i
           </div>
 
           <h4 className=" absolute  bottom-0 bg-white translate-y-4 rounded-tl-xl  pl-5 pt-3 w-fit translate-x-16">
+            <Link to={"/agent-detail/" + agentId}>
 
-            <div className=" group-hover:text-[#7166F0]  text-xl">
-              <div>{name}</div>
+              <div className=" group-hover:text-[#7166F0]  text-xl">
+                <div>{name}</div>
 
-              <span className=" text-gray-500 text-sm font-thin" >{position}</span>
-            </div>
+                <span className=" text-gray-500 text-sm font-thin" >{position}</span>
+              </div>
+            </Link>
           </h4>
 
 

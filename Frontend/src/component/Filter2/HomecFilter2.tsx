@@ -2,9 +2,9 @@ import { z } from "zod";
 import FromField from "./FromField2";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { categoriesType, ResidentialProperties } from "@src/types/categories.subcategories.types";
+import { categoriesType, CommercialProperties, LandAndPlots, ResidentialProperties } from "@src/types/categories.subcategories.types";
 import { AbuDhabiEmirate, cities } from "@src/types/cities.delegations.types";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { listing_types } from "@src/types/listing_types.types";
 
@@ -24,8 +24,8 @@ type HomeFilterType = z.infer<typeof HomeFilterSchema>;
 function HomecFilter({ rentOrSale }: { rentOrSale: string }) {
 
   const commercialOrNot = ["Non commercial", "Commercial"]
-  const [commercial, setCommercial] = useState(false);
-  const [category, setCategory] = useState(categoriesType[ResidentialProperties]);
+  const [commercial, setCommercial] = useState(commercialOrNot[0]);
+  const [category, setCategory] = useState<string>(categoriesType[LandAndPlots]);
   const [city, setCity] = useState(cities[AbuDhabiEmirate]);
 
   const navigate = useNavigate();
@@ -35,14 +35,45 @@ function HomecFilter({ rentOrSale }: { rentOrSale: string }) {
 
     let listing_type: string = ""
 
-    if (rentOrSale == "Rent" && commercial) listing_type = listing_types.commercialRent
-    if (rentOrSale == "Rent" && !commercial) listing_type = listing_types.rent
-    if (rentOrSale == "Sale" && commercial) listing_type = listing_types.commercialSale
-    if (rentOrSale == "Sale" && !commercial) listing_type = listing_types.sale
+    if (rentOrSale == "Rent" && commercial === commercialOrNot[1]) listing_type = listing_types.commercialRent
+    if (rentOrSale == "Rent" && commercial === commercialOrNot[0]) listing_type = listing_types.rent
+    if (rentOrSale == "Sale" && commercial === commercialOrNot[1]) listing_type = listing_types.commercialSale
+    if (rentOrSale == "Sale" && commercial === commercialOrNot[0]) listing_type = listing_types.sale
 
-    navigate(`/property?listingType=${listing_type}&city=${city}&category=${category}`)
+
+    const query = new URLSearchParams({
+      listingType: 'rent',
+      city: 'Umm Al-Quwain Emirate',
+      category: 'Land & Plots',
+    });
+
+    const url = `/property?listingType=${listing_type}&city=${city}&category=${category}`
+    console.log(url);
+
+    navigate(`/property?${query.toString()}`)
 
   }
+
+  const setCommercialWrapper = (e: any) => {
+    e === commercialOrNot[0] && category === categoriesType[CommercialProperties] && setCategory(categoriesType[ResidentialProperties]);
+    e === commercialOrNot[1] && category === categoriesType[ResidentialProperties] && setCategory(categoriesType[CommercialProperties]);
+
+    setCommercial(e);
+  }
+
+  const setCategoryWrapper = (e: any) => {
+    setCategory(e)
+  }
+
+  const setCityWrapper = (e: any) => {
+    setCity(e)
+  }
+  const categories = Object.keys(categoriesType).filter((category) => {
+    if (commercial === commercialOrNot[1])
+      return category !== categoriesType[ResidentialProperties] && category
+    else
+      return category !== categoriesType[CommercialProperties] && category
+  });
 
   return (
     <div className="tab-pane fade show active " id="homec-tab1" role="tabpanel">
@@ -55,21 +86,21 @@ function HomecFilter({ rentOrSale }: { rentOrSale: string }) {
               name="Listing Type"
               options={commercialOrNot}
               state={commercial}
-              setState={setCommercial}
+              setState={setCommercialWrapper}
             />
 
             <FromField
               name="Category"
-              options={Object.keys(categoriesType)}
+              options={categories}
               state={category}
-              setState={setCategory}
+              setState={setCategoryWrapper}
             />
 
             <FromField
               name="City"
               options={Object.keys(cities)}
               state={city}
-              setState={setCity}
+              setState={setCityWrapper}
             />
 
 

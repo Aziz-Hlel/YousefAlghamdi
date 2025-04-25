@@ -6,7 +6,7 @@ import PaymentMethod from "./component/PaymentMethod";
 import { createBrowserRouter, Route, BrowserRouter as Router, RouterProvider, Routes, useParams } from "react-router-dom";
 import AboutUs from "./component/About";
 import AddProperty from "./component/AddProperty2";
-import AgentDetail from "./component/AgentDetail";
+import AgentDetail from "./component/AgentDetail2";
 import Contact from "./component/Contact2";
 import Dashboard from "./component/Dashboard2";
 import EditProperty from "./component/Edit Property2";
@@ -46,7 +46,6 @@ const App2 = () => {
             <AuthProvider>
                 <AgentsProvider>
 
-                    {/* <RouterProvider router={router} />{" "} */}
                     <Router>
                         <Routes>
 
@@ -62,7 +61,7 @@ const App2 = () => {
                                 <Route path="property-single/:propertyId" element={<PropertySingle />} />
 
 
-                                <Route path="agent-detail" element={<AgentDetail />} />
+                                <Route path="agent-detail/:agentId" element={<AgentDetail />} />
                                 {/* <Route path="our-agents" element={<OurAgents />} /> */}
                                 {/* <Route path="about" element={<AboutUs />} /> */}
                                 {/* <Route path="/pricing" element={<Pricing />} /> */}

@@ -2,11 +2,18 @@ import AgentCardV2 from "../Cards/AgentCardV2";
 import AboutShapeImg from "../About/AboutShapeImg";
 import agents from "../../data/agents";
 import AgentCardV2_2 from "../Cards/AgentCardV2_2";
+import { useAgents } from "@src/providers/AgentsProvider.context";
+import agent1 from "../../assets/img/agents/agent1.jpg"
+import agent2 from "../../assets/img/agents/agent2.jpg"
+import agent3 from "../../assets/img/agents/agent3.jpg"
+
 
 const Agents = () => {
 
+  const { agents } = useAgents();
 
-
+  const agentImgs = [agent1, agent2, agent3]
+  console.log('agent nik omk',agents);
 
   return (
     <section className="homec-about homec-bg-third-color pd-top-120 pd-btm-120">
@@ -36,18 +43,18 @@ const Agents = () => {
         </div>
         <div className="flex  items-center flex-col lg:flex-row ">
 
-          {agents?.map((agent) => (
-            <AgentCardV2_2
-              formkey={agent.id}
-              img={agent.img}
-              name={agent.name}
-              position={agent.position}
-              propertiesLink={agent.propertiesLink}
-              detailsLink={agent.detailsLink}
-              key={agent.id}
+          {agents && Object.keys(agents)?.map((agentId, index) => {
+            const agent = agents[agentId];
+            return <AgentCardV2_2
+              key={agent._id}
+              agentId={agent._id}
+              img={agentImgs[index]}
+              name={`${agent.firstName} ${agent.lastName}`}
+              position={"Real Estate Broker"}
+              detailsLink={agent.socials}
             />
 
-          ))}
+          })}
 
         </div>
       </div>

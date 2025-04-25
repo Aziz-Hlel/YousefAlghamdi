@@ -1,8 +1,7 @@
-import ProtoTypes from "prop-types";
-import { useState } from "react";
-import Select from "react-dropdown-select";
 
-function FromField({ name, options, state, setState }: any) {
+
+
+function FromField({ name, options, state, setState }: { name: string, options: string[], state: string, setState: Function }) {
 
   return (
     <div className="form-group text-xs  font-light  lg:w-52 flex justify-center">
@@ -15,7 +14,7 @@ function FromField({ name, options, state, setState }: any) {
         value={state}
       >
         {options.map((option: any, index: number) => (
-          <option formkey={option} value={option} key={index}>
+          <option value={option} key={index}>
             {option}
           </option>
         ))}

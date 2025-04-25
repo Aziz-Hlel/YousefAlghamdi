@@ -74,6 +74,7 @@ const userSchema = new Schema({
     { timestamps: true }
 );
 
+
 userSchema.pre('save', async function (next) {
     if (!this.isModified("password")) return next(); // Only hash if password is modified
     try {
@@ -87,6 +88,7 @@ userSchema.pre('save', async function (next) {
 
 })
 
+
 userSchema.methods.matchPassword = async function (enteredPassword: string): Promise<boolean> {
     if (!enteredPassword || !this.password) {
         throw new Error('Both enteredPassword and stored password are required.');
@@ -96,5 +98,6 @@ userSchema.methods.matchPassword = async function (enteredPassword: string): Pro
 
 
 const User = mongoose.model<IUser_model>('User', userSchema);
+
 
 export default User;

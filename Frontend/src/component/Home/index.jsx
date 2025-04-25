@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Footer from "../Footer";
 import GoTopBtn from "../Button/GoTopBtn";
 import About from "../About2/About";
-import Agents from "../Agents";
+import Agents from "../Agents2";
 import Blog from "../Blog";
 import DownloadApp from "../DownloadApp2";
 import Features2 from "../Features2";

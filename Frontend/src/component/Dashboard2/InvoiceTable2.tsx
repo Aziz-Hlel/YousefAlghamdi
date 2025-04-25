@@ -35,7 +35,7 @@ const AgentsTable = () => {
                 lastName={agent.lastName}
                 email={agent.email}
                 phone={agent.phoneNumber}
-                formkey={agentId}
+                key={agentId}
               />
 
             })}
