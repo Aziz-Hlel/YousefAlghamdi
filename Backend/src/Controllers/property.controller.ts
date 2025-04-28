@@ -17,46 +17,77 @@ import ApproveSubmitPropertySchema from "../schemas/ApproveSubmitPropertySchema"
 export const createProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
     const clientId = req.user?._id!;
-    let agentId: string | undefined | null = req.user?.agentId ?? null;
+    let agentId: string | undefined | null = req.user?.clientInfo?.agentId ?? null;
 
-    if (agentId === null) {
+
+    if (req.user?.role === roles.CLIENT || roles.USER) {
+
+
+        if (!agentId) {
+            try {
+                const user = await User.findById(clientId);
+                if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+                agentId = user?.clientInfo?.agentId;
+            } catch (e) {
+                next(e);
+            }
+        }
+        req.body.active = false
+        req.body.advanced = {
+            state: statesTypes.toBeAdded,
+            available: null,
+            updated_version: {},
+        };
+
+
+        const property = new Property({
+            ...req.body,
+            clientId: clientId,
+            agentId: agentId
+
+        });
+
+
         try {
-            const user = await User.findById(clientId);
-            if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
-            agentId = user?.agentId;
-        } catch (e) {
-            next(e);
+            Promise.all([
+                User.findByIdAndUpdate(
+                    clientId,
+                    { role: roles.CLIENT },
+                    { new: true, runValidators: true },
+                ),
+                property.save(),
+            ])
+            res.status(statusCode.CREATED).json('Property created successful');
+        } catch (error) {
+            next(error);
         }
     }
-    req.body.active = false
-    req.body.advanced = {
-        state: statesTypes.toBeAdded,
-        available: null,
-        updated_version: {},
-    };
+    else if (req.user?.role === roles.AGENT) {
 
 
-    const property = new Property({
-        ...req.body,
-        clientId: clientId,
-        agentId: agentId
+        req.body.active = true,
+            req.body.advanced = {
+                state: statesTypes.active,
+                available: null,
+                updated_version: {},
+            };
 
-    });
 
+        const property = new Property({
+            ...req.body,
+            clientId: clientId,
+            agentId: agentId
 
-    try {
-        Promise.all([
-            User.findByIdAndUpdate(
-                clientId,
-                { role: roles.CLIENT },
-                { new: true, runValidators: true },
-            ),
-            property.save()
-        ])
+        });
+
+        await property.save();
+
         res.status(statusCode.CREATED).json('Property created successful');
-    } catch (error) {
-        next(error);
+
     }
+
+    // ! 3nd if l user client agent w admin le donc ken admin chizid dar none will happen , reason mezetch 5atr bch trasilik tzidlou input y5tar agent m3aha mouch kima l agent t7sb besmou direct w client kima 5dmt melloul
+
 
 }
 
@@ -128,10 +159,10 @@ export const getProperty = async (req: Request, res: Response, next: NextFunctio
     if (!propertyId || !mongoose.Types.ObjectId.isValid(propertyId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     try {
-        const estate = await Property.findById(propertyId);
+        const property = await Property.findById(propertyId);
         res.json({
 
-            result: estate,
+            result: property,
         });
     } catch (error) {
         next(error);
@@ -150,7 +181,7 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
 
     if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
-    if (req.user?.role === roles.USER)
+    if (req.user?.role === roles.CLIENT)
 
         try {
 

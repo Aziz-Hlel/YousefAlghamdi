@@ -23,7 +23,7 @@ const seedData = async () => {
     
     const agentsData = await createAgents();
 
-    const DBagents = await Agent.insertMany(agentsData);
+    const DBagents = await User.insertMany(agentsData);
 
     const DBusers = await createUser(DBagents);
 

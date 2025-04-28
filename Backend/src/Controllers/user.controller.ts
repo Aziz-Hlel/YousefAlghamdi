@@ -14,8 +14,10 @@ import Agent from "../Models/agent.model";
 import ENV from "../utils/ENV.variables";
 
 
-export const test = (req: Request, res: Response) => {
-    res.json({ message: 'API is working!' });
+export const test = async (req: Request, res: Response) => {
+    const user = await User.findById('680f59d00ec1896fab3046b7');
+    console.log('user', user)
+    res.json({ message: 'API is working!', user });
 };
 
 
@@ -59,7 +61,7 @@ const registerBodySchema = z.object({
 export const register = async (req: Request, res: Response, next: NextFunction) => {
 
     const newUser: any = req.body;
-
+    // console.log('newUser', newUser)
     const validBody = registerBodySchema.safeParse(newUser)
 
     if (!validBody.success) {
@@ -117,13 +119,8 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
     let user = await User.findOne({ email }).select('+password');;
 
-    if (!user) {
-        user = await Agent.findOne({ email }).select('+password');
-        console.log('ousil w chay')
+    if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.COMMON.Invalid_Credentials));
 
-        if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.COMMON.Invalid_Credentials));
-
-    }
     console.log("ousil", user.email, password)
     if (!(await user.matchPassword(password))) {
         console.log("ousil0.5")
@@ -189,6 +186,7 @@ export const getUser = async (req: AuthenticatedRequest, res: Response, next: Ne
 
     try {
         const user = await User.findById(userId).select("-password");
+
         res.json({
 
             result: user,
@@ -212,10 +210,16 @@ export const updateAgentOfClient = async (req: AuthenticatedRequest, res: Respon
 
     try {
         const user = await User.findById(userId);
-        if (!user) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+        const agent = await User.findById(agentId);
 
-        user.agentId = agentId;
+        if (!user || user.role !== roles.CLIENT) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+        if (!agent || agent.role !== roles.AGENT) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
+        if (!user.clientInfo) {
+            user.clientInfo = {};
+        }
+        user.clientInfo.agentId = agentId;
+        
         await user.save();
 
         Promise.all([
@@ -225,7 +229,7 @@ export const updateAgentOfClient = async (req: AuthenticatedRequest, res: Respon
             Property.bulkWrite([{
                 updateMany: {
                     filter: { clientId: userId },
-                    update: { $set: { agentId: agentId } }
+                    update: { $set: { agentId: agentId } },
                 }
             }])
         ]);

@@ -39,6 +39,10 @@ const generateToken = (res: Response, user: IUser_model) => {
         lastName: user.lastName,
         email: user.email,
         role: user.role,
+        clientInfo: user.clientInfo,
+        agentInfo: user.agentInfo,
+        adminInfo: user.adminInfo,
+
     };
 
     const accessToken = generateAccessToken(payload);

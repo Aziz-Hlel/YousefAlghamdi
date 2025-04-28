@@ -4,7 +4,7 @@ import roles from "../types/roles.type";
 
 
 
-export interface Iuser {
+export interface IUser {
     _id: mongoose.Types.ObjectId;
     firstName: string;
     lastName: string;
@@ -12,18 +12,92 @@ export interface Iuser {
     phoneNumber: string;
     password: string;
     role: string;
-    agentId: string | null;
+
+    clientInfo?: {
+        agentId?: string | null,
+    };
+
+    agentInfo?: {
+        image: string | null,
+        about: string | null,
+        socials: {
+            whatsApp: string | null,
+            instagram: string | null,
+            twitter: string | null,
+            linkedin: string | null,
+        },
+        address?: string | null,
+        clientsId: string[],
+
+    };
+
+    adminInfo?: {
+        image: string | null,
+        about: string | null,
+        socials: {
+            whatsApp: string | null,
+            instagram: string | null,
+            twitter: string | null,
+            linkedin: string | null,
+        },
+        address?: string | null,
+
+    };
+
+    savedProperties: string[]
 }
 
 
 
-export interface IUser_model extends Document, Iuser {
+export interface IUser_model extends Document, IUser {
     matchPassword(enteredPassword: string): Promise<boolean>;
 
 }
 
 
-const userSchema = new Schema({
+const clientInfoSchema = new mongoose.Schema({
+    agentId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+}, { _id: false });
+
+
+const agentInfoSchema = new mongoose.Schema({
+
+    image: { type: String, required: false, },
+
+    about: { type: String, required: false, },
+
+    address: { type: String, required: false, },
+
+    socials: {
+        whatsApp: { type: String, required: false, },
+        instagram: { type: String, required: false, },
+        twitter: { type: String, required: false, },
+        linkedin: { type: String, required: false, },
+    },
+
+    clientsId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+
+}, { _id: false });
+
+const adminInfoSchema = new mongoose.Schema({
+    image: { type: String, required: false, },
+
+    about: { type: String, required: false, },
+
+    address: { type: String, required: false, },
+
+    socials: {
+        whatsApp: { type: String, required: false, },
+        instagram: { type: String, required: false, },
+        twitter: { type: String, required: false, },
+        linkedin: { type: String, required: false, },
+    },
+
+}, { _id: false });
+
+
+
+const userSchema = new Schema<IUser_model>({
 
     firstName: {
         type: String,
@@ -65,13 +139,23 @@ const userSchema = new Schema({
         default: roles.USER,
     },
 
-    agentId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Agent',
-        default: null,
-    }
+
+
+
+    clientInfo: { type: clientInfoSchema, required: false, },
+
+    agentInfo: { type: agentInfoSchema, required: false, },
+
+    adminInfo: { type: adminInfoSchema, required: false, },
+
+
+    savedProperties: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }]
 },
-    { timestamps: true }
+    {
+        timestamps: true,
+        toJSON: { virtuals: true, },
+        toObject: { virtuals: true }
+    }
 );
 
 
@@ -93,7 +177,7 @@ userSchema.methods.matchPassword = async function (enteredPassword: string): Pro
     if (!enteredPassword || !this.password) {
         throw new Error('Both enteredPassword and stored password are required.');
     }
-    return  bcrypt.compareSync(enteredPassword, this.password);
+    return bcrypt.compareSync(enteredPassword, this.password);
 }
 
 

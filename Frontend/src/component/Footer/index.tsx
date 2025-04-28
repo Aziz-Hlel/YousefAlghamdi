@@ -191,7 +191,7 @@ function Footer() {
               <p className="copyright-text">
                 © 2025 Yousef Alghamdi Properties. All rights reserved by
                 <a href="https://technoshark.org/" target="_blank">
-                  TecknoShark
+                  TechnoShark
                 </a>
               </p>
             </div>

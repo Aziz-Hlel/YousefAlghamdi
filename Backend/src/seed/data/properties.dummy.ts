@@ -8,7 +8,7 @@ import data from './property.dummy.json';
 
 
 
-const createProperties = async (clients: Iuser_wPassword[], agents: IAgentModel[]): Promise<any[]> => {
+const createProperties = async (clients: Iuser_wPassword[], agents: Iuser_wPassword[]): Promise<any[]> => {
 
 
 
