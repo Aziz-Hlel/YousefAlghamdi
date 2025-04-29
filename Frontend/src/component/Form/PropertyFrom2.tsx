@@ -99,7 +99,7 @@ const PropertyFrom = () => {
   const CityValueObserver = watch('city');
 
   const [NearestLocation, setNearestLocation] = useState<{ placeName: string, distance: string }[]>([{ placeName: "", distance: "" }]);
-  const [additionalDetails, setAdditionalDetails] = useState<string[]>([])
+  const [additionalDetails, setAdditionalDetails] = useState<string[]>([]);
 
   const initialImgArray: imageArray = [null, null, null, null];
   const [imgs, setImgs] = useState<imageArray>(initialImgArray);

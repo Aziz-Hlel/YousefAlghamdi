@@ -176,7 +176,7 @@ export const getProperty = async (req: Request, res: Response, next: NextFunctio
 
 
 export const getUserProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-
+    console.log('t5lll5l5l5l5')
     const userId = req.user?._id;
     const page = Number(req.query.page) || 1;
     const limit = 6;
@@ -270,6 +270,7 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
 };
 
 
+
 export const getPendingProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
     const userId = req.user?._id;
@@ -337,12 +338,57 @@ export const getPendingProperties = async (req: AuthenticatedRequest, res: Respo
 };
 
 
+
+
+export const updateProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    const property = req.body;
+    const propertyId = req.params.propertyId;
+
+    if (!propertyId || !mongoose.Types.ObjectId.isValid(propertyId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    const validBody = ApproveSubmitPropertySchema.safeParse(property);
+
+    if (!validBody.success) {
+        console.log("validBody.error.issues", validBody.error.issues)
+        let zodErrors = {}
+        validBody.error.issues.forEach((issue) => zodErrors = { ...zodErrors, [issue.path[0]]: issue.message });
+        return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request, zodErrors));
+    }
+
+    try {
+
+        const property = await Property.findById(propertyId);
+        if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
+      
+        (validBody as any)._id = req.params.propertyId;
+
+        property.active = false
+        property.advanced = {
+            state: statesTypes.toBeUpdated,
+            available: null,
+            updated_version: validBody.data,
+        };
+        await property.save();
+        res.status(statusCode.OK).json('Property updated successfully');
+    }
+    catch (error) {
+        next(error);
+    };
+
+
+
+};
+
+
+
+
 export const approveProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
 
     const property = req.body;
 
-    const propertyId = req.body._id;
+    const propertyId = req.params.propertyId;
 
     if (!propertyId || !mongoose.Types.ObjectId.isValid(propertyId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
@@ -364,12 +410,12 @@ export const approveProperty = async (req: AuthenticatedRequest, res: Response, 
 
         if (req.user && req.user.role === roles.AGENT && property.agentId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
 
-        const validatedVersion: any = validBody.data
+        const validatedVersion: any = validBody.data;
         validatedVersion.active = true;
         validatedVersion.advanced = {};
         validatedVersion.advanced.state = statesTypes.active;
         validatedVersion.advanced.available = null;
-        Object.assign(property, validatedVersion)
+        Object.assign(property, validatedVersion);
         await property.save();
 
         res.json('Property approved successfully');

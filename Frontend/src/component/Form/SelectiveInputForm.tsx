@@ -35,7 +35,7 @@ function SelectiveInputForm({ size, title, options, fieldRegister, fieldError }:
             disabled={options.length === 0}
           >
             <option ></option>
-            {options.map((value: any) => <option formkey={value} value={value}>{value}</option>)}
+            {options.map((value: any) => <option key={value} value={value}>{value}</option>)}
           </select>
         </div>
         <span className="text-red-600 p-2 inline-block">{fieldError?.message}</span>

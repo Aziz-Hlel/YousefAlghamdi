@@ -9,7 +9,7 @@ import AddProperty from "./component/AddProperty2";
 import AgentDetail from "./component/AgentDetail2";
 import Contact from "./component/Contact2";
 import Dashboard from "./component/Dashboard2";
-import EditProperty from "./component/Edit Property2";
+import EditPendingProperty from "./component/EditPendingProperty/index.js";
 import ErrorPage from "./component/Error";
 import Faq from "./component/Faq";
 import Login from "./component/Login2";
@@ -101,8 +101,8 @@ const App2 = () => {
 
                                     </Route>
 
-                                    <Route path="dashboard/my-properties/edit-property/:propertyId" element={<EditProperty />} />
-                                    <Route path="dashboard/pending-properties/edit-property/:propertyId" element={<EditProperty />} />
+                                    <Route path="dashboard/my-properties/edit-property/:propertyId" element={<EditPendingProperty />} />
+                                    <Route path="dashboard/pending-properties/edit-property/:propertyId" element={<EditPendingProperty />} />
 
 
 

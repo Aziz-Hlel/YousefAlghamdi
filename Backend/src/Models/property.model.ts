@@ -44,7 +44,7 @@ export interface Iproperty {
 
     advanced: {
         state: string,
-        available: Date,
+        available: Date|null,
         updated_version: { [key: string]: any }
     },
 

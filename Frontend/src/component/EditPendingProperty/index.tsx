@@ -10,7 +10,7 @@ import { SinglePropertyProvider } from "@src/providers/SingleProperty.context";
 import { useParams } from "react-router-dom";
 import PropertyFrom from "../Form/PropertyFrom2.edit";
 
-const EditProperty = () => {
+const EditPendingProperty = () => {
   const [isLoading, setisLoadingg] = useState(true);
   const { propertyId } = useParams();
 
@@ -52,4 +52,4 @@ const EditProperty = () => {
   return component;
 }
 
-export default EditProperty;
+export default EditPendingProperty;

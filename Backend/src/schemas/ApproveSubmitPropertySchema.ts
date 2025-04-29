@@ -2,7 +2,6 @@ import z from "zod";
 
 const ApproveSubmitPropertySchema = z.object({
 
-    _id: z.string().optional(),
     title: z.string({ required_error: "Title is required" })
         .min(2, { message: "Title must be at least 2 characters long" })
         .max(25, { message: "Title must be at most 25 characters long" }),
