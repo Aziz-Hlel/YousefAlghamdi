@@ -30,6 +30,9 @@ const apiGateway = {
         myProperties: {
             list: "/property/my-properties",
         },
+        pendingProperties: {
+            list: "/property/pending-properties",
+        },
 
         approve: "/property/approve",
 

@@ -1,6 +1,8 @@
 import Iproperty from "@src/models/property.type";
 import { useAgents } from "@src/providers/AgentsProvider.context";
+import { useAuth } from "@src/providers/AuthProvider.context";
 import Http from "@src/services/Http";
+import roles from "@src/types/roles.type";
 import apiGateway from "@src/utils/apiGateway";
 import { createContext, RefObject, useContext, useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
@@ -18,12 +20,13 @@ const MyPropertiesContext = createContext<IMyPropertiesContext | undefined>(unde
 
 
 
-const MyPropertiesProvider = ({ children }: { children: React.ReactNode }) => {
+const MyPropertiesProvider = ({ children, title }: { children: React.ReactNode, title: "Pending Properties" | "My properties" }) => {
 
   const [properties, setProperties] = useState<Iproperty[]>([]);
   const [totalCount, setTotalCount] = useState(0);
   const listRef = useRef<HTMLDivElement | null>(null);
 
+  const { user } = useAuth();
 
   const fetchProperties = async (page?: number) => {
 
@@ -36,8 +39,9 @@ const MyPropertiesProvider = ({ children }: { children: React.ReactNode }) => {
         behavior: 'smooth',
       });
     }
-    
-    const response = await Http.get(apiGateway.property.myProperties.list, { params: { page: page ?? 1 } });
+    const url = title === "Pending Properties" ? apiGateway.property.pendingProperties.list : apiGateway.property.myProperties.list;
+
+    const response = await Http.get(url, { params: { page: page ?? 1 } });
     const properties: Iproperty[] = response?.data.result || [];
     const totalCount = Number(response?.headers["x-total-count"]);
 
@@ -52,7 +56,7 @@ const MyPropertiesProvider = ({ children }: { children: React.ReactNode }) => {
 
     fetchProperties();
 
-  }, []);
+  }, [title]);
 
 
   return (

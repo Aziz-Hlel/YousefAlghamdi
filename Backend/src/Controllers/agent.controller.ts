@@ -2,11 +2,10 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../Models/user.model";
 import roles from "../types/roles.type";
-import { z, ZodEffects } from "zod";
+import { z } from "zod";
 import { errorHandler } from "../utils/error";
 import statusCode from "../utils/statusCode";
 import errorMessages from "../utils/errorMessages";
-import Agent from "../Models/agent.model";
 import mongoose from "mongoose";
 
 

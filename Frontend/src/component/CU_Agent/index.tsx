@@ -1,5 +1,7 @@
 import { useAgents } from "@src/providers/AgentsProvider.context";
+import { useAuth } from "@src/providers/AuthProvider.context";
 import Http from "@src/services/Http";
+import roles from "@src/types/roles.type";
 import apiGateway from "@src/utils/apiGateway";
 import ProtoTypes from "prop-types";
 import { useEffect, useId, useState } from "react";
@@ -41,7 +43,7 @@ const UserView = () => {
 
 
   const { userId } = useParams();
-
+  const { user } = useAuth()
   const [userInspected, setUserInspected] = useState<IUser>(initUser);
   const navigate = useNavigate();
 
@@ -52,7 +54,7 @@ const UserView = () => {
 
     const response = await Http.get(apiGateway.user.getById + userId);
     response?.status !== 200 && navigate("../")
-    
+
     setUserInspected(response?.data.result);
     setCurrentAgent(response?.data.result.clientInfo?.agentId ?? null)
 
@@ -151,29 +153,31 @@ const UserView = () => {
                     <span>Created at:</span> {createdAt}
                   </li>
 
-                  <li>
-                    <span>Sponsored agent: </span>
+                  {user?.role === roles.ADMIN &&
+                    <li>
+                      <span>Sponsored agent: </span>
 
-                    <select name="sponsoredAgent" value={currentAgent ?? ""} onChange={(e) => {
+                      <select name="sponsoredAgent" value={currentAgent ?? ""} onChange={(e) => {
 
-                      console.log("e.target.value", e.target.value);
-                      ; setCurrentAgent(e.target.value)
-                    }}>
-                      {!userInspected.clientInfo?.agentId && <option value=""></option>}
-                      {Object.keys(agents).map((agent) =>
-                        <option value={agent} key={agent}>
-                          {`${agents[agent].firstName} ${agents[agent].lastName}`}
-                        </option>
-                      )}
+                        console.log("e.target.value", e.target.value);
+                        ; setCurrentAgent(e.target.value)
+                      }}>
+                        {!userInspected.clientInfo?.agentId && <option value=""></option>}
+                        {Object.keys(agents).map((agent) =>
+                          <option value={agent} key={agent}>
+                            {`${agents[agent].firstName} ${agents[agent].lastName}`}
+                          </option>
+                        )}
 
-                    </select>
-                  </li>
+                      </select>
+                    </li>
+                  }
                   <li>
                     <div className=" w-full  flex justify-end">
 
-                      <button type="button" className="homec-invoice-table--btn w-20 h-10" onClick={changeAgentOfUser} >
+                      {user?.role === roles.ADMIN && <button type="button" className="homec-invoice-table--btn w-20 h-10" onClick={changeAgentOfUser} >
                         save
-                      </button>
+                      </button>}
 
                     </div>
                   </li>

@@ -80,14 +80,16 @@ const App2 = () => {
                                     <Route path="dashboard" element={<Dashboard />} >
 
                                         <Route index element={<DashboardComp />} />
-                                        <Route path="my-properties" element={<MyPropertiesProvider> <MyProperties title="My properties" /> </MyPropertiesProvider>} />
+                                        <Route path="my-properties" element={<MyPropertiesProvider title="My properties"> <MyProperties title="My properties" /> </MyPropertiesProvider>} >
+                                            <Route path="inspect-user/:userId" element={<UserView />} />
+                                        </Route>
                                         <Route path="personal-info" element={<PersonalInfo />} />
                                         <Route path="Reviews" element={<Reviews />} />
                                         <Route path="change-password" element={<ChangePassword />} />
 
 
                                         {/* Admin Routes */}
-                                        <Route path="pending-properties" element={<MyPropertiesProvider> <MyProperties title="Pending Properties" /> </MyPropertiesProvider>} >
+                                        <Route path="pending-properties" element={<MyPropertiesProvider title="Pending Properties"> <MyProperties title="Pending Properties" /> </MyPropertiesProvider>} >
                                             <Route path="inspect-user/:userId" element={<UserView />} />
                                         </Route>
 

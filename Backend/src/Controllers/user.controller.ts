@@ -91,8 +91,6 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
 };
 
 
-
-
 const loginBodySchema = z.object({
     email: z.string({ required_error: "Email is required" })
         .email({ message: "Invalid email address" }),
@@ -136,11 +134,8 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 }
 
 
-
-
-
 export const whoAmI = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    console.log('t5l l whoAmI w cokkies =', req.cookies)
+
     const userId = req.user?._id
 
     if (!userId) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
@@ -156,7 +151,6 @@ export const whoAmI = async (req: AuthenticatedRequest, res: Response, next: Nex
     });
 
 }
-
 
 
 export const logOut = async (req: Request, res: Response, next: NextFunction) => {

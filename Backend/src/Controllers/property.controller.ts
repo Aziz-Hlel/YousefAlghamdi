@@ -20,7 +20,7 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
     let agentId: string | undefined = req.user?.clientInfo?.agentId;
 
 
-    if (req.user?.role === roles.CLIENT || roles.USER) {
+    if (req.user?.role === roles.CLIENT || req.user?.role === roles.USER) {
 
 
         if (!agentId) {
@@ -41,7 +41,7 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
 
 
         const property = new Property({
-            
+
             ...req.body,
             clientId: clientId,
             agentId: agentId
@@ -77,7 +77,7 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
         const property = new Property({
             ...req.body,
             clientId: clientId,
-            agentId: agentId
+            agentId: clientId
 
         });
 
@@ -86,6 +86,7 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
         res.status(statusCode.CREATED).json('Property created successful');
 
     }
+    else return next(errorHandler(statusCode.INTERNAL_SERVER_ERROR, errorMessages.COMMON.INTERNAL_SERVER_ERROR));
 
     // ! 3nd if l user client agent w admin le donc ken admin chizid dar none will happen , reason mezetch 5atr bch trasilik tzidlou input y5tar agent m3aha mouch kima l agent t7sb besmou direct w client kima 5dmt melloul
 
@@ -217,11 +218,11 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
         try {
 
             const [properties, total] = await Promise.all([
-                Property.find({ agentId: userId })
+                Property.find({ agentId: userId, "advanced.state": { $eq: statesTypes.active } })
                     .limit(limit)
                     .skip((page - 1) * limit)
                     .sort({ createdAt: -1 }),
-                Property.countDocuments({ agentId: userId }),
+                Property.countDocuments({ agentId: userId, "advanced.state": { $eq: statesTypes.active } }),
             ]);
 
             res.set("x-total-count", total.toString()); // Optional, useful for frontend
@@ -240,7 +241,7 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
 
 
     if (req.user?.role === roles.ADMIN)
-
+        // ! func t3 el admin f compoenet t3 my properties ama y3ih ken l pending 
         try {
 
             const [properties, total] = await Promise.all([
@@ -268,6 +269,72 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
     return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
 };
 
+
+export const getPendingProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    const userId = req.user?._id;
+    const role = req.user?.role;
+    const page = Number(req.query.page) || 1;
+    const limit = 6;
+
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+
+    if (role === roles.AGENT)
+
+        try {
+
+            const [properties, total] = await Promise.all([
+                Property.find({ agentId: userId, "advanced.state": { $ne: statesTypes.active } })
+                    .limit(limit)
+                    .skip((page - 1) * limit)
+                    .sort({ createdAt: -1 }),
+                Property.countDocuments({ agentId: userId, "advanced.state": { $ne: statesTypes.active } }),
+            ]);
+
+            res.set("x-total-count", total.toString()); // Optional, useful for frontend
+
+            res.json({
+
+                result: properties,
+
+            });
+
+            return
+
+        } catch (error) {
+            next(error);
+        }
+
+
+    if (role === roles.ADMIN)
+
+        try {
+
+            const [properties, total] = await Promise.all([
+                Property.find({ "advanced.state": { $ne: statesTypes.active } })
+                    .limit(limit)
+                    .skip((page - 1) * limit)
+                    .sort({ updatedAt: -1 }),
+                Property.countDocuments({ "advanced.state": { $ne: statesTypes.active } }),
+            ]);
+            res.set("x-total-count", total.toString()); // Optional, useful for frontend
+
+            res.json({
+
+                result: properties,
+
+            });
+
+            return
+
+        } catch (error) {
+            next(error);
+        }
+
+
+    return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+};
 
 
 export const approveProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {

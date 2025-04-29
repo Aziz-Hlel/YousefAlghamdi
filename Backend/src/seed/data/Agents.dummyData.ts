@@ -16,12 +16,12 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
     return [
         {
             _id: new mongoose.Types.ObjectId(),
-            firstName: 'agent111',
+            firstName: 'agent1',
             lastName: 'Doe',
-            email: "agent111@gmail.com",
+            email: "agent1@gmail.com",
             phoneNumber: '1234567890',
             role: roles.AGENT,
-            password: await hashPassword("agent111"),
+            password: await hashPassword("agent1"),
 
             agentInfo: {
                 image: "",
@@ -32,7 +32,7 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
                     instagram: "https://instagram.com/"
                 },
                 address: '1 Agent St',
-                about: "agent111 description",
+                about: "agent1 description",
                 clientsId: [],
             },
             savedProperties: [],
@@ -41,10 +41,10 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
         },
         {
             _id: new mongoose.Types.ObjectId(),
-            firstName: 'agent222',
+            firstName: 'agent2',
             lastName: 'Doe',
-            password: await hashPassword("agent222"), // make sure to hash or use dummy
-            email: "agent222@gmail.com",
+            password: await hashPassword("agent2"), // make sure to hash or use dummy
+            email: "agent2@gmail.com",
             phoneNumber: '1234567890',
             role: roles.AGENT,
             agentInfo: {
@@ -56,7 +56,7 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
                     instagram: "https://instagram.com/"
                 },
                 image: "",
-                about: "agent222 description",
+                about: "agent2 description",
                 clientsId: [],
             },
             savedProperties: [],
@@ -64,10 +64,10 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
         },
         {
             _id: new mongoose.Types.ObjectId(),
-            firstName: 'agent333',
+            firstName: 'agent3',
             lastName: 'Doe',
-            password: await hashPassword("agent333"), // make sure to hash or use dummy
-            email: "agent333@gmail.com",
+            password: await hashPassword("agent3"), // make sure to hash or use dummy
+            email: "agent3@gmail.com",
             phoneNumber: '1234567890',
             role: roles.AGENT,
             agentInfo: {
@@ -80,7 +80,7 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
                     instagram: "https://instagram.com/"
                 },
                 image: "",
-                about: "agent333 description",
+                about: "agent3 description",
                 clientsId: [],
 
             },
@@ -89,10 +89,10 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
         },
         {
             _id: new mongoose.Types.ObjectId(),
-            firstName: 'admin111',
+            firstName: 'admin',
             lastName: 'Doe',
-            password: await hashPassword("admin111"), // make sure to hash or use dummy
-            email: "admin111@gmail.com",
+            password: await hashPassword("admin"), // make sure to hash or use dummy
+            email: "admin@gmail.com",
             phoneNumber: '1234567890',
             role: roles.ADMIN,
 

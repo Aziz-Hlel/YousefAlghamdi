@@ -25,6 +25,10 @@ export const SinglePropertyProvider = ({ children, id }: { children: ReactNode, 
         // const property: Iproperty =  (await Http.get<Iproperty>(`${apiGateway.property.getById}/${id}`)).data.result;
         const response = await Http.get(`${apiGateway.property.getById}/${id}`);
         response?.status === 200 && setProperty(response.data.result)
+        
+        if (response?.status !== 200)
+            throw new Error("Failed to fetch property data in SinglePropertyProvider , updateProperty function");
+
         // console.log("property", typeof property);
         // console.log(property)
 

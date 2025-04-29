@@ -28,8 +28,8 @@ function ChangePassword() {
   });
 
   const onSubmit = async (data: ChangePasswordFields) => {
-    // const response = await Http.post(apiGateway.user.sigIn, data)
-    console.log(data);
+
+    
     if (data.password !== data.confirmPassword) {
       setError("confirmPassword", { message: "Passwords do not match" });
       return;

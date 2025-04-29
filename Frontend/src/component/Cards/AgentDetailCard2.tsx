@@ -2,7 +2,7 @@ import { useAgents } from "@src/providers/AgentsProvider.context";
 import ProtoTypes from "prop-types";
 import { useParams } from "react-router-dom";
 
-function AgentDetailCard({ image, position,  linkedin, twitter, instagram, }: any) {
+function AgentDetailCard({ image, position, }: { image: string, position: string }) {
 
   const { agentId } = useParams();
   const { agents } = useAgents();
@@ -38,7 +38,7 @@ function AgentDetailCard({ image, position,  linkedin, twitter, instagram, }: an
                   <a href={`mailto:${agent.email}`}>{agent.email}</a>
                 </li>
                 <li>
-                  <img src="/img/agent-location.svg" alt="#" /> {agent.adresse}
+                  <img src="/img/agent-location.svg" alt="#" /> {agent.agentInfo.address}
                 </li>
               </ul>
               <ul className="homec-agent__social homec-agent__social--inline list-none mg-top-30">
@@ -58,7 +58,7 @@ function AgentDetailCard({ image, position,  linkedin, twitter, instagram, }: an
                   </a>
                 </li>
                 <li>
-                  <a href={linkedin}>
+                  <a href={agent.agentInfo.socials.linkedin}>
                     <svg
                       width="16"
                       height="15"
@@ -73,7 +73,7 @@ function AgentDetailCard({ image, position,  linkedin, twitter, instagram, }: an
                   </a>
                 </li>
                 <li>
-                  <a href={twitter}>
+                  <a href={agent.agentInfo.socials.twitter}>
                     <svg
                       width="18"
                       height="16"
@@ -86,7 +86,7 @@ function AgentDetailCard({ image, position,  linkedin, twitter, instagram, }: an
                   </a>
                 </li>
                 <li>
-                  <a href={instagram}>
+                  <a href={agent.agentInfo.socials.instagram}>
                     <svg
                       width="15"
                       height="15"
@@ -108,7 +108,7 @@ function AgentDetailCard({ image, position,  linkedin, twitter, instagram, }: an
               <div className="homec-agent-detail__sticky--heading">
                 <h2 className="homec-agent-detail__sticky--title">About Me</h2>
               </div>
-              <p className="homec-agent-detail__sticky--text">{agent.about}</p>
+              <p className="homec-agent-detail__sticky--text">{agent.agentInfo.about}</p>
             </div>
           </div>
         </div>

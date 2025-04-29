@@ -51,7 +51,6 @@ function PersonalInfo() {
                 style={{
                   backgroundImage: (agent1 ? `url(${agent1})` : "url('https://placehold.co/1720x1420')"),
                 }}
-
               >
 
               </div>
@@ -75,7 +74,7 @@ function PersonalInfo() {
                 Santa Ana, Illinois 85486{" "}
               </li> */}
             </ul>
-            {user.role === roles.AGENT || user.role === roles.ADMIN && <AgentAddOns socials= {roles.ADMIN ? user.adminInfo?.socials : user.agentInfo?.socials} />}
+            {(user.role === roles.AGENT || user.role === roles.ADMIN) && <AgentAddOns socials={user.role === roles.ADMIN ? user.adminInfo?.socials : user.agentInfo?.socials} />}
           </div>
         </div>
       </div>

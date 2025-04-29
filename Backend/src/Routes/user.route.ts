@@ -1,6 +1,6 @@
 import express from 'express';
 import { changePassword, getUser, login, logOut, register, test, updateAgentOfClient, updateUser, whoAmI } from '../Controllers/user.controller';
-import protect, { adminAuth } from '../Middlewares/auth.middleware';
+import protect, { adminAuth, adminOrAgentAuth } from '../Middlewares/auth.middleware';
 
 
 
@@ -14,7 +14,7 @@ userRouter.post('/register', register);
 userRouter.get('/test', protect, test);
 userRouter.post('/login', login);
 
-userRouter.get('/:userId', adminAuth, getUser);
+userRouter.get('/:userId', adminOrAgentAuth, getUser);
 userRouter.patch('/update-agent', adminAuth, updateAgentOfClient)
 userRouter.patch('/update-user/', protect, updateUser);
 userRouter.post('/log-out', logOut);

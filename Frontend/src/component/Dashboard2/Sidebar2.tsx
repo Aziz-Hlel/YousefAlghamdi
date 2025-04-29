@@ -84,7 +84,7 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
         }
 
         {
-          user?.role === roles.ADMIN && < DashboardSidebarBtn
+          (user?.role === roles.ADMIN || user?.role === roles.AGENT) && < DashboardSidebarBtn
             active={activeComponent}
             handleActive={setComponent}
             title="Pending properties"

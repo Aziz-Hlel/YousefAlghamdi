@@ -53,10 +53,7 @@ function AgentDetail() {
               <AgentDetailCard
                 image="https://placehold.co/360x390"
                 position="Real Estate Broker"
-                phone="#"
-                linkedin="#"
-                twitter="#"
-                instagram="#"
+
               />
               <PropertyAgents
                 image="https://placehold.co/500x500"

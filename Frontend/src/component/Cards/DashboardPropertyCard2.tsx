@@ -40,7 +40,7 @@ function DashboardPropertyCard({ _id, ownerId, status, image, tempToSeeIfUser, l
       {/* Property Button */}
       <div className="homec-dashboard-property__buttons ">
 
-        {user?.role === roles.ADMIN && <Link to={"inspect-user/" + ownerId}>
+        {(user?.role === roles.ADMIN || user?.role=== roles.AGENT) && <Link to={"inspect-user/" + ownerId}>
           <button className="homec-dashboard-property__btn px-2 flex justify-center items-center" >
             <div className="flex  justify-center  items-center">
 
