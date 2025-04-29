@@ -4,23 +4,33 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 
 export type IAgent = {
-    _id: string;
     firstName: string;
     lastName: string;
     email: string;
-    phoneNumber: string;
+    id: string;
     role: string;
-    adresse: string;
-    image: string;
-    socials: {
-        whatsApp: string;
-        linkedin: string;
-        twitter: string;
-        instagram: string;
-    }
-    about: string;
+    phoneNumber: string;
+
+    agentInfo: {
+        image: string,
+        about: string,
+        socials: {
+            whatsApp: string,
+            instagram: string,
+            twitter: string,
+            linkedin: string,
+        },
+        address?: string,
+        clientsId: string[],
+
+    };
+
+
+
 
 }
+
+
 
 type IAgentDic = {
     [key: string]: IAgent

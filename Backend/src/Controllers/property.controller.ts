@@ -17,7 +17,7 @@ import ApproveSubmitPropertySchema from "../schemas/ApproveSubmitPropertySchema"
 export const createProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
     const clientId = req.user?._id!;
-    let agentId: string | undefined | null = req.user?.clientInfo?.agentId ?? null;
+    let agentId: string | undefined = req.user?.clientInfo?.agentId;
 
 
     if (req.user?.role === roles.CLIENT || roles.USER) {
@@ -41,6 +41,7 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
 
 
         const property = new Property({
+            
             ...req.body,
             clientId: clientId,
             agentId: agentId

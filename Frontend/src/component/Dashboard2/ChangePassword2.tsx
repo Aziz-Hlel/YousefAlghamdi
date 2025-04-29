@@ -1,14 +1,44 @@
-import { useAgents } from "@src/providers/AgentsProvider.context";
-import { useState } from "react";
+import { useAuth } from "@src/providers/AuthProvider.context";
+import Http from "@src/services/Http";
+import apiGateway from "@src/utils/apiGateway";
+import { useForm } from "react-hook-form";
+
+
+type ChangePasswordFields = {
+  password: string;
+  confirmPassword: string;
+};
 
 function ChangePassword() {
-  const [input, setInput] = useState({
-    password: "",
-    confirmPassword: "",
+
+  const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<ChangePasswordFields>();
+  const { logout } = useAuth()
+  const passwordRegister = register("password", {
+    required: "Email is required",
+    minLength: { value: 8, message: "Password must be at least 8 characters", },
+
   });
-  const handleChange = (e: any) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-  };
+
+  const confirmPasswordRegister = register("confirmPassword", {
+
+    required: "Confirm password is required",
+
+    minLength: { value: 8, message: "Confirm password must be at least 8 characters", }
+
+  });
+
+  const onSubmit = async (data: ChangePasswordFields) => {
+    // const response = await Http.post(apiGateway.user.sigIn, data)
+    console.log(data);
+    if (data.password !== data.confirmPassword) {
+      setError("confirmPassword", { message: "Passwords do not match" });
+      return;
+    }
+    const response = await Http.patch(apiGateway.user.changePassword, data)
+    response?.status !== 200 && setError("root", { message: "something went wrong" })
+    response?.status === 200 &&  logout()
+
+  }
 
 
   return (
@@ -26,8 +56,7 @@ function ChangePassword() {
             {/* Sign in Form */}
             <form
               className="ecom-wc__form-main p-0"
-              action="index.html"
-              method="post"
+              onSubmit={handleSubmit(onSubmit)}
             >
               <div className="row">
                 <div className="col-12">
@@ -39,14 +68,10 @@ function ChangePassword() {
                       <input
                         className="ecom-wc__form-input"
                         placeholder="●●●●●●"
-                        id="password-field"
                         type="password"
-                        name="password"
-                        maxLength="8"
-                        required="required"
-                        value={input.password}
-                        onChange={(e) => handleChange(e)}
+                        {...passwordRegister}
                       />
+                      {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
                     </div>
                   </div>
                 </div>
@@ -59,14 +84,10 @@ function ChangePassword() {
                       <input
                         className="ecom-wc__form-input"
                         placeholder="●●●●●●"
-                        id="confirm-password-field"
                         type="password"
-                        name="confirmPassword"
-                        maxLength="8"
-                        required="required"
-                        value={input.confirmPassword}
-                        onChange={(e) => handleChange(e)}
+                        {...confirmPasswordRegister}
                       />
+                      {errors.confirmPassword && <span className="text-red-500 text-sm">{errors.confirmPassword.message}</span>}
                     </div>
                   </div>
                 </div>
@@ -74,6 +95,7 @@ function ChangePassword() {
               {/* Form Group */}
               <div className="form-group form-mg-top25">
                 <div className="ecom-wc__button ecom-wc__button--bottom">
+                  {errors.root && <span className="pl-2 text-red-600 ">{errors.root.message}</span>}
                   <button className="homec-btn homec-btn__second" type="submit">
                     <span>Update Password</span>
                   </button>

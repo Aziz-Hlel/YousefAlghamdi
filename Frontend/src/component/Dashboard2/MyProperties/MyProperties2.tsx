@@ -6,7 +6,7 @@ import properties from "../../../data/property";
 import { useMyPropertiesContext } from "./MyPropertiesProvider.context";
 import apiGateway from "@src/utils/apiGateway";
 import { pickRandomPhoto } from "@src/pickRandomPhoto";
-import UserView from "@src/component/Modal2";
+import UserView from "@src/component/CU_Agent";
 import Http from "@src/services/Http";
 
 

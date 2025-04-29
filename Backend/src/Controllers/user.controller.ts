@@ -12,14 +12,13 @@ import roles from "../types/roles.type";
 import Property from "../Models/property.model";
 import Agent from "../Models/agent.model";
 import ENV from "../utils/ENV.variables";
+import { merge, pick } from 'lodash';
 
 
 export const test = async (req: Request, res: Response) => {
-    const user = await User.findById('680f59d00ec1896fab3046b7');
-    console.log('user', user)
-    res.json({ message: 'API is working!', user });
-};
 
+    res.json({ message: 'API is working!' });
+};
 
 const registerBodySchema = z.object({
     firstName: z.string({ required_error: "First name is required" })
@@ -102,7 +101,7 @@ const loginBodySchema = z.object({
         .min(1, { message: "Password must be at least 6 characters long" })
         .max(25, { message: "Password must be at most 25 characters long" }),
 
-})
+});
 
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {
@@ -146,24 +145,14 @@ export const whoAmI = async (req: AuthenticatedRequest, res: Response, next: Nex
 
     if (!userId) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
 
-    let user = await User.findById(userId).select("-password");
+    const user = await User.findById(userId).select("-password");
 
-    if (!user) {
-        user = await Agent.findById(userId).select("-password");
-        if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
-    }
+    if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
 
-    const response = {
-        _id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        role: user.role
 
-    }
 
     res.status(statusCode.OK).json({
-        result: response
+        result: user,
     });
 
 }
@@ -199,7 +188,6 @@ export const getUser = async (req: AuthenticatedRequest, res: Response, next: Ne
 };
 
 
-
 export const updateAgentOfClient = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
     const { userId, agentId } = req.body;
@@ -219,7 +207,7 @@ export const updateAgentOfClient = async (req: AuthenticatedRequest, res: Respon
             user.clientInfo = {};
         }
         user.clientInfo.agentId = agentId;
-        
+
         await user.save();
 
         Promise.all([
@@ -238,5 +226,100 @@ export const updateAgentOfClient = async (req: AuthenticatedRequest, res: Respon
     } catch (e) {
         next(e);
     }
+
+};
+
+
+export const updateUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    const userId = req.user?._id;
+
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    const existingUser = await User.findById(userId);
+
+    if (!existingUser) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.BAD_Request));
+
+    const incomingUser = req.body;
+
+    // --------- Global fields you allow to update ----------
+    const globalAllowedFields = ['firstName', 'lastName', 'phoneNumber',];
+
+    // --------- Role-specific subdocument update fields ----------
+    const roleInfoUpdateRules: Record<string, { path: string, allowedFields: string[] }> = {
+        agent: { path: 'agentInfo', allowedFields: ['image', 'about', 'address', 'socials'] },
+        admin: { path: 'adminInfo', allowedFields: ['image', 'about', 'address', 'socials'] },
+    };
+
+    // Update global fields
+    for (const field of globalAllowedFields) {
+        if (field in incomingUser) {
+            (existingUser as any)[field] = incomingUser[field];
+        }
+    }
+
+    // Update role-specific info if provided
+    const roleRule = roleInfoUpdateRules[existingUser.role];
+
+    if (roleRule && incomingUser[roleRule.path]) {
+        const existingRoleInfo = (existingUser as any)[roleRule.path]?.toObject() || {};
+        const incomingRoleInfo = incomingUser[roleRule.path];
+
+        // Pick only allowed fields from incoming
+        const safeIncomingRoleInfo = pick(incomingRoleInfo, roleRule.allowedFields);
+
+        let mergedRoleInfo = merge({}, existingRoleInfo, safeIncomingRoleInfo);
+
+        // ⚡ Protect critical internal fields
+        if (existingUser.role === 'agent') {
+            mergedRoleInfo.clientsId = existingRoleInfo.clientsId;  // Force keep
+        }
+
+        existingUser.email = existingUser.email; // Force keep
+        existingUser.savedProperties = existingUser.savedProperties; // Force keep
+
+        (existingUser as any)[roleRule.path] = mergedRoleInfo;
+    }
+
+    // ⚡ Protect globally critical fields manually
+    existingUser.savedProperties = existingUser.savedProperties;
+
+    const updatedUser = await existingUser.save();
+
+    res.status(statusCode.OK).json({
+        result: updatedUser,
+    });
+};
+
+
+export const changePassword = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    const { password, confirmPassword } = req.body;
+
+    if (!password || !confirmPassword) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    if (password !== confirmPassword) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    if (password.length < 6) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    const userId = req.user?._id;
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    try {
+        const user = await User.findById(userId).select('+password');
+        if (!user) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+        (user as any).password = password;
+        await (user as any).save();
+
+        res.clearCookie("accessToken", { httpOnly: true, secure: ENV.NODE_ENV === "production", sameSite: 'strict' });
+        res.clearCookie("refreshToken", { httpOnly: true, secure: ENV.NODE_ENV === "production", sameSite: 'strict' });
+
+        res.status(statusCode.OK).json('Password updated successfully');
+    } catch (error) {
+        return next(error);
+    };
+
+    // return next(errorHandler(statusCode.INTERNAL_SERVER_ERROR, errorMessages.INTERNAL_SERVER_ERROR));
 
 };

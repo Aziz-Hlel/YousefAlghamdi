@@ -29,10 +29,10 @@ import Reviews from "./component/Dashboard2/Reviews2.js";
 import DashboardComp from "./component/Dashboard2/DashboardComp2.js";
 import ChangePassword from "./component/Dashboard2/ChangePassword2.js";
 import MyPropertiesProvider from "./component/Dashboard2/MyProperties/MyPropertiesProvider.context.js";
-import AgentsTable from "./component/Dashboard2/InvoiceTable2.js";
+import AgentsTable from "./component/Dashboard2/AgentTable2.js";
 import { AgentsProvider } from "./providers/AgentsProvider.context.js";
-import CU_Agent from "./component/Modal2/updatePersonalInfo.js";
-import UserView from "./component/Modal2/index.js";
+import CU_Agent from "./component/CU_Agent/CU_Agent.js";
+import UserView from "./component/CU_Agent/index.js";
 import PropertySingle from "./component/PropertySingle2/index.js";
 
 const App2 = () => {
@@ -98,6 +98,7 @@ const App2 = () => {
                                         {/* <Route path="add-agent" element={<UpdatePersonalInfo isModalOpen={true} toggleModal={() => { }} />}></Route> */}
 
                                     </Route>
+
                                     <Route path="dashboard/my-properties/edit-property/:propertyId" element={<EditProperty />} />
                                     <Route path="dashboard/pending-properties/edit-property/:propertyId" element={<EditProperty />} />
 

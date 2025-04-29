@@ -12,14 +12,13 @@ import mongoose from "mongoose";
 
 const registerBodySchema = z.object({
     firstName: z.string({ required_error: "First name is required" })
-        .min(1, { message: "First name is required" })  // Custom message for required field
         .min(2, { message: "First name must be at least 2 characters long" })
         .max(25, { message: "First name must be at most 25 characters long" })
         .regex(/^[A-Za-z]+$/, { message: "First name can only contain letters" }),
 
 
     lastName: z.string({ required_error: "Last name is required" })
-        .min(1, { message: "Last name must be at least 2 characters long" })
+        .min(2, { message: "Last name must be at least 2 characters long" })
         .max(25, { message: "Last name must be at most 25 characters long" })
         .regex(/^[A-Za-z]+$/, { message: "Last name can only contain letters" }),
 
@@ -31,10 +30,6 @@ const registerBodySchema = z.object({
     email: z.string({ required_error: "Email is required" })
         .email({ message: "Invalid email address" }),
 
-    adresse: z.string({ required_error: "Adresse is required" })
-        .min(1, { message: "Adresse is required" })  // Custom message for required field
-        .max(50, { message: "Adresse must be at most 50 characters long" }),
-
 
     password: z.string({ required_error: "Password is required" })
         .min(1, { message: "Password must be at least 6 characters long" })
@@ -44,16 +39,20 @@ const registerBodySchema = z.object({
         .min(1, { message: "Confirm password must be at least 6 characters long" })
         .max(25, { message: "Confirm password must be at most 25 characters long" }),
 
-    image: z.string({ required_error: "Image is required" }),
+    agentInfo: z.object({
 
-    socials: z.object({
-        whatsApp: z.string({ required_error: "WhatsApp is required" }),
-        linkedin: z.string({ required_error: "LinkedIn is required" }),
-        twitter: z.string({ required_error: "Twitter is required" }),
-        instagram: z.string({ required_error: "Instagram is required" }),
+        image: z.string({ required_error: "Image is required" }),
+        address: z.string({ required_error: "Address is required" }),
+        about: z.string({ required_error: "About is required" }),
+
+        socials: z.object({
+            whatsApp: z.string({ required_error: "WhatsApp is required" }),
+            linkedin: z.string({ required_error: "LinkedIn is required" }),
+            twitter: z.string({ required_error: "Twitter is required" }),
+            instagram: z.string({ required_error: "Instagram is required" }),
+        }),
+
     }),
-
-    about: z.string({ required_error: "About is required" }),
 
 }).refine((data) =>
     data.password === data.confirmPassword, {
@@ -72,7 +71,7 @@ const updateAgentSchema = registerBodySchema.innerType().omit({
 export const createAgent = async (req: Request, res: Response, next: NextFunction) => {
 
     const newAgent = req.body;
-    newAgent.image = "https://example.com/images/john.jpg";
+    // newAgent.agentInfo.image = "https://example.com/images/john.jpg";
     const validBody = registerBodySchema.safeParse(newAgent);
 
     if (!validBody.success) {
@@ -82,12 +81,12 @@ export const createAgent = async (req: Request, res: Response, next: NextFunctio
     }
 
     const { email } = newAgent;
-    const agentExist = await Agent.findOne({ email });
+    const agentExist = await User.findOne({ email });
 
     if (agentExist) return next(errorHandler(statusCode.CONFLICT, errorMessages.COMMON.User_Already_Exists));
 
     newAgent.role = roles.AGENT;
-    const agent = new Agent(newAgent);
+    const agent = new User(newAgent);
 
     try {
         const agentt = await agent.save();
@@ -107,7 +106,7 @@ export const updateAgent = async (req: Request, res: Response, next: NextFunctio
     if (!agentId || !mongoose.Types.ObjectId.isValid(agentId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.TEA_POT));
 
     const updatedAgent = req.body;
-    updatedAgent.image = "https://example.com/images/john.jpg";
+    // updatedAgent.image = "https://example.com/images/john.jpg";
     const validBody = updateAgentSchema.safeParse(updatedAgent);
 
     if (!validBody.success) {
@@ -117,7 +116,7 @@ export const updateAgent = async (req: Request, res: Response, next: NextFunctio
     }
 
     try {
-        const updateResult = await Agent.findByIdAndUpdate(agentId, updatedAgent, { new: true });
+        const updateResult = await User.findByIdAndUpdate(agentId, updatedAgent, { new: true });
         if (!updateResult) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
         res.status(statusCode.OK).json({ result: updateResult });
@@ -130,12 +129,12 @@ export const updateAgent = async (req: Request, res: Response, next: NextFunctio
 }
 
 export const getAgents = async (req: Request, res: Response, next: NextFunction) => {
-    console.log('cookies : ', req.cookies)
+
 
     try {
         const [agents, agentsCount] = await Promise.all([
-            Agent.find().where('role').equals(roles.AGENT),
-            Agent.countDocuments({ role: roles.AGENT })
+            User.find().where('role').equals(roles.AGENT),
+            User.countDocuments({ role: roles.AGENT })
         ]);
 
         res.set("x-total-count", agentsCount.toString());

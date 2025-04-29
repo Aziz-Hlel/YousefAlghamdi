@@ -14,7 +14,9 @@ type IUser = {
   phoneNumber: number;
   createdAt: string;
   role: string;
-  agentId: string
+  clientInfo?: {
+    agentId?: string | null;
+  };
 }
 
 const initUser = {
@@ -49,9 +51,10 @@ const UserView = () => {
 
 
     const response = await Http.get(apiGateway.user.getById + userId);
-
+    response?.status !== 200 && navigate("../")
+    
     setUserInspected(response?.data.result);
-    setCurrentAgent(response?.data.result.agentId)
+    setCurrentAgent(response?.data.result.clientInfo?.agentId ?? null)
 
   };
 
@@ -79,7 +82,7 @@ const UserView = () => {
   const changeAgentOfUser = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
-    if (currentAgent === userInspected.agentId)
+    if (currentAgent === userInspected.clientInfo?.agentId)
       navigate("../");
     else {
       await Http.patch(apiGateway.user.updateAgent, {
@@ -152,12 +155,13 @@ const UserView = () => {
                     <span>Sponsored agent: </span>
 
                     <select name="sponsoredAgent" value={currentAgent ?? ""} onChange={(e) => {
+
                       console.log("e.target.value", e.target.value);
                       ; setCurrentAgent(e.target.value)
                     }}>
-                      {!userInspected.agentId && <option value=""></option>}
+                      {!userInspected.clientInfo?.agentId && <option value=""></option>}
                       {Object.keys(agents).map((agent) =>
-                        <option value={agent} formkey={agent}>
+                        <option value={agent} key={agent}>
                           {`${agents[agent].firstName} ${agents[agent].lastName}`}
                         </option>
                       )}

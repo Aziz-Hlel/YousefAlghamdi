@@ -1,32 +1,27 @@
-import ProtoTypes from "prop-types";
+
+import { useAuth } from "@src/providers/AuthProvider.context";
 import PersonalInfo from "../Form/PersonalInfo2";
-import { useNavigate, useParams } from "react-router-dom";
-import { z } from "zod";
+
+function UpdatePersonalInfo({ isModalOpen, toggleModal }: { isModalOpen: boolean; toggleModal: () => void; }) {
 
 
-
-const CU_Agent = () => {
-
-  const navigate = useNavigate();
-
-
-  const isModalOpen = true;
-
-  const toggleModal = () => {
-    navigate("../");
-  }
 
   return (
     <div
       className={`homec-modal modal fade ${isModalOpen && "show"}`}
       id="profile_view"
-      style={{ display: isModalOpen && "block" }}
+      tabIndex={-1}
+      aria-labelledby="profile_view"
+      aria-hidden="true"
+      style={{ display: isModalOpen ? "block" : undefined }}
     >
       <div className="homec-modal__width homec-modal__width--profile modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <button
             type="button"
             className="homec-moal__close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
             onClick={toggleModal}
           >
             <svg
@@ -51,7 +46,7 @@ const CU_Agent = () => {
               </span>
             </h3>
             {/* Sign in Form  */}
-            <PersonalInfo />
+            <PersonalInfo toggleModal={toggleModal} />
             {/* End Sign in Form */}
           </div>
         </div>
@@ -61,4 +56,5 @@ const CU_Agent = () => {
 }
 
 
-export default CU_Agent;
+
+export default UpdatePersonalInfo;

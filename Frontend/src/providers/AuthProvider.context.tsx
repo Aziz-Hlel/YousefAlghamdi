@@ -4,7 +4,6 @@ import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import { AxiosResponse } from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-import { IAgent } from "./AgentsProvider.context";
 
 
 export type IUser = {
@@ -12,14 +11,49 @@ export type IUser = {
     lastName: string;
     email: string;
     id: string;
+    phoneNumber: string;
     role: string;
+
+    clientInfo?: {
+        agentId?: string | null;
+    },
+
+    agentInfo?: {
+        image: string,
+        about: string,
+        socials: {
+            whatsApp: string,
+            instagram: string,
+            twitter: string,
+            linkedin: string,
+        },
+        address: string,
+        clientsId: string[],
+
+    };
+
+    adminInfo?: {
+        image: string,
+        about: string,
+        socials: {
+            whatsApp: string,
+            instagram: string,
+            twitter: string,
+            linkedin: string,
+        },
+        address: string,
+    };
+
+
+
 }
 
 type IAuthContext = {
-    user: IUser | IAgent | null | undefined;
+    user: IUser | null | undefined;
     signup: (data: SignUpSchemaType) => Promise<AxiosResponse<any, any> | undefined>;
     login: (data: LoginFormFields) => Promise<AxiosResponse<any, any> | undefined>;
     logout: () => void;
+    refreshUser: () => void;
 }
 
 const AuthContext = createContext<IAuthContext | undefined>(undefined);
@@ -29,7 +63,7 @@ const AuthContext = createContext<IAuthContext | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 
-    const [user, setUser] = useState<IUser | IAgent | null | undefined>(undefined);
+    const [user, setUser] = useState<IUser | null | undefined>(undefined);
 
     const whoAmI = async () => {
         const response = await Http.get(apiGateway.user.whoAmI);
@@ -72,6 +106,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         signup,
         login,
         logout,
+        refreshUser: whoAmI,
     };
     // console.log("user", user);
 
@@ -80,7 +115,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             {children}
         </AuthContext.Provider>
     );
-}
+};
 
 
 export const useAuth = () => {

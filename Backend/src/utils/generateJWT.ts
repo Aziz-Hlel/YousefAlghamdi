@@ -38,6 +38,8 @@ const generateToken = (res: Response, user: IUser_model) => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        phoneNumber: user.phoneNumber,
+        savedProperties: user.savedProperties,
         role: user.role,
         clientInfo: user.clientInfo,
         agentInfo: user.agentInfo,

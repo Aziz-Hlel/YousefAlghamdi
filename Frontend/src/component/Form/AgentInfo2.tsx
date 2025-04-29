@@ -1,15 +1,16 @@
+import { useEffect, useState } from "react";
 import PropertyTextInput from "./PropertyTextInput2";
 import PropertyTextAreaV2 from "./PropertyTextAreaV22";
 import { z } from "zod";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAgents } from "@src/providers/AgentsProvider.context";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
-import { useAuth } from "@src/providers/AuthProvider.context";
-import roles from "@src/types/roles.type";
 
 
-const userSchema = z.object({
+const agentSchema = z.object({
 
 
   firstName: z.string({ required_error: "First name is required" })
@@ -24,11 +25,25 @@ const userSchema = z.object({
     .min(1, { message: "Phone number is required" })  // Custom message for required field
     .max(50, { message: "Phone number must be at most 50 characters long" }),
 
+  email: z.string({ required_error: "Email address is required" })
+    .min(1, { message: "Email address is required" })  // Custom message for required field
+    .max(50, { message: "Email address must be at most 50 characters long" }),
+
+  password: z.string({ required_error: "Password is required" })
+    .min(1, { message: "Password must be at least 6 characters long" })
+    .max(25, { message: "Password must be at most 25 characters long" })
+    .optional(),
+
+  confirmPassword: z.string({ required_error: "Confirm password is required" })
+    .min(1, { message: "Confirm password must be at least 6 characters long" })
+    .max(25, { message: "Confirm password must be at most 25 characters long" })
+    .optional(),
+
 
   // image: z.string({ required_error: "About text is required" }),
 
   agentInfo: z.object({
-    image: z.string({ required_error: "About text is required" }),
+    image: z.string({ required_error: "About text is required" }).default(""),
     address: z.string({ required_error: "Adresse is required" })
       .min(1, { message: "Adresse is required" })  // Custom message for required field
       .max(50, { message: "Adresse must be at most 50 characters long" }),
@@ -58,73 +73,71 @@ const userSchema = z.object({
       .min(1, { message: "About text is required" })  // Custom message for required field  
       .max(200, { message: "About text must be at most 200 characters long" }),
 
-  }).optional(),
+  }),
 
-  adminInfo: z.object({
-    image: z.string({ required_error: "About text is required" }),
-    address: z.string({ required_error: "Adresse is required" })
-      .min(1, { message: "Adresse is required" })  // Custom message for required field
-      .max(50, { message: "Adresse must be at most 50 characters long" }),
+}).refine((data) =>
+  data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+}
+);
 
-    socials: z.object({
-
-      whatsApp: z.string({ required_error: "Whatsapp is required" })
-        .min(1, { message: "Whatsapp is required" })  // Custom message for required field
-        .max(50, { message: "Whatsapp must be at most 50 characters long" }),
-
-      twitter: z.string({ required_error: "Twitter is required" })
-        .min(1, { message: "Twitter is required" })  // Custom message for required field
-        .max(50, { message: "Twitter must be at most 50 characters long" }),
-
-      instagram: z.string({ required_error: "Instagram is required" })
-        .min(1, { message: "Instagram is required" })  // Custom message for required field
-        .max(50, { message: "Instagram must be at most 50 characters long" }),
-
-      linkedin: z.string({ required_error: "Linkedin is required" })
-        .min(1, { message: "Linkedin is required" })  // Custom message for required field
-        .max(50, { message: "Linkedin must be at most 50 characters long" }),
-
-    }),
-
-
-    about: z.string({ required_error: "About text is required" })
-      .min(1, { message: "About text is required" })  // Custom message for required field  
-      .max(200, { message: "About text must be at most 200 characters long" }),
-
-  }).optional(),
-
-})
-
-type addAgentSchemaType = z.infer<typeof userSchema>
+type addAgentSchemaType = z.infer<typeof agentSchema>
 
 
 
-function PersonalInfo({ toggleModal }: { toggleModal: () => void }) {
+function PersonalInfo() {
 
+  const { agents, refreshAgents } = useAgents();
+  const { agentId } = useParams();
 
-  const { user, refreshUser } = useAuth();
-  if (!user) return null;
+  const editMode = agentId ? true : false;
 
-  const { register, handleSubmit, formState: { errors, isSubmitting, }, setError } =
+  const { register, handleSubmit, reset, formState: { errors, isSubmitting, }, setError } =
     useForm<addAgentSchemaType>({
-      resolver: zodResolver(userSchema),
-      defaultValues: user,
+      resolver: zodResolver(agentSchema),
+      defaultValues: agentId ? agents[agentId] : undefined
     });
 
+  !editMode && agentSchema.innerType().omit({ password: true, confirmPassword: true });
 
+  const navigate = useNavigate();;
+  useEffect(() => {
 
+    if (agentId) {
+      console.log('t5ll5l5l5l5');
 
-  const onSubmit = async (data: addAgentSchemaType) => {
+      reset()
+    }
 
+  }, [agentId])
 
-    const response = await Http.patch(`${apiGateway.user.update}`, data);
-    response?.status === 200 && refreshUser()
-    response?.status === 200 && toggleModal()
-    response && response.status !== 200 && Object.keys(response.data.errors).map((key: any) => {
-      setError(key, { message: response.data.errors[key] })
-    })
+  const onSubmit = (data: addAgentSchemaType) => {
 
+    const createAgent = async () => {
 
+      const response = await Http.post(apiGateway.agent.create, data);
+      response?.status === 201 && await refreshAgents()
+      response?.status === 201 && navigate("../")
+      response && response.status !== 201 && Object.keys(response.data.errors).map((key: any) => {
+        console.log(response.data.errors[key]);
+
+        setError(key, { message: response.data.errors[key] })
+      })
+
+    };
+
+    const updateAgent = async () => {
+
+      const response = await Http.put(`${apiGateway.agent.update}/${agentId}`, data);
+      response?.status === 200 && await refreshAgents()
+      response?.status === 200 && navigate("../")
+      response && response.status !== 200 && Object.keys(response.data.errors).map((key: any) => {
+        setError(key, { message: response.data.errors[key] })
+      })
+    }
+
+    editMode ? updateAgent() : createAgent();
 
   };
 
@@ -137,7 +150,7 @@ function PersonalInfo({ toggleModal }: { toggleModal: () => void }) {
       onSubmit={handleSubmit(onSubmit)}>
 
       <div className="row">
-        {(user.role === roles.AGENT || user.role === roles.ADMIN) && <div className="col-12">
+        <div className="col-12">
           <div className="homec-profile__edit mg-top-20">
             <img src="https://placehold.co/90x90" alt="#" />
             <label htmlFor="file-input">
@@ -166,7 +179,7 @@ function PersonalInfo({ toggleModal }: { toggleModal: () => void }) {
 
             />
           </div>
-        </div>}
+        </div>
         <PropertyTextInput
           size="col-lg-6 col-md-6"
           title="First Name*"
@@ -187,58 +200,71 @@ function PersonalInfo({ toggleModal }: { toggleModal: () => void }) {
           fieldRegister={register("phoneNumber")}
           fieldError={errors.phoneNumber}
         />
+        <PropertyTextInput
+          title="Email Address*"
+          placeholder="Email Address"
+          fieldRegister={register("email")}
+          fieldError={errors.email}
+        />
+        {!editMode && <PropertyTextInput
+          title="Password*"
+          placeholder="Password"
+          fieldRegister={register("password")}
+          fieldError={errors.password}
+          type="password"
+        />}
+        {!editMode && <PropertyTextInput
+          title="Confirm Password*"
+          placeholder="Confirm Password"
+          fieldRegister={register("confirmPassword")}
+          fieldError={errors.confirmPassword}
+          type="password"
+        />}
+        <PropertyTextInput
+          title="Location*"
+          placeholder="Your Location"
+          fieldRegister={register("agentInfo.address")}
+          fieldError={errors.agentInfo?.address}
 
-
-        {user.role !== roles.USER && user.role !== roles.CLIENT &&
-          <>
-            <PropertyTextInput
-              title="Location*"
-              placeholder="Your Location"
-              fieldRegister={user.role === roles.AGENT ? register("agentInfo.address") : register("adminInfo.address")}
-              fieldError={user.role === roles.AGENT ? errors.agentInfo?.address : errors.adminInfo?.address}
-            />
-
-            <PropertyTextAreaV2
-              title="About Text*"
-              name="aboutText"
-              sizeFull={true}
-              fieldRegister={user.role === roles.AGENT ? register("agentInfo.about") : register("adminInfo.about")}
-              fieldError={user.role === roles.AGENT ? errors.agentInfo?.about : errors.adminInfo?.about}
-            />
-            <h4 className="homec-modal-form__middle">Social Link</h4>
-            <div className="row">
-              <PropertyTextInput
-                size="col-lg-6 col-md-6"
-                title="Whatsapp*"
-                placeholder="Whatsapp Link"
-                fieldRegister={user.role === roles.AGENT ? register("agentInfo.socials.whatsApp") : register("adminInfo.socials.whatsApp")}
-                fieldError={user.role === roles.AGENT ? errors.agentInfo?.socials?.whatsApp : errors.adminInfo?.socials?.whatsApp}
-              />
-              <PropertyTextInput
-                size="col-lg-6 col-md-6"
-                title="Twitter*"
-                placeholder="Twitter Link"
-                fieldRegister={user.role === roles.AGENT ? register("agentInfo.socials.twitter") : register("adminInfo.socials.twitter")}
-                fieldError={user.role === roles.AGENT ? errors.agentInfo?.socials?.twitter : errors.adminInfo?.socials?.twitter}
-              />
-              <PropertyTextInput
-                size="col-lg-6 col-md-6"
-                title="Instagram*"
-                placeholder="Instagram Link"
-                fieldRegister={user.role === roles.AGENT ? register("agentInfo.socials.instagram") : register("adminInfo.socials.instagram")}
-                fieldError={user.role === roles.AGENT ? errors.agentInfo?.socials?.instagram : errors.adminInfo?.socials?.instagram}
-              />
-              <PropertyTextInput
-                size="col-lg-6 col-md-6"
-                title="Linkedin*"
-                placeholder="Linkedin Link"
-                fieldRegister={user.role === roles.AGENT ? register("agentInfo.socials.linkedin") : register("adminInfo.socials.linkedin")}
-                fieldError={user.role === roles.AGENT ? errors.agentInfo?.socials?.linkedin : errors.adminInfo?.socials?.linkedin}
-              />
-            </div>
-          </>
-
-        }
+        />
+        <PropertyTextAreaV2
+          title="About Text*"
+          name="aboutText"
+          sizeFull={true}
+          fieldRegister={register("agentInfo.about")}
+          fieldError={errors.agentInfo?.about}
+        />
+        <h4 className="homec-modal-form__middle">Social Link</h4>
+        <div className="row">
+          <PropertyTextInput
+            size="col-lg-6 col-md-6"
+            title="Whatsapp*"
+            placeholder="Whatsapp Link"
+            fieldRegister={register("agentInfo.socials.whatsApp")}
+            fieldError={errors.agentInfo?.socials?.whatsApp}
+          />
+          <PropertyTextInput
+            size="col-lg-6 col-md-6"
+            title="Twitter*"
+            placeholder="Twitter Link"
+            fieldRegister={register("agentInfo.socials.twitter")}
+            fieldError={errors.agentInfo?.socials?.twitter}
+          />
+          <PropertyTextInput
+            size="col-lg-6 col-md-6"
+            title="Instagram*"
+            placeholder="Instagram Link"
+            fieldRegister={register("agentInfo.socials.instagram")}
+            fieldError={errors.agentInfo?.socials?.instagram}
+          />
+          <PropertyTextInput
+            size="col-lg-6 col-md-6"
+            title="Linkedin*"
+            placeholder="Linkedin Link"
+            fieldRegister={register("agentInfo.socials.linkedin")}
+            fieldError={errors.agentInfo?.socials?.linkedin}
+          />
+        </div>
         {<span className="pl-2 text-red-600 ">{errors.root?.message}</span>}
 
       </div>

@@ -8,6 +8,7 @@ const errorMessages = {
         User_Already_Exists: "User already exists",
         FORBIDDEN: "forbidden",
         NOT_FOUND: "not found",
+        INTERNAL_SERVER_ERROR: "internal server error",
     },
 
     AUTH: {

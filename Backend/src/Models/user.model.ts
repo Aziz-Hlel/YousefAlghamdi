@@ -14,7 +14,7 @@ export interface IUser {
     role: string;
 
     clientInfo?: {
-        agentId?: string | null,
+        agentId?: string,
     };
 
     agentInfo?: {
