@@ -1,5 +1,5 @@
 import express from 'express';
-import { approveProperty, cancelUpdateProperty, createProperty, deleteProperty, getPendingProperties, getProperty, getUserProperties, listProperties, updateProperty } from '../Controllers/property.controller';
+import { approveProperty, declinePropertyChanges, createProperty, deleteProperty, getPendingProperties, getProperty, getUserProperties, listProperties, updateProperty } from '../Controllers/property.controller';
 import protect, { adminOrAgentAuth } from '../Middlewares/auth.middleware';
 
 
@@ -14,7 +14,7 @@ propertyRouter.get('/my-properties', protect, getUserProperties);
 propertyRouter.get('/pending-properties', adminOrAgentAuth, getPendingProperties);
 
 propertyRouter.put('/approve/:propertyId', adminOrAgentAuth, approveProperty)
-propertyRouter.get('/decline/:propertyId', protect, cancelUpdateProperty);
+propertyRouter.get('/decline/:propertyId', protect, declinePropertyChanges);
 
 
 

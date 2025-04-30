@@ -1,6 +1,10 @@
 import { useAuth } from "@src/providers/AuthProvider.context";
+import Http from "@src/services/Http";
 import roles from "@src/types/roles.type";
+import apiGateway from "@src/utils/apiGateway";
+import { Alert, ConfirmationAlertAsync } from "@src/utils/createAlert";
 import { Link } from "react-router-dom";
+import { useMyPropertiesContext } from "../Dashboard2/MyProperties/MyPropertiesProvider.context";
 
 
 type IDashboardPropertyCard = {
@@ -19,6 +23,66 @@ type IDashboardPropertyCard = {
 function DashboardPropertyCard({ _id, ownerId, status, image, tempToSeeIfUser, listing_type, title, location, onInspectClient, }: IDashboardPropertyCard) {
 
   const { user } = useAuth();
+  const { fetchProperties } = useMyPropertiesContext()
+
+  const handleDeleteProperty = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    const response = await ConfirmationAlertAsync({
+      title: "Delete Property",
+      text: "Are you sure you want to delete this property?",
+      icon: "warning",
+    })
+    if (response.isConfirmed) {
+      const response = await Http.delete(`${apiGateway.property.delete}/${_id}`);
+      if (response?.status === 200) {
+        (user?.role === roles.ADMIN || user?.role === roles.AGENT) ?
+          Alert({
+            title: "Property Deleted",
+            icon: "success",
+            text: "Property deleted successfully",
+          })
+          :
+          Alert({
+            title: "Request Sent",
+            icon: "success",
+            text: "Request to delete property sent successfully",
+          })
+        fetchProperties(1)
+      }
+      else alert("something went wrong")
+
+    }
+
+  };
+
+  const handleUnavailable = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    const response = await ConfirmationAlertAsync({
+      title: "Unavailable Property",
+      text: "Are you sure you want to make this property unavailable?",
+      icon: "warning",
+    })
+    if (response.isConfirmed) {
+      const response = await Http.get(`${apiGateway.property.unavailable}/${_id}`);
+      if (response?.status === 200) {
+        (user?.role === roles.ADMIN || user?.role === roles.AGENT) ?
+          Alert({
+            title: "Property Unavailable",
+            icon: "success",
+            text: "Property unavailable successfully",
+          })
+          :
+          Alert({
+            title: "Request Sent",
+            icon: "success",
+            text: "Request to make property unavailable sent successfully",
+          })
+        fetchProperties(1)
+      }
+      else alert("something went wrong")
+    }
+  }
+
 
   return (
     <div className="homec-dashboard-property mg-top-30">
@@ -89,7 +153,7 @@ function DashboardPropertyCard({ _id, ownerId, status, image, tempToSeeIfUser, l
 
           }
         </button>
-        <button className="homec-dashboard-property__btn px-2 homec-dashboard-property__btn--delete flex justify-center items-center">
+        <button className="homec-dashboard-property__btn px-2 homec-dashboard-property__btn--delete flex justify-center items-center" onClick={handleDeleteProperty}>
 
           <div className="flex  justify-center  items-center">
 
@@ -111,6 +175,35 @@ function DashboardPropertyCard({ _id, ownerId, status, image, tempToSeeIfUser, l
 
           </div>
 
+        </button>
+
+
+        <button className="homec-dashboard-property__btn px-2 homec-dashboard-property__btn--delete flex justify-center items-center" onClick={handleUnavailable}>
+
+          <div className="flex  justify-center  items-center fill-black stroke-black hover:fill-white hover:stroke-white" >
+            <svg
+              width="20"
+              height="21"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 215.152 215.152"
+              xmlSpace="preserve"
+              strokeWidth="8"
+            >
+              <g id="SVGRepo_bgCarrier" strokeWidth={0} />
+              <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
+              <g id="SVGRepo_iconCarrier">
+                {" "}
+                <g>
+                  {" "}
+                  <path d="M107.573,0C61.849,0,24.649,37.206,24.649,82.938c0,32.665,13.675,65.706,39.545,95.549 c19.32,22.288,38.47,34.917,39.275,35.443c1.246,0.815,2.675,1.222,4.104,1.222s2.857-0.407,4.104-1.222 c0.806-0.526,19.957-13.155,39.278-35.443c25.872-29.844,39.548-62.885,39.548-95.55C190.503,37.206,153.301,0,107.573,0z M107.566,198.447C92.281,187.083,39.649,143.54,39.649,82.938C39.649,45.477,70.12,15,107.573,15 c37.457,0,67.93,30.477,67.93,67.938C175.503,143.401,122.842,187.059,107.566,198.447z" />{" "}
+                  <path d="M130.904,59.592c-2.93-2.928-7.679-2.929-10.606,0l-12.72,12.719L94.857,59.588c-2.929-2.928-7.678-2.929-10.606,0 c-2.93,2.929-2.93,7.678-0.001,10.607l12.721,12.722L84.25,95.636c-2.93,2.929-2.93,7.678-0.001,10.607 c1.465,1.464,3.384,2.197,5.304,2.197c1.919,0,3.839-0.732,5.303-2.196l12.721-12.72l12.721,12.722 c1.465,1.464,3.384,2.197,5.304,2.197c1.919,0,3.839-0.732,5.303-2.196c2.93-2.929,2.93-7.678,0.001-10.607l-12.721-12.722 l12.72-12.718C133.833,67.271,133.833,62.521,130.904,59.592z" />{" "}
+                </g>{" "}
+              </g>
+            </svg>
+
+          </div>
         </button>
       </div>
     </div >

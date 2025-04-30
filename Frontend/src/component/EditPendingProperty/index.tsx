@@ -35,7 +35,7 @@ const EditPendingProperty = () => {
           <HistoryLinks link="/home" text="Home" isActive={false} />
           <HistoryLinks
             link="/edit-property"
-            text="Edit Property"
+            text="Edit Property"  
             isActive={true}
           />
         </Breadcrumbs>

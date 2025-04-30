@@ -453,8 +453,18 @@ export const deleteProperty = async (req: AuthenticatedRequest, res: Response, n
     }
 
     // ! Clean up related data if any (e.g., images, bookings, etc.) , specially the s3
-
-    await property.deleteOne();
+    if (role === roles.ADMIN || role === roles.AGENT) {
+        await property.deleteOne();
+    }
+    else if (role === roles.CLIENT || role === roles.USER) {
+        property.active = false
+        property.advanced = {
+            state: statesTypes.toBeDeleted,
+            available: null,
+            updated_version: {},
+        };
+        await property.save();
+    }
 
 
     res.status(statusCode.OK).json({
@@ -466,8 +476,8 @@ export const deleteProperty = async (req: AuthenticatedRequest, res: Response, n
 
 }
 
-
-export const cancelUpdateProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+// ? including decline delete
+export const declinePropertyChanges = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
     const propertyId = req.params.propertyId;
     const role = req.user?.role;
@@ -506,5 +516,61 @@ export const cancelUpdateProperty = async (req: AuthenticatedRequest, res: Respo
     await property.save();
 
     res.status(statusCode.OK).json('Property updated successfully');
+
+}
+
+
+
+
+export const unavailable = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    if (!req.user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+
+    const propertyId = req.params.propertyId;
+    if (!propertyId || !mongoose.Types.ObjectId.isValid(propertyId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    const { state } = req.body;
+    if (!state || !['available', 'unavailable'].includes(state)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    const property = await Property.findById(propertyId);
+    if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
+
+    const role = req.user.role
+
+    // if (property.clientId !== req.user?._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+
+    switch (role) {
+        case roles.AGENT:
+            if (property.agentId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+            break;
+        case roles.ADMIN:
+            break;
+        default:
+            return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+    }
+
+    if (state === 'unavailable') {
+        property.active = false
+        property.advanced = {
+            state: statesTypes.unavailable,
+            available: null,
+            updated_version: {},
+        }
+    }
+    else {
+        property.active = true
+        property.advanced = {
+            state: statesTypes.active,
+            available: null,
+            updated_version: {},
+        };
+
+    }
+
+    await property.save();
+
+
+    res.status(statusCode.OK).json('Property updated successfully');
+
 
 }

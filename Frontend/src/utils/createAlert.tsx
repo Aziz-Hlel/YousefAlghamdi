@@ -18,7 +18,7 @@ type SweetAlertResult = {
     cancelButtonText?: string;
 };
 
-export const createAlertAsync = async (sweetAlertProps: SweetAlertResult) => {
+export const ConfirmationAlertAsync = async (sweetAlertProps: SweetAlertResult) => {
     return await Swal.fire({
         title: sweetAlertProps.title,
         text: sweetAlertProps.text,
@@ -28,4 +28,14 @@ export const createAlertAsync = async (sweetAlertProps: SweetAlertResult) => {
         cancelButtonColor: '#3085d6',
         confirmButtonText: 'Yes, delete it!',
     });
+}
+
+
+export const Alert = (sweetAlertProps: SweetAlertResult) => {
+    Swal.fire({
+        title: sweetAlertProps.title,
+        text: sweetAlertProps.text,
+        icon: sweetAlertProps.icon,
+    });
+
 }

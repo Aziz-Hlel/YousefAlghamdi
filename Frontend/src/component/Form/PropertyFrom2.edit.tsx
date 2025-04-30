@@ -26,7 +26,7 @@ import { useAuth } from "@src/providers/AuthProvider.context";
 import roles from "@src/types/roles.type";
 import { AxiosResponse } from "axios";
 import Swal from 'sweetalert2'
-import { createAlertAsync } from "@src/utils/createAlert";
+import { ConfirmationAlertAsync } from "@src/utils/createAlert";
 
 
 export const SubmitPropertySchema = z.object({
@@ -372,27 +372,24 @@ const PropertyFrom = () => {
 
     }
 
+    if (property.advanced.state === statesTypes.toBeDeleted) {
 
-    return
+      const result = await createAlert("Delete Property", "Are you sure you want to delete this property?")
+      if (result.isConfirmed) {
+        const response = await Http.delete(`${apiGateway.property.delete}/${property._id}`);
+        if (response?.status === 200) navigate("./../../")
+        else alert("something went wrong");
+      }
 
-    updateAdditionalDetails(data)
+    }
 
-    updateNearestLocation(data)
-
-    updateImages(data)
-
-    // if (imgs[2] === null) {
-    //   setError("imgs", { message: "rest Image is required" });
-    //   return;
-    // }
-    await Http.post(apiGateway.property.create, data);
-    console.log(data);
 
   };
 
 
   const handleCancel = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
+    e.stopPropagation();
     navigate("./../../")
   }
 
@@ -418,7 +415,7 @@ const PropertyFrom = () => {
     // u prob gone notifications for this to inform the client 
     switch (propertyState) {
       case statesTypes.toBeAdded:
-        const result = await createAlertAsync({ title: "Decline request", text: "Are you sure you want to decline this property and delete it?", icon: "warning" })
+        const result = await ConfirmationAlertAsync({ title: "Decline request", text: "Are you sure you want to decline this property and delete it?", icon: "warning" })
         if (result.isConfirmed) {
           const response = await Http.delete(`${apiGateway.property.delete}/${property._id}`);
           if (response?.status === 200) navigate("./../../")
@@ -427,7 +424,7 @@ const PropertyFrom = () => {
         break;
 
       case statesTypes.toBeUpdated:
-        const result2 = await createAlertAsync({ title: "Decline request", text: "Are you sure you want to decline the update?", icon: "warning" })
+        const result2 = await ConfirmationAlertAsync({ title: "Decline request", text: "Are you sure you want to decline the update?", icon: "warning" })
         if (result2.isConfirmed) {
           const response = await Http.get(`${apiGateway.property.decline}/${property._id}`);
           if (response?.status === 200) navigate("./../../")
@@ -435,8 +432,16 @@ const PropertyFrom = () => {
         }
         break;
 
+      case statesTypes.toBeDeleted:
+        const result3 = await ConfirmationAlertAsync({ title: "Decline request", text: "Are you sure you want to decline the delete request?", icon: "warning" })
+        if (result3.isConfirmed) {
+          const response = await Http.get(`${apiGateway.property.decline}/${property._id}`);
+          if (response?.status === 200) navigate("./../../")
+          else alert("something went wrong");
+        }
+        break;
 
-  default:
+      default:
         break;
     }
   }
@@ -623,21 +628,25 @@ const PropertyFrom = () => {
 
 
               <div className="row">
-                <div className="col-12 d-flex justify-content-end mg-top-40 gap-2">
-                  <button className="homec-btn  bg-red-500">
-                    <span onClick={handleCancel}>{isSubmitting ? "Loading..." : "Cancel"}</span>
-                  </button>
-                  {statesTypes.active !== property.advanced.state && < button onClick={handleDecline} value={propertyState} className="homec-btn ">
-                    <span  >{isSubmitting ? "Loading..." : "Decline request"}</span>
-                  </button>}
-                  <button type="submit" className="homec-btn homec-btn__second ">
-                    {propertyState === statesTypes.active && <span>{isSubmitting ? "Loading..." : "Update Property"}</span>}
-                    {propertyState === statesTypes.toBeAdded && <span>{isSubmitting ? "Loading..." : "Add Property"}</span>}
-                    {propertyState === statesTypes.toBeUpdated && <span>{isSubmitting ? "Loading..." : "Update Property"}</span>}
-                    {propertyState === statesTypes.toBeDeleted && <span>{isSubmitting ? "Loading..." : "Delete Property"}</span>}
-                    {propertyState === statesTypes.unavailable && <span>{isSubmitting ? "Loading..." : "Make Property unavailable"}</span>}
+                <div className=" w-full border border-black">
 
-                  </button>
+
+                  <div className="col-12 d-flex flex-col items-center sm:flex-row justify-content-end mg-top-40 gap-2">
+                    <button className="homec-btn  bg-red-500">
+                      <span onClick={handleCancel}>{isSubmitting ? "Loading..." : "Cancel"}</span>
+                    </button>
+                    {statesTypes.active !== property.advanced.state && < button onClick={handleDecline} value={propertyState} className="homec-btn ">
+                      <span  >{isSubmitting ? "Loading..." : "Decline request"}</span>
+                    </button>}
+                    <button type="submit" className="homec-btn homec-btn__second ">
+                      {propertyState === statesTypes.active && <span>{isSubmitting ? "Loading..." : "Update Property"}</span>}
+                      {propertyState === statesTypes.toBeAdded && <span>{isSubmitting ? "Loading..." : "Add Property"}</span>}
+                      {propertyState === statesTypes.toBeUpdated && <span>{isSubmitting ? "Loading..." : "Update Property"}</span>}
+                      {propertyState === statesTypes.toBeDeleted && <span>{isSubmitting ? "Loading..." : "Delete Property"}</span>}
+                      {propertyState === statesTypes.unavailable && <span>{isSubmitting ? "Loading..." : "Make Property unavailable"}</span>}
+
+                    </button>
+                  </div>
                 </div>
               </div>
             </form>
