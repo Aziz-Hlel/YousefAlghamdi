@@ -178,7 +178,7 @@ function DashboardPropertyCard({ _id, ownerId, status, image, tempToSeeIfUser, l
         </button>
 
 
-        <button className="homec-dashboard-property__btn px-2 homec-dashboard-property__btn--delete flex justify-center items-center" onClick={handleUnavailable}>
+        {(user?.role === roles.ADMIN || user?.role === roles.AGENT) && <button className="homec-dashboard-property__btn px-2 homec-dashboard-property__btn--delete flex justify-center items-center" onClick={handleUnavailable}>
 
           <div className="flex  justify-center  items-center fill-black stroke-black hover:fill-white hover:stroke-white" >
             <svg
@@ -204,7 +204,7 @@ function DashboardPropertyCard({ _id, ownerId, status, image, tempToSeeIfUser, l
             </svg>
 
           </div>
-        </button>
+        </button>}
       </div>
     </div >
   );

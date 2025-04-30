@@ -155,20 +155,20 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
 
 
 
-export const getProperty = async (req: Request, res: Response, next: NextFunction) => {
+export const getProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
 
     const propertyId = req.params.propertyId;
     if (!propertyId || !mongoose.Types.ObjectId.isValid(propertyId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
-    try {
-        const property = await Property.findById(propertyId);
-        res.json({
+    const property = await Property.findById(propertyId);
+    if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
+   
+    res.json({
 
-            result: property,
-        });
-    } catch (error) {
-        next(error);
-    }
+        result: property,
+    });
+
 
 
 }
