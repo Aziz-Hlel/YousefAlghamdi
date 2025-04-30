@@ -35,6 +35,8 @@ import CU_Agent from "./component/CU_Agent/CU_Agent.js";
 import UserView from "./component/CU_Agent/index.js";
 import PropertySingle from "./component/PropertySingle2/index.js";
 
+
+
 const App2 = () => {
 
     useEffect(() => {
@@ -43,6 +45,7 @@ const App2 = () => {
 
     return (
         <>
+        
             <AuthProvider>
                 <AgentsProvider>
 

@@ -4,11 +4,11 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 
 export const axiosInstance = axios.create({
-    baseURL: baseUrl ,
+    baseURL: baseUrl,
     withCredentials: true,
-    
+
     // headers: { 'Content-Type': 'application/json' },
-    
+
 });
 
 type HTTPRequestConfig = AxiosRequestConfig;
@@ -58,8 +58,14 @@ const Http = {
 
     },
 
-    delete: <T>(url: string, config: HTTPRequestConfig = {}) => {
-        return axiosInstance.delete<T>(url, config);
+    delete: async <T>(url: string, config: HTTPRequestConfig = {}) => {
+        try {
+            return await axiosInstance.delete<T>(url, config);
+
+        } catch (e) {
+            axios.isAxiosError(e) && console.log(e.response?.data);
+            if (axios.isAxiosError(e)) return e.response
+        }
     },
 
 }

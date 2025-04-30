@@ -27,6 +27,7 @@ const apiGateway = {
         create: "/property",
         getById: "/property",
         update: "/property",
+        delete: "/property",
         myProperties: {
             list: "/property/my-properties",
         },
@@ -35,6 +36,7 @@ const apiGateway = {
         },
 
         approve: "/property/approve",
+        decline: "/property/decline",
 
     },
 

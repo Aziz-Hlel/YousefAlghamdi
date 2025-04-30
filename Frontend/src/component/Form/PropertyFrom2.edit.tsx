@@ -25,6 +25,8 @@ import useRandomPhoto from "@src/useRandomPhoto";
 import { useAuth } from "@src/providers/AuthProvider.context";
 import roles from "@src/types/roles.type";
 import { AxiosResponse } from "axios";
+import Swal from 'sweetalert2'
+import { createAlertAsync } from "@src/utils/createAlert";
 
 
 export const SubmitPropertySchema = z.object({
@@ -370,215 +372,247 @@ const PropertyFrom = () => {
 
     }
 
-  
-  return
 
-  updateAdditionalDetails(data)
+    return
 
-  updateNearestLocation(data)
+    updateAdditionalDetails(data)
 
-  updateImages(data)
+    updateNearestLocation(data)
 
-  // if (imgs[2] === null) {
-  //   setError("imgs", { message: "rest Image is required" });
-  //   return;
-  // }
-  await Http.post(apiGateway.property.create, data);
-  console.log(data);
+    updateImages(data)
 
-};
+    // if (imgs[2] === null) {
+    //   setError("imgs", { message: "rest Image is required" });
+    //   return;
+    // }
+    await Http.post(apiGateway.property.create, data);
+    console.log(data);
+
+  };
 
 
-const handleCancel = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-  e.preventDefault();
-  navigate("./../../")
-}
-
-const handleDecline = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-
-  e.preventDefault();
-  if (!propertyState) return
-  // u prob gone notifications for this to inform the client 
-  switch (propertyState) {
-    case statesTypes.toBeAdded:
-      "sd"
-
+  const handleCancel = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    navigate("./../../")
   }
-  navigate("./../../")
-}
 
-return (
-  <section className="pd-top-80 pd-btm-80"  >
-    <div className="container" aria-disabled>
-      <div className="row">
-        <div className="col-12">
+  const createAlert = async (title: string, text: string,) => {
+    return await Swal.fire({
+      title: 'Are you sure?',
+      text: 'This action cannot be undone.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+    });
+  }
 
-          <form
-            method="post"
-            onSubmit={handleSubmit(handleFormSubmit)}>
+  const handleDecline = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 
-
-            <div className="homec-submit-form">
-              <h4 className="homec-submit-form__title">
-                Property Information {property?.clientId}
-              </h4>
-              <div className="homec-submit-form__inner">
-                <div className="row">
-
-                  <PropertyTextInput
-
-                    title="Property Title*"
-                    placeholder="Title"
-                    fieldRegister={register('title')}
-                    fieldError={errors.title}
-
-                  />
-
-                  <SelectiveInputForm
-                    size="col-lg-6 col-md-6"
-                    title={"Category"}
-                    options={Object.keys(categoriesType)}
-                    fieldRegister={register('category')}
-                    fieldError={errors.category}
-                  />
-
-                  <SelectiveInputForm
-                    size="col-lg-6 col-md-6"
-                    title={"Sub Category"}
-                    options={propertyCategoryValue && Object.keys(categoriesType).includes(propertyCategoryValue) ? sub_categories[propertyCategoryValue as keyof typeof sub_categories] : []}
-                    fieldRegister={register('sub_category')}
-                    fieldError={errors.sub_category}
-                  />
-
-                  <PropertyTextInput
-                    size="col-lg-6 col-md-6"
-                    title="Property Price"
-                    placeholder="24345"
-                    fieldRegister={register('filterFields.price')}
-                    fieldError={errors.filterFields?.price}
-                  />
-
-                  <PropertyTextInput
-                    size="col-lg-6 col-md-6"
-                    title="Total Area (sq:Mt)*"
-                    fieldRegister={register('filterFields.area')}
-                    fieldError={errors.filterFields?.area}
-                    placeholder="1200"
-                  />
-
-                  {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
-                    size="col-lg-6 col-md-6"
-                    title="Total Rooms*"
-                    fieldRegister={register('filterFields.rooms')}
-                    fieldError={errors.filterFields?.rooms}
-                    placeholder="2"
-                  />}
-
-                  {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
-                    size="col-lg-6 col-md-6"
-                    title="Total Bathroom*"
-                    fieldRegister={register('filterFields.bathrooms')}
-                    fieldError={errors.filterFields?.bathrooms}
-                    placeholder="2"
-                  />}
-
-                  <PropertyTextArea
-                    title="Description*"
-                    fieldRegister={register('description')}
-                    fieldError={errors.description}
-                  />
-
-                </div>
-
-              </div>
-            </div>
-
-            <div className="homec-submit-form mg-top-40">
-              <h4 className="homec-submit-form__title">Property Location</h4>
-              <div className="homec-submit-form__inner">
-                <div className="row ">
-                  {/* Single Form Element   */}
-                  <SelectiveInputForm
-                    size="col-md-4 flex justify-center items-center mg-top-20"
-                    title={"City"}
-                    options={Object.keys(cities)}
-                    fieldRegister={register('city')}
-                    fieldError={errors.city}
-                  />
-
-                  <SelectiveInputForm
-                    size="col-md-4 flex justify-center items-center mg-top-20"
-                    title={"Delegation"}
-                    options={CityValueObserver && Object.keys(cities).includes(CityValueObserver) ? delegations[CityValueObserver as keyof typeof delegations] : []}
-                    fieldRegister={register('delegation')}
-                    fieldError={errors.delegation}
-                  />
-
-                  <PropertyTextInput
-                    size="col-md-4  flex justify-center items-center -mt-10"
-                    title="Street adresse"
-                    fieldRegister={register('addresse')}
-                    fieldError={errors.addresse}
-                    placeholder="Emirates Towers, Sheikh Zayed Road"
-                  />
+    e.preventDefault();
 
 
-                </div>
-              </div>
-            </div>
 
-            <div className="homec-submit-form mg-top-40">
-              <h4 className="homec-submit-form__title">
-                Additional Details
-              </h4>
-              <div className="homec-submit-form__inner">
-                <div className="row">
+    if (!propertyState) return
+    // u prob gone notifications for this to inform the client 
+    switch (propertyState) {
+      case statesTypes.toBeAdded:
+        const result = await createAlertAsync({ title: "Decline request", text: "Are you sure you want to decline this property and delete it?", icon: "warning" })
+        if (result.isConfirmed) {
+          const response = await Http.delete(`${apiGateway.property.delete}/${property._id}`);
+          if (response?.status === 200) navigate("./../../")
+          else alert("something went wrong");
+        }
+        break;
 
-                  <div className="flex  flex-wrap gap-12 w-full">
+      case statesTypes.toBeUpdated:
+        const result2 = await createAlertAsync({ title: "Decline request", text: "Are you sure you want to decline the update?", icon: "warning" })
+        if (result2.isConfirmed) {
+          const response = await Http.get(`${apiGateway.property.decline}/${property._id}`);
+          if (response?.status === 200) navigate("./../../")
+          else alert("something went wrong");
+        }
+        break;
 
-                    {propertyCategoryValue && Object.keys(categoriesType).includes(propertyCategoryValue) &&
-                      additionalDetailsAttributes[propertyCategoryValue as keyof typeof additionalDetailsAttributes].map((item: string, index: number) => (
-                        <CheckInput2
-                          key={index}
-                          title={item}
-                          setAdditionalDetails={setAdditionalDetailsWrapper}
-                          additionalDetails={additionalDetails}
-                        />
-                      ))}
+
+  default:
+        break;
+    }
+  }
+
+  return (
+    <section className="pd-top-80 pd-btm-80"  >
+      <div className="container" aria-disabled>
+        <div className="row">
+          <div className="col-12">
+
+            <form
+              method="post"
+              onSubmit={handleSubmit(handleFormSubmit)}>
+
+
+              <div className="homec-submit-form">
+                <h4 className="homec-submit-form__title">
+                  Property Information {property?.clientId}
+                </h4>
+                <div className="homec-submit-form__inner">
+                  <div className="row">
+
+                    <PropertyTextInput
+
+                      title="Property Title*"
+                      placeholder="Title"
+                      fieldRegister={register('title')}
+                      fieldError={errors.title}
+
+                    />
+
+                    <SelectiveInputForm
+                      size="col-lg-6 col-md-6"
+                      title={"Category"}
+                      options={Object.keys(categoriesType)}
+                      fieldRegister={register('category')}
+                      fieldError={errors.category}
+                    />
+
+                    <SelectiveInputForm
+                      size="col-lg-6 col-md-6"
+                      title={"Sub Category"}
+                      options={propertyCategoryValue && Object.keys(categoriesType).includes(propertyCategoryValue) ? sub_categories[propertyCategoryValue as keyof typeof sub_categories] : []}
+                      fieldRegister={register('sub_category')}
+                      fieldError={errors.sub_category}
+                    />
+
+                    <PropertyTextInput
+                      size="col-lg-6 col-md-6"
+                      title="Property Price"
+                      placeholder="24345"
+                      fieldRegister={register('filterFields.price')}
+                      fieldError={errors.filterFields?.price}
+                    />
+
+                    <PropertyTextInput
+                      size="col-lg-6 col-md-6"
+                      title="Total Area (sq:Mt)*"
+                      fieldRegister={register('filterFields.area')}
+                      fieldError={errors.filterFields?.area}
+                      placeholder="1200"
+                    />
+
+                    {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
+                      size="col-lg-6 col-md-6"
+                      title="Total Rooms*"
+                      fieldRegister={register('filterFields.rooms')}
+                      fieldError={errors.filterFields?.rooms}
+                      placeholder="2"
+                    />}
+
+                    {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
+                      size="col-lg-6 col-md-6"
+                      title="Total Bathroom*"
+                      fieldRegister={register('filterFields.bathrooms')}
+                      fieldError={errors.filterFields?.bathrooms}
+                      placeholder="2"
+                    />}
+
+                    <PropertyTextArea
+                      title="Description*"
+                      fieldRegister={register('description')}
+                      fieldError={errors.description}
+                    />
 
                   </div>
 
                 </div>
               </div>
-            </div>
+
+              <div className="homec-submit-form mg-top-40">
+                <h4 className="homec-submit-form__title">Property Location</h4>
+                <div className="homec-submit-form__inner">
+                  <div className="row ">
+                    {/* Single Form Element   */}
+                    <SelectiveInputForm
+                      size="col-md-4 flex justify-center items-center mg-top-20"
+                      title={"City"}
+                      options={Object.keys(cities)}
+                      fieldRegister={register('city')}
+                      fieldError={errors.city}
+                    />
+
+                    <SelectiveInputForm
+                      size="col-md-4 flex justify-center items-center mg-top-20"
+                      title={"Delegation"}
+                      options={CityValueObserver && Object.keys(cities).includes(CityValueObserver) ? delegations[CityValueObserver as keyof typeof delegations] : []}
+                      fieldRegister={register('delegation')}
+                      fieldError={errors.delegation}
+                    />
+
+                    <PropertyTextInput
+                      size="col-md-4  flex justify-center items-center -mt-10"
+                      title="Street adresse"
+                      fieldRegister={register('addresse')}
+                      fieldError={errors.addresse}
+                      placeholder="Emirates Towers, Sheikh Zayed Road"
+                    />
+
+
+                  </div>
+                </div>
+              </div>
+
+              <div className="homec-submit-form mg-top-40">
+                <h4 className="homec-submit-form__title">
+                  Additional Details
+                </h4>
+                <div className="homec-submit-form__inner">
+                  <div className="row">
+
+                    <div className="flex  flex-wrap gap-12 w-full">
+
+                      {propertyCategoryValue && Object.keys(categoriesType).includes(propertyCategoryValue) &&
+                        additionalDetailsAttributes[propertyCategoryValue as keyof typeof additionalDetailsAttributes].map((item: string, index: number) => (
+                          <CheckInput2
+                            key={index}
+                            title={item}
+                            setAdditionalDetails={setAdditionalDetailsWrapper}
+                            additionalDetails={additionalDetails}
+                          />
+                        ))}
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
 
 
 
-            <div className="homec-submit-form mg-top-40">
-              <h4 className="homec-submit-form__title">Nearest Location</h4>
+              <div className="homec-submit-form mg-top-40">
+                <h4 className="homec-submit-form__title">Nearest Location</h4>
 
-              <KeyValueInput
-                list={NearestLocation}
-                handleAddOrDelete={handleAddOrDelete}
-                handleChange={handleKeyValueChange}
-                filedTitle="Nearest Location*"
-                filedTitleTwo="Distance(KM)*"
+                <KeyValueInput
+                  list={NearestLocation}
+                  handleAddOrDelete={handleAddOrDelete}
+                  handleChange={handleKeyValueChange}
+                  filedTitle="Nearest Location*"
+                  filedTitleTwo="Distance(KM)*"
 
-                placeholderOne={"Burj khalifa"}
-                placeholderTwo={"15"}
+                  placeholderOne={"Burj khalifa"}
+                  placeholderTwo={"15"}
+                />
+
+              </div>
+
+              <ImageInput
+                imgs={imgs}
+                handleDelete={handleImageDelete}
+                handleImage={handleImageInput}
+                fieldError={errors.imgs}
+
               />
 
-            </div>
-
-            <ImageInput
-              imgs={imgs}
-              handleDelete={handleImageDelete}
-              handleImage={handleImageInput}
-              fieldError={errors.imgs}
-
-            />
-
-            {/* <PropertyLocationInput                                                                                                                            
+              {/* <PropertyLocationInput                                                                                                                            
                 location={input.location}                                                                                                                           
                 handleLocation={handleLocationChange}                                                                                                                           
               /> */}
@@ -588,30 +622,30 @@ return (
 
 
 
-            <div className="row">
-              <div className="col-12 d-flex justify-content-end mg-top-40 gap-2">
-                <button className="homec-btn  bg-red-500">
-                  <span onClick={handleCancel}>{isSubmitting ? "Loading..." : "Cancel"}</span>
-                </button>
-                <button onClick={handleDecline} value={propertyState} className="homec-btn homec-btn__second">
-                  <span  >{isSubmitting ? "Loading..." : "Decline request"}</span>
-                </button>
-                <button type="submit" className="homec-btn ">
-                  {propertyState === statesTypes.active && <span>{isSubmitting ? "Loading..." : "Update Property"}</span>}
-                  {propertyState === statesTypes.toBeAdded && <span>{isSubmitting ? "Loading..." : "Add Property"}</span>}
-                  {propertyState === statesTypes.toBeUpdated && <span>{isSubmitting ? "Loading..." : "Update Property"}</span>}
-                  {propertyState === statesTypes.toBeDeleted && <span>{isSubmitting ? "Loading..." : "Delete Property"}</span>}
-                  {propertyState === statesTypes.unavailable && <span>{isSubmitting ? "Loading..." : "Make Property unavailable"}</span>}
+              <div className="row">
+                <div className="col-12 d-flex justify-content-end mg-top-40 gap-2">
+                  <button className="homec-btn  bg-red-500">
+                    <span onClick={handleCancel}>{isSubmitting ? "Loading..." : "Cancel"}</span>
+                  </button>
+                  {statesTypes.active !== property.advanced.state && < button onClick={handleDecline} value={propertyState} className="homec-btn ">
+                    <span  >{isSubmitting ? "Loading..." : "Decline request"}</span>
+                  </button>}
+                  <button type="submit" className="homec-btn homec-btn__second ">
+                    {propertyState === statesTypes.active && <span>{isSubmitting ? "Loading..." : "Update Property"}</span>}
+                    {propertyState === statesTypes.toBeAdded && <span>{isSubmitting ? "Loading..." : "Add Property"}</span>}
+                    {propertyState === statesTypes.toBeUpdated && <span>{isSubmitting ? "Loading..." : "Update Property"}</span>}
+                    {propertyState === statesTypes.toBeDeleted && <span>{isSubmitting ? "Loading..." : "Delete Property"}</span>}
+                    {propertyState === statesTypes.unavailable && <span>{isSubmitting ? "Loading..." : "Make Property unavailable"}</span>}
 
-                </button>
+                  </button>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
-      </div>
-    </div>
-  </section >
-);
+      </div >
+    </section >
+  );
 }
 
 export default PropertyFrom;
