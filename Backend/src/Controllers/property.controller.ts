@@ -339,7 +339,6 @@ export const getPendingProperties = async (req: AuthenticatedRequest, res: Respo
 
 
 
-
 export const updateProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
     const property = req.body;
@@ -360,7 +359,7 @@ export const updateProperty = async (req: AuthenticatedRequest, res: Response, n
 
         const property = await Property.findById(propertyId);
         if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
-      
+
         (validBody as any)._id = req.params.propertyId;
 
         property.active = false
@@ -379,7 +378,6 @@ export const updateProperty = async (req: AuthenticatedRequest, res: Response, n
 
 
 };
-
 
 
 
@@ -422,5 +420,91 @@ export const approveProperty = async (req: AuthenticatedRequest, res: Response, 
     } catch (error) {
         next(error);
     }
+
+}
+
+
+export const deleteProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    const propertyId = req.params.propertyId;
+    const role = req.user?.role;
+
+    if (!propertyId || !mongoose.Types.ObjectId.isValid(propertyId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+    if (!req.user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+
+
+    const property = await Property.findById(propertyId);
+    if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
+
+    switch (role) {
+        case roles.USER:
+            if (property.clientId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+            break;
+        case roles.CLIENT:
+            if (property.clientId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+            break;
+        case roles.AGENT:
+            if (property.agentId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+            break;
+        case roles.ADMIN:
+            break;
+        default:
+            return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+    }
+
+    // ! Clean up related data if any (e.g., images, bookings, etc.) , specially the s3
+
+    await property.deleteOne();
+
+
+    res.status(statusCode.OK).json({
+        success: true,
+        message: 'Property deleted successfully',
+    });
+
+
+
+}
+
+
+export const cancelUpdateProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    const propertyId = req.params.propertyId;
+    const role = req.user?.role;
+
+    if (!propertyId || !mongoose.Types.ObjectId.isValid(propertyId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+    if (!req.user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+
+
+    const property = await Property.findById(propertyId);
+    if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
+
+    switch (role) {
+        case roles.USER:
+            if (property.clientId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+            break;
+        case roles.CLIENT:
+            if (property.clientId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+            break;
+        case roles.AGENT:
+            if (property.agentId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+            break;
+        case roles.ADMIN:
+            break;
+        default:
+            return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+    }
+
+    // ! Clean up related data if any (e.g., images, bookings, etc.) , specially the s3
+    // ! sur dima property.active 7atta f decline request t3 unavaible ? 
+    property.active = true
+    property.advanced = {
+        state: statesTypes.active,
+        available: null,
+        updated_version: {},
+    };
+    await property.save();
+
+    res.status(statusCode.OK).json('Property updated successfully');
 
 }
