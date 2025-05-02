@@ -118,6 +118,32 @@ function Footer() {
                           </svg>
                         </a>
                       </li>
+                      <li>
+                        <a href={companySocials.snapchat} target="_blank" >
+                          <svg
+                            viewBox="0 0 48 48"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                          
+                            className="stroke-[#7065F0] stroke-3 hover:stroke-white "
+                          >
+                            <path
+                              d="M24.012 42.27c3.827-.003 4.967-1.607 7.486-2.724 2.25-.998 5.469.509 6.137-2.162h0c.086-1.38 2.513-1.158 3.874-2.1 1.242-.858 1.366-2.235.09-2.777-2.887-1.227-5.923-3.915-6.657-6.797-.459-1.797 5.278-2.35 4.084-5.74-.705-2-3.238-1.296-4.616-.848C35.328 12.014 31.868 5.73 24 5.73s-11.328 6.284-10.41 13.392c-1.378-.448-3.911-1.152-4.616.848-1.195 3.39 4.542 3.943 4.084 5.74-.734 2.882-3.77 5.57-6.658 6.797-1.275.542-1.151 1.919.09 2.778 1.362.942 3.788.72 3.875 2.1h0c.668 2.67 3.887 1.163 6.137 2.161 2.52 1.117 3.659 2.721 7.486 2.724h.023z"
+                              fill="none"
+                              strokeWidth="3"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className=" "
+                            />
+                            <defs>
+                              <clipPath id="clip0_3">
+                                <rect width="23.9531" height="24" />
+                              </clipPath>
+                            </defs>
+                          </svg>
+                        </a>
+                      </li>
                     </ul>
                     {/* End Social  */}
                   </div>
@@ -128,7 +154,7 @@ function Footer() {
                     <div className="col-lg-4 col-md-4 col-12">
                       {/* Footer Widget   */}
                       <div className="single-widget footer-useful-links">
-                        <h3 className="widget-title">Listing</h3>
+                        <h3 className="widget-title ">Listing</h3>
                         <ul className="f-useful-links-inner list-none">
                           <FooterList link="/property" title="Properties" />
                           <FooterList link="/add-property" title="Add Properties" />
@@ -170,6 +196,7 @@ function Footer() {
                               <img src="/img/footer-location.png" alt="#" />
                               <p>{companyInfo.address}</p>
                             </li>
+
                           </ul>
                         </div>
                       </div>

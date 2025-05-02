@@ -50,7 +50,6 @@ const App2 = () => {
 
     return (
         <>
-
             <AuthProvider>
                 <AgentsProvider>
 
