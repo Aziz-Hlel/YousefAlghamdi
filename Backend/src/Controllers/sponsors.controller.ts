@@ -37,13 +37,13 @@ export const getSponsors = async (req: Request, res: Response, next: NextFunctio
     try {
 
         const [sponsors, total] = await Promise.all([
-            Sponsors.find({}).sort({ createdAt: -1 }).skip((pageNumber - 1) * limitNumber).limit(limitNumber),
+            Sponsors.find({}).skip((pageNumber - 1) * limitNumber).limit(limitNumber),
             Sponsors.countDocuments({}),
         ]);
 
         res.set("x-total-count", total.toString());
 
-         res.status(statusCode.OK).json({
+        res.status(statusCode.OK).json({
             success: true,
             result: sponsors,
 
@@ -74,3 +74,46 @@ export const getAllSponsors = async (req: Request, res: Response, next: NextFunc
 
 
 
+export const updateSponser = async (req: Request, res: Response, next: NextFunction) => {
+
+    const { sponsorId } = req.params;
+    if (!sponsorId) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    const { name, logo, url } = req.body;
+    if (!name || !logo || !url) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    const sponsor = await Sponsors.findById(sponsorId);
+    if (!sponsor) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
+
+    try {
+        const updatedSponsor = await Sponsors.findByIdAndUpdate(sponsorId, { name, logo, url }, { new: true });
+        res.status(statusCode.OK).json({
+            success: true,
+            result: updatedSponsor,
+        });
+    } catch (error) {
+        return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+    }
+
+}
+
+
+export const deleteSponsor = async (req: Request, res: Response, next: NextFunction) => {
+
+    const { sponsorId } = req.params;
+    if (!sponsorId) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    const sponsor = await Sponsors.findById(sponsorId);
+    if (!sponsor) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
+
+    try {
+        await Sponsors.findByIdAndDelete(sponsorId);
+        res.status(statusCode.OK).json({
+            success: true,
+            message: "Sponsor deleted successfully",
+        });
+    } catch (error) {
+        return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+    }
+
+}

@@ -23,20 +23,7 @@ function Home() {
   useEffect(() => {
     setisLoadingg(false);
   }, []);
-  const sponsors = [
-    { id: 1, name: 'Acme Corp', logoUrl: apiGateway.images + "property_img1.png" },
-    { id: 2, name: 'Globex', logoUrl: apiGateway.images + "property_img1.png" },
-    { id: 3, name: 'Initech', logoUrl: apiGateway.images + "property_img1.png" },
-    { id: 4, name: 'Umbrella Corp', logoUrl: apiGateway.images + "property_img1.png" },
-    { id: 5, name: 'Stark Industries', logoUrl: apiGateway.images + "property_img1.png" },
-    { id: 6, name: 'Wayne Enterprises', logoUrl: apiGateway.images + "property_img1.png" },
-    { id: 7, name: 'Cyberdyne Systems', logoUrl: apiGateway.images + "property_img1.png" },
-    { id: 8, name: 'Oscorp', logoUrl: apiGateway.images + "property_img1.png" },
-    { id: 9, name: 'Tyrell Corp', logoUrl: apiGateway.images + "property_img1.png" },
-    { id: 10, name: 'LexCorp', logoUrl: apiGateway.images + "property_img1.png" },
-    { id: 11, name: 'Massive Dynamic', logoUrl: apiGateway.images + "property_img1.png" },
-    { id: 12, name: 'Soylent Corp', logoUrl: apiGateway.images + "property_img1.png" }
-  ];
+
   let component = undefined;
   if (isLoading) {
     component = <Preloader />;
@@ -47,9 +34,9 @@ function Home() {
         <HomecHeroV2 />
         {/* <CitiesListing /> */}
         <LatestPropertyV2 />
-        <div className="py-10 sm:px-4    bg-gray-50">
-            <Sponsors sponsors={sponsors} speed={200} className="py-4" />
-        </div>
+
+        <Sponsors  />
+
         <Features2 />
         <About />
         <Agents />

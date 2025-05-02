@@ -48,6 +48,13 @@ const apiGateway = {
     },
 
 
+    sponsor:{
+        get: "/sponsor/",
+        getAll: "/sponsor/all",
+        create: "/sponsor",
+        delete: "/sponsor",
+        update: "/sponsor",
+    },
 
     images: baseUrl + "/images/",
 

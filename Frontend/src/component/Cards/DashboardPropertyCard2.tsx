@@ -60,6 +60,7 @@ function DashboardPropertyCard({ _id, ownerId, status, image, tempToSeeIfUser, l
     const response = await ConfirmationAlertAsync({
       title: "Unavailable Property",
       text: "Are you sure you want to make this property unavailable?",
+      confirmButtonText: "Yes, make it unavailable",
       icon: "warning",
     })
     if (response.isConfirmed) {
@@ -69,7 +70,7 @@ function DashboardPropertyCard({ _id, ownerId, status, image, tempToSeeIfUser, l
           Alert({
             title: "Property Unavailable",
             icon: "success",
-            text: "Property unavailable successfully",
+            text: "Property is now unavailable",
           })
           :
           Alert({

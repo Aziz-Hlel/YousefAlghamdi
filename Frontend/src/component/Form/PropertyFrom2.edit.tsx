@@ -628,7 +628,7 @@ const PropertyFrom = () => {
 
 
               <div className="row">
-                <div className=" w-full border border-black">
+                <div className=" w-full ">
 
 
                   <div className="col-12 d-flex flex-col items-center sm:flex-row justify-content-end mg-top-40 gap-2">

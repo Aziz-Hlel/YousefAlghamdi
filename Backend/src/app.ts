@@ -32,7 +32,7 @@ app.use(cors({
 app.use('/api/user', userRouter);
 app.use('/api/property', propertyRouter);
 app.use('/api/agent', agentRouter);
-app.use('/api/sponsors', sponsorRouter);
+app.use('/api/sponsor', sponsorRouter);
 
 // Serve static files
 // app.use('/api/images', express.static(path.join(__dirname, '../public/images')));

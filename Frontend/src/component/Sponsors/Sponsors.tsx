@@ -1,53 +1,40 @@
 import apiGateway from '@src/utils/apiGateway';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import logo from "@img/logo2.png"
+import Http from '@src/services/Http';
+
 interface Sponsor {
-    id: number;
+    _id: number;
     name: string;
     logo: string;
     url: string;
 }
 
+const Sponsors = () => {
+    const [sponsors, setSponsors] = useState<Sponsor[]>([]);
 
-const Sponsors: React.FC = () => {
-    const sponsors: Sponsor[] = [
-        { id: 1, name: 'Sponsor 1', logo: logo, url: '#' },
-        { id: 2, name: 'Sponsor 2', logo: logo, url: '#' },
-        { id: 3, name: 'Sponsor 3', logo: logo, url: '#' },
-        { id: 4, name: 'Sponsor 4', logo: logo, url: '#' },
-        { id: 5, name: 'Sponsor 5', logo: logo, url: '#' },
-        { id: 6, name: 'Sponsor 6', logo: logo, url: '#' },
-        { id: 7, name: 'Sponsor 7', logo: logo, url: '#' },
-        { id: 8, name: 'Sponsor 8', logo: logo, url: '#' },
-        { id: 9, name: 'Sponsor 9', logo: logo, url: '#' },
-        { id: 10, name: 'Sponsor 10', logo: logo, url: '#' },
-        { id: 11, name: 'Sponsor 11', logo: logo, url: '#' },
-        { id: 12, name: 'Sponsor 12', logo: logo, url: '#' },
-    ];
 
-    const scrollerRef = useRef<HTMLDivElement>(null);
-    const scrollerInnerRef = useRef<HTMLDivElement>(null);
+    const fetchSponsors = async () => {
+        const response = await Http.get(apiGateway.sponsor.getAll)
+        response?.status === 200 && setSponsors(response.data.result);
+        response?.status !== 200 && console.error("Error fetching sponsors");
+    }
 
     useEffect(() => {
-        if (!scrollerRef.current || !scrollerInnerRef.current) return;
+        fetchSponsors()
+    }, [])
+
+    const scrollerRef = useRef<HTMLDivElement>(null);
+    const [scrollPosition, setScrollPosition] = useState(0);
+
+    useEffect(() => {
+        if (!scrollerRef.current) return;
 
         const scroller = scrollerRef.current;
-        const scrollerInner = scrollerInnerRef.current;
-
-        // Duplicate the sponsors for seamless looping
-        scrollerInner.innerHTML = '';
-        const content = sponsors.map(sponsor => (
-            `<a href="${sponsor.url}" key="${sponsor.id}" class="relative rounded-lg px-4 py-2 flex items-center justify-center w-[200px] h-[100px] flex-shrink-0">
-        <img src="${sponsor.logo}" alt="${sponsor.name}" class="max-w-[160px] max-h-[80px] object-contain" />
-      </a>`
-        )).join('');
-
-        scrollerInner.innerHTML = content + content;
-
         let animationFrameId: number;
         let speed = 1; // pixels per frame
         let position = 0;
-        const maxPosition = scrollerInner.scrollWidth / 2;
+        const maxPosition = scroller.scrollWidth / 2;
 
         const animate = () => {
             position += speed;
@@ -58,6 +45,7 @@ const Sponsors: React.FC = () => {
             }
 
             scroller.scrollLeft = position;
+            setScrollPosition(position);
             animationFrameId = requestAnimationFrame(animate);
         };
 
@@ -82,22 +70,65 @@ const Sponsors: React.FC = () => {
         };
     }, [sponsors]);
 
-    return (
-        <section className="py-12 sm:px-32 bg-gray-50 w-full">
-            <div className="  px-4">
-                <div className="sm:text-3xl text-2xl font-bold text-center mb-8">Trusted by the best</div>
+    const displaySponsors = sponsors;
 
-                <div
-                    ref={scrollerRef}
-                    className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
-                >
+    return (
+        <div className="py-10 sm:px-4 bg-gray-50">
+            <section className="py-12 sm:px-20 bg-gray-50 w-full">
+                <div className="px-4">
+                    <div className="sm:text-3xl text-2xl font-bold text-center mb-8">Trusted by the best</div>
+
                     <div
-                        ref={scrollerInnerRef}
-                        className="flex items-center justify-center md:justify-start gap-8"
-                    />
+                        ref={scrollerRef}
+                        className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_20px,_black_calc(100%-20px),transparent_100%)]"// * 20px kent 128px
+                    >
+                        <div className="flex items-center justify-center md:justify-start gap-8">
+                            {/* First set of sponsors */}
+                            {displaySponsors.map(sponsor => (
+                                <a
+                                    href={sponsor.url}
+                                    key={sponsor._id}
+                                    className="relative rounded-lg px-4 py-2 flex items-center justify-center  h-[100px] flex-shrink-0"
+                                >
+                                    <img
+                                        src={apiGateway.images + sponsor.logo}
+                                        alt={sponsor.name}
+                                        className="max-w-[100px] max-h-[80px] object-contain"
+                                        title={sponsor.name}
+                                    />
+                                </a>
+                            ))}
+                            {/* Duplicate for seamless looping */}
+                            {displaySponsors.map(sponsor => (
+                                <>
+                                    <a
+                                        href={sponsor.url}
+                                        key={`duplicate-${sponsor._id}`}
+                                        className="relative rounded-lg px-4 py-2 flex items-center justify-center  h-[100px] flex-shrink-0"
+                                    >
+                                        <img
+                                            src={apiGateway.images + sponsor.logo}
+                                            alt={sponsor.name}
+                                            className="max-w-[100px] max-h-[80px] object-contain"
+                                            title={sponsor.name}
+                                        />
+                                    </a>
+
+                                    {/* <div className=" w-full h-full flex  justify-center  items-center p-15 bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-contain  bg-no-repeat  mt-7"
+                                        style={{
+                                            backgroundImage: apiGateway.images+ sponsor.logo,
+                                        }}
+
+                                    >
+                                    </div> */}
+                                </>
+                            ))}
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     );
 };
 

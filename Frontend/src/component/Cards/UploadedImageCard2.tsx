@@ -44,7 +44,7 @@ const progress = 80;
           {...getRootProps()}
         >
           <input {...getInputProps()} />
-          <CircularProgressBar progress={80} />
+          {/* <CircularProgressBar progress={80} /> */}
         </div>
         {img && <button
           className="homec-upload-images__single--edit flex justify-center group overflow-hidden"

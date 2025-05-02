@@ -69,16 +69,7 @@ function Dashboard() {
                       setComponent={setActiveComponentWrapper}
                     />
 
-                    {/* {activeComponent === "Dashboard" && <DashboardComp />} */}
-
-                    {/* {activeComponent === "My Properties" && <MyProperties />} */}
-                    {/* {activeComponent === "Invoice" && <InvoiceTable />} */}
-                    {/* {activeComponent === "Personals Info" && <PersonalInfo />} */}
-                    {/* {activeComponent === "Saved" && <Saved />} */}
-                    {/* {activeComponent === "Reviews" && <Reviews />} */}
-                    {/* {activeComponent === "Change Password" && (
-                      <ChangePassword />
-                    )} */}
+                
                     <Outlet />
 
                   </div>

@@ -20,9 +20,8 @@ import SubmitProperty from "./component/SubmitProperty2";
 import Property from "./component/Property2/";
 import Header from "./component/Header/index.jsx";
 import HomecHero from "./component/HomecHero2/index.jsx";
-import Layout from "./component/Layouts/Layout.js";
 import { AuthProvider } from "./providers/AuthProvider.context.js";
-import ProtectedLayouts from "./component/Layouts/ProtectedLayouts.js";
+import ProtectedLayouts from "./component/Layouts/ProtectedLayouts/ProtectedLayouts.js";
 import MyProperties from "./component/Dashboard2/MyProperties/MyProperties2.js";
 import PersonalInfo from "./component/Dashboard2/MyProperties/PersonalInfo2/PersonalInfo2.js";
 import Reviews from "./component/Dashboard2/Reviews2.js";
@@ -34,6 +33,12 @@ import { AgentsProvider } from "./providers/AgentsProvider.context.js";
 import CU_Agent from "./component/CU_Agent/CU_Agent.js";
 import UserView from "./component/CU_Agent/index.js";
 import PropertySingle from "./component/PropertySingle2/index.js";
+import SponsorsProvider from "./component/Dashboard2/SponsorsEdit/Sponsors.provider.js";
+import SponsorsEdit from "./component/Dashboard2/SponsorsEdit/SponsorsTable.js";
+import Layout from "./component/Layouts/Layout.js";
+import PrivilegedLayouts from "./component/Layouts/PrivilegedLayouts/PrivilegedLayouts.js";
+import roles from "./types/roles.type.js";
+import CU_Sponsor from "./component/Dashboard2/SponsorsEdit/CU_Sponsor.js";
 
 
 
@@ -45,7 +50,7 @@ const App2 = () => {
 
     return (
         <>
-        
+
             <AuthProvider>
                 <AgentsProvider>
 
@@ -87,26 +92,36 @@ const App2 = () => {
                                             <Route path="inspect-user/:userId" element={<UserView />} />
                                         </Route>
                                         <Route path="personal-info" element={<PersonalInfo />} />
-                                        <Route path="Reviews" element={<Reviews />} />
                                         <Route path="change-password" element={<ChangePassword />} />
 
 
-                                        {/* Admin Routes */}
                                         <Route path="pending-properties" element={<MyPropertiesProvider title="Pending Properties"> <MyProperties title="Pending Properties" /> </MyPropertiesProvider>} >
                                             <Route path="inspect-user/:userId" element={<UserView />} />
                                         </Route>
 
-                                        <Route path="agents" element={<AgentsTable />} >
-                                            <Route path="add-agent" element={<CU_Agent />} />
-                                            <Route path="edit-agent/:agentId" element={<CU_Agent />} />
+                                        {
+                                            // * Admin only Routes 
+                                        }
+                                        <Route element={<PrivilegedLayouts authorizedRoles={roles.ADMIN} />}>
+
+                                            <Route path="sponsors" element={<SponsorsProvider> <SponsorsEdit /></SponsorsProvider>} >
+                                                <Route path="add-sponsor" element={<CU_Sponsor />} />
+                                                <Route path="edit-sponsor/:sponsorId" element={<CU_Sponsor />} />
+                                            </Route>
+
+                                            <Route path="agents" element={<AgentsTable />} >
+                                                <Route path="add-agent" element={<CU_Agent />} />
+                                                <Route path="edit-agent/:agentId" element={<CU_Agent />} />
+                                            </Route>
+
                                         </Route>
+
                                         {/* <Route path="add-agent" element={<UpdatePersonalInfo isModalOpen={true} toggleModal={() => { }} />}></Route> */}
 
                                     </Route>
 
                                     <Route path="dashboard/my-properties/edit-property/:propertyId" element={<EditPendingProperty />} />
                                     <Route path="dashboard/pending-properties/edit-property/:propertyId" element={<EditPendingProperty />} />
-
 
 
 

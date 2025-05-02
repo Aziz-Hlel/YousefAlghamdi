@@ -1,62 +1,62 @@
 [
     {
-        "name" : "Test Sponsor 1",
-        "url" : "https://www.test1.com",
-        "logo" : "https://picsum.photos/200/300"
+        "name": "Unknown",
+        "url": "https://www.test1.com",
+        "logo": "sponsorsImg/IMG-20250502-WA0001.jpg"
     },
     {
-        "name" : "Test Sponsor 2",
-        "url" : "https://www.test2.com",
-        "logo" : "https://picsum.photos/200/300"
+        "name": "BINGHATTI",
+        "url": "https://binghatti.com/en/",
+        "logo": "sponsorsImg/IMG-20250502-WA0002.jpg"
     },
     {
-        "name" : "Test Sponsor 3",
-        "url" : "https://www.test3.com",
-        "logo" : "https://picsum.photos/200/300"
+        "name": "ELLINGTON",
+        "url": "https://ellingtonproperties.ae/",
+        "logo": "sponsorsImg/IMG-20250502-WA0003.jpg"
     },
     {
-        "name" : "Test Sponsor 4",
-        "url" : "https://www.test4.com",
-        "logo" : "https://picsum.photos/200/300"
+        "name": "SAMANA DEVELOPERS",
+        "url": "https://samanadevelopers.com/",
+        "logo": "sponsorsImg/IMG-20250502-WA0004.jpg"
     },
     {
-        "name" : "Test Sponsor 5",
-        "url" : "https://www.test5.com",
-        "logo" : "https://picsum.photos/200/300"
+        "name": "BLOOM HOLDING",
+        "url": "https://bloomholding.com/",
+        "logo": "sponsorsImg/IMG-20250502-WA0005.jpg"
     },
     {
-        "name" : "Test Sponsor 6",
-        "url" : "https://www.test6.com",
-        "logo" : "https://picsum.photos/200/300"
+        "name": "EMAAR",
+        "url": "https://www.emaar.com/",
+        "logo": "sponsorsImg/IMG-20250502-WA0006.jpg"
     },
     {
-        "name" : "Test Sponsor 7",
-        "url" : "https://www.test7.com",
-        "logo" : "https://picsum.photos/200/300"
+        "name": "DAMAC",
+        "url": "https://www.damacproperties.com/",
+        "logo": "sponsorsImg/IMG-20250502-WA0007.jpg"
     },
     {
-        "name" : "Test Sponsor 8",
-        "url" : "https://www.test8.com",
-        "logo" : "https://picsum.photos/200/300"
+        "name": "DANUBE PROPERTIES",
+        "url": "https://danubeproperties.com/",
+        "logo": "sponsorsImg/IMG-20250502-WA0008.jpg"
     },
     {
-        "name" : "Test Sponsor 9",
-        "url" : "https://www.test9.com",
-        "logo" : "https://picsum.photos/200/300"
+        "name": "ARADA",
+        "url": "https://www.arada.com/en/",
+        "logo": "sponsorsImg/IMG-20250502-WA0009.jpg"
     },
     {
-        "name" : "Test Sponsor 10",
-        "url" : "https://www.test10.com",
-        "logo" : "https://picsum.photos/200/300"
+        "name": "BNW DEVELOPEMENTS",
+        "url": "https://bnw.ae/",
+        "logo": "sponsorsImg/IMG-20250502-WA0010.jpg"
     },
     {
-        "name" : "Test Sponsor 11",
-        "url" : "https://www.test11.com",
-        "logo" : "https://picsum.photos/200/300"
+        "name": "RAK PROPERTIES",
+        "url": "https://rakproperties.ae/",
+        "logo": "sponsorsImg/IMG-20250502-WA0011.jpg"
     },
     {
-        "name" : "Test Sponsor 12",
-        "url" : "https://www.test12.com",
-        "logo" : "https://picsum.photos/200/300"
+        "name": "TIGER GROUP",
+        "url": "https://tigergroup.ae/",
+        "logo": "sponsorsImg/IMG-20250502-WA0012.jpg"
     }
 ]
