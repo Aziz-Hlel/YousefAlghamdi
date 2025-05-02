@@ -8,6 +8,7 @@ import IApiErrorMiddleware from './Interfaces/ApiErrorResponse.interface';
 import imgHandlerRouter from './imgHandler';
 import agentRouter from './Routes/agent.route';
 import ENV from './utils/ENV.variables';
+import sponsorRouter from './Routes/sponsor.route';
 
 
 
@@ -31,7 +32,7 @@ app.use(cors({
 app.use('/api/user', userRouter);
 app.use('/api/property', propertyRouter);
 app.use('/api/agent', agentRouter);
-
+app.use('/api/sponsors', sponsorRouter);
 
 // Serve static files
 // app.use('/api/images', express.static(path.join(__dirname, '../public/images')));

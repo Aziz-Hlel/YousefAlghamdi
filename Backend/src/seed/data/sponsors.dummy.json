@@ -1,0 +1,62 @@
+[
+    {
+        "name" : "Test Sponsor 1",
+        "url" : "https://www.test1.com",
+        "logo" : "https://picsum.photos/200/300"
+    },
+    {
+        "name" : "Test Sponsor 2",
+        "url" : "https://www.test2.com",
+        "logo" : "https://picsum.photos/200/300"
+    },
+    {
+        "name" : "Test Sponsor 3",
+        "url" : "https://www.test3.com",
+        "logo" : "https://picsum.photos/200/300"
+    },
+    {
+        "name" : "Test Sponsor 4",
+        "url" : "https://www.test4.com",
+        "logo" : "https://picsum.photos/200/300"
+    },
+    {
+        "name" : "Test Sponsor 5",
+        "url" : "https://www.test5.com",
+        "logo" : "https://picsum.photos/200/300"
+    },
+    {
+        "name" : "Test Sponsor 6",
+        "url" : "https://www.test6.com",
+        "logo" : "https://picsum.photos/200/300"
+    },
+    {
+        "name" : "Test Sponsor 7",
+        "url" : "https://www.test7.com",
+        "logo" : "https://picsum.photos/200/300"
+    },
+    {
+        "name" : "Test Sponsor 8",
+        "url" : "https://www.test8.com",
+        "logo" : "https://picsum.photos/200/300"
+    },
+    {
+        "name" : "Test Sponsor 9",
+        "url" : "https://www.test9.com",
+        "logo" : "https://picsum.photos/200/300"
+    },
+    {
+        "name" : "Test Sponsor 10",
+        "url" : "https://www.test10.com",
+        "logo" : "https://picsum.photos/200/300"
+    },
+    {
+        "name" : "Test Sponsor 11",
+        "url" : "https://www.test11.com",
+        "logo" : "https://picsum.photos/200/300"
+    },
+    {
+        "name" : "Test Sponsor 12",
+        "url" : "https://www.test12.com",
+        "logo" : "https://picsum.photos/200/300"
+    }
+]
