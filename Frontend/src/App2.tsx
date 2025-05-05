@@ -1,8 +1,8 @@
 import AOS from "aos";
 // import "aos/dist/aos.css";
-import  { useEffect } from 'react';
+import { useEffect } from 'react';
 import Home from './component/Home/';
-import {  Route, BrowserRouter as Router,  Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import AddProperty from "./component/AddProperty2";
 import AgentDetail from "./component/AgentDetail2";
 import Contact from "./component/Contact2";

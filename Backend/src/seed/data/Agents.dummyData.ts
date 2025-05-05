@@ -26,7 +26,7 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
             agentInfo: {
                 image: "",
                 socials: {
-                    whatsApp: "+0000",
+                    whatsApp: "+971501575572",
                     linkedin: "https://linkedin.com/",
                     twitter: "https://twitter.com/",
                     instagram: "https://instagram.com/"
@@ -45,12 +45,12 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
             lastName: 'Kristal',
             password: await hashPassword("agent2"), // make sure to hash or use dummy
             email: "agent2@gmail.com",
-            phoneNumber: '+971504100867',
+            phoneNumber: '+971 504100867',
             role: roles.AGENT,
             agentInfo: {
                 address: '2 Agent St',
                 socials: {
-                    whatsApp: "+0000",
+                    whatsApp: "+971504100867",
                     linkedin: "https://linkedin.com/",
                     twitter: "https://twitter.com/",
                     instagram: "https://instagram.com/"
@@ -68,13 +68,13 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
             lastName: 'Liakat',
             password: await hashPassword("agent3"), // make sure to hash or use dummy
             email: "agent3@gmail.com",
-            phoneNumber: '1234567890',
+            phoneNumber: '+971 585395994',
             role: roles.AGENT,
             agentInfo: {
 
                 address: '3 Agent St',
                 socials: {
-                    whatsApp: "+0000",
+                    whatsApp: "+971585395994",
                     linkedin: "https://linkedin.com/",
                     twitter: "https://twitter.com/",
                     instagram: "https://instagram.com/"
@@ -93,14 +93,14 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
             lastName: 'Alaoui',
             password: await hashPassword("admin"), // make sure to hash or use dummy
             email: "admin@gmail.com",
-            phoneNumber: '1234567890',
+            phoneNumber: '+971 525002822',
             role: roles.ADMIN,
 
             adminInfo: {
 
                 address: 'admin St',
                 socials: {
-                    whatsApp: "+0000",
+                    whatsApp: "+971525002822",
                     linkedin: "https://linkedin.com/",
                     twitter: "https://twitter.com/",
                     instagram: "https://instagram.com/",

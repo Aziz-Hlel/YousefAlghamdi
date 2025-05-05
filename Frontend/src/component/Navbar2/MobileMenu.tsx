@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ProtoTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { listing_types } from "@src/types/listing_types.types";
 
 interface ImobileMenu {
   handleSidebar: () => void;
@@ -69,9 +70,17 @@ const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
                   <li>
                     <Link to="/property">Properties</Link>
                   </li>
-
                   <li>
-                    <Link to="/add-property">Add Property</Link>
+                    <Link to={`/property?listingType=${listing_types.rent}`} >Rent</Link>
+                  </li>
+                  <li>
+                    <Link to={`/property?listingType=${listing_types.sale}`} >Sale</Link>
+                  </li>
+                  <li>
+                    <Link to={`/property?listingType=${listing_types.commercialRent}`} >Commercial rent</Link>
+                  </li>
+                  <li>
+                    <Link to={`/property?listingType=${listing_types.commercialSale}`} >Commercial sale</Link>
                   </li>
 
                 </ul>
