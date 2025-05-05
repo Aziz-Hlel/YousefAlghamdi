@@ -1,12 +1,10 @@
 import Layout from "./Layout2";
 import DashboardPropertyCard from "../../Cards/DashboardPropertyCard2";
 import Pagination from "../../Pagination2";
-import { use, useState } from "react";
-import properties from "../../../data/property";
+import { useState } from "react";
 import { useMyPropertiesContext } from "./MyPropertiesProvider.context";
 import apiGateway from "@src/utils/apiGateway";
 import { pickRandomPhoto } from "@src/pickRandomPhoto";
-import UserView from "@src/component/CU_Agent";
 import Http from "@src/services/Http";
 
 
@@ -45,18 +43,7 @@ function MyProperties({ title }: { title: string }) {
     fetchProperties(page);
   };
 
-  const [userInspected, setUserInspected] = useState<IUser>(initUser);
-  const [viewInvoice, setViewInvoice] = useState(false);
-  const toggleModal = async (clientId?: string) => {
-    setViewInvoice(!viewInvoice);
 
-    if (!clientId) return
-
-    const response = await Http.get(apiGateway.user.getById + clientId);
-
-    setUserInspected(response?.data.result);
-
-  };
 
   const randomPhotos = [
     pickRandomPhoto(),
@@ -82,16 +69,9 @@ function MyProperties({ title }: { title: string }) {
             title={property.title}
             location={property.city + ", " + property.delegation + ", " + property.addresse}
             // price={property.filterFields.price}
-            onInspectClient={toggleModal}
-            tempToSeeIfUser={title}
           />
         ))}
 
-        {/* <UserView
-          isOpen={viewInvoice}
-          handleModal={toggleModal}
-          user={{ ...userInspected }}
-        /> */}
         <Pagination
           totalPage={totalPage}
           currentPage={currentPage}

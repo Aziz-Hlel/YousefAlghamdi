@@ -20,7 +20,7 @@ const MyPropertiesContext = createContext<IMyPropertiesContext | undefined>(unde
 
 
 
-const MyPropertiesProvider = ({ children, title }: { children: React.ReactNode, title: "Pending Properties" | "My properties" }) => {
+const MyPropertiesProvider = ({ children, title }: { children: React.ReactNode, title: "Pending Properties" | "My properties" | "Unavailable Properties" }) => {
 
   const [properties, setProperties] = useState<Iproperty[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -39,7 +39,13 @@ const MyPropertiesProvider = ({ children, title }: { children: React.ReactNode, 
         behavior: 'smooth',
       });
     }
-    const url = title === "Pending Properties" ? apiGateway.property.pendingProperties.list : apiGateway.property.myProperties.list;
+
+    const titleTourl = {
+      "Pending Properties": apiGateway.property.pendingProperties.list,
+      "My properties": apiGateway.property.myProperties.list,
+      "Unavailable Properties": apiGateway.property.unavailableProperties.list,
+    }
+    const url = titleTourl[title]
 
     const response = await Http.get(url, { params: { page: page ?? 1 } });
     const properties: Iproperty[] = response?.data.result || [];

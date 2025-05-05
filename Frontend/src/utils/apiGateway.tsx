@@ -16,7 +16,7 @@ const apiGateway = {
         sigIn: "/user/login",
         getById: "/user/",
         updateAgent: "/user/update-agent",
-        update:"/user/update-user",
+        update: "/user/update-user",
         logOut: "/user/log-out",
         changePassword: "/user/change-password",
     },
@@ -34,6 +34,9 @@ const apiGateway = {
         pendingProperties: {
             list: "/property/pending-properties",
         },
+        unavailableProperties: {
+            list: "/property/unavailable-properties",
+        },
 
         approve: "/property/approve",
         decline: "/property/decline",
@@ -48,7 +51,7 @@ const apiGateway = {
     },
 
 
-    sponsor:{
+    sponsor: {
         get: "/sponsor/",
         getAll: "/sponsor/all",
         create: "/sponsor",

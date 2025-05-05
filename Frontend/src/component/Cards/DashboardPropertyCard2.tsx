@@ -15,12 +15,10 @@ type IDashboardPropertyCard = {
   listing_type: string;
   title: string;
   location: string;
-  onInspectClient: Function
-  tempToSeeIfUser: string
 };
 
 
-function DashboardPropertyCard({ _id, ownerId, status, image, tempToSeeIfUser, listing_type, title, location, onInspectClient, }: IDashboardPropertyCard) {
+function DashboardPropertyCard({ _id, ownerId, status, image, listing_type, title, location, }: IDashboardPropertyCard) {
 
   const { user } = useAuth();
   const { fetchProperties } = useMyPropertiesContext()

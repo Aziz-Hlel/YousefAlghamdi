@@ -92,6 +92,9 @@ const App2 = () => {
                                             <Route path="inspect-user/:userId" element={<UserView />} />
                                         </Route>
 
+                                        <Route path="unavailable-properties" element={<MyPropertiesProvider title="Unavailable Properties"> <MyProperties title="Unavailable Properties" /> </MyPropertiesProvider>} >
+                                            <Route path="inspect-user/:userId" element={<UserView />} />
+                                        </Route>
                                         {
                                             // * Admin only Routes 
                                         }
