@@ -1,10 +1,8 @@
 import AOS from "aos";
 // import "aos/dist/aos.css";
-import React, { useEffect } from 'react'
-import Home from './component/Home/'
-import PaymentMethod from "./component/PaymentMethod";
-import { createBrowserRouter, Route, BrowserRouter as Router, RouterProvider, Routes, useParams } from "react-router-dom";
-import AboutUs from "./component/About";
+import  { useEffect } from 'react';
+import Home from './component/Home/';
+import {  Route, BrowserRouter as Router,  Routes } from "react-router-dom";
 import AddProperty from "./component/AddProperty2";
 import AgentDetail from "./component/AgentDetail2";
 import Contact from "./component/Contact2";
@@ -13,18 +11,13 @@ import EditPendingProperty from "./component/EditPendingProperty/index.js";
 import ErrorPage from "./component/Error";
 import Faq from "./component/Faq";
 import Login from "./component/Login2";
-import OurAgents from "./component/OurAgents";
-import Pricing from "./component/Pricing.jsx";
 import SignUp from "./component/SignUp2";
 import SubmitProperty from "./component/SubmitProperty2";
 import Property from "./component/Property2/";
-import Header from "./component/Header/index.jsx";
-import HomecHero from "./component/HomecHero2/index.jsx";
 import { AuthProvider } from "./providers/AuthProvider.context.js";
 import ProtectedLayouts from "./component/Layouts/ProtectedLayouts/ProtectedLayouts.js";
 import MyProperties from "./component/Dashboard2/MyProperties/MyProperties2.js";
 import PersonalInfo from "./component/Dashboard2/MyProperties/PersonalInfo2/PersonalInfo2.js";
-import Reviews from "./component/Dashboard2/Reviews2.js";
 import DashboardComp from "./component/Dashboard2/DashboardComp2.js";
 import ChangePassword from "./component/Dashboard2/ChangePassword2.js";
 import MyPropertiesProvider from "./component/Dashboard2/MyProperties/MyPropertiesProvider.context.js";
@@ -39,6 +32,7 @@ import Layout from "./component/Layouts/Layout.js";
 import PrivilegedLayouts from "./component/Layouts/PrivilegedLayouts/PrivilegedLayouts.js";
 import roles from "./types/roles.type.js";
 import CU_Sponsor from "./component/Dashboard2/SponsorsEdit/CU_Sponsor.js";
+import AboutUs from "./component/About2/index.js";
 
 
 
@@ -70,7 +64,7 @@ const App2 = () => {
 
                                 <Route path="agent-detail/:agentId" element={<AgentDetail />} />
                                 {/* <Route path="our-agents" element={<OurAgents />} /> */}
-                                {/* <Route path="about" element={<AboutUs />} /> */}
+                                <Route path="about" element={<AboutUs />} />
                                 {/* <Route path="/pricing" element={<Pricing />} /> */}
                                 {/* <Route path="/payment-method" element={<PaymentMethod />} /> */}
                                 <Route path="faq" element={<Faq />} />

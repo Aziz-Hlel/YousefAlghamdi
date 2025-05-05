@@ -5,7 +5,7 @@ import About from "../About2/About";
 import Agents from "../Agents2";
 import Blog from "../Blog";
 import DownloadApp from "../DownloadApp2";
-import Features2 from "../Features2";
+import Features2 from "../WhyUs";
 import Header from "../Header";
 import HomecHero from "../HomecHero2";
 import HomecHeroV2 from "../HomecHero2/HomecHeroV2";
@@ -35,7 +35,7 @@ function Home() {
         {/* <CitiesListing /> */}
         <LatestPropertyV2 />
 
-        <Sponsors  />
+        <Sponsors />
 
         <Features2 />
         <About />

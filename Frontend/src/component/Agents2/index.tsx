@@ -1,11 +1,10 @@
 import AgentCardV2 from "../Cards/AgentCardV2";
 import AboutShapeImg from "../About/AboutShapeImg";
-import agents from "../../data/agents";
 import AgentCardV2_2 from "../Cards/AgentCardV2_2";
 import { useAgents } from "@src/providers/AgentsProvider.context";
-import agent1 from "../../assets/img/agents/agent1.jpg"
-import agent2 from "../../assets/img/agents/agent2.jpg"
-import agent3 from "../../assets/img/agents/agent3.jpg"
+import agent1 from "@img/agents/agent4.jpg"
+import agent2 from "@img/agents/agent5.jpg"
+import agent3 from "@img/agents/agent6.jpg"
 
 
 const Agents = () => {
@@ -26,22 +25,20 @@ const Agents = () => {
       </div>
 
       <div className="container">
-        <div className="row">
-          <div className="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
-            <div className="homec-section__head text-center mg-btm-30">
-
-              <h2
-                className="homec-section__title"
-                data-aos="fade-in"
-                data-aos-delay="400"
-              >
-                Meet Our Properties Agents
-              </h2>
-            </div>
-          </div>
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            Meet Our Talented Team
+          </h2>
+          <div className="h-1 w-20 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto mb-6 rounded-full" />
+          <p className="text-gray-600 text-lg">
+            We're a dynamic group of individuals who are passionate about what we do
+            and dedicated to delivering the best results for our clients.
+          </p>
         </div>
-        <div className="flex  items-center flex-col lg:flex-row ">
-
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"> */}
+        <div className="lg:flex gap-8  lg:justify-center  grid grid-cols-1 sm:grid-cols-2
+      ">
           {agents && Object.keys(agents)?.map((agentId, index) => {
             const agent = agents[agentId];
             return <AgentCardV2_2
@@ -50,10 +47,12 @@ const Agents = () => {
               img={agentImgs[index]}
               name={`${agent.firstName} ${agent.lastName}`}
               position={"Real Estate Broker"}
-              detailsLink={agent.socials}
+              detailsLink={agent.agentInfo.socials.whatsApp}
             />
 
           })}
+
+
 
         </div>
       </div>

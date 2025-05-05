@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "@src/providers/AuthProvider.context";
 import roles from "@src/types/roles.type";
-import agent1 from "@src/assets/img/agents/agent1.jpg"
+import agent1 from "@src/assets/img/agents/agent4.jpg"
 import AgentAddOns from "./AgentAddOns";
 import UpdatePersonalInfo from "@src/component/ModalPersonalInfo/updatePersonalInfo";
 

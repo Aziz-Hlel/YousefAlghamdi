@@ -16,10 +16,10 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
     return [
         {
             _id: new mongoose.Types.ObjectId(),
-            firstName: 'agent1',
-            lastName: 'Doe',
+            firstName: 'Mohamed',
+            lastName: 'Abdelkhalek',
             email: "agent1@gmail.com",
-            phoneNumber: '1234567890',
+            phoneNumber: '+971501575572',
             role: roles.AGENT,
             password: await hashPassword("agent1"),
 
@@ -36,16 +36,16 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
                 clientsId: [],
             },
             savedProperties: [],
-            
-            
+
+
         },
         {
             _id: new mongoose.Types.ObjectId(),
-            firstName: 'agent2',
-            lastName: 'Doe',
+            firstName: 'Widad',
+            lastName: 'Kristal',
             password: await hashPassword("agent2"), // make sure to hash or use dummy
             email: "agent2@gmail.com",
-            phoneNumber: '1234567890',
+            phoneNumber: '+971504100867',
             role: roles.AGENT,
             agentInfo: {
                 address: '2 Agent St',
@@ -60,12 +60,12 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
                 clientsId: [],
             },
             savedProperties: [],
-            
+
         },
         {
             _id: new mongoose.Types.ObjectId(),
-            firstName: 'agent3',
-            lastName: 'Doe',
+            firstName: 'Ali',
+            lastName: 'Liakat',
             password: await hashPassword("agent3"), // make sure to hash or use dummy
             email: "agent3@gmail.com",
             phoneNumber: '1234567890',
@@ -85,12 +85,12 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
 
             },
             savedProperties: [],
-            
+
         },
         {
             _id: new mongoose.Types.ObjectId(),
-            firstName: 'admin',
-            lastName: 'Doe',
+            firstName: 'Narjiss Didi',
+            lastName: 'Alaoui',
             password: await hashPassword("admin"), // make sure to hash or use dummy
             email: "admin@gmail.com",
             phoneNumber: '1234567890',
@@ -98,7 +98,7 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
 
             adminInfo: {
 
-                address: '3 Agent St',
+                address: 'admin St',
                 socials: {
                     whatsApp: "+0000",
                     linkedin: "https://linkedin.com/",
@@ -109,7 +109,7 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
                 about: "admin description",
 
             },
-            
+
             savedProperties: [],
         },
 

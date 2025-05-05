@@ -1,19 +1,19 @@
 import AboutCard from "../Cards/AboutCard";
 import AboutShapeImg from "./AboutShapeImg";
 import about_img from "./../../assets/img/about/about_img.jpg"
-import ceo_img from "./../../assets/img/about/ceo_img.png"
+import ceo_img from "./../../assets/img/about/ceo_img.jpg"
 
 
 function About() {
   return (
     <section className="homec-about homec-bg-third-color pd-top-90 pd-btm-120">
       <div className="homec-shape">
-        <AboutShapeImg img="img/anim-shape-1.svg" design="homec-shape-1" />
-        <AboutShapeImg img="img/anim-shape-2.svg" design="homec-shape-2" />
-        <AboutShapeImg img="img/anim-shape-3.svg" design="homec-shape-3" />
-        <AboutShapeImg img="img/anim-shape-1.svg" design="homec-shape-1" />
-        <AboutShapeImg img="img/anim-shape-2.svg" design="homec-shape-2" />
-        <AboutShapeImg img="img/anim-shape-3.svg" design="homec-shape-3" />
+        <AboutShapeImg img="/img/anim-shape-1.svg" design="homec-shape-1" />
+        <AboutShapeImg img="/img/anim-shape-2.svg" design="homec-shape-2" />
+        <AboutShapeImg img="/img/anim-shape-3.svg" design="homec-shape-3" />
+        <AboutShapeImg img="/img/anim-shape-1.svg" design="homec-shape-1" />
+        <AboutShapeImg img="/img/anim-shape-2.svg" design="homec-shape-2" />
+        <AboutShapeImg img="/img/anim-shape-3.svg" design="homec-shape-3" />
       </div>
       <div className="container">
         <div className="row align-items-center">
@@ -35,10 +35,13 @@ function About() {
               <div className="homec-ceo-quote">
                 <div className="homec-ceo-quote__img">
                   <div className="homec-overlay"></div>
+
                   <img src={ceo_img} alt="#" />
+
                 </div>
                 <h4 className="homec-ceo-quote__title">
-                  Yousef Alghamdi<span>Ceo & Founder</span>
+                  Narjiss Didi Alaoui
+                  <span>Ceo</span>
                 </h4>
               </div>
             </div>
@@ -63,7 +66,8 @@ function About() {
                   data-aos="fade-in"
                   data-aos-delay="400"
                 >
-                  Have done some Coo Stuff with common users
+                  Welcome Message from the CEO
+
                 </h2>
               </div>
               <div
@@ -72,30 +76,14 @@ function About() {
                 data-aos-delay="500"
               >
                 <p className="homec-about-content__text">
-                  There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered alteration in some
-                  form, by injected humour, or randomised words which don't look
-                  even slightly believable.
+                  Welcome to YGP Real Estate, where vision meets value. As CEO, I take pride in leading a team committed to excellence, integrity, and client satisfaction.
+                  Our focus is not only on transactions, but on building lasting relationships rooted in trust and transparency.
+                  Whether you're buying, selling, or investing, we are here to guide you every step of the way with market insight, personalized service, and a deep commitment to your success.
+                  Thank you for choosing YGP — your trusted partner in UAE real estate.
+
                 </p>
-                <div className="homec-focus-content homec-focus-content--v2 homec-border mg-top-20">
-                  <p>
-                    Over 20 years’ experience providing top quality house
-                    Booking in to the rant and sell for your Amazing Dream &
-                    Make you Happy
-                  </p>
-                </div>
-                <div className="homec-dflex-space">
-                  <AboutCard
-                    text="believe in our service & Care"
-                    img="img/count-icon1.svg"
-                    count={90}
-                  />
-                  <AboutCard
-                    text="house ready for cccupancy"
-                    img="img/count-icon2.svg"
-                    count={120}
-                  />
-                </div>
+
+
               </div>
             </div>
           </div>

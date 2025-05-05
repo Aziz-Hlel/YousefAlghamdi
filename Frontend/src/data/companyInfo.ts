@@ -1,7 +1,7 @@
 const companyInfo = {
-    email: "yousefAlghamdi@gmail.com",
-    phone: "+971 50 123 4567",
-    address: "1901 Palm Jumeirah Rd, Dubai"
+    email: "Info@ypg.ae",
+    phone: "+971 525002822",
+    address: "Ibis Hotel Rigga Business Center, 3rd floor Al Rigga , Muraqqabat , Dubai"
 }
 
 

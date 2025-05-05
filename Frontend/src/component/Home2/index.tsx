@@ -5,7 +5,7 @@ import About from "../About/About";
 import Agents from "../Agents";
 import Blog from "../Blog";
 import DownloadApp from "../DownloadApp2";
-import Features2 from "../Features2";
+import Features2 from "../WhyUs";
 import Header from "../Header";
 import HomecHero from "../HomecHero2";
 import LatestProperty from "../LatestProperty";

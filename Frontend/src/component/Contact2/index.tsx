@@ -118,7 +118,7 @@ function Contact() {
                       
                     /> */}
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d24283.867113395823!2d55.27683941576713!3d25.2093445177991!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43348a67e24b%3A0xff45e502e1ceb7e2!2sBurj%20Khalifa!5e0!3m2!1sen!2stn!4v1744633414399!5m2!1sen!2stn"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2145.429739769822!2d55.32074530635143!3d25.264921475882506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f4341e8d5ba51%3A0x1350007e85f2d67a!2sibis%20Dubai%20Al%20Rigga!5e0!3m2!1sen!2stn!4v1746459399938!5m2!1sen!2stn"
                       height="450" className=" w-full"
                       loading="lazy" ></iframe>
 

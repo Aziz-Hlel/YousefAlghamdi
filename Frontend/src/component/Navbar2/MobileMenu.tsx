@@ -74,29 +74,12 @@ const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
                     <Link to="/add-property">Add Property</Link>
                   </li>
 
-                  <li>
-                    <Link to="/edit-property">Edit Property</Link>
-                  </li>
-
                 </ul>
 
               </li>
 
-
-
-              <li
-                className={`menu-item-has-children ${activeSubmenu === "agents" && "active"}`}>
-                <Link to="#" onClick={(_) => handleActive("agents")}>
-                  Agents
-                </Link>
-                <ul className="sub-menu" onClick={handleSidebar}>
-                  <li>
-                    <Link to="/our-agent">Our Agent</Link>
-                  </li>
-                  <li>
-                    <Link to="/agent-detail">Agent Details</Link>
-                  </li>
-                </ul>
+              <li>
+                <Link to="/about" onClick={handleSidebar}>About us</Link>
               </li>
 
               <li>

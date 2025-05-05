@@ -47,11 +47,8 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
                           <NavBtn link="/edit-property" text="Edit Property" /> */}
 
                         </NavBtn>
-                        <NavBtn text="Agents" link="#">
-                          <NavBtn link="/our-agents" text="Our Agent" />
-                          <NavBtn link="/about" text="About Us" />
-                          {/* <NavBtn link="/agent-detail" text="Agent Details" /> */}
-                        </NavBtn>
+                        <NavBtn link="/about" text="About Us" />
+                        {/* <NavBtn link="/agent-detail" text="Agent Details" /> */}
                         <NavBtn link="/contact" text="Contact" />
                         <NavBtn link="/dashboard" text="Dashboard" />
                       </ul>
