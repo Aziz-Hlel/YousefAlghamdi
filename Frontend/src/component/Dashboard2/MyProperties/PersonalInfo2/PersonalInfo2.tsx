@@ -47,7 +47,7 @@ function PersonalInfo() {
 
               {/* <img src="https://placehold.co/360x390" alt="#" /> */}
 
-              <div className=" w-8/12 lg:h-11/12  h-72 object-fill flex  justify-center  items-center  bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-cover  bg-no-repeat "
+              <div className=" w-8/12   h-72 object-fill flex  justify-center  items-center  bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-cover  bg-no-repeat "
                 style={{
                   backgroundImage: (agent1 ? `url(${agent1})` : "url('https://placehold.co/1720x1420')"),
                 }}
@@ -74,12 +74,9 @@ function PersonalInfo() {
                 Santa Ana, Illinois 85486{" "}
               </li> */}
             </ul>
-            {(user.role === roles.AGENT || user.role === roles.ADMIN) && <AgentAddOns socials={user.role === roles.ADMIN ? user.adminInfo?.socials : user.agentInfo?.socials} />}
           </div>
         </div>
       </div>
-      {user.role === roles.AGENT && <AboutComp about={user.agentInfo?.about ?? ""} />}
-      {user.role === roles.ADMIN && <AboutComp about={user.adminInfo?.about ?? ""} />}
       <div className="row mg-top-30">
         <div className="col-12 d-flex justify-content-end">
           <a
