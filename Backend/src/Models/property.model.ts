@@ -14,7 +14,13 @@ export interface Iproperty {
     delegation: string,
     addresse: string,
 
-    imgs: string[],
+    imageGallery: {
+        folderId: string,
+        images: {
+            key: string,
+            url: string,
+        }[],
+    }
     // videos: string[],
 
     filterFields: {
@@ -56,86 +62,57 @@ export interface Iproperty {
 export interface Iproperty_model extends Document, Iproperty { }
 
 
+
+const imageSchema = new mongoose.Schema({
+
+    key: { type: String, required: true },
+
+
+}, { _id: false });
+
+
 const propertySchema = new mongoose.Schema({
 
-    title: {
-        type: String,
-        required: true,
-        trim: true
-    },
+    title: { type: String, required: true, trim: true },
 
-    description: {
-        type: String,
-        required: true,
-        trim: true,
-    },
+    description: { type: String, required: true, trim: true, },
 
-    category: {
-        type: String,
-        required: true,
-    },
+    category: { type: String, required: true, },
 
-    sub_category: {
-        type: String,
-        required: true,
-    },
+    sub_category: { type: String, required: true, },
 
-    city: {
-        type: String,
-        required: true,
+    city: { type: String, required: true, },
 
-    },
+    delegation: { type: String, required: true, },
 
-    delegation: {
-        type: String,
-        required: true,
-    },
+    addresse: { type: String, required: true, },
 
-    addresse: {
-        type: String,
-        required: true,
-    },
+    imageGallery: {
 
-    imgs: {
-        type: [String],
-        required: true,
+        folderId: { type: String, required: true },
+
+        images: [imageSchema],
+
     },
 
     filterFields: filterFieldsTypes,
 
-    listing_type: {
-        type: String,
-        required: true,
-    },
+    listing_type: { type: String, required: true, },
 
-    additionalDetails: {
-        type: [String],
-    },
+    additionalDetails: { type: [String], },
 
     nearestPlaces: { type: Map, of: String },
 
 
-    productTier: {
-        type: String,
-        required: true,
-    },
+    productTier: { type: String, required: true, },
 
-    clientId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-    },
+    clientId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', },
 
-    agentId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Agent',
-        default: null,
-    },
+    agentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Agent', default: null, },
 
 
-    active: {
-        type: Boolean,
-        default: false,
-    },
+    active: { type: Boolean, default: false, },
+
 
     advanced: {
         state: {

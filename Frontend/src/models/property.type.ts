@@ -11,7 +11,14 @@ type Iproperty = {
     delegation: string,
     addresse: string,
 
-    imgs: string[],
+
+    imageGallery: {
+        folderId: string,
+        images: {
+            key: string,
+            url?: string,
+        }[],
+    },
 
     listing_type: string,
     productTier: string,
@@ -39,7 +46,7 @@ type Iproperty = {
         available: Date,
         updated_version: { [key: string]: any }
     },
-    
+
 }
 
 

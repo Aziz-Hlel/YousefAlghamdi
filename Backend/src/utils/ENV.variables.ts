@@ -36,7 +36,7 @@ const bucketAccessKey = process.env.BUCKET_ACCESS_KEY ?? ""
 const bucketSecretAccessKey = process.env.BUCKET_SECRET_ACCESS_KEY ?? ""
 
 const CDN_DOMAIN = process.env.CDN_DOMAIN ?? "";
-const CDN_KEY_PAIR_ID = process.env.CDN_KEY_PAIR_ID ?? "";
+const CDN_PUBLIC_KEY_ID = process.env.CDN_PUBLIC_KEY_ID ?? "";
 const CDN_PRIVATE_KEY = process.env.CDN_PRIVATE_KEY ?? "";
 
 console.log('MONGO_URI', MONGO_URI);
@@ -54,7 +54,7 @@ const ENV = {
     bucketSecretAccessKey,
 
     CDN_DOMAIN,
-    CDN_KEY_PAIR_ID,
+    CDN_PUBLIC_KEY_ID,
     CDN_PRIVATE_KEY,
 };
 

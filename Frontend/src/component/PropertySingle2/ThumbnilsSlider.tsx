@@ -31,8 +31,8 @@ function ThumbnailsSlider() {
       >
 
         {
-          property && property.imgs.map((img, index) =>
-            <ThumbnailsCard key={index} img={apiGateway.images + randomPhotos[0]} />
+          property && property.imageGallery.images.map((img, index) =>
+            <ThumbnailsCard key={index} img={img.url} />
           )
         }
         <ThumbnailsCard img="https://placehold.co/270x180" />

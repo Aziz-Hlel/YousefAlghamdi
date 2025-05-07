@@ -10,7 +10,6 @@ import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
 import mongoose from "mongoose";
 import roles from "../types/roles.type";
 import Property from "../Models/property.model";
-import Agent from "../Models/agent.model";
 import ENV from "../utils/ENV.variables";
 import { merge, pick } from 'lodash';
 

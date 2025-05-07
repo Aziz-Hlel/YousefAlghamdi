@@ -11,11 +11,21 @@ import User from "../Models/user.model";
 import ApproveSubmitPropertySchema from "../schemas/ApproveSubmitPropertySchema";
 import { getCDN_SignedUrl } from "../imgHandler";
 
+const addSignedUrl = (property: any) => {
+    return {
+        ...property.toObject(),
+        imageGallery: {
+            ...(property.imageGallery as any).toObject(),
+            images: property.imageGallery.images.map((image: any) => ({ ...image.toObject(), url: getCDN_SignedUrl(image.key) })),
+        },
+    }
 
+}
 
 
 
 export const createProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    await Property.deleteMany();
 
     const clientId = req.user?._id!;
     let agentId: string | undefined = req.user?.clientInfo?.agentId;
@@ -74,11 +84,11 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
                 updated_version: {},
             };
 
-
+        console.log("req.body", req.body.imageGallery)
         const property = new Property({
             ...req.body,
             clientId: clientId,
-            agentId: clientId
+            agentId: clientId,
 
         });
 
@@ -87,9 +97,10 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
         res.status(statusCode.CREATED).json('Property created successful');
 
     }
-    else return next(errorHandler(statusCode.INTERNAL_SERVER_ERROR, errorMessages.COMMON.INTERNAL_SERVER_ERROR));
 
     // ! 3nd if l user client agent w admin le donc ken admin chizid dar none will happen , reason mezetch 5atr bch trasilik tzidlou input y5tar agent m3aha mouch kima l agent t7sb besmou direct w client kima 5dmt melloul
+    else return next(errorHandler(statusCode.INTERNAL_SERVER_ERROR, errorMessages.COMMON.INTERNAL_SERVER_ERROR));
+
 
 
 }
@@ -139,14 +150,14 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
             Property.countDocuments(filters)
         ]);
 
-        properties.forEach((property: Iproperty) => {
-            property.imgs = property.imgs.map((imgKey: string) => getCDN_SignedUrl(imgKey))
-        })
+
+        const updatedProperties = properties.map((property) => addSignedUrl(property));
+
 
         res.set("x-total-count", total.toString()); // Optional, useful for frontend
 
         res.json({
-            result: properties,
+            result: updatedProperties,
         })
 
 
@@ -169,9 +180,12 @@ export const getProperty = async (req: AuthenticatedRequest, res: Response, next
     const property = await Property.findById(propertyId);
     if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
 
+    const propertyWithSignedUrls = addSignedUrl(property);
+    
+
     res.json({
 
-        result: property,
+        result: propertyWithSignedUrls,
     });
 
 
@@ -383,6 +397,10 @@ export const updateProperty = async (req: AuthenticatedRequest, res: Response, n
 
 
 };
+
+
+
+
 
 export const getUnavailableProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 

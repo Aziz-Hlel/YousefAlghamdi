@@ -29,14 +29,14 @@ function SingleSlider() {
       ]}
     >
       {
-        property && property.imgs.map((img, index) =>
+        property && property.imageGallery.images.map((img, index) =>
           <ImageCard
-            formkey={index}
+            key={index}
             price={property.filterFields.price}
             duration={property.listing_type === "rent" || property.listing_type === "commercial rent" ? "Month" : ""}
             title={property.title}
             text="1901 Thornridge Cir. Shiloh, Hawaii 81063"
-            img={apiGateway.images + randomPhoto} />
+            img={img.url!} />
         )}
 
       {/* <ImageCard

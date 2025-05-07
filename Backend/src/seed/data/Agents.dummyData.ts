@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { IAgent } from "../../Models/agent.model";
 import roles from "../../types/roles.type";
 import hashPassword from "../hashPassword";
 import bcrypt from "bcrypt";

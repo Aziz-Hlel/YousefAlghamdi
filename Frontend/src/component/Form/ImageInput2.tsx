@@ -3,15 +3,14 @@ import UploadedImageCard from "../Cards/UploadedImageCard2";
 import CircularProgressBar from "./CircularProgressBar ";
 import UploadThumbnailCard from "./UploadThumbnailCard";
 import { FileWithPath } from "react-dropzone";
-import { FieldError, Merge } from "react-hook-form";
+import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
 
 
 type ImageInputProps = {
   imgs: (File | null)[];
   handleDelete: Function;
   handleImage: (uploadedImg: FileWithPath, idx: number) => void;
-  fieldError: Merge<FieldError, (FieldError | undefined)[]> | undefined
-
+  fieldError: Merge<FieldError, (Merge<FieldError, FieldErrorsImpl<{ key: string; }>> | undefined)[]> | undefined | undefined
 };
 
 function ImageInput({ imgs, handleDelete, handleImage, fieldError }: ImageInputProps) {

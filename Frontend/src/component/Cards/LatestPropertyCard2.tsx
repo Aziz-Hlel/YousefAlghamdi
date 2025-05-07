@@ -60,7 +60,7 @@ function LatestPropertyCard({ estate, _id, likeLink, period, listing_type, name,
           <Link to={"/property-single/" + estate._id}>
             <div className="w-[22rem] h-60 flex  justify-center  items-center  bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-cover  bg-no-repeat "
               style={{
-                backgroundImage: (`url(${estate.imgs[0]})`),
+                backgroundImage: (`url(${estate.imageGallery.images[0].url})`),
               }}>
             </div>
           </Link>

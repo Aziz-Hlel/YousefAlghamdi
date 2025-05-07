@@ -1,4 +1,3 @@
-import { IAgentModel } from "../../Models/agent.model";
 import { Iproperty } from "../../Models/property.model";
 import { Iuser_wPassword } from "./Users.dummyData";
 

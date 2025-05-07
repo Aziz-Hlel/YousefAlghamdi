@@ -1,6 +1,5 @@
 import ENV from "../utils/ENV.variables";
 import createAgents from "./data/Agents.dummyData";
-import Agent from "../Models/agent.model";
 import createUser from "./data/Users.dummyData";
 import User from "../Models/user.model";
 import createProperties from "./data/properties.dummy";
@@ -20,7 +19,6 @@ const seedData = async () => {
 
     // Clear existing data if needed
     await User.deleteMany();
-    await Agent.deleteMany();
     await Property.deleteMany();
     await Sponsors.deleteMany();
     console.log("☑️   Cleared all existing data!");

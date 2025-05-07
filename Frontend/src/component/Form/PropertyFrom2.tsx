@@ -17,7 +17,6 @@ import { cities, delegations } from "@src/types/cities.delegations.types";
 import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
-import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
 import { useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -71,7 +70,15 @@ export const SubmitPropertySchema = z.object({
 
 
   additionalDetails: z.array(z.string()).default([]),
-  imgs: z.array(z.string({ required_error: "Image is required" })).optional(),
+  imageGallery: z.object({
+
+    folderId: z.string({ required_error: "Folder id is required" }),
+
+    images: z.array(z.object({
+      key: z.string({ required_error: "Image key is required" }),
+    })),
+
+  }).optional(),
   listing_type: z.string({ required_error: "Listing type is required" }),
   productTier: z.string({ required_error: "Product tier is required" }).default("free"),
   nearestPlaces: z.record(z.string(), z.string()).default({}),
@@ -89,6 +96,7 @@ const PropertyFrom = () => {
   const { whatFor, } = useParams();
 
   const imgsFolderId = useRef<string>(uuidv4());
+
 
   const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting, }, setError } =
     useForm<SubmitPropertyType>({
@@ -194,12 +202,14 @@ const PropertyFrom = () => {
         if (item.placeName !== "" && item.distance !== "") data.nearestPlaces[item.placeName] = item.distance;
       });
     }
-
+  
+    data.imageGallery = { folderId: imgsFolderId.current, images: [] };
+ 
     if (imgs[0] === null) {
-      setError("imgs", { message: "Thumbnail Image is required" });
+      setError("imageGallery.images", { message: "Thumbnail Image is required" });
       return;
     }
-    else data.imgs = imgs.filter((img) => img !== null).map((img) => img.key);
+    else data.imageGallery.images = imgs.filter((img) => img !== null).map((img) => { return { key: img.key } });
 
     if (data.category !== ResidentialProperties) {
       delete data.filterFields.rooms
@@ -215,7 +225,7 @@ const PropertyFrom = () => {
     // }
     const response = await Http.post(apiGateway.property.create, data);
 
-    response?.status === 201 && navigate("/dashboard/my-properties")
+    // response?.status === 201 && navigate("/dashboard/my-properties")
     console.log(data);
 
   };
@@ -223,6 +233,7 @@ const PropertyFrom = () => {
     whatFor && setValue("listing_type", whatFor)
   }, [whatFor])
 
+  console.log(errors);
 
   if (whatFor && !listing_typesValues.includes(whatFor)) return <> </>
   return (
@@ -392,7 +403,7 @@ const PropertyFrom = () => {
                 imgs={imgs}
                 handleDelete={handleImageDelete}
                 handleImage={handleImageInput}
-                fieldError={errors.imgs}
+                fieldError={errors.imageGallery?.images}
 
               />
 

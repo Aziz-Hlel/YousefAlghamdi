@@ -49,7 +49,16 @@ const ApproveSubmitPropertySchema = z.object({
 
 
     additionalDetails: z.array(z.string()).default([]),
-    imgs: z.array(z.string({ required_error: "Image is required" })).optional(),
+    imageGallery: z.object({
+
+        folderId: z.string({ required_error: "Folder id is required" }),
+
+        images: z.array(z.object({
+            key: z.string({ required_error: "Image key is required" }),
+        })),
+
+    }),
+
     listing_type: z.string({ required_error: "Listing type is required" }),
     productTier: z.string({ required_error: "Product tier is required" }).default("free"),
     nearestPlaces: z.record(z.string(), z.string()).default({}),

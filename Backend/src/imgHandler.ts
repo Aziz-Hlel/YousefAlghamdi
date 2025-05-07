@@ -58,7 +58,7 @@ const s3Client = new S3Client({
 export const getCDN_SignedUrl = (s3ObjectKey: string): string => {
 
     const getCDN_SignedUrl = CDN_getSignedUrl({
-        keyPairId: ENV.CDN_KEY_PAIR_ID,
+        keyPairId: ENV.CDN_PUBLIC_KEY_ID,
         privateKey: ENV.CDN_PRIVATE_KEY,
         url: `https://${ENV.CDN_DOMAIN}/${s3ObjectKey}`,
 
