@@ -19,17 +19,25 @@ const MONGO_URI = NODE_ENV !== 'local'
     : `mongodb://127.0.0.1:27017/${MONGO_INITDB_DATABASE}`
 
 
-console.log("port : ",process.env.PORT)
+console.log("port : ", process.env.PORT)
 
 const PORT = process.env.PORT ?? 5000
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET ?? "secret"
 const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET ?? "secret"
 const FRONT_URL = process.env.FRONT_URL ?? ""
 
-console.log("JWT_REFRESH_SECRET : ",PORT)
-console.log("JWT_ACCESS_SECRET : ",PORT)
-console.log("FRONT_URL : ",PORT)
+console.log("JWT_REFRESH_SECRET : ", PORT)
+console.log("JWT_ACCESS_SECRET : ", PORT)
+console.log("FRONT_URL : ", PORT)
 
+const bucketName = process.env.BUCKET_NAME ?? ""
+const bucketRegion = process.env.BUCKET_REGION ?? ""
+const bucketAccessKey = process.env.BUCKET_ACCESS_KEY ?? ""
+const bucketSecretAccessKey = process.env.BUCKET_SECRET_ACCESS_KEY ?? ""
+
+const CDN_DOMAIN = process.env.CDN_DOMAIN ?? "";
+const CDN_KEY_PAIR_ID = process.env.CDN_KEY_PAIR_ID ?? "";
+const CDN_PRIVATE_KEY = process.env.CDN_PRIVATE_KEY ?? "";
 
 console.log('MONGO_URI', MONGO_URI);
 const ENV = {
@@ -39,6 +47,15 @@ const ENV = {
     JWT_ACCESS_SECRET,
     NODE_ENV,
     FRONT_URL,
+
+    bucketName,
+    bucketRegion,
+    bucketAccessKey,
+    bucketSecretAccessKey,
+
+    CDN_DOMAIN,
+    CDN_KEY_PAIR_ID,
+    CDN_PRIVATE_KEY,
 };
 
 

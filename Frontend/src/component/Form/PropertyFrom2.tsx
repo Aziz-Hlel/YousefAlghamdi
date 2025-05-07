@@ -18,6 +18,8 @@ import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
+import { useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 
 export const SubmitPropertySchema = z.object({
@@ -86,6 +88,8 @@ const PropertyFrom = () => {
 
   const { whatFor, } = useParams();
 
+  const imgsFolderId = useRef<string>(uuidv4());
+
   const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting, }, setError } =
     useForm<SubmitPropertyType>({
       resolver: zodResolver(SubmitPropertySchema),
@@ -127,7 +131,7 @@ const PropertyFrom = () => {
   // // handle property image input sector
 
   const handleImageInput = async (uploadedImg: FileWithPath, idx: number) => {
-    const key = await uploadImageToS3_SIMULATOR(uploadedImg, "property");
+    const key = await uploadImageToS3_SIMULATOR(uploadedImg, imgsFolderId.current, "property");
     const imgWithPreview = Object.assign(uploadedImg, {
       preview: URL.createObjectURL(uploadedImg),
       key: key
@@ -201,6 +205,10 @@ const PropertyFrom = () => {
       delete data.filterFields.rooms
       delete data.filterFields.bathrooms
     }
+
+    // (data as any).imgsFolderId = imgsFolderId.current
+
+
     // if (imgs[2] === null) {
     //   setError("imgs", { message: "rest Image is required" });
     //   return;

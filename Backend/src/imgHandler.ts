@@ -7,6 +7,14 @@ import path from 'path';
 import ENV from './utils/ENV.variables';
 
 
+import { S3Client, GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl as S3_getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { getSignedUrl as CDN_getSignedUrl } from '@aws-sdk/cloudfront-signer';
+import AuthenticatedRequest from './Interfaces/AuthenticatedRequest.interface';
+import protect from './Middlewares/auth.middleware';
+
+
+
 
 // Set storage engine
 const storage = multer.diskStorage({
@@ -38,9 +46,35 @@ const maxFileSizeInMB = 10 // MB
 const maxFileSize = 1024 * 1024 * maxFileSizeInMB;
 
 
-const getSignedUrl = (req: Request, res: Response, next: NextFunction) => {
+const s3Client = new S3Client({
+    credentials: {
+        accessKeyId: ENV.bucketAccessKey,
+        secretAccessKey: ENV.bucketSecretAccessKey,
+    },
+    region: ENV.bucketRegion,
+})
 
-    const { fileName, fileType, fileSize, purpose } = req.body
+
+export const getCDN_SignedUrl = (s3ObjectKey: string): string => {
+
+    const getCDN_SignedUrl = CDN_getSignedUrl({
+        keyPairId: ENV.CDN_KEY_PAIR_ID,
+        privateKey: ENV.CDN_PRIVATE_KEY,
+        url: `https://${ENV.CDN_DOMAIN}/${s3ObjectKey}`,
+
+        dateLessThan: new Date(Date.now() + 3600 * 1000),
+    })
+    console.log("getCDN_SignedUrl", getCDN_SignedUrl)
+    return getCDN_SignedUrl
+}
+
+const getSignedUrlFunc = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    const { fileName, fileType, fileSize, purpose, imgsFolderId } = req.body
+
+    if (!fileName) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    if (!imgsFolderId) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     if (!allowedTypes.includes(fileType)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.IMAGES.INVALID_IMAGE_TYPE));
 
@@ -48,21 +82,40 @@ const getSignedUrl = (req: Request, res: Response, next: NextFunction) => {
 
     if (!imgPurpose.includes(purpose)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
-    // const userId = req.user?._id
-    const userId = "userid"
+    const userId = req.user?._id
+    // const userId = "userid"
     const timestamp = Date.now(); // Get current timestamp in milliseconds
 
-    const key = `${userId}/${purpose}/${fileName.toLowerCase()}/${timestamp}`;
-    const localhostUrl = "http://localhost:" + ENV.PORT + "/api/images/uploadImageToS3_SIMULATOR/";
-    const randomNumber = Math.floor(Math.random() * 1000);
-    const localKey = `${fileName.toLowerCase()}`
+    const key = `uploads/${userId}/${purpose}/${imgsFolderId}/${timestamp}--${fileName.toLowerCase()}`;
+
+    const command = new PutObjectCommand({
+        Bucket: ENV.bucketName,
+        Key: key,
+        ContentType: fileType,
+    });
+
+    const expiration = 3600; // Set expiration time in seconds (e.g., 1 hour)
+
+    const signedUrl = await S3_getSignedUrl(s3Client, command, { expiresIn: expiration, });
+
 
     res.json({
         result: {
-            url: localhostUrl + String(randomNumber),
-            key: localKey,
+            url: signedUrl,
+            key: key,
         }
     });
+
+    // const localhostUrl = "http://localhost:" + ENV.PORT + "/api/images/uploadImageToS3_SIMULATOR/";
+    // const randomNumber = Math.floor(Math.random() * 1000);
+    // const localKey = `${fileName.toLowerCase()}`
+
+    // res.json({
+    //     result: {
+    //         url: localhostUrl + String(randomNumber),
+    //         key: localKey,
+    //     }
+    // });
 
 }
 
@@ -74,7 +127,7 @@ const getSignedUrl = (req: Request, res: Response, next: NextFunction) => {
 const imgHandlerRouter = express.Router()
 
 imgHandlerRouter.use('/', express.static(path.join(__dirname, '../public/images')));
-imgHandlerRouter.post('/getSignedUrl', getSignedUrl)
+imgHandlerRouter.post('/getSignedUrl', protect, getSignedUrlFunc)
 imgHandlerRouter.post('/uploadImageToS3_SIMULATOR/:imgId', upload.single('image'), uploadImageToS3_SIMULATOR)
 
 

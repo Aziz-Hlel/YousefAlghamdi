@@ -30,7 +30,7 @@ export interface Iproperty {
 
     nearestPlaces: {
         [key: string]: string;
-    }
+    },
 
     productTier: string,
 
@@ -44,7 +44,7 @@ export interface Iproperty {
 
     advanced: {
         state: string,
-        available: Date|null,
+        available: Date | null,
         updated_version: { [key: string]: any }
     },
 

@@ -42,7 +42,7 @@ function PersonalInfo() {
             isModalOpen={modalOpen}
             toggleModal={toggleModal}
           />
-          <div className="col-lg-6 col-12 ">
+          {(user.role === roles.ADMIN || user.role === roles.AGENT) && <div className="col-lg-6 col-12 ">
             <div className="homec-agent-detail__img w-full h-full flex justify-center ">
 
               {/* <img src="https://placehold.co/360x390" alt="#" /> */}
@@ -55,7 +55,7 @@ function PersonalInfo() {
 
               </div>
             </div>
-          </div>
+          </div>}
           <div className="col-lg-6 col-12">
             <div className="homec-agent-detail__body">
               <h3 className="homec-agent-detail__title">{`${user.firstName} ${user.lastName}`}</h3>
@@ -89,7 +89,7 @@ function PersonalInfo() {
           </a>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

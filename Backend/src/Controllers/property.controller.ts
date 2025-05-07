@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import Property from "../Models/property.model";
+import Property, { Iproperty } from "../Models/property.model";
 import { errorHandler } from "../utils/error";
 import mongoose from "mongoose";
 import errorMessages from "../utils/errorMessages";
@@ -9,6 +9,7 @@ import roles from "../types/roles.type";
 import statesTypes from "../types/states.types";
 import User from "../Models/user.model";
 import ApproveSubmitPropertySchema from "../schemas/ApproveSubmitPropertySchema";
+import { getCDN_SignedUrl } from "../imgHandler";
 
 
 
@@ -138,6 +139,10 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
             Property.countDocuments(filters)
         ]);
 
+        properties.forEach((property: Iproperty) => {
+            property.imgs = property.imgs.map((imgKey: string) => getCDN_SignedUrl(imgKey))
+        })
+
         res.set("x-total-count", total.toString()); // Optional, useful for frontend
 
         res.json({
@@ -163,7 +168,7 @@ export const getProperty = async (req: AuthenticatedRequest, res: Response, next
 
     const property = await Property.findById(propertyId);
     if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
-   
+
     res.json({
 
         result: property,
@@ -379,6 +384,42 @@ export const updateProperty = async (req: AuthenticatedRequest, res: Response, n
 
 };
 
+export const getUnavailableProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    const userId = req.user?._id;
+    const role = req.user?.role;
+    const page = Number(req.query.page) || 1;
+    const limit = 6;
+
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+
+    if (role === roles.AGENT)
+
+        try {
+
+            const [properties, total] = await Promise.all([
+                Property.find({ agentId: userId, "advanced.state": statesTypes.unavailable })
+                    .limit(limit)
+                    .skip((page - 1) * limit)
+                    .sort({ createdAt: -1 }),
+                Property.countDocuments({ agentId: userId, "advanced.state": statesTypes.unavailable }),
+            ]);
+
+            res.set("x-total-count", total.toString()); // Optional, useful for frontend
+
+            res.json({
+
+                result: properties,
+            })
+
+        } catch (error) {
+            next(error);
+        }
+
+
+}
+
 
 
 export const approveProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
@@ -541,7 +582,7 @@ export const unavailable = async (req: AuthenticatedRequest, res: Response, next
 
     switch (role) {
         case roles.AGENT:
-            if (property.agentId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+            if (property.agentId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.TEAPOT, errorMessages.COMMON.FORBIDDEN));
             break;
         case roles.ADMIN:
             break;
