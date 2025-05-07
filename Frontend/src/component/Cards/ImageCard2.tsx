@@ -20,8 +20,8 @@ function ImageCard({ price, duration, title, text, img }: IimageCard) {
       {/* End Amount Card  */}
       <div className="homec-overlay ">
 
-      </div>
-      <img src={img} alt="#" className=" h-[400px] object- w-[1170px]" />
+</div>
+<img src={img} alt="#" className=" h-[400px] object- w-[1170px]" />
       <div className="homec-image-gallery__bottom">
         <div className="homec-image-gallery__content">
           <h3 className="homec-image-gallery__title">{title}</h3>

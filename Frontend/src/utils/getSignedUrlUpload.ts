@@ -15,19 +15,19 @@ export const getSignedUrlUpload = async (fileName: string, fileType: string, fil
 
 
 
-export const uploadImageToS3_SIMULATOR = async (uploadedImg: FileWithPath, imgsFolderId: string, purpose: "property" | "profile") => {
+export const uploadImageToS3_SIMULATOR = async (uploadedImg: Blob, name: string, imgsFolderId: string, purpose: "property" | "profile") => {
 
-    const { name, type, size } = uploadedImg
+    const {  type, size } = uploadedImg
+
+    
     const { url, key } = await getSignedUrlUpload(name, type, size, purpose, imgsFolderId);
 
     console.log("aws url for the upload : ", url);
 
-    const formData = new FormData();
-    formData.append("image", uploadedImg);
 
-    const response = await Http.put(url, uploadedImg)
+    const response = await Http.put(url, uploadedImg);
 
-    
+
     console.log("response", response?.data);
 
     return key

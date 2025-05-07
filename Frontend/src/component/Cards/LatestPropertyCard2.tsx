@@ -56,14 +56,8 @@ function LatestPropertyCard({ estate, _id, likeLink, period, listing_type, name,
           }`}
       >
         {/* Property Head  */}
-        <div className="homec-property__head [@media(min-width:500px)]:w-fit md:w-auto">
-          <Link to={"/property-single/" + estate._id}>
-            <div className="w-[22rem] h-60 flex  justify-center  items-center  bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-cover  bg-no-repeat "
-              style={{
-                backgroundImage: (`url(${estate.imageGallery.images[0].url})`),
-              }}>
-            </div>
-          </Link>
+        <div className="homec-property__head ">
+        <img src={estate.imageGallery.images[0].url} alt="#" className="  w-fit" />
           {/* Top Sticky  */}
           <div className="homec-property__hsticky">
             <a href={likeLink} className="homec-heart">

@@ -71,7 +71,7 @@ export const getCDN_SignedUrl = (s3ObjectKey: string): string => {
 const getSignedUrlFunc = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
     const { fileName, fileType, fileSize, purpose, imgsFolderId } = req.body
-
+    console.log(req.body);
     if (!fileName) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     if (!imgsFolderId) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
@@ -86,7 +86,7 @@ const getSignedUrlFunc = async (req: AuthenticatedRequest, res: Response, next: 
     // const userId = "userid"
     const timestamp = Date.now(); // Get current timestamp in milliseconds
 
-    const key = `uploads/${userId}/${purpose}/${imgsFolderId}/${timestamp}--${fileName.toLowerCase()}`;
+    const key = `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${userId}/${purpose}/${imgsFolderId}/${fileName.toLowerCase()}--${timestamp}`;
 
     const command = new PutObjectCommand({
         Bucket: ENV.bucketName,
@@ -103,7 +103,7 @@ const getSignedUrlFunc = async (req: AuthenticatedRequest, res: Response, next: 
         result: {
             url: signedUrl,
             key: key,
-        }
+        },
     });
 
     // const localhostUrl = "http://localhost:" + ENV.PORT + "/api/images/uploadImageToS3_SIMULATOR/";

@@ -35,7 +35,7 @@ function SingleSlider() {
             price={property.filterFields.price}
             duration={property.listing_type === "rent" || property.listing_type === "commercial rent" ? "Month" : ""}
             title={property.title}
-            text="1901 Thornridge Cir. Shiloh, Hawaii 81063"
+            text={property.addresse}
             img={img.url!} />
         )}
 

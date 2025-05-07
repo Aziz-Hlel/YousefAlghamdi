@@ -25,7 +25,7 @@ const addSignedUrl = (property: any) => {
 
 
 export const createProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    await Property.deleteMany();
+    // await Property.deleteMany();
 
     const clientId = req.user?._id!;
     let agentId: string | undefined = req.user?.clientInfo?.agentId;
