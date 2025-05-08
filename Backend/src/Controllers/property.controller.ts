@@ -181,7 +181,7 @@ export const getProperty = async (req: AuthenticatedRequest, res: Response, next
     if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
 
     const propertyWithSignedUrls = addSignedUrl(property);
-    
+
 
     res.json({
 
@@ -216,12 +216,13 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
                 Property.countDocuments({ clientId: userId }),
             ]);
 
+            const updatedProperties = properties.map((property) => addSignedUrl(property));
 
             res.set("x-total-count", total.toString()); // Optional, useful for frontend
 
             res.json({
 
-                result: properties,
+                result: updatedProperties,
 
             });
 
@@ -244,11 +245,12 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
                 Property.countDocuments({ agentId: userId, "advanced.state": { $eq: statesTypes.active } }),
             ]);
 
+            const updatedProperties = properties.map((property) => addSignedUrl(property));
             res.set("x-total-count", total.toString()); // Optional, useful for frontend
 
             res.json({
 
-                result: properties,
+                result: updatedProperties,
 
             });
 
@@ -260,7 +262,7 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
 
 
     if (req.user?.role === roles.ADMIN)
-        // ! func t3 el admin f compoenet t3 my properties ama y3ih ken l pending 
+        // ! func t3 el admin f compoenet t3 my properties ama y3tih ken l pending 
         try {
 
             const [properties, total] = await Promise.all([
@@ -270,11 +272,13 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
                     .sort({ updatedAt: -1 }),
                 Property.countDocuments({ "advanced.state": { $ne: statesTypes.active } }),
             ]);
+
+            const updatedProperties = properties.map((property) => addSignedUrl(property));
             res.set("x-total-count", total.toString()); // Optional, useful for frontend
 
             res.json({
 
-                result: properties,
+                result: updatedProperties,
 
             });
 
@@ -312,11 +316,12 @@ export const getPendingProperties = async (req: AuthenticatedRequest, res: Respo
                 Property.countDocuments({ agentId: userId, "advanced.state": { $ne: statesTypes.active } }),
             ]);
 
+            const updatedProperties = properties.map((property) => addSignedUrl(property));
             res.set("x-total-count", total.toString()); // Optional, useful for frontend
 
             res.json({
 
-                result: properties,
+                result: updatedProperties,
 
             });
 
@@ -338,11 +343,13 @@ export const getPendingProperties = async (req: AuthenticatedRequest, res: Respo
                     .sort({ updatedAt: -1 }),
                 Property.countDocuments({ "advanced.state": { $ne: statesTypes.active } }),
             ]);
+
+            const updatedProperties = properties.map((property) => addSignedUrl(property));
             res.set("x-total-count", total.toString()); // Optional, useful for frontend
 
             res.json({
 
-                result: properties,
+                result: updatedProperties,
 
             });
 

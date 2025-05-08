@@ -1,5 +1,5 @@
 import CircularProgressBar from "../Form/CircularProgressBar ";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDropzone } from 'react-dropzone';
 
 
@@ -16,15 +16,18 @@ function UploadedImageCard({ img, handleImage, handleDelete, idx }: UploadedImag
 
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
-    accept: { 'image/*': [] },
+    accept: { 'image/*': [], },
     disabled: false,
-    maxSize: 5 * 1024 * 1024 // 5MB max file size
+    maxSize: 5 * 1024 * 1024, // 5MB max file size
 
   });
-const progress = 80;
+  const [progress, setProgress] = useState<number>();
 
   useEffect(() => {
-    if (acceptedFiles.length > 0) handleImage(acceptedFiles[acceptedFiles.length - 1], idx);
+    if (acceptedFiles.length > 0) {
+
+      handleImage(acceptedFiles[acceptedFiles.length - 1], idx, (progress: any) => { setProgress(progress) });
+    };
 
   }, [acceptedFiles])
 
@@ -33,18 +36,18 @@ const progress = 80;
 
   return (
     <div className="col-lg-4 col-md-4 col-12 mg-top-10">
-      <div className="homec-upload-images__single   h-32 "
+      <div className="homec-upload-images__single  "
 
       >
         <div className=" w-full h-full flex  justify-center  items-center p-15 bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-contain  bg-no-repeat  mt-7
                 "
           style={{
-            backgroundImage: (img ? `url(${URL.createObjectURL(img)})` : "url('https://placehold.co/1720x1420')"),
+            backgroundImage: (img ? `url(${URL.createObjectURL(img)})` : "url('https://placehold.co/1920x1080')"),
           }}
           {...getRootProps()}
         >
           <input {...getInputProps()} />
-          {/* <CircularProgressBar progress={80} /> */}
+          {progress && <CircularProgressBar progress={progress} />}
         </div>
         {img && <button
           className="homec-upload-images__single--edit flex justify-center group overflow-hidden"

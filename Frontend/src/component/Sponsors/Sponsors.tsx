@@ -89,6 +89,7 @@ const Sponsors = () => {
                                     href={sponsor.url}
                                     key={sponsor._id}
                                     className="relative rounded-lg px-4 py-2 flex items-center justify-center  h-[100px] flex-shrink-0"
+
                                 >
                                     <img
                                         src={apiGateway.images + sponsor.logo}
@@ -100,6 +101,25 @@ const Sponsors = () => {
                             ))}
                             {/* Duplicate for seamless looping */}
                             {displaySponsors.map(sponsor => (
+
+                                <a
+                                    href={sponsor.url}
+                                    key={`duplicate-${sponsor._id}`}
+                                    className="relative rounded-lg px-4 py-2 flex items-center justify-center  h-[100px] flex-shrink-0"
+                                >
+                                    <img
+                                        src={apiGateway.images + sponsor.logo}
+                                        alt={sponsor.name}
+                                        className="max-w-[100px] max-h-[80px] object-contain"
+                                        title={sponsor.name}
+                                    />
+                                </a>
+
+
+                            ))}
+
+                            {/* Old impl if the animation on the other fcked up revert to this one */}
+                            {/* {displaySponsors.map(sponsor => (
                                 <>
                                     <a
                                         href={sponsor.url}
@@ -114,15 +134,15 @@ const Sponsors = () => {
                                         />
                                     </a>
 
-                                    {/* <div className=" w-full h-full flex  justify-center  items-center p-15 bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-contain  bg-no-repeat  mt-7"
+                                    <div className=" w-full h-full flex  justify-center  items-center p-15 bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-contain  bg-no-repeat  mt-7"
                                         style={{
-                                            backgroundImage: apiGateway.images+ sponsor.logo,
+                                            backgroundImage: apiGateway.images + sponsor.logo,
                                         }}
 
                                     >
-                                    </div> */}
+                                    </div>
                                 </>
-                            ))}
+                            ))} */}
 
                         </div>
                     </div>

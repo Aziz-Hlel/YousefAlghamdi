@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PropertyTextInput from "./PropertyTextInput2";
 import PropertyTextArea from "./PropertyTextArea2";
-import ImageInput from "./ImageInput2";
 import KeyValueInput from "./KeyValueInput2";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -11,8 +10,7 @@ import SelectiveInputForm from "./SelectiveInputForm";
 import { categoriesType, ResidentialProperties, sub_categories } from "@src/types/categories.subcategories.types";
 import { additionalDetailsAttributes } from "@src/types/additionalDetails.types";
 import { FileWithPath } from "react-dropzone";
-import { useNavigate, useParams } from "react-router-dom";
-import { listing_typesValues } from "@src/types/listing_types.types";
+import { useNavigate } from "react-router-dom";
 import { cities, delegations } from "@src/types/cities.delegations.types";
 import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 import Http from "@src/services/Http";
@@ -20,93 +18,50 @@ import apiGateway from "@src/utils/apiGateway";
 import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
 import Iproperty from "@src/models/property.type";
 import statesTypes from "@src/types/states.types";
-import { pickRandomPhoto } from "@src/pickRandomPhoto";
-import useRandomPhoto from "@src/useRandomPhoto";
 import { useAuth } from "@src/providers/AuthProvider.context";
 import roles from "@src/types/roles.type";
 import { AxiosResponse } from "axios";
 import Swal from 'sweetalert2'
 import { ConfirmationAlertAsync } from "@src/utils/createAlert";
+import SubmitPropertySchema from "@src/schemas/SubmitPropertySchema.zod";
+import prepareImageForUpload from "./prepareImageForUpload";
+import ImageInput from "./ImageInput2.edit";
 
 
-export const SubmitPropertySchema = z.object({
 
-  _id: z.string().optional(),
-  title: z.string({ required_error: "Title is required" })
-    .min(2, { message: "Title must be at least 2 characters long" })
-    .max(25, { message: "Title must be at most 25 characters long" }),
-
-  description: z.string({ required_error: "Description is required" })
-    .min(2, { message: "Description must be at least 2 characters long" })
-    .max(200, { message: "Description must be at most 200 characters long" }),
-
-  category: z.string({ required_error: "Category is required" })
-    .min(2, { message: "Type must be at least 2 characters long" })
-    .max(25, { message: "Type must be at most 25 characters long" }),
-
-  sub_category: z.string({ required_error: "Sub category is required" }),
-
-  city: z.string({ required_error: "City is required" }),
-  delegation: z.string({ required_error: "Delegation is required" }),
-  addresse: z.string({ required_error: "Addresse is required" }).optional(),
-
-  filterFields: z.object({
-
-    price: z.string({ required_error: "Price is required" })
-      .min(3, { message: "Price must be at least 100" })
-      .max(7, { message: "Price must be at most 10000000" })
-      .regex(/^\d+$/, "Price must be a number"),
-
-    area: z.string({ required_error: "Area is required" })
-      .min(1, { message: "Area must be at least 0" })
-      .max(5, { message: "Area must be at most 100000" })
-      .regex(/^\d+$/, "Price must be a number"),
-
-    rooms: z.string({ required_error: "Rooms is required" })
-      .min(1, { message: "Rooms must be at least 0" })
-      .max(2, { message: "Rooms must be at most 99" })
-      .regex(/^\d+$/, "Price must be a number")
-      .optional(),
-
-    bathrooms: z.string({ required_error: "Bathrooms is required" })
-      .min(1, { message: "Bathrooms must be at least 0" })
-      .max(2, { message: "Bathrooms must be at most 99" })
-      .regex(/^\d+$/, "Price must be a number")
-      .optional(),
-
-  }),
-
-
-  additionalDetails: z.array(z.string()).default([]),
-  imgs: z.array(z.string({ required_error: "Image is required" })).optional(),
-  listing_type: z.string({ required_error: "Listing type is required" }),
-  productTier: z.string({ required_error: "Product tier is required" }).default("free"),
-  nearestPlaces: z.record(z.string(), z.string()).default({}),
-
-
-});
 
 export type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
 
-type imageArray = (FileWithPath & { preview: string; key: string; } | null)[];
+type imageArray = ({ url: string; key: string; } | null)[];
 
 const PropertyFrom = () => {
 
   const { user } = useAuth()
   const { property } = useSinglePropertyContext();
-  if (!property) return
+  const [InspectedProperty, setInspectedProperty] = useState<Iproperty | undefined>(undefined);
+  const imgsFolderId = useRef<string>("");
+  const navigate = useNavigate();
 
-  const propertyState = property?.advanced.state
 
-  const [InspectedProperty, setInspectedProperty] = useState<Iproperty | undefined>();
-
-  const { register, watch, handleSubmit, setValue, reset, formState: { errors, isSubmitting, }, setError } =
+  const { register, watch, handleSubmit, setValue, reset, formState: { errors, isSubmitting, }, setError, clearErrors } =
     useForm<SubmitPropertyType>({
       resolver: zodResolver(SubmitPropertySchema),
     });
+  useEffect
+  const propertyCategoryValue = watch('category');
+  const CityValueObserver = watch('city');
 
-  console.log('prrr', property);
+  const [NearestLocation, setNearestLocation] = useState<{ placeName: string, distance: string }[]>([{ placeName: "", distance: "" }]);
+  const [additionalDetails, setAdditionalDetails] = useState<string[]>([])
+
+  const initialImgArray: imageArray = [null, null, null, null];
+  const [imgs, setImgs] = useState<imageArray>(initialImgArray);
+
+  useEffect(() => {
+    console.log("imgs", imgs);
+  }, [imgs]);
+
   useEffect(() => {
 
     if (!property) return
@@ -130,7 +85,6 @@ const PropertyFrom = () => {
   useEffect(() => {
     if (!InspectedProperty) return
     //walli na77i linspected property w3tih direct ml property
-    console.log("inspected porp = === ", InspectedProperty);
 
     reset({
       _id: InspectedProperty._id,
@@ -154,8 +108,15 @@ const PropertyFrom = () => {
         bathrooms: InspectedProperty.filterFields.bathrooms ?? undefined,
       },
 
+      imageGallery: {
+        folderId: InspectedProperty.imageGallery.folderId,
+        images: InspectedProperty.imageGallery.images.map((img) => ({ key: img.key }))
+      },
+
       additionalDetails: InspectedProperty.additionalDetails,
     })
+
+    imgsFolderId.current = InspectedProperty.imageGallery.folderId;
     setAdditionalDetails(InspectedProperty.additionalDetails)
 
     setNearestLocation(() =>
@@ -165,23 +126,27 @@ const PropertyFrom = () => {
       }))
     );
 
+    //! r u sure ?
+    InspectedProperty.imageGallery.images.map((img, index) => urlToFileWithPath(img, index));
 
-    InspectedProperty.imgs.map((img, index) => urlToFileWithPath(img, "aaa", index))
-
-    console.log('InspectedProperty', InspectedProperty);
 
   }, [InspectedProperty]);
 
-  const navigate = useNavigate();
-  const propertyCategoryValue = watch('category');
-  const CityValueObserver = watch('city');
-  console.log("category:::::", propertyCategoryValue);
 
-  const [NearestLocation, setNearestLocation] = useState<{ placeName: string, distance: string }[]>([{ placeName: "", distance: "" }]);
-  const [additionalDetails, setAdditionalDetails] = useState<string[]>([])
+  useEffect(() => {
+    setValue("additionalDetails", [])
+  }, [propertyCategoryValue])
 
-  const initialImgArray: imageArray = [null, null, null, null];
-  const [imgs, setImgs] = useState<imageArray>(initialImgArray);
+
+  if (!property) return <></>
+
+  const propertyState = property?.advanced.state
+
+
+
+
+
+
 
   const setAdditionalDetailsWrapper = (event: any) => {
     event.target.checked ? setAdditionalDetails((prev) => [...prev, event.target.name]) : setAdditionalDetails((prev) => prev.filter((item) => item !== event.target.name));
@@ -196,24 +161,30 @@ const PropertyFrom = () => {
     setImgs((prev) => prev.map((_, index) => index === idx ? null : _));
   };
 
-  useEffect(() => {
-    setValue("additionalDetails", [])
-  }, [propertyCategoryValue])
 
   // handle property image input sector
 
-  const handleImageInput = async (uploadedImg: FileWithPath, idx: number) => {
-    const key = await uploadImageToS3_SIMULATOR(uploadedImg, "property");
+  const handleImageInput = async (uploadedImg: FileWithPath, idx: number, setProgress: Function) => {
+
+    const optimizedImg = await prepareImageForUpload(uploadedImg);
+    if (optimizedImg.width !== 1920 || optimizedImg.height !== 1080) {
+      setError("imageGallery.images", { message: "Image size should be 1920x1080" });
+      return
+    } else {
+      clearErrors("imageGallery.images");
+    }
+
+    setError("imageGallery.images", { message: "" });
+    const key = await uploadImageToS3_SIMULATOR(optimizedImg.blob, uploadedImg.name, imgsFolderId.current, "property", setProgress);
     const imgWithPreview = Object.assign(uploadedImg, {
       preview: URL.createObjectURL(uploadedImg),
       key: key
     });
 
-    console.log("imgWithPreview", imgWithPreview);
 
     setImgs((prev) => {
       const newArray = [...prev];
-      newArray[idx] = imgWithPreview;
+      newArray[idx] = { key: imgWithPreview.key, url: URL.createObjectURL(uploadedImg) };
       return newArray;
     });
 
@@ -221,24 +192,12 @@ const PropertyFrom = () => {
 
 
 
-  const randomPhoto = useRandomPhoto()
-  async function urlToFileWithPath(url: string, filename: string, index: number) {
-    console.log("url", url);
 
-    const response = await fetch(apiGateway.images + randomPhoto);
-    const blob = await response.blob();
-
-    const file: FileWithPath = new File([blob], blob.name, {
-      type: blob.type,
-    });
-
-    const file2: (FileWithPath & { preview: string; key: string }) = Object.assign(file, { preview: URL.createObjectURL(file), key: "" });
-    // Optional: add a fake path if needed by your uploader
-    // (file as FileWithPath).path = filename;
+  async function urlToFileWithPath(img: { url?: string, key: string }, index: number) {
 
     setImgs((prev) => {
       const newArray = [...prev];
-      newArray[index] = file2;
+      newArray[index] = { key: img.key, url: img.url ?? "#" };
       return newArray;
     });
 
@@ -300,12 +259,14 @@ const PropertyFrom = () => {
 
     const updateImages = (data: any) => {
       if (imgs[0] === null) {
-        setError("imgs", { message: "Thumbnail Image is required" });
+        setError("imageGallery.images", { message: "Thumbnail Image is required" });
         return;
       }
-      else data.imgs = imgs.filter((img) => img !== null).map((img) => img.key);
+      else data.imageGallery.images = imgs.filter((img) => img !== null).map((img) => ({ key: img.key }));
+
 
     }
+
 
     const checkProperVariables = (data: any) => {
       if (data.category !== ResidentialProperties) {
@@ -459,7 +420,7 @@ const PropertyFrom = () => {
 
               <div className="homec-submit-form">
                 <h4 className="homec-submit-form__title">
-                  Property Information {property?.clientId}
+                  Property Information
                 </h4>
                 <div className="homec-submit-form__inner">
                   <div className="row">
@@ -613,7 +574,7 @@ const PropertyFrom = () => {
                 imgs={imgs}
                 handleDelete={handleImageDelete}
                 handleImage={handleImageInput}
-                fieldError={errors.imgs}
+                fieldError={errors.imageGallery?.images}
 
               />
 

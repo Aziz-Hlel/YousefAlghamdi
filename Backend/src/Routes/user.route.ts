@@ -11,7 +11,7 @@ const userRouter = express.Router();
 
 userRouter.get('/', protect, whoAmI)
 userRouter.post('/register', register);
-userRouter.get('/test', protect, test);
+userRouter.get('/test',  test);
 userRouter.post('/login', login);
 
 userRouter.get('/:userId', adminOrAgentAuth, getUser);

@@ -1,9 +1,7 @@
 import Carousel from "react-multi-carousel";
 import { responsiveLogoSlider2 } from "../../utils/responsiveSlider";
 import ButtonGroup from "../CustomDot/CustomArrow";
-import apiGateway from "@src/utils/apiGateway";
 import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
-import useRandomPhoto from "@src/useRandomPhoto";
 import ThumbnailsCard from "../Cards/ThumbnilsCard2";
 
 
@@ -11,15 +9,7 @@ function ThumbnailsSlider() {
 
   const { property } = useSinglePropertyContext();
 
-  const randomPhotos = [
-    useRandomPhoto(),
-    useRandomPhoto(),
-    useRandomPhoto(),
-    useRandomPhoto(),
-    useRandomPhoto(),
-    useRandomPhoto(),
-    useRandomPhoto(),
-  ]
+
   return (
     <div className="mg-top-10">
       <Carousel
@@ -32,20 +22,11 @@ function ThumbnailsSlider() {
 
         {
           property && property.imageGallery.images.map((img, index) =>
-            <ThumbnailsCard key={index} img={img.url!} />
+            <ThumbnailsCard key={index} img={img.url ?? "#"} />
           )
         }
-        <ThumbnailsCard img="https://placehold.co/270x180" />
-        <ThumbnailsCard img="https://placehold.co/270x180" />
-        <ThumbnailsCard img="https://placehold.co/270x180" />
-        <ThumbnailsCard img="https://placehold.co/270x180" />
-        <ThumbnailsCard img="https://placehold.co/270x180" />
-        <ThumbnailsCard img="https://placehold.co/270x180" />
-        <ThumbnailsCard img="https://placehold.co/270x180" />
-        <ThumbnailsCard img="https://placehold.co/270x180" />
-        <ThumbnailsCard img="https://placehold.co/270x180" />
-        <ThumbnailsCard img="https://placehold.co/270x180" />
-        <ThumbnailsCard img="https://placehold.co/270x180" />
+        {!property && <ThumbnailsCard img="https://placehold.co/270x180" />}
+
       </Carousel>
     </div>
   );

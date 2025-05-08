@@ -1,5 +1,6 @@
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway"
+import axios from "axios";
 
 import { FileWithPath } from "react-dropzone";
 
@@ -15,20 +16,39 @@ export const getSignedUrlUpload = async (fileName: string, fileType: string, fil
 
 
 
-export const uploadImageToS3_SIMULATOR = async (uploadedImg: Blob, name: string, imgsFolderId: string, purpose: "property" | "profile") => {
+export const uploadImageToS3_SIMULATOR = async (uploadedImg: Blob, name: string, imgsFolderId: string, purpose: "property" | "profile",setProgress:Function) => {
 
-    const {  type, size } = uploadedImg
+    const { type, size } = uploadedImg
 
-    
+
     const { url, key } = await getSignedUrlUpload(name, type, size, purpose, imgsFolderId);
 
     console.log("aws url for the upload : ", url);
 
 
-    const response = await Http.put(url, uploadedImg);
+    // const response = await Http.put(url, uploadedImg);
 
+    try {
+        await axios.put(url, uploadedImg, {
+            headers: {
+                'Content-Type': uploadedImg.type,
+            },
+            onUploadProgress: (event) => {
+                const percent = Math.round((event.loaded * 100) / (event.total || 1));
+                setProgress(percent);
+            },
+        });
 
-    console.log("response", response?.data);
+        setProgress(100);
+        setTimeout(() => setProgress(null), 500); // Reset after complete
+    } catch (err) {
+        console.error("Upload failed", err);
+        setProgress(null);
+    } finally {
+        // setUploading(false);
+    }
+
+    // console.log("response", response?.data);
 
     return key
 

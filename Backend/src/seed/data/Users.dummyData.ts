@@ -16,7 +16,7 @@ const createUser = async (agents: Iuser_wPassword[]): Promise<Iuser_wPassword[]>
 
     return [
         {
-            _id: new mongoose.Types.ObjectId(),
+            _id: new mongoose.Types.ObjectId("681b2ac5fe184b03f44dcbd5"),
             firstName: 'user1',
             lastName: 'Johnson',
             password: await hashPassword("user1"),

@@ -19,71 +19,12 @@ import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import { useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
-
-export const SubmitPropertySchema = z.object({
-
-  _id: z.string().optional(),
-  title: z.string({ required_error: "Title is required" })
-    .min(2, { message: "Title must be at least 2 characters long" })
-    .max(25, { message: "Title must be at most 25 characters long" }),
-
-  description: z.string({ required_error: "Description is required" })
-    .min(2, { message: "Description must be at least 2 characters long" })
-    .max(200, { message: "Description must be at most 200 characters long" }),
-
-  category: z.string({ required_error: "Category is required" })
-    .min(2, { message: "Type must be at least 2 characters long" })
-    .max(25, { message: "Type must be at most 25 characters long" }),
-
-  sub_category: z.string({ required_error: "Sub category is required" }),
-
-  city: z.string({ required_error: "City is required" }),
-  delegation: z.string({ required_error: "Delegation is required" }),
-  addresse: z.string({ required_error: "Addresse is required" }).optional(),
-
-  filterFields: z.object({
-
-    price: z.string({ required_error: "Price is required" })
-      .min(3, { message: "Price must be at least 100" })
-      .max(7, { message: "Price must be at most 10000000" })
-      .regex(/^\d+$/, "Price must be a number"),
-
-    area: z.string({ required_error: "Area is required" })
-      .min(1, { message: "Area must be at least 0" })
-      .max(5, { message: "Area must be at most 100000" })
-      .regex(/^\d+$/, "Price must be a number"),
-
-    rooms: z.string({ required_error: "Rooms is required" })
-      .min(1, { message: "Rooms must be at least 0" })
-      .max(2, { message: "Rooms must be at most 99" })
-      .regex(/^\d+$/, "Price must be a number")
-      .optional(),
-
-    bathrooms: z.string({ required_error: "Bathrooms is required" })
-      .min(1, { message: "Bathrooms must be at least 0" })
-      .max(2, { message: "Bathrooms must be at most 99" })
-      .regex(/^\d+$/, "Price must be a number")
-      .optional(),
-  }),
+import { Alert } from "@src/utils/createAlert";
+import prepareImageForUpload from "./prepareImageForUpload";
+import SubmitPropertySchema from "@src/schemas/SubmitPropertySchema.zod";
 
 
 
-  additionalDetails: z.array(z.string()).default([]),
-  imageGallery: z.object({
-
-    folderId: z.string({ required_error: "Folder id is required" }),
-
-    images: z.array(z.object({
-      key: z.string({ required_error: "Image key is required" }),
-    })),
-
-  }).optional(),
-  listing_type: z.string({ required_error: "Listing type is required" }),
-  productTier: z.string({ required_error: "Product tier is required" }).default("free"),
-  nearestPlaces: z.record(z.string(), z.string()).default({}),
-
-});
 
 export type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
@@ -137,110 +78,23 @@ const PropertyFrom = () => {
 
 
   // // handle property image input sector
-  interface ImageOptimizationOptions {
-    maxWidth?: number;
-    quality?: number;
-    format?: 'webp' | 'jpeg' | 'png';
-  }
-
-  const prepareImageForUpload = async (
-    file: File,
-    options: ImageOptimizationOptions = {}
-  ): Promise<{
-    blob: Blob;
-    format: string;
-    width: number;
-    height: number;
-    originalSize: number;
-    optimizedSize: number;
-  }> => {
-    // Default options with professional values
-    const {
-      maxWidth = 1920,
-      quality = 0.85,
-      format = 'webp'
-    } = options;
-
-    // Set appropriate mime type
-    const mimeTypes = {
-      webp: 'image/webp',
-      jpeg: 'image/jpeg',
-      png: 'image/png'
-    };
-    const mimeType = mimeTypes[format];
-
-    // Create an image element to load the file
-    const img = new Image();
-
-    const imgLoaded = new Promise<void>((resolve) => {
-      img.onload = () => resolve();
-    });
-
-    // Create object URL safely
-    const objectUrl = URL.createObjectURL(file);
-    img.src = objectUrl;
-    await imgLoaded;
-
-    // Calculate new dimensions while maintaining aspect ratio
-    let width = img.width;
-    let height = img.height;
-    if (width > maxWidth) {
-      height = Math.round((height * maxWidth) / width);
-      width = maxWidth;
-    }
-
-    // Create canvas and draw resized image
-    const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext('2d');
-
-    if (!ctx) {
-      throw new Error('Could not get canvas context');
-    }
-
-    // Draw with proper image smoothing for high quality results
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'high';
-    ctx.drawImage(img, 0, 0, width, height);
-
-    // Convert to desired format with specified quality
-    const optimizedBlob = await new Promise<Blob>((resolve, reject) => {
-      canvas.toBlob(
-        (blob) => {
-          if (blob) {
-            resolve(blob);
-          } else {
-            reject(new Error('Canvas conversion failed'));
-          }
-        },
-        mimeType,
-        quality,
-      );
-    });
-
-    // Clean up resources
-    URL.revokeObjectURL(objectUrl);
-
-    return {
-      blob: optimizedBlob,
-      format,
-      width,
-      height,
-      originalSize: file.size,
-      optimizedSize: optimizedBlob.size
-    };
-  };
 
 
-  const handleImageInput = async (uploadedImg: FileWithPath, idx: number) => {
+
+
+  const handleImageInput = async (uploadedImg: FileWithPath, idx: number, setProgress: Function) => {
 
     const optimizedImg = await prepareImageForUpload(uploadedImg);
+    if (optimizedImg.width !== 1920 || optimizedImg.height !== 1080) {
+      setError("imageGallery.images", { message: "Image size should be 1920x1080" });
+      return
+    }
 
-    const key = await uploadImageToS3_SIMULATOR(optimizedImg.blob, uploadedImg.name, imgsFolderId.current, "property");
+    setError("imageGallery.images", { message: "" });
+    const key = await uploadImageToS3_SIMULATOR(optimizedImg.blob, uploadedImg.name, imgsFolderId.current, "property", setProgress);
     const imgWithPreview = Object.assign(uploadedImg, {
       preview: URL.createObjectURL(uploadedImg),
-      key: key
+      key: key,
     });
 
     console.log("imgWithPreview", imgWithPreview);
@@ -253,16 +107,6 @@ const PropertyFrom = () => {
 
   };
 
-
-  // handle aminities
-
-  // const handleCheckBox = (e: any) => {
-  //   setProperty({
-  //     ...property,
-  //     aminities: { ...property.aminities, [e.target.name]: e.target.checked },
-  //   });
-  // };
-  // handle Property Plan, additionalInformation, nearestLocation add new item or delete item
 
   const handleAddOrDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, type: string, idx: number,) => {
     e.preventDefault();
@@ -314,19 +158,21 @@ const PropertyFrom = () => {
       delete data.filterFields.bathrooms
     }
 
-    // (data as any).imgsFolderId = imgsFolderId.current
+    (data as any).imgsFolderId = imgsFolderId.current
 
 
-    // if (imgs[2] === null) {
-    //   setError("imgs", { message: "rest Image is required" });
-    //   return;
-    // }
+    if (imgs[2] === null) {
+      setError("imageGallery.images", { message: "Images is required" });
+      return;
+    }
     const response = await Http.post(apiGateway.property.create, data);
 
-    // response?.status === 201 && navigate("/dashboard/my-properties")
+    response?.status === 201 && navigate("/dashboard/my-properties")
+    response?.status !== 201 && Alert({ title: "Error", text: "Something went wrong,cannot create property", icon: "error" })
     console.log(data);
 
   };
+
   useEffect(() => {
     whatFor && setValue("listing_type", whatFor)
   }, [whatFor])
@@ -504,13 +350,6 @@ const PropertyFrom = () => {
                 fieldError={errors.imageGallery?.images}
 
               />
-
-              {/* <PropertyLocationInput
-                location={input.location}
-                handleLocation={handleLocationChange}
-              /> */}
-
-
 
 
 

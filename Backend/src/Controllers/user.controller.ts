@@ -16,7 +16,7 @@ import { merge, pick } from 'lodash';
 
 export const test = async (req: Request, res: Response) => {
 
-    res.json({ message: 'API is working!' });
+    res.json({ message: 'API is working! ' });
 };
 
 const registerBodySchema = z.object({

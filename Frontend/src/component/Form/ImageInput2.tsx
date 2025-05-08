@@ -9,7 +9,7 @@ import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
 type ImageInputProps = {
   imgs: (File | null)[];
   handleDelete: Function;
-  handleImage: (uploadedImg: FileWithPath, idx: number) => void;
+  handleImage: (uploadedImg: FileWithPath, idx: number,setProgress:Function) => void;
   fieldError: Merge<FieldError, (Merge<FieldError, FieldErrorsImpl<{ key: string; }>> | undefined)[]> | undefined | undefined
 };
 
@@ -30,7 +30,9 @@ function ImageInput({ imgs, handleDelete, handleImage, fieldError }: ImageInputP
             <div className="mg-top-20">
               <div className="homec-submit-form__upload mg-btm-10">
                 <p className="homec-img-video-label">
-                  Slider Image* <span>(Max. limit 10 & Max. Size 10MB)</span>
+                  Slider Image*
+                  {/* <span>(Max. limit 10 & Max. Size 10MB)</span> */}
+                  <span>Image must be full HD (1920x1080)</span>
                 </p>
                 {/* <div className="homec-submit-form__upload-btn">
                   <button className="homec-btn homec-btn--upload">

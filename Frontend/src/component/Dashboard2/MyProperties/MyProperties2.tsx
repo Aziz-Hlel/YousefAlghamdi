@@ -34,10 +34,9 @@ function MyProperties({ title }: { title: string }) {
   const { properties, totalCount, fetchProperties, listRef } = useMyPropertiesContext();
   const [currentPage, setCurrentPage] = useState(1);
   const totalPage = Math.ceil(totalCount / 6)
-  console.log("total count", totalCount);
 
   const handelPage = (page: number) => {
-    console.log('page', page);
+
 
     setCurrentPage(page);
     fetchProperties(page);
@@ -64,11 +63,11 @@ function MyProperties({ title }: { title: string }) {
             ownerId={property.clientId}
             key={property._id}
             status={property.advanced.state}
-            image={apiGateway.images + randomPhotos[index]}
+            image={property.imageGallery.images[0]?.url ?? "#"}
             listing_type={property.listing_type}
             title={property.title}
             location={property.city + ", " + property.delegation + ", " + property.addresse}
-            // price={property.filterFields.price}
+          // price={property.filterFields.price}
           />
         ))}
 
