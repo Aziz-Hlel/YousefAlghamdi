@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PropertyTextInput from "./PropertyTextInput2";
 import PropertyTextAreaV2 from "./PropertyTextAreaV22";
 import { z } from "zod";
@@ -8,82 +8,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAgents } from "@src/providers/AgentsProvider.context";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
+import { FileWithPath, useDropzone } from "react-dropzone";
+import prepareImageForUpload from "./prepareImageForUpload";
+import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
+import { v4 as uuidv4 } from 'uuid';
+import CircularProgressBar from "./CircularProgressBar ";
+import CircularProgressBarAgent from "./CircularProgressBarAgent";
+import { agentSchema } from "@src/schemas/AgentSchema.CU";
 
 
-const agentSchema = z.object({
-
-
-  firstName: z.string({ required_error: "First name is required" })
-    .min(1, { message: "First name is required" })  // Custom message for required field
-    .max(50, { message: "First name must be at most 50 characters long" }),
-
-  lastName: z.string({ required_error: "Last name is required" })
-    .min(1, { message: "Last name is required" })  // Custom message for required field
-    .max(50, { message: "Last name must be at most 50 characters long" }),
-
-  phoneNumber: z.string({ required_error: "Phone number is required" })
-    .min(1, { message: "Phone number is required" })  // Custom message for required field
-    .max(50, { message: "Phone number must be at most 50 characters long" }),
-
-  email: z.string({ required_error: "Email address is required" })
-    .min(1, { message: "Email address is required" })  // Custom message for required field
-    .max(50, { message: "Email address must be at most 50 characters long" }),
-
-  password: z.string({ required_error: "Password is required" })
-    .min(1, { message: "Password must be at least 6 characters long" })
-    .max(25, { message: "Password must be at most 25 characters long" })
-    .optional(),
-
-  confirmPassword: z.string({ required_error: "Confirm password is required" })
-    .min(1, { message: "Confirm password must be at least 6 characters long" })
-    .max(25, { message: "Confirm password must be at most 25 characters long" })
-    .optional(),
-
-
-  // image: z.string({ required_error: "About text is required" }),
-
-  agentInfo: z.object({
-    image: z.string({ required_error: "About text is required" }).default(""),
-    address: z.string({ required_error: "Adresse is required" })
-      .min(1, { message: "Adresse is required" })  // Custom message for required field
-      .max(50, { message: "Adresse must be at most 50 characters long" }),
-
-    socials: z.object({
-
-      whatsApp: z.string({ required_error: "Whatsapp is required" })
-        .min(1, { message: "Whatsapp is required" })  // Custom message for required field
-        .max(50, { message: "Whatsapp must be at most 50 characters long" }),
-
-      twitter: z.string({ required_error: "Twitter is required" })
-        .min(1, { message: "Twitter is required" })  // Custom message for required field
-        .max(50, { message: "Twitter must be at most 50 characters long" }),
-
-      instagram: z.string({ required_error: "Instagram is required" })
-        .min(1, { message: "Instagram is required" })  // Custom message for required field
-        .max(50, { message: "Instagram must be at most 50 characters long" }),
-
-      linkedin: z.string({ required_error: "Linkedin is required" })
-        .min(1, { message: "Linkedin is required" })  // Custom message for required field
-        .max(50, { message: "Linkedin must be at most 50 characters long" }),
-
-    }),
-
-
-    about: z.string({ required_error: "About text is required" })
-      .min(1, { message: "About text is required" })  // Custom message for required field  
-      .max(200, { message: "About text must be at most 200 characters long" }),
-
-  }),
-
-}).refine((data) =>
-  data.password === data.confirmPassword, {
-  message: "Passwords do not match",
-  path: ["confirmPassword"],
-}
-);
 
 type addAgentSchemaType = z.infer<typeof agentSchema>
 
+type imageArray = ({ url: string; key: string; } | null)[];
 
 
 function PersonalInfo() {
@@ -93,7 +30,7 @@ function PersonalInfo() {
 
   const editMode = agentId ? true : false;
 
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting, }, setError } =
+  const { register, handleSubmit, formState: { errors, isSubmitting, }, setError, clearErrors, setValue, getValues } =
     useForm<addAgentSchemaType>({
       resolver: zodResolver(agentSchema),
       defaultValues: agentId ? agents[agentId] : undefined
@@ -101,16 +38,84 @@ function PersonalInfo() {
 
   !editMode && agentSchema.innerType().omit({ password: true, confirmPassword: true });
 
-  const navigate = useNavigate();;
+  const folderId = useRef<string>("")
+  const initialImgArray: imageArray = [null, null, null, null];
+  const [imgs, setImgs] = useState<imageArray>(initialImgArray);
+
+
   useEffect(() => {
+    if (!editMode) folderId.current = uuidv4();
+  }, [editMode])
+  const navigate = useNavigate();;
 
-    if (agentId) {
-      console.log('t5ll5l5l5l5');
 
-      reset()
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+    maxFiles: 1,
+    accept: { 'image/*': [], },
+    disabled: false,
+    maxSize: 5 * 1024 * 1024, // 5MB max file size
+
+  });
+
+  const { acceptedFiles: acceptedFilesMini, getRootProps: getRootPropsMini, getInputProps: getInputPropsMini } = useDropzone({
+    maxFiles: 1,
+    accept: { 'image/*': [], },
+    disabled: false,
+    maxSize: 5 * 1024 * 1024, // 5MB max file size
+
+  });
+
+  const [progressMain, setProgressMain] = useState<number>();
+  const [progressMini, setProgressMini] = useState<number>();
+
+
+  const handleImageInput = async (uploadedImg: FileWithPath, attr: "agentInfo.imageGallery.mainImage" | "agentInfo.imageGallery.miniImage", setProgress: Function) => {
+
+    const optimizedImg = await prepareImageForUpload(uploadedImg);
+
+    if (attr === "agentInfo.imageGallery.mainImage" && (optimizedImg.width !== 960 || optimizedImg.height !== 1280)) {
+      setError(attr, { message: "Image size should be 960x1280" });
+      return
+    } else if (attr === "agentInfo.imageGallery.mainImage") {
+      clearErrors(attr);
     }
 
-  }, [agentId])
+    if (attr === "agentInfo.imageGallery.miniImage" && (optimizedImg.width !== 90 || optimizedImg.height !== 90)) {
+      setError(attr, { message: "Image size should be 90x90" });
+      return
+    } else if (attr === "agentInfo.imageGallery.miniImage") {
+      clearErrors(attr);
+    }
+
+
+    const key = await uploadImageToS3_SIMULATOR(optimizedImg.blob, uploadedImg.name, folderId.current, "property", setProgress);
+    const imgWithPreview = Object.assign(uploadedImg, {
+      preview: URL.createObjectURL(uploadedImg),
+      key: key
+    });
+
+
+    setValue(attr, { key: imgWithPreview.key, url: URL.createObjectURL(uploadedImg) });
+
+
+  };
+
+
+  useEffect(() => {
+    if (acceptedFiles.length > 0) {
+
+      handleImageInput(acceptedFiles[acceptedFiles.length - 1], "agentInfo.imageGallery.mainImage", (progress: any) => { setProgressMain(progress) });
+    };
+
+  }, [acceptedFiles])
+
+  useEffect(() => {
+    if (acceptedFilesMini.length > 0) {
+
+      handleImageInput(acceptedFilesMini[acceptedFilesMini.length - 1], "agentInfo.imageGallery.miniImage", (progress: any) => { setProgressMini(progress) });
+    };
+
+  }, [acceptedFilesMini])
 
   const onSubmit = (data: addAgentSchemaType) => {
 
@@ -150,35 +155,72 @@ function PersonalInfo() {
       onSubmit={handleSubmit(onSubmit)}>
 
       <div className="row">
-        <div className="col-12">
-          <div className="homec-profile__edit mg-top-20">
-            <img src="https://placehold.co/90x90" alt="#" />
+        <div className="col-6">
+          <div className=" mg-top-20" {...getRootProps()}>
+            <img src={getValues("agentInfo.imageGallery.mainImage.url") ? getValues("agentInfo.imageGallery.mainImage.url") : "https://placehold.co/960x1280"} alt="#" />
             <label htmlFor="file-input">
+
+
+
               <span className="homec-pimg">
-                <svg
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
-                    fill="white"
-                  ></path>
-                  <path
-                    d="M20.9499 14.2904C19.7436 13.0842 18.5449 11.8854 17.3499 10.6904C17.5634 10.4694 17.7844 10.2446 18.0054 10.0199C18.2639 9.76139 18.5261 9.50291 18.7884 9.24443C19.118 8.91852 19.5713 8.91852 19.8972 9.24443C20.7251 10.0611 21.5492 10.8815 22.3771 11.6981C22.6993 12.0165 22.7105 12.4698 22.3996 12.792C21.9238 13.2865 21.4443 13.7772 20.9686 14.2717C20.9648 14.2792 20.9536 14.2867 20.9499 14.2904Z"
-                    fill="white"
-                  ></path>
-                </svg>
+                {progressMain ? <CircularProgressBarAgent progress={progressMain} />
+
+                  :
+                  <svg
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
+                      fill="white"
+                    ></path>
+                    <path
+                      d="M20.9499 14.2904C19.7436 13.0842 18.5449 11.8854 17.3499 10.6904C17.5634 10.4694 17.7844 10.2446 18.0054 10.0199C18.2639 9.76139 18.5261 9.50291 18.7884 9.24443C19.118 8.91852 19.5713 8.91852 19.8972 9.24443C20.7251 10.0611 21.5492 10.8815 22.3771 11.6981C22.6993 12.0165 22.7105 12.4698 22.3996 12.792C21.9238 13.2865 21.4443 13.7772 20.9686 14.2717C20.9648 14.2792 20.9536 14.2867 20.9499 14.2904Z"
+                      fill="white"
+                    ></path>
+                  </svg>
+                }
               </span>
             </label>
-            <input
-
-              type="file"
-              name="image"
-            // value={input.image}
-
-            />
+            <input {...getInputProps()} />
           </div>
+          {<span className=" text-red-600"> {errors.agentInfo?.imageGallery?.mainImage?.message}</span>}
+          <span className=" text-gray-600"> Main agent's image</span>
+          <div className="text-gray-600">Photo resolution: 960 × 1280  </div>
+
+        </div>
+
+
+        <div className="col-6">
+          <div className="homec-profile__edit mg-top-20" {...getRootPropsMini()}>
+            <img src={getValues("agentInfo.imageGallery.miniImage.url") ? getValues("agentInfo.imageGallery.miniImage.url") : "https://placehold.co/90x90"} alt="#" />
+            <label htmlFor="file-input">
+              <span className="homec-pimg">
+                {progressMini ? <CircularProgressBarAgent progress={progressMini} /> :
+                  <svg
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
+                      fill="white"
+                    ></path>
+                    <path
+                      d="M20.9499 14.2904C19.7436 13.0842 18.5449 11.8854 17.3499 10.6904C17.5634 10.4694 17.7844 10.2446 18.0054 10.0199C18.2639 9.76139 18.5261 9.50291 18.7884 9.24443C19.118 8.91852 19.5713 8.91852 19.8972 9.24443C20.7251 10.0611 21.5492 10.8815 22.3771 11.6981C22.6993 12.0165 22.7105 12.4698 22.3996 12.792C21.9238 13.2865 21.4443 13.7772 20.9686 14.2717C20.9648 14.2792 20.9536 14.2867 20.9499 14.2904Z"
+                      fill="white"
+                    ></path>
+                  </svg>}
+              </span>
+            </label>
+            <input {...getInputPropsMini()} />
+          </div>
+          {<span className=" text-red-600"> {errors.agentInfo?.imageGallery?.miniImage?.message}</span>}
+
+          <span className=" text-gray-600"> Minimized agent's image</span>
+          <div className="text-gray-600">Photo resolution: 90x90  </div>
+
         </div>
         <PropertyTextInput
           size="col-lg-6 col-md-6"
@@ -220,53 +262,9 @@ function PersonalInfo() {
           fieldError={errors.confirmPassword}
           type="password"
         />}
-        <PropertyTextInput
-          title="Location*"
-          placeholder="Your Location"
-          fieldRegister={register("agentInfo.address")}
-          fieldError={errors.agentInfo?.address}
 
-        />
-        <PropertyTextAreaV2
-          title="About Text*"
-          name="aboutText"
-          sizeFull={true}
-          fieldRegister={register("agentInfo.about")}
-          fieldError={errors.agentInfo?.about}
-        />
-        <h4 className="homec-modal-form__middle">Social Link</h4>
-        <div className="row">
-          <PropertyTextInput
-            size="col-lg-6 col-md-6"
-            title="Whatsapp*"
-            placeholder="Whatsapp Link"
-            fieldRegister={register("agentInfo.socials.whatsApp")}
-            fieldError={errors.agentInfo?.socials?.whatsApp}
-          />
-          <PropertyTextInput
-            size="col-lg-6 col-md-6"
-            title="Twitter*"
-            placeholder="Twitter Link"
-            fieldRegister={register("agentInfo.socials.twitter")}
-            fieldError={errors.agentInfo?.socials?.twitter}
-          />
-          <PropertyTextInput
-            size="col-lg-6 col-md-6"
-            title="Instagram*"
-            placeholder="Instagram Link"
-            fieldRegister={register("agentInfo.socials.instagram")}
-            fieldError={errors.agentInfo?.socials?.instagram}
-          />
-          <PropertyTextInput
-            size="col-lg-6 col-md-6"
-            title="Linkedin*"
-            placeholder="Linkedin Link"
-            fieldRegister={register("agentInfo.socials.linkedin")}
-            fieldError={errors.agentInfo?.socials?.linkedin}
-          />
-        </div>
+
         {<span className="pl-2 text-red-600 ">{errors.root?.message}</span>}
-
       </div>
       {/* Form Group  */}
       <div className="form-group form-mg-top25">

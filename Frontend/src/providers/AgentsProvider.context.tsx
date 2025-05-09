@@ -12,15 +12,19 @@ export type IAgent = {
     phoneNumber: string;
 
     agentInfo: {
-        image: string,
-        about: string,
-        socials: {
-            whatsApp: string,
-            instagram: string,
-            twitter: string,
-            linkedin: string,
+
+        imageGallery: {
+            folderId: string,
+            mainImage: {
+                key: string,
+                url: string,
+            },
+            miniImage: {
+                key: string,
+                url: string,
+            }
         },
-        address?: string,
+
         clientsId: string[],
 
     };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CircularProgressBar = ({ progress }: { progress: number|un }) => {
+const CircularProgressBar = ({ progress }: { progress: number }) => {
     const radius = 40;
     const circumference = 2 * Math.PI * radius;
     const strokeDashoffset = circumference - ((100-progress) / 100) * circumference;

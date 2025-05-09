@@ -174,7 +174,6 @@ const PropertyFrom = () => {
       clearErrors("imageGallery.images");
     }
 
-    setError("imageGallery.images", { message: "" });
     const key = await uploadImageToS3_SIMULATOR(optimizedImg.blob, uploadedImg.name, imgsFolderId.current, "property", setProgress);
     const imgWithPreview = Object.assign(uploadedImg, {
       preview: URL.createObjectURL(uploadedImg),

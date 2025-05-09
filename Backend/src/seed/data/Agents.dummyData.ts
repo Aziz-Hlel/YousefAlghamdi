@@ -23,15 +23,19 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
             password: await hashPassword("agent1"),
 
             agentInfo: {
-                image: "",
-                socials: {
-                    whatsApp: "+971501575572",
-                    linkedin: "https://linkedin.com/",
-                    twitter: "https://twitter.com/",
-                    instagram: "https://instagram.com/"
+
+
+                imageGallery: {
+                    folderId: "",
+                    mainImage: {
+                        key: "",
+                        url: "",
+                    },
+                    miniImage: {
+                        key: "",
+                        url: "",
+                    }
                 },
-                address: '1 Agent St',
-                about: "agent1 description",
                 clientsId: [],
             },
             savedProperties: [],
@@ -47,15 +51,19 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
             phoneNumber: '+971 504100867',
             role: roles.AGENT,
             agentInfo: {
-                address: '2 Agent St',
-                socials: {
-                    whatsApp: "+971504100867",
-                    linkedin: "https://linkedin.com/",
-                    twitter: "https://twitter.com/",
-                    instagram: "https://instagram.com/"
+
+                imageGallery: {
+                    folderId: "",
+                    mainImage: {
+                        key: "",
+                        url: "",
+                    },
+                    miniImage: {
+                        key: "",
+                        url: "",
+                    }
                 },
-                image: "",
-                about: "agent2 description",
+
                 clientsId: [],
             },
             savedProperties: [],
@@ -71,15 +79,19 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
             role: roles.AGENT,
             agentInfo: {
 
-                address: '3 Agent St',
-                socials: {
-                    whatsApp: "+971585395994",
-                    linkedin: "https://linkedin.com/",
-                    twitter: "https://twitter.com/",
-                    instagram: "https://instagram.com/"
+                imageGallery: {
+
+                    folderId: "",
+                    
+                    mainImage: {
+                        key: "",
+                        url: "",
+                    },
+                    miniImage: {
+                        key: "",
+                        url: "",
+                    }
                 },
-                image: "",
-                about: "agent3 description",
                 clientsId: [],
 
             },
@@ -97,16 +109,19 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
 
             adminInfo: {
 
-                address: 'admin St',
-                socials: {
-                    whatsApp: "+971525002822",
-                    linkedin: "https://linkedin.com/",
-                    twitter: "https://twitter.com/",
-                    instagram: "https://instagram.com/",
-                },
-                image: "",
-                about: "admin description",
 
+
+                imageGallery: {
+                    folderId: "",
+                    mainImage: {
+                        key: "",
+                        url: "",
+                    },
+                    miniImage: {
+                        key: "",
+                        url: "",
+                    }
+                },
             },
 
             savedProperties: [],

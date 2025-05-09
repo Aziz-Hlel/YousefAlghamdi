@@ -5,6 +5,7 @@ import roles from "../types/roles.type";
 
 
 export interface IUser {
+
     _id: mongoose.Types.ObjectId;
     firstName: string;
     lastName: string;
@@ -18,29 +19,38 @@ export interface IUser {
     };
 
     agentInfo?: {
-        image: string | null,
-        about: string | null,
-        socials: {
-            whatsApp: string | null,
-            instagram: string | null,
-            twitter: string | null,
-            linkedin: string | null,
+        
+        imageGallery: {
+            folderId: string,
+            mainImage: {
+                key: string,
+                url?: string,
+            },
+            miniImage: {
+                key: string,
+                url?: string,
+            }
         },
-        address?: string | null,
+
         clientsId: string[],
 
     };
 
     adminInfo?: {
-        image: string | null,
-        about: string | null,
-        socials: {
-            whatsApp: string | null,
-            instagram: string | null,
-            twitter: string | null,
-            linkedin: string | null,
+
+
+
+        imageGallery: {
+            folderId: string,
+            mainImage: {
+                key: string,
+                url?: string,
+            },
+            miniImage: {
+                key: string,
+                url?: string,
+            }
         },
-        address?: string | null,
 
     };
 
@@ -60,38 +70,36 @@ const clientInfoSchema = new mongoose.Schema({
 }, { _id: false });
 
 
+const imageGallerySchema = new mongoose.Schema({
+
+    folderId: { type: String, required: false, },
+
+    mainImage: {
+        key: { type: String, required: false, },
+    },
+
+    miniImage: {
+        key: { type: String, required: false, },
+    }
+
+}, { _id: false });
+
+
 const agentInfoSchema = new mongoose.Schema({
 
-    image: { type: String, required: false, },
 
-    about: { type: String, required: false, },
-
-    address: { type: String, required: false, },
-
-    socials: {
-        whatsApp: { type: String, required: false, },
-        instagram: { type: String, required: false, },
-        twitter: { type: String, required: false, },
-        linkedin: { type: String, required: false, },
-    },
+    imageGallery: imageGallerySchema,
 
     clientsId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 
 }, { _id: false });
 
+
 const adminInfoSchema = new mongoose.Schema({
-    image: { type: String, required: false, },
 
-    about: { type: String, required: false, },
 
-    address: { type: String, required: false, },
+    imageGallery: imageGallerySchema,
 
-    socials: {
-        whatsApp: { type: String, required: false, },
-        instagram: { type: String, required: false, },
-        twitter: { type: String, required: false, },
-        linkedin: { type: String, required: false, },
-    },
 
 }, { _id: false });
 
@@ -138,7 +146,6 @@ const userSchema = new Schema<IUser_model>({
         reuqired: true,
         default: roles.USER,
     },
-
 
 
 

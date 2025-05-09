@@ -7,6 +7,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 
 export type IUser = {
+
+    
     firstName: string;
     lastName: string;
     email: string;
@@ -15,35 +17,44 @@ export type IUser = {
     role: string;
 
     clientInfo?: {
-        agentId?: string | null;
-    },
+        agentId?: string,
+    };
 
     agentInfo?: {
-        image: string,
-        about: string,
-        socials: {
-            whatsApp: string,
-            instagram: string,
-            twitter: string,
-            linkedin: string,
+        
+        imageGallery: {
+            folderId: string,
+            mainImage: {
+                key: string,
+                url?: string,
+            },
+            miniImage: {
+                key: string,
+                url?: string,
+            }
         },
-        address: string,
+
         clientsId: string[],
 
     };
 
     adminInfo?: {
-        image: string,
-        about: string,
-        socials: {
-            whatsApp: string,
-            instagram: string,
-            twitter: string,
-            linkedin: string,
-        },
-        address: string,
-    };
 
+
+
+        imageGallery: {
+            folderId: string,
+            mainImage: {
+                key: string,
+                url?: string,
+            },
+            miniImage: {
+                key: string,
+                url?: string,
+            }
+        },
+
+    };
 
 
 }
