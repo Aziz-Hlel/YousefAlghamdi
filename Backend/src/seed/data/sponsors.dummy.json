@@ -1,3 +1,98 @@
 [
-
-]
+    {
+      "_id": "681dec691c89d787a82c3308",
+      "name": "TIGER GROUP",
+      "image": {
+        "key": "tmp_dev/sponsor/tiger group.jpg--1746791527087"
+      },
+      "url": "https://tigergroup.ae/"
+    },
+    {
+      "_id": "681dec5a1c89d787a82c3304",
+      "name": "RAK PROPERTIES",
+      "image": {
+        "key": "tmp_dev/sponsor/rak properties.jpg--1746791511115"
+      },
+      "url": "https://rakproperties.ae/"
+    },
+    {
+      "_id": "681dec441c89d787a82c3300",
+      "name": "BNW DEVELOPEMENTS",
+      "image": {
+        "key": "tmp_dev/sponsor/bnw developements.jpg--1746791490030"
+      },
+      "url": "https://bnw.ae/"
+    },
+    {
+      "_id": "681dec2c1c89d787a82c32fc",
+      "name": "ARADA",
+      "image": {
+        "key": "tmp_dev/sponsor/arada.jpg--1746791465448"
+      },
+      "url": "https://www.arada.com/en/"
+    },
+    {
+      "_id": "681dec1c1c89d787a82c32f8",
+      "name": "DANUBE PROPERTIES",
+      "image": {
+        "key": "tmp_dev/sponsor/danube properties.jpg--1746791449400"
+      },
+      "url": "https://danubeproperties.com/"
+    },
+    {
+      "_id": "681dec041c89d787a82c32f4",
+      "name": "DAMAC",
+      "image": {
+        "key": "tmp_dev/sponsor/damac.jpg--1746791424963"
+      },
+      "url": "https://www.damacproperties.com/"
+    },
+    {
+      "_id": "681debef1c89d787a82c32f0",
+      "name": "EMAAR",
+      "image": {
+        "key": "tmp_dev/sponsor/emaar.jpg--1746791404352"
+      },
+      "url": "https://www.emaar.com/"
+    },
+    {
+      "_id": "681debd91c89d787a82c32ec",
+      "name": "BLOOM HOLDING",
+      "image": {
+        "key": "tmp_dev/sponsor/bloom holding.jpg--1746791383095"
+      },
+      "url": "https://bloomholding.com/"
+    },
+    {
+      "_id": "681debc71c89d787a82c32e8",
+      "name": "SAMANA DEVELOPERS",
+      "image": {
+        "key": "tmp_dev/sponsor/samana developers.jpg--1746791364500"
+      },
+      "url": "https://samanadevelopers.com/"
+    },
+    {
+      "_id": "681debae1c89d787a82c32e4",
+      "name": "ELLINGTON",
+      "image": {
+        "key": "tmp_dev/sponsor/ellington.jpg--1746791339779"
+      },
+      "url": "https://ellingtonproperties.ae/"
+    },
+    {
+      "_id": "681deb9c1c89d787a82c32e0",
+      "name": "BINGHATTI",
+      "image": {
+        "key": "tmp_dev/sponsor/binghatti.jpg--1746791322725"
+      },
+      "url": "https://binghatti.com/en/"
+    },
+    {
+      "_id": "681deb891c89d787a82c32dc",
+      "name": "SOBHA REALTY",
+      "image": {
+        "key": "tmp_dev/sponsor/sobha realty.jpg--1746791302251"
+      },
+      "url": "https://sobharealty.com/"
+    }
+  ]

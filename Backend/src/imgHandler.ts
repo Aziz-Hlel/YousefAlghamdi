@@ -74,7 +74,8 @@ const generateKey = (fileName: string, fileType: string, purpose: ImagePurposeTy
 
 
     if (purpose === imagePurposes.SPONSOR) {
-        return `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${purpose}/${fileName.toLowerCase()}--${timestamp}`
+        // ! added _test after purpose for testing , because purpose is the init state of the sponsors so i didnt want to change it or clean it each time
+        return `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${purpose}_test/${fileName.toLowerCase()}--${timestamp}`
     }
 
     return `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${userId}/${purpose}/${folderId}/${fileName.toLowerCase()}--${timestamp}`
@@ -85,7 +86,7 @@ const generateKey = (fileName: string, fileType: string, purpose: ImagePurposeTy
 const getSignedUrlFunc = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
     const { fileName, fileType, fileSize, purpose, imgsFolderId } = req.body
-    console.log(req.body);
+
     if (!fileName) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     if (!imgsFolderId) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
@@ -100,7 +101,8 @@ const getSignedUrlFunc = async (req: AuthenticatedRequest, res: Response, next: 
 
     const timestamp = Date.now(); // Get current timestamp in milliseconds
 
-    const key = generateKey(fileName, fileType, purpose, userId, imgsFolderId, timestamp)
+    const key = generateKey(fileName, fileType, purpose, userId, imgsFolderId, timestamp);
+
     const command = new PutObjectCommand({
         Bucket: ENV.bucketName,
         Key: key,

@@ -2,13 +2,9 @@ import apiGateway from '@src/utils/apiGateway';
 import { useEffect, useRef, useState } from 'react';
 import logo from "@img/logo2.png"
 import Http from '@src/services/Http';
+import { Sponsor } from '../Dashboard2/SponsorsEdit/Sponsors.provider';
 
-interface Sponsor {
-    _id: number;
-    name: string;
-    logo: string;
-    url: string;
-}
+
 
 const Sponsors = () => {
     const [sponsors, setSponsors] = useState<Sponsor[]>([]);
@@ -92,7 +88,7 @@ const Sponsors = () => {
 
                                 >
                                     <img
-                                        src={apiGateway.images + sponsor.logo}
+                                        src={sponsor.image.url}
                                         alt={sponsor.name}
                                         className="max-w-[100px] max-h-[80px] object-contain"
                                         title={sponsor.name}
@@ -108,7 +104,7 @@ const Sponsors = () => {
                                     className="relative rounded-lg px-4 py-2 flex items-center justify-center  h-[100px] flex-shrink-0"
                                 >
                                     <img
-                                        src={apiGateway.images + sponsor.logo}
+                                        src={sponsor.image.url}
                                         alt={sponsor.name}
                                         className="max-w-[100px] max-h-[80px] object-contain"
                                         title={sponsor.name}
@@ -127,7 +123,7 @@ const Sponsors = () => {
                                         className="relative rounded-lg px-4 py-2 flex items-center justify-center  h-[100px] flex-shrink-0"
                                     >
                                         <img
-                                            src={apiGateway.images + sponsor.logo}
+                                            src={sponsor.image.url}}
                                             alt={sponsor.name}
                                             className="max-w-[100px] max-h-[80px] object-contain"
                                             title={sponsor.name}
@@ -136,7 +132,7 @@ const Sponsors = () => {
 
                                     <div className=" w-full h-full flex  justify-center  items-center p-15 bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-contain  bg-no-repeat  mt-7"
                                         style={{
-                                            backgroundImage: apiGateway.images + sponsor.logo,
+                                            backgroundImage: sponsor.image.url},
                                         }}
 
                                     >

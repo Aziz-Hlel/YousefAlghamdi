@@ -1,34 +1,11 @@
 import Pagination from "../../Pagination2";
 import { useState } from "react";
-import apiGateway from "@src/utils/apiGateway";
-import { pickRandomPhoto } from "@src/pickRandomPhoto";
-import Http from "@src/services/Http";
 import { useSponsorsContext } from "./Sponsors.provider";
 import SponsorsCard from "./DashboardSponsors";
 import Layout from "../MyProperties/Layout2";
 import { Link, Outlet } from "react-router-dom";
 
 
-type IUser = {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: number;
-  createdAt: string;
-  role: string;
-  agentId: string;
-}
-const initUser = {
-  _id: "",
-  firstName: "",
-  lastName: "",
-  email: "",
-  phoneNumber: 0,
-  createdAt: "",
-  role: "",
-  agentId: "",
-}
 
 function SponsorsTable() {
 
@@ -44,28 +21,6 @@ function SponsorsTable() {
     getSponsors(page);
   };
 
-  // const [userInspected, setUserInspected] = useState<IUser>(initUser);
-  const [viewInvoice, setViewInvoice] = useState(false);
-  const toggleModal = async (clientId?: string) => {
-    setViewInvoice(!viewInvoice);
-
-    if (!clientId) return
-
-    const response = await Http.get(apiGateway.user.getById + clientId);
-
-    // setUserInspected(response?.data.result);
-
-  };
-
-  const randomPhotos = [
-    pickRandomPhoto(),
-    pickRandomPhoto(),
-    pickRandomPhoto(),
-    pickRandomPhoto(),
-    pickRandomPhoto(),
-    pickRandomPhoto(),
-
-  ];
 
   return (
     <>
