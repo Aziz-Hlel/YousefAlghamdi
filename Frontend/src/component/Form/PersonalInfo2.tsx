@@ -213,7 +213,7 @@ function PersonalInfo({ toggleModal }: { toggleModal: () => void }) {
               {<span className=" text-red-600"> {errors.agentInfo?.imageGallery?.miniImage?.message}</span>}
 
               <span className=" text-gray-600"> Minimized agent's image</span>
-              <div className="text-gray-600">Photo resolution: 90x90  </div>
+              <div className="text-gray-600">Photo resolution: 90x90</div>
 
             </div>
           </>

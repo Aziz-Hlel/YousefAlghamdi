@@ -126,29 +126,74 @@ const createAgents = async (): Promise<IUser_wPassword[]> => {
         },
 
 
+
         {
-            _id: new mongoose.Types.ObjectId('681dbd08f88fc9de765fb6e5'),
-            firstName: 'Mohamed',
-            lastName: 'BenHlel',
-            email: 'agent1@gmail.com',
-            password: await hashPassword("agent1"), // make sure to hash or use dummy
-            phoneNumber: '1234567890',
-            role: 'agent',
-            agentInfo: {
-                imageGallery: {
-                    folderId: "724596e8-b0b4-4dcd-9eb3-050724208a00",
-                    mainImage: {
-                        key: "tmp_dev/681b2ac5fe184b03f44dcbcf/property/724596e8-b0b4-4dcd-9eb3-050724208a00/agent6.jpg--1746782415497",
+            "_id": new mongoose.Types.ObjectId("681e3156ddd409c99daf3884"),
+            "firstName": "Mohamed",
+            "lastName": "abdelkhalek",
+            "email": "agent1@gmail.com",
+            "phoneNumber": "+971501575572",
+            "role": "agent",
+            "agentInfo": {
+                "imageGallery": {
+                    "mainImage": {
+                        "key": "tmp_dev/681b2ac5fe184b03f44dcbcf/property/02f48747-0edc-4429-a88b-bb6512de2f86/agent4.jpg--1746809167052"
                     },
-                    miniImage: {
-                        key: "tmp_dev/681b2ac5fe184b03f44dcbcf/property/724596e8-b0b4-4dcd-9eb3-050724208a00/agent4 - mini.jpg--1746779144497",
-                    }
+                    "miniImage": {
+                        "key": "tmp_dev/681b2ac5fe184b03f44dcbcf/property/02f48747-0edc-4429-a88b-bb6512de2f86/agent4 - mini.jpg--1746809169106"
+                    },
+                    "folderId": "02f48747-0edc-4429-a88b-bb6512de2f86"
                 },
-                clientsId: []
+                "clientsId": []
             },
-            savedProperties: []
+            "savedProperties": [],
+            password: await hashPassword("agent1")
         },
-        
+        {
+            "_id": new mongoose.Types.ObjectId("681e31ecddd409c99daf3889"),
+            "firstName": "Widad",
+            "lastName": "Kristal",
+            "email": "agent2@gmail.com",
+            "phoneNumber": "+971504100867",
+            "role": "agent",
+            "agentInfo": {
+                "imageGallery": {
+                    "mainImage": {
+                        "key": "tmp_dev/681b2ac5fe184b03f44dcbcf/property/c9e5587a-30ec-48f3-9d9c-05681ebef1ff/agent8.jpg--1746809224627"
+                    },
+                    "miniImage": {
+                        "key": "tmp_dev/681b2ac5fe184b03f44dcbcf/property/c9e5587a-30ec-48f3-9d9c-05681ebef1ff/agent8 - mini.jpg--1746809318380"
+                    },
+                    "folderId": "c9e5587a-30ec-48f3-9d9c-05681ebef1ff"
+                },
+                "clientsId": []
+            },
+            "savedProperties": [],
+            password: await hashPassword("agent2")
+        },
+        {
+            "_id": new mongoose.Types.ObjectId("681e3230ddd409c99daf388e"),
+            "firstName": "Liakat",
+            "lastName": "Ali",
+            "email": "agent3@gmail.com",
+            "phoneNumber": "+971585395994",
+            "role": "agent",
+            "agentInfo": {
+                "imageGallery": {
+                    "mainImage": {
+                        "key": "tmp_dev/681b2ac5fe184b03f44dcbcf/property/46c1a42d-57db-4f4c-a132-6b4012479829/agent6.jpg--1746809386198"
+                    },
+                    "miniImage": {
+                        "key": "tmp_dev/681b2ac5fe184b03f44dcbcf/property/46c1a42d-57db-4f4c-a132-6b4012479829/agent6 mini (1).jpg--1746809389810"
+                    },
+                    "folderId": "46c1a42d-57db-4f4c-a132-6b4012479829"
+                },
+                "clientsId": []
+            },
+            "savedProperties": [],
+            password: await hashPassword("agent3")
+        },
+
 
     ];
 };

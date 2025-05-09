@@ -78,6 +78,11 @@ const generateKey = (fileName: string, fileType: string, purpose: ImagePurposeTy
         return `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${purpose}_test/${fileName.toLowerCase()}--${timestamp}`
     }
 
+    if (purpose === imagePurposes.PROFILE) {
+        // ! added _test after purpose for testing , because purpose is the init state of the sponsors so i didnt want to change it or clean it each time
+        return `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${purpose}/${fileName.toLowerCase()}--${timestamp}`
+    }
+
     return `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${userId}/${purpose}/${folderId}/${fileName.toLowerCase()}--${timestamp}`
 }
 
