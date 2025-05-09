@@ -240,7 +240,7 @@ export const updateUser = async (req: AuthenticatedRequest, res: Response, next:
 
     // --------- Role-specific subdocument update fields ----------
     const roleInfoUpdateRules: Record<string, { path: string, allowedFields: string[] }> = {
-        agent: { path: 'agentInfo', allowedFields: ['image', 'about', 'address', 'socials'] },
+        agent: { path: 'agentInfo', allowedFields: ['imageGallery',] },
         admin: { path: 'adminInfo', allowedFields: ['image', 'about', 'address', 'socials'] },
     };
 
@@ -251,28 +251,35 @@ export const updateUser = async (req: AuthenticatedRequest, res: Response, next:
         }
     }
 
+
+    if (existingUser.role === roles.AGENT && incomingUser.agentInfo.imageGallery.mainImage.key) {
+        existingUser.agentInfo!.imageGallery.mainImage.key = incomingUser.agentInfo.imageGallery.mainImage.key;
+    }
+    if (existingUser.role === roles.AGENT && incomingUser.agentInfo.imageGallery.miniImage.key) {
+        existingUser.agentInfo!.imageGallery.miniImage.key = incomingUser.agentInfo.imageGallery.miniImage.key;
+    }
     // Update role-specific info if provided
     const roleRule = roleInfoUpdateRules[existingUser.role];
 
-    if (roleRule && incomingUser[roleRule.path]) {
-        const existingRoleInfo = (existingUser as any)[roleRule.path]?.toObject() || {};
-        const incomingRoleInfo = incomingUser[roleRule.path];
+    // if (roleRule && incomingUser[roleRule.path]) {
+    //     const existingRoleInfo = (existingUser as any)[roleRule.path]?.toObject() || {};
+    //     const incomingRoleInfo = incomingUser[roleRule.path];
 
-        // Pick only allowed fields from incoming
-        const safeIncomingRoleInfo = pick(incomingRoleInfo, roleRule.allowedFields);
+    //     // Pick only allowed fields from incoming
+    //     const safeIncomingRoleInfo = pick(incomingRoleInfo, roleRule.allowedFields);
 
-        let mergedRoleInfo = merge({}, existingRoleInfo, safeIncomingRoleInfo);
+    //     let mergedRoleInfo = merge({}, existingRoleInfo, safeIncomingRoleInfo);
 
-        // ⚡ Protect critical internal fields
-        if (existingUser.role === 'agent') {
-            mergedRoleInfo.clientsId = existingRoleInfo.clientsId;  // Force keep
-        }
+    //     // ⚡ Protect critical internal fields
+    //     if (existingUser.role === 'agent') {
+    //         mergedRoleInfo.clientsId = existingRoleInfo.clientsId;  // Force keep
+    //     }
 
-        existingUser.email = existingUser.email; // Force keep
-        existingUser.savedProperties = existingUser.savedProperties; // Force keep
+    //     existingUser.email = existingUser.email; // Force keep
+    //     existingUser.savedProperties = existingUser.savedProperties; // Force keep
 
-        (existingUser as any)[roleRule.path] = mergedRoleInfo;
-    }
+    //     (existingUser as any)[roleRule.path] = mergedRoleInfo;
+    // }
 
     // ⚡ Protect globally critical fields manually
     existingUser.savedProperties = existingUser.savedProperties;

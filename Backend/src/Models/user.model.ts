@@ -73,8 +73,6 @@ export interface IUser {
 
     adminInfo?: {
 
-
-
         imageGallery: {
             folderId: string,
             mainImage: {

@@ -1,22 +1,15 @@
 import { useEffect, useState } from "react";
-import Header from "../Header";
+
 import Breadcrumbs from "../Breadcrumbs2";
 import HistoryLinks from "../Breadcrumbs2/HistoryLinks";
 import DownloadApp from "../DownloadApp";
-import Footer from "../Footer";
+
 import Sidebar from "./Sidebar2";
-import DashboardComp from "./DashboardComp";
-import MyProperties from "./MyProperties/MyProperties2";
-import AgentsTable from "./AgentTable2";
-import PersonalInfo from "./MyProperties/PersonalInfo2/PersonalInfo2";
-import Saved from "./Saved";
-import Reviews from "./Reviews";
-import ChangePassword from "./ChangePassword";
+
 import { Outlet, useNavigate } from "react-router-dom";
 import GoTopBtn from "../Button/GoTopBtn";
 import Preloader from "../Loader";
-import apiGateway from "@src/utils/apiGateway";
-import Http from "@src/services/Http";
+
 import { useAuth } from "@src/providers/AuthProvider.context";
 
 function Dashboard() {

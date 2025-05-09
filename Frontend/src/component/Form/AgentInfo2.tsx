@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import PropertyTextInput from "./PropertyTextInput2";
-import PropertyTextAreaV2 from "./PropertyTextAreaV22";
-import { z } from "zod";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,7 +10,6 @@ import { FileWithPath, useDropzone } from "react-dropzone";
 import prepareImageForUpload from "./prepareImageForUpload";
 import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 import { v4 as uuidv4 } from 'uuid';
-import CircularProgressBar from "./CircularProgressBar ";
 import CircularProgressBarAgent from "./CircularProgressBarAgent";
 import { AgentFormType, createAgentSchema, createAgentSchemaType, updateAgentSchema, updateAgentSchemaType } from "@src/schemas/AgentSchema.CU";
 
