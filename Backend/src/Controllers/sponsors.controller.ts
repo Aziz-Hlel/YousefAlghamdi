@@ -1,21 +1,31 @@
 import { NextFunction, Request, Response } from "express";
-import { Sponsors } from "../Models/sponsor.model";
+import { ISponsor, Sponsors } from "../Models/sponsor.model";
 import statusCode from "../utils/statusCode";
 import { errorHandler } from "../utils/error";
 import errorMessages from "../utils/errorMessages";
+import { getCDN_SignedUrl } from "../imgHandler";
 
+
+
+
+
+const addSignedUrl = (sponsor: ISponsor) => {
+    const signedUrl = getCDN_SignedUrl(sponsor.image.key);
+    sponsor.image.url = signedUrl;
+    return sponsor;
+}
 
 
 
 export const createSponsor = async (req: Request, res: Response, next: NextFunction) => {
 
-    const { name, logo, url } = req.body;
+    const { name, url, image: { key } } = req.body;
 
-    if (!name || !logo || !url) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+    if (!name || !key || !url) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     try {
-        const sponsor = await Sponsors.create({ name, logo, url });
-        // ! 3adi return ?
+        const sponsor = await Sponsors.create({ name, image: { key }, url });
+
         res.status(statusCode.CREATED).json({
             success: true,
             result: sponsor,
@@ -41,11 +51,14 @@ export const getSponsors = async (req: Request, res: Response, next: NextFunctio
             Sponsors.countDocuments({}),
         ]);
 
+        const sponsorsWithSignedUrls = sponsors.map((sponsor) => addSignedUrl(sponsor.toObject()));
+
+
         res.set("x-total-count", total.toString());
 
         res.status(statusCode.OK).json({
             success: true,
-            result: sponsors,
+            result: sponsorsWithSignedUrls,
 
         })
 
@@ -66,9 +79,11 @@ export const getAllSponsors = async (req: Request, res: Response, next: NextFunc
 
     const sponsors = await Sponsors.find({}).sort({ createdAt: -1 });
 
+    const sponsorsWithSignedUrls = sponsors.map((sponsor) => addSignedUrl(sponsor.toObject()));
+
     res.status(statusCode.OK).json({
         success: true,
-        result: sponsors,
+        result: sponsorsWithSignedUrls,
     });
 }
 
@@ -79,14 +94,15 @@ export const updateSponser = async (req: Request, res: Response, next: NextFunct
     const { sponsorId } = req.params;
     if (!sponsorId) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
-    const { name, logo, url } = req.body;
-    if (!name || !logo || !url) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+    const { name, image: { key }, url } = req.body;
+
+    if (!name || !key || !url) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     const sponsor = await Sponsors.findById(sponsorId);
     if (!sponsor) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
 
     try {
-        const updatedSponsor = await Sponsors.findByIdAndUpdate(sponsorId, { name, logo, url }, { new: true });
+        const updatedSponsor = await Sponsors.findByIdAndUpdate(sponsorId, { name, image: { key }, url }, { new: true });
         res.status(statusCode.OK).json({
             success: true,
             result: updatedSponsor,

@@ -5,10 +5,13 @@ import mongoose, { model, Schema, Document, mongo } from "mongoose";
 
 
 
-interface ISponsor {
+export interface ISponsor {
     _id: string;
     name: string;
-    logo: string;
+    image: {
+        key: string,
+        url?: string,
+    }
     url: string;
 }
 
@@ -18,12 +21,16 @@ interface ISponsorModel extends Document, ISponsor {
 }
 
 
+const imageSchema = new Schema({
+    key: { type: String, required: true },
+
+}, { _id: false });
 
 const sponsorSchema = new Schema<ISponsorModel>(
     {
 
         name: { type: String, required: true },
-        logo: { type: String, required: true },
+        image: imageSchema,
         url: { type: String, required: true },
     },
     { timestamps: true }

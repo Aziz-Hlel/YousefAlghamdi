@@ -44,10 +44,10 @@ const Agents = () => {
             return <AgentCardV2_2
               key={agent._id}
               agentId={agent._id}
-              img={agentImgs[index]}
+              img={agent.agentInfo.imageGallery.mainImage.url}
               name={`${agent.firstName} ${agent.lastName}`}
               position={"Real Estate Broker"}
-              detailsLink={agent.agentInfo.socials.whatsApp}
+              detailsLink={agent.phoneNumber}
             />
 
           })}

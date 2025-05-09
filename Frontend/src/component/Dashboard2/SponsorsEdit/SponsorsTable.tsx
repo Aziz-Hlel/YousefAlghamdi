@@ -81,7 +81,7 @@ function SponsorsTable() {
           <SponsorsCard
             _id={sponsor._id}
             key={sponsor._id}
-            logo={sponsor.logo}
+            logoUrl={sponsor.image.url}
             name={sponsor.name}
             url={sponsor.url}
           />

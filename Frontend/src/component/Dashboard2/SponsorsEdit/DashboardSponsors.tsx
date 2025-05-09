@@ -10,13 +10,13 @@ import Http from "@src/services/Http";
 
 type IDashboardPropertyCard = {
   _id: string;
-  logo: string;
+  logoUrl: string;
   name: string;
   url: string;
 };
 
 
-function SponsorsCard({ _id, logo, name, url, }: IDashboardPropertyCard) {
+function SponsorsCard({ _id, logoUrl, name, url, }: IDashboardPropertyCard) {
 
   const { user } = useAuth();
   const { getSponsors } = useSponsorsContext()
@@ -54,7 +54,7 @@ function SponsorsCard({ _id, logo, name, url, }: IDashboardPropertyCard) {
 
       {/* Property IMG */}
       <div className="homec-dashboard-property__img">
-        <img src={apiGateway.images + logo}  alt="#" title={name} />
+        <img src={logoUrl} alt="#" title={name} />
         {/* Property Content */}
         <div className="homec-dashboard-property__content">
           <div className="homec-dashboard-property__badge"> {"- Sponsor"}</div>

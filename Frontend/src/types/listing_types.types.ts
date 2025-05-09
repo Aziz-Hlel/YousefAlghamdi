@@ -14,3 +14,4 @@ export const listing_types = {
     commercialRent: "commercial rent",
     commercialSale: "commercial sale",
 }
+

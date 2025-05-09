@@ -10,7 +10,10 @@ import React, { createContext, RefObject, useContext, useEffect, useRef, useStat
 export interface Sponsor {
     _id: string;
     name: string;
-    logo: string;
+    image: {
+        key: string,
+        url: string,
+    }
     url: string;
 }
 

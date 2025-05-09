@@ -14,13 +14,11 @@ import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 import { v4 as uuidv4 } from 'uuid';
 import CircularProgressBar from "./CircularProgressBar ";
 import CircularProgressBarAgent from "./CircularProgressBarAgent";
-import { agentSchema } from "@src/schemas/AgentSchema.CU";
+import { AgentFormType, createAgentSchema, createAgentSchemaType, updateAgentSchema, updateAgentSchemaType } from "@src/schemas/AgentSchema.CU";
 
 
 
-type addAgentSchemaType = z.infer<typeof agentSchema>
 
-type imageArray = ({ url: string; key: string; } | null)[];
 
 
 function PersonalInfo() {
@@ -31,20 +29,36 @@ function PersonalInfo() {
   const editMode = agentId ? true : false;
 
   const { register, handleSubmit, formState: { errors, isSubmitting, }, setError, clearErrors, setValue, getValues } =
-    useForm<addAgentSchemaType>({
-      resolver: zodResolver(agentSchema),
+    useForm<AgentFormType>({
+      // * it just works when u add any
+      resolver: zodResolver((!editMode ? createAgentSchema : updateAgentSchema) as any),
       defaultValues: agentId ? agents[agentId] : undefined
     });
 
-  !editMode && agentSchema.innerType().omit({ password: true, confirmPassword: true });
+  if (editMode) {
+    createAgentSchema.innerType().omit({ password: true, confirmPassword: true });
+  }
 
   const folderId = useRef<string>("")
-  const initialImgArray: imageArray = [null, null, null, null];
-  const [imgs, setImgs] = useState<imageArray>(initialImgArray);
+
 
 
   useEffect(() => {
-    if (!editMode) folderId.current = uuidv4();
+
+    if (!editMode) {
+      const uid = uuidv4();
+      folderId.current = uid
+      setValue("agentInfo.imageGallery.folderId", uid)
+    }
+    else {
+      const agentExistinUid = agents[agentId!]?.agentInfo.imageGallery.folderId
+      folderId.current = agentExistinUid
+      setValue("agentInfo.imageGallery.folderId", agentExistinUid)
+
+
+    }
+
+
   }, [editMode])
   const navigate = useNavigate();;
 
@@ -117,7 +131,7 @@ function PersonalInfo() {
 
   }, [acceptedFilesMini])
 
-  const onSubmit = (data: addAgentSchemaType) => {
+  const onSubmit = (data: updateAgentSchemaType | createAgentSchemaType) => {
 
     const createAgent = async () => {
 
@@ -146,6 +160,7 @@ function PersonalInfo() {
 
   };
 
+  console.log(getValues())
   console.log(errors);
 
 

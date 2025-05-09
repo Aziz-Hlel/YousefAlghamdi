@@ -1,4 +1,5 @@
 import Http from "@src/services/Http";
+import { ImagePurposeType } from "@src/types/imagePurpose.types";
 import apiGateway from "@src/utils/apiGateway"
 import axios from "axios";
 
@@ -7,7 +8,7 @@ import { FileWithPath } from "react-dropzone";
 
 
 
-export const getSignedUrlUpload = async (fileName: string, fileType: string, fileSize: number, purpose: "property" | "profile", imgsFolderId: string) => {
+export const getSignedUrlUpload = async (fileName: string, fileType: string, fileSize: number, purpose: ImagePurposeType, imgsFolderId: string) => {
 
     const response = await Http.post(apiGateway.getSignedUrl, { fileName, fileType, fileSize, purpose, imgsFolderId })
 
@@ -16,7 +17,7 @@ export const getSignedUrlUpload = async (fileName: string, fileType: string, fil
 
 
 
-export const uploadImageToS3_SIMULATOR = async (uploadedImg: Blob, name: string, imgsFolderId: string, purpose: "property" | "profile",setProgress:Function) => {
+export const uploadImageToS3_SIMULATOR = async (uploadedImg: Blob, name: string, imgsFolderId: string, purpose: ImagePurposeType, setProgress: Function) => {
 
     const { type, size } = uploadedImg
 

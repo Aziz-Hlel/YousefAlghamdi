@@ -4,6 +4,41 @@ import roles from "../types/roles.type";
 
 
 
+export interface IAgent {
+
+
+    _id: mongoose.Types.ObjectId;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    password: string;
+    role: string;
+
+    agentInfo: {
+
+        imageGallery: {
+            folderId: string,
+            mainImage: {
+                key: string,
+                url?: string,
+            },
+            miniImage: {
+                key: string,
+                url?: string,
+            }
+        },
+
+        clientsId: string[],
+
+    };
+
+    savedProperties: string[]
+
+}
+
+
+
 export interface IUser {
 
     _id: mongoose.Types.ObjectId;
@@ -19,7 +54,7 @@ export interface IUser {
     };
 
     agentInfo?: {
-        
+
         imageGallery: {
             folderId: string,
             mainImage: {

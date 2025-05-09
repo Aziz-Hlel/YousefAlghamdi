@@ -42,10 +42,8 @@ const CU_Sponsor = () => {
           </button>
           <div className="homec-modal__inner">
             <h3 className="ecom-wc__form-title ecom-wc__form-title__one">
-              Personals Info edit{" "}
-              <span>
-                Your email address will not be published. Required fields are marked *
-              </span>
+              Sponsors Info edit{" "}
+             
             </h3> 
             {/* Sign in Form  */}
             <SponsorForm2 />

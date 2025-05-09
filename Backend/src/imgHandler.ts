@@ -12,6 +12,7 @@ import { getSignedUrl as S3_getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { getSignedUrl as CDN_getSignedUrl } from '@aws-sdk/cloudfront-signer';
 import AuthenticatedRequest from './Interfaces/AuthenticatedRequest.interface';
 import protect from './Middlewares/auth.middleware';
+import { imagePurposes, ImagePurposeType } from './types/imagePurpose.types';
 
 
 
@@ -40,7 +41,7 @@ const uploadImageToS3_SIMULATOR = ((req: Request, res: Response, next: NextFunct
 
 
 const allowedTypes = ["image/jpeg", "image/png", "image/jpg", "image/webp", "image/avif"];
-const imgPurpose = ["profile", "property"]
+
 const maxFileSizeInMB = 10 // MB
 
 const maxFileSize = 1024 * 1024 * maxFileSizeInMB;
@@ -68,6 +69,19 @@ export const getCDN_SignedUrl = (s3ObjectKey: string): string => {
     return getCDN_SignedUrl
 }
 
+
+const generateKey = (fileName: string, fileType: string, purpose: ImagePurposeType, userId: string, folderId: string, timestamp: number) => {
+
+
+    if (purpose === imagePurposes.SPONSOR) {
+        return `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${purpose}/${fileName.toLowerCase()}--${timestamp}`
+    }
+
+    return `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${userId}/${purpose}/${folderId}/${fileName.toLowerCase()}--${timestamp}`
+}
+
+
+
 const getSignedUrlFunc = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
     const { fileName, fileType, fileSize, purpose, imgsFolderId } = req.body
@@ -80,14 +94,13 @@ const getSignedUrlFunc = async (req: AuthenticatedRequest, res: Response, next: 
 
     if (fileSize > maxFileSize) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.IMAGES.MAX_SIZE));
 
-    if (!imgPurpose.includes(purpose)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+    if (!Object.values(imagePurposes).includes(purpose)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
-    const userId = req.user?._id
-    // const userId = "userid"
+    const userId = req.user!._id as any
+
     const timestamp = Date.now(); // Get current timestamp in milliseconds
 
-    const key = `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${userId}/${purpose}/${imgsFolderId}/${fileName.toLowerCase()}--${timestamp}`;
-
+    const key = generateKey(fileName, fileType, purpose, userId, imgsFolderId, timestamp)
     const command = new PutObjectCommand({
         Bucket: ENV.bucketName,
         Key: key,
