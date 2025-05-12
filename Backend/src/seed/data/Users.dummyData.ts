@@ -40,7 +40,6 @@ const createUser = async (agents: Iuser_wPassword[]): Promise<Iuser_wPassword[]>
             phoneNumber: '1112223333',
             role: roles.CLIENT,
             clientInfo: {
-                agentId: String(agents[0]._id), // linking to John
             },
             savedProperties: [],
         },

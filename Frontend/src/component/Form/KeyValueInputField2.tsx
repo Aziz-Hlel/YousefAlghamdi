@@ -59,12 +59,13 @@ function KeyValueInputField({
           <h4 className="homec-submit-form__heading">{titleTwo}</h4>
           <div className="form-group homec-form-input homec-form-add">
             <input
-              type="number"
+              type="text"
               value={item.distance}
               name="distance"
+
               placeholder={placeholderTwo}
 
-              onChange={(e) => { handleKeyValue(idx, "distance", e.target.value) }}
+              onChange={(e) => { if (/^\d*$/.test(e.target.value)) handleKeyValue(idx, "distance", e.target.value) }}
             />
             <button
               className={`homec-form-add__button flex justify-center  ${btnType !== "add" && "homec-form-add__button--delete"

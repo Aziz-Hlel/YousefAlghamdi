@@ -180,6 +180,7 @@ const PropertyFrom = () => {
   console.log(errors);
 
   if (whatFor && !listing_typesValues.includes(whatFor)) return <> </>
+  
   return (
     <section className="pd-top-80 pd-btm-80"  >
       <div className="container" aria-disabled>

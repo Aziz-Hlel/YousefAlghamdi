@@ -22,7 +22,7 @@ import { useAuth } from "@src/providers/AuthProvider.context";
 import roles from "@src/types/roles.type";
 import { AxiosResponse } from "axios";
 import Swal from 'sweetalert2'
-import { ConfirmationAlertAsync } from "@src/utils/createAlert";
+import { Alert, ConfirmationAlertAsync } from "@src/utils/createAlert";
 import SubmitPropertySchema from "@src/schemas/SubmitPropertySchema.zod";
 import prepareImageForUpload from "./prepareImageForUpload";
 import ImageInput from "./ImageInput2.edit";
@@ -280,27 +280,41 @@ const PropertyFrom = () => {
 
     if (!InspectedProperty) return
 
-    console.log('t5l form validée????????');
 
     const refinedData: any = data;
     refinedData.clientId = InspectedProperty.clientId;
     refinedData.agentId = InspectedProperty.agentId;
-    console.log('refinedData', refinedData);
+
 
     if (property.advanced.state === statesTypes.toBeAdded) {
 
-      updateAdditionalDetails(refinedData)
-      updateNearestLocation(refinedData)
-      updateImages(refinedData)
-      checkProperVariables(refinedData)
-      removeId(refinedData)
-      const response = await Http.put(apiGateway.property.approve, refinedData);
-      if (response?.status === 200) navigate("./../../")
-      else console.log(response);
+
+      if (user?.role === roles.AGENT || user?.role === roles.ADMIN) {
+
+        if (user?.role === roles.ADMIN && !property.agentId) {
+          Alert({ title: "Info", text: "You have to associate an agent to the client before approving the property", icon: "info" });
+        }
+        else {
+          updateAdditionalDetails(refinedData)
+          updateNearestLocation(refinedData)
+          updateImages(refinedData)
+          checkProperVariables(refinedData)
+          removeId(refinedData)
+          const response = await Http.put(`${apiGateway.property.approve}/${property._id}`, refinedData);
+          if (response?.status === 200) navigate("./../../");
+          else console.log(response);
+        }
+
+      }
+
+      else if (user?.role === roles.USER || user?.role === roles.CLIENT) {
+        Alert({ title: "Info", text: "Your property has to be added before updating it", icon: "info" });
+      }
 
     }
 
     if (property.advanced.state === statesTypes.active || property.advanced.state === statesTypes.toBeUpdated) {
+
       updateAdditionalDetails(refinedData)
       updateNearestLocation(refinedData)
       updateImages(refinedData)
@@ -308,6 +322,7 @@ const PropertyFrom = () => {
       removeId(refinedData)
 
       let response: AxiosResponse<any, any> | undefined
+
       if (user?.role === roles.AGENT) {
         response = await Http.put(`${apiGateway.property.approve}/${property._id}`, refinedData);
         if (response?.status === 200) navigate("./../../")
@@ -334,11 +349,17 @@ const PropertyFrom = () => {
 
     if (property.advanced.state === statesTypes.toBeDeleted) {
 
-      const result = await createAlert("Delete Property", "Are you sure you want to delete this property?")
-      if (result.isConfirmed) {
-        const response = await Http.delete(`${apiGateway.property.delete}/${property._id}`);
-        if (response?.status === 200) navigate("./../../")
-        else alert("something went wrong");
+      if (user?.role === roles.ADMIN || user?.role === roles.AGENT) {
+
+        const result = await createAlert("Delete Property", "Are you sure you want to delete this property?")
+        if (result.isConfirmed) {
+          const response = await Http.delete(`${apiGateway.property.delete}/${property._id}`);
+          if (response?.status === 200) navigate("./../../")
+          else alert("something went wrong");
+        }
+      }
+      else {
+        Alert({ title: "Info", text: "A request been sends to delete your property", icon: "info" });
       }
 
     }
@@ -595,12 +616,15 @@ const PropertyFrom = () => {
                     <button className="homec-btn  bg-red-500">
                       <span onClick={handleCancel}>{isSubmitting ? "Loading..." : "Cancel"}</span>
                     </button>
-                    {statesTypes.active !== property.advanced.state && < button onClick={handleDecline} value={propertyState} className="homec-btn ">
-                      <span  >{isSubmitting ? "Loading..." : "Decline request"}</span>
-                    </button>}
+                    {(user?.role === roles.ADMIN || user?.role === roles.AGENT) &&
+                      (property.advanced.state === statesTypes.toBeUpdated || property.advanced.state === statesTypes.toBeAdded
+                        || property.advanced.state === statesTypes.toBeDeleted
+                      ) && < button onClick={handleDecline} value={propertyState} className="homec-btn ">
+                        <span  >{isSubmitting ? "Loading..." : "Decline request"}</span>
+                      </button>}
                     <button type="submit" className="homec-btn homec-btn__second ">
                       {propertyState === statesTypes.active && <span>{isSubmitting ? "Loading..." : "Update Property"}</span>}
-                      {propertyState === statesTypes.toBeAdded && <span>{isSubmitting ? "Loading..." : "Add Property"}</span>}
+                      {propertyState === statesTypes.toBeAdded && <span>{isSubmitting ? "Loading..." : "Approve Property"}</span>}
                       {propertyState === statesTypes.toBeUpdated && <span>{isSubmitting ? "Loading..." : "Update Property"}</span>}
                       {propertyState === statesTypes.toBeDeleted && <span>{isSubmitting ? "Loading..." : "Delete Property"}</span>}
                       {propertyState === statesTypes.unavailable && <span>{isSubmitting ? "Loading..." : "Make Property unavailable"}</span>}

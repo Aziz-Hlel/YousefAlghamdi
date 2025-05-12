@@ -11,12 +11,13 @@ import User from "../Models/user.model";
 import ApproveSubmitPropertySchema from "../schemas/ApproveSubmitPropertySchema";
 import { getCDN_SignedUrl } from "../imgHandler";
 
+
 const addSignedUrl = (property: any) => {
     return {
-        ...property.toObject(),
+        ...property.toJSON(),
         imageGallery: {
-            ...(property.imageGallery as any).toObject(),
-            images: property.imageGallery.images.map((image: any) => ({ ...image.toObject(), url: getCDN_SignedUrl(image.key) })),
+            ...(property.imageGallery as any).toJSON(),
+            images: property.imageGallery.images.map((image: any) => ({ ...image.toJSON(), url: getCDN_SignedUrl(image.key) })),
         },
     }
 
@@ -116,6 +117,7 @@ const filterFunc = (minVal: any, maxVal: any, filterKeyName: string, filters: an
 }
 
 
+
 export const listProperties = async (req: Request, res: Response, next: NextFunction) => {
 
     const { city, delegation, category, sub_category, listingType, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
@@ -182,6 +184,14 @@ export const getProperty = async (req: AuthenticatedRequest, res: Response, next
 
     const propertyWithSignedUrls = addSignedUrl(property);
 
+    try {
+        if (propertyWithSignedUrls.advanced.state === statesTypes.toBeUpdated) {
+
+            propertyWithSignedUrls.advanced.updated_version.imageGallery.images = propertyWithSignedUrls.advanced.updated_version.imageGallery.images.map((image: any) => ({ key: image.key, url: getCDN_SignedUrl(image.key) }))
+        }
+    } catch (error) {
+        console.log(error)
+    }
 
     res.json({
 
@@ -195,7 +205,7 @@ export const getProperty = async (req: AuthenticatedRequest, res: Response, next
 
 
 export const getUserProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    console.log('t5lll5l5l5l5')
+
     const userId = req.user?._id;
     const page = Number(req.query.page) || 1;
     const limit = 6;
@@ -380,7 +390,7 @@ export const updateProperty = async (req: AuthenticatedRequest, res: Response, n
         validBody.error.issues.forEach((issue) => zodErrors = { ...zodErrors, [issue.path[0]]: issue.message });
         return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request, zodErrors));
     }
-
+    console.log("validBody.data ::::::::::", validBody.data)
     try {
 
         const property = await Property.findById(propertyId);
@@ -388,16 +398,19 @@ export const updateProperty = async (req: AuthenticatedRequest, res: Response, n
 
         (validBody as any)._id = req.params.propertyId;
 
-        property.active = false
+        property.active = false;
         property.advanced = {
             state: statesTypes.toBeUpdated,
             available: null,
             updated_version: validBody.data,
         };
-        await property.save();
-        res.status(statusCode.OK).json('Property updated successfully');
+        console.log("property ::::::", property);
+        console.log("property.advanced type :::", typeof property.advanced.updated_version);
+        const prop = await property.save();
+        res.status(statusCode.OK).json({ result: prop });
     }
     catch (error) {
+        console.log(error)
         next(error);
     };
 
@@ -503,19 +516,25 @@ export const deleteProperty = async (req: AuthenticatedRequest, res: Response, n
     if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
 
     switch (role) {
+
         case roles.USER:
             if (property.clientId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
             break;
+
         case roles.CLIENT:
             if (property.clientId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
             break;
+
         case roles.AGENT:
             if (property.agentId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
             break;
+
         case roles.ADMIN:
             break;
+
         default:
             return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+
     }
 
     // ! Clean up related data if any (e.g., images, bookings, etc.) , specially the s3
@@ -523,13 +542,19 @@ export const deleteProperty = async (req: AuthenticatedRequest, res: Response, n
         await property.deleteOne();
     }
     else if (role === roles.CLIENT || role === roles.USER) {
-        property.active = false
-        property.advanced = {
-            state: statesTypes.toBeDeleted,
-            available: null,
-            updated_version: {},
-        };
-        await property.save();
+        if (property.advanced.state !== statesTypes.toBeAdded) {
+
+            property.active = false
+            property.advanced = {
+                state: statesTypes.toBeDeleted,
+                available: null,
+                updated_version: {},
+            };
+            await property.save();
+        }
+        else {
+            await property.deleteOne();
+        }
     }
 
 

@@ -15,8 +15,8 @@ import { merge, pick } from 'lodash';
 
 
 export const test = async (req: Request, res: Response) => {
-
-    res.json({ message: 'API is working! ' });
+    const prop =await Property.findById("6821ff8fec59995e3285b02d");
+    res.json({ message: 'API is working! ',prop });
 };
 
 const registerBodySchema = z.object({

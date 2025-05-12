@@ -3,31 +3,7 @@ import DashboardPropertyCard from "../../Cards/DashboardPropertyCard2";
 import Pagination from "../../Pagination2";
 import { useState } from "react";
 import { useMyPropertiesContext } from "./MyPropertiesProvider.context";
-import apiGateway from "@src/utils/apiGateway";
-import { pickRandomPhoto } from "@src/pickRandomPhoto";
-import Http from "@src/services/Http";
 
-
-type IUser = {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: number;
-  createdAt: string;
-  role: string;
-  agentId: string;
-}
-const initUser = {
-  _id: "",
-  firstName: "",
-  lastName: "",
-  email: "",
-  phoneNumber: 0,
-  createdAt: "",
-  role: "",
-  agentId: "",
-}
 
 function MyProperties({ title }: { title: string }) {
 
@@ -44,25 +20,15 @@ function MyProperties({ title }: { title: string }) {
 
 
 
-  const randomPhotos = [
-    pickRandomPhoto(),
-    pickRandomPhoto(),
-    pickRandomPhoto(),
-    pickRandomPhoto(),
-    pickRandomPhoto(),
-    pickRandomPhoto(),
-
-  ];
-
   return (
     <>
       <Layout title={title} ref={listRef}>
-        {properties?.map((property, index) => (
+        {properties?.map((property) => (
           <DashboardPropertyCard
             _id={property._id}
             ownerId={property.clientId}
             key={property._id}
-            status={property.advanced.state}
+            state={property.advanced.state}
             image={property.imageGallery.images[0]?.url ?? "#"}
             listing_type={property.listing_type}
             title={property.title}

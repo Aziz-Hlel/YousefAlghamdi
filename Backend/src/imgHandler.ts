@@ -65,7 +65,7 @@ export const getCDN_SignedUrl = (s3ObjectKey: string): string => {
 
         dateLessThan: new Date(Date.now() + 3600 * 1000),
     })
-    console.log("getCDN_SignedUrl", getCDN_SignedUrl)
+
     return getCDN_SignedUrl
 }
 
@@ -80,7 +80,7 @@ const generateKey = (fileName: string, fileType: string, purpose: ImagePurposeTy
 
     if (purpose === imagePurposes.PROFILE) {
         // ! added _test after purpose for testing , because purpose is the init state of the sponsors so i didnt want to change it or clean it each time
-        return `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${purpose}/${fileName.toLowerCase()}--${timestamp}`
+        return `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${purpose}_test/${fileName.toLowerCase()}--${timestamp}`
     }
 
     return `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${userId}/${purpose}/${folderId}/${fileName.toLowerCase()}--${timestamp}`

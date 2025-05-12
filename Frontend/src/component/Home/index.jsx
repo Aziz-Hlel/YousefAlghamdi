@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Footer from "../Footer";
 import GoTopBtn from "../Button/GoTopBtn";
-import About from "../About2/About";
+import CEO from "../CEO/About";
 import Agents from "../Agents2";
 import Blog from "../Blog";
 import DownloadApp from "../DownloadApp2";
@@ -38,7 +38,7 @@ function Home() {
         <Sponsors />
 
         <Features2 />
-        <About />
+        <CEO />
         <Agents />
         <FaqSection />
         <DownloadApp />

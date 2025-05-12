@@ -5,12 +5,13 @@ import apiGateway from "@src/utils/apiGateway";
 import { Alert, ConfirmationAlertAsync } from "@src/utils/createAlert";
 import { Link } from "react-router-dom";
 import { useMyPropertiesContext } from "../Dashboard2/MyProperties/MyPropertiesProvider.context";
+import statesTypes from "@src/types/states.types";
 
 
 type IDashboardPropertyCard = {
   _id: string;
   ownerId: string;
-  status: string;
+  state: string;
   image: string;
   listing_type: string;
   title: string;
@@ -18,7 +19,7 @@ type IDashboardPropertyCard = {
 };
 
 
-function DashboardPropertyCard({ _id, ownerId, status, image, listing_type, title, location, }: IDashboardPropertyCard) {
+function DashboardPropertyCard({ _id, ownerId, state, image, listing_type, title, location, }: IDashboardPropertyCard) {
 
   const { user } = useAuth();
   const { fetchProperties } = useMyPropertiesContext()
@@ -85,7 +86,7 @@ function DashboardPropertyCard({ _id, ownerId, status, image, listing_type, titl
 
   return (
     <div className="homec-dashboard-property mg-top-30">
-      <div className="homec-dashboard-property__label">{status}</div>
+      <div className="homec-dashboard-property__label">{state}</div>
       {/* Property IMG */}
       <div className="homec-dashboard-property__img">
         <img src={image} alt="#" />
@@ -176,8 +177,8 @@ function DashboardPropertyCard({ _id, ownerId, status, image, listing_type, titl
 
         </button>
 
-
-        {(user?.role === roles.ADMIN || user?.role === roles.AGENT) && <button className="homec-dashboard-property__btn px-2 homec-dashboard-property__btn--delete flex justify-center items-center" onClick={handleUnavailable}>
+        {/* Unavailable button */}
+        {(user?.role === roles.ADMIN || user?.role === roles.AGENT) && state === statesTypes.active && <button className="homec-dashboard-property__btn px-2 homec-dashboard-property__btn--delete flex justify-center items-center" onClick={handleUnavailable}>
 
           <div className="flex  justify-center  items-center fill-black stroke-black hover:fill-white hover:stroke-white" >
             <svg

@@ -12,6 +12,7 @@ import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 import { v4 as uuidv4 } from 'uuid';
 import CircularProgressBarAgent from "./CircularProgressBarAgent";
 import { AgentFormType, createAgentSchema, createAgentSchemaType, updateAgentSchema, updateAgentSchemaType } from "@src/schemas/AgentSchema.CU";
+import { imagePurposes } from "@src/types/imagePurpose.types";
 
 
 
@@ -99,7 +100,7 @@ function PersonalInfo() {
     }
 
 
-    const key = await uploadImageToS3_SIMULATOR(optimizedImg.blob, uploadedImg.name, folderId.current, "property", setProgress);
+    const key = await uploadImageToS3_SIMULATOR(optimizedImg.blob, uploadedImg.name, folderId.current, imagePurposes.PROFILE, setProgress);
     const imgWithPreview = Object.assign(uploadedImg, {
       preview: URL.createObjectURL(uploadedImg),
       key: key

@@ -10,6 +10,7 @@ import PropertyAgents from "../Agents/PropertyAgents";
 import OtherDetailsTabFeatures from "./OtherDetailsTabFeatures";
 import apiGateway from "@src/utils/apiGateway";
 import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
+import { useAgents } from "@src/providers/AgentsProvider.context";
 
 function PropertyDetails() {
   const [activeTab, setActiveTab] = useState("Property Details");
@@ -17,12 +18,18 @@ function PropertyDetails() {
     setActiveTab(title);
   };
 
+
+  const { property } = useSinglePropertyContext();
+
+  const { agents } = useAgents();
+
+  if (!property) return <></>
+
+  const propertyAgent = agents[property.agentId];
+
   type IPropertyDetail = {
     [key: string]: string | number;
   };
-
-  const { property } = useSinglePropertyContext();
-  if (!property) return <></>
 
   const propertyDetails: IPropertyDetail[] = [
     { "Type": property ? property.category : "" },
@@ -89,8 +96,8 @@ function PropertyDetails() {
             </div>
           </div>
           <PropertyAgents
-            image={apiGateway.images + "agent_small.png"}
-            name="Wade De Warren"
+            image={propertyAgent.agentInfo.imageGallery.miniImage.url}
+            name={propertyAgent.firstName + " " + propertyAgent.lastName}
             position="Real Estate Broker"
           />
         </div>

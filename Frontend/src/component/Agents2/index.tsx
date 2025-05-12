@@ -1,17 +1,12 @@
-import AgentCardV2 from "../Cards/AgentCardV2";
 import AboutShapeImg from "../About/AboutShapeImg";
 import AgentCardV2_2 from "../Cards/AgentCardV2_2";
 import { useAgents } from "@src/providers/AgentsProvider.context";
-import agent1 from "@img/agents/agent4.jpg"
-import agent2 from "@img/agents/agent5.jpg"
-import agent3 from "@img/agents/agent6.jpg"
 
 
 const Agents = () => {
 
   const { agents } = useAgents();
 
-  const agentImgs = [agent1, agent2, agent3]
 
   return (
     <section className="homec-about homec-bg-third-color pd-top-120 pd-btm-120">

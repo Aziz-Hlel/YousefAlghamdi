@@ -15,19 +15,11 @@ function WelcomeCard({ languages, links, image, brunches, builtHouse }: any) {
             <Link to="/">
               <img src={image} alt="#" />
             </Link>
-            <div className="ecom-wc__countdown--title -translate-y-20">
-              {brunches}
-              <span>Brunches</span>
-            </div>
 
-            <div className="ecom-wc__countdown--title ecom-wc__countdown--title--v2 translate-y-14 border border-gray-400 outline-gray-400">
-              {builtHouse}
-              <span>Built House</span>
-            </ div>
           </div>
           <div className="ecom-wc__footer">
             <ul className="ecom-wc__footer--list list-none">
-              {links?.map((link: any, index:number) => (
+              {links?.map((link: any, index: number) => (
                 <li key={index}>
                   <a href={link.link}>{link.name}</a>
                 </li>
@@ -35,7 +27,7 @@ function WelcomeCard({ languages, links, image, brunches, builtHouse }: any) {
             </ul>
             <div className="ecom-wc__footer--languages">
               <select className="ecom-wc__footer--language">
-                {languages?.map((language: any, index:number) =>
+                {languages?.map((language: any, index: number) =>
                   index === 0 ? (
                     <option data-display={language} key={index}>
                       {language}

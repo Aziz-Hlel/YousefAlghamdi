@@ -19,7 +19,7 @@ function MyProperties() {
         {properties?.map((property) => (
           <DashboardPropertyCard
             formkey={property.id}
-            status={property.status}
+            state={property.status}
             image={property.img2}
             listing_type={property.whatFor}
             title={property.name}
