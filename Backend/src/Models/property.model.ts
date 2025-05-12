@@ -108,7 +108,7 @@ const propertySchema = new mongoose.Schema({
 
     clientId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', },
 
-    agentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Agent', default: null, },
+    agentId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null, },
 
 
     active: { type: Boolean, default: false, },

@@ -100,6 +100,9 @@ const App2 = () => {
                                         }
                                         <Route element={<PrivilegedLayouts authorizedRoles={roles.ADMIN} />}>
 
+                                            <Route path="all-properties" element={<MyPropertiesProvider title="All Properties"> <MyProperties title="All Properties" /> </MyPropertiesProvider>} >
+                                                <Route path="inspect-user/:userId" element={<UserView />} />
+                                            </Route>
                                             <Route path="sponsors" element={<SponsorsProvider> <SponsorsEdit /></SponsorsProvider>} >
                                                 <Route path="add-sponsor" element={<CU_Sponsor />} />
                                                 <Route path="edit-sponsor/:sponsorId" element={<CU_Sponsor />} />
@@ -109,7 +112,6 @@ const App2 = () => {
                                                 <Route path="add-agent" element={<CU_Agent />} />
                                                 <Route path="edit-agent/:agentId" element={<CU_Agent />} />
                                             </Route>
-
                                         </Route>
 
                                         {/* <Route path="add-agent" element={<UpdatePersonalInfo isModalOpen={true} toggleModal={() => { }} />}></Route> */}

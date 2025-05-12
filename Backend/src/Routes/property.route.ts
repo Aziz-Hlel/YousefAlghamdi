@@ -1,6 +1,6 @@
 import express from 'express';
-import { approveProperty, declinePropertyChanges, createProperty, deleteProperty, getPendingProperties, getProperty, getUserProperties, listProperties, updateProperty, getUnavailableProperties, unavailable } from '../Controllers/property.controller';
-import protect, { adminOrAgentAuth } from '../Middlewares/auth.middleware';
+import { approveProperty, declinePropertyChanges, createProperty, deleteProperty, getPendingProperties, getProperty, getUserProperties, listProperties, updateProperty, getUnavailableProperties, unavailable, getAllProperties } from '../Controllers/property.controller';
+import protect, { adminAuth, adminOrAgentAuth } from '../Middlewares/auth.middleware';
 
 
 
@@ -13,7 +13,7 @@ const propertyRouter = express.Router();
 propertyRouter.get('/my-properties', protect, getUserProperties);
 propertyRouter.get('/pending-properties', adminOrAgentAuth, getPendingProperties);
 propertyRouter.get('/unavailable-properties', adminOrAgentAuth, getUnavailableProperties);
-
+propertyRouter.get('/all-properties', adminAuth,getAllProperties);
 
 
 propertyRouter.put('/approve/:propertyId', adminOrAgentAuth, approveProperty)

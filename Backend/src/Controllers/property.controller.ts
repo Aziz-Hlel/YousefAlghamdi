@@ -118,6 +118,9 @@ const filterFunc = (minVal: any, maxVal: any, filterKeyName: string, filters: an
 
 
 
+
+
+
 export const listProperties = async (req: Request, res: Response, next: NextFunction) => {
 
     const { city, delegation, category, sub_category, listingType, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
@@ -543,7 +546,7 @@ export const deleteProperty = async (req: AuthenticatedRequest, res: Response, n
     }
 
     else if (role === roles.CLIENT || role === roles.USER) {
-        
+
         if (property.advanced.state !== statesTypes.toBeAdded) {
 
             property.active = false
@@ -666,4 +669,26 @@ export const unavailable = async (req: AuthenticatedRequest, res: Response, next
     res.status(statusCode.OK).json('Property updated successfully');
 
 
+}
+
+
+
+
+export const getAllProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+
+    const [properties, total] = await Promise.all([
+        Property.find({}).limit(10).skip((Number(req.query.page) || 1) - 1).sort({ createdAt: -1 }).populate(['agentId', 'clientId']),
+        Property.countDocuments({}),
+    ]);
+
+    const updatedProperties = properties.map((property) => addSignedUrl(property));
+
+    res.set('x-total-count', total.toString());
+
+    res.status(statusCode.OK).json({
+        success: true,
+        message: 'Properties fetched successfully',
+        result: updatedProperties,
+    });
 }

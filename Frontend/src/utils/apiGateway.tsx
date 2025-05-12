@@ -41,7 +41,7 @@ const apiGateway = {
         approve: "/property/approve",
         decline: "/property/decline",
         unavailable: "/property/unavailable",
-
+        all_properties:"/property/all-properties",
     },
 
     agent: {
