@@ -541,7 +541,9 @@ export const deleteProperty = async (req: AuthenticatedRequest, res: Response, n
     if (role === roles.ADMIN || role === roles.AGENT) {
         await property.deleteOne();
     }
+
     else if (role === roles.CLIENT || role === roles.USER) {
+        
         if (property.advanced.state !== statesTypes.toBeAdded) {
 
             property.active = false

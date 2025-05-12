@@ -1,23 +1,11 @@
-import { z } from "zod";
 import FromField from "./FromField2";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { categoriesType, CommercialProperties, LandAndPlots, ResidentialProperties } from "@src/types/categories.subcategories.types";
 import { AbuDhabiEmirate, cities } from "@src/types/cities.delegations.types";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { listing_types } from "@src/types/listing_types.types";
 
 
-const HomeFilterSchema = z.object({
-  listing_type: z.string(),
-  category: z.string(),
-  city: z.string(),
-  price: z.string(),
-
-});
-
-type HomeFilterType = z.infer<typeof HomeFilterSchema>;
 
 
 

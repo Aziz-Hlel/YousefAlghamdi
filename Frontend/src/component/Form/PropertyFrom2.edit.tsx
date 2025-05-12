@@ -351,7 +351,7 @@ const PropertyFrom = () => {
 
       if (user?.role === roles.ADMIN || user?.role === roles.AGENT) {
 
-        const result = await createAlert("Delete Property", "Are you sure you want to delete this property?")
+        const result = await createAlert()
         if (result.isConfirmed) {
           const response = await Http.delete(`${apiGateway.property.delete}/${property._id}`);
           if (response?.status === 200) navigate("./../../")
@@ -374,7 +374,7 @@ const PropertyFrom = () => {
     navigate("./../../")
   }
 
-  const createAlert = async (title: string, text: string,) => {
+  const createAlert = async () => {
     return await Swal.fire({
       title: 'Are you sure?',
       text: 'This action cannot be undone.',
