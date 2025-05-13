@@ -1,3 +1,5 @@
+import { IUser } from "@src/providers/AuthProvider.context";
+
 type Iproperty = {
     _id: string
 
@@ -23,7 +25,7 @@ type Iproperty = {
     listing_type: string,
     productTier: string,
 
-    clientId: string,
+    clientId: string | IUser,
     agentId: string,
 
     filterFields: {
@@ -38,8 +40,8 @@ type Iproperty = {
     }
     additionalDetails: string[]
 
-
-    show: boolean,
+    featured: boolean,
+    active: boolean,
 
     advanced: {
         state: string,

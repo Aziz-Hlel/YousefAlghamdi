@@ -22,7 +22,7 @@ type IDashboardPropertyCard = {
 };
 
 
-function DashboardPropertyCard({ property, _id, ownerId, state, image, listing_type, title, location, }: IDashboardPropertyCard) {
+function DashboardPropertyCard({ property, componentTitle, ownerId, state, image, listing_type, title, location, }: IDashboardPropertyCard) {
 
   const { user } = useAuth();
   const { fetchProperties } = useMyPropertiesContext()
@@ -66,7 +66,7 @@ function DashboardPropertyCard({ property, _id, ownerId, state, image, listing_t
       icon: "warning",
     })
     if (response.isConfirmed) {
-      const response = await Http.get(`${apiGateway.property.unavailable}/${property._id}`);
+      const response = await Http.patch(`${apiGateway.property.unavailable}/${property._id}`, {});
       if (response?.status === 200) {
         (user?.role === roles.ADMIN || user?.role === roles.AGENT) ?
           Alert({
@@ -79,6 +79,37 @@ function DashboardPropertyCard({ property, _id, ownerId, state, image, listing_t
             title: "Request Sent",
             icon: "success",
             text: "Request to make property unavailable sent successfully",
+          })
+        fetchProperties(1)
+      }
+      else alert("something went wrong")
+    }
+  }
+
+
+  const handleFeatured = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+
+    e.preventDefault();
+    const response = await ConfirmationAlertAsync({
+      title: "Featured Property",
+      text: "Are you sure you want to add it to featured properties ?",
+      confirmButtonText: "Yes, i want to add it",
+      icon: "warning",
+    })
+    if (response.isConfirmed) {
+      const response = await Http.patch(`${apiGateway.property.feature.update}/${property._id}`, {});
+      if (response?.status === 200) {
+        (property.featured) ?
+          Alert({
+            title: "Property unfeatured",
+            icon: "success",
+            text: "Property is now unfeatured",
+          })
+          :
+          Alert({
+            title: "Property featured",
+            icon: "success",
+            text: "Property is now featured",
           })
         fetchProperties(1)
       }
@@ -182,36 +213,98 @@ function DashboardPropertyCard({ property, _id, ownerId, state, image, listing_t
           </button>
 
           {/* Unavailable button */}
-          {(user?.role === roles.ADMIN || user?.role === roles.AGENT) && state === statesTypes.active && <button className="homec-dashboard-property__btn px-2 homec-dashboard-property__btn--delete flex justify-center items-center" onClick={handleUnavailable}>
+          {(user?.role === roles.ADMIN || user?.role === roles.AGENT) && (state === statesTypes.active || state === statesTypes.unavailable) &&
+            <button className="homec-dashboard-property__btn px-2 homec-dashboard-property__btn--delete flex justify-center items-center" onClick={handleUnavailable}>
 
-            <div className="flex  justify-center  items-center fill-black stroke-black hover:fill-white hover:stroke-white" >
-              <svg
-                width="20"
-                height="21"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                viewBox="0 0 215.152 215.152"
-                xmlSpace="preserve"
-                strokeWidth="8"
-              >
-                <g id="SVGRepo_bgCarrier" strokeWidth={0} />
-                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
-                <g id="SVGRepo_iconCarrier">
-                  {" "}
-                  <g>
+              <div className="flex  justify-center  items-center fill-black stroke-black hover:fill-white hover:stroke-white" >
+                <svg
+                  width="20"
+                  height="21"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 215.152 215.152"
+                  xmlSpace="preserve"
+                  strokeWidth="8"
+                >
+                  <g id="SVGRepo_bgCarrier" strokeWidth={0} />
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
+                  <g id="SVGRepo_iconCarrier">
                     {" "}
-                    <path d="M107.573,0C61.849,0,24.649,37.206,24.649,82.938c0,32.665,13.675,65.706,39.545,95.549 c19.32,22.288,38.47,34.917,39.275,35.443c1.246,0.815,2.675,1.222,4.104,1.222s2.857-0.407,4.104-1.222 c0.806-0.526,19.957-13.155,39.278-35.443c25.872-29.844,39.548-62.885,39.548-95.55C190.503,37.206,153.301,0,107.573,0z M107.566,198.447C92.281,187.083,39.649,143.54,39.649,82.938C39.649,45.477,70.12,15,107.573,15 c37.457,0,67.93,30.477,67.93,67.938C175.503,143.401,122.842,187.059,107.566,198.447z" />{" "}
-                    <path d="M130.904,59.592c-2.93-2.928-7.679-2.929-10.606,0l-12.72,12.719L94.857,59.588c-2.929-2.928-7.678-2.929-10.606,0 c-2.93,2.929-2.93,7.678-0.001,10.607l12.721,12.722L84.25,95.636c-2.93,2.929-2.93,7.678-0.001,10.607 c1.465,1.464,3.384,2.197,5.304,2.197c1.919,0,3.839-0.732,5.303-2.196l12.721-12.72l12.721,12.722 c1.465,1.464,3.384,2.197,5.304,2.197c1.919,0,3.839-0.732,5.303-2.196c2.93-2.929,2.93-7.678,0.001-10.607l-12.721-12.722 l12.72-12.718C133.833,67.271,133.833,62.521,130.904,59.592z" />{" "}
-                  </g>{" "}
-                </g>
-              </svg>
+                    <g>
+                      {" "}
+                      <path d="M107.573,0C61.849,0,24.649,37.206,24.649,82.938c0,32.665,13.675,65.706,39.545,95.549 c19.32,22.288,38.47,34.917,39.275,35.443c1.246,0.815,2.675,1.222,4.104,1.222s2.857-0.407,4.104-1.222 c0.806-0.526,19.957-13.155,39.278-35.443c25.872-29.844,39.548-62.885,39.548-95.55C190.503,37.206,153.301,0,107.573,0z M107.566,198.447C92.281,187.083,39.649,143.54,39.649,82.938C39.649,45.477,70.12,15,107.573,15 c37.457,0,67.93,30.477,67.93,67.938C175.503,143.401,122.842,187.059,107.566,198.447z" />{" "}
+                      <path d="M130.904,59.592c-2.93-2.928-7.679-2.929-10.606,0l-12.72,12.719L94.857,59.588c-2.929-2.928-7.678-2.929-10.606,0 c-2.93,2.929-2.93,7.678-0.001,10.607l12.721,12.722L84.25,95.636c-2.93,2.929-2.93,7.678-0.001,10.607 c1.465,1.464,3.384,2.197,5.304,2.197c1.919,0,3.839-0.732,5.303-2.196l12.721-12.72l12.721,12.722 c1.465,1.464,3.384,2.197,5.304,2.197c1.919,0,3.839-0.732,5.303-2.196c2.93-2.929,2.93-7.678,0.001-10.607l-12.721-12.722 l12.72-12.718C133.833,67.271,133.833,62.521,130.904,59.592z" />{" "}
+                    </g>{" "}
+                  </g>
+                </svg>
 
-            </div>
-          </button>}
+              </div>
+            </button>}
+
+
+
+          {/* Featured button */}
+          {
+            property.advanced.state === statesTypes.active && <button className="group px-2  flex justify-center items-center  " onClick={handleFeatured}>
+
+              <div className="flex  justify-center  items-center " >
+
+                <svg
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="21"
+                >
+                  <path
+                    d="M11.317 3.612c.226-.368.339-.552.484-.615a.5.5 0 01.397 0c.145.063.258.247.483.615l1.985 3.236c.085.139.128.208.186.259a.5.5 0 00.176.099c.073.023.154.023.317.024l3.905.015c.462.001.692.002.824.1a.5.5 0 01.2.356c.016.163-.103.361-.341.756l-1.885 3.13c-.09.15-.136.225-.153.305a.5.5 0 000 .216c.017.08.063.155.153.305l1.885 3.13c.238.395.357.593.342.756a.5.5 0 01-.2.356c-.133.098-.363.099-.825.1l-3.905.015c-.163 0-.244.001-.317.024a.497.497 0 00-.176.1c-.058.05-.1.12-.186.258l-1.985 3.236c-.225.368-.338.552-.483.615a.5.5 0 01-.397 0c-.145-.063-.258-.247-.484-.615l-1.985-3.236c-.085-.139-.127-.208-.185-.259a.498.498 0 00-.176-.099c-.073-.023-.155-.023-.317-.024l-3.906-.015c-.461-.001-.692-.002-.823-.1a.5.5 0 01-.201-.356c-.015-.163.104-.361.342-.756l1.885-3.13c.09-.15.135-.225.153-.306a.5.5 0 000-.215c-.018-.08-.063-.155-.153-.305l-1.885-3.13c-.238-.395-.357-.593-.342-.756a.5.5 0 01.2-.356c.132-.098.363-.099.824-.1l3.906-.015c.162 0 .244-.001.317-.024a.5.5 0 00.176-.1c.058-.05.1-.12.185-.258l1.985-3.236z"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={"  " + (property.featured ? "fill-amber-400 stroke-amber-200" : "fill-gray-700 stroke-black")}
+                  />
+                </svg>
+
+              </div>
+            </button>
+
+          }
         </div>
       </div >
-      qsfsq
+
+
+      {/* 
+      // * Owner info component below the property
+      */}
+      {
+        componentTitle === "All Properties" && typeof property.clientId === "object" &&
+        <>
+          <div className=" border border-black w-full bg-[#f5f4ff]  lg:px-12 ">
+
+            <div className="flex h-fit">
+              <h6 className=" mb-0">Owner :  </h6>
+              <span>{`${property.clientId.firstName} ${property.clientId.lastName} (${property.clientId.role})`}</span>
+            </div>
+
+            {property.clientId.role !== roles.AGENT &&
+              <>
+                <div className="flex h-fit">
+                  <div className=" mb-0 px-1 ">Email :  </div>
+                  <span>{`${property.clientId.email}`}</span>
+                </div>
+
+                <div className="flex h-fit">
+                  <div className=" mb-0  px-1">Phone :  </div>
+                  <span>{`${property.clientId.phoneNumber}`}</span>
+                </div>
+              </>
+            }
+
+          </div>
+
+
+        </>
+      }
+
     </div>
   );
 }

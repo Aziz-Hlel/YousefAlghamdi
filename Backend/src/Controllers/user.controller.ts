@@ -15,8 +15,9 @@ import { merge, pick } from 'lodash';
 
 
 export const test = async (req: Request, res: Response) => {
-    const prop =await Property.findById("6821ff8fec59995e3285b02d");
-    res.json({ message: 'API is working! ',prop });
+    const prop = await User.find({ _id: new mongoose.Types.ObjectId("6821b247bc4d00392204d5a7") });
+    console.log(prop[0].id )
+    res.json({ message: 'API is working! ', prop });
 };
 
 const registerBodySchema = z.object({

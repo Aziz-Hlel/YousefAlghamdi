@@ -107,6 +107,7 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
 }
 
 
+
 const filterFunc = (minVal: any, maxVal: any, filterKeyName: string, filters: any) => {
     if (minVal && maxVal && !isNaN(Number(minVal)) && !isNaN(Number(maxVal))) {
         filters[filterKeyName] = {};
@@ -115,11 +116,6 @@ const filterFunc = (minVal: any, maxVal: any, filterKeyName: string, filters: an
     }
 
 }
-
-
-
-
-
 
 export const listProperties = async (req: Request, res: Response, next: NextFunction) => {
 
@@ -176,6 +172,7 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
 
 
 
+
 export const getProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
 
@@ -205,6 +202,17 @@ export const getProperty = async (req: AuthenticatedRequest, res: Response, next
 
 }
 
+
+export const getFeaturedProperties = async (req: Request, res: Response, next: NextFunction) => {
+
+    const featuredProperties = await Property.find({ featured: true }).sort({ createdAt: -1 });
+    const updatedProperties = featuredProperties.map((property) => addSignedUrl(property));
+
+    res.status(statusCode.OK).json({
+        success: true,
+        result: updatedProperties,
+    });
+}
 
 
 export const getUserProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
@@ -306,7 +314,6 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
 };
 
 
-
 export const getPendingProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
     const userId = req.user?._id;
@@ -322,11 +329,11 @@ export const getPendingProperties = async (req: AuthenticatedRequest, res: Respo
         try {
 
             const [properties, total] = await Promise.all([
-                Property.find({ agentId: userId, "advanced.state": { $ne: statesTypes.active } })
+                Property.find({ agentId: userId, "advanced.state": { $nin: [statesTypes.active, statesTypes.unavailable] } })
                     .limit(limit)
                     .skip((page - 1) * limit)
                     .sort({ createdAt: -1 }),
-                Property.countDocuments({ agentId: userId, "advanced.state": { $ne: statesTypes.active } }),
+                Property.countDocuments({ agentId: userId, "advanced.state": { $nin: [statesTypes.active, statesTypes.unavailable] } }),
             ]);
 
             const updatedProperties = properties.map((property) => addSignedUrl(property));
@@ -350,11 +357,11 @@ export const getPendingProperties = async (req: AuthenticatedRequest, res: Respo
         try {
 
             const [properties, total] = await Promise.all([
-                Property.find({ "advanced.state": { $ne: statesTypes.active } })
+                Property.find({ "advanced.state": { $nin: [statesTypes.active, statesTypes.unavailable] } })
                     .limit(limit)
                     .skip((page - 1) * limit)
                     .sort({ updatedAt: -1 }),
-                Property.countDocuments({ "advanced.state": { $ne: statesTypes.active } }),
+                Property.countDocuments({ "advanced.state": { $nin: [statesTypes.active, statesTypes.unavailable] } }),
             ]);
 
             const updatedProperties = properties.map((property) => addSignedUrl(property));
@@ -435,7 +442,7 @@ export const getUnavailableProperties = async (req: AuthenticatedRequest, res: R
     if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
 
-    if (role === roles.AGENT)
+    if (role === roles.AGENT) {
 
         try {
 
@@ -446,19 +453,43 @@ export const getUnavailableProperties = async (req: AuthenticatedRequest, res: R
                     .sort({ createdAt: -1 }),
                 Property.countDocuments({ agentId: userId, "advanced.state": statesTypes.unavailable }),
             ]);
+            const updatedProperties = properties.map((property) => addSignedUrl(property));
 
             res.set("x-total-count", total.toString()); // Optional, useful for frontend
 
             res.json({
 
-                result: properties,
+                result: updatedProperties,
             })
 
         } catch (error) {
             next(error);
         }
+    }
+    if (role === roles.ADMIN) {
+        try {
 
+            const [properties, total] = await Promise.all([
+                Property.find({ "advanced.state": statesTypes.unavailable })
+                    .limit(limit)
+                    .skip((page - 1) * limit)
+                    .sort({ createdAt: -1 }),
+                Property.countDocuments({ "advanced.state": statesTypes.unavailable }),
+            ]);
 
+            const updatedProperties = properties.map((property) => addSignedUrl(property));
+
+            res.set("x-total-count", total.toString()); // Optional, useful for frontend
+
+            res.json({
+
+                result: updatedProperties,
+            })
+        } catch (error) {
+            next(error);
+        }
+
+    }
 }
 
 
@@ -625,14 +656,13 @@ export const unavailable = async (req: AuthenticatedRequest, res: Response, next
     const propertyId = req.params.propertyId;
     if (!propertyId || !mongoose.Types.ObjectId.isValid(propertyId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
-    const { state } = req.body;
-    if (!state || !['available', 'unavailable'].includes(state)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
 
     const property = await Property.findById(propertyId);
     if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
 
-    const role = req.user.role
-
+    const role = req.user.role;
+    const popertyState = property.advanced.state;
     // if (property.clientId !== req.user?._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
 
     switch (role) {
@@ -645,7 +675,7 @@ export const unavailable = async (req: AuthenticatedRequest, res: Response, next
             return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
     }
 
-    if (state === 'unavailable') {
+    if (popertyState === statesTypes.active) {
         property.active = false
         property.advanced = {
             state: statesTypes.unavailable,
@@ -653,7 +683,8 @@ export const unavailable = async (req: AuthenticatedRequest, res: Response, next
             updated_version: {},
         }
     }
-    else {
+
+    else if (popertyState === statesTypes.unavailable) {
         property.active = true
         property.advanced = {
             state: statesTypes.active,
@@ -691,4 +722,23 @@ export const getAllProperties = async (req: AuthenticatedRequest, res: Response,
         message: 'Properties fetched successfully',
         result: updatedProperties,
     });
+}
+
+
+
+export const featureProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    const propertyId = req.params.propertyId;
+    if (!propertyId || !mongoose.Types.ObjectId.isValid(propertyId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    const property = await Property.findById(propertyId);
+    if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
+
+    property.featured = !property.featured;
+    if (!property.featured) property.featured = false
+    await property.save();
+
+    res.status(statusCode.OK).json('Property updated successfully');
+
+
 }

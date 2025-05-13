@@ -1,5 +1,5 @@
 import express from 'express';
-import { approveProperty, declinePropertyChanges, createProperty, deleteProperty, getPendingProperties, getProperty, getUserProperties, listProperties, updateProperty, getUnavailableProperties, unavailable, getAllProperties } from '../Controllers/property.controller';
+import { approveProperty, declinePropertyChanges, createProperty, deleteProperty, getPendingProperties, getProperty, getUserProperties, listProperties, updateProperty, getUnavailableProperties, unavailable, getAllProperties, featureProperty, getFeaturedProperties } from '../Controllers/property.controller';
 import protect, { adminAuth, adminOrAgentAuth } from '../Middlewares/auth.middleware';
 
 
@@ -9,16 +9,18 @@ import protect, { adminAuth, adminOrAgentAuth } from '../Middlewares/auth.middle
 
 const propertyRouter = express.Router();
 
-
+propertyRouter.get('/featured-properties',getFeaturedProperties);
 propertyRouter.get('/my-properties', protect, getUserProperties);
 propertyRouter.get('/pending-properties', adminOrAgentAuth, getPendingProperties);
 propertyRouter.get('/unavailable-properties', adminOrAgentAuth, getUnavailableProperties);
 propertyRouter.get('/all-properties', adminAuth,getAllProperties);
 
 
+
 propertyRouter.put('/approve/:propertyId', adminOrAgentAuth, approveProperty)
 propertyRouter.get('/decline/:propertyId', protect, declinePropertyChanges);
-propertyRouter.get('/unavailable/:propertyId', protect, unavailable);
+propertyRouter.patch('/unavailable/:propertyId', protect, unavailable);
+propertyRouter.patch('/feature/:propertyId', adminAuth, featureProperty);
 
 
 propertyRouter.post('/', protect, createProperty);

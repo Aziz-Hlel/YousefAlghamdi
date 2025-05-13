@@ -55,12 +55,8 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
     const listRef = useRef<HTMLDivElement | null>(null);
 
     const updateField = (field: keyof IfilterProperty, value: any, mnin?: string) => {
-        // console.log("field", field).
-        if (field === "city") {
-            console.log("city bch ytbadel jey mnin :", mnin);
-            console.log("value", value);
 
-        }
+        
 
 
         setFilter((prev) => ({
@@ -85,10 +81,8 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
             });
         }
         let filter: any = {}
-        console.log("nanana chouf 9addeh l pag mil prams l context :", page);
         searchParams.forEach((value, key) => {
 
-            console.log(value, key);
 
             filter = { ...filter, [key]: value }
         })
@@ -99,20 +93,17 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
             setSearchParams(searchParams, { replace: true });
         };
 
-        console.log('rabk om l filter : ', filter);
 
         const response = await Http.get<any>(apiGateway.property.list, { params: filter });
         const properties: Iproperty[] = response?.data.result
         const totalCount = Number(response?.headers["x-total-count"]);
         setTotalCount(totalCount)
-        // console.log("estates", estates);
-        console.log("t5l ????????????");
 
+        
         setProperties(properties);
     };
 
     useEffect(() => {
-        console.log("mounta context");
         updateEstate();
     }, []);
 

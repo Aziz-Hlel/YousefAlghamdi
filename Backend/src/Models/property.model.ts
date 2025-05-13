@@ -45,6 +45,7 @@ export interface Iproperty {
 
 
 
+    featured : boolean,
 
     active: boolean,
 
@@ -103,13 +104,14 @@ const propertySchema = new mongoose.Schema({
 
     nearestPlaces: { type: Map, of: String },
 
-
     productTier: { type: String, required: true, },
 
     clientId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', },
 
     agentId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null, },
 
+
+    featured: { type: Boolean, default: false, },
 
     active: { type: Boolean, default: false, },
 

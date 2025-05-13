@@ -7,7 +7,7 @@ import path from 'path';
 import ENV from './utils/ENV.variables';
 
 
-import { S3Client, GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl as S3_getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { getSignedUrl as CDN_getSignedUrl } from '@aws-sdk/cloudfront-signer';
 import AuthenticatedRequest from './Interfaces/AuthenticatedRequest.interface';
@@ -56,15 +56,24 @@ const s3Client = new S3Client({
 })
 
 
+
+
 export const getCDN_SignedUrl = (s3ObjectKey: string): string => {
+
+
+    // Calculate midnight of the current day in UTC 
+    const midnight = new Date();
+    midnight.setUTCHours(23, 59, 59, 999); // End of the current day 
+
 
     const getCDN_SignedUrl = CDN_getSignedUrl({
         keyPairId: ENV.CDN_PUBLIC_KEY_ID,
         privateKey: ENV.CDN_PRIVATE_KEY,
         url: `https://${ENV.CDN_DOMAIN}/${s3ObjectKey}`,
 
-        dateLessThan: new Date(Date.now() + 3600 * 1000),
+        dateLessThan: midnight,
     })
+
 
     return getCDN_SignedUrl
 }
@@ -114,7 +123,7 @@ const getSignedUrlFunc = async (req: AuthenticatedRequest, res: Response, next: 
         ContentType: fileType,
     });
 
-    const expiration = 3600; // Set expiration time in seconds (e.g., 1 hour)
+    const expiration = 3600 * 5; // Set expiration time in seconds (e.g., 5 hour)
 
     const signedUrl = await S3_getSignedUrl(s3Client, command, { expiresIn: expiration, });
 

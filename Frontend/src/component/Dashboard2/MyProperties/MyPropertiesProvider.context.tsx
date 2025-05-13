@@ -1,11 +1,17 @@
 import Iproperty from "@src/models/property.type";
+import { IUser } from "@src/providers/AuthProvider.context";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import { createContext, RefObject, useContext, useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
 
+
+// export type IpropertyWithUserInfo = Iproperty & {
+//   clientId: IUser;
+// };
+
 type IMyPropertiesContext = {
-  properties: Iproperty[];
+  properties: Iproperty[] 
   totalCount: number;
   fetchProperties(page: number): Promise<void>;
   listRef: RefObject<HTMLDivElement | null>;

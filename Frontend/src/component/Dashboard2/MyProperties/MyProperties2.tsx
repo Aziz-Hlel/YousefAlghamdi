@@ -8,7 +8,7 @@ import { useMyPropertiesContext } from "./MyPropertiesProvider.context";
 function MyProperties({ title }: { title: "Pending Properties" | "My properties" | "Unavailable Properties" | "All Properties" }) {
 
   const { properties, totalCount, fetchProperties, listRef } = useMyPropertiesContext();
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const totalPage = Math.ceil(totalCount / 6)
 
@@ -28,7 +28,7 @@ function MyProperties({ title }: { title: "Pending Properties" | "My properties"
             componentTitle={title}
             property={property}
             _id={property._id}
-            ownerId={property.clientId}
+            ownerId={typeof property.clientId === "string" ? property.clientId : property.clientId._id}
             key={property._id}
             state={property.advanced.state}
             image={property.imageGallery.images[0]?.url ?? "#"}

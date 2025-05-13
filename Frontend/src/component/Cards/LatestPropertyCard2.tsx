@@ -1,21 +1,8 @@
-import apiGateway from "@src/utils/apiGateway";
 import Iproperty from "@src/models/property.type";
 import { Link } from "react-router-dom";
-import { pickRandomPhoto } from "@src/pickRandomPhoto";
-import useRandomPhoto from "@src/useRandomPhoto";
 
 interface ILatestPropertyCard {
-  estate: Iproperty;
-  _id: string,
-  likeLink: string,
-  detailsLink: string,
-  price: string,
-  period: string,
-  listing_type: string,
-  propertyLink: string,
-  name: string,
-  address: string,
-  detailsList: any,
+  property: Iproperty;
   style: any,
   classes: string,
   view: string,
@@ -37,11 +24,10 @@ const listingTypeExprssion: { [key: string]: string; } = {
 
 
 
-function LatestPropertyCard({ estate, _id, likeLink, period, listing_type, name, address, style, classes, view, }: ILatestPropertyCard) {
+function LatestPropertyCard({ property, style, classes, view, }: ILatestPropertyCard) {
 
-  const whatFor = listingTypeExprssion[listing_type];
+  const whatFor = listingTypeExprssion[property.listing_type];
 
-  const randomPhoto = useRandomPhoto()
 
   return (
     <div
@@ -57,9 +43,9 @@ function LatestPropertyCard({ estate, _id, likeLink, period, listing_type, name,
       >
         {/* Property Head  */}
         <div className="homec-property__head ">
-          <Link to={"/property-single/" + _id}>
+          <Link to={"/property-single/" + property._id}>
 
-            <img src={estate.imageGallery.images[0].url} alt="#" className="  w-fit" />
+            <img src={property.imageGallery.images[0].url} alt="#" className="  w-fit" />
             {/* Top Sticky  */}
             {/* <div className="homec-property__hsticky">
               <a href={likeLink} className="homec-heart">
@@ -84,9 +70,9 @@ function LatestPropertyCard({ estate, _id, likeLink, period, listing_type, name,
         {/* Property Body */}
         <div className="homec-property__body [@media(min-width:500px)]:w-fit md:w-auto">
           <div className="homec-property__topbar">
-            <div className="homec-property__price">
-              ${estate.filterFields.price} <span>{listing_type === "To rent" && "/" + period}</span>
-            </div>
+            {/* <div className="homec-property__price">
+              ${property.filterFields.price} <span>{property.listing_type === "To rent" && "/" + "period"}qsd</span>
+            </div> */}
 
             <div className=" flex justify-center items-center  [@media(min-width:500px)]:w-fit md:w-auto ">
               {whatFor === "For sale" ?
@@ -96,35 +82,35 @@ function LatestPropertyCard({ estate, _id, likeLink, period, listing_type, name,
 
           </div>
           <h3 className="homec-property__title">
-            <Link to={"/property-single/" + _id}>
-              {name}
+            <Link to={"/property-single/" + property._id}>
+              {property.title}
             </Link>
           </h3>
           <div className="homec-property__text">
             <img src="/img/location-icon.svg" alt="#" />
-            <p>{address}</p>
+            <p>{`${property.city}, ${property.delegation}, ${property.addresse}`}</p>
           </div>
           {/* Property List */}
           <ul className="homec-property__list homec-border-top list-none ">
 
-            {estate.filterFields.rooms && <li className=" h-fit mx-0 p-0">
+            {property.filterFields.rooms && <li className=" h-fit mx-0 p-0">
               <img src={atrToImg.rooms} alt="#" className=" " />
               <span className=" sm:text-sm sm:font-medium">
-                {estate.filterFields.rooms} Room
+                {property.filterFields.rooms} Room
               </span>
 
             </li>}
-            {estate.filterFields.bathrooms && <li>
+            {property.filterFields.bathrooms && <li>
               <img src={atrToImg.bathroom} alt="#" className=" " />
               <span className=" sm:text-sm sm:font-medium">
-                {estate.filterFields.bathrooms} Bathroom
+                {property.filterFields.bathrooms} Bathroom
               </span>
             </li>}
-            {estate.filterFields.area && <li>
+            {property.filterFields.area && <li>
               <img src={atrToImg.square} alt="#" className=" " />
               <span className=" sm:text-sm sm:font-medium">
 
-                {estate.filterFields.area} m2
+                {property.filterFields.area} m2
               </span>
             </li>}
             {/* {detailsList?.map((details: any, index: number) => (

@@ -35,7 +35,7 @@ const initialProperty: Iproperty = {
   nearestPlaces: {},
   additionalDetails: [],
 
-  show: false,
+  active: false,
 
   advanced: {
     available: new Date(),

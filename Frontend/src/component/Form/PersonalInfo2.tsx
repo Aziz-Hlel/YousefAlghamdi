@@ -35,9 +35,9 @@ function PersonalInfo({ toggleModal }: { toggleModal: () => void }) {
   useEffect(() => {
     if (user.role === roles.AGENT) {
 
-      setValue("agentInfo.imageGallery.mainImage.url", agents[user!.id].agentInfo!.imageGallery.mainImage.url);
-      setValue("agentInfo.imageGallery.miniImage.url", agents[user!.id].agentInfo!.imageGallery.miniImage.url);
-      setfolderId(agents[user!.id].agentInfo!.imageGallery.folderId)
+      setValue("agentInfo.imageGallery.mainImage.url", agents[user!._id].agentInfo!.imageGallery.mainImage.url);
+      setValue("agentInfo.imageGallery.miniImage.url", agents[user!._id].agentInfo!.imageGallery.miniImage.url);
+      setfolderId(agents[user!._id].agentInfo!.imageGallery.folderId)
     }
   }, [user])
 

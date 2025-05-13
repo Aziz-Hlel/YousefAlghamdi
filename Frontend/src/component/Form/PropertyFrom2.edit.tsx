@@ -323,7 +323,7 @@ const PropertyFrom = () => {
 
       let response: AxiosResponse<any, any> | undefined
 
-      if (user?.role === roles.AGENT) {
+      if (user?.role === roles.AGENT || user?.role === roles.ADMIN) {
         response = await Http.put(`${apiGateway.property.approve}/${property._id}`, refinedData);
         if (response?.status === 200) navigate("./../../")
         else {

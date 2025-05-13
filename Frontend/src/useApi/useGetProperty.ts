@@ -36,7 +36,7 @@ const initialProperty: Iproperty = {
     additionalDetails: [],
 
 
-    show: false,
+    active: false,
 
     advanced: {
         available: new Date(),
@@ -72,7 +72,7 @@ export const useGetProperty = (id: string | undefined) => {
     }, [id]);
     // useEffect(() => {
     //   console.log("rab om property = ", property);
-      
+
     // }, [property]);
     return { property }
 }

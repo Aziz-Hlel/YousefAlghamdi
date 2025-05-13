@@ -8,11 +8,11 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 export type IUser = {
 
-    
+    _id: string;
+
     firstName: string;
     lastName: string;
     email: string;
-    id: string;
     phoneNumber: string;
     role: string;
 
@@ -21,7 +21,7 @@ export type IUser = {
     };
 
     agentInfo?: {
-        
+
         imageGallery: {
             folderId: string,
             mainImage: {

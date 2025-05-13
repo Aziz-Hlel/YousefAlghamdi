@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import PropertyBar from "./PropertyBar";
 import Sidebar from "../Sidebar2";
 import LatestPropertyCard from "../Cards/LatestPropertyCard2";
 import Pagination from "../Pagination2";
-import staticProperties from "../../data/property";
 import { useFormContext } from "./FilterProvider.context";
 import { useSearchParams } from "react-router-dom";
 
@@ -63,20 +62,11 @@ function PropertyGrid() {
                 ref={listRef}
               >
                 <div className="row" >
-                  {properties && properties.map((property, index) =>
+                  {properties && properties.map((property) =>
                     <LatestPropertyCard
-                      estate={property}
+
+                      property={property}
                       key={property._id}
-                      _id={property._id}
-                      likeLink={staticProperties[index].likeLink}
-                      detailsLink={staticProperties[index].detailsLink}
-                      price={property.filterFields.price}
-                      period={staticProperties[index].period}
-                      listing_type={property.listing_type}
-                      propertyLink={staticProperties[index].propertyLink}
-                      name={property.title}
-                      address={`${property.city}, ${property.delegation}, ${property.addresse}`}
-                      detailsList={staticProperties[index].detailsList}
                       classes={`${gridStyle === "grid"
                         ? "col-md-6 col-12 mg-top-30"
                         : "col-12 mg-top-30"

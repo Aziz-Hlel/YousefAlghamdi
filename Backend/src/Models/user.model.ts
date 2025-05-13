@@ -193,9 +193,10 @@ const userSchema = new Schema<IUser_model>({
 },
     {
         timestamps: true,
-        toJSON: { virtuals: true, },
-        toObject: { virtuals: true }
+        toJSON: { virtuals: true, versionKey: false, },
+        toObject: { virtuals: true },
     }
+
 );
 
 

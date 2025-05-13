@@ -95,6 +95,7 @@ const App2 = () => {
                                         <Route path="unavailable-properties" element={<MyPropertiesProvider title="Unavailable Properties"> <MyProperties title="Unavailable Properties" /> </MyPropertiesProvider>} >
                                             <Route path="inspect-user/:userId" element={<UserView />} />
                                         </Route>
+
                                         {
                                             // * Admin only Routes 
                                         }
@@ -120,6 +121,7 @@ const App2 = () => {
 
                                     <Route path="dashboard/my-properties/edit-property/:propertyId" element={<EditPendingProperty />} />
                                     <Route path="dashboard/pending-properties/edit-property/:propertyId" element={<EditPendingProperty />} />
+                                    <Route path="dashboard/all-properties/edit-property/:propertyId" element={<EditPendingProperty />} />
 
 
 

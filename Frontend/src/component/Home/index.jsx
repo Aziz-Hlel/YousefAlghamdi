@@ -13,9 +13,10 @@ import LatestProperty from "../LatestProperty";
 import CitiesListing from "../CitiesListing2";
 import Preloader from "../Loader";
 import FaqSection from "../Faq/FaqSection";
-import LatestPropertyV2 from "../LatestProperty/LatestPropertyV2";
+import LatestPropertyV2 from "../LatestProperty2/LatestPropertyV22";
 import Sponsors from "../Sponsors/Sponsors";
 import apiGateway from "@src/utils/apiGateway";
+import FeaturedPropertiesProvider from "../LatestProperty2/FeaturedPropertiesProvider.context";
 
 function Home() {
   const [isLoading, setisLoadingg] = useState(true);
@@ -32,8 +33,10 @@ function Home() {
       <>
         {/* <HomecHero /> */}
         <HomecHeroV2 />
-        {/* <CitiesListing /> */}
-        <LatestPropertyV2 />
+        {/* <CitiesListing /> */}.
+        <FeaturedPropertiesProvider>
+          <LatestPropertyV2 />
+        </FeaturedPropertiesProvider>
 
         <Sponsors />
 
