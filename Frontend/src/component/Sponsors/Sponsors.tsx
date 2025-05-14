@@ -83,6 +83,8 @@ const Sponsors = () => {
                             {displaySponsors.map(sponsor => (
                                 <a
                                     href={sponsor.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     key={sponsor._id}
                                     className="relative rounded-lg px-4 py-2 flex items-center justify-center  h-[100px] flex-shrink-0"
 
