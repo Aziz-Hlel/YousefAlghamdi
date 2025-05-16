@@ -160,9 +160,11 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
             </button>
           </Link>}
 
-          <button className="homec-dashboard-property__btn px-2  homec-dashboard-property__btn--edit  flex justify-center items-center">
+          {componentTitle !== "Unavailable Properties" &&
 
-            {
+
+            <button className="homec-dashboard-property__btn px-2  homec-dashboard-property__btn--edit  flex justify-center items-center">
+
               <Link to={`edit-property/${property._id}`}>
 
                 <div className="flex  justify-center  items-center">
@@ -186,8 +188,10 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
               </Link>
 
 
-            }
-          </button>
+
+            </button>
+
+          }
           <button className="homec-dashboard-property__btn px-2 homec-dashboard-property__btn--delete flex justify-center items-center" onClick={handleDeleteProperty}>
 
             <div className="flex  justify-center  items-center">
@@ -246,7 +250,7 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
 
           {/* Featured button */}
           {
-           property.advanced.state === statesTypes.active && <button className="group px-2  flex justify-center items-center  " onClick={handleFeatured}>
+            user?.role === roles.ADMIN && property.advanced.state === statesTypes.active && <button className="group px-2  flex justify-center items-center  " onClick={handleFeatured}>
 
               <div className="flex  justify-center  items-center " >
 

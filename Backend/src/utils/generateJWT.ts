@@ -11,7 +11,7 @@ export const NODE_ENV = ENV.NODE_ENV;
 
 
 const accessTokenLifeSpan = "1m";
-const refreshTokenLifeSpan = "1d";
+const refreshTokenLifeSpan = "5m";
 
 
 const generateAccessToken = (payload: { [key: string]: any }) => {

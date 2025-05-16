@@ -161,14 +161,11 @@ const PropertyFrom = () => {
     (data as any).imgsFolderId = imgsFolderId.current
 
 
-    if (imgs[2] === null) {
-      setError("imageGallery.images", { message: "Images is required" });
-      return;
-    }
+
     const response = await Http.post(apiGateway.property.create, data);
 
     response?.status === 201 && navigate("/dashboard/my-properties")
-    response?.status !== 201 && Alert({ title: "Error", text: "Something went wrong,cannot create property", icon: "error" })
+    response?.status !== 201 && Alert({ title: "Error", text: "Something went wrong, cannot create property", icon: "error" })
     console.log(data);
 
   };

@@ -6,7 +6,6 @@ import { isValidObjectId } from "mongoose";
 import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
 import statusCode from "../utils/statusCode";
 import roles from "../types/roles.type";
-import { requireAuth } from "./auth2.middleware";
 import { AppError } from "./AppError";
 
 
@@ -39,16 +38,15 @@ const protect = async (req: AuthenticatedRequest, res: Response, next: NextFunct
 
     const refreshToken = req.cookies?.refreshToken;
 
-
+    
     if (!accessToken) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
     if (!refreshToken) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
 
 
 
-
+    
     const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET as string;
     jwt.verify(accessToken, JWT_ACCESS_SECRET, (err: any, decoded: any) => {
-
         if (err) {
             return verifyRefreshToken(refreshToken, req, next)
         }
@@ -78,11 +76,13 @@ export const adminAuth = async (req: AuthenticatedRequest, res: Response, next: 
 
 
 
-
 export const adminOrAgentAuth = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    requireAuth(req, res, next)
-    if (req.user?.role !== roles.ADMIN && req.user?.role !== roles.AGENT) res.status(statusCode.FORBIDDEN).json({ message: errorMessages.AUTH.PERMISSION_DENIED });
-    else next();
+    try {
+        if (req.user?.role !== roles.ADMIN && req.user?.role !== roles.AGENT) throw new AppError(errorMessages.AUTH.PERMISSION_DENIED, statusCode.FORBIDDEN, 500)
+        else next();
+    } catch (error) {
+        next(error)
+    }
 }
 
 

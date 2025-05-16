@@ -17,11 +17,15 @@ services:
     ports:
       - 443:443
       - 80:80
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy-prod-data:/data
-      - caddy-prod-config:/config
-    restart: unless-stopped  # Better than always
+
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://proxy-prod:443"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+      
+    restart: unless-stopped
 
     networks:
       - app-network
@@ -40,8 +44,25 @@ services:
         - MONGO_INITDB_ROOT_USERNAME=${PROD___MONGO_INITDB_ROOT_USERNAME}
         - MONGO_INITDB_ROOT_PASSWORD=${PROD___MONGO_INITDB_ROOT_PASSWORD}
         - MONGO_INITDB_DATABASE=${PROD___MONGO_INITDB_DATABASE}
+        - BUCKET_NAME=${PROD___BUCKET_NAME}
+        - BUCKET_REGION=${PROD___BUCKET_REGION}
+        - BUCKET_ACCESS_KEY=${PROD___BUCKET_ACCESS_KEY}
+        - BUCKET_SECRET_ACCESS_KEY=${PROD___BUCKET_SECRET_ACCESS_KEY}
+        - CDN_DOMAIN=${PROD___CDN_DOMAIN}
+        - CDN_PUBLIC_KEY_ID=${PROD___CDN_PUBLIC_KEY_ID}
+        - CDN_PRIVATE_KEY=${PROD___CDN_PRIVATE_KEY}  
 
-    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://server-prod:5000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
     networks:
       - app-network
 
@@ -54,9 +75,18 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=${PROD___MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${PROD___MONGO_INITDB_ROOT_PASSWORD}
       - MONGO_INITDB_DATABASE=${PROD___MONGO_INITDB_DATABASE}
-    restart: always
+
     ports:
       - 27017:27017
+
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "http://proxy-stage:5000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+    restart: unless-stopped
     networks:
       - app-network
 

@@ -3,8 +3,7 @@ import { useAuth } from "@src/providers/AuthProvider.context";
 import Http from "@src/services/Http";
 import roles from "@src/types/roles.type";
 import apiGateway from "@src/utils/apiGateway";
-import ProtoTypes from "prop-types";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 
@@ -30,12 +29,6 @@ const initUser = {
   createdAt: "",
   role: "",
   agentId: "",
-}
-
-type IInvoice = {
-  isOpen: boolean;
-  handleModal: () => void;
-  user: IUser;
 }
 
 
@@ -153,7 +146,7 @@ const UserView = () => {
                     <span>Created at:</span> {createdAt}
                   </li>
 
-                  {user?.role === roles.ADMIN &&
+                  {user?.role === roles.ADMIN && userInspected?.role !== roles.AGENT &&
                     <li>
                       <span>Sponsored agent: </span>
 

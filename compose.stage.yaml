@@ -23,7 +23,7 @@ services:
       - caddy-stage-config:/config
 
     healthcheck:
-      test: ["CMD", "wget", "--spider", "-q", "http://localhost"]
+      test: ["CMD", "wget", "--spider", "-q", "http://proxy-stage:5000/health"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -49,9 +49,16 @@ services:
         - MONGO_INITDB_ROOT_USERNAME=${STAGE___MONGO_INITDB_ROOT_USERNAME}
         - MONGO_INITDB_ROOT_PASSWORD=${STAGE___MONGO_INITDB_ROOT_PASSWORD}
         - MONGO_INITDB_DATABASE=${STAGE___MONGO_INITDB_DATABASE}
+        - BUCKET_NAME=${STAGE___BUCKET_NAME}
+        - BUCKET_REGION=${STAGE___BUCKET_REGION}
+        - BUCKET_ACCESS_KEY=${STAGE___BUCKET_ACCESS_KEY}
+        - BUCKET_SECRET_ACCESS_KEY=${STAGE___BUCKET_SECRET_ACCESS_KEY}
+        - CDN_DOMAIN=${STAGE___CDN_DOMAIN}
+        - CDN_PUBLIC_KEY_ID=${STAGE___CDN_PUBLIC_KEY_ID}
+        - CDN_PRIVATE_KEY=${STAGE___CDN_PRIVATE_KEY}       
 
     healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      test: ["CMD", "curl", "-f", "http://server-stage:5000/health"]
       interval: 10s
       timeout: 5s
       retries: 5
