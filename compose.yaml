@@ -7,7 +7,9 @@
 services:
 
   proxy:
+
     container_name: proxy-prod
+    
     build:
       context: ./Frontend
       args:
@@ -19,15 +21,18 @@ services:
       - 80:80
 
 
-    restart: unless-stopped
+    restart: always
 
     networks:
       - app-network
 
   server:
+
     container_name: server-prod
+
     build:
       context: ./Backend
+
     environment:
         - PORT=${PROD___PORT}
         - JWT_ACCESS_SECRET=${PROD___JWT_ACCESS_SECRET}
@@ -48,28 +53,35 @@ services:
 
 
 
-    restart: unless-stopped
+    restart: always
+
     depends_on:
       - mongo
+
     networks:
       - app-network
 
   mongo:
+
     container_name: mongo-prod
+
     image: mongo:latest
+
     volumes:
       - mongo-prod-data:/data/db
+
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${PROD___MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${PROD___MONGO_INITDB_ROOT_PASSWORD}
       - MONGO_INITDB_DATABASE=${PROD___MONGO_INITDB_DATABASE}
 
+    command: mongod --logpath /dev/null  # For no logs at all
+
     ports:
       - 27017:27017
 
+    restart: always
 
-
-    restart: unless-stopped
     networks:
       - app-network
 
