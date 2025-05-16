@@ -22,12 +22,6 @@ services:
       - caddy-stage-data:/data
       - caddy-stage-config:/config
 
-    healthcheck:
-      test: ["CMD", "wget", "--spider", "-q", "http://proxy-stage:5000/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 5s
       
     restart: unless-stopped
     
@@ -35,10 +29,13 @@ services:
       - app-network
 
   server:
+
     container_name: server-stage
+
     build:
       context: ./Backend
       dockerfile: Dockerfile.stage
+
     environment:
         - PORT=${STAGE___PORT}
         - JWT_ACCESS_SECRET=${STAGE___JWT_ACCESS_SECRET}
@@ -57,25 +54,24 @@ services:
         - CDN_PUBLIC_KEY_ID=${STAGE___CDN_PUBLIC_KEY_ID}
         - CDN_PRIVATE_KEY=${STAGE___CDN_PRIVATE_KEY}       
 
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://server-stage:5000/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 5s
 
     restart: unless-stopped
+
     depends_on:
-      mongo:
-        condition: service_healthy
+      - mongo
+
     networks:
       - app-network
 
   mongo:
+
     container_name: mongo-stage
+
     image: mongo:latest
+
     volumes:
       - mongo-stage-data:/data/db
+
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${STAGE___MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${STAGE___MONGO_INITDB_ROOT_PASSWORD}
@@ -83,13 +79,9 @@ services:
     
     ports:
       - 27017:27017
-    
-    healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 5s
+
+    command: mongod --logpath /dev/null  # For no logs at all
+
 
     restart: unless-stopped
     networks:
