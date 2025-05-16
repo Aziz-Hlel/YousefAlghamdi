@@ -1,20 +1,67 @@
-ygp.ae { # Replace with your actual domain
+ygp.ae {  # Replace with your actual domain
+    root * /srv
+    
+    log {
+        output file /var/log/caddy/access.log
+        format json
+        level ERROR
+    }
+    
+    @api path /api/*
+    reverse_proxy @api server:5000 #{
+   #     health_uri /health
+   #     health_interval 30s
+   #     health_timeout 5s
+   #     fail_duration 10s
+   #     
+   #     lb_policy round_robin
+   #     
+   #     header_up Host {upstream_hostport}
+   #     header_up X-Real-IP {remote}
+   #     header_up X-Forwarded-For {remote}
+   #     header_up X-Forwarded-Proto {scheme}
+   # }
+    
+    @spa {
+        not path /api/*
+        not file
+    }
+    rewrite @spa /index.html
+    
+    file_server
+    
+    # Define matchers for different file types
+    @static {
+        path_regexp \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$
+    }
+    
+    @html {
+        path_regexp \.html$
+    }
+    
+    # Apply headers based on matchers
+    header @static Cache-Control "public, max-age=604800, must-revalidate"
+    header @html Cache-Control "no-cache, must-revalidate"
+    
+    # Security headers for all responses
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    }
+    
     # Compress responses
     encode gzip zstd
-
-    # --- API Backend Proxy ---
-    # Directly proxy paths starting with /api/
-    # Ensure 'server:5000' is correct.
-    reverse_proxy /api/* server:5000
-
-    # --- SPA Frontend Handling ---
-    # Root directory for your frontend build files
-    root * /srv
-    # Try to serve the requested file. If not found, serve /index.html (for SPA routing).
-    # This must come BEFORE file_server if you want it to act as a fallback for non-existent files.
-    # However, for a pure SPA setup where non-API calls that aren't files go to index.html,
-    # Caddy's file_server can often handle this with a try_files subdirective,
-    # or you can structure it like this:
-    try_files {path} /index.html
-    file_server
+    
+    # Auto HTTPS with Let's Encrypt
+    tls {
+        protocols tls1.2 tls1.3
+    }
+    
+    # Handle errors gracefully
+    handle_errors {
+        respond "{http.error.status_code} {http.error.status_text}" {http.error.status_code}
+    }
 }
