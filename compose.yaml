@@ -23,8 +23,15 @@ services:
 
     restart: always
 
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy-prod-data:/data
+      - caddy-prod-config:/config
+
     networks:
       - app-network
+
+
 
   server:
 
