@@ -8,8 +8,8 @@ services:
 
   proxy:
 
-    container_name: proxy-prod
-    
+    container_name: proxy
+
     build:
       context: ./Frontend
       args:
@@ -28,7 +28,7 @@ services:
 
   server:
 
-    container_name: server-prod
+    container_name: server
 
     build:
       context: ./Backend
@@ -63,7 +63,7 @@ services:
 
   mongo:
 
-    container_name: mongo-prod
+    container_name: mongo
 
     image: mongo:latest
 
