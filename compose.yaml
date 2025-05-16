@@ -18,13 +18,7 @@ services:
       - 443:443
       - 80:80
 
-    healthcheck:
-      test: ["CMD", "wget", "--spider", "-q", "http://proxy-prod:443"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 5s
-      
+
     restart: unless-stopped
 
     networks:
@@ -52,17 +46,11 @@ services:
         - CDN_PUBLIC_KEY_ID=${PROD___CDN_PUBLIC_KEY_ID}
         - CDN_PRIVATE_KEY=${PROD___CDN_PRIVATE_KEY}  
 
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://server-prod:5000/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 5s
+
 
     restart: unless-stopped
     depends_on:
-      mongo:
-        condition: service_healthy
+      - mongo
     networks:
       - app-network
 
@@ -79,12 +67,7 @@ services:
     ports:
       - 27017:27017
 
-    healthcheck:
-      test: ["CMD", "mongosh", "--eval", "http://proxy-stage:5000/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 5s
+
 
     restart: unless-stopped
     networks:
