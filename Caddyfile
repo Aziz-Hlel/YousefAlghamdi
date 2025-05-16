@@ -1,6 +1,6 @@
 # Add this section for direct IP access
 :80 {
-    reverse_proxy /api/* server-prod:5000
+    reverse_proxy /api/* server:5000
     
     @spa {
         not path /api/*
