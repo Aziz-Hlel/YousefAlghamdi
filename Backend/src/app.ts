@@ -19,23 +19,27 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(cors({
-    origin: [ ENV.FRONT_URL],  // Make sure to specify the exact frontend URL
+    origin: [ENV.FRONT_URL],  // Make sure to specify the exact frontend URL                                    
 
-    credentials: true,  // Necessary for cookies or authorization headers
+    credentials: true,  // Necessary for cookies or authorization headers                                   
 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     exposedHeaders: ['Content-Range', 'X-Total-Count', "Content-Type", "Authorization"],
 
 }));
 
+app.use('/health', (_, res) => {
+    res.status(200)
+        .json("i feel good!");
+});
 
 app.use('/api/user', userRouter);
 app.use('/api/property', propertyRouter);
 app.use('/api/agent', agentRouter);
 app.use('/api/sponsor', sponsorRouter);
 
-// Serve static files
-// app.use('/api/images', express.static(path.join(__dirname, '../public/images')));
+// Serve static files                                   
+// app.use('/api/images', express.static(path.join(__dirname, '../public/images')));                                    
 
 app.use('/api/images', imgHandlerRouter);
 
@@ -66,4 +70,4 @@ app.get('*', (req, res) => {
     res.status(404).json({ message: 'Route not found', url: req.url });
 })
 
-export default app;
+export default app;                                 

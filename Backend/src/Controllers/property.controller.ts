@@ -727,7 +727,7 @@ export const getAllProperties = async (req: AuthenticatedRequest, res: Response,
 
 
 export const featureProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-
+    console.log("sdfjipsdpjif")
     const propertyId = req.params.propertyId;
     if (!propertyId || !mongoose.Types.ObjectId.isValid(propertyId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 

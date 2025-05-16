@@ -246,7 +246,7 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
 
           {/* Featured button */}
           {
-            property.advanced.state === statesTypes.active && <button className="group px-2  flex justify-center items-center  " onClick={handleFeatured}>
+           property.advanced.state === statesTypes.active && <button className="group px-2  flex justify-center items-center  " onClick={handleFeatured}>
 
               <div className="flex  justify-center  items-center " >
 

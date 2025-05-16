@@ -18,6 +18,7 @@ services:
       - ./Frontend:/app
       - client-dev-node-modules:/app/node_modules
 
+    restart: unless-stopped
     stdin_open: true # keeps the container running and allows for better terminal interaction
     tty: true
     
@@ -52,6 +53,15 @@ services:
     env_file:
       - ./Backend/.env
 
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+
+    restart: unless-stopped
+
   mongo:
     container_name: mongo-dev
     image: mongo:latest
@@ -59,6 +69,14 @@ services:
       - mongo-dev-data:/data/db
     env_file:
       - ./Backend/.env
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+  
 
 volumes:
   client-dev-node-modules:

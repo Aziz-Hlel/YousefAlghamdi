@@ -21,7 +21,16 @@ services:
       - ./stage.Caddyfile:/etc/caddy/Caddyfile
       - caddy-stage-data:/data
       - caddy-stage-config:/config
-    # restart: always
+
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+      
+    restart: unless-stopped
+    
     networks:
       - app-network
 
@@ -41,7 +50,17 @@ services:
         - MONGO_INITDB_ROOT_PASSWORD=${STAGE___MONGO_INITDB_ROOT_PASSWORD}
         - MONGO_INITDB_DATABASE=${STAGE___MONGO_INITDB_DATABASE}
 
-    restart: always
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
     networks:
       - app-network
 
@@ -54,9 +73,18 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=${STAGE___MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${STAGE___MONGO_INITDB_ROOT_PASSWORD}
       - MONGO_INITDB_DATABASE=${STAGE___MONGO_INITDB_DATABASE}
-    restart: always
+    
     ports:
       - 27017:27017
+    
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+    restart: unless-stopped
     networks:
       - app-network
 

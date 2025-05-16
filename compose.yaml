@@ -21,7 +21,8 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy-prod-data:/data
       - caddy-prod-config:/config
-    # restart: always
+    restart: unless-stopped  # Better than always
+
     networks:
       - app-network
 

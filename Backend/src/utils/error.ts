@@ -11,6 +11,8 @@ interface IApiErrorResponse {
 export const errorHandler = (statusCode: any, message: string, errors?: any) => {
 
 
+
+
     const ApiErrorResponse: IApiErrorResponse = { statusCode, message };
 
 
@@ -19,5 +21,6 @@ export const errorHandler = (statusCode: any, message: string, errors?: any) => 
     }
 
     return ApiErrorResponse;
+
 
 };

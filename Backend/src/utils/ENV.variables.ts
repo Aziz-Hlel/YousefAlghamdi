@@ -16,7 +16,7 @@ console.log('mongo : ', MONGO_INITDB_ROOT_USERNAME, MONGO_INITDB_ROOT_PASSWORD, 
 
 const MONGO_URI = NODE_ENV !== 'local'
     ? `mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/${MONGO_INITDB_DATABASE}?authSource=admin`
-    : `mongodb://127.0.0.1:27017/${MONGO_INITDB_DATABASE}`
+    : `mongodb://mongo:27017/${MONGO_INITDB_DATABASE}`
 
 
 console.log("port : ", process.env.PORT)
