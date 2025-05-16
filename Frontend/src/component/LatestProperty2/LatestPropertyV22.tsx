@@ -1,0 +1,76 @@
+import Carousel from "react-multi-carousel";
+import { responsivePropertySlider } from "../../utils/responsiveSlider";
+import CustomDotRound from "../CustomDot/CustomDotRound";
+// import LatestPropertyCard from "../Cards/LatestPropertyCard";
+import LatestPropertyCard from "../Cards/LatestPropertyCard2";
+import TitleWithBtn from "../Title/TitleWithBtn";
+import  { useFeaturedPropertiesContext } from "./FeaturedPropertiesProvider.context";
+import staticProperties from "../../data/property";
+
+function LatestPropertyV2() {
+
+
+  const { properties } = useFeaturedPropertiesContext();
+
+  return (
+
+    <div>
+      <section
+        className="homec-properties homec-bg-cover homec-bg-third-color pd-top-90 pd-btm-120"
+        style={{ backgroundImage: "url('img/bg-shape-one.svg')" }}
+      >
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <TitleWithBtn
+                btn={true}
+                styleCategory={{}}
+                styleTitle={{}}
+                category="View All 329 New Listings"
+                title="Featured Properties"
+                link="/property"
+                btnText="See all  Properties"
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <Carousel
+                responsive={responsivePropertySlider}
+                showDots={true}
+                infinite={true}
+                autoPlay={true}
+                autoPlaySpeed={3000}
+                removeArrowOnDeviceType={[
+                  "superLargeDesktop",
+                  "desktop",
+                  "tablet",
+                  "mobile",
+                ]}
+                customDot={<CustomDotRound />
+
+                }
+              >
+                {properties?.map((property, index) => (
+
+                  <LatestPropertyCard
+                    property={property}
+                    key={property._id}
+                    classes={""}
+                    view="grid"
+                    style={{ width: "95%", marginBottom: "60px" }}
+
+                  />
+                ))}
+              </Carousel>
+            </div>
+          </div>
+        </div>
+      </section >
+    </div >
+
+
+  );
+}
+
+export default LatestPropertyV2;
