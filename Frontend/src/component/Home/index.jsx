@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Footer from "../Footer";
 import GoTopBtn from "../Button/GoTopBtn";
-import CEO from "../CEO/About";
+import CEO from "../CeoComp/About";
 import Agents from "../Agents2";
 import Blog from "../Blog";
 import DownloadApp from "../DownloadApp2";

@@ -32,7 +32,7 @@ import Layout from "./component/Layouts/Layout.js";
 import PrivilegedLayouts from "./component/Layouts/PrivilegedLayouts/PrivilegedLayouts.js";
 import roles from "./types/roles.type.js";
 import CU_Sponsor from "./component/Dashboard2/SponsorsEdit/CU_Sponsor.js";
-import AboutUs from "./component/CEO/index.js";
+import AboutUs from "./component/CeoComp/index.js";
 
 
 
