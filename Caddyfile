@@ -1,15 +1,3 @@
-# Add this section for direct IP access
-:80 {
-    reverse_proxy /api/* server:5000
-    
-    @spa {
-        not path /api/*
-        not file
-    }
-    rewrite @spa /index.html
-    
-    file_server
-}
 
 
 
