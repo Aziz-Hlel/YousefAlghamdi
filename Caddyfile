@@ -1,31 +1,20 @@
 ygp.ae { # Replace with your actual domain
-    # Root directory for your frontend build files (e.g., React's build folder)
-    root * /srv
-
-    # Compress responses (good to keep)
+    # Compress responses
     encode gzip zstd
 
     # --- API Backend Proxy ---
-    # Match requests starting with /api/
-    @api path /api/*
-    # Proxy these requests to your backend server
-    # Ensure 'server-prod:5000' is correct. If backend is on the same EC2,
-    # use 'localhost:5000' or '127.0.0.1:5000'.
-    reverse_proxy @api server:5000
+    # Directly proxy paths starting with /api/
+    # Ensure 'server:5000' is correct.
+    reverse_proxy /api/* server:5000
 
     # --- SPA Frontend Handling ---
-    # Match requests that are NOT for the API and NOT for an existing static file
-    @spa {
-        not path /api/*
-        not file
-    }
-    # Rewrite these SPA requests to /index.html so your client-side router can take over
-    rewrite @spa /index.html
-
-    # Serve static files from the root directory
+    # Root directory for your frontend build files
+    root * /srv
+    # Try to serve the requested file. If not found, serve /index.html (for SPA routing).
+    # This must come BEFORE file_server if you want it to act as a fallback for non-existent files.
+    # However, for a pure SPA setup where non-API calls that aren't files go to index.html,
+    # Caddy's file_server can often handle this with a try_files subdirective,
+    # or you can structure it like this:
+    try_files {path} /index.html
     file_server
-
-    # Caddy handles automatic HTTPS (including TLS protocols) by default
-    # Caddy logs to standard output by default, which is often fine for Docker/systemd
-    # Caddy has default error handling
 }
