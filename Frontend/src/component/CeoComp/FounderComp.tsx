@@ -2,6 +2,19 @@ import React from 'react'
 import founderImg from "@img/about/founder.jpg"
 
 const FounderComp = () => {
+
+
+    const handleCall = (phoneNumber: string) => {
+        window.location.href = `tel:${phoneNumber}`;
+    };
+
+    const handleWhatsApp = (phoneNumber: string) => {
+        const whatsappUrl = `https://wa.me/${phoneNumber.replace('+', '')}`;
+        window.open(whatsappUrl, '_blank');
+    };
+
+
+
     return (
         <section className="text-gray-600 body-font overflow-hidden">
             <div className="   flex  justify-center lg:w-5/6 py-24 lg:mx-auto px-6">
@@ -19,14 +32,15 @@ const FounderComp = () => {
                         <h2 className="text-gray-900 text-3xl title-font font-medium mb-1">
                             Dr. Yousef Alghamdi
                         </h2>
-                        <a href={"tel:+971505884220"}>
+                        <div >
                             <div className=' flex items-center'>
 
                                 <svg
                                     viewBox="0 0 24 24"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className=' w-5 h-5'
+                                    className=' w-5 h-5 cursor-pointer'
+                                    onClick={() => handleWhatsApp("+971505884220")}
                                 >
                                     <g fill="#0F0F0F">
                                         <path d="M6.014 8.006c.114-.904 1.289-2.132 2.22-1.996V6.01c.907.172 1.625 1.734 2.03 2.436.286.509.1 1.025-.167 1.243-.361.29-.926.692-.808 1.095C9.5 11.5 12 14 13.23 14.711c.466.269.804-.44 1.092-.804.21-.28.726-.447 1.234-.171.759.442 1.474.956 2.135 1.534.33.276.408.684.179 1.115-.403.76-1.569 1.76-2.415 1.557C13.976 17.587 8 15.27 6.08 8.558c-.108-.318-.08-.438-.066-.552z" />
@@ -38,7 +52,9 @@ const FounderComp = () => {
                                     </g>
                                 </svg>
 
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className=' w-5 h-5'>
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className=' w-5 h-5 cursor-pointer'
+                                onClick={() => handleCall("+971505884220")}
+                                >
                                     <g id="SVGRepo_bgCarrier" strokeWidth={0} />
                                     <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
                                     <g id="SVGRepo_iconCarrier">
@@ -50,21 +66,22 @@ const FounderComp = () => {
                                     </g>
                                 </svg>
 
-                                <span className=' mx-1' >
+                                <span className=' mx-1 cursor-pointer' onClick={() => handleWhatsApp("+971505884220")} >
                                     +971 505884220
                                 </span>
 
                             </div>
 
-                        </a>
-                        <a href="tel:+966558344770">
+                        </div>
+                        <div >
                             <div className=' flex items-center'>
 
                                 <svg
                                     viewBox="0 0 24 24"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className=' w-5 h-5'
+                                    className=' w-5 h-5 cursor-pointer'
+                                    onClick={() => handleWhatsApp("+966558344770")}
                                 >
                                     <g fill="#0F0F0F">
                                         <path d="M6.014 8.006c.114-.904 1.289-2.132 2.22-1.996V6.01c.907.172 1.625 1.734 2.03 2.436.286.509.1 1.025-.167 1.243-.361.29-.926.692-.808 1.095C9.5 11.5 12 14 13.23 14.711c.466.269.804-.44 1.092-.804.21-.28.726-.447 1.234-.171.759.442 1.474.956 2.135 1.534.33.276.408.684.179 1.115-.403.76-1.569 1.76-2.415 1.557C13.976 17.587 8 15.27 6.08 8.558c-.108-.318-.08-.438-.066-.552z" />
@@ -76,7 +93,9 @@ const FounderComp = () => {
                                     </g>
                                 </svg>
 
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className=' w-5 h-5'>
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className=' w-5 h-5 cursor-pointer'
+                                onClick={() => handleCall("+966558344770")}
+                                >
                                     <g id="SVGRepo_bgCarrier" strokeWidth={0} />
                                     <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
                                     <g id="SVGRepo_iconCarrier">
@@ -88,13 +107,13 @@ const FounderComp = () => {
                                     </g>
                                 </svg>
 
-                                <span className=' mx-1' >
+                                <span className=' mx-1 cursor-pointer' onClick={() => handleWhatsApp("+966558344770")} >
                                     +966 558344770
                                 </span>
 
                             </div>
 
-                        </a>
+                        </div>
                         <div
                             className="homec-about-content__inner mg-top-20"
                             data-aos="fade-in"
