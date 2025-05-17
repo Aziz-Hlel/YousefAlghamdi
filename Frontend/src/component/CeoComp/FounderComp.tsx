@@ -57,7 +57,7 @@ const FounderComp = () => {
                             </div>
 
                         </a>
-                        <a href="+966558344770">
+                        <a href="tel:+966558344770">
                             <div className=' flex items-center'>
 
                                 <svg
