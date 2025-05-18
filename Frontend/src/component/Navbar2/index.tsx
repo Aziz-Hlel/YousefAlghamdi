@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import CustomLanguageOption from "./CustomLanguageOption";
 import { useAuth } from "@src/providers/AuthProvider.context";
 import { listing_types } from "@src/types/listing_types.types";
+
 const Navbar = ({ handleSidebar, secondNav }: any) => {
 
   const { user } = useAuth();

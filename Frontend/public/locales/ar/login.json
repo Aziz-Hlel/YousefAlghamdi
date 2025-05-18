@@ -1,0 +1,17 @@
+{
+    "login": {
+        "title": "تسجيل الدخول",
+        "description": "لن يتم نشر عنوان بريدك الإلكتروني. الحقول المطلوبة محددة بـ *",
+        "noAccount": "ليس لديك حساب؟",
+        "cretaeAccount": "إنشاء حساب",
+        "allRightsReserved": "© 2025 Yousef Alghamdi Properties. جميع الحقوق محفوظة لـ"
+    },
+    "signUp": {
+        "title": "إنشاء حساب",
+        "description": "لن يتم نشر عنوان بريدك الإلكتروني. الحقول المطلوبة محددة بـ *",
+        "haveAccount": "هل لديك حساب بالفعل؟",
+        "btn": "تسجيل",
+        "login": "تسجيل الدخول",
+        "allRightsReserved": "© 2025 Yousef Alghamdi Properties. جميع الحقوق محفوظة لـ"
+    }
+}

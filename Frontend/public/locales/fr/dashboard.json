@@ -1,0 +1,48 @@
+{
+    "myProperties": "Mes propriétés",
+    "pendingProperties": "Propriétés en attente",
+    "unavailableProperties": "Propriétés indisponibles",
+    "allProperties": "Toutes les propriétés",
+    "logout": "Déconnexion",
+    "agents": {
+        "title": "Agents",
+        "table": {
+            "firstName": "Prénom",
+            "lastName": "Nom",
+            "email": "E-mail",
+            "phone": "Téléphone",
+            "edit": "Modifier"
+        },
+        "agentCU": {
+            "addAgent": "Ajouter un agent",
+            "mainAgentImage": "Image principale de l'agent",
+            "mainphotoResolution": "La résolution de la photo doit être de 960 x 1280 pixels",
+            "minimizedAgentImage": "Image miniature de l'agent",
+            "minimizePhotoResolution": "La résolution de la photo doit être de 90 x 90 pixels",
+            "firstName": "Prénom",
+            "lastName": "Nom",
+            "emailAdress": "Adresse e-mail",
+            "phoneNumber": "Numéro de téléphone",
+            "password": "Mot de passe",
+            "confirmPassword": "Confirmer le mot de passe",
+            "btns": {
+                "updateProfile": "Mettre à jour le profil",
+                "updateAgent": "Mettre à jour l'agent",
+                "addAgent": "Ajouter un agent"
+            }
+        }
+    },
+    "personalInfo": {
+        "title": "Informations personnelles",
+        "btn": "Modifier le profil",
+        "editProfile": {
+            "title": "Modification des informations personnelles",
+            "description": "Votre adresse e-mail ne sera pas publiée. Les champs obligatoires sont marqués *"
+        }
+    },
+    "changePassword": {
+        "title": "Mettre à jour votre mot de passe",
+        "password": "Mot de passe",
+        "confirmPassword": "Confirmer le mot de passe"
+    }
+}

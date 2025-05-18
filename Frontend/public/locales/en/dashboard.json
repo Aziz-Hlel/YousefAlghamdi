@@ -1,0 +1,48 @@
+{
+    "myProperties": "My Properties",
+    "pendingProperties": "Pending Properties",
+    "unavailableProperties": "Unavailable Properties",
+    "allProperties": "All Properties",
+    "logout": "Logout",
+    "agents": {
+        "title": "Agents",
+        "table": {
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "email": "Email",
+            "phone": "Phone",
+            "edit": "Edit"
+        },
+        "agentCU": {
+            "addAgent": "Add Agent",
+            "mainAgentImage": "Main Agent Image",
+            "mainphotoResolution": "Photo resolution should be 960 x 1280 pixels",
+            "minimizedAgentImage": "Minimized Agent Image",
+            "minimizePhotoResolution": "Photo resolution should be 90 x 90 pixels",
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "emailAdress": "Email Address",
+            "phoneNumber": "Phone Number",
+            "password": "Password",
+            "confirmPassword": "Confirm Password",
+            "btns": {
+                "updateProfile": "Update Profile",
+                "updateAgent": "Update Agent",
+                "addAgent": "Add Agent"
+            }
+        }
+    },
+    "personalInfo": {
+        "title": "Personal Info",
+        "btn": "Edit Profile",
+        "editProfile": {
+            "title": "Personals Info edit",
+            "description": "Your email address will not be published. Required fields are marked *"
+        }
+    },
+    "changePassword": {
+        "title": "Update your Password",
+        "password": "Password",
+        "confirmPassword": "Confirm Password"
+    }
+}

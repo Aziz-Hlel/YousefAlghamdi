@@ -1,0 +1,39 @@
+[
+    {
+        "propertyInformation": {
+            "title": "Property Information",
+            "propertyTitle": "Property Title",
+            "category": "Category",
+            "subCategory": "Sub Category",
+            "propertyPrice": "Property Price",
+            "totalArea": "Total Area",
+            "description": "Description"
+        },
+        "propertyLocation": {
+            "title": "Property Location",
+            "city": "City",
+            "delegation": "Delegation",
+            "streetAdresse": "Street Adresse"
+        },
+        "nearestLocation": {
+            "title": "Nearest Location",
+            "nearestLocation": "Nearest Location",
+            "distance": "Distance (KM)"
+        },
+        "propertyImage": {
+            "title": "Property Image",
+            "thumbnaiImage": {
+                "title": "Thumbnail Image",
+                "note": "Image must be full HD (1920x1080)"
+            },
+            "sliderImages": {
+                "title": "Slider Images",
+                "note": "Image must be full HD (1920x1080)"
+            }
+        },
+        "btns": {
+            "submit": "Submit",
+            "cancel": "Cancel"
+        }
+    }
+]

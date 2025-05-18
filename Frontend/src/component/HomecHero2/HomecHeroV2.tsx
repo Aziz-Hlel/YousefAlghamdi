@@ -2,11 +2,15 @@ import { useState } from "react";
 import FilterTabBtn from "../Filter2/FilterTabBtn2";
 import HomecFilter from "../Filter2/HomecFilter2";
 import logo from "/img/homeHeroV2.webp"
+import { useTranslation } from 'react-i18next';
+import getText from "@src/i18n/data/getText";
 
 
 
 function HomecHero() {
   const [rentOrSale, setRentOrSale] = useState("Rent");
+  const { t } = useTranslation(['home','common']);
+
 
   const handleListing_Type = (name: string) => {
     setRentOrSale(name);
@@ -37,7 +41,7 @@ function HomecHero() {
               {/* <!-- Hero Content --> */}
               <div className="homec-hero__content">
                 <h1 className="homec-hero__title">
-                  Let’s Find Your Perfect Home For You.
+                  {t(getText.home.HomecHeroV2.title)}
                 </h1>
                 {/* <!-- Hero Tabs --> */}
                 <div className="homec-hero__tabs">
@@ -48,12 +52,12 @@ function HomecHero() {
                     role="tablist"
                   >
                     <FilterTabBtn
-                      text="Rent"
+                      text={t(getText.common.rent)}
                       isActive={rentOrSale}
                       handleListing_Type={handleListing_Type}
                     />
                     <FilterTabBtn
-                      text="Sale"
+                      text={t(getText.common.sale)}
                       isActive={rentOrSale}
                       handleListing_Type={handleListing_Type}
                     />

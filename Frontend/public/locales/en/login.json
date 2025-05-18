@@ -1,0 +1,17 @@
+{
+    "login": {
+        "title": "Login",
+        "description": "Your email address will not be published. Required fields are marked *",
+        "noAccount": "Dont’t have an account ?",
+        "cretaeAccount": "Create an account",
+        "allRightsReserved": "© 2025 Yousef Alghamdi Properties. All rights reserved by"
+    },
+    "signUp": {
+        "title": "Create an account",
+        "description": "Your email address will not be published. Required fields are marked *",
+        "haveAccount": "Already have an account ?",
+        "btn": "Sign Up",
+        "login": "Login",
+        "allRightsReserved": "© 2025 Yousef Alghamdi Properties. All rights reserved by"
+    }
+}

@@ -1,0 +1,48 @@
+{
+    "myProperties": "عقاراتي",
+    "pendingProperties": "العقارات المعلقة",
+    "unavailableProperties": "العقارات غير المتاحة",
+    "allProperties": "جميع العقارات",
+    "logout": "تسجيل الخروج",
+    "agents": {
+        "title": "الوكلاء",
+        "table": {
+            "firstName": "الاسم الأول",
+            "lastName": "الاسم الأخير",
+            "email": "البريد الإلكتروني",
+            "phone": "الهاتف",
+            "edit": "تعديل"
+        },
+        "agentCU": {
+            "addAgent": "إضافة وكيل",
+            "mainAgentImage": "صورة الوكيل الرئيسية",
+            "mainphotoResolution": "يجب أن تكون دقة الصورة 960 × 1280 بكسل",
+            "minimizedAgentImage": "صورة الوكيل المصغرة",
+            "minimizePhotoResolution": "يجب أن تكون دقة الصورة 90 × 90 بكسل",
+            "firstName": "الاسم الأول",
+            "lastName": "الاسم الأخير",
+            "emailAdress": "البريد الإلكتروني",
+            "phoneNumber": "رقم الهاتف",
+            "password": "كلمة المرور",
+            "confirmPassword": "تأكيد كلمة المرور",
+            "btns": {
+                "updateProfile": "تحديث الملف الشخصي",
+                "updateAgent": "تحديث الوكيل",
+                "addAgent": "إضافة وكيل"
+            }
+        }
+    },
+    "personalInfo": {
+        "title": "المعلومات الشخصية",
+        "btn": "تعديل الملف الشخصي",
+        "editProfile": {
+            "title": "تعديل المعلومات الشخصية",
+            "description": "لن يتم نشر عنوان بريدك الإلكتروني. الحقول المطلوبة محددة بـ *"
+        }
+    },
+    "changePassword": {
+        "title": "تحديث كلمة المرور",
+        "password": "كلمة المرور",
+        "confirmPassword": "تأكيد كلمة المرور"
+    }
+}

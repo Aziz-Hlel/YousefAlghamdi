@@ -10,7 +10,7 @@ export const requireAuth = (
     res: Response,
     next: NextFunction
 ): void => {
-    try {
+
 
         const accessToken = req.cookies?.accessToken;
 
@@ -55,7 +55,5 @@ export const requireAuth = (
                 );
             }
         }
-    } catch (error) {
-        next(error);
-    }
+  
 };

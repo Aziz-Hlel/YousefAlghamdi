@@ -35,7 +35,6 @@ import CU_Sponsor from "./component/Dashboard2/SponsorsEdit/CU_Sponsor.js";
 import AboutUs from "./component/CeoComp/index.js";
 
 
-
 const App2 = () => {
 
     useEffect(() => {

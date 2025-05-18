@@ -1,0 +1,22 @@
+{
+    "addPropertyForRent": {
+        "title": "إضافة عقار للإيجار",
+        "description": "أضف عقارك للإيجار",
+        "btn": "إضافة عقار"
+    },
+    "addPropertyForSale": {
+        "title": "إضافة عقار للبيع",
+        "description": "أضف عقارك للبيع",
+        "btn": "إضافة عقار"
+    },
+    "addPropertyForCommercialRent": {
+        "title": "إضافة عقار تجاري للإيجار",
+        "description": "أضف عقارك التجاري للإيجار",
+        "btn": "إضافة عقار"
+    },
+    "addPropertyForCommercialSale": {
+        "title": "إضافة عقار تجاري للبيع",
+        "description": "أضف عقارك التجاري للبيع",
+        "btn": "إضافة عقار"
+    }
+}

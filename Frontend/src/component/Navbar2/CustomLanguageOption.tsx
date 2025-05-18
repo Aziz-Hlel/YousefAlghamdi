@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ArabicSvg, EnglishSvg, FrenchSvg } from './languagesSvg';
+import { useTranslation } from 'react-i18next';
+import { changeLanguage, languages } from '@src/i18n/i18n';
 
 
 const languagesOptions = [
@@ -10,7 +12,6 @@ const languagesOptions = [
 
 const CustomLanguageOption = () => {
 
-    const [selected, setSelected] = useState(languagesOptions[0]);
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -28,6 +29,17 @@ const CustomLanguageOption = () => {
         };
     }, []);
 
+
+
+    const { i18n } = useTranslation();
+    const currentLanguage = i18n.language;
+    const currentLanguageIcon = languages[currentLanguage as keyof typeof languages]?.icon;
+    
+    const handleLanguageChange = async (newLang: string) => {
+
+        await changeLanguage(newLang);
+    };
+
     return (
         <div className="relative w-fit h-full" ref={dropdownRef}>
             {/* Selected Option */}
@@ -37,7 +49,7 @@ const CustomLanguageOption = () => {
             >
                 <div className="flex items-center gap-2">
                     {/* <img src={selected.icon} alt={selected.label} className="w-5 h-5" /> */}
-                    {selected.icon}
+                    {currentLanguageIcon}
                 </div>
                 {/* <span className="text-gray-600">{open ? "▲" : "▼"}</span> */}
             </button>
@@ -48,17 +60,17 @@ const CustomLanguageOption = () => {
                     className="absolute left-0 top-full mt-1 w-full bg-white border rounded-lg shadow-lg z-50"
                     style={{ position: "absolute", minWidth: "100%" }}
                 >
-                    {languagesOptions.map((option) => (
+                    {Object.entries(languages).map(([code, { nativeName, icon }]) => (
                         <div
-                            formkey={option.value}
+                            key={code}
                             className="flex items-center gap-2 p-2 hover:bg-gray-100 cursor-pointer"
                             onClick={() => {
-                                setSelected(option);
+                                handleLanguageChange(code);
                                 setOpen(false);
                             }}
                         >
                             {/* <img src={option.icon} alt={option.label} className="w-5 h-5" /> */}
-                            {option.icon}
+                            {icon}
                         </div>
                     ))}
                 </div>

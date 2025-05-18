@@ -1,0 +1,94 @@
+{
+    "welcome": "Welcome to our application",
+    "navigation": {
+        "home": "Home",
+        "properties": {
+            "properties": "Properties",
+            "rent": "Rent",
+            "sale": "Sale",
+            "commercialRent": "Commercial Rent",
+            "commercialSale": "Commercial Sale"
+        },
+        "about": "About Us",
+        "contact": "Contact",
+        "dashboard": "Dashboard",
+        "addProperty": "Add Property"
+    },
+    "HomecHeroV2": {
+        "title": "Let’s Find Your Perfect Home For You.",
+        "listingType": "Listing Type",
+        "category": "Category",
+        "city": "City",
+        "search": "Search"
+    },
+    "LatestPropertyV2": {
+        "title": "Featured Properties",
+        "seeAllProperties": "See All Properties"
+    },
+    "Sponsors": {
+        "title": "Trusted by the best"
+    },
+    "Features2": {
+        "title": "Why Choose Us",
+        "stepsToGo": "6 Steps to go",
+        "steps": {
+            "1": "Extensive portfolio of properties across Dubai and the UAE",
+            "2": "Expert team with in-depth market knowledge",
+            "3": "Transparent, ethical, and professional practices",
+            "4": "Tailored solutions for investors, homeowners, and tenants",
+            "5": "End-to-end support from inquiry to closing",
+            "6": "End-to-end property care to protect and grow your investment."
+        }
+    },
+    "CEO": {
+        "aboutYGP": "About YGP",
+        "WelcomeMessage": "Welcome Message from the CEO",
+        "message": "Welcome to YGP Real Estate, where vision meets value. As CEO, I take pride in leading a team committed to excellence, integrity, and client satisfaction. Our focus is not only on transactions, but on building lasting relationships rooted in trust and transparency. Whether you're buying, selling, or investing, we are here to guide you every step of the way with market insight, personalized service, and a deep commitment to your success. Thank you for choosing YGP — your trusted partner in UAE real estate.",
+        "ceo": "CEO",
+        "yearsOfExperience": "12 Years of Experience"
+    },
+    "Agents": {
+        "title": "Meet Our Talented Team",
+        "description": "We're a dynamic group of individuals who are passionate about what we do and dedicated to delivering the best results for our clients.",
+        "realEstateBroker": "Real Estate Broker"
+    },
+    "FaqSection": {
+        "title": "If you want to know Frequently Ask Questions",
+        "faq": "FAQ",
+        "support": "24/7 Support",
+        "questions": "Have any Questions Contact Us?"
+    },
+    "DownloadApp": {
+        "title": "Download Our Mobile App",
+        "description": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered into the find to amke it alteration.",
+        "download": {
+            "downloadOnTHe": "Download on the",
+            "appStore": "App Store",
+            "getItOn": "Get it on",
+            "googlePlay": "Google Play"
+        }
+    },
+    "Footer": {
+        "title": "YGP Real Estate",
+        "description": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered into the find to amke it alteration.",
+        "listing": {
+            "listing": "Listing",
+            "properties": "Properties",
+            "addProperty": "Add Property",
+            "login": "Login",
+            "signup": "Signup"
+        },
+        "important": {
+            "title": "Important",
+            "aboutUs": "About Us",
+            "ourAgents": "Our Agents",
+            "contact": "Contact"
+        },
+        "copyright": {
+            "allRightsReserved": "© 2025 Yousef Alghamdi Properties. All rights reserved by",
+            "technoShark": "TechnoShark",
+            "aboutCompany": "About Company",
+            "contactUs": "Contact Us"
+        }
+    }
+}

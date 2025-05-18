@@ -4,7 +4,7 @@ import Http from "@src/services/Http";
 import roles from "@src/types/roles.type";
 import apiGateway from "@src/utils/apiGateway";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 
 type IUser = {
@@ -73,7 +73,9 @@ const UserView = () => {
 
   const [currentAgent, setCurrentAgent] = useState<string | null>(null)
   const { agents } = useAgents();
+  const location = useLocation();
 
+  
   const changeAgentOfUser = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
@@ -85,7 +87,9 @@ const UserView = () => {
         agentId: currentAgent,
       })
 
-      navigate("../");
+      navigate("../", {
+        state: { shouldRefresh: true }
+      });
 
 
     }

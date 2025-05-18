@@ -1,0 +1,22 @@
+{
+    "addPropertyForRent": {
+        "title": "Ajouter une propriété à louer",
+        "description": "Ajoutez votre propriété à louer",
+        "btn": "Ajouter une propriété"
+    },
+    "addPropertyForSale": {
+        "title": "Ajouter une propriété à vendre",
+        "description": "Ajoutez votre propriété à vendre",
+        "btn": "Ajouter une propriété"
+    },
+    "addPropertyForCommercialRent": {
+        "title": "Ajouter une propriété commerciale à louer",
+        "description": "Ajoutez votre propriété commerciale à louer",
+        "btn": "Ajouter une propriété"
+    },
+    "addPropertyForCommercialSale": {
+        "title": "Ajouter une propriété commerciale à vendre",
+        "description": "Ajoutez votre propriété commerciale à vendre",
+        "btn": "Ajouter une propriété"
+    }
+}

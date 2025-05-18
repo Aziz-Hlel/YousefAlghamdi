@@ -1,0 +1,35 @@
+{
+    "unavailableProperty": {
+        "title": "Property Unavailable",
+        "description": "Are you sure you want to make this property unavailable?",
+        "confirmBtn": "Yes, make it unavailable",
+        "cancelBtn": "Cancel",
+        "confirmationAlert": {
+            "title": "Property Unavailable",
+            "description": "Property is now unavailable",
+            "btn": "Ok"
+        }
+    },
+    "availableProperty": {
+        "title ": "Property Available",
+        "description ": "Are you sure you want to make this property available?",
+        "confirmBtn ": "Yes, make it available",
+        "cancelBtn ": "Cancel",
+        "confirmationAlert": {
+            "title": "Property Available",
+            "description": "Property is now available",
+            "btn": "Ok"
+        }
+    },
+    "deleteProperty": {
+        "title": "Delete Property",
+        "description": "Are you sure you want to delete this property?",
+        "confirmBtn": "Yes, delete it",
+        "cancelBtn": "Cancel",
+        "confirmationAlert": {
+            "title": "Property Deleted",
+            "description": "Property is now deleted",
+            "btn": "Ok"
+        }
+    }
+}

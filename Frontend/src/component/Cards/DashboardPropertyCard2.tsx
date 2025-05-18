@@ -3,10 +3,11 @@ import Http from "@src/services/Http";
 import roles from "@src/types/roles.type";
 import apiGateway from "@src/utils/apiGateway";
 import { Alert, ConfirmationAlertAsync } from "@src/utils/createAlert";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useMyPropertiesContext } from "../Dashboard2/MyProperties/MyPropertiesProvider.context";
 import statesTypes from "@src/types/states.types";
 import Iproperty from "@src/models/property.type";
+import { useEffect } from "react";
 
 
 type IDashboardPropertyCard = {
@@ -26,6 +27,22 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
 
   const { user } = useAuth();
   const { fetchProperties } = useMyPropertiesContext()
+  const navigate = useNavigate();
+
+  const location2 = useLocation();
+
+
+  useEffect(() => {
+    if (location2.state?.shouldRefresh) {
+      fetchProperties(1); // your refetch logic here
+
+      // clear the flag so it doesn't rerun on next render
+      navigate(location2.pathname, { replace: true, state: {} });
+    }
+  }, [location2.state]);
+
+
+
 
   const handleDeleteProperty = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -118,6 +135,7 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
   }
 
 
+
   return (
     <div className="">
       <div className="homec-dashboard-property mg-top-30">
@@ -133,13 +151,16 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
               <img src="/img/location-icon.svg" alt="#" />
               <p>{location}</p>
             </div>
-
+            {
+              user?.role === roles.ADMIN && componentTitle === "Pending Properties" && property?.agentId === null
+              && <div className="">No agent assigned to the client yet</div>
+            }
           </div>
         </div>
         {/* Property Button */}
         <div className="homec-dashboard-property__buttons ">
 
-          {(user?.role === roles.ADMIN || user?.role === roles.AGENT) && <Link to={"inspect-user/" + ownerId}>
+          {(user?.role === roles.ADMIN || user?.role === roles.AGENT) && <Link to={"inspect-user/" + ownerId} state={{ fromProperties: true }}>
             <button className="homec-dashboard-property__btn px-2 flex justify-center items-center" >
               <div className="flex  justify-center  items-center">
 

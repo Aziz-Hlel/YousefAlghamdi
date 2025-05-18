@@ -1,0 +1,22 @@
+{
+    "addPropertyForRent": {
+        "title": "Add Property For Rent",
+        "description": "Add your property for rent",
+        "btn": "Add Property"
+    },
+    "addPropertyForSale": {
+        "title": "Add Property For Sale",
+        "description": "Add your property for sale",
+        "btn": "Add Property"
+    },
+    "addPropertyForCommercialRent": {
+        "title": "Add Property For Commercial Rent",
+        "description": "Add your property for commercial rent",
+        "btn": "Add Property"
+    },
+    "addPropertyForCommercialSale": {
+        "title": "Add Property For Commercial Sale",
+        "description": "Add your property for commercial sale",
+        "btn": "Add Property"
+    }
+}

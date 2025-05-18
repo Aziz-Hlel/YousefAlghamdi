@@ -31,7 +31,6 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
     const clientId = req.user?._id!;
     let agentId: string | undefined = req.user?.clientInfo?.agentId;
 
-
     if (req.user?.role === roles.CLIENT || req.user?.role === roles.USER) {
 
 
@@ -41,6 +40,7 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
                 if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
                 agentId = user?.clientInfo?.agentId;
             } catch (e) {
+                console.log(e)
                 next(e);
             }
         }

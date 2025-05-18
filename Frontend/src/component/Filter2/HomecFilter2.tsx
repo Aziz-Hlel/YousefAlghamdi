@@ -4,6 +4,9 @@ import { AbuDhabiEmirate, cities } from "@src/types/cities.delegations.types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { listing_types } from "@src/types/listing_types.types";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalize } from "@src/utils/capitalize_decapitalized";
 
 
 
@@ -15,7 +18,7 @@ function HomecFilter({ rentOrSale }: { rentOrSale: string }) {
   const [commercial, setCommercial] = useState(commercialOrNot[0]);
   const [category, setCategory] = useState<string>(categoriesType[LandAndPlots]);
   const [city, setCity] = useState(cities[AbuDhabiEmirate]);
-
+  const { t } = useTranslation(["common"]);
   const navigate = useNavigate();
 
   const navigateToProperties = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -78,14 +81,14 @@ function HomecFilter({ rentOrSale }: { rentOrSale: string }) {
             />
 
             <FromField
-              name="Category"
+              name={capitalize(t(getText.common.category))}
               options={categories}
               state={category}
               setState={setCategoryWrapper}
             />
 
             <FromField
-              name="City"
+              name={capitalize(t(getText.common.city))}
               options={Object.keys(cities)}
               state={city}
               setState={setCityWrapper}
@@ -110,7 +113,7 @@ function HomecFilter({ rentOrSale }: { rentOrSale: string }) {
                     />
                   </svg>
                 </span>
-                <span>Search</span>
+                <span>{capitalize(t(getText.common.search))}</span>
               </span>
             </button>
           </div>

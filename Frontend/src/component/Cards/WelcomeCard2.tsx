@@ -17,7 +17,7 @@ function WelcomeCard({ languages, links, image, brunches, builtHouse }: any) {
             </Link>
 
           </div>
-          <div className="ecom-wc__footer">
+          {/* <div className="ecom-wc__footer">
             <ul className="ecom-wc__footer--list list-none">
               {links?.map((link: any, index: number) => (
                 <li key={index}>
@@ -40,9 +40,9 @@ function WelcomeCard({ languages, links, image, brunches, builtHouse }: any) {
                 )}
               </select>
             </div>
-          </div>
-          <p className="ecom-wc__footer--text">
-            @ 2023 HomeCo. All Right Reserved.
+          </div> */}
+          <p className="ecom-wc__footer--text pt-5">
+            @ 2025 YGP. All Right Reserved.
           </p>
         </div>
       </div>

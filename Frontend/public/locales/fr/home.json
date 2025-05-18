@@ -1,0 +1,94 @@
+{
+    "welcome": "Bienvenue dans notre application",
+    "navigation": {
+        "home": "Accueil",
+        "properties": {
+            "properties": "Propriétés",
+            "rent": "Location",
+            "sale": "Vente",
+            "commercialRent": "Location commerciale",
+            "commercialSale": "Vente commerciale"
+        },
+        "about": "À propos de nous",
+        "contact": "Contact",
+        "dashboard": "Tableau de bord",
+        "addProperty": "Ajouter une propriété"
+    },
+    "HomecHeroV2": {
+        "title": "Trouvons la propriété parfaite pour vous.",
+        "listingType": "Type d'annonce",
+        "category": "Catégorie",
+        "city": "Ville",
+        "search": "Rechercher"
+    },
+    "LatestPropertyV2": {
+        "title": "Propriétés en vedette",
+        "seeAllProperties": "Voir toutes les propriétés"
+    },
+    "Sponsors": {
+        "title": "Recommandé par les meilleurs"
+    },
+    "Features2": {
+        "title": "Pourquoi nous choisir",
+        "stepsToGo": "6 étapes à suivre",
+        "steps": {
+            "1": "Portefeuille étendu de propriétés à Dubaï et aux Émirats Arabes Unis",
+            "2": "Équipe experte avec une connaissance approfondie du marché",
+            "3": "Pratiques transparentes, éthiques et professionnelles",
+            "4": "Solutions sur mesure pour investisseurs, propriétaires et locataires",
+            "5": "Support de bout en bout, de l'enquête à la clôture",
+            "6": "Gestion immobilière complète pour protéger et développer votre investissement."
+        }
+    },
+    "CEO": {
+        "aboutYGP": "À propos de YGP",
+        "WelcomeMessage": "Message de bienvenue du PDG",
+        "message": "Bienvenue chez YGP Real Estate, où la vision rencontre la valeur. En tant que PDG, je suis fier de diriger une équipe engagée envers l'excellence, l'intégrité et la satisfaction client. Notre focus n'est pas seulement sur les transactions, mais sur la construction de relations durables basées sur la confiance et la transparence. Que vous achetiez, vendiez ou investissiez, nous sommes là pour vous guider à chaque étape avec des insights marché, un service personnalisé et un engagement profond envers votre succès. Merci de choisir YGP — votre partenaire de confiance dans l'immobilier aux Émirats Arabes Unis.",
+        "ceo": "PDG",
+        "yearsOfExperience": "12 ans d'expérience"
+    },
+    "Agents": {
+        "title": "Rencontrez notre équipe talentueuse",
+        "description": "Nous sommes un groupe dynamique d'individus passionnés par ce que nous faisons et dédiés à offrir les meilleurs résultats à nos clients.",
+        "realEstateBroker": "Courtier immobilier"
+    },
+    "FaqSection": {
+        "title": "Si vous voulez connaître les questions fréquemment posées",
+        "faq": "FAQ",
+        "support": "Support 24/7",
+        "questions": "Vous avez des questions ? Contactez-nous !"
+    },
+    "DownloadApp": {
+        "title": "Téléchargez notre application mobile",
+        "description": "Il existe de nombreuses variations de passages du Lorem Ipsum disponibles, mais la majorité ont subi des modifications pour les adapter.",
+        "download": {
+            "downloadOnTHe": "Téléchargez sur",
+            "appStore": "App Store",
+            "getItOn": "Disponible sur",
+            "googlePlay": "Google Play"
+        }
+    },
+    "Footer": {
+        "title": "YGP Real Estate",
+        "description": "Il existe de nombreuses variations de passages du Lorem Ipsum disponibles, mais la majorité ont subi des modifications pour les adapter.",
+        "listing": {
+            "listing": "Annonces",
+            "properties": "Propriétés",
+            "addProperty": "Ajouter une propriété",
+            "login": "Connexion",
+            "signup": "Inscription"
+        },
+        "important": {
+            "title": "Important",
+            "aboutUs": "À propos de nous",
+            "ourAgents": "Nos agents",
+            "contact": "Contact"
+        },
+        "copyright": {
+            "allRightsReserved": "© 2025 Yousef Alghamdi Properties. Tous droits réservés par",
+            "technoShark": "TechnoShark",
+            "aboutCompany": "À propos de l'entreprise",
+            "contactUs": "Contactez-nous"
+        }
+    }
+}
