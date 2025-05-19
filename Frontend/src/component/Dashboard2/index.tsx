@@ -56,12 +56,8 @@ function Dashboard() {
                   <div className="row">
 
 
-                    <Sidebar
-                      activeComponent={activeComponent}
-                      setComponent={setActiveComponentWrapper}
-                    />
+                    <Sidebar activeComponent={activeComponent} setComponent={setActiveComponentWrapper} />
 
-                
                     <Outlet />
 
                   </div>

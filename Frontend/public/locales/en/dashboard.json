@@ -41,6 +41,7 @@
         }
     },
     "changePassword": {
+        "sideBar": "Change Password",
         "title": "Update your Password",
         "password": "Password",
         "confirmPassword": "Confirm Password"

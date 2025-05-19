@@ -3,6 +3,9 @@ import DashboardSidebarBtn from "../Button2/DashboardSidebarBtn2";
 import { useAuth } from "@src/providers/AuthProvider.context";
 import roles from "@src/types/roles.type";
 import useLogout from "@src/utils/useLogout";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { useTranslation } from "react-i18next";
 
 type SidebarProps = {
   activeComponent: string;
@@ -14,6 +17,11 @@ type SidebarProps = {
 const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
 
   const { user } = useAuth()
+
+  const { t } = useTranslation(['home', 'dashboard']);
+  { capitalizePhrase(t(getText.common.test)) }
+
+
   return (
     <div className="col-lg-3 col-md-4 col-12 mg-top-30">
       <div className="list-group homec-list-tabs homec-list-tabs--v3 homec-border">
@@ -43,7 +51,7 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
           user?.role !== roles.ADMIN && < DashboardSidebarBtn
             active={activeComponent}
             handleActive={setComponent}
-            title="My Properties"
+            title={capitalizePhrase(t(getText.dashboard.myProperties))}
             path="dashboard/my-properties"
           >
             <svg
@@ -63,7 +71,7 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
           user?.role === roles.ADMIN && <DashboardSidebarBtn
             active={activeComponent}
             handleActive={setComponent}
-            title="Agents"
+            title={capitalizePhrase(t(getText.dashboard.agents.title))}
             path="dashboard/agents"
           >
             <svg
@@ -86,7 +94,7 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
         {user?.role === roles.ADMIN && < DashboardSidebarBtn
           active={activeComponent}
           handleActive={setComponent}
-          title="All properties"
+          title={capitalizePhrase(t(getText.dashboard.allProperties))}
           path="dashboard/all-properties"
         >
           <svg
@@ -104,7 +112,7 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
           (user?.role === roles.ADMIN || user?.role === roles.AGENT) && < DashboardSidebarBtn
             active={activeComponent}
             handleActive={setComponent}
-            title="Pending properties"
+            title={capitalizePhrase(t(getText.dashboard.pendingProperties))}
             path="dashboard/pending-properties"
           >
             <svg
@@ -125,7 +133,7 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
             active={activeComponent}
             handleActive={setComponent}
             title="Unavailable properties"
-            path="dashboard/unavailable-properties" 
+            path={capitalizePhrase(t(getText.dashboard.unavailableProperties))}
           >
             <svg
               width="32"
@@ -143,7 +151,7 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
         <DashboardSidebarBtn
           active={activeComponent}
           handleActive={setComponent}
-          title="Personal Info"
+          title={capitalizePhrase(t(getText.dashboard.personalInfo.title))}
           path="dashboard/personal-info"
           onClick={() => useLogout()}
 
@@ -163,7 +171,7 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
         <DashboardSidebarBtn
           active={activeComponent}
           handleActive={setComponent}
-          title="Change Password"
+          title={capitalizePhrase(t(getText.dashboard.changePassword.sideBar))}
           path="dashboard/change-password"
         >
           <svg
@@ -199,7 +207,7 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
         <DashboardSidebarBtn
           active={activeComponent}
           handleActive={setComponent}
-          title="Logout"
+          title={capitalizePhrase(t(getText.dashboard.logout))}
           path="../../"
         >
           <svg

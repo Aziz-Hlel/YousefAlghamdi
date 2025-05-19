@@ -17,7 +17,7 @@ function WhyUs() {
       <div className="">
         <div className="">
           <Title
-            firstText={capitalizePhrase(t(getText.home.Features2.stepsToGo))}
+            firstText={""}
             secondText={capitalizePhrase(t(getText.home.Features2.title))}
             marginSize="40"
             styleFirst={{ color: "#ffff" }}

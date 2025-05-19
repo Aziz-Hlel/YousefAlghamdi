@@ -5,7 +5,7 @@ function NavBtn({ link, text, children }:{link:string,text:string,children?:any}
   return (
     <>
       {children ? (
-        <li className="menu-item-has-children">
+        <li className="menu-item-has-children ">
           <Link to={link}>{text}</Link>
           <ul className="sub-menu">{children}</ul>
         </li>

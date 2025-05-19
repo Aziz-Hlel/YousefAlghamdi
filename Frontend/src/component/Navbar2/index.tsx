@@ -18,7 +18,7 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
 
 
     <div className={"homec-header__middle"}>
-      <div className={"container"}>
+      <div className={" 2xl:mx-[200px] mx-3.5 "}>
         <div className="row align-items-center">
           <div className="col-12 ">
             <div
@@ -35,12 +35,12 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
                   <div className="navbar">
                     <div className="nav-item">
                       {/* Main Menu  */}
-                      <ul className="nav-menu menu navigation list-none">
+                      <ul className="nav-menu menu navigation list-none " >
 
                         <NavBtn text={capitalizePhrase(t(getText.home.navigation.home))} link="/" />
 
 
-                        <NavBtn text={ capitalizePhrase(t(getText.home.navigation.properties.properties)) } link="#">
+                        <NavBtn text={capitalizePhrase(t(getText.home.navigation.properties.properties))} link="#">
                           {/* <NavBtn link="/property" text="Properties" /> */}
 
                           <NavBtn link={`/property?listingType=${listing_types.rent}`} text="Rent" />
@@ -53,10 +53,10 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
                           <NavBtn link="/edit-property" text="Edit Property" /> */}
 
                         </NavBtn>
-                        <NavBtn link="/about" text="About Us" />
+                        <NavBtn link="/about" text={(t(getText.home.navigation.about))} />
                         {/* <NavBtn link="/agent-detail" text="Agent Details" /> */}
-                        <NavBtn link="/contact" text="Contact" />
-                        <NavBtn link="/dashboard" text="Dashboard" />
+                        <NavBtn link="/contact" text={(t(getText.home.navigation.contact))} />
+                        <NavBtn link="/dashboard" text={(t(getText.home.navigation.dashboard))} />
                       </ul>
                       {/* End Main Menu */}
                     </div>
