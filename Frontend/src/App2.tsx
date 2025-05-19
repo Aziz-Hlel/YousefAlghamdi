@@ -44,7 +44,7 @@ const App2 = () => {
 
     return (
         <>
-         
+
             <AuthProvider>
                 <AgentsProvider>
 
@@ -140,7 +140,8 @@ const App2 = () => {
                     </Router>
 
                 </AgentsProvider>
-            </AuthProvider >  <FloatingContactButton/>
+            </AuthProvider >
+            <FloatingContactButton />
         </>
     )
 }
