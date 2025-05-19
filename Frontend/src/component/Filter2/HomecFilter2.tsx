@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { listing_types } from "@src/types/listing_types.types";
 import { useTranslation } from "react-i18next";
 import getText from "@src/i18n/data/getText";
-import { capitalize } from "@src/utils/capitalize_decapitalized";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 
@@ -81,14 +81,14 @@ function HomecFilter({ rentOrSale }: { rentOrSale: string }) {
             />
 
             <FromField
-              name={capitalize(t(getText.common.category))}
+              name={capitalizePhrase(t(getText.common.category))}
               options={categories}
               state={category}
               setState={setCategoryWrapper}
             />
 
             <FromField
-              name={capitalize(t(getText.common.city))}
+              name={capitalizePhrase(t(getText.common.city))}
               options={Object.keys(cities)}
               state={city}
               setState={setCityWrapper}
@@ -97,7 +97,7 @@ function HomecFilter({ rentOrSale }: { rentOrSale: string }) {
 
 
             {/* Button  */}
-            <button className="homec-btn homec-btn__second" onClick={navigateToProperties}>
+            <button className="homec-btn homec-btn__second mx-0 px-0" onClick={navigateToProperties}>
               <span className="homec-btn__inside">
                 <span>
                   <svg
@@ -113,7 +113,7 @@ function HomecFilter({ rentOrSale }: { rentOrSale: string }) {
                     />
                   </svg>
                 </span>
-                <span>{capitalize(t(getText.common.search))}</span>
+                <span>{capitalizePhrase(t(getText.common.search))}</span>
               </span>
             </button>
           </div>

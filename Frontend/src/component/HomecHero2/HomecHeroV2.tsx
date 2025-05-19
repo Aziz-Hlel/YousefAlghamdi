@@ -4,13 +4,14 @@ import HomecFilter from "../Filter2/HomecFilter2";
 import logo from "/img/homeHeroV2.webp"
 import { useTranslation } from 'react-i18next';
 import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 
 function HomecHero() {
   const [rentOrSale, setRentOrSale] = useState("Rent");
-  const { t } = useTranslation(['home','common']);
-
+  const { t } = useTranslation(['home', 'common']);
+  { capitalizePhrase(t(getText.common.test)) }
 
   const handleListing_Type = (name: string) => {
     setRentOrSale(name);

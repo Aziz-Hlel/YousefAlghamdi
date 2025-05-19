@@ -3,6 +3,9 @@ import { useEffect, useRef, useState } from 'react';
 import logo from "@img/logo2.png"
 import Http from '@src/services/Http';
 import { Sponsor } from '../Dashboard2/SponsorsEdit/Sponsors.provider';
+import { useTranslation } from 'react-i18next';
+import getText from '@src/i18n/data/getText';
+import { capitalizePhrase } from '@src/utils/capitalize_decapitalized';
 
 
 
@@ -67,12 +70,13 @@ const Sponsors = () => {
     }, [sponsors]);
 
     const displaySponsors = sponsors;
-
+    const { t } = useTranslation(['home', 'common']);
+    { capitalizePhrase(t(getText.common.test)) }
     return (
         <div className="py-10 sm:px-4 bg-gray-50">
             <section className="py-12 sm:px-20 bg-gray-50 w-full">
                 <div className="px-4">
-                    <div className="sm:text-3xl text-2xl font-bold text-center mb-8">Trusted by the best</div>
+                    <div className="sm:text-3xl text-2xl font-bold text-center mb-8"> {capitalizePhrase(t(getText.home.Sponsors.title))}</div>
 
                     <div
                         ref={scrollerRef}

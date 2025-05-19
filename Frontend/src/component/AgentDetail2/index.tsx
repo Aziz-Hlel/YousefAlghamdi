@@ -3,7 +3,6 @@ import Footer from "../Footer";
 import HistoryLinks from "../Breadcrumbs/HistoryLinks";
 import Breadcrumbs from "../Breadcrumbs";
 import Header from "../Header";
-import GoTopBtn from "../Button/GoTopBtn";
 import AgentDetailCard from "../Cards/AgentDetailCard2";
 import PropertyAgents from "../Agents/PropertyAgents2";
 import { useEffect, useState } from "react";
@@ -66,7 +65,6 @@ function AgentDetail() {
           </div>
         </section>
         <DownloadApp />
-        <GoTopBtn />
       </>
     );
   }

@@ -3,7 +3,6 @@ import Header from "../Header";
 import Breadcrumbs from "../Breadcrumbs";
 import HistoryLinks from "../Breadcrumbs/HistoryLinks";
 import Footer from "../Footer";
-import GoTopBtn from "../Button/GoTopBtn";
 import Preloader from "../Loader";
 import SingleSlider from "./SingleSlider";
 import PropertyDetails from "./PropertyDetails";
@@ -51,7 +50,6 @@ function PropertySingle() {
             </div>
           </section>
           <PropertyDetails />
-          <GoTopBtn />
         </SinglePropertyProvider>
       </>
     );

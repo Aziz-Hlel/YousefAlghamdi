@@ -2,9 +2,17 @@ import AboutCard from "../Cards/AboutCard";
 import AboutShapeImg from "./AboutShapeImg";
 import about_img from "./../../assets/img/about/about_img.jpg"
 import ceo_img from "./../../assets/img/about/ceo_img.jpg"
+import getText from "@src/i18n/data/getText";
+import { useTranslation } from "react-i18next";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 function CEO() {
+
+  const { t } = useTranslation(['home', 'common']);
+  { capitalizePhrase(t(getText.common.test)) }
+
+
   return (
     <section className="homec-about homec-bg-third-color pd-top-90 pd-btm-120">
       <div className="homec-shape">
@@ -59,7 +67,7 @@ function CEO() {
                     data-aos="fade-down"
                     data-aos-delay="300"
                   >
-                    About YGP
+                    {capitalizePhrase(t(getText.home.CEO.aboutYGP))}
                   </span>
                 </div>
                 <h2
@@ -67,7 +75,7 @@ function CEO() {
                   data-aos="fade-in"
                   data-aos-delay="400"
                 >
-                  Welcome Message from the CEO
+                 {capitalizePhrase(t(getText.home.CEO.WelcomeMessage))}
 
                 </h2>
               </div>
@@ -77,10 +85,7 @@ function CEO() {
                 data-aos-delay="500"
               >
                 <p className="homec-about-content__text">
-                  Welcome to YGP Real Estate, where vision meets value. As CEO, I take pride in leading a team committed to excellence, integrity, and client satisfaction.
-                  Our focus is not only on transactions, but on building lasting relationships rooted in trust and transparency.
-                  Whether you're buying, selling, or investing, we are here to guide you every step of the way with market insight, personalized service, and a deep commitment to your success.
-                  Thank you for choosing YGP — your trusted partner in UAE real estate.
+                {capitalizePhrase(t(getText.home.CEO.message))}
 
                 </p>
 

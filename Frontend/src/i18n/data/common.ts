@@ -23,7 +23,12 @@ const common = {
     propertyCategory: "propertyCategory",
     SquareFeet: "SquareFeet",
     Price: "Price",
-    search: "search"
+    search: "search",
+
+
+
+
+    test: "test,"
 }
 
 

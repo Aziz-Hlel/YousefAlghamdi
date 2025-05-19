@@ -13,7 +13,6 @@ import Saved from "./Saved";
 import Reviews from "./Reviews";
 import ChangePassword from "./ChangePassword";
 import { useNavigate } from "react-router-dom";
-import GoTopBtn from "../Button/GoTopBtn";
 import Preloader from "../Loader";
 
 function Dashboard() {
@@ -77,7 +76,6 @@ function Dashboard() {
           </div>
         </section>
         <DownloadApp />
-        <GoTopBtn />
       </>
     );
   }

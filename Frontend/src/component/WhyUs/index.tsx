@@ -1,7 +1,13 @@
+import { capitalizePhrase as capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import FeaturesCardV2 from "../Cards/FeaturesCardV2_2";
 import Title from "../Title";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
 
 function WhyUs() {
+
+  const { t } = useTranslation(['home', 'common']);
+  { capitalizePhrase(t(getText.common.test)) }
   return (
     <section className="homec-bg-primary-color pd-top-110 pd-btm-110">
       <div
@@ -11,8 +17,8 @@ function WhyUs() {
       <div className="">
         <div className="">
           <Title
-            firstText="4 step to go"
-            secondText=" Why Choose us"
+            firstText={capitalizePhrase(t(getText.home.Features2.stepsToGo))}
+            secondText={capitalizePhrase(t(getText.home.Features2.title))}
             marginSize="40"
             styleFirst={{ color: "#ffff" }}
             styleSecond={{ color: "#ffff" }}
@@ -36,7 +42,7 @@ function WhyUs() {
                     <path d="M22 4L12 14.01l-3-3" />
                   </svg>
                   <span className="title-font font-medium">
-                    Extensive portfolio of properties across Dubai and the UAE
+                    {capitalizePhrase(t(getText.home.Features2.steps["1"]))}
                   </span>
                 </div>
               </div>
@@ -55,7 +61,7 @@ function WhyUs() {
                     <path d="M22 4L12 14.01l-3-3" />
                   </svg>
                   <span className="title-font font-medium">
-                    Expert team with in-depth market knowledge
+                    {capitalizePhrase(t(getText.home.Features2.steps["2"]))}
                   </span>
                 </div>
               </div>
@@ -74,7 +80,7 @@ function WhyUs() {
                     <path d="M22 4L12 14.01l-3-3" />
                   </svg>
                   <span className="title-font font-medium">
-                    Transparent, ethical, and professional practices
+                    {capitalizePhrase(t(getText.home.Features2.steps["3"]))}
                   </span>
                 </div>
               </div>
@@ -93,7 +99,7 @@ function WhyUs() {
                     <path d="M22 4L12 14.01l-3-3" />
                   </svg>
                   <span className="title-font font-medium">
-                    Tailored solutions for investors, homeowners, and tenants
+                    {capitalizePhrase(t(getText.home.Features2.steps["4"]))}
                   </span>
                 </div>
               </div>
@@ -112,7 +118,7 @@ function WhyUs() {
                     <path d="M22 4L12 14.01l-3-3" />
                   </svg>
                   <span className="title-font font-medium">
-                    End-to-end support from inquiry to closing
+                    {capitalizePhrase(t(getText.home.Features2.steps["5"]))}
                   </span>
                 </div>
               </div>
@@ -131,7 +137,7 @@ function WhyUs() {
                     <path d="M22 4L12 14.01l-3-3" />
                   </svg>
                   <span className="title-font font-medium">
-                    End-to-end property care to protect and grow your investment.
+                    {capitalizePhrase(t(getText.home.Features2.steps["6"]))}
                   </span>
                 </div>
               </div>

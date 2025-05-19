@@ -5,7 +5,6 @@ import DownloadApp from "../DownloadApp";
 import Footer from "../Footer";
 import Preloader from "../Loader";
 import { useEffect, useState } from "react";
-import GoTopBtn from "../Button/GoTopBtn";
 import PropertyFrom from "../Form/PropertyFrom2";
 
 const SubmitProperty = () => {
@@ -34,7 +33,6 @@ const SubmitProperty = () => {
         </Breadcrumbs>
         <PropertyFrom />
         <DownloadApp />
-        <GoTopBtn />
       </>
 
     );

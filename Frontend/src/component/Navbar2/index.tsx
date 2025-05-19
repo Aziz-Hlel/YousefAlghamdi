@@ -4,10 +4,15 @@ import { Link } from "react-router-dom";
 import CustomLanguageOption from "./CustomLanguageOption";
 import { useAuth } from "@src/providers/AuthProvider.context";
 import { listing_types } from "@src/types/listing_types.types";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { useTranslation } from "react-i18next";
 
 const Navbar = ({ handleSidebar, secondNav }: any) => {
 
   const { user } = useAuth();
+  const { t } = useTranslation(['home', 'common']);
+  { capitalizePhrase(t(getText.common.test)) }
 
   return (
 
@@ -32,10 +37,10 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
                       {/* Main Menu  */}
                       <ul className="nav-menu menu navigation list-none">
 
-                        <NavBtn text="Home" link="/" />
+                        <NavBtn text={capitalizePhrase(t(getText.home.navigation.home))} link="/" />
 
 
-                        <NavBtn text="Properties" link="#">
+                        <NavBtn text={ capitalizePhrase(t(getText.home.navigation.properties.properties)) } link="#">
                           {/* <NavBtn link="/property" text="Properties" /> */}
 
                           <NavBtn link={`/property?listingType=${listing_types.rent}`} text="Rent" />
@@ -91,11 +96,11 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
                     to="/add-property"
                     className="homec-btn homec-btn__second"
                   >
-                    <span>Add Property</span>
+                    <span>{capitalizePhrase(t(getText.home.navigation.addProperty))}</span>
                   </Link>
                 ) : (
                   <Link to="/add-property" className="homec-btn">
-                    <span>Add Property</span>
+                    <span>{capitalizePhrase(t(getText.home.navigation.addProperty))}</span>
                   </Link>
                 )}
               </div>

@@ -7,7 +7,6 @@ import DownloadApp from "../DownloadApp";
 import Sidebar from "./Sidebar2";
 
 import { Outlet, useNavigate } from "react-router-dom";
-import GoTopBtn from "../Button/GoTopBtn";
 import Preloader from "../Loader";
 
 import { useAuth } from "@src/providers/AuthProvider.context";
@@ -72,7 +71,6 @@ function Dashboard() {
           </div>
         </section>
         <DownloadApp />
-        <GoTopBtn />
       </>
     );
   }

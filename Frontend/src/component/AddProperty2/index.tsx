@@ -6,7 +6,6 @@ import HistoryLinks from "../Breadcrumbs/HistoryLinks";
 import PropertyAddCard from "../Cards/PropertyAddCard2";
 import { useEffect, useState } from "react";
 import Preloader from "../Loader";
-import GoTopBtn from "../Button/GoTopBtn";
 import { listing_types } from "@src/types/listing_types.types";
 
 const AddProperty = () => {
@@ -66,7 +65,6 @@ const AddProperty = () => {
         </section>
 
         <DownloadApp />
-        <GoTopBtn />
       </>
     );
   }

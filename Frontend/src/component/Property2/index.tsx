@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Preloader from "../Loader";
 import Header from "../Header";
 import Breadcrumbs from "../Breadcrumbs";
-import GoTopBtn from "../Button/GoTopBtn";
 import Footer from "../Footer";
 import HistoryLinks from "../Breadcrumbs/HistoryLinks";
 import PropertyGrid from "./PropertyGrid";
@@ -41,7 +40,6 @@ const Property = () => {
           <PropertyGrid />
         </FormProvider>
 
-        <GoTopBtn />
       </>
     );
   }

@@ -33,6 +33,7 @@ import PrivilegedLayouts from "./component/Layouts/PrivilegedLayouts/PrivilegedL
 import roles from "./types/roles.type.js";
 import CU_Sponsor from "./component/Dashboard2/SponsorsEdit/CU_Sponsor.js";
 import AboutUs from "./component/CeoComp/index.js";
+import FloatingContactButton from "./component/FloatingContactButton/FloatingContactButton.js";
 
 
 const App2 = () => {
@@ -43,6 +44,7 @@ const App2 = () => {
 
     return (
         <>
+         
             <AuthProvider>
                 <AgentsProvider>
 
@@ -138,7 +140,7 @@ const App2 = () => {
                     </Router>
 
                 </AgentsProvider>
-            </AuthProvider >
+            </AuthProvider >  <FloatingContactButton/>
         </>
     )
 }

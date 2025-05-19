@@ -4,20 +4,23 @@ import CustomDotRound from "../CustomDot/CustomDotRound";
 // import LatestPropertyCard from "../Cards/LatestPropertyCard";
 import LatestPropertyCard from "../Cards/LatestPropertyCard2";
 import TitleWithBtn from "../Title/TitleWithBtn";
-import  { useFeaturedPropertiesContext } from "./FeaturedPropertiesProvider.context";
-import staticProperties from "../../data/property";
+import { useFeaturedPropertiesContext } from "./FeaturedPropertiesProvider.context";
+import { useTranslation } from 'react-i18next';
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 function LatestPropertyV2() {
 
 
   const { properties } = useFeaturedPropertiesContext();
-
+  const { t } = useTranslation(['home', 'common']);
+  { capitalizePhrase(t(getText.common.test)) }
   return (
 
     <div>
       <section
         className="homec-properties homec-bg-cover homec-bg-third-color pd-top-90 pd-btm-120"
-        style={{ backgroundImage: "url('img/bg-shape-one.svg')" }}
+        style={{ backgroundImage: "url('/img/bg-shape-one.svg')" }}
       >
         <div className="container">
           <div className="row">
@@ -26,10 +29,9 @@ function LatestPropertyV2() {
                 btn={true}
                 styleCategory={{}}
                 styleTitle={{}}
-                category="View All 329 New Listings"
-                title="Featured Properties"
+                title={t(getText.home.LatestPropertyV2.title)}
                 link="/property"
-                btnText="See all  Properties"
+                btnText={capitalizePhrase(t(getText.home.LatestPropertyV2.seeAllProperties))}
               />
             </div>
           </div>

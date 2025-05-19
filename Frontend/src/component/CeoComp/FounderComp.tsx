@@ -1,7 +1,14 @@
 import React from 'react'
 import founderImg from "@img/about/founder.jpg"
+import getText from '@src/i18n/data/getText';
+import { capitalizePhrase } from '@src/utils/capitalize_decapitalized';
+import { useTranslation } from 'react-i18next';
 
 const FounderComp = () => {
+
+    const { t } = useTranslation(['aboutUs', 'common']);
+    { capitalizePhrase(t(getText.common.test)) }
+
 
 
     const handleCall = (phoneNumber: string) => {
@@ -26,12 +33,13 @@ const FounderComp = () => {
                     />
                     <div className="lg:w-6/12 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 lg:flex flex-col justify-center">
                         <h3 className="text-sm title-font text-gray-500 tracking-widest">
-                            Founder’s Brief
+                            {capitalizePhrase(t(getText.aboutUs.founder.founderBiref))}
 
                         </h3>
                         <h2 className="text-gray-900 text-3xl title-font font-medium mb-1">
-                            Dr. Yousef Alghamdi
+                            {capitalizePhrase(t(getText.aboutUs.founder.yousefAlghamdi))}
                         </h2>
+
                         <div >
                             <div className=' flex items-center'>
 
@@ -53,7 +61,7 @@ const FounderComp = () => {
                                 </svg>
 
                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className=' w-5 h-5 cursor-pointer'
-                                onClick={() => handleCall("+971505884220")}
+                                    onClick={() => handleCall("+971505884220")}
                                 >
                                     <g id="SVGRepo_bgCarrier" strokeWidth={0} />
                                     <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
@@ -94,7 +102,7 @@ const FounderComp = () => {
                                 </svg>
 
                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className=' w-5 h-5 cursor-pointer'
-                                onClick={() => handleCall("+966558344770")}
+                                    onClick={() => handleCall("+966558344770")}
                                 >
                                     <g id="SVGRepo_bgCarrier" strokeWidth={0} />
                                     <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
@@ -120,9 +128,7 @@ const FounderComp = () => {
                             data-aos-delay="500"
                         >
                             <p className="homec-about-content__text">
-                                YGP Real Estate was founded with a clear purpose: to reshape the real estate experience in the UAE by combining innovation, market intelligence, and a passion for service.
-                                The Founder envisioned a company that puts people first — delivering exceptional property solutions while maintaining the highest standards of ethics and professionalism.
-                                Today, that vision continues to drive our growth, positioning YGP as a leading name in Dubai’s competitive real estate market.
+                                {capitalizePhrase(t(getText.aboutUs.founder.message))}
                             </p>
 
 

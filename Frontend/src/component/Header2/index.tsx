@@ -3,7 +3,7 @@ import MobileMenu from "../Navbar2/MobileMenu";
 import Navbar from "../Navbar2";
 import Topbar from "../Topbar2";
 
-function  Header({ v2 }:{v2:boolean}) {
+function Header({ v2 }: { v2: boolean }) {
   const [scrollPosition, setScrollPosition] = useState(0);
 
   const handleScroll = () => {
@@ -23,7 +23,7 @@ function  Header({ v2 }:{v2:boolean}) {
     setOpenSidebar(!openSidebar);
   };
   return (
-    <>
+    <>  
       <MobileMenu handleSidebar={toggleSidebar} show={openSidebar} />
       <header
         id="active-sticky"

@@ -1,15 +1,14 @@
 import Header from "../Header";
 import Breadcrumbs from "../Breadcrumbs2";
 import HistoryLinks from "../Breadcrumbs2/HistoryLinks";
-import DownloadApp from "../DownloadApp";
 import Footer from "../Footer";
-import GoTopBtn from "../Button/GoTopBtn";
 import ContactForm from "../Form/ContactForm";
 import SingleContact from "./SingleContact";
 import Preloader from "../Loader";
 import { useEffect, useState } from "react";
 import contact_img from "/img/contact-bg.jpg"
 import companyInfo from "@src/data/companyInfo";
+import DownloadApp from "../DownloadApp2";
 
 function Contact() {
   const [isLoading, setisLoadingg] = useState(true);
@@ -131,7 +130,6 @@ function Contact() {
         </section>
         <DownloadApp />
 
-        <GoTopBtn />
       </>
     );
   }

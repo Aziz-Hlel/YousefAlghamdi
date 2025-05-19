@@ -2,7 +2,6 @@ import ProtoTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 function TitleWithBtn({
-  category,
   title,
   link,
   btnText,
@@ -21,7 +20,6 @@ function TitleWithBtn({
           data-aos-delay="300"
           style={styleCategory}
         >
-          {category}
         </span>
         <h2
           className="homec-section__title"

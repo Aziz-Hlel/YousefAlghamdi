@@ -5,9 +5,17 @@ import logo_img from "@img/logo.png"
 import companyInfo from "@src/data/companyInfo";
 import companySocials from "@src/data/companySocials";
 import logo2 from "@img/logo2.png"
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { useTranslation } from "react-i18next";
 
 
 function Footer() {
+
+  const { t } = useTranslation(['home', 'common']);
+  { capitalizePhrase(t(getText.common.test)) }
+
+
   return (
     <footer className="footer-area p-relative">
       <div className="homec-shape">
@@ -19,7 +27,6 @@ function Footer() {
         <div className="row">
           <div className="col-12">
             {/* Subscribe Form   */}
-            <SubscribeForm />
             {/* End Subscribe Form   */}
           </div>
         </div>
@@ -36,9 +43,8 @@ function Footer() {
                       </Link>
                     </div>
                     <p className="footer-about-text">
-                      There are many variatons of pass Ipsum available, but the
-                      majority alteration in some form, by inject randomised
-                      words
+                      {capitalizePhrase(t(getText.home.Footer.description))}
+
                     </p>
                     {/* Social   */}
                     <ul className="homec-social homec-social__v2">
@@ -174,12 +180,12 @@ function Footer() {
                     <div className="col-lg-4 col-md-4 col-12">
                       {/* Footer Widget   */}
                       <div className="single-widget footer-useful-links">
-                        <h3 className="widget-title ">Listing</h3>
+                        <h3 className="widget-title ">{capitalizePhrase(t(getText.home.Footer.listing.listing))}</h3>
                         <ul className="f-useful-links-inner list-none">
-                          <FooterList link="/property" title="Properties" />
-                          <FooterList link="/add-property" title="Add Properties" />
-                          <FooterList link="/login" title="Login" />
-                          <FooterList link="/signup" title="Signup" />
+                          <FooterList link="/property" title={capitalizePhrase(t(getText.home.Footer.listing.properties))} />
+                          <FooterList link="/add-property" title={capitalizePhrase(t(getText.home.Footer.listing.addProperty))} />
+                          <FooterList link="/login" title={capitalizePhrase(t(getText.home.Footer.listing.login))} />
+                          <FooterList link="/signup" title={capitalizePhrase(t(getText.home.Footer.listing.signup))} />
                         </ul>
                       </div>
                       {/* End Footer Widget  */}
@@ -187,11 +193,11 @@ function Footer() {
                     <div className="col-lg-4 col-md-4 col-12">
                       {/* Footer Widget  */}
                       <div className="single-widget footer-need-helps">
-                        <h3 className="widget-title">Importants</h3>
+                        <h3 className="widget-title">{capitalizePhrase(t(getText.home.Footer.important.title))}</h3>
                         <ul className="f-need-helps-inner list-none">
-                          <FooterList link="/about" title="About Us" />
-                          <FooterList link="/our-agents" title="Our Agent" />
-                          <FooterList link="/contact" title="Contact Us" />
+                          <FooterList link="/about" title={capitalizePhrase(t(getText.home.Footer.important.aboutUs))} />
+                          <FooterList link="/our-agents" title={capitalizePhrase(t(getText.home.Footer.important.ourAgents))} />
+                          <FooterList link="/contact" title={capitalizePhrase(t(getText.home.Footer.important.contact))} />
                         </ul>
                       </div>
                       {/* End Footer Widget  */}
@@ -199,7 +205,7 @@ function Footer() {
                     <div className="col-lg-4 col-md-4 col-12">
                       {/* Footer Widget   */}
                       <div className="single-widget footer-contact">
-                        <h3 className="widget-title">Contact Us</h3>
+                        <h3 className="widget-title">{capitalizePhrase(t(getText.home.Footer.copyright.contactUs))} </h3>
                         <div className="f-contact__form-top">
                           <ul className="f-contact-list list-none">
                             <li>
@@ -236,7 +242,7 @@ function Footer() {
             <div className="col-lg-6 col-12">
               {/* Copyright Text   */}
               <p className="copyright-text">
-                © 2025 Yousef Alghamdi Properties. All rights reserved by
+                {capitalizePhrase(t(getText.home.Footer.copyright.allRightsReserved))}
                 <a href="https://technoshark.org/" target="_blank" className="mx-1">
                   TechnoShark
                 </a>
@@ -246,10 +252,10 @@ function Footer() {
               {/* Footer Page List   */}
               <ul className="footer-pages list-none">
                 <li>
-                  <Link to={"/about"}>About Company</Link>
+                  <Link to={"/about"}>{capitalizePhrase(t(getText.home.Footer.copyright.aboutCompany))}</Link>
                 </li>
                 <li>
-                  <Link to={"/contact"}>Contact Us</Link>
+                  <Link to={"/contact"}>{capitalizePhrase(t(getText.home.Footer.copyright.contactUs))}</Link>
                 </li>
               </ul>
             </div>

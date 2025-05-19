@@ -5,7 +5,6 @@ import Breadcrumbs from "../Breadcrumbs2";
 import HistoryLinks from "../Breadcrumbs2/HistoryLinks";
 import Preloader from "../Loader";
 import { useEffect, useState } from "react";
-import GoTopBtn from "../Button/GoTopBtn";
 import { SinglePropertyProvider } from "@src/providers/SingleProperty.context";
 import { useParams } from "react-router-dom";
 import PropertyFrom from "../Form/PropertyFrom2.edit";
@@ -45,7 +44,6 @@ const EditPendingProperty = () => {
         </SinglePropertyProvider>
 
         <DownloadApp />
-        <GoTopBtn />
       </>
     );
   }

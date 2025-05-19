@@ -23,7 +23,8 @@ const home ={
     },
     LatestPropertyV2: {
         title: "LatestPropertyV2.title",
-        seeAllProperties: "LatestPropertyV2.seeAllProperties"
+        seeAllProperties: "LatestPropertyV2.seeAllProperties",
+        btn: "see all properties",
     },
     Sponsors: {
         title: "Sponsors.title"

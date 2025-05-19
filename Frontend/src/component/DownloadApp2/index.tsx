@@ -1,10 +1,16 @@
 import AboutShapeImg from "../About/AboutShapeImg";
 import DownloadAppBtn from "../Button/DownloadAppBtn";
 import screen_app from "../../assets/img/app-screen.png"
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { useTranslation } from "react-i18next";
 
 
 function DownloadApp() {
-  
+
+  const { t } = useTranslation(['home', 'common']);
+  { capitalizePhrase(t(getText.common.test)) }
+
   return (
 
     <section
@@ -27,12 +33,10 @@ function DownloadApp() {
                   data-aos-delay="400"
                 >
                   <h2 className="homec-section__title">
-                    Download Our Mobile App
+                   { capitalizePhrase(t(getText.home.DownloadApp.title)) }
                   </h2>
                   <p className="sec-head__text">
-                    There are many variations of passages of Lorem Ipsum
-                    available, but the majority have suffered into the find to
-                    amke it alteration.
+                    { capitalizePhrase(t(getText.home.DownloadApp.description)) }
                   </p>
                 </div>
                 {/* App Download Button  */}
@@ -43,13 +47,13 @@ function DownloadApp() {
                 >
                   <DownloadAppBtn
                     link="#"
-                    download="DOWNLOAD ON THE"
-                    location="App Store"
+                    download={ capitalizePhrase(t(getText.home.DownloadApp.download.downloadOnTHe)) }
+                    location={ capitalizePhrase(t(getText.home.DownloadApp.download.appStore)) }
                   />
                   <DownloadAppBtn
                     link="#"
-                    download="GET IT ON"
-                    location="Google Play"
+                    download={ capitalizePhrase(t(getText.home.DownloadApp.download.getItOn)) }
+                    location={ capitalizePhrase(t(getText.home.DownloadApp.download.googlePlay)) }
                   />
                 </div>
 

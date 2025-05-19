@@ -1,4 +1,3 @@
-import GoTopBtn from "../Button/GoTopBtn";
 import DownloadApp from "../DownloadApp";
 import CEO from "./About";
 import { useEffect, useState } from "react";
@@ -31,7 +30,6 @@ function AboutUs() {
         {/* <AgentsV2 /> */}
         {/* <FaqSection /> */}
         <DownloadApp />
-        <GoTopBtn />
       </>
     );
   }
