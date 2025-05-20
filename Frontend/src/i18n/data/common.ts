@@ -5,7 +5,7 @@ const common = {
     rent: "common:rent",
     sale: "common:sale",
     commercialRent: "common:commercialRent",
-    commercialSale: "common:CommercialSale",
+    commercialSale: "common:commercialSale",
     firstName: "common:firstName",
     lastName: "common:lastName",
     emailAdress: "common:emailAdress",

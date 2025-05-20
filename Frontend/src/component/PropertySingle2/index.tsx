@@ -5,7 +5,6 @@ import HistoryLinks from "../Breadcrumbs/HistoryLinks";
 import Footer from "../Footer";
 import Preloader from "../Loader";
 import SingleSlider from "./SingleSlider";
-import PropertyDetails from "./PropertyDetails";
 import { useParams } from "react-router-dom";
 import Iproperty from "@src/models/property.type";
 import Http from "@src/services/Http";
@@ -15,6 +14,7 @@ import { SinglePropertyProvider } from "@src/providers/SingleProperty.context";
 import { useTranslation } from "react-i18next";
 import getText from "@src/i18n/data/getText";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import PropertyDetails from "./PropertyDetails";
 
 
 function PropertySingle() {

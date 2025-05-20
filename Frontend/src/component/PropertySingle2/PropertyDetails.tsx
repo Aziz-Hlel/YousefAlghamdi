@@ -6,7 +6,6 @@ import FloorDetails from "../FloorDetails";
 import PropertyVideo from "../PropertyVideo";
 import PropertyLocation from "../PropertyLocation";
 import PropertyReview from "../PropertyReview";
-import PropertyAgents from "../Agents/PropertyAgents";
 import apiGateway from "@src/utils/apiGateway";
 import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
 import { useAgents } from "@src/providers/AgentsProvider.context";
@@ -14,13 +13,14 @@ import { useTranslation } from "react-i18next";
 import getText from "@src/i18n/data/getText";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import OtherDetailsTabFeatures from "./OtherDetailsTabFeatures";
+import PropertyAgents from "../Agents2/PropertyAgents2";
 
 function PropertyDetails() {
   const [activeTab, setActiveTab] = useState("Property Details");
   const handleActive = (title: any) => {
     setActiveTab(title);
   };
-  const { t } = useTranslation(['propertySingle','common']);
+  const { t } = useTranslation(['propertySingle', 'common']);
 
 
   const { property } = useSinglePropertyContext();
@@ -92,6 +92,10 @@ function PropertyDetails() {
             image={propertyAgent.agentInfo.imageGallery.miniImage.url}
             name={propertyAgent.firstName + " " + propertyAgent.lastName}
             position={capitalizePhrase(t(getText.common.realEstateBroker))}
+            phoneNumber={propertyAgent.phoneNumber}
+            property={property}
+
+
           />
         </div>
       </div>
