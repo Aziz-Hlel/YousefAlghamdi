@@ -18,7 +18,7 @@ function HomecFilter({ rentOrSale }: { rentOrSale: string }) {
   const [commercial, setCommercial] = useState(commercialOrNot[0]);
   const [category, setCategory] = useState<string>(categoriesType[LandAndPlots]);
   const [city, setCity] = useState(cities[AbuDhabiEmirate]);
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation(["common", "home"]);
   const navigate = useNavigate();
 
   const navigateToProperties = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -33,9 +33,9 @@ function HomecFilter({ rentOrSale }: { rentOrSale: string }) {
 
 
     const query = new URLSearchParams({
-      listingType: 'rent',
-      city: 'Umm Al-Quwain Emirate',
-      category: 'Land & Plots',
+      listingType: listing_type,
+      city: city,
+      category: category,
     });
 
     const url = `/property?listingType=${listing_type}&city=${city}&category=${category}`
@@ -74,7 +74,7 @@ function HomecFilter({ rentOrSale }: { rentOrSale: string }) {
 
             {/* Form Group   */}
             <FromField
-              name="Listing Type"
+              name={capitalizePhrase(t(getText.common.listingType))}
               options={commercialOrNot}
               state={commercial}
               setState={setCommercialWrapper}

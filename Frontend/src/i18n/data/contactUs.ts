@@ -1,9 +1,9 @@
 const contactUs = {
-    contactNow: "contactNow",
-    sendMessageNow: "sendMessageNow",
-    contactInfo: "contactInfo",
-    location: "location",
-    email: "email"
+    contactNow: "contactUs:contactNow",
+    sendMessageNow: "contactUs:sendMessageNow",
+    contactInfo: "contactUs:contactInfo",
+    location: "contactUs:location",
+    email: "contactUs:email"
 }
 
 

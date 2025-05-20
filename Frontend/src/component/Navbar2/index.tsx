@@ -12,7 +12,6 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
 
   const { user } = useAuth();
   const { t } = useTranslation(['home', 'common']);
-  { capitalizePhrase(t(getText.common.test)) }
 
   return (
 
@@ -43,10 +42,10 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
                         <NavBtn text={capitalizePhrase(t(getText.home.navigation.properties.properties))} link="#">
                           {/* <NavBtn link="/property" text="Properties" /> */}
 
-                          <NavBtn link={`/property?listingType=${listing_types.rent}`} text="Rent" />
-                          <NavBtn link={`/property?listingType=${listing_types.sale}`} text="Sale" />
-                          <NavBtn link={`/property?listingType=${listing_types.commercialRent}`} text="Commercial rent" />
-                          <NavBtn link={`/property?listingType=${listing_types.commercialSale}`} text="Commercial sale" />
+                          <NavBtn link={`/property?listingType=${listing_types.rent}`} text={capitalizePhrase(t(getText.common.rent))} />
+                          <NavBtn link={`/property?listingType=${listing_types.sale}`} text={capitalizePhrase(t(getText.common.sale))} />
+                          <NavBtn link={`/property?listingType=${listing_types.commercialRent}`} text={capitalizePhrase(t(getText.common.commercialRent))}/>
+                          <NavBtn link={`/property?listingType=${listing_types.commercialSale}`} text={capitalizePhrase(t(getText.common.commercialSale))} />
 
 
                           {/* <NavBtn link="/add-property" text="Add Property" />

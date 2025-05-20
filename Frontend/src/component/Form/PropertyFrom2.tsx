@@ -29,7 +29,7 @@ import SubmitPropertySchema from "@src/schemas/SubmitPropertySchema.zod";
 export type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
 
-type imageArray = (FileWithPath & { preview: string; key: string; } | null)[];
+type imageArray = ({ url: string; key: string; } | null)[];
 
 const PropertyFrom = () => {
 
@@ -72,6 +72,9 @@ const PropertyFrom = () => {
 
 
   const handleImageDelete = (idx: number) => {
+
+    console.log("delete", idx);
+
     setImgs((prev) => prev.map((_, index) => index === idx ? null : _));
   };
 
@@ -82,16 +85,16 @@ const PropertyFrom = () => {
 
 
 
-  const handleImageInput = async (uploadedImg: FileWithPath, idx: number, setProgress: Function) => {
+  const handleImageInput = async (uploadedImg: FileWithPath, idx: number, setProgress: Function, fileName?: string) => {
 
     const optimizedImg = await prepareImageForUpload(uploadedImg);
-    if (optimizedImg.width !== 1920 || optimizedImg.height !== 1080) {
-      setError("imageGallery.images", { message: "Image size should be 1920x1080" });
-      return
-    }
+    // if (optimizedImg.width !== 1920 || optimizedImg.height !== 1080) {
+    //   setError("imageGallery.images", { message: "Image size should be 1920x1080" });
+    //   return
+    // }
 
     setError("imageGallery.images", { message: "" });
-    const key = await uploadImageToS3_SIMULATOR(optimizedImg.blob, uploadedImg.name, imgsFolderId.current, "property", setProgress);
+    const key = await uploadImageToS3_SIMULATOR(optimizedImg.blob, fileName ?? uploadedImg.name, imgsFolderId.current, "property", setProgress);
     const imgWithPreview = Object.assign(uploadedImg, {
       preview: URL.createObjectURL(uploadedImg),
       key: key,
@@ -101,7 +104,7 @@ const PropertyFrom = () => {
 
     setImgs((prev) => {
       const newArray = [...prev];
-      newArray[idx] = imgWithPreview;
+      newArray[idx] = { url: URL.createObjectURL(uploadedImg), key: key };
       return newArray;
     });
 
@@ -177,7 +180,7 @@ const PropertyFrom = () => {
   console.log(errors);
 
   if (whatFor && !listing_typesValues.includes(whatFor)) return <> </>
-  
+
   return (
     <section className="pd-top-80 pd-btm-80"  >
       <div className="container" aria-disabled>

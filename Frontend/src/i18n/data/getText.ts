@@ -7,7 +7,9 @@ import dashboard from "./dashboard";
 import data from "./data";
 import home from "./home";
 import login from "./login";
+import pagesTitle from "./pagesTitle";
 import properties from "./properties";
+import propertySingle from "./propertySingle";
 
 const getText = {
     aboutUs,
@@ -15,7 +17,9 @@ const getText = {
     alerts,
     common,
     contactUs,
+    pagesTitle,
     dashboard,
+    propertySingle,
     data,
     home,
     login,

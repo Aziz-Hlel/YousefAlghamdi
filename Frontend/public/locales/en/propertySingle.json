@@ -1,0 +1,21 @@
+[
+    {
+        "description": "description",
+        "details": {
+            "title": "details",
+            "type": "type",
+            "city": "city",
+            "area": {
+                "title": "area",
+                "m2": "m2"
+            },
+            "rooms": "rooms",
+            "bathrooms": "bathrooms"
+        },
+        "nearestPlaces": {
+            "title": "Nearest Places",
+            "km": "km"
+        },
+        "additionalDetails": "additional details"
+    }
+]

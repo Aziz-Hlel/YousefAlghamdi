@@ -210,7 +210,7 @@ function Footer() {
                           <ul className="f-contact-list list-none">
                             <li>
                               <img src="/img/footer-phone.svg" alt="#" />
-                              <Link to={`tel:${companyInfo.phone}`}>{companyInfo.phone}</Link>
+                              <Link to={`tel:${companyInfo.phone}`} dir="ltr">{companyInfo.phone}</Link>
                             </li>
                             <li>
                               <img src="/img/footer-message.png" alt="#" />

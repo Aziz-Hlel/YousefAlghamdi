@@ -1,0 +1,15 @@
+[
+    {
+        "home": "home",
+        "lastestProperties": "latest Properties",
+        "aboutUs": "about Us",
+        "contactUs": "contact Us",
+        "dashboard": "dashboard",
+        "myProperties": "my Properties",
+        "allProperties": "all Properties",
+        "pendingProperties": "pending Properties",
+        "unavailableProperties": "unavailable Properties",
+        "changePassword": "change Password",
+        "submitProperty": "submit Property"
+    }
+]

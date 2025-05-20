@@ -7,9 +7,9 @@ import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
 
 
 type ImageInputProps = {
-  imgs: (File | null)[];
+  imgs: ({ url: string, key: string } | null)[];
   handleDelete: Function;
-  handleImage: (uploadedImg: FileWithPath, idx: number,setProgress:Function) => void;
+  handleImage: (uploadedImg: FileWithPath, idx: number, setProgress: Function) => void;
   fieldError: Merge<FieldError, (Merge<FieldError, FieldErrorsImpl<{ key: string; }>> | undefined)[]> | undefined | undefined
 };
 
@@ -22,18 +22,18 @@ function ImageInput({ imgs, handleDelete, handleImage, fieldError }: ImageInputP
       <h4 className="homec-submit-form__title">Property Image</h4>
       <div className="homec-submit-form__inner">
         <div className="row">
-
-          <UploadThumbnailCard handleImage={handleImage} img={imgs[0]} handleDelete={() => { }} />
+          <p className="homec-img-video-label mg-btm-10  pt-2">
+            Thumbnail Image*
+            {/* <span>(Max. limit 10 & Max. Size 10MB)</span> */}
+            <span>Image must be full HD (1920x1080)</span>
+          </p>
+          <UploadThumbnailCard handleImage={handleImage} img={imgs[0]} handleDelete={handleDelete} />
 
 
           <div className="col-lg-6 col-md-6 col-12">
             <div className="mg-top-20">
               <div className="homec-submit-form__upload mg-btm-10">
-                <p className="homec-img-video-label">
-                  Slider Image*
-                  {/* <span>(Max. limit 10 & Max. Size 10MB)</span> */}
-                  <span>Image must be full HD (1920x1080)</span>
-                </p>
+
                 {/* <div className="homec-submit-form__upload-btn">
                   <button className="homec-btn homec-btn--upload">
                     <span>Upload New Image</span>
@@ -42,25 +42,31 @@ function ImageInput({ imgs, handleDelete, handleImage, fieldError }: ImageInputP
               </div>
               {/* Image Input   */}
 
-
-              <div className="homec-upload-images">
-                <div className="row">
-                  {imgs.map((image, index) => (
-                    index !== 0 &&
-                    <UploadedImageCard
-                      key={index + 1}
-                      img={image}
-                      handleDelete={handleDelete}
-                      handleImage={handleImage}
-                      idx={index}
-                    />
-                  ))}
-                </div>
-              </div>
             </div>
+
           </div>
+
           <span className="text-red-600 p-2 inline-block">{fieldError?.message}</span>
 
+        </div>
+        <p className="homec-img-video-label pt-10">
+          Slider Images*
+          {/* <span>(Max. limit 10 & Max. Size 10MB)</span> */}
+          <span>Image must be full HD (1920x1080)</span>
+        </p>
+        <div className="homec-upload-images">
+          <div className="row">
+            {imgs.map((image, index) => (
+              index !== 0 &&
+              <UploadedImageCard
+                key={index + 1}
+                img={image}
+                handleDelete={handleDelete}
+                handleImage={handleImage}
+                idx={index}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -4,6 +4,13 @@ export const CommercialProperties = "Commercial Properties";
 export const LandAndPlots = "Land & Plots";
 
 
+export const categoriesList = [
+    ResidentialProperties,
+    CommercialProperties,
+    LandAndPlots,
+] as const;
+
+
 export const categoriesType = {
     [ResidentialProperties]: ResidentialProperties,
     [CommercialProperties]: CommercialProperties,

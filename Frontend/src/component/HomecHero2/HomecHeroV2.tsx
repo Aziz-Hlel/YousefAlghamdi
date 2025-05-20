@@ -10,7 +10,7 @@ import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 function HomecHero() {
   const [rentOrSale, setRentOrSale] = useState("Rent");
-  const { t } = useTranslation(['home', 'common']);
+  const { t } = useTranslation(['common','home']);
   { capitalizePhrase(t(getText.common.test)) }
 
   const handleListing_Type = (name: string) => {
@@ -53,12 +53,12 @@ function HomecHero() {
                     role="tablist"
                   >
                     <FilterTabBtn
-                      text={t(getText.common.rent)}
+                      text={capitalizePhrase(t(getText.common.rent))}
                       isActive={rentOrSale}
                       handleListing_Type={handleListing_Type}
                     />
                     <FilterTabBtn
-                      text={t(getText.common.sale)}
+                      text={capitalizePhrase(t(getText.common.sale))}
                       isActive={rentOrSale}
                       handleListing_Type={handleListing_Type}
                     />

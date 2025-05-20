@@ -7,16 +7,20 @@ import PropertyVideo from "../PropertyVideo";
 import PropertyLocation from "../PropertyLocation";
 import PropertyReview from "../PropertyReview";
 import PropertyAgents from "../Agents/PropertyAgents";
-import OtherDetailsTabFeatures from "./OtherDetailsTabFeatures";
 import apiGateway from "@src/utils/apiGateway";
 import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
 import { useAgents } from "@src/providers/AgentsProvider.context";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import OtherDetailsTabFeatures from "./OtherDetailsTabFeatures";
 
 function PropertyDetails() {
   const [activeTab, setActiveTab] = useState("Property Details");
   const handleActive = (title: any) => {
     setActiveTab(title);
   };
+  const { t } = useTranslation(['propertySingle','common']);
 
 
   const { property } = useSinglePropertyContext();
@@ -32,7 +36,7 @@ function PropertyDetails() {
   };
 
   const propertyDetails: IPropertyDetail[] = [
-    { "Type": property ? property.category : "" },
+    { Type: property ? property.category : "" },
     { City: property ? property.city : "" },
     { Area: property ? property.filterFields.area : "" },]
 
@@ -60,45 +64,34 @@ function PropertyDetails() {
               <div className="tab-content">
                 <DetailsTab
                   isActive={activeTab === "Property Details"}
-                  text={property.description}
+                  text={capitalizePhrase(t(getText.propertySingle.description))}
                 >
 
                   <DetailsTabFeatures
-                    title="Details"
+                    title={capitalizePhrase(t(getText.propertySingle.details.title))}
                     property={propertyDetails}
                   />
 
 
                   <OtherDetailsTabFeatures check={null}
-                    title="Nearest Place"
+                    title={capitalizePhrase(t(getText.propertySingle.nearestPlaces.title))}
                     property={nearestPlaces}
                   />
 
                   <OtherDetailsTabFeatures
-                    title="Additional details"
+                    title={capitalizePhrase(t(getText.propertySingle.additionalDetails))}
                     property={additionalDetails}
                     check={true}
                   />
                 </DetailsTab>
-                <FloorDetails isActive={activeTab === "Floor Plans"} />
-                <PropertyVideo
-                  isActive={activeTab === "Property Video"}
-                  img="https://placehold.co/785x410"
-                  text="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden end to main to marked."
-                />
-                <PropertyLocation
-                  address="70 Washington Square South, New York, NY 10012, United States"
-                  text="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden end to main to marked."
-                  isActive={activeTab === "Locations"}
-                />
-                <PropertyReview isActive={activeTab === "Review"} />
+
               </div>
             </div>
           </div>
           <PropertyAgents
             image={propertyAgent.agentInfo.imageGallery.miniImage.url}
             name={propertyAgent.firstName + " " + propertyAgent.lastName}
-            position="Real Estate Broker"
+            position={capitalizePhrase(t(getText.common.realEstateBroker))}
           />
         </div>
       </div>

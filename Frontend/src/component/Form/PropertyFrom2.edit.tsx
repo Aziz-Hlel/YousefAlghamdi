@@ -25,7 +25,7 @@ import Swal from 'sweetalert2'
 import { Alert, ConfirmationAlertAsync } from "@src/utils/createAlert";
 import SubmitPropertySchema from "@src/schemas/SubmitPropertySchema.zod";
 import prepareImageForUpload from "./prepareImageForUpload";
-import ImageInput from "./ImageInput2.edit";
+import ImageInput from "./ImageInput2";
 
 
 
@@ -164,26 +164,26 @@ const PropertyFrom = () => {
 
   // handle property image input sector
 
-  const handleImageInput = async (uploadedImg: FileWithPath, idx: number, setProgress: Function) => {
+  const handleImageInput = async (uploadedImg: FileWithPath, idx: number, setProgress: Function, fileName?: string) => {
 
     const optimizedImg = await prepareImageForUpload(uploadedImg);
-    if (optimizedImg.width !== 1920 || optimizedImg.height !== 1080) {
-      setError("imageGallery.images", { message: "Image size should be 1920x1080" });
-      return
-    } else {
-      clearErrors("imageGallery.images");
-    }
+    // if (optimizedImg.width !== 1920 || optimizedImg.height !== 1080) {
+    //   setError("imageGallery.images", { message: "Image size should be 1920x1080" });
+    //   return
+    // }
 
-    const key = await uploadImageToS3_SIMULATOR(optimizedImg.blob, uploadedImg.name, imgsFolderId.current, "property", setProgress);
+    setError("imageGallery.images", { message: "" });
+    const key = await uploadImageToS3_SIMULATOR(optimizedImg.blob, fileName ?? uploadedImg.name, imgsFolderId.current, "property", setProgress);
     const imgWithPreview = Object.assign(uploadedImg, {
       preview: URL.createObjectURL(uploadedImg),
-      key: key
+      key: key,
     });
 
+    console.log("imgWithPreview", imgWithPreview);
 
     setImgs((prev) => {
       const newArray = [...prev];
-      newArray[idx] = { key: imgWithPreview.key, url: URL.createObjectURL(uploadedImg) };
+      newArray[idx] = { url: URL.createObjectURL(uploadedImg), key: key };
       return newArray;
     });
 

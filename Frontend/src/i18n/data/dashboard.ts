@@ -1,50 +1,50 @@
 const dashboard = {
-    myProperties: "myProperties",
-    pendingProperties: "pendingProperties",
-    unavailableProperties: "unavailableProperties",
-    allProperties: "allProperties",
-    logout: "logout",
+    myProperties: "dashboard:myProperties",
+    pendingProperties: "dashboard:pendingProperties",
+    unavailableProperties: "dashboard:unavailableProperties",
+    allProperties: "dashboard:allProperties",
+    logout: "dashboard:logout",
     agents: {
-        title: "agents.title",
+        title: "dashboard:agents.title",
         table: {
-            firstName: "agents.table.firstName",
-            lastName: "agents.table.lastName",
-            email: "agents.table.email",
-            phone: "agents.table.phone",
-            edit: "agents.table.edit"
+            firstName: "dashboard:agents.table.firstName",
+            lastName: "dashboard:agents.table.lastName",
+            email: "dashboard:agents.table.email",
+            phone: "dashboard:agents.table.phone",
+            edit: "dashboard:agents.table.edit"
         },
         agentCU: {
-            addAgent: "agents.agentCU.addAgent",
-            mainAgentImage: "agents.agentCU.mainAgentImage",
-            mainphotoResolution: "agents.agentCU.mainphotoResolution",
-            minimizedAgentImage: "agents.agentCU.minimizedAgentImage",
-            minimizePhotoResolution: "agents.agentCU.minimizePhotoResolution",
-            firstName: "agents.agentCU.firstName",
-            lastName: "agents.agentCU.lastName",
-            emailAdress: "agents.agentCU.emailAdress",
-            phoneNumber: "agents.agentCU.phoneNumber",
-            password: "agents.agentCU.password",
-            confirmPassword: "agents.agentCU.confirmPassword",
+            addAgent: "dashboard:agents.agentCU.addAgent",
+            mainAgentImage: "dashboard:agents.agentCU.mainAgentImage",
+            mainphotoResolution: "dashboard:agents.agentCU.mainphotoResolution",
+            minimizedAgentImage: "dashboard:agents.agentCU.minimizedAgentImage",
+            minimizePhotoResolution: "dashboard:agents.agentCU.minimizePhotoResolution",
+            firstName: "dashboard:agents.agentCU.firstName",
+            lastName: "dashboard:agents.agentCU.lastName",
+            emailAdress: "dashboard:agents.agentCU.emailAdress",
+            phoneNumber: "dashboard:agents.agentCU.phoneNumber",
+            password: "dashboard:agents.agentCU.password",
+            confirmPassword: "dashboard:agents.agentCU.confirmPassword",
             btns: {
-                updateProfile: "agents.agentCU.btns.updateProfile",
-                updateAgent: "agents.agentCU.btns.updateAgent",
-                addAgent: "agents.agentCU.btns.addAgent"
+                updateProfile: "dashboard:agents.agentCU.btns.updateProfile",
+                updateAgent: "dashboard:agents.agentCU.btns.updateAgent",
+                addAgent: "dashboard:agents.agentCU.btns.addAgent"
             }
         }
     },
     personalInfo: {
-        title: "personalInfo.title",
-        btn: "personalInfo.btn",
+        title: "dashboard:personalInfo.title",
+        btn: "dashboard:personalInfo.btn",
         editProfile: {
-            title: "personalInfo.editProfile.title",
-            description: "personalInfo.editProfile.description"
+            title: "dashboard:personalInfo.editProfile.title",
+            description: "dashboard:personalInfo.editProfile.description"
         }
     },
     changePassword: {
-        sideBar: "changePassword.sideBar",  
-        title: "changePassword.title",
-        password: "changePassword.password",
-        confirmPassword: "changePassword.confirmPassword"
+        sideBar: "dashboard:changePassword.sideBar",
+        title: "dashboard:changePassword.title",
+        password: "dashboard:changePassword.password",
+        confirmPassword: "dashboard:changePassword.confirmPassword"
     }
 }
 

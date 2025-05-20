@@ -21,5 +21,64 @@
     "propertyCategory": "Property's Category",
     "SquareFeet": "Square Feet",
     "Price": "Price",
-    "search": "Search"
+    "search": "Search",
+    "applyFilter": "Apply Filter",
+    "realEstateBroker": "Real Estate Broker",
+    "state": {
+        "toBeDeleted": "toBeDeleted",
+        "toBeUpdated": "toBeUpdated",
+        "toBeAdded": "toBeAdded",
+        "unavailable": "unavailable",
+        "active": "active"
+    },
+    "roles": {
+        "USER": "user",
+        "CLIENT": "client",
+        "AGENT": "agent",
+        "ADMIN": "admin"
+    },
+    "sub_categories": {
+        "Residential Properties": {
+            "Apartment": "Apartment",
+            "Villa": "Villa",
+            "Townhouse": "Townhouse",
+            "Studio": "Studio",
+            "Penthouse": "Penthouse"
+        },
+        "Commercial Properties": {
+            "Office Space": "Office Space",
+            "Retail Shop": "Retail Shop",
+            "Warehouse": "Warehouse",
+            "Business Center": "Business Center"
+        },
+        "Land & Plots": {
+            "Residential Plot": "Residential Plot",
+            "Commercial Plot": "Commercial Plot",
+            "Agricultural Land": "Agricultural Land",
+            "Industrial Land": "Industrial Land"
+        }
+    },
+    "additionalDetails": {
+        "wifi": "Wi-Fi",
+        "swimmingPool": "Swimming Pool",
+        "gym": "Gym",
+        "airConditioning": "Air Conditioning",
+        "elevator": "Elevator",
+        "parking": "Parking",
+        "security": "Security",
+        "maintenance": "Maintenance",
+        "cleaning": "Cleaning",
+        "furnished": "Furnished",
+        "unfurnished": "Unfurnished",
+        "balcony": "Balcony",
+        "terrace": "Terrace",
+        "garden": "Garden",
+        "petsAllowed": "Pets Allowed",
+        "alcohol": "Alcohol",
+        "internet": "Internet",
+        "cableTV": "Cable TV",
+        "viewOfWater": "View of Water",
+        "viewOfLandmark": "View of Landmark"
+    },
+    "test": "test"
 }

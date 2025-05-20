@@ -1,10 +1,10 @@
 const properties={
-    searchProperties: "properties.searchProperties",
-    searchNow: "properties.searchNow",
-    showing: "properties.showing",
-    of: "properties.of",
-    results: "properties.results",
-    applyFilters: "properties.applyFilters"
+    searchProperties: "properties:searchProperties",
+    searchNow: "properties:searchNow",
+    showing: "properties:showing",
+    of: "properties:of",
+    results: "properties:results",
+    applyFilters: "properties:applyFilters"
 }
 
 

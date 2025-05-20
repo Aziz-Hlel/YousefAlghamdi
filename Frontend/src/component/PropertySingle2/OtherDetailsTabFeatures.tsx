@@ -1,23 +1,31 @@
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import ProtoTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
-function DetailsTabFeatures({ title, property, check }) {
+function DetailsTabFeatures({ title, property, check }: any) {
+
+  const { t } = useTranslation(['propertySingle', 'common']);
+
+
   return (
 
     <div className="bg-white rounded-xl p-4 m-4">
       <div className="homec-ptdetails-features ">
         <h4 className="homec-ptdetails-features__title">{title}</h4>
         <ul className="homec-ptdetails-features__list">
-          {property?.map((item, index) =>
+          {property?.map((item: any, index: number) =>
             check ? (
-              <li formkey={item + index}>
+              <li key={item + index}>
                 <b>
                   <i className="fas fa-check"></i> {item}
                 </b>
               </li>
             ) : (
-              <li formkey={index + Object.keys(item)[0]}>
+              <li key={index + Object.keys(item)[0]}>
                 <b>{Object.keys(item)[0]}:</b>{" "}
-                <span>{item[Object.keys(item)[0]]}</span>
+                <span>{item[Object.keys(item)[0]]} {capitalizePhrase(t(getText.propertySingle.nearestPlaces.km))}</span>
+
               </li>
             )
           )}

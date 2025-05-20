@@ -10,7 +10,7 @@ function NavBtn({ link, text, children }:{link:string,text:string,children?:any}
           <ul className="sub-menu">{children}</ul>
         </li>
       ) : (
-        <li>
+        <li className=" px-2">
           <Link to={link}>{text}</Link>
         </li>
       )}

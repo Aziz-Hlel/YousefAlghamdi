@@ -26,8 +26,7 @@ const FloatingContactButton = () => {
         });
     };
 
-    const { t } = useTranslation(['contactUs']);
-    { capitalizePhrase(t(getText.common.test)) }
+    const { t } = useTranslation(['contactUs', 'common']);
 
 
 

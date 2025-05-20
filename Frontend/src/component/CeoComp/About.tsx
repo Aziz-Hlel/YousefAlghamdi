@@ -36,7 +36,7 @@ function CEO() {
                 <img src={about_img} alt="#" />
                 <div className="homec-experiences">
                   <h4 className="homec-experiences__title">
-                    12 Years <span>Experience</span>
+                    {capitalizePhrase(t(getText.home.CEO.NumbyearsOfExperience))} <span> {capitalizePhrase(t(getText.home.CEO.ofExperience))}</span>
                   </h4>
                 </div>
               </div>
@@ -49,7 +49,7 @@ function CEO() {
                 </div>
                 <h4 className="homec-ceo-quote__title">
                   Narjiss Didi Alaoui
-                  <span>Ceo   <a className=" text-sm font-extralight " href="tel:+971525002822">+971 525002822</a></span>
+                  <span>Ceo<a className=" text-sm font-extralight " href="tel:+971525002822" dir="ltr">+971 525002822</a></span>
 
                 </h4>
               </div>
@@ -75,7 +75,7 @@ function CEO() {
                   data-aos="fade-in"
                   data-aos-delay="400"
                 >
-                 {capitalizePhrase(t(getText.home.CEO.WelcomeMessage))}
+                  {capitalizePhrase(t(getText.home.CEO.WelcomeMessage))}
 
                 </h2>
               </div>
@@ -85,7 +85,7 @@ function CEO() {
                 data-aos-delay="500"
               >
                 <p className="homec-about-content__text">
-                {capitalizePhrase(t(getText.home.CEO.message))}
+                  {capitalizePhrase(t(getText.home.CEO.message))}
 
                 </p>
 

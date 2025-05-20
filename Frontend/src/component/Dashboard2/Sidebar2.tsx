@@ -132,8 +132,8 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
           (user?.role === roles.AGENT || user?.role === roles.ADMIN) && < DashboardSidebarBtn
             active={activeComponent}
             handleActive={setComponent}
-            title="Unavailable properties"
-            path={capitalizePhrase(t(getText.dashboard.unavailableProperties))}
+            title={capitalizePhrase(t(getText.dashboard.unavailableProperties))}
+            path="dashboard/unavailable-properties"
           >
             <svg
               width="32"

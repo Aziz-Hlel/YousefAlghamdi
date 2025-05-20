@@ -1,95 +1,97 @@
-const home ={
-    welcome: "welcome",
+const home = {
+    welcome: "home:welcome",
     navigation: {
-        home: "navigation.home",
+        home: "home:navigation.home",
         properties: {
-            properties: "navigation.properties.properties",
-            rent: "navigation.properties.rent",
-            sale: "navigation.properties.sale",
-            commercialRent: "navigation.properties.commercialRent",
-            commercialSale: "navigation.properties.commercialSale"
+            properties: "home:navigation.properties.properties",
+            rent: "home:navigation.properties.rent",
+            sale: "home:navigation.properties.sale",
+            commercialRent: "home:navigation.properties.commercialRent",
+            commercialSale: "home:navigation.properties.commercialSale"
         },
-        about: "navigation.about",
-        contact: "navigation.contact",
-        dashboard: "navigation.dashboard",
-        addProperty: "navigation.addProperty"
+        about: "home:navigation.about",
+        contact: "home:navigation.contact",
+        dashboard: "home:navigation.dashboard",
+        addProperty: "home:navigation.addProperty"
     },
     HomecHeroV2: {
-        title: "HomecHeroV2.title",
-        listingType: "HomecHeroV2.listingType",
-        category: "HomecHeroV2.category",
-        city: "HomecHeroV2.city",
-        search: "HomecHeroV2.search"
+        title: "home:HomecHeroV2.title",
+        listingType: "home:HomecHeroV2.listingType",
+        category: "home:HomecHeroV2.category",
+        city: "home:HomecHeroV2.city",
+        search: "home:HomecHeroV2.search"
     },
     LatestPropertyV2: {
-        title: "LatestPropertyV2.title",
-        seeAllProperties: "LatestPropertyV2.seeAllProperties",
-        btn: "see all properties",
+        title: "home:LatestPropertyV2.title",
+        seeAllProperties: "home:LatestPropertyV2.seeAllProperties",
+        btn: "home:see all properties",
     },
     Sponsors: {
-        title: "Sponsors.title"
+        title: "home:Sponsors.title"
     },
     Features2: {
-        title: "Features2.title",
-        stepsToGo: "Features2.stepsToGo",
+        title: "home:Features2.title",
+        stepsToGo: "home:Features2.stepsToGo",
         steps: {
-            1: "Features2.steps.1",
-            2: "Features2.steps.2",
-            3: "Features2.steps.3",
-            4: "Features2.steps.4",
-            5: "Features2.steps.5",
-            6: "Features2.steps.6"
+            1: "home:Features2.steps.1",
+            2: "home:Features2.steps.2",
+            3: "home:Features2.steps.3",
+            4: "home:Features2.steps.4",
+            5: "home:Features2.steps.5",
+            6: "home:Features2.steps.6"
         }
     },
     CEO: {
-        aboutYGP: "CEO.aboutYGP",
-        WelcomeMessage: "CEO.WelcomeMessage",
-        message: "CEO.message",
-        ceo: "CEO.ceo",
-        yearsOfExperience: "CEO.yearsOfExperience"
+        aboutYGP: "home:CEO.aboutYGP",
+        WelcomeMessage: "home:CEO.WelcomeMessage",
+        message: "home:CEO.message",
+        ceo: "home:CEO.ceo",
+        NumbyearsOfExperience: "home:CEO.yearsOfExperience",
+        ofExperience: "home:CEO.ofExperience",
+        ceoName: "home:CEO.ceoName",
     },
     Agents: {
-        title: "Agents.title",
-        description: "Agents.description",
-        realEstateBroker: "Agents.realEstateBroker"
+        title: "home:Agents.title",
+        description: "home:Agents.description",
+        realEstateBroker: "home:Agents.realEstateBroker"
     },
     FaqSection: {
-        title: "FaqSection.title",
-        faq: "FaqSection.faq",
-        support: "FaqSection.support",
-        questions: "FaqSection.questions"
+        title: "home:FaqSection.title",
+        faq: "home:FaqSection.faq",
+        support: "home:FaqSection.support",
+        questions: "home:FaqSection.questions"
     },
     DownloadApp: {
-        title: "DownloadApp.title",
-        description: "DownloadApp.description",
+        title: "home:DownloadApp.title",
+        description: "home:DownloadApp.description",
         download: {
-            downloadOnTHe: "DownloadApp.download.downloadOnTHe",
-            appStore: "DownloadApp.download.appStore",
-            getItOn: "DownloadApp.download.getItOn",
-            googlePlay: "DownloadApp.download.googlePlay"
+            downloadOnTHe: "home:DownloadApp.download.downloadOnTHe",
+            appStore: "home:DownloadApp.download.appStore",
+            getItOn: "home:DownloadApp.download.getItOn",
+            googlePlay: "home:DownloadApp.download.googlePlay"
         }
     },
     Footer: {
-        title: "Footer.title",
-        description: "Footer.description",
+        title: "home:Footer.title",
+        description: "home:Footer.description",
         listing: {
-            listing: "Footer.listing.listing",
-            properties: "Footer.listing.properties",
-            addProperty: "Footer.listing.addProperty",
-            login: "Footer.listing.login",
-            signup: "Footer.listing.signup"
+            listing: "home:Footer.listing.listing",
+            properties: "home:Footer.listing.properties",
+            addProperty: "home:Footer.listing.addProperty",
+            login: "home:Footer.listing.login",
+            signup: "home:Footer.listing.signup"
         },
         important: {
-            title: "Footer.important.title",
-            aboutUs: "Footer.important.aboutUs",
-            ourAgents: "Footer.important.ourAgents",
-            contact: "Footer.important.contact"
+            title: "home:Footer.important.title",
+            aboutUs: "home:Footer.important.aboutUs",
+            ourAgents: "home:Footer.important.ourAgents",
+            contact: "home:Footer.important.contact"
         },
         copyright: {
-            allRightsReserved: "Footer.copyright.allRightsReserved",
-            technoShark: "Footer.copyright.technoShark",
-            aboutCompany: "Footer.copyright.aboutCompany",
-            contactUs: "Footer.copyright.contactUs"
+            allRightsReserved: "home:Footer.copyright.allRightsReserved",
+            technoShark: "home:Footer.copyright.technoShark",
+            aboutCompany: "home:Footer.copyright.aboutCompany",
+            contactUs: "home:Footer.copyright.contactUs"
         }
     }
 }

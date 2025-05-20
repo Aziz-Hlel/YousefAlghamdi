@@ -71,7 +71,7 @@ const Sponsors = () => {
 
     const displaySponsors = sponsors;
     const { t } = useTranslation(['home', 'common']);
-    { capitalizePhrase(t(getText.common.test)) }
+
     return (
         <div className="py-10 sm:px-4 bg-gray-50">
             <section className="py-12 sm:px-20 bg-gray-50 w-full">

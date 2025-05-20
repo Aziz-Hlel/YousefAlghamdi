@@ -7,7 +7,7 @@
   
 
 const prepareImageForUpload = async (
-    file: File,
+    file: File|Blob,
     options: ImageOptimizationOptions = {}
   ): Promise<{
     blob: Blob;
@@ -19,7 +19,6 @@ const prepareImageForUpload = async (
   }> => {
     // Default options with professional values
     const {
-      maxWidth = 1920,
       quality = 0.85,
       format = 'webp'
     } = options;
@@ -79,6 +78,7 @@ const prepareImageForUpload = async (
         },
         mimeType,
         quality,
+        
       );
     });
 

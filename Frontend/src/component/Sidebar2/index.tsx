@@ -4,28 +4,32 @@ import imarates from "../../types/imarates";
 import { useFormContext } from "../Property2/FilterProvider.context";
 import { useSearchParams } from "react-router-dom";
 import { listing_typesValues } from "@src/types/listing_types.types";
-import { categoriesType, ICategory, sub_categories } from "@src/types/categories.subcategories.types";
+import { categoriesList, categoriesType, ICategory, sub_categories } from "@src/types/categories.subcategories.types";
 import { cities, citiesType, delegations } from "@src/types/cities.delegations.types";
 import { useEffect } from "react";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { useTranslation } from "react-i18next";
 
 const SideBar22 = () => {
 
-  const {filterObject,  updateEstate } = useFormContext();
+  const { filterObject, updateEstate } = useFormContext();
   const [searchParams, setSearchParams] = useSearchParams();
-
-  // const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-
-  //   const field = e.target.name
-  //   const newValue = e.target.value;
-  //   console.log("newValue", newValue);
-
-  //   if (newValue) searchParams.set(field, newValue); // update param
-  //   else searchParams.delete(field, newValue)
-  //   setSearchParams(searchParams, { replace: true });     // push to URL
-  // };
+  const { t } = useTranslation(['home', 'common']);
 
   const city = searchParams.get('city');
   const category = searchParams.get('category');
+
+  if (city && !cities[city as citiesType]) {
+    searchParams.delete('city')
+    setSearchParams(searchParams, { replace: true });
+  }
+
+  if (category && categoriesList.includes(category as any)) {
+    searchParams.delete('category')
+    setSearchParams(searchParams, { replace: true });
+  }
+
 
   useEffect(() => {
     searchParams.delete('delegation')
@@ -45,7 +49,7 @@ const SideBar22 = () => {
       <div className="property-sidebar">
 
         <SelectiveInput
-          title="Lisiting type"
+          title={capitalizePhrase(t(getText.common.listingType))}
           options={
             listing_typesValues.map((listingType) => {
               return { id: listingType, name: listingType }
@@ -56,7 +60,7 @@ const SideBar22 = () => {
         />
 
         <SelectiveInput
-          title="City"
+          title={capitalizePhrase(t(getText.common.city))}
           options={
             Object.keys(cities).map((city) => {
               return { id: city, name: city };
@@ -66,7 +70,7 @@ const SideBar22 = () => {
         />
 
         <SelectiveInput
-          title="Delegation"
+          title={capitalizePhrase(t(getText.common.delegation))}
           options={
             searchParams.get('city') ? delegations[(searchParams.get('city') as citiesType)].map((delegation) => {
               return { id: delegation, name: delegation };
@@ -77,7 +81,7 @@ const SideBar22 = () => {
         />
 
         <SelectiveInput
-          title="Property Category"
+          title={capitalizePhrase(t(getText.common.category))}
           options={
             Object.keys(categoriesType).map((category) => {
               return { id: category, name: category }
@@ -88,9 +92,9 @@ const SideBar22 = () => {
         />
 
         <SelectiveInput
-          title="Sub-category"
+          title={capitalizePhrase(t(getText.common.subCategory))}
           options={
-            searchParams.get('category') ?
+            searchParams.get('category') && categoriesList.includes((searchParams.get('category') as any)) ?
               sub_categories[(searchParams.get('category') as ICategory)].map((estateType) => {
                 return { id: estateType, name: estateType }
               }) : []
@@ -131,7 +135,7 @@ const SideBar22 = () => {
           maxValue={filterObject.maxNumberOfSquareFeet}
           minKey={"minNumberOfSquareFeet"}
           maxKey={"maxNumberOfSquareFeet"}
-          title="Square feet"
+          title={capitalizePhrase(t(getText.common.SquareFeet))}
           standard="sq. ft."
         />
 
@@ -142,14 +146,14 @@ const SideBar22 = () => {
           maxValue={filterObject.maxPrice}
           minKey={"minPrice"}
           maxKey={"maxPrice"}
-          title="Price"
+          title={capitalizePhrase(t(getText.common.Price))}
           text="Range: "
           symbol="$"
         />
 
         <div className="w-full flex flex-col justify-center items-center gap-2 pt-4">
-          <button className="homec-btn" onClick={()=> updateEstate()}>
-            Apply filter
+          <button className="homec-btn" onClick={() => updateEstate()}>
+            {capitalizePhrase(t(getText.common.applyFilter))}
           </button>
           {/* <div className="underline font-extralight hover:cursor-pointer " onClick={() => resetFilter()}>reset filter</div> */}
         </div>

@@ -14,7 +14,9 @@ function PropertyBar({ gridStyle, handleGridStyle }: { gridStyle: any, handleGri
   return (
     <div className="homec-property-bar">
       <div className="homec-property-bar__single">
-        <Search />
+        {/* <Search /> */}
+        <div className=" flex w-96" />
+        <div className=" flex w-32" />
         {/* Show Results   */}
         <ShowingResult currentPage={`${idxFirstProperty}-${idxLastProperty}`} totalPages={totalCount} />
         {/* End Show Results  */}

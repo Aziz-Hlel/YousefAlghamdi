@@ -2,7 +2,7 @@ import ProtoTypes from "prop-types";
 
 function TopbarBtn({ link, img, text }) {
   return (
-    <li>
+    <li dir="ltr">
       <a href={link}>
         <img src={img} alt="#" />
         <span>{text}</span>

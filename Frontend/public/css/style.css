@@ -129,7 +129,8 @@ Version:	1.0
 
 .homec-header__menu .nav-menu li {
   display: inline-block;
-  margin-right: 25px;
+  margin-right: 10px;
+  margin-left: 10px;
   color: #fff;
   position: relative;
 }

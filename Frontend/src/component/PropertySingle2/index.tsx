@@ -12,11 +12,16 @@ import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import ThumbnailsSlider from "./ThumbnilsSlider";
 import { SinglePropertyProvider } from "@src/providers/SingleProperty.context";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 function PropertySingle() {
   const [isLoading, setIsLoading] = useState(true);
   const { propertyId } = useParams();
+
+  const { t } = useTranslation(['common','pageTitle']);
 
   useEffect(() => {
     propertyId && setIsLoading(false);
@@ -28,14 +33,14 @@ function PropertySingle() {
   } else {
     component = (
       <>
-        <SinglePropertyProvider id={propertyId }>
+        <SinglePropertyProvider id={propertyId}>
 
           {/* <Header v2={null} /> */}
-          <Breadcrumbs title="Latest Properties" background={null} overlay={null} titlePosition={null}>
-            <HistoryLinks link="home" text="Home" isActive={null} />
+          <Breadcrumbs title={capitalizePhrase(t(getText.pagesTitle.lastestProperties))} background={null} overlay={null} titlePosition={null}>
+            <HistoryLinks link="home" text={capitalizePhrase(t(getText.pagesTitle.home))} isActive={null} />
             <HistoryLinks
               link="property"
-              text="Latest Properties"
+              text={capitalizePhrase(t(getText.pagesTitle.lastestProperties))}
               isActive={true}
             />
           </Breadcrumbs>
