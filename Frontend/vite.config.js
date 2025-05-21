@@ -11,14 +11,14 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  
+
   envPrefix: 'VITE_',
 
   server: {
     port: 3000,
-    
+
     host: true,  /* Allows external access from AWS */
-    allowedHosts: ['ygp.ae', 'www.ygp.ae', 'localhost', '127.0.0.1',"http://localhost:3000"],
+    allowedHosts: ['ygp.ae', 'www.ygp.ae', 'localhost', '127.0.0.1', "http://localhost:3000"],
     strictPort: true, // Ensures the port is exactly 3000
     watch: {
       usePolling: true
@@ -41,7 +41,21 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
     // For better debugging in development
-    sourcemap: true
+    sourcemap: true,
+
+
+    // Enable asset hashing for proper cache busting
+    assetsInlineLimit: 4096,
+    rollupOptions: {
+      output: {
+        // Ensure CSS gets hashed filenames
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+      },
+    },
+
+
   }
 
 
