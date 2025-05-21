@@ -28,18 +28,40 @@ ygp.ae {  # Replace with your actual domain
     }
     rewrite @spa /index.html
     
-
+    file_server
+    
+    # Define matchers for different file types
+    @static {
+        path_regexp \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$
+    }
     
     @html {
         path_regexp \.html$
     }
     
-
+    # Apply headers based on matchers
+    header @static Cache-Control "public, max-age=604800, must-revalidate"
+    header @html Cache-Control "no-cache, must-revalidate"
+    
+    # Security headers for all responses
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    }
+    
+    # Compress responses
+    encode gzip zstd
     
     # Auto HTTPS with Let's Encrypt
     tls {
         protocols tls1.2 tls1.3
     }
     
-
+    # Handle errors gracefully
+    handle_errors {
+        respond "{http.error.status_code} {http.error.status_text}" {http.error.status_code}
+    }
 }
