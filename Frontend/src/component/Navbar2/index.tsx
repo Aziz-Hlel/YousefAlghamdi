@@ -44,7 +44,7 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
 
                           <NavBtn link={`/property?listingType=${listing_types.rent}`} text={capitalizePhrase(t(getText.common.rent))} />
                           <NavBtn link={`/property?listingType=${listing_types.sale}`} text={capitalizePhrase(t(getText.common.sale))} />
-                          <NavBtn link={`/property?listingType=${listing_types.commercialRent}`} text={capitalizePhrase(t(getText.common.commercialRent))}/>
+                          <NavBtn link={`/property?listingType=${listing_types.commercialRent}`} text={capitalizePhrase(t(getText.common.commercialRent))} />
                           <NavBtn link={`/property?listingType=${listing_types.commercialSale}`} text={capitalizePhrase(t(getText.common.commercialSale))} />
 
 
@@ -55,7 +55,7 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
                         <NavBtn link="/about" text={(t(getText.home.navigation.about))} />
                         {/* <NavBtn link="/agent-detail" text="Agent Details" /> */}
                         <NavBtn link="/contact" text={(t(getText.home.navigation.contact))} />
-                        <NavBtn link="/dashboard" text={(t(getText.home.navigation.dashboard))} />
+                        <NavBtn link="/dashboard/personal-info" text={(t(getText.home.navigation.dashboard))} />
                       </ul>
                       {/* End Main Menu */}
                     </div>

@@ -2,6 +2,10 @@ import { useState } from "react";
 import ProtoTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { listing_types } from "@src/types/listing_types.types";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { useTranslation } from "react-i18next";
+import { useAuth } from "@src/providers/AuthProvider.context";
 
 interface ImobileMenu {
   handleSidebar: () => void;
@@ -10,6 +14,12 @@ interface ImobileMenu {
 
 const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
   const [activeSubmenu, setActiveSubmenu] = useState("");
+  const { t } = useTranslation(['home', 'common']);
+  const { user } = useAuth();
+
+  { capitalizePhrase(t(getText.common.test)) }
+
+
   const handleActive = (name: string) => {
     if (activeSubmenu === name) {
       setActiveSubmenu("");
@@ -53,7 +63,7 @@ const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
 
               <li>
                 <Link to="/home" onClick={handleSidebar}>
-                  Home
+                  {capitalizePhrase(t(getText.home.navigation.home))}
                 </Link>
               </li>
 
@@ -62,25 +72,25 @@ const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
                 <Link
                   to="#"
                   onClick={(_) => handleActive("properties")} >
-                  Properties
+                  {capitalizePhrase(t(getText.home.navigation.properties.properties))}
                 </Link>
 
                 <ul className="sub-menu" onClick={handleSidebar}>
 
                   <li>
-                    <Link to="/property">Properties</Link>
+                    <Link to="/property"> {capitalizePhrase(t(getText.home.navigation.properties.properties))}</Link>
                   </li>
                   <li>
-                    <Link to={`/property?listingType=${listing_types.rent}`} >Rent</Link>
+                    <Link to={`/property?listingType=${listing_types.rent}`} > {capitalizePhrase(t(getText.home.navigation.properties.rent))}</Link>
                   </li>
                   <li>
-                    <Link to={`/property?listingType=${listing_types.sale}`} >Sale</Link>
+                    <Link to={`/property?listingType=${listing_types.sale}`} > {capitalizePhrase(t(getText.home.navigation.properties.sale))}</Link>
                   </li>
                   <li>
-                    <Link to={`/property?listingType=${listing_types.commercialRent}`} >Commercial rent</Link>
+                    <Link to={`/property?listingType=${listing_types.commercialRent}`} > {capitalizePhrase(t(getText.home.navigation.properties.commercialRent))}</Link>
                   </li>
                   <li>
-                    <Link to={`/property?listingType=${listing_types.commercialSale}`} >Commercial sale</Link>
+                    <Link to={`/property?listingType=${listing_types.commercialSale}`} > {capitalizePhrase(t(getText.home.navigation.properties.commercialSale))}</Link>
                   </li>
 
                 </ul>
@@ -88,17 +98,22 @@ const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
               </li>
 
               <li>
-                <Link to="/about" onClick={handleSidebar}>About us</Link>
+                <Link to="/about" onClick={handleSidebar}> {capitalizePhrase(t(getText.home.navigation.about))}</Link>
               </li>
 
               <li>
-                <Link to="/contact" onClick={handleSidebar}>Contact</Link>
+                <Link to="/contact" onClick={handleSidebar}> {capitalizePhrase(t(getText.home.navigation.contact))}</Link>
               </li>
 
               <li>
-                <Link to="/login" onClick={handleSidebar}>
-                  Login
-                </Link>
+                {user ?
+                  <Link to="/dashboard/personal-info" onClick={handleSidebar}>
+                    {capitalizePhrase(t(getText.home.navigation.profile))}
+                  </Link>
+                  :
+                  <Link to="/login" onClick={handleSidebar}>
+                    {capitalizePhrase(t(getText.home.navigation.login))}
+                  </Link>}
               </li>
 
             </ul>

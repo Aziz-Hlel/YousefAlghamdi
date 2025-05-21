@@ -12,7 +12,9 @@ const home = {
         about: "home:navigation.about",
         contact: "home:navigation.contact",
         dashboard: "home:navigation.dashboard",
-        addProperty: "home:navigation.addProperty"
+        addProperty: "home:navigation.addProperty",
+        login: "home:navigation.login",
+        profile: "home:navigation.profile",
     },
     HomecHeroV2: {
         title: "home:HomecHeroV2.title",

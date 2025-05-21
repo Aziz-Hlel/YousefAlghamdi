@@ -12,7 +12,10 @@
         "about": "About Us",
         "contact": "Contact",
         "dashboard": "Dashboard",
-        "addProperty": "Add Property"
+        "addProperty": "Add Property",
+        "login": "Login",
+        "profile": "Profile"
+
     },
     "HomecHeroV2": {
         "title": "Let’s Find Your Perfect Home For You.",
