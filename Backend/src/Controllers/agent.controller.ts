@@ -9,6 +9,7 @@ import errorMessages from "../utils/errorMessages";
 import mongoose from "mongoose";
 import { createAgentSchema, updateAgentSchema } from "../schemas/agent.CU";
 import { getCDN_SignedUrl } from "../imgHandler";
+import Property from "../Models/property.model";
 
 
 const addSignedUrlToAgent = (agent: IAgent) => {
@@ -113,5 +114,43 @@ export const getAgents = async (req: Request, res: Response, next: NextFunction)
     } catch (error) {
         console.log(error);
     }
+
+};
+
+
+
+
+
+
+
+export const deleteAgent = async (req: Request, res: Response, next: NextFunction) => {
+
+
+    const { agentId } = req.params;
+    if (!agentId || !mongoose.Types.ObjectId.isValid(agentId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    try {
+        // Step 2: Delete the agent
+        const agent = await User.findByIdAndDelete(agentId);
+        if (!agent) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+
+        await Property.updateMany(
+            { agentId },
+            {
+                $unset: { agentId: "" },// Proper way to remove a field in MongoDB
+                $set: { show: false }
+            }
+
+        );
+
+        await Property.deleteMany({ clientId: agentId });
+
+        res.status(statusCode.OK).json({ result: true });
+
+    } catch (error) {
+        next(error);
+    }
+
 
 };

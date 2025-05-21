@@ -22,7 +22,7 @@ const AgentsTable = () => {
               <th className="homec-invoice-table__column2">Last name</th>
               <th className="homec-invoice-table__column3">Email</th>
               <th className="homec-invoice-table__column4">Phone</th>
-              <th className="homec-invoice-table__column5">Edit</th>
+              <th className="homec-invoice-table__column5">Edit/Delete</th>
             </tr>
           </thead>
           <tbody className="homec-invoice-table__body">

@@ -26,7 +26,7 @@ type Iproperty = {
     productTier: string,
 
     clientId: string | IUser,
-    agentId: string,
+    agentId?: string,
 
     filterFields: {
         price: string,

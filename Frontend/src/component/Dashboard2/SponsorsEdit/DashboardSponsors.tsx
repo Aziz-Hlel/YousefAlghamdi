@@ -18,7 +18,6 @@ type IDashboardPropertyCard = {
 
 function SponsorsCard({ _id, logoUrl, name, url, }: IDashboardPropertyCard) {
 
-  const { user } = useAuth();
   const { getSponsors } = useSponsorsContext()
 
   const handleDeleteProperty = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

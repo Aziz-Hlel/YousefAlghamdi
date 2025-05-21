@@ -29,7 +29,7 @@ function PropertyDetails() {
 
   if (!property) return <></>
 
-  const propertyAgent = agents[property.agentId];
+  const propertyAgent = property.agentId ? agents[property.agentId] : undefined;
 
   type IPropertyDetail = {
     [key: string]: string | number;
@@ -88,15 +88,14 @@ function PropertyDetails() {
               </div>
             </div>
           </div>
-          <PropertyAgents
+          {propertyAgent && <PropertyAgents
             image={propertyAgent.agentInfo.imageGallery.miniImage.url}
             name={propertyAgent.firstName + " " + propertyAgent.lastName}
             position={capitalizePhrase(t(getText.common.realEstateBroker))}
             phoneNumber={propertyAgent.phoneNumber}
             property={property}
 
-
-          />
+          />}
         </div>
       </div>
     </section>

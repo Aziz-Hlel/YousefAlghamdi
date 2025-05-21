@@ -63,21 +63,14 @@ const App2 = () => {
                                 <Route path="property-single/:propertyId" element={<PropertySingle />} />
 
 
-                                <Route path="agent-detail/:agentId" element={<AgentDetail />} />
-                                {/* <Route path="our-agents" element={<OurAgents />} /> */}
                                 <Route path="about" element={<AboutUs />} />
-                                {/* <Route path="/pricing" element={<Pricing />} /> */}
-                                {/* <Route path="/payment-method" element={<PaymentMethod />} /> */}
                                 <Route path="faq" element={<Faq />} />
                                 <Route path="contact" element={<Contact />} />
 
                                 <Route element={<ProtectedLayouts />}>
 
-                                    {/* <Route path="edit-property" element={<EditProperty />} /> */}
                                     <Route path="add-property" element={<AddProperty />} />
                                     <Route path="submit-property/:whatFor" element={<SubmitProperty />} />
-                                    {/* <Route path="edit-property/:whatFor/:propertyId" element={<SinglePropertyProvider ><SubmitProperty /></SinglePropertyProvider>} /> */}
-
 
                                     <Route path="dashboard" element={<Dashboard />} >
 
@@ -115,8 +108,6 @@ const App2 = () => {
                                                 <Route path="edit-agent/:agentId" element={<CU_Agent />} />
                                             </Route>
                                         </Route>
-
-                                        {/* <Route path="add-agent" element={<UpdatePersonalInfo isModalOpen={true} toggleModal={() => { }} />}></Route> */}
 
                                     </Route>
 

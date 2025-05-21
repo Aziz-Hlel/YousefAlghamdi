@@ -2,6 +2,7 @@ import Iproperty from "@src/models/property.type";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 interface IpropertySingleProvider {
@@ -20,14 +21,14 @@ export const SinglePropertyProvider = ({ children, id }: { children: ReactNode, 
     // const { propertyId } = useParams()
 
     const [property, setProperty] = useState<Iproperty | undefined>(undefined);
-
+    const navigate = useNavigate();
     const updateProperty = async () => {
         // const property: Iproperty =  (await Http.get<Iproperty>(`${apiGateway.property.getById}/${id}`)).data.result;
         const response = await Http.get(`${apiGateway.property.getById}/${id}`);
         response?.status === 200 && setProperty(response.data.result)
-        
+
         if (response?.status !== 200)
-            throw new Error("Failed to fetch property data in SinglePropertyProvider , updateProperty function");
+            navigate("*")
 
         // console.log("property", typeof property);
         // console.log(property)

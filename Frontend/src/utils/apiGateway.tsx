@@ -56,6 +56,7 @@ const apiGateway = {
         list: "/agent/",
         create: "/agent",
         update: "/agent",
+        delete: "/agent",
     },
 
 

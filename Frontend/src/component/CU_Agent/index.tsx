@@ -5,6 +5,7 @@ import roles from "@src/types/roles.type";
 import apiGateway from "@src/utils/apiGateway";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useMyPropertiesContext } from "../Dashboard2/MyProperties/MyPropertiesProvider.context";
 
 
 type IUser = {
@@ -39,6 +40,7 @@ const UserView = () => {
   const { user } = useAuth()
   const [userInspected, setUserInspected] = useState<IUser>(initUser);
   const navigate = useNavigate();
+  const { fetchProperties } = useMyPropertiesContext()
 
   const toggleModal = async () => {
 
@@ -75,7 +77,7 @@ const UserView = () => {
   const { agents } = useAgents();
   const location = useLocation();
 
-  
+
   const changeAgentOfUser = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
@@ -86,10 +88,8 @@ const UserView = () => {
         userId: userInspected._id,
         agentId: currentAgent,
       })
-
-      navigate("../", {
-        state: { shouldRefresh: true }
-      });
+      fetchProperties(1);
+      navigate("../");
 
 
     }

@@ -321,6 +321,7 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
                   <div className=" mb-0  px-1">Phone :  </div>
                   <span>{`${property.clientId.phoneNumber}`}</span>
                 </div>
+                {!property.agentId && <span className="text-red-600">Not agent associated yet</span> }
               </>
             }
 

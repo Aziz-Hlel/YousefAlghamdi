@@ -41,11 +41,11 @@ export interface Iproperty {
     productTier: string,
 
     clientId: string,
-    agentId: string,
+    agentId?: string,
 
 
 
-    featured : boolean,
+    featured: boolean,
 
     active: boolean,
 
