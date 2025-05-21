@@ -57,7 +57,11 @@ services:
         - CDN_DOMAIN=${PROD___CDN_DOMAIN}
         - CDN_PUBLIC_KEY_ID=${PROD___CDN_PUBLIC_KEY_ID}
         - CDN_PRIVATE_KEY=${PROD___CDN_PRIVATE_KEY}  
-
+        - EMAIL_HOST=${PROD___EMAIL_HOST}
+        - EMAIL_PORT=${PROD___EMAIL_PORT}
+        - EMAIL_SECURE=${PROD___EMAIL_SECURE}
+        - EMAIL_USER=${PROD___EMAIL_USER}
+        - EMAIL_PASS=${PROD___EMAIL_PASS}
 
 
     restart: always

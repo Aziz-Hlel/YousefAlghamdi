@@ -45,6 +45,12 @@ services:
         - CDN_DOMAIN=${DEV___CDN_DOMAIN}
         - CDN_PUBLIC_KEY_ID=${DEV___CDN_PUBLIC_KEY_ID}
         - CDN_PRIVATE_KEY=${DEV___CDN_PRIVATE_KEY}       
+        - EMAIL_HOST=${DEV___EMAIL_HOST}
+        - EMAIL_PORT=${DEV___EMAIL_PORT}
+        - EMAIL_SECURE=${DEV___EMAIL_SECURE}
+        - EMAIL_USER=${DEV___EMAIL_USER}
+        - EMAIL_PASS=${DEV___EMAIL_PASS}
+  
     ports:
       - 5000:5000
     volumes:
@@ -69,6 +75,9 @@ services:
       - mongo-dev-data:/data/db
     env_file:
       - ./Backend/.env
+
+    command: mongod --logpath /dev/null  # For no logs at all
+
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 10s

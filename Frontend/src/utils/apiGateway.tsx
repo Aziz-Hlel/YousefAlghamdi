@@ -67,6 +67,11 @@ const apiGateway = {
         update: "/sponsor",
     },
 
+
+    services: {
+        email: "/services/email",
+    },
+
     images: baseUrl + "/images/",
 
     getSignedUrl: baseUrl + "/images/getSignedUrl",

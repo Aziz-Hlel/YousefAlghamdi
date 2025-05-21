@@ -27,6 +27,9 @@ const errorMessages = {
 
     },
     TEA_POT: "Teapot",
+    SERVICES: {
+        EMAIL: "Could not send email",
+    }
     // PERMISSION:{
     //     FORBIDDEN: "forbidden",
     // }

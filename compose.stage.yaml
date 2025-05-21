@@ -53,8 +53,13 @@ services:
         - CDN_DOMAIN=${STAGE___CDN_DOMAIN}
         - CDN_PUBLIC_KEY_ID=${STAGE___CDN_PUBLIC_KEY_ID}
         - CDN_PRIVATE_KEY=${STAGE___CDN_PRIVATE_KEY}       
+        - EMAIL_HOST=${STAGE___EMAIL_HOST}
+        - EMAIL_PORT=${STAGE___EMAIL_PORT}
+        - EMAIL_SECURE=${STAGE___EMAIL_SECURE}
+        - EMAIL_USER=${STAGE___EMAIL_USER}
+        - EMAIL_PASS=${STAGE___EMAIL_PASS}
 
-
+        
     restart: unless-stopped
 
     depends_on:
