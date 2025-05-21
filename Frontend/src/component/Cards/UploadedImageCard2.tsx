@@ -94,11 +94,6 @@ function UploadedImageCard({ img, handleImage, handleDelete, idx }: UploadedImag
     }
   }
 
-  let imgDisplayed: string | undefined;
-  if (!uploadedImg) imgDisplayed = "https://placehold.co/1920x1080"
-  else if (img === null) imgDisplayed = undefined
-  else imgDisplayed = img.url
-
 
 
   const handleCancel = (e: React.MouseEvent<HTMLDivElement>) => {

@@ -57,6 +57,7 @@ function PropertyAgents({ image, name, position, phoneNumber, property }: {
             <h4 className="homec-property-ag__author--title">
               {name}
               <span>{position}</span>
+              <a dir="ltr" className=" text-base font-sans" href={`tel:${phoneNumber}`}>{phoneNumber}</a>
             </h4>
           </div>
         </div>
