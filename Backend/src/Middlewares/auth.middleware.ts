@@ -54,7 +54,6 @@ const protect = async (req: AuthenticatedRequest, res: Response, next: NextFunct
         const userId = (decoded as any)._id
         if (!isValidObjectId(userId)) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN))
 
-        console.log(decoded)
         req.user = (decoded as any);
         next();
 

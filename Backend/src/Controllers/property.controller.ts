@@ -84,7 +84,6 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
                 updated_version: {},
             };
 
-        console.log("req.body", req.body.imageGallery)
         const property = new Property({
             ...req.body,
             clientId: clientId,
@@ -121,7 +120,7 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
     const { city, delegation, category, sub_category, listingType, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
 
     let filters: any = {};
-    console.log(req.query)
+    // console.log(req.query)
     filterFunc(minPrice, maxPrice, "filterFields.price", filters);
     // filterFunc(minNumberOfRooms, maxNumberOfRooms, "filterFields.rooms", filters);
     // filterFunc(minNumberOfBathrooms, maxNumberOfBathrooms, "filterFields.bathrooms", filters);
@@ -394,12 +393,12 @@ export const updateProperty = async (req: AuthenticatedRequest, res: Response, n
     const validBody = ApproveSubmitPropertySchema.safeParse(property);
 
     if (!validBody.success) {
-        console.log("validBody.error.issues", validBody.error.issues)
+        // console.log("validBody.error.issues", validBody.error.issues)
         let zodErrors = {}
         validBody.error.issues.forEach((issue) => zodErrors = { ...zodErrors, [issue.path[0]]: issue.message });
         return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request, zodErrors));
     }
-    console.log("validBody.data ::::::::::", validBody.data)
+    // console.log("validBody.data ::::::::::", validBody.data)
     try {
 
         const property = await Property.findById(propertyId);
@@ -413,13 +412,13 @@ export const updateProperty = async (req: AuthenticatedRequest, res: Response, n
             available: null,
             updated_version: validBody.data,
         };
-        console.log("property ::::::", property);
-        console.log("property.advanced type :::", typeof property.advanced.updated_version);
+        // console.log("property ::::::", property);
+        // console.log("property.advanced type :::", typeof property.advanced.updated_version);
         const prop = await property.save();
         res.status(statusCode.OK).json({ result: prop });
     }
     catch (error) {
-        console.log(error)
+        // console.log(error)
         next(error);
     };
 
@@ -505,7 +504,7 @@ export const approveProperty = async (req: AuthenticatedRequest, res: Response, 
     const validBody = ApproveSubmitPropertySchema.safeParse(property);
 
     if (!validBody.success) {
-        console.log("validBody.error.issues", validBody.error.issues)
+        // console.log("validBody.error.issues", validBody.error.issues)
         let zodErrors = {}
         validBody.error.issues.forEach((issue) => zodErrors = { ...zodErrors, [issue.path[0]]: issue.message });
         return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request, zodErrors));
@@ -515,8 +514,8 @@ export const approveProperty = async (req: AuthenticatedRequest, res: Response, 
     try {
         const property = await Property.findById(propertyId);
         if (!property) return next(errorHandler(statusCode.NOT_FOUND, errorMessages.COMMON.NOT_FOUND));
-        console.log("req.user", req.user)
-        console.log("property.agentId", property.agentId)
+        // console.log("req.user", req.user)
+        // console.log("property.agentId", property.agentId)
 
         if (req.user && req.user.role === roles.AGENT && property.agentId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
 
@@ -726,7 +725,7 @@ export const getAllProperties = async (req: AuthenticatedRequest, res: Response,
 
 
 export const featureProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    console.log("sdfjipsdpjif")
+
     const propertyId = req.params.propertyId;
     if (!propertyId || !mongoose.Types.ObjectId.isValid(propertyId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 

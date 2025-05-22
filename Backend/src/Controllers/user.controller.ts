@@ -15,9 +15,7 @@ import { merge, pick } from 'lodash';
 
 
 export const test = async (req: Request, res: Response) => {
-    const prop = await User.find({ _id: new mongoose.Types.ObjectId("6821b247bc4d00392204d5a7") });
-    console.log(prop[0].id )
-    res.json({ message: 'API is working! ', prop });
+    res.json({ message: 'API is working! ' });
 };
 
 const registerBodySchema = z.object({
@@ -118,17 +116,14 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
     if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.COMMON.Invalid_Credentials));
 
-    console.log("ousil", user.email, password)
     if (!(await user.matchPassword(password))) {
-        console.log("ousil0.5")
 
         return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.COMMON.Invalid_Credentials));
     }
-    console.log("ousil2")
 
     user.set('password', undefined, { strict: false });
     generateToken(res, user);
-    console.log('res cookies ==>', res)
+
     res.status(statusCode.OK);
 
 }
