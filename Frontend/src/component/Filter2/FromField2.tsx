@@ -1,7 +1,14 @@
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { useTranslation } from "react-i18next";
 
 
 
 function FromField({ name, options, state, setState }: { name: string, options: string[], state: string, setState: Function }) {
+
+  const { t } = useTranslation(["common", "data"]);
+
+  console.log("xxxxxxxxx", (getText.data[options[0] as keyof typeof getText.data]));
 
   return (
     <div className="form-group text-xs  font-light  lg:w-52 flex justify-center">
@@ -15,7 +22,8 @@ function FromField({ name, options, state, setState }: { name: string, options: 
       >
         {options.map((option: any, index: number) => (
           <option value={option} key={index}>
-            {option}
+            {/* {option} */}
+            {capitalizePhrase(t(getText.data[option as keyof typeof getText.data]))}
           </option>
         ))}
       </select>

@@ -10,7 +10,6 @@ import Header from "../Header";
 import HomecHero from "../HomecHero2";
 import HomecHeroV2 from "../HomecHero2/HomecHeroV2";
 import LatestProperty from "../LatestProperty";
-import CitiesListing from "../CitiesListing2";
 import Preloader from "../Loader";
 import FaqSection from "../Faq/FaqSection";
 import LatestPropertyV2 from "../LatestProperty2/LatestPropertyV22";
@@ -31,9 +30,7 @@ function Home() {
   } else {
     component = (
       <>
-        {/* <HomecHero /> */}
         <HomecHeroV2 />
-        {/* <CitiesListing /> */}.
         <FeaturedPropertiesProvider>
           <LatestPropertyV2 />
         </FeaturedPropertiesProvider>

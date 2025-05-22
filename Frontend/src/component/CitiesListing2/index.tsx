@@ -1,8 +1,6 @@
 import HomeSearch from "../Filter2/HomeSearch";
 import Title from "../Title";
 import SingleList from "./SingleList";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import TitleBtn from "../Button/TitleBtn";
 import dubai_central from "../../assets/img/dubai_central.jpg";
 import deira from "../../assets/img/deira.jpg"
 

@@ -15,7 +15,6 @@
         "addProperty": "Add Property",
         "login": "Login",
         "profile": "Profile"
-
     },
     "HomecHeroV2": {
         "title": "Let’s Find Your Perfect Home For You.",
@@ -61,7 +60,25 @@
         "title": "If you want to know Frequently Ask Questions",
         "faq": "FAQ",
         "support": "24/7 Support",
-        "questions": "Have any Questions Contact Us?"
+        "questions": "Have any Questions Contact Us?",
+        "contents": {
+            "1": {
+                "question": "What services does YGP Real Estate provide?",
+                "answer": " YGP is a full-service brokerage that helps clients *buy, sell, or rent* ready and off-plan properties across the UAE. We also offer landlord representation, property-management packages, and investment advisory services to maximise rental yields and capital growth."
+            },
+            "2": {
+                "question": "Can non-UAE residents purchase property through YGP?",
+                "answer": " Yes. Foreign buyers can purchase freehold property in designated zones. YGP handles the entire cross-border process for you—from virtual viewings and due-diligence checks to drafting the Sales & Purchase Agreement (SPA) and coordinating trustee-office transfers—so you can complete the transaction even if you are outside the UAE.  "
+            },
+            "3": {
+                "question": "How long does a typical property purchase take with YGP?",
+                "answer": " Once you select a property, the end-to-end process usually spans *10–15 working days* for cash deals and *30–45 working days* if bank financing is involved. We manage every step—price negotiation, SPA signing, No-Objection Certificate (NOC) collection, mortgage coordination (if required), and trustee transfer—so you can receive your title deed with minimal hassle.  "
+            },
+            "4": {
+                "question": "How do I list my property or book a viewing?",
+                "answer": "1️⃣ Call or WhatsApp +971 52 500 2822 or email info@ygp.ae . 2️⃣ Share basic details (title deed, Oqood, photos). 3️⃣ A dedicated agent will visit to verify the unit, sign the Form A listing agreement, and arrange professional photos. 4️⃣ Your listing goes live on ygp.ae and major portals within 24 hours, and viewings are scheduled at your convenience—often the same day."
+            }
+        }
     },
     "DownloadApp": {
         "title": "Download Our Mobile App",

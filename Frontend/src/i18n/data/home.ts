@@ -61,7 +61,25 @@ const home = {
         title: "home:FaqSection.title",
         faq: "home:FaqSection.faq",
         support: "home:FaqSection.support",
-        questions: "home:FaqSection.questions"
+        questions: "home:FaqSection.questions",
+        contents: {
+            1: {
+                question: "home:FaqSection.contents.1.question",
+                answer: "home:FaqSection.contents.1.answer"
+            },
+            2: {
+                question: "home:FaqSection.contents.2.question",
+                answer: "home:FaqSection.contents.2.answer"
+            },
+            3: {
+                question: "home:FaqSection.contents.3.question",
+                answer: "home:FaqSection.contents.3.answer"
+            },
+            4: {
+                question: "home:FaqSection.contents.4.question",
+                answer: "home:FaqSection.contents.4.answer"
+            },
+        }
     },
     DownloadApp: {
         title: "home:DownloadApp.title",

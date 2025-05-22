@@ -3,8 +3,6 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./component/Home";
-import Home2 from "./component/Home-2";
-import Home3 from "./component/Home-3";
 import Property from "./component/Property";
 import PropertySingle from "./component/Property Single";
 import EditProperty from "./component/Edit Property";
