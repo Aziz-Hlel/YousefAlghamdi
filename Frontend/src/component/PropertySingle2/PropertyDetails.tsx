@@ -64,7 +64,7 @@ function PropertyDetails() {
               <div className="tab-content">
                 <DetailsTab
                   isActive={activeTab === "Property Details"}
-                  text={capitalizePhrase(t(getText.propertySingle.description))}
+                  text={property.description}
                 >
 
                   <DetailsTabFeatures
