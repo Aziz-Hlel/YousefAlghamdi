@@ -6,15 +6,19 @@ import DownloadApp from "../DownloadApp";
 
 import Sidebar from "./Sidebar2";
 
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Preloader from "../Loader";
 
 import { useAuth } from "@src/providers/AuthProvider.context";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalize } from "lodash";
 
 function Dashboard() {
   // Inner navigation
   const [activeComponent, setActiveComponent] = useState("Dashboard");
-  const navigate = useNavigate();
+  const { t } = useTranslation(['common', 'pagesTitle']);
+
 
   const logout = useAuth().logout
   // navigate to logout
@@ -45,8 +49,8 @@ function Dashboard() {
           background="url(/img/bread-overlay.jpg)"
         >
 
-          <HistoryLinks link="/home" text="Home" isActive={false} />
-          <HistoryLinks link="/dashboard" text="Dashboard" isActive={true} />
+          <HistoryLinks link="/home" text={capitalize(t(getText.pagesTitle.home))} isActive={false} />
+          <HistoryLinks link="/dashboard" text={capitalize(t(getText.pagesTitle.dashboard))} isActive={true} />
         </Breadcrumbs>
         <section className="homec-dashboard pd-top-100 pd-btm-100 homec-bg-third-color">
           <div className="container">

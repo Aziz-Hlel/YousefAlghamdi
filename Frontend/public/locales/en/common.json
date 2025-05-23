@@ -10,8 +10,8 @@
     "phoneNumber": "Phone Number",
     "password": "Password",
     "confirmPassword": "Confirm Password",
-    "prev": "Prev",
-    "next": "Next",
+    "prev": "prev",
+    "next": "next",
     "goTopBtn ": "Go To Top",
     "listingType": "Listing Type",
     "category": "Category",
@@ -24,6 +24,8 @@
     "search": "Search",
     "applyFilter": "Apply Filter",
     "realEstateBroker": "Real Estate Broker",
+    "loading": "Loading",
+    "noPublishPersonalInfo": "your personal info will not be published",
     "state": {
         "toBeDeleted": "toBeDeleted",
         "toBeUpdated": "toBeUpdated",
@@ -32,10 +34,10 @@
         "active": "active"
     },
     "roles": {
-        "USER": "user",
-        "CLIENT": "client",
-        "AGENT": "agent",
-        "ADMIN": "admin"
+        "user": "client",
+        "client": "client",
+        "agent": "agent",
+        "admin": "admin"
     },
     "sub_categories": {
         "Residential Properties": {

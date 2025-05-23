@@ -1,25 +1,27 @@
 
 const addProperty = {
     addPropertyForRent: {
-        title: "aboutUs:addProperty.addPropertyForRent.title",
-        description: "aboutUs:addProperty.addPropertyForRent.description",
-        btn: "aboutUs:addProperty.addPropertyForRent.btn"
+        title: "addProperty:addPropertyForRent.title",
+        description: "addProperty:addPropertyForRent.description",
+        btn: "addProperty:addPropertyForRent.btn"
     },
     addPropertyForSale: {
-        title: "aboutUs:addProperty.addPropertyForSale.title",
-        description: "aboutUs:addProperty.addPropertyForSale.description",
-        btn: "aboutUs:addProperty.addPropertyForSale.btn"
+        title: "addProperty:addPropertyForSale.title",
+        description: "addProperty:addPropertyForSale.description",
+        btn: "addProperty:addPropertyForSale.btn"
     },
     addPropertyForCommercialRent: {
-        title: "aboutUs:addProperty.addPropertyForCommercialRent.title",
-        description: "aboutUs:addProperty.addPropertyForCommercialRent.description",
-        btn: "aboutUs:addProperty.addPropertyForCommercialRent.btn"
+        title: "addProperty:addPropertyForCommercialRent.title",
+        description: "addProperty:addPropertyForCommercialRent.description",
+        btn: "addProperty:addPropertyForCommercialRent.btn"
     },
     addPropertyForCommercialSale: {
-        title: "aboutUs:addProperty.addPropertyForCommercialSale.title",
-        description: "aboutUs:addProperty.addPropertyForCommercialSale.description",
-        btn: "aboutUs:addProperty.addPropertyForCommercialSale.btn"
-    }
+        title: "addProperty:addPropertyForCommercialSale.title",
+        description: "addProperty:addPropertyForCommercialSale.description",
+        btn: "addProperty:addPropertyForCommercialSale.btn"
+    },
+    addPropertyFor: "addProperty:addPropertyFor",
+    createFor: "addProperty:createFor"
 }
 
 

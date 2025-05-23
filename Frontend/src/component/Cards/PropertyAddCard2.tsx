@@ -1,3 +1,6 @@
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 type PropertyAddCardProps = {
@@ -9,6 +12,10 @@ type PropertyAddCardProps = {
 
 
 function PropertyAddCard({ img, why, btn, link }: PropertyAddCardProps) {
+
+  const { t } = useTranslation(['data', 'addProperty','common']);
+
+
   return (
     <div
       className="col-lg-6 col-md-6 col-12 mg-top-30"
@@ -23,9 +30,9 @@ function PropertyAddCard({ img, why, btn, link }: PropertyAddCardProps) {
         </div>
         {/* Homec Property Content   */}
         <div className="homec-add-property__content">
-          <h3 className="homec-add-property__title">Add Property for {why}</h3>
+          <h3 className="homec-add-property__title">{capitalizePhrase(t(getText.addProperty.addPropertyFor))} {why}</h3>
           <p className="homec-add-property__text">
-            Your email address will not be published. Required fields are marked
+            {capitalizePhrase(t(getText.common.noPublishPersonalInfo))} 
           </p>
           <div className="homec-add-property__button">
             <Link
@@ -34,7 +41,7 @@ function PropertyAddCard({ img, why, btn, link }: PropertyAddCardProps) {
                 btn !== "second" ? "homec-btn" : "homec-btn homec-btn__second"
               }
             >
-              <span>Create For {why}</span>
+              <span>{capitalizePhrase(t(getText.addProperty.createFor))} {why}</span>
             </Link>
           </div>
         </div>

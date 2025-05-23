@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 function DetailsTabFeatures({ title, property, check }: any) {
 
-  const { t } = useTranslation(['propertySingle', 'common']);
+  const { t } = useTranslation(['data', 'propertySingle']);
 
 
   return (
@@ -18,7 +18,8 @@ function DetailsTabFeatures({ title, property, check }: any) {
             check ? (
               <li key={item + index}>
                 <b>
-                  <i className="fas fa-check"></i> {item}
+                  {/* <i className="fas fa-check"></i> {item} */}
+                  <i className="fas fa-check"></i> {capitalizePhrase(t(getText.data[item as keyof typeof getText.data]))}
                 </b>
               </li>
             ) : (

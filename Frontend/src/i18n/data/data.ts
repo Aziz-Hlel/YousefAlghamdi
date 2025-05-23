@@ -105,6 +105,32 @@ const data = {
     "Non commercial": "Non commercial",
     "Commercial": "Commercial",
 
+
+
+
+    "title": "title",
+    "type": "type",
+    "description": "description",
+    "category": "category",
+    "sub_category": "sub_category",
+    "city": "city",
+    "delegation": "delegation",
+    "addresse": "addresse",
+    "listing_type": "listing_type",
+    "price": "price",
+    "area": "area",
+    "rooms": "rooms",
+    "bathrooms": "bathrooms",
+    "nearestPlaces": "nearestPlaces",
+    "additionalDetails": "additionalDetails",
+
+
+    "rent": "rent",
+    "sale": "sale",
+    "commercial rent": "commercial rent",
+    "commercial sale": "commercial sale",
+
+
 }
 
 

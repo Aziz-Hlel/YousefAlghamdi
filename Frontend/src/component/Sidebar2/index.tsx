@@ -1,6 +1,5 @@
 import SelectiveInput from "../Form/SelectiveInput2";
 import RangeInput from "../Form/RangeInput2";
-import imarates from "../../types/imarates";
 import { useFormContext } from "../Property2/FilterProvider.context";
 import { useSearchParams } from "react-router-dom";
 import { listing_typesValues } from "@src/types/listing_types.types";

@@ -1,14 +1,18 @@
-import Header from "../Header";
 import Breadcrumbs from "../Breadcrumbs";
 import HistoryLinks from "../Breadcrumbs/HistoryLinks";
-import DownloadApp from "../DownloadApp";
-import Footer from "../Footer";
 import Preloader from "../Loader";
 import { useEffect, useState } from "react";
 import PropertyFrom from "../Form/PropertyFrom2";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import DownloadApp from "../DownloadApp2";
 
 const SubmitProperty = () => {
   const [isLoading, setisLoadingg] = useState(true);
+  const { t } = useTranslation(['common', 'pagesTitle']);
+
+
   useEffect(() => {
     setisLoadingg(false);
   }, []);
@@ -21,13 +25,13 @@ const SubmitProperty = () => {
 
       <>
         <Breadcrumbs
-          title="Submit Property"
+          title={capitalizePhrase(t(getText.pagesTitle.submitProperty))}
           titlePosition="bottom"
           background="url(/img/bread-overlay.jpg)" overlay={undefined} >
-          <HistoryLinks link="/home" text="Home" isActive={undefined} />
+          <HistoryLinks link="/home" text={capitalizePhrase(t(getText.pagesTitle.home))} isActive={undefined} />
           <HistoryLinks
             link="/submit-property"
-            text="Submit Property"
+            text={capitalizePhrase(t(getText.pagesTitle.submitProperty))}
             isActive={true}
           />
         </Breadcrumbs>

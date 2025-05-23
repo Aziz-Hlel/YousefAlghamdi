@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import SponsorForm2 from "./SponsorForm2";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 
-const CU_Sponsor = () => {
+const CU_Sponsor = ({ edit }: { edit: boolean }) => {
 
   const navigate = useNavigate();
 
+  const { t } = useTranslation(['common', 'dashboard']);
 
   const isModalOpen = true;
 
@@ -42,9 +46,9 @@ const CU_Sponsor = () => {
           </button>
           <div className="homec-modal__inner">
             <h3 className="ecom-wc__form-title ecom-wc__form-title__one">
-              Sponsors Info edit{" "}
-             
-            </h3> 
+              {edit ? capitalizePhrase(t(getText.dashboard.sponsors.cuSponsor.edit)) : capitalizePhrase(t(getText.dashboard.sponsors.cuSponsor.add))}
+
+            </h3>
             {/* Sign in Form  */}
             <SponsorForm2 />
             {/* End Sign in Form */}

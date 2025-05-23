@@ -1,6 +1,12 @@
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { useTranslation } from "react-i18next";
 
 
 function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number, handlePage: any, currentPage: number }) {
+
+  const { t } = useTranslation(['common', 'dashboard']);
+
 
   return (
     <div className="row mg-top-40">
@@ -13,14 +19,14 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
                 currentPage > 1 && handlePage(currentPage - 1);
               }}
             >
-              Prev
+              {capitalizePhrase(t(getText.common.prev))}
             </a>
           </li>
 
           {Array.from({ length: totalPage }, (_, index) => (
             index === 0 || index + 1 === totalPage ? (
               <li
-              
+
                 className={currentPage === index + 1 ? "active" : ""}
                 key={index}
               >
@@ -35,7 +41,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
             ) : (index < 5 && currentPage < 5) ||
               (index > totalPage - 6 && currentPage > totalPage - 4) ? (
               <li
-              
+
                 className={currentPage === index + 1 ? "active" : ""}
                 key={index}
               >
@@ -51,7 +57,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               index === currentPage - 1 ||
               index === currentPage ? (
               <li
-              
+
                 className={currentPage === index + 1 ? "active" : ""}
 
               >
@@ -65,7 +71,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               </li>
             ) : currentPage > 4 && index === 2 ? (
               <li
-              
+
                 className={currentPage === index + 1 ? "active" : ""}
               >
                 <a
@@ -80,7 +86,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
               currentPage < totalPage - 2 &&
               index === totalPage - 2 && (
                 <li
-                
+
                   className={currentPage === index + 1 ? "active" : ""}
                 >
                   <a
@@ -104,7 +110,7 @@ function Pagination({ totalPage, handlePage, currentPage }: { totalPage: number,
                 currentPage < totalPage && handlePage(currentPage + 1);
               }}
             >
-              Next
+              {capitalizePhrase(t(getText.common.next))}   
             </a>
           </li>
         </ul>}

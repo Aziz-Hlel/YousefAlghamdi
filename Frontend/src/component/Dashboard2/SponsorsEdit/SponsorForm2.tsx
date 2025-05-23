@@ -11,6 +11,9 @@ import { FileWithPath, useDropzone } from "react-dropzone";
 import CircularProgressBarAgent from "@src/component/Form/CircularProgressBarAgent";
 import prepareImageForUpload from "@src/component/Form/prepareImageForUpload";
 import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 const SponsorSchema = z.object({
@@ -41,6 +44,8 @@ function SponsorForm() {
 
   const { sponsors, getSponsors } = useSponsorsContext();
   const { sponsorId } = useParams();
+  const { t } = useTranslation(['common', 'dashboard']);
+
 
   const editMode = sponsorId ? true : false;
 
@@ -57,7 +62,7 @@ function SponsorForm() {
     maxFiles: 1,
     accept: { 'image/*': [], },
     disabled: false,
-    maxSize: 5 * 1024 * 1024, // 5MB max file size
+    maxSize: 10 * 1024 * 1024, // 5MB max file size
 
   });
   const [progressMain, setProgressMain] = useState<number>();
@@ -142,8 +147,8 @@ function SponsorForm() {
       <div className="row">
         <div className="col-12">
           <div className=" flex  max-w-24 w-auto justify-start mg-top-20 rounded-none" {...getRootProps()}>
-         
-            <img src={getValues("image.url") ?? ""} className="bg-gray-300 max-w-24 w-24 min-h-24 h-24 rounded-none"  />
+
+            <img src={getValues("image.url") ?? ""} className="bg-gray-300 max-w-24 w-24 min-h-24 h-24 rounded-none" />
 
             <label htmlFor="file-input rounded-none">
               <span className="homec-pimg">
@@ -173,14 +178,14 @@ function SponsorForm() {
         </div>
         <PropertyTextInput
           size="col-lg-6 col-md-6"
-          title="Name*"
+          title={capitalizePhrase(t(getText.dashboard.sponsors.cuSponsor.name))}
           placeholder="Demo Name"
           fieldRegister={register("name")}
           fieldError={errors.name}
         />
         <PropertyTextInput
           size="col-lg-6 col-md-6"
-          title="Url*"
+          title={capitalizePhrase(t(getText.dashboard.sponsors.cuSponsor.url))}
           placeholder="Demo Name"
           fieldRegister={register("url")}
           fieldError={errors.url}

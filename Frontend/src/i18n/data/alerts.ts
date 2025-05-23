@@ -1,36 +1,48 @@
 const alerts = {
     unavailableProperty: {
-        title: "alerts:alerts.unavailableProperty.title",
-        description: "alerts:alerts.unavailableProperty.description",
-        confirmBtn: "alerts:alerts.unavailableProperty.confirmBtn",
-        cancelBtn: "alerts:alerts.unavailableProperty.cancelBtn",
+        title: "alerts:unavailableProperty.title",
+        description: "alerts:unavailableProperty.description",
+        confirmBtn: "alerts:unavailableProperty.confirmBtn",
+        cancelBtn: "alerts:unavailableProperty.cancelBtn",
         confirmationAlert: {
-            title: "alerts:alerts.unavailableProperty.confirmationAlert.title",
-            description: "alerts:alerts.unavailableProperty.confirmationAlert.description",
-            btn: "alerts:alerts.unavailableProperty.confirmationAlert.btn"
+            title: "alerts:unavailableProperty.confirmationAlert.title",
+            description: "alerts:unavailableProperty.confirmationAlert.description",
+            btn: "alerts:unavailableProperty.confirmationAlert.btn"
         }
     },
     availableProperty: {
-        title: "alerts:alerts.availableProperty.title",
-        description: "alerts:alerts.availableProperty.description",
-        confirmBtn: "alerts:alerts.availableProperty.confirmBtn",
-        cancelBtn: "alerts:alerts.availableProperty.cancelBtn",
+        title: "alerts:availableProperty.title",
+        description: "alerts:availableProperty.description",
+        confirmBtn: "alerts:availableProperty.confirmBtn",
+        cancelBtn: "alerts:availableProperty.cancelBtn",
         confirmationAlert: {
-            title: "alerts:alerts.availableProperty.confirmationAlert.title",
-            description: "alerts:alerts.availableProperty.confirmationAlert.description",
-            btn: "alerts:alerts.availableProperty.confirmationAlert.btn"
+            title: "alerts:availableProperty.confirmationAlert.title",
+            description: "alerts:availableProperty.confirmationAlert.description",
+            btn: "alerts:availableProperty.confirmationAlert.btn"
         }
     },
     deleteProperty: {
-        title: "alerts:alerts.deleteProperty.title",
-        description: "alerts:alerts.deleteProperty.description",
-        confirmBtn: "alerts:alerts.deleteProperty.confirmBtn",
-        cancelBtn: "alerts:alerts.deleteProperty.cancelBtn",
+        title: "alerts:deleteProperty.title",
+        description: "alerts:deleteProperty.description",
+        confirmBtn: "alerts:deleteProperty.confirmBtn",
+        cancelBtn: "alerts:deleteProperty.cancelBtn",
         confirmationAlert: {
-            title: "alerts:alerts.deleteProperty.confirmationAlert.title",
-            description: "alerts:alerts.deleteProperty.confirmationAlert.description",
-            btn: "alerts:alerts.deleteProperty.confirmationAlert.btn"
+            title: "alerts:deleteProperty.confirmationAlert.title",
+            description: "alerts:deleteProperty.confirmationAlert.description",
+            btn: "alerts:deleteProperty.confirmationAlert.btn"
         }
+    },
+    sponsors: {
+        delete: {
+            confimationAlert: {
+                title: "alerts:sponsors.delete.confimationAlert.title",
+                description: "alerts:sponsors.delete.confimationAlert.description",
+            },
+            sucsessAlert: {
+                title: "alerts:sponsors.delete.sucsessAlert.title",
+                description: "alerts:sponsors.delete.sucsessAlert.description",
+            },
+        },
     }
 }
 

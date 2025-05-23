@@ -1,7 +1,10 @@
+import getText from "@src/i18n/data/getText";
 import { useAuth } from "@src/providers/AuthProvider.context";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 
 type ChangePasswordFields = {
@@ -13,30 +16,31 @@ function ChangePassword() {
 
   const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<ChangePasswordFields>();
   const { logout } = useAuth()
+  const { t } = useTranslation(["common", "dashboard", "errors"]);
   const passwordRegister = register("password", {
-    required: "Email is required",
-    minLength: { value: 8, message: "Password must be at least 8 characters", },
+    required: capitalizePhrase(t(getText.errors.changePassword.password.required)),
+    minLength: { value: 8, message: capitalizePhrase(t(getText.errors.changePassword.password.atLeast8)) },
 
   });
 
   const confirmPasswordRegister = register("confirmPassword", {
 
-    required: "Confirm password is required",
+    required: capitalizePhrase(t(getText.errors.changePassword.confirmPassword.required)),
 
-    minLength: { value: 8, message: "Confirm password must be at least 8 characters", }
+    minLength: { value: 8, message: capitalizePhrase(t(getText.errors.changePassword.confirmPassword.atLeast8)) }
 
   });
 
   const onSubmit = async (data: ChangePasswordFields) => {
 
-    
+
     if (data.password !== data.confirmPassword) {
-      setError("confirmPassword", { message: "Passwords do not match" });
+      setError("confirmPassword", { message: capitalizePhrase(t(getText.errors.changePassword.confirmPassword.doNotMatch)) });
       return;
     }
     const response = await Http.patch(apiGateway.user.changePassword, data)
-    response?.status !== 200 && setError("root", { message: "something went wrong" })
-    response?.status === 200 &&  logout()
+    response?.status !== 200 && setError("root", { message: capitalizePhrase(t(getText.errors.changePassword.root.somethingWentWrong)) })
+    response?.status === 200 && logout()
 
   }
 
@@ -47,11 +51,8 @@ function ChangePassword() {
         <div className="row">
           <div className="col-lg-7 col-12">
             <h3 className="ecom-wc__form-title homec-dashboard__password">
-              Update your Password{" "}
-              <span className="pd-btm-30">
-                Your email address will not be published. Required fields are
-                marked *
-              </span>
+              {capitalizePhrase(t(getText.dashboard.changePassword.title))}
+
             </h3>
             {/* Sign in Form */}
             <form
@@ -62,7 +63,7 @@ function ChangePassword() {
                 <div className="col-12">
                   <div className="form-group homec-form-input">
                     <label className="ecom-wc__form-label mg-btm-10">
-                      Password*
+                      {capitalizePhrase(t(getText.dashboard.changePassword.password))}
                     </label>
                     <div className="form-group__input">
                       <input
@@ -78,7 +79,7 @@ function ChangePassword() {
                 <div className="col-12">
                   <div className="form-group homec-form-input">
                     <label className="ecom-wc__form-label mg-btm-10">
-                      Confirm Password*
+                      {capitalizePhrase(t(getText.dashboard.changePassword.confirmPassword))}
                     </label>
                     <div className="form-group__input">
                       <input
@@ -97,7 +98,7 @@ function ChangePassword() {
                 <div className="ecom-wc__button ecom-wc__button--bottom">
                   {errors.root && <span className="pl-2 text-red-600 ">{errors.root.message}</span>}
                   <button className="homec-btn homec-btn__second" type="submit">
-                    <span>Update Password</span>
+                    <span>{capitalizePhrase(t(getText.dashboard.changePassword.updatePassword))}</span>
                   </button>
                 </div>
               </div>

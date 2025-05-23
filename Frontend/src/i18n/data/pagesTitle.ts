@@ -10,6 +10,7 @@ const pagesTitle = {
     unavailableProperties: "pagesTitle:unavailableProperties",
     changePassword: "pagesTitle:changePassword",
     submitProperty: "pagesTitle:submitProperty",
+    addProperty:"pagesTitle:addProperty"
 }
 
 

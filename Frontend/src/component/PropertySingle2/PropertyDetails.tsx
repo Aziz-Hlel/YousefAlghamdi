@@ -1,12 +1,5 @@
-import { useState } from "react";
-import PropertyDetailsBtn from "../Button/PropertyDetailsBtn";
 import DetailsTab from "./DetailsTab";
 import DetailsTabFeatures from "./DetailsTabFeatures";
-import FloorDetails from "../FloorDetails";
-import PropertyVideo from "../PropertyVideo";
-import PropertyLocation from "../PropertyLocation";
-import PropertyReview from "../PropertyReview";
-import apiGateway from "@src/utils/apiGateway";
 import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
 import { useAgents } from "@src/providers/AgentsProvider.context";
 import { useTranslation } from "react-i18next";
@@ -16,16 +9,14 @@ import OtherDetailsTabFeatures from "./OtherDetailsTabFeatures";
 import PropertyAgents from "../Agents2/PropertyAgents2";
 
 function PropertyDetails() {
-  const [activeTab, setActiveTab] = useState("Property Details");
-  const handleActive = (title: any) => {
-    setActiveTab(title);
-  };
-  const { t } = useTranslation(['propertySingle', 'common']);
+
+  const { t } = useTranslation(['common', 'propertySingle',]);
 
 
   const { property } = useSinglePropertyContext();
 
   const { agents } = useAgents();
+
 
   if (!property) return <></>
 
@@ -36,11 +27,11 @@ function PropertyDetails() {
   };
 
   const propertyDetails: IPropertyDetail[] = [
-    { Type: property ? property.category : "" },
-    { City: property ? property.city : "" },
-    { Area: property ? property.filterFields.area : "" },]
+    { type: property ? property.category : "" },
+    { city: property ? property.city : "" },
+    { area: property ? property.filterFields.area : "" },]
 
-  property && property.filterFields.rooms && propertyDetails.push({ Rooms: property.filterFields.rooms });
+  property && property.filterFields.rooms && propertyDetails.push({ rooms: property.filterFields.rooms });
   property && property.filterFields.bathrooms && propertyDetails.push({ bathrooms: property.filterFields.bathrooms });
 
   const nearestPlaces = Object.keys(property.nearestPlaces).map((key) => ({
@@ -63,7 +54,7 @@ function PropertyDetails() {
             <div className="homec-pdetails-tab">
               <div className="tab-content">
                 <DetailsTab
-                  isActive={activeTab === "Property Details"}
+                  isActive={true}
                   text={property.description}
                 >
 

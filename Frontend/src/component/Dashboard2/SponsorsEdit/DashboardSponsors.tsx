@@ -6,6 +6,9 @@ import apiGateway from "@src/utils/apiGateway";
 import { pickRandomPhoto } from "@src/pickRandomPhoto";
 import { Alert, ConfirmationAlertAsync } from "@src/utils/createAlert";
 import Http from "@src/services/Http";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { useTranslation } from "react-i18next";
 
 
 type IDashboardPropertyCard = {
@@ -19,12 +22,13 @@ type IDashboardPropertyCard = {
 function SponsorsCard({ _id, logoUrl, name, url, }: IDashboardPropertyCard) {
 
   const { getSponsors } = useSponsorsContext()
+  const { t } = useTranslation(["common", "dashboard", "alerts"]);
 
   const handleDeleteProperty = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const response = await ConfirmationAlertAsync({
-      title: "Delete sponsor",
-      text: "Are you sure you want to delete this sponsor?",
+      title: capitalizePhrase(t(getText.alerts.sponsors.delete.confimationAlert.title)),
+      text: capitalizePhrase(t(getText.alerts.sponsors.delete.confimationAlert.description)),
       icon: "warning",
     })
     if (response.isConfirmed) {
@@ -32,9 +36,9 @@ function SponsorsCard({ _id, logoUrl, name, url, }: IDashboardPropertyCard) {
       if (response?.status === 200)
 
         Alert({
-          title: "Property Deleted",
+          title: capitalizePhrase(t(getText.alerts.sponsors.delete.sucsessAlert.title)),
           icon: "success",
-          text: "Property deleted successfully",
+          text: capitalizePhrase(t(getText.alerts.sponsors.delete.sucsessAlert.description)),
         })
       else alert("something went wrong");
 
@@ -56,7 +60,7 @@ function SponsorsCard({ _id, logoUrl, name, url, }: IDashboardPropertyCard) {
         <img src={logoUrl} alt="#" title={name} />
         {/* Property Content */}
         <div className="homec-dashboard-property__content">
-          <div className="homec-dashboard-property__badge"> {"- Sponsor"}</div>
+          <div className="homec-dashboard-property__badge"> {`-  ${capitalizePhrase(t(getText.dashboard.sponsors.sponsor))}`}</div>
           <h3 className="homec-dashboard-property__title">{name}</h3>
           <div className="homec-property__text">
 

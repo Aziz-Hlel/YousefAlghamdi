@@ -1,6 +1,13 @@
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import ProtoTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 function DetailsTab({ text, isActive, children }: { text: string | undefined, isActive: boolean, children: any }) {
+
+    const { t } = useTranslation([ 'common','propertySingle']);
+  
+
   return (
     <div className="">
 
@@ -16,7 +23,7 @@ function DetailsTab({ text, isActive, children }: { text: string | undefined, is
 
 
           <div className="bg-white rounded-xl p-4 m-4" >
-            <h4 className="homec-ptdetails-features__title ">Description</h4>
+            <h4 className="homec-ptdetails-features__title ">{capitalizePhrase(t(getText.propertySingle.description))}</h4>
 
             <p className="">
               {text ?? ""}

@@ -28,8 +28,8 @@ export const SinglePropertyProvider = ({ children, id }: { children: ReactNode, 
         response?.status === 200 && setProperty(response.data.result)
 
         if (response?.status !== 200)
-            navigate("*")
-
+            navigate("/not-found", { replace: true });
+            
         // console.log("property", typeof property);
         // console.log(property)
 

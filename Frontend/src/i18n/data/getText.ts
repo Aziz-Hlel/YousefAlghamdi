@@ -5,15 +5,18 @@ import common from "./common";
 import contactUs from "./contactUs";
 import dashboard from "./dashboard";
 import data from "./data";
+import errors from "./errors";
 import home from "./home";
 import login from "./login";
 import pagesTitle from "./pagesTitle";
 import properties from "./properties";
 import propertySingle from "./propertySingle";
+import submitProperty from "./submitProperty";
 
 const getText = {
     aboutUs,
     addProperty,
+    submitProperty,
     alerts,
     common,
     contactUs,
@@ -24,6 +27,7 @@ const getText = {
     home,
     login,
     properties,
+    errors,
 }
 
 

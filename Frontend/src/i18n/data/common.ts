@@ -26,7 +26,8 @@ const common = {
     search: "common:search",
     applyFilter: "common:applyFilter",
     realEstateBroker: "common:realEstateBroker",
-
+    loading: "common:loading",
+    noPublishPersonalInfo: "common:noPublishPersonalInfo",
 
     state: {
         toBeDeleted: 'state.toBeDeleted',
@@ -36,10 +37,10 @@ const common = {
         active: 'state.active',
     },
     roles: {
-        USER: "common:roles.USER",
-        CLIENT: "common:roles.CLIENT",
-        AGENT: "common:roles.AGENT",
-        ADMIN: "common:roles.ADMIN"
+        user: "common:roles.user",
+        client: "common:roles.client",
+        agent: "common:roles.agent",
+        admin: "common:roles.admin"
     },
 
     sub_categories: {

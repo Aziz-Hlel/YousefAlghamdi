@@ -1,21 +1,21 @@
 const propertySingle = {
-    description: "description",
+    description: "propertySingle:description",
     details: {
-        title: "details.title",
-        type: "details.type",
-        city: "details.city",
+        title: "propertySingle:details.title",
+        type: "propertySingle:details.type",
+        city: "propertySingle:details.city",
         area: {
-            title: "details.area.title",
-            m2: "details.area.m2",
+            title: "propertySingle:details.area.title",
+            m2: "propertySingle:details.area.m2",
         },
-        rooms: "details.rooms",
-        bathrooms: "details.bathrooms",
+        rooms: "propertySingle:details.rooms",
+        bathrooms: "propertySingle:details.bathrooms",
     },
     nearestPlaces: {
-        title: "nearestPlaces.title",
-        km: "nearestPlaces.km",
+        title: "propertySingle:nearestPlaces.title",
+        km: "propertySingle:nearestPlaces.km",
     },
-    additionalDetails: "additionalDetails",
+    additionalDetails: "propertySingle:additionalDetails",
 
 
 

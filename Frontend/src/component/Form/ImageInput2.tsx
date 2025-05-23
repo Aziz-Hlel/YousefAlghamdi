@@ -4,6 +4,9 @@ import CircularProgressBar from "./CircularProgressBar ";
 import UploadThumbnailCard from "./UploadThumbnailCard";
 import { FileWithPath } from "react-dropzone";
 import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 type ImageInputProps = {
@@ -15,17 +18,17 @@ type ImageInputProps = {
 
 function ImageInput({ imgs, handleDelete, handleImage, fieldError }: ImageInputProps) {
 
-
+  const { t } = useTranslation(['common', 'submitProperty']);
 
   return (
     <div className="homec-submit-form mg-top-40">
-      <h4 className="homec-submit-form__title">Property Image</h4>
+      <h4 className="homec-submit-form__title">{capitalizePhrase(t(getText.submitProperty.propertyImage.title))}</h4>
       <div className="homec-submit-form__inner">
         <div className="row">
           <p className="homec-img-video-label mg-btm-10  pt-2">
-            Thumbnail Image*
+            {capitalizePhrase(t(getText.submitProperty.propertyImage.thumbnaiImage.title))}
             {/* <span>(Max. limit 10 & Max. Size 10MB)</span> */}
-            <span>Image must be full HD (1920x1080)</span>
+            <span> {capitalizePhrase(t(getText.submitProperty.propertyImage.thumbnaiImage.note))}</span>
           </p>
           <UploadThumbnailCard handleImage={handleImage} img={imgs[0]} handleDelete={handleDelete} />
 
@@ -50,9 +53,9 @@ function ImageInput({ imgs, handleDelete, handleImage, fieldError }: ImageInputP
 
         </div>
         <p className="homec-img-video-label pt-10">
-          Slider Images*
+          {capitalizePhrase(t(getText.submitProperty.propertyImage.sliderImages.title))}
           {/* <span>(Max. limit 10 & Max. Size 10MB)</span> */}
-          <span>Image must be full HD (1920x1080)</span>
+          <span> {capitalizePhrase(t(getText.submitProperty.propertyImage.sliderImages.note))}</span>
         </p>
         <div className="homec-upload-images">
           <div className="row">

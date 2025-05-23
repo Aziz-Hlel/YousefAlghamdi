@@ -7,9 +7,13 @@ import PropertyAddCard from "../Cards/PropertyAddCard2";
 import { useEffect, useState } from "react";
 import Preloader from "../Loader";
 import { listing_types } from "@src/types/listing_types.types";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 const AddProperty = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const { t } = useTranslation(['data', 'pagesTitle']);
 
   useEffect(() => {
     setIsLoading(false);
@@ -22,11 +26,11 @@ const AddProperty = () => {
     component = (
       <>
 
-        <Breadcrumbs title="Add Property" titlePosition="bottom" background={undefined} overlay={undefined}>
-          <HistoryLinks link="/home" text="Home" isActive={undefined} />
+        <Breadcrumbs title={capitalizePhrase(t(getText.pagesTitle.addProperty))} titlePosition="bottom" background={undefined} overlay={undefined}>
+          <HistoryLinks link="/home" text={capitalizePhrase(t(getText.pagesTitle.home))} isActive={undefined} />
           <HistoryLinks
             link="/add-property"
-            text="Add Property"
+            text={capitalizePhrase(t(getText.pagesTitle.addProperty))}
             isActive={true}
           />
         </Breadcrumbs>
@@ -37,25 +41,25 @@ const AddProperty = () => {
 
               <PropertyAddCard
                 img="/img/property-rent.png"
-                why={listing_types.rent}
+                why={capitalizePhrase(t(getText.data[listing_types.rent as keyof typeof getText.data]))}
                 link={"/submit-property/" + listing_types.rent} />
 
               <PropertyAddCard
                 img="/img/property-rent.png"
-                why={listing_types.commercialRent}
+                why={capitalizePhrase(t(getText.data[listing_types.commercialRent as keyof typeof getText.data]))}
                 link={"/submit-property/" + listing_types.commercialRent}
               />
 
               <PropertyAddCard
                 img="/img/property-sale.png"
-                why={listing_types.sale}
+                why={capitalizePhrase(t(getText.data[listing_types.sale as keyof typeof getText.data]))}
                 link={"/submit-property/" + listing_types.sale}
                 btn="second"
               />
 
               <PropertyAddCard
                 img="/img/property-sale.png"
-                why={listing_types.commercialSale}
+                why={capitalizePhrase(t(getText.data[listing_types.commercialSale as keyof typeof getText.data]))}
                 link={"/submit-property/" + listing_types.commercialSale}
                 btn="second"
               />

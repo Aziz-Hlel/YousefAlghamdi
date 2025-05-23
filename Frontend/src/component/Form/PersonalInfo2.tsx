@@ -13,6 +13,9 @@ import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 import { imagePurposes } from "@src/types/imagePurpose.types";
 import CircularProgressBarAgent from "./CircularProgressBarAgent";
 import { useAgents } from "@src/providers/AgentsProvider.context";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 
@@ -24,6 +27,9 @@ function PersonalInfo({ toggleModal }: { toggleModal: () => void }) {
   const { user, refreshUser } = useAuth();
   const { agents } = useAgents();
   const [folderId, setfolderId] = useState("");
+  const { t } = useTranslation(['common', 'dashboard']);
+
+
   if (!user) return null;
 
   const { register, handleSubmit, formState: { errors, isSubmitting, }, setError, clearErrors, setValue, getValues } =
@@ -180,8 +186,8 @@ function PersonalInfo({ toggleModal }: { toggleModal: () => void }) {
                 <input {...getInputProps()} />
               </div>
               {<div className=" text-red-600"> {errors.agentInfo?.imageGallery?.mainImage?.message}</div>}
-              <span className=" text-gray-600"> Main agent's image</span>
-              <div className="text-gray-600">Photo resolution: 960 × 1280  </div>
+              <span className=" text-gray-600"> {capitalizePhrase(t(getText.dashboard.personalInfo.editProfile.mainImage.title))}</span>
+              <div className="text-gray-600">{capitalizePhrase(t(getText.dashboard.personalInfo.editProfile.mainImage.resolution))}  </div>
 
             </div>
 
@@ -212,8 +218,8 @@ function PersonalInfo({ toggleModal }: { toggleModal: () => void }) {
               </div>
               {<span className=" text-red-600"> {errors.agentInfo?.imageGallery?.miniImage?.message}</span>}
 
-              <span className=" text-gray-600"> Minimized agent's image</span>
-              <div className="text-gray-600">Photo resolution: 90x90</div>
+              <span className=" text-gray-600"> {capitalizePhrase(t(getText.dashboard.personalInfo.editProfile.miniImage.title))}</span>
+              <div className="text-gray-600">{capitalizePhrase(t(getText.dashboard.personalInfo.editProfile.miniImage.resolution))}</div>
 
             </div>
           </>
@@ -221,20 +227,20 @@ function PersonalInfo({ toggleModal }: { toggleModal: () => void }) {
 
         <PropertyTextInput
           size="col-lg-6 col-md-6"
-          title="First Name*"
+          title={capitalizePhrase(t(getText.common.firstName))}
           placeholder="Demo Name"
           fieldRegister={register("firstName")}
           fieldError={errors.firstName}
         />
         <PropertyTextInput
           size="col-lg-6 col-md-6"
-          title="Last Name*"
+          title={capitalizePhrase(t(getText.common.lastName))}
           placeholder="Demo Name"
           fieldRegister={register("lastName")}
           fieldError={errors.lastName}
         />
         <PropertyTextInput
-          title="Phone Number*"
+          title={capitalizePhrase(t(getText.common.phoneNumber))}
           placeholder="Phone Number"
           fieldRegister={register("phoneNumber")}
           fieldError={errors.phoneNumber}
@@ -248,7 +254,7 @@ function PersonalInfo({ toggleModal }: { toggleModal: () => void }) {
       <div className="form-group form-mg-top25">
         <div className="ecom-wc__button ecom-wc__button--bottom">
           <button className="homec-btn homec-btn__second" type="submit" disabled={isSubmitting}>
-            <span>{isSubmitting ? "Loading" : "Update Profile"}</span>
+            <span>{isSubmitting ? capitalizePhrase(t(getText.common.loading)) : capitalizePhrase(t(getText.dashboard.personalInfo.editProfile.updateProfile))}</span>
           </button>
         </div>
       </div>

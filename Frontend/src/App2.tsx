@@ -4,12 +4,10 @@ import { useEffect } from 'react';
 import Home from './component/Home/';
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import AddProperty from "./component/AddProperty2";
-import AgentDetail from "./component/AgentDetail2";
 import Contact from "./component/Contact2";
 import Dashboard from "./component/Dashboard2";
 import EditPendingProperty from "./component/EditPendingProperty/index.js";
 import ErrorPage from "./component/Error";
-import Faq from "./component/Faq";
 import Login from "./component/Login2";
 import SignUp from "./component/SignUp2";
 import SubmitProperty from "./component/SubmitProperty2";
@@ -64,7 +62,6 @@ const App2 = () => {
 
 
                                 <Route path="about" element={<AboutUs />} />
-                                <Route path="faq" element={<Faq />} />
                                 <Route path="contact" element={<Contact />} />
 
                                 <Route element={<ProtectedLayouts />}>
@@ -99,14 +96,15 @@ const App2 = () => {
                                                 <Route path="inspect-user/:userId" element={<UserView />} />
                                             </Route>
                                             <Route path="sponsors" element={<SponsorsProvider> <SponsorsEdit /></SponsorsProvider>} >
-                                                <Route path="add-sponsor" element={<CU_Sponsor />} />
-                                                <Route path="edit-sponsor/:sponsorId" element={<CU_Sponsor />} />
+                                                <Route path="add-sponsor" element={<CU_Sponsor edit = {false} />} />
+                                                <Route path="edit-sponsor/:sponsorId" element={<CU_Sponsor edit = {true} />} />
                                             </Route>
 
                                             <Route path="agents" element={<AgentsTable />} >
                                                 <Route path="add-agent" element={<CU_Agent />} />
                                                 <Route path="edit-agent/:agentId" element={<CU_Agent />} />
                                             </Route>
+
                                         </Route>
 
                                     </Route>

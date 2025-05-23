@@ -6,14 +6,18 @@ import Footer from "../Footer";
 import HistoryLinks from "../Breadcrumbs/HistoryLinks";
 import PropertyGrid from "./PropertyGrid";
 import { FormProvider } from "./FilterProvider.context";
+import { useTranslation } from "react-i18next";
+import { capitalize } from "lodash";
+import getText from "@src/i18n/data/getText";
 
 const Property = () => {
   const [isLoading, setisLoadingg] = useState(true);
+  const { t } = useTranslation(['common', 'pagesTitle']);
+  
+  
   useEffect(() => {
     setisLoadingg(false);
   }, []);
-
-
 
 
 
@@ -25,13 +29,13 @@ const Property = () => {
     component = (
       <>
 
+        <Breadcrumbs title={capitalize(t(getText.pagesTitle.lastestProperties))}  background={undefined} overlay={undefined} titlePosition={undefined}>
         {/* <Header v2={undefined} /> */}
-        <Breadcrumbs title="Latest Properties" background={undefined} overlay={undefined} titlePosition={undefined}>
 
-          <HistoryLinks link="home" text="Home" isActive={undefined} />
+          <HistoryLinks link="home" text={capitalize(t(getText.pagesTitle.home))} isActive={undefined} />
           <HistoryLinks
             link="property"
-            text="Latest Properties"
+            text={capitalize(t(getText.pagesTitle.lastestProperties))}
             isActive={true} />
 
         </Breadcrumbs>

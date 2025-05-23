@@ -37,13 +37,35 @@
         "btn": "Edit Profile",
         "editProfile": {
             "title": "Personals Info edit",
-            "description": "Your email address will not be published. Required fields are marked *"
+            "description": "Your email address will not be published. Required fields are marked *",
+            "updateProfile": "Update Profile",
+            "mainImage": {
+                "title": "Main agent's image",
+                "resolution": "Photo resolution: 960 × 1280"
+            },
+            "miniImage": {
+                "title": "Minimized agent's image",
+                "resolution": "Photo resolution: 90 × 90"
+            }
         }
     },
     "changePassword": {
         "sideBar": "Change Password",
         "title": "Update your Password",
         "password": "Password",
-        "confirmPassword": "Confirm Password"
+        "confirmPassword": "Confirm Password",
+        "updatePassword": "Update Password",
+        "error": "Password not match"
+    },
+    "sponsors": {
+        "title": "sponsors",
+        "sponsor": "sponsor",
+        "addSponsor": "add Sponsor",
+        "cuSponsor": {
+            "add": "sponsors Info add",
+            "edit": "sponsors Info edit",
+            "name": "name",
+            "url": "url"
+        }
     }
 }

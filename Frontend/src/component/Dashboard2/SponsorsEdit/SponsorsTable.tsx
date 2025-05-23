@@ -4,7 +4,10 @@ import { useSponsorsContext } from "./Sponsors.provider";
 import SponsorsCard from "./DashboardSponsors";
 import Layout from "../MyProperties/Layout2";
 import { Link, Outlet } from "react-router-dom";
-
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { useTranslation } from "react-i18next";
+  
 
 
 function SponsorsTable() {
@@ -13,6 +16,9 @@ function SponsorsTable() {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPage = Math.ceil(totalCount / 6)
   console.log("total count", totalCount);
+
+  const { t } = useTranslation(['home', 'dashboard']);
+
 
   const handelPage = (page: number) => {
     console.log('page', page);
@@ -25,7 +31,7 @@ function SponsorsTable() {
   return (
     <>
 
-      <Layout title={"Sponsors"} ref={listRef}>
+      <Layout title={capitalizePhrase(t(getText.dashboard.sponsors.title))} ref={listRef}>
 
         <Outlet />
 
@@ -56,7 +62,7 @@ function SponsorsTable() {
         <Link to={"add-sponsor"}>
           <button className=" homec-btn homec-btn__first">
 
-            add sponsor
+            {capitalizePhrase(t(getText.dashboard.sponsors.addSponsor))}
 
           </button>
         </Link>

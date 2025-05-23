@@ -1,0 +1,16 @@
+{
+    "changePassword": {
+        "root": {
+            "somethingWentWrong": "something went wrong"
+        },
+        "password": {
+            "required": "Password is required",
+            "atLeast8": "Password must be at least 8 characters"
+        },
+        "confirmPassword": {
+            "required": "Confirm password is required",
+            "atLeast8": "Confirm password must be at least 8 characters",
+            "doNotMatch": "Passwords do not match"
+        }
+    }
+}

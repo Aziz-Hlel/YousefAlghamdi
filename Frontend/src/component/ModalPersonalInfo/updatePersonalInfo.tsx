@@ -1,9 +1,11 @@
-
-import { useAuth } from "@src/providers/AuthProvider.context";
 import PersonalInfo from "../Form/PersonalInfo2";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 function UpdatePersonalInfo({ isModalOpen, toggleModal }: { isModalOpen: boolean; toggleModal: () => void; }) {
 
+  const { t } = useTranslation(['common', 'dashboard']);
 
 
   return (
@@ -39,11 +41,8 @@ function UpdatePersonalInfo({ isModalOpen, toggleModal }: { isModalOpen: boolean
           </button>
           <div className="homec-modal__inner">
             <h3 className="ecom-wc__form-title ecom-wc__form-title__one">
-              Personals Info edit{" "}
-              <span>
-                Your email address will not be published. Required fields are
-                marked *
-              </span>
+              {capitalizePhrase(t(getText.dashboard.personalInfo.editProfile.title))}
+
             </h3>
             {/* Sign in Form  */}
             <PersonalInfo toggleModal={toggleModal} />

@@ -37,14 +37,37 @@ const dashboard = {
         btn: "dashboard:personalInfo.btn",
         editProfile: {
             title: "dashboard:personalInfo.editProfile.title",
-            description: "dashboard:personalInfo.editProfile.description"
+            description: "dashboard:personalInfo.editProfile.description",
+            updateProfile: "dashboard:personalInfo.editProfile.updateProfile",
+            mainImage: {
+                title: "dashboard:personalInfo.editProfile.mainImage.title",
+                resolution: "dashboard:personalInfo.editProfile.mainImage.resolution"
+            },
+            miniImage: {
+                title: "dashboard:personalInfo.editProfile.miniImage.title",
+                resolution: "dashboard:personalInfo.editProfile.miniImage.resolution"
+            }
         }
     },
     changePassword: {
         sideBar: "dashboard:changePassword.sideBar",
         title: "dashboard:changePassword.title",
         password: "dashboard:changePassword.password",
-        confirmPassword: "dashboard:changePassword.confirmPassword"
+        confirmPassword: "dashboard:changePassword.confirmPassword",
+        updatePassword: "dashboard:changePassword.updatePassword",
+        error: "dashboard:changePassword.error"
+    },
+    sponsors: {
+        title: "dashboard:sponsors.title",
+        sponsor: "dashboard:sponsors.sponsor",
+        addSponsor: "dashboard:sponsors.addSponsor",
+        cuSponsor: {
+            add: "dashboard:sponsors.cuSponsor.add",
+            edit: "dashboard:sponsors.cuSponsor.edit",
+            name: "dashboard:sponsors.cuSponsor.name",
+            url: "dashboard:sponsors.cuSponsor.url",
+
+        }
     }
 }
 

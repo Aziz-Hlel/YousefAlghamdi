@@ -11,7 +11,7 @@ import SelectiveInputForm from "./SelectiveInputForm";
 import { categoriesType, ResidentialProperties, sub_categories } from "@src/types/categories.subcategories.types";
 import { additionalDetailsAttributes } from "@src/types/additionalDetails.types";
 import { FileWithPath } from "react-dropzone";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { listing_typesValues } from "@src/types/listing_types.types";
 import { cities, delegations } from "@src/types/cities.delegations.types";
 import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
@@ -22,6 +22,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { Alert } from "@src/utils/createAlert";
 import prepareImageForUpload from "./prepareImageForUpload";
 import SubmitPropertySchema from "@src/schemas/SubmitPropertySchema.zod";
+import { useTranslation } from "react-i18next";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import getText from "@src/i18n/data/getText";
 
 
 
@@ -62,6 +65,7 @@ const PropertyFrom = () => {
 
   };
 
+  const { t } = useTranslation(['data', 'common', 'submitProperty']);
 
   useEffect(() => {
     setValue("additionalDetails", [])
@@ -179,7 +183,11 @@ const PropertyFrom = () => {
 
   console.log(errors);
 
-  if (whatFor && !listing_typesValues.includes(whatFor)) return <> </>
+  if (whatFor && !listing_typesValues.includes(whatFor)) return < Navigate to="/not-found" replace />;
+
+  console.log("whatFor", whatFor);
+
+  if (whatFor && !listing_typesValues.includes(whatFor)) console.log("nnon ???");
 
   return (
     <section className="pd-top-80 pd-btm-80"  >
@@ -194,14 +202,14 @@ const PropertyFrom = () => {
 
               <div className="homec-submit-form">
                 <h4 className="homec-submit-form__title">
-                  Property Information
+                  {capitalizePhrase(t(getText.submitProperty.propertyInformation.title))}
                 </h4>
                 <div className="homec-submit-form__inner">
                   <div className="row">
 
                     <PropertyTextInput
 
-                      title="Property Title*"
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.propertyTitle))}
                       placeholder="Title"
                       fieldRegister={register('title')}
                       fieldError={errors.title}
@@ -210,7 +218,7 @@ const PropertyFrom = () => {
 
                     <SelectiveInputForm
                       size="col-lg-6 col-md-6"
-                      title={"Category"}
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.category))}
                       options={Object.keys(categoriesType)}
                       fieldRegister={register('category')}
                       fieldError={errors.category}
@@ -218,7 +226,7 @@ const PropertyFrom = () => {
 
                     <SelectiveInputForm
                       size="col-lg-6 col-md-6"
-                      title={"Sub Category"}
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.subCategory))}
                       options={propertyCategoryValue && Object.keys(categoriesType).includes(propertyCategoryValue) ? sub_categories[propertyCategoryValue as keyof typeof sub_categories] : []}
                       fieldRegister={register('sub_category')}
                       fieldError={errors.sub_category}
@@ -226,7 +234,7 @@ const PropertyFrom = () => {
 
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
-                      title="Property Price"
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.propertyPrice))}
                       placeholder="24345"
                       fieldRegister={register('filterFields.price')}
                       fieldError={errors.filterFields?.price}
@@ -234,7 +242,7 @@ const PropertyFrom = () => {
 
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
-                      title="Total Area (sq:Mt)*"
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.totalArea))}
                       fieldRegister={register('filterFields.area')}
                       fieldError={errors.filterFields?.area}
                       placeholder="1200"
@@ -242,7 +250,7 @@ const PropertyFrom = () => {
 
                     {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
                       size="col-lg-6 col-md-6"
-                      title="Total Rooms*"
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.totalRooms))}
                       fieldRegister={register('filterFields.rooms')}
                       fieldError={errors.filterFields?.rooms}
                       placeholder="2"
@@ -250,14 +258,14 @@ const PropertyFrom = () => {
 
                     {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
                       size="col-lg-6 col-md-6"
-                      title="Total Bathroom*"
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.totalBathrooms))}
                       fieldRegister={register('filterFields.bathrooms')}
                       fieldError={errors.filterFields?.bathrooms}
                       placeholder="2"
                     />}
 
                     <PropertyTextArea
-                      title="Description*"
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.description))}
                       fieldRegister={register('description')}
                       fieldError={errors.description}
                     />
@@ -268,13 +276,13 @@ const PropertyFrom = () => {
               </div>
 
               <div className="homec-submit-form mg-top-40">
-                <h4 className="homec-submit-form__title">Property Location</h4>
+                <h4 className="homec-submit-form__title">{capitalizePhrase(t(getText.submitProperty.propertyLocation.title))}</h4>
                 <div className="homec-submit-form__inner">
                   <div className="row ">
                     {/* Single Form Element   */}
                     <SelectiveInputForm
                       size="col-md-4 flex justify-center items-center mg-top-20"
-                      title={"City"}
+                      title={capitalizePhrase(t(getText.submitProperty.propertyLocation.city))}
                       options={Object.keys(cities)}
                       fieldRegister={register('city')}
                       fieldError={errors.city}
@@ -282,7 +290,7 @@ const PropertyFrom = () => {
 
                     <SelectiveInputForm
                       size="col-md-4 flex justify-center items-center mg-top-20"
-                      title={"Delegation"}
+                      title={capitalizePhrase(t(getText.submitProperty.propertyLocation.delegation))}
                       options={CityValueObserver && Object.keys(cities).includes(CityValueObserver) ? delegations[CityValueObserver as keyof typeof delegations] : []}
                       fieldRegister={register('delegation')}
                       fieldError={errors.delegation}
@@ -290,7 +298,7 @@ const PropertyFrom = () => {
 
                     <PropertyTextInput
                       size="col-md-4  flex justify-center items-center -mt-10"
-                      title="Street adresse"
+                      title={capitalizePhrase(t(getText.submitProperty.propertyLocation.streetAdresse))}
                       fieldRegister={register('addresse')}
                       fieldError={errors.addresse}
                       placeholder="Emirates Towers, Sheikh Zayed Road"
@@ -303,7 +311,7 @@ const PropertyFrom = () => {
 
               <div className="homec-submit-form mg-top-40">
                 <h4 className="homec-submit-form__title">
-                  Additional Details
+                  {capitalizePhrase(t(getText.data.additionalDetails))}
                 </h4>
                 <div className="homec-submit-form__inner">
                   <div className="row">
@@ -311,14 +319,14 @@ const PropertyFrom = () => {
                     <div className="flex  flex-wrap gap-12 w-full">
 
                       {propertyCategoryValue && Object.keys(categoriesType).includes(propertyCategoryValue) &&
-                        additionalDetailsAttributes[propertyCategoryValue as keyof typeof additionalDetailsAttributes].map((item: string, index: number) => (
+                        additionalDetailsAttributes[propertyCategoryValue as keyof typeof additionalDetailsAttributes].map((item: string, index: number) =>
                           <CheckInput2
                             key={index}
-                            title={item}
+                            title={getText.data[item as keyof typeof getText.data] ? capitalizePhrase(t(getText.data[item as keyof typeof getText.data])) : item}
                             setAdditionalDetails={setAdditionalDetailsWrapper}
                             additionalDetails={additionalDetails}
                           />
-                        ))}
+                        )}
 
                     </div>
 
@@ -329,17 +337,18 @@ const PropertyFrom = () => {
 
 
               <div className="homec-submit-form mg-top-40">
-                <h4 className="homec-submit-form__title">Nearest Location</h4>
+                <h4 className="homec-submit-form__title">{capitalizePhrase(t(getText.submitProperty.nearestLocation.title))}</h4>
 
                 <KeyValueInput
                   list={NearestLocation}
                   handleAddOrDelete={handleAddOrDelete}
                   handleChange={handleKeyValueChange}
-                  filedTitle="Nearest Location*"
-                  filedTitleTwo="Distance(KM)*"
 
-                  placeholderOne={"Burj khalifa"}
-                  placeholderTwo={"15"}
+                  filedTitle={capitalizePhrase(t(getText.submitProperty.nearestLocation.nearestLocation))}
+                  filedTitleTwo={capitalizePhrase(t(getText.submitProperty.nearestLocation.distance))}
+
+                  placeholderOne={capitalizePhrase(t(getText.submitProperty.nearestLocation.nearestLocationPlaceholder))}
+                  placeholderTwo={capitalizePhrase(t(getText.submitProperty.nearestLocation.distancePlaceholder))}
                 />
 
               </div>
@@ -358,7 +367,10 @@ const PropertyFrom = () => {
               <div className="row">
                 <div className="col-12 d-flex justify-content-end mg-top-40">
                   <button type="submit" className="homec-btn homec-btn__second">
-                    {isSubmitting ? <span>Loading...</span> : <span>Submit Property Now</span>}
+                    {isSubmitting ?
+                      <span>{capitalizePhrase(t(getText.common.loading))}...</span>
+                      : <span>{capitalizePhrase(t(getText.submitProperty.btns.submit))}</span>
+                    }
                   </button>
                 </div>
               </div>

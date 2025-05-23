@@ -31,5 +31,17 @@
             "description": "Property is now deleted",
             "btn": "Ok"
         }
+    },
+    "sponsors": {
+        "delete": {
+            "confimationAlert": {
+                "title": "delete sponsor",
+                "description": "are you sure you want to delete this sponsor?"
+            },
+            "sucsessAlert": {
+                "title": "property Deleted",
+                "description": "property deleted successfully"
+            }
+        }
     }
 }

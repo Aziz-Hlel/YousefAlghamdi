@@ -26,7 +26,7 @@ i18n
         lng: "en", // if you're using a language detector, do not define the lng option
         fallbackLng: "en",
 
-        ns: ['common', 'errors', 'home', 'aboutUs', 'addProperty', 'alerts', 'contactUs', 'dashboard', 'data', 'login', 'properties', 'submitProperty'],
+        ns: ['common', 'errors', 'home', 'aboutUs', 'addProperty', 'propertySingle', 'alerts', 'contactUs', 'dashboard', 'data', 'login', 'properties', 'submitProperty', 'errors'],
         defaultNS: 'common',
 
 

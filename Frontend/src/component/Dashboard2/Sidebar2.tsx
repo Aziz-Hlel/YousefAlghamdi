@@ -189,7 +189,7 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
           (user?.role === roles.ADMIN) && < DashboardSidebarBtn
             active={activeComponent}
             handleActive={setComponent}
-            title="Sponsors"
+            title={capitalizePhrase(t(getText.dashboard.sponsors.title))}
             path="dashboard/sponsors"
           >
             <svg

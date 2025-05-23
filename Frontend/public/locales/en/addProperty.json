@@ -18,5 +18,7 @@
         "title": "Add Property For Commercial Sale",
         "description": "Add your property for commercial sale",
         "btn": "Add Property"
-    }
-}
+    },
+    "addPropertyFor": "Add Property For",
+    "createFor": "Create For"
+} 
