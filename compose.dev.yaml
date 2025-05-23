@@ -76,6 +76,9 @@ services:
     env_file:
       - ./Backend/.env
 
+    ports:
+      - 27017:27017
+      
     command: mongod --logpath /dev/null  # For no logs at all
 
     healthcheck:

@@ -25,6 +25,10 @@
     "applyFilter": "Apply Filter",
     "realEstateBroker": "Real Estate Broker",
     "loading": "Loading",
+    "confirm": "confirm",
+    "cancel": "cancel",
+    "delete": "delete",
+    "change": "change",
     "noPublishPersonalInfo": "your personal info will not be published",
     "state": {
         "toBeDeleted": "toBeDeleted",

@@ -13,8 +13,8 @@ const MONGO_INITDB_DATABASE = process.env.MONGO_INITDB_DATABASE ?? ""
 
 const MONGO_URI = NODE_ENV !== 'local'
     ? `mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/${MONGO_INITDB_DATABASE}?authSource=admin`
-    : `mongodb://mongo:27017/${MONGO_INITDB_DATABASE}`
-
+    : `mongodb://localhost:27017/${MONGO_INITDB_DATABASE}`
+console.log(MONGO_URI)
 
 
 const PORT = process.env.PORT ?? 5000

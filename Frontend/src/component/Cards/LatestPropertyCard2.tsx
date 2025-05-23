@@ -1,4 +1,7 @@
+import getText from "@src/i18n/data/getText";
 import Iproperty from "@src/models/property.type";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 interface ILatestPropertyCard {
@@ -27,6 +30,9 @@ const listingTypeExprssion: { [key: string]: string; } = {
 function LatestPropertyCard({ property, style, classes, view, }: ILatestPropertyCard) {
 
   const whatFor = listingTypeExprssion[property.listing_type];
+
+  const { t } = useTranslation(['data', 'home', 'common']);
+
 
 
   return (
@@ -96,21 +102,21 @@ function LatestPropertyCard({ property, style, classes, view, }: ILatestProperty
             {property.filterFields.rooms && <li className=" h-fit mx-0 p-0">
               <img src={atrToImg.rooms} alt="#" className=" " />
               <span className=" sm:text-sm sm:font-medium">
-                {property.filterFields.rooms} Room
+                {property.filterFields.rooms} {capitalizePhrase(t(getText.data.rooms))}
               </span>
 
             </li>}
             {property.filterFields.bathrooms && <li>
               <img src={atrToImg.bathroom} alt="#" className=" " />
               <span className=" sm:text-sm sm:font-medium">
-                {property.filterFields.bathrooms} Bathroom
+                {property.filterFields.bathrooms} {capitalizePhrase(t(getText.data.bathrooms))}
               </span>
             </li>}
             {property.filterFields.area && <li>
               <img src={atrToImg.square} alt="#" className=" " />
               <span className=" sm:text-sm sm:font-medium">
 
-                {property.filterFields.area} m2
+                {property.filterFields.area} {t(getText.data.m2)}
               </span>
             </li>}
             {/* {detailsList?.map((details: any, index: number) => (

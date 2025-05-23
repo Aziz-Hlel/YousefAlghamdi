@@ -5,6 +5,9 @@ import Cropper from 'react-easy-crop';
 import getCroppedImg from './cropImg.func';
 import { Point, Area } from "react-easy-crop";
 import prepareImageForUpload from './prepareImageForUpload';
+import { useTranslation } from 'react-i18next';
+import getText from '@src/i18n/data/getText';
+import { capitalizePhrase } from '@src/utils/capitalize_decapitalized';
 
 
 interface UploadThumbnailCardProps {
@@ -17,6 +20,7 @@ interface UploadThumbnailCardProps {
 const UploadThumbnailCard = ({ img, handleImage, handleDelete, }: UploadThumbnailCardProps) => {
     const { acceptedFiles, getRootProps, getInputProps } = useDropzone({ maxFiles: 1, accept: { 'image/*': [] }, disabled: false });
     const { acceptedFiles: acceptedFiles2, getRootProps: getRootProps2, getInputProps: getInputProps2 } = useDropzone({ maxFiles: 1, accept: { 'image/*': [] }, disabled: false });
+    const { t } = useTranslation(["data", 'common']);
 
     const [progress, setProgress] = useState<number>();
 
@@ -49,7 +53,6 @@ const UploadThumbnailCard = ({ img, handleImage, handleDelete, }: UploadThumbnai
 
     const [uploadedImg, setUploadedImg] = useState<File | null>(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 })
-    const [rotation, setRotation] = useState(0)
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
     const [cropperOpened, setcopperOpened] = useState(false)
@@ -76,7 +79,7 @@ const UploadThumbnailCard = ({ img, handleImage, handleDelete, }: UploadThumbnai
                 URL.createObjectURL(uploadedImg),
                 uploadedImg.name,
                 croppedAreaPixels,
-                rotation
+                0
             )
             if (!croppedImage) return
             console.log('t5l 2 croppedImage type :', typeof croppedImage);
@@ -93,11 +96,6 @@ const UploadThumbnailCard = ({ img, handleImage, handleDelete, }: UploadThumbnai
             console.error(e)
         }
     }
-
-    let imgDisplayed: string | undefined;
-    if (!uploadedImg) imgDisplayed = "https://placehold.co/1920x1080"
-    else if (img === null) imgDisplayed = undefined
-    else imgDisplayed = img.url
 
 
 
@@ -159,8 +157,11 @@ const UploadThumbnailCard = ({ img, handleImage, handleDelete, }: UploadThumbnai
                                 />
                             </div>
                             <div className=' w-full flex gap-4'>
-                                <div className='w-fit p-2 bg-red-500 rounded-xl text-white hover:bg-red-600 cursor-pointer ' onClick={handleCancel}>cancel</div>
-                                <div className='w-fit p-2 bg-green-500 rounded-xl text-white hover:bg-green-600 cursor-pointer ' onClick={showCroppedImage}>confirm</div>
+                                <div className='w-fit p-2 bg-red-500 rounded-xl text-white hover:bg-red-600 cursor-pointer '
+                                    onClick={handleCancel}>
+                                    {capitalizePhrase(t(getText.common.cancel))}
+                                </div>
+                                <div className='w-fit p-2 bg-green-500 rounded-xl text-white hover:bg-green-600 cursor-pointer ' onClick={showCroppedImage}> {capitalizePhrase(t(getText.common.confirm))}</div>
 
                             </div>
                         </div>
@@ -170,16 +171,23 @@ const UploadThumbnailCard = ({ img, handleImage, handleDelete, }: UploadThumbnai
                         <div className={' h-full w-full  relative ' + (img ? "bg-slate-200" : "")}>
                             <img src={img ? img.url : ""} alt="" className=" w-full h-full" />
                             <div className=" w-full flex justify-end px-2 py-2 gap-2">
-                                {img && <div className='w-fit p-2 bg-red-500 rounded-xl text-white hover:bg-red-600 cursor-pointer ' onClick={(e) => { e.preventDefault(); setCompDisplayed("placeholder"); handleDelete(0) }}>delete</div>}
+
+                                {img && <div className='w-fit p-2 bg-red-500 rounded-xl text-white hover:bg-red-600 cursor-pointer '
+                                    onClick={(e) => { e.preventDefault(); setCompDisplayed("placeholder"); handleDelete(0) }}>
+                                    {capitalizePhrase(t(getText.common.change))}
+                                </div>
+                                }
 
                                 {img &&
                                     <div className='w-fit p-2 bg-amber-500 rounded-xl text-white hover:bg-amber-600 cursor-pointer ' {...getRootProps2()} >
                                         <div >
 
-                                            change
+                                            {capitalizePhrase(t(getText.common.change))}
                                             <input {...getInputProps2()} accept="image/*" />
                                         </div>
-                                    </div>}
+                                    </div>
+                                }
+
                                 {progress && <CircularProgressBar progress={progress} />}
 
                             </div>

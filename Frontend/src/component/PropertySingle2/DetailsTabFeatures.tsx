@@ -15,18 +15,15 @@ function DetailsTabFeatures({ title, property }: { title: string, property: any 
         <h4 className="homec-ptdetails-features__title">{title}</h4>
         <div className=" flex flex-wrap  gap-y-2 lg:px-10  gap-x-20 ">
 
-          {property?.map((item: any, index: number) => {
-            console.log("item : ", Object.keys(item)[0]);
-
-            console.log("get Text result : ", getText.data[Object.keys(item)[0] as keyof typeof getText.data]);
+          {property?.map((item: any, index: number) =>
 
 
-            return <div key={index + Object.keys(item)[0]}>
+            <div key={index + Object.keys(item)[0]}>
               <span className="  mr-5 " style={{ fontWeight: "400px", fontSize: "14px" }}>{capitalizePhrase(t(getText.data[Object.keys(item)[0] as keyof typeof getText.data]))}:</span>
               <span style={{ color: "#7e8ba0" }}>{item[Object.keys(item)[0]]}</span>
             </div>
 
-          }
+
           )}
 
         </div>

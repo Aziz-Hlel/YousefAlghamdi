@@ -9,9 +9,17 @@ import contact_img from "/img/contact-bg.jpg"
 import companyInfo from "@src/data/companyInfo";
 import DownloadApp from "../DownloadApp2";
 import ContactForm from "../Form/ContactForm2";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { useTranslation } from "react-i18next";
 
 function Contact() {
   const [isLoading, setisLoadingg] = useState(true);
+
+  const { t } = useTranslation(['common', 'pagesTitle',]);
+  { capitalizePhrase(t(getText.common.test)) }
+
+
   useEffect(() => {
     setisLoadingg(false);
   }, []);
@@ -23,9 +31,9 @@ function Contact() {
     component = (
       <>
 
-        <Breadcrumbs title="Contact US" titlePosition="bottom" background={""} overlay={false}>
-          <HistoryLinks link="/home" text="Home" isActive={false} />
-          <HistoryLinks link="/contact" text="Contact US" isActive={true} />
+        <Breadcrumbs title={capitalizePhrase(t(getText.pagesTitle.contactUs))} titlePosition="bottom" background={""} overlay={false}>
+          <HistoryLinks link="/home" text={capitalizePhrase(t(getText.pagesTitle.home))} isActive={false} />
+          <HistoryLinks link="/contact" text={capitalizePhrase(t(getText.pagesTitle.contactUs))} isActive={true} />
         </Breadcrumbs>
         <section
           className="homec-contact-form homec-bg-cover pd-top-80 pd-btm-80 mg-top-100"

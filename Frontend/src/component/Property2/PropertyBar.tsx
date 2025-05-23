@@ -1,5 +1,4 @@
-import ProtoTypes from "prop-types";
-import Search from "../Form/Search";
+
 import ShowingResult from "./ShowingResult";
 import ListBtn from "../Button/ListBtn";
 import { useFormContext } from "./FilterProvider.context";

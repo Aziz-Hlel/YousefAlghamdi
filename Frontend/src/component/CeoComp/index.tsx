@@ -1,13 +1,19 @@
-import DownloadApp from "../DownloadApp";
 import CEO from "./About";
 import { useEffect, useState } from "react";
 import Preloader from "../Loader";
 import FounderComp from "./FounderComp";
 import Breadcrumbs from "../Breadcrumbs2";
 import HistoryLinks from "../Breadcrumbs2/HistoryLinks";
+import DownloadApp from "../DownloadApp2";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { useTranslation } from "react-i18next";
 
 function AboutUs() {
   const [isLoading, setisLoadingg] = useState(true);
+
+  const { t } = useTranslation(['common', 'pagesTitle', ]);
+  { capitalizePhrase(t(getText.common.test)) }
 
   useEffect(() => {
     setisLoadingg(false);
@@ -19,9 +25,9 @@ function AboutUs() {
   } else {
     component = (
       <>
-        <Breadcrumbs title="About US" titlePosition="bottom" background="url(/img/bread-overlay.jpg)" overlay={false} >
-          <HistoryLinks link="/home" text="Home" isActive={false} />
-          <HistoryLinks link="/about" text="About US" isActive={true} />
+        <Breadcrumbs title={capitalizePhrase(t(getText.pagesTitle.contactUs))} titlePosition="bottom" background="url(/img/bread-overlay.jpg)" overlay={false} >
+          <HistoryLinks link="/home" text={capitalizePhrase(t(getText.pagesTitle.home))} isActive={false} />
+          <HistoryLinks link="/about" text={capitalizePhrase(t(getText.contactUs.contactNow))} isActive={true} />
         </Breadcrumbs>
         <CEO />
         <FounderComp />

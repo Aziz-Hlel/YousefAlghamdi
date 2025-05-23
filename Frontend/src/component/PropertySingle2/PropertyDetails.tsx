@@ -21,6 +21,9 @@ function PropertyDetails() {
   if (!property) return <></>
 
   const propertyAgent = property.agentId ? agents[property.agentId] : undefined;
+  console.log("agentId", property.agentId);
+
+  console.log("propertyAgent", propertyAgent);
 
   type IPropertyDetail = {
     [key: string]: string | number;

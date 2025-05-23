@@ -25,6 +25,7 @@ import SubmitPropertySchema from "@src/schemas/SubmitPropertySchema.zod";
 import { useTranslation } from "react-i18next";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import getText from "@src/i18n/data/getText";
+import useSubmitPropertySchema from "@src/schemas/useSubmitPropertySchema";
 
 
 
@@ -40,7 +41,8 @@ const PropertyFrom = () => {
   const { whatFor, } = useParams();
 
   const imgsFolderId = useRef<string>(uuidv4());
-
+  
+  const { SubmitPropertySchema } = useSubmitPropertySchema();
 
   const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting, }, setError } =
     useForm<SubmitPropertyType>({

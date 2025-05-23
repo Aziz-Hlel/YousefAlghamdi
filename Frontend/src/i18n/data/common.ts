@@ -28,13 +28,16 @@ const common = {
     realEstateBroker: "common:realEstateBroker",
     loading: "common:loading",
     noPublishPersonalInfo: "common:noPublishPersonalInfo",
-
+    confirm: "common:confirm",
+    cancel: "common:cancel",
+    delete: "common:delete",
+    change: "common:change",
     state: {
-        toBeDeleted: 'state.toBeDeleted',
-        toBeUpdated: 'state.toBeUpdated',
-        toBeAdded: 'state.toBeAdded',
-        unavailable: 'state.unavailable',
-        active: 'state.active',
+        toBeDeleted: 'common:state.toBeDeleted',
+        toBeUpdated: 'common:state.toBeUpdated',
+        toBeAdded: 'common:state.toBeAdded',
+        unavailable: 'common:state.unavailable',
+        active: 'common:state.active',
     },
     roles: {
         user: "common:roles.user",

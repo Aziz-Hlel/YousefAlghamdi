@@ -130,7 +130,7 @@ const data = {
     "commercial rent": "commercial rent",
     "commercial sale": "commercial sale",
 
-
+    "m2": "m2",
 }
 
 

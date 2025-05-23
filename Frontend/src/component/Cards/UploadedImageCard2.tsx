@@ -4,6 +4,9 @@ import { useDropzone } from 'react-dropzone';
 import Cropper, { Area, Point } from "react-easy-crop";
 import getCroppedImg from "../Form/cropImg.func";
 import prepareImageForUpload from "../Form/prepareImageForUpload";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 type UploadedImageCardProps = {
@@ -19,7 +22,7 @@ function UploadedImageCard({ img, handleImage, handleDelete, idx }: UploadedImag
 
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({ maxFiles: 1, accept: { 'image/*': [] }, disabled: false });
   const { acceptedFiles: acceptedFiles2, getRootProps: getRootProps2, getInputProps: getInputProps2 } = useDropzone({ maxFiles: 1, accept: { 'image/*': [] }, disabled: false });
-
+  const { t } = useTranslation(["data", 'common']);
   const [progress, setProgress] = useState<number>();
 
   useEffect(() => {
@@ -118,7 +121,7 @@ function UploadedImageCard({ img, handleImage, handleDelete, idx }: UploadedImag
         <div className=" ">
 
           {compDisplayed === "placeholder" &&
-            <div className=""    {...getRootProps()}>
+            <div className="" {...getRootProps()}>
 
               <img src="https://placehold.co/1920x1080" alt="" />
               {/* <div className="-overlay -overlay--img-video"></div> */}
@@ -156,8 +159,8 @@ function UploadedImageCard({ img, handleImage, handleDelete, idx }: UploadedImag
                 />
               </div>
               <div className=' w-full flex gap-4'>
-                <div className='w-fit p-2 bg-red-500 rounded-xl text-white hover:bg-red-600 cursor-pointer ' onClick={handleCancel}>cancel</div>
-                <div className='w-fit p-2 bg-green-500 rounded-xl text-white hover:bg-green-600 cursor-pointer ' onClick={showCroppedImage}>confirm</div>
+                <div className='w-fit p-2 bg-red-500 rounded-xl text-white hover:bg-red-600 cursor-pointer ' onClick={handleCancel}>{capitalizePhrase(t(getText.common.confirm))}</div>
+                <div className='w-fit p-2 bg-green-500 rounded-xl text-white hover:bg-green-600 cursor-pointer ' onClick={showCroppedImage}>{capitalizePhrase(t(getText.common.cancel))}</div>
 
               </div>
             </div>
@@ -167,12 +170,17 @@ function UploadedImageCard({ img, handleImage, handleDelete, idx }: UploadedImag
             <div className={' h-full w-full  relative ' + (img ? "bg-slate-200" : "")}>
               <img src={img ? img.url : ""} alt="" className=" w-full h-full" />
               <div className=" w-full flex justify-end px-2 py-2 gap-2">
-                {img && <div className='w-fit p-2 bg-red-500 rounded-xl text-white hover:bg-red-600 cursor-pointer ' onClick={(e) => { e.preventDefault(); setCompDisplayed("placeholder"); handleDelete(idx) }}>delete</div>}
+                {img &&
+                  <div className='w-fit p-2 bg-red-500 rounded-xl text-white hover:bg-red-600 cursor-pointer '
+                    onClick={(e) => { e.preventDefault(); setCompDisplayed("placeholder"); handleDelete(idx) }}>
+                    {capitalizePhrase(t(getText.common.cancel))}
+                  </div>
+                }
 
                 {img &&
                   <div className='w-fit p-2 bg-amber-500 rounded-xl text-white hover:bg-amber-600 cursor-pointer ' {...getRootProps2()} >
                     <div >
-                      change
+                      {capitalizePhrase(t(getText.common.change))}
                       <input {...getInputProps2()} accept="image/*" />
                     </div>
                   </div>}

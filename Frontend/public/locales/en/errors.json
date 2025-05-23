@@ -1,4 +1,59 @@
 {
+    "submitProperty": {
+        "title": {
+            "required": "Title is required",
+            "min": "Title must be at least 2 characters long",
+            "max": "Title must be at most 25 characters long"
+        },
+        "description": {
+            "required": "Description is required",
+            "min": "Description must be at least 2 characters long",
+            "max": "Description must be at most 200 characters long"
+        },
+        "category": {
+            "required": "Category is required",
+            "min": "Type must be at least 2 characters long",
+            "max": "Type must be at most 25 characters long"
+        },
+        "sub_category": {
+            "required": "Sub category is required"
+        },
+        "city": {
+            "required": "City is required"
+        },
+        "delegation": {
+            "required": "Delegation is required"
+        },
+        "addresse": {
+            "required": "Addresse is required"
+        },
+        "filterFields": {
+            "price": {
+                "required": "Price is required",
+                "min": "Price must be at least 100",
+                "max": "Price must be at most 10000000",
+                "regex": "Price must be a number"
+            },
+            "area": {
+                "required": "Area is required",
+                "min": "Area must be at least 1",
+                "max": "Area must be at most 100000",
+                "regex": "Area must be a number"
+            },
+            "rooms": {
+                "required": "Rooms is required",
+                "min": "Rooms must be at least 0",
+                "max": "Rooms must be at most 99",
+                "regex": "Rooms must be a number"
+            },
+            "bathrooms": {
+                "required": "Bathrooms is required",
+                "min": "Bathrooms must be at least 0",
+                "max": "Bathrooms must be at most 99",
+                "regex": "Bathrooms must be a number"
+            }
+        }
+    },
     "changePassword": {
         "root": {
             "somethingWentWrong": "something went wrong"

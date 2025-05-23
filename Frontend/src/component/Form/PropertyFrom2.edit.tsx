@@ -26,6 +26,7 @@ import { Alert, ConfirmationAlertAsync } from "@src/utils/createAlert";
 import SubmitPropertySchema from "@src/schemas/SubmitPropertySchema.zod";
 import prepareImageForUpload from "./prepareImageForUpload";
 import ImageInput from "./ImageInput2";
+import useSubmitPropertySchema from "@src/schemas/useSubmitPropertySchema";
 
 
 
@@ -42,6 +43,8 @@ const PropertyFrom = () => {
   const [InspectedProperty, setInspectedProperty] = useState<Iproperty | undefined>(undefined);
   const imgsFolderId = useRef<string>("");
   const navigate = useNavigate();
+
+  const { SubmitPropertySchema } = useSubmitPropertySchema();
 
 
   const { register, watch, handleSubmit, setValue, reset, formState: { errors, isSubmitting, }, setError, clearErrors } =
