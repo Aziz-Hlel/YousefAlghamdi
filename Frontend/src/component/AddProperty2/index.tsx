@@ -1,6 +1,5 @@
 import Header from "../Header";
 import Footer from "../Footer";
-import DownloadApp from "../DownloadApp";
 import Breadcrumbs from "../Breadcrumbs";
 import HistoryLinks from "../Breadcrumbs/HistoryLinks";
 import PropertyAddCard from "../Cards/PropertyAddCard2";
@@ -10,6 +9,7 @@ import { listing_types } from "@src/types/listing_types.types";
 import { useTranslation } from "react-i18next";
 import getText from "@src/i18n/data/getText";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import DownloadApp from "../DownloadApp2";
 
 const AddProperty = () => {
   const [isLoading, setIsLoading] = useState(true);

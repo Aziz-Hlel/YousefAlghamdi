@@ -76,7 +76,7 @@ export const adminAuth = async (req: AuthenticatedRequest, res: Response, next: 
 
 
 export const adminOrAgentAuth = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    console.log("ouslll")
+
     try {
         if (req.user?.role !== roles.ADMIN && req.user?.role !== roles.AGENT) throw new AppError(errorMessages.AUTH.PERMISSION_DENIED, statusCode.FORBIDDEN, 500)
         else next();

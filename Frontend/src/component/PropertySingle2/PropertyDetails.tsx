@@ -10,7 +10,7 @@ import PropertyAgents from "../Agents2/PropertyAgents2";
 
 function PropertyDetails() {
 
-  const { t } = useTranslation(['common', 'propertySingle',]);
+  const { t } = useTranslation(['data', 'common', 'propertySingle',]);
 
 
   const { property } = useSinglePropertyContext();
@@ -30,9 +30,9 @@ function PropertyDetails() {
   };
 
   const propertyDetails: IPropertyDetail[] = [
-    { type: property ? property.category : "" },
-    { city: property ? property.city : "" },
-    { area: property ? property.filterFields.area : "" },]
+    { type: capitalizePhrase(t(getText.data[property.category as keyof typeof getText.data])) },
+    { city: capitalizePhrase(t(getText.data[property.city as keyof typeof getText.data])) },
+    { area: property.filterFields.area },]
 
   property && property.filterFields.rooms && propertyDetails.push({ rooms: property.filterFields.rooms });
   property && property.filterFields.bathrooms && propertyDetails.push({ bathrooms: property.filterFields.bathrooms });

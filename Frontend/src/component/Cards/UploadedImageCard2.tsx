@@ -159,13 +159,13 @@ function UploadedImageCard({ img, handleImage, handleDelete, idx }: UploadedImag
                 />
               </div>
               <div className=' w-full flex gap-4'>
-                <div className='w-fit p-2 bg-red-500 rounded-xl text-white hover:bg-red-600 cursor-pointer ' onClick={handleCancel}>{capitalizePhrase(t(getText.common.confirm))}</div>
-                <div className='w-fit p-2 bg-green-500 rounded-xl text-white hover:bg-green-600 cursor-pointer ' onClick={showCroppedImage}>{capitalizePhrase(t(getText.common.cancel))}</div>
+                <div className='w-fit p-2 bg-red-500 rounded-xl text-white hover:bg-red-600 cursor-pointer ' onClick={handleCancel}>{capitalizePhrase(t(getText.common.cancel))}</div>
+                <div className='w-fit p-2 bg-green-500 rounded-xl text-white hover:bg-green-600 cursor-pointer ' onClick={showCroppedImage}>{capitalizePhrase(t(getText.common.confirm))}</div>
 
               </div>
             </div>
           }
-          {
+          { 
             compDisplayed === "img" &&
             <div className={' h-full w-full  relative ' + (img ? "bg-slate-200" : "")}>
               <img src={img ? img.url : ""} alt="" className=" w-full h-full" />
@@ -173,7 +173,7 @@ function UploadedImageCard({ img, handleImage, handleDelete, idx }: UploadedImag
                 {img &&
                   <div className='w-fit p-2 bg-red-500 rounded-xl text-white hover:bg-red-600 cursor-pointer '
                     onClick={(e) => { e.preventDefault(); setCompDisplayed("placeholder"); handleDelete(idx) }}>
-                    {capitalizePhrase(t(getText.common.cancel))}
+                    {capitalizePhrase(t(getText.common.delete))}
                   </div>
                 }
 

@@ -5,7 +5,6 @@ import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import { useAuth } from "@src/providers/AuthProvider.context";
 import roles from "@src/types/roles.type";
-import { addAgentSchemaType, userSchema } from "@src/schemas/EditPersonalInfo.schema";
 import { FileWithPath, useDropzone } from "react-dropzone";
 import { useEffect, useState } from "react";
 import prepareImageForUpload from "./prepareImageForUpload";
@@ -16,6 +15,8 @@ import { useAgents } from "@src/providers/AgentsProvider.context";
 import { useTranslation } from "react-i18next";
 import getText from "@src/i18n/data/getText";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import useUserSchema from "@src/schemas/useEditPersonalInfo.schema";
+import { z } from "zod";
 
 
 
@@ -28,8 +29,9 @@ function PersonalInfo({ toggleModal }: { toggleModal: () => void }) {
   const { agents } = useAgents();
   const [folderId, setfolderId] = useState("");
   const { t } = useTranslation(['common', 'dashboard']);
-
-
+  const { userSchema } = useUserSchema();
+  type addAgentSchemaType = z.infer<typeof userSchema>
+  
   if (!user) return null;
 
   const { register, handleSubmit, formState: { errors, isSubmitting, }, setError, clearErrors, setValue, getValues } =

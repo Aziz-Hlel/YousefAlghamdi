@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import Breadcrumbs from "../Breadcrumbs2";
 import HistoryLinks from "../Breadcrumbs2/HistoryLinks";
-import DownloadApp from "../DownloadApp";
 
 import Sidebar from "./Sidebar2";
 
@@ -13,6 +12,7 @@ import { useAuth } from "@src/providers/AuthProvider.context";
 import { useTranslation } from "react-i18next";
 import getText from "@src/i18n/data/getText";
 import { capitalize } from "lodash";
+import DownloadApp from "../DownloadApp2";
 
 function Dashboard() {
   // Inner navigation

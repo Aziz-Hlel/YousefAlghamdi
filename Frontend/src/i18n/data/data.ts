@@ -115,7 +115,6 @@ const data = {
     "sub_category": "sub_category",
     "city": "city",
     "delegation": "delegation",
-    "addresse": "addresse",
     "listing_type": "listing_type",
     "price": "price",
     "area": "area",
@@ -131,6 +130,7 @@ const data = {
     "commercial sale": "commercial sale",
 
     "m2": "m2",
+
 }
 
 

@@ -18,5 +18,7 @@
         "title": "Ajouter une propriété commerciale à vendre",
         "description": "Ajoutez votre propriété commerciale à vendre",
         "btn": "Ajouter une propriété"
-    }
+    },
+    "addPropertyFor": "Ajouter une propriété pour",
+    "createFor": "Créer pour"
 }

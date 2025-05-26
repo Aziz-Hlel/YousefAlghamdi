@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 function AboutUs() {
   const [isLoading, setisLoadingg] = useState(true);
 
-  const { t } = useTranslation(['common', 'pagesTitle', ]);
+  const { t } = useTranslation(['common', 'pagesTitle','contactUs' ]);
   { capitalizePhrase(t(getText.common.test)) }
 
   useEffect(() => {
@@ -25,9 +25,9 @@ function AboutUs() {
   } else {
     component = (
       <>
-        <Breadcrumbs title={capitalizePhrase(t(getText.pagesTitle.contactUs))} titlePosition="bottom" background="url(/img/bread-overlay.jpg)" overlay={false} >
+        <Breadcrumbs title={capitalizePhrase(t(getText.pagesTitle.aboutUs))} titlePosition="bottom" background="url(/img/bread-overlay.jpg)" overlay={false} >
           <HistoryLinks link="/home" text={capitalizePhrase(t(getText.pagesTitle.home))} isActive={false} />
-          <HistoryLinks link="/about" text={capitalizePhrase(t(getText.contactUs.contactNow))} isActive={true} />
+          <HistoryLinks link="/about" text={capitalizePhrase(t(getText.pagesTitle.aboutUs))} isActive={true} />
         </Breadcrumbs>
         <CEO />
         <FounderComp />

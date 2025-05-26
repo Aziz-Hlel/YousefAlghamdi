@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 function Contact() {
   const [isLoading, setisLoadingg] = useState(true);
 
-  const { t } = useTranslation(['common', 'pagesTitle',]);
+  const { t } = useTranslation(['data','common', 'pagesTitle','contactUs']);
   { capitalizePhrase(t(getText.common.test)) }
 
 
@@ -46,7 +46,7 @@ function Contact() {
                   className="homec-property-ag homec-bg-cover"
                   style={{ backgroundImage: "url('/img/property-ag-bg.svg')" }}
                 >
-                  <h3 className="homec-property-ag__title">Contact Now</h3>
+                  <h3 className="homec-property-ag__title">{capitalizePhrase(t(getText.contactUs.contactNow))}</h3>
                   {/* End Property Profile */}
                   <ContactForm />
                 </div>
@@ -60,7 +60,7 @@ function Contact() {
             <div className="row">
               <div className="col-12">
                 <div className="homec-contact__middle homec-border">
-                  <SingleContact title="Contact Info" text={companyInfo.phone}>
+                  <SingleContact title={capitalizePhrase(t(getText.common.contactInfo))} text={companyInfo.phone}>
                     <svg
                       width="35"
                       height="35"
@@ -74,8 +74,8 @@ function Contact() {
                     </svg>
                   </SingleContact>
                   <SingleContact
-                    title="Location"
-                    text={companyInfo.address}
+                    title={capitalizePhrase(t(getText.common.location))}
+                    text={capitalizePhrase(t(getText.data.address))}
                   >
                     <svg
                       width="31"
@@ -88,7 +88,7 @@ function Contact() {
                       <path d="M15.2923 6.18457C12.4818 6.18457 10.1953 8.47109 10.1953 11.2816C10.1953 14.0921 12.4818 16.3786 15.2923 16.3786C18.1028 16.3786 20.3893 14.0921 20.3893 11.2816C20.3893 8.47109 18.1028 6.18457 15.2923 6.18457ZM15.2923 14.3398C13.606 14.3398 12.2341 12.9679 12.2341 11.2816C12.2341 9.59528 13.606 8.22337 15.2923 8.22337C16.9786 8.22337 18.3505 9.59528 18.3505 11.2816C18.3505 12.9679 16.9786 14.3398 15.2923 14.3398Z" />
                     </svg>
                   </SingleContact>
-                  <SingleContact title="Email" text={companyInfo.email}>
+                  <SingleContact title={capitalizePhrase(t(getText.common.email))} text={companyInfo.email}>
                     <svg
                       width="34"
                       height="34"

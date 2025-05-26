@@ -1,0 +1,19 @@
+{
+    "description": "description",
+    "details": {
+        "title": "détails",
+        "type": "type",
+        "city": "ville",
+        "area": {
+            "title": "superficie",
+            "m2": "m²"
+        },
+        "rooms": "pièces",
+        "bathrooms": "salles de bain"
+    },
+    "nearestPlaces": {
+        "title": "Lieux à proximité",
+        "km": "km"
+    },
+    "additionalDetails": "détails supplémentaires"
+}

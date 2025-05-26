@@ -1,7 +1,10 @@
+import getText from "@src/i18n/data/getText";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import { Alert } from "@src/utils/createAlert";
 import { FormEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function ContactForm() {
   const [input, setInput] = useState({
@@ -11,7 +14,12 @@ function ContactForm() {
     subject: "",
     message: "",
   });
+
   const [submitting, setSubmitting] = useState(false);
+
+  const { t } = useTranslation(['common', 'alertUs',]);
+
+
   const handleChange = (e: any) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
@@ -21,11 +29,11 @@ function ContactForm() {
     setSubmitting(true);
 
     const response = await Http.post(apiGateway.services.email, { ...input });
-    response?.status === 200 && Alert({ icon: "success", title: "Success", text: "Your inquiry has been received. An agent will contact you as soon as possible to provide further assistance." });
+    response?.status === 200 && Alert({ icon: "success", title: capitalizePhrase(t(getText.alerts.contactUs.successAlert.title)), text: capitalizePhrase(t(getText.alerts.contactUs.successAlert.text)) });
     response?.status === 200 && setInput({ name: "", email: "", phoneNumber: "", subject: "", message: "" });
-    response?.status !== 200 && Alert({ icon: "error", title: "Error", text: "Message not sent! please try later" });
+    response?.status !== 200 && Alert({ icon: "error", title: capitalizePhrase(t(getText.alerts.contactUs.errorAlert.title)), text: capitalizePhrase(t(getText.alerts.contactUs.errorAlert.text)) });
     setSubmitting(false);
-  }
+  };
 
 
   return (
@@ -34,7 +42,7 @@ function ContactForm() {
         <input
           type="text"
           name="name"
-          placeholder="Full name"
+          placeholder={capitalizePhrase(t(getText.common.fullName))}
           value={input.name}
           onChange={(e) => handleChange(e)}
         />
@@ -43,7 +51,7 @@ function ContactForm() {
         <input
           type="email"
           name="email"
-          placeholder="Your email"
+          placeholder={capitalizePhrase(t(getText.common.yourEmail))}
           value={input.email}
           onChange={(e) => handleChange(e)}
         />
@@ -52,7 +60,7 @@ function ContactForm() {
         <input
           type="text"
           name="phoneNumber"
-          placeholder="Your Phone"
+          placeholder={capitalizePhrase(t(getText.common.yourPhone))}
           value={input.phoneNumber}
           onChange={(e) => handleChange(e)}
         />
@@ -61,7 +69,7 @@ function ContactForm() {
         <input
           type="text"
           name="subject"
-          placeholder="Subject"
+          placeholder={capitalizePhrase(t(getText.common.subject))}
           value={input.subject}
           onChange={(e) => handleChange(e)}
         />
@@ -69,19 +77,19 @@ function ContactForm() {
       <div className="form-group">
         <textarea
           name="message"
-          placeholder="Description"
+          placeholder={capitalizePhrase(t(getText.common.description))}
           required
           value={input.message}
           onChange={(e) => handleChange(e)}
         ></textarea>
       </div>
-      <button
-        type="submit"
-        className="homec-btn homec-btn__second homec-property-ag__button"
-        disabled={submitting}
-      >
-        <span>{!submitting ? "Send Message Now" : "Submitting..."}</span>
+
+      <button type="submit" className="homec-btn homec-btn__second homec-property-ag__button" disabled={submitting}>
+
+        <span>{!submitting ? capitalizePhrase(t(getText.contactUs.sendMessageNow)) : capitalizePhrase(t(getText.common.submitting)) + "..."}</span>
+
       </button>
+
     </form>
   );
 }

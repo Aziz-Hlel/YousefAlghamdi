@@ -43,7 +43,17 @@ const alerts = {
                 description: "alerts:sponsors.delete.sucsessAlert.description",
             },
         },
-    }
+    },
+    contactUs: {
+        successAlert: {
+            title: "alerts:contactUs.successAlert.title",
+            text: "alerts:contactUs.successAlert.text",
+        },
+        errorAlert: {
+            title: "alerts:contactUs.errorAlert.title",
+            text: "alerts:contactUs.errorAlert.text",
+        }
+    },
 }
 
 

@@ -157,8 +157,7 @@ const UploadThumbnailCard = ({ img, handleImage, handleDelete, }: UploadThumbnai
                                 />
                             </div>
                             <div className=' w-full flex gap-4'>
-                                <div className='w-fit p-2 bg-red-500 rounded-xl text-white hover:bg-red-600 cursor-pointer '
-                                    onClick={handleCancel}>
+                                <div className='w-fit p-2 bg-red-500 rounded-xl text-white hover:bg-red-600 cursor-pointer ' onClick={handleCancel}>
                                     {capitalizePhrase(t(getText.common.cancel))}
                                 </div>
                                 <div className='w-fit p-2 bg-green-500 rounded-xl text-white hover:bg-green-600 cursor-pointer ' onClick={showCroppedImage}> {capitalizePhrase(t(getText.common.confirm))}</div>
@@ -174,7 +173,7 @@ const UploadThumbnailCard = ({ img, handleImage, handleDelete, }: UploadThumbnai
 
                                 {img && <div className='w-fit p-2 bg-red-500 rounded-xl text-white hover:bg-red-600 cursor-pointer '
                                     onClick={(e) => { e.preventDefault(); setCompDisplayed("placeholder"); handleDelete(0) }}>
-                                    {capitalizePhrase(t(getText.common.change))}
+                                    {capitalizePhrase(t(getText.common.delete))}
                                 </div>
                                 }
 

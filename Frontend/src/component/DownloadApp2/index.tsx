@@ -36,7 +36,7 @@ function DownloadApp() {
                    { capitalizePhrase(t(getText.home.DownloadApp.title)) }
                   </h2>
                   <p className="sec-head__text">
-                    { capitalizePhrase(t(getText.home.DownloadApp.description)) }
+                    {/* { capitalizePhrase(t(getText.home.DownloadApp.description)) } */}
                   </p>
                 </div>
                 {/* App Download Button  */}

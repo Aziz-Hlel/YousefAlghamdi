@@ -1,14 +1,14 @@
 {
     "login": {
         "title": "Connexion",
-        "description": "Votre adresse e-mail ne sera pas publiée. Les champs obligatoires sont marqués *",
+        "description": "Votre adresse email ne sera pas publiée. Les champs obligatoires sont indiqués avec *",
         "noAccount": "Vous n'avez pas de compte ?",
         "cretaeAccount": "Créer un compte",
         "allRightsReserved": "© 2025 Yousef Alghamdi Properties. Tous droits réservés par"
     },
     "signUp": {
         "title": "Créer un compte",
-        "description": "Votre adresse e-mail ne sera pas publiée. Les champs obligatoires sont marqués *",
+        "description": "Votre adresse email ne sera pas publiée. Les champs obligatoires sont indiqués avec *",
         "haveAccount": "Vous avez déjà un compte ?",
         "btn": "S'inscrire",
         "login": "Connexion",

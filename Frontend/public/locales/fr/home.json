@@ -6,88 +6,110 @@
             "properties": "Propriétés",
             "rent": "Location",
             "sale": "Vente",
-            "commercialRent": "Location commerciale",
-            "commercialSale": "Vente commerciale"
+            "commercialRent": "Location Commerciale",
+            "commercialSale": "Vente Commerciale"
         },
-        "about": "À propos de nous",
+        "about": "À Propos de Nous",
         "contact": "Contact",
-        "dashboard": "Tableau de bord",
-        "addProperty": "Ajouter une propriété"
+        "dashboard": "Tableau de Bord",
+        "addProperty": "Ajouter une Propriété",
+        "login": "Connexion",
+        "profile": "Profil"
     },
     "HomecHeroV2": {
-        "title": "Trouvons la propriété parfaite pour vous.",
-        "listingType": "Type d'annonce",
+        "title": "Trouvons Votre Maison Parfaite Pour Vous.",
+        "listingType": "Type d'Annonce",
         "category": "Catégorie",
         "city": "Ville",
         "search": "Rechercher"
     },
     "LatestPropertyV2": {
-        "title": "Propriétés en vedette",
-        "seeAllProperties": "Voir toutes les propriétés"
+        "title": "Propriétés en Vedette",
+        "seeAllProperties": "Voir Toutes les Propriétés"
     },
     "Sponsors": {
-        "title": "Recommandé par les meilleurs"
+        "title": "Approuvé par les meilleurs"
     },
     "Features2": {
-        "title": "Pourquoi nous choisir",
-        "stepsToGo": "6 étapes à suivre",
+        "title": "Pourquoi Nous Choisir",
+        "stepsToGo": "6 Étapes à Suivre",
         "steps": {
-            "1": "Portefeuille étendu de propriétés à Dubaï et aux Émirats Arabes Unis",
-            "2": "Équipe experte avec une connaissance approfondie du marché",
+            "1": "Portefeuille étendu de propriétés à travers Dubaï et les EAU",
+            "2": "Équipe d'experts avec une connaissance approfondie du marché",
             "3": "Pratiques transparentes, éthiques et professionnelles",
             "4": "Solutions sur mesure pour investisseurs, propriétaires et locataires",
-            "5": "Support de bout en bout, de l'enquête à la clôture",
-            "6": "Gestion immobilière complète pour protéger et développer votre investissement."
+            "5": "Support de bout en bout de la demande à la clôture",
+            "6": "Soins immobiliers de bout en bout pour protéger et faire fructifier votre investissement."
         }
     },
     "CEO": {
-        "aboutYGP": "À propos de YGP",
-        "WelcomeMessage": "Message de bienvenue du PDG",
-        "message": "Bienvenue chez YGP Real Estate, où la vision rencontre la valeur. En tant que PDG, je suis fier de diriger une équipe engagée envers l'excellence, l'intégrité et la satisfaction client. Notre focus n'est pas seulement sur les transactions, mais sur la construction de relations durables basées sur la confiance et la transparence. Que vous achetiez, vendiez ou investissiez, nous sommes là pour vous guider à chaque étape avec des insights marché, un service personnalisé et un engagement profond envers votre succès. Merci de choisir YGP — votre partenaire de confiance dans l'immobilier aux Émirats Arabes Unis.",
+        "aboutYGP": "À Propos de YGP",
+        "WelcomeMessage": "Message de Bienvenue du PDG",
+        "message": "Bienvenue chez YGP Real Estate, où la vision rencontre la valeur. En tant que PDG, je suis fier de diriger une équipe engagée vers l'excellence, l'intégrité et la satisfaction client. Notre focus n'est pas seulement sur les transactions, mais sur la construction de relations durables enracinées dans la confiance et la transparence. Que vous achetiez, vendiez ou investissiez, nous sommes là pour vous guider à chaque étape avec des insights de marché, un service personnalisé et un engagement profond envers votre succès. Merci d'avoir choisi YGP — votre partenaire de confiance dans l'immobilier des EAU.",
         "ceo": "PDG",
-        "yearsOfExperience": "12 ans d'expérience"
+        "yearsOfExperience": "12 Années ",
+        "ofExperience": "d'Expérience",
+        "ceoName": "Narjiss Didi Alaoui"
     },
     "Agents": {
-        "title": "Rencontrez notre équipe talentueuse",
-        "description": "Nous sommes un groupe dynamique d'individus passionnés par ce que nous faisons et dédiés à offrir les meilleurs résultats à nos clients.",
-        "realEstateBroker": "Courtier immobilier"
+        "title": "Rencontrez Notre Équipe Talentueuse",
+        "description": "Nous sommes un groupe dynamique d'individus passionnés par ce que nous faisons et dédiés à livrer les meilleurs résultats pour nos clients.",
+        "realEstateBroker": "Courtier Immobilier"
     },
     "FaqSection": {
-        "title": "Si vous voulez connaître les questions fréquemment posées",
+        "title": "Si vous voulez connaître les Questions Fréquemment Posées",
         "faq": "FAQ",
         "support": "Support 24/7",
-        "questions": "Vous avez des questions ? Contactez-nous !"
+        "questions": "Avez-vous des Questions ? Contactez-nous ?",
+        "contents": {
+            "1": {
+                "question": "Quels services YGP Real Estate fournit-il ?",
+                "answer": "YGP est un courtage à service complet qui aide les clients à *acheter, vendre ou louer* des propriétés prêtes et sur plan à travers les EAU. Nous offrons également la représentation de propriétaires, des packages de gestion immobilière et des services de conseil en investissement pour maximiser les rendements locatifs et la croissance du capital."
+            },
+            "2": {
+                "question": "Les non-résidents des EAU peuvent-ils acheter une propriété via YGP ?",
+                "answer": "Oui. Les acheteurs étrangers peuvent acheter une propriété en pleine propriété dans les zones désignées. YGP gère l'ensemble du processus transfrontalier pour vous—des visites virtuelles et vérifications de diligence raisonnable à la rédaction de l'Accord de Vente et d'Achat (SPA) et la coordination des transferts de bureau fiduciaire—afin que vous puissiez compléter la transaction même si vous êtes en dehors des EAU."
+            },
+            "3": {
+                "question": "Combien de temps prend un achat immobilier typique avec YGP ?",
+                "answer": "Une fois que vous sélectionnez une propriété, le processus de bout en bout s'étend généralement sur *10–15 jours ouvrables* pour les transactions en espèces et *30–45 jours ouvrables* si un financement bancaire est impliqué. Nous gérons chaque étape—négociation de prix, signature SPA, collecte du Certificat de Non-Objection (NOC), coordination hypothécaire (si nécessaire), et transfert fiduciaire—afin que vous puissiez recevoir votre titre de propriété avec un minimum de tracas."
+            },
+            "4": {
+                "question": "Comment puis-je lister ma propriété ou réserver une visite ?",
+                "answer": "1️⃣ Appelez ou WhatsApp +971 52 500 2822 ou email info@ygp.ae. 2️⃣ Partagez les détails de base (titre de propriété, Oqood, photos). 3️⃣ Un agent dédié visitera pour vérifier l'unité, signer l'accord de listing Formulaire A, et organiser des photos professionnelles. 4️⃣ Votre annonce sera en ligne sur ygp.ae et les portails principaux dans les 24 heures, et les visites sont programmées selon votre convenance—souvent le même jour."
+            }
+        }
     },
     "DownloadApp": {
-        "title": "Téléchargez notre application mobile",
-        "description": "Il existe de nombreuses variations de passages du Lorem Ipsum disponibles, mais la majorité ont subi des modifications pour les adapter.",
+        "title": "Téléchargez Notre Application Mobile",
+        "description": "Il existe de nombreuses variations de passages de Lorem Ipsum disponibles, mais la majorité ont souffert dans la recherche pour en faire une altération.",
         "download": {
-            "downloadOnTHe": "Téléchargez sur",
+            "downloadOnTHe": "Télécharger sur l'",
             "appStore": "App Store",
-            "getItOn": "Disponible sur",
+            "getItOn": "Obtenez-le sur",
             "googlePlay": "Google Play"
         }
     },
     "Footer": {
         "title": "YGP Real Estate",
-        "description": "Il existe de nombreuses variations de passages du Lorem Ipsum disponibles, mais la majorité ont subi des modifications pour les adapter.",
+        "description": "Il existe de nombreuses variations de passages de Lorem Ipsum disponibles, mais la majorité ont souffert dans la recherche pour en faire une altération.",
         "listing": {
             "listing": "Annonces",
             "properties": "Propriétés",
-            "addProperty": "Ajouter une propriété",
+            "addProperty": "Ajouter une Propriété",
             "login": "Connexion",
-            "signup": "Inscription"
+            "signup": "S'inscrire"
         },
         "important": {
             "title": "Important",
-            "aboutUs": "À propos de nous",
-            "ourAgents": "Nos agents",
+            "aboutUs": "À Propos de Nous",
+            "ourAgents": "Nos Agents",
             "contact": "Contact"
         },
         "copyright": {
             "allRightsReserved": "© 2025 Yousef Alghamdi Properties. Tous droits réservés par",
             "technoShark": "TechnoShark",
-            "aboutCompany": "À propos de l'entreprise",
+            "aboutCompany": "À Propos de la Société",
             "contactUs": "Contactez-nous"
         }
     }

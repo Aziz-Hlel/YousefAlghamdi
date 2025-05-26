@@ -1,0 +1,19 @@
+{
+    "description": "الوصف",
+    "details": {
+        "title": "التفاصيل",
+        "type": "النوع",
+        "city": "المدينة",
+        "area": {
+            "title": "المساحة",
+            "m2": "م²"
+        },
+        "rooms": "الغرف",
+        "bathrooms": "الحمامات"
+    },
+    "nearestPlaces": {
+        "title": "أقرب الأماكن",
+        "km": "كم"
+    },
+    "additionalDetails": "تفاصيل إضافية"
+}

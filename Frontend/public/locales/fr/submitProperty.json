@@ -1,0 +1,41 @@
+{
+    "propertyInformation": {
+        "title": "Informations sur la propriété",
+        "propertyTitle": "Titre de la propriété",
+        "category": "Catégorie",
+        "subCategory": "Sous-catégorie",
+        "propertyPrice": "Prix de la propriété",
+        "totalArea": "Superficie totale",
+        "rooms": "Pièces",
+        "bathrooms": "Salles de bain",
+        "description": "Description"
+    },
+    "propertyLocation": {
+        "title": "Emplacement de la propriété",
+        "city": "Ville",
+        "delegation": "Délégation",
+        "streetAdresse": "Adresse de la rue"
+    },
+    "nearestLocation": {
+        "title": "Lieu le plus proche",
+        "nearestLocation": "Lieu le plus proche",
+        "distance": "Distance (KM)",
+        "nearestLocationPlaceholder": "Burj Khalifa",
+        "distancePlaceholder": "15"
+    },
+    "propertyImage": {
+        "title": "Image de la propriété",
+        "thumbnaiImage": {
+            "title": "Image miniature",
+            "note": "L'image doit être en Full HD (1920x1080)"
+        },
+        "sliderImages": {
+            "title": "Images du diaporama",
+            "note": "L'image doit être en Full HD (1920x1080)"
+        }
+    },
+    "btns": {
+        "submit": "Soumettre la propriété maintenant",
+        "cancel": "Annuler"
+    }
+}

@@ -1,9 +1,9 @@
 {
     "Abu Dhabi": "Abu Dhabi",
-    "Dubai": "xxx",
+    "Dubai": "Dubai",
     "Sharjah": "Sharjah",
     "Ajman": "Ajman",
-    "Umm Al-Quwain": "Umm xxx",
+    "Umm Al-Quwain": "Umm Al-Quwain",
     "Ras Al Khaimah": "Ras Al Khaimah",
     "Fujairah": "Fujairah",
     "Abu Dhabi Central": "Abu Dhabi Central",
@@ -108,5 +108,6 @@
     "sale": "sale",
     "commercial rent": "commercial rent",
     "commercial sale": "commercial sale",
-    "m2": "m2"
+    "m2": "m²"
+
 }

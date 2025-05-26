@@ -4,6 +4,8 @@ import support_img from "@img/support/support_img.png";
 
 
 function FaqSection() {
+
+  
   const [collapse, setCollapse] = useState(1);
   const handleCollapse = (id) => {
     setCollapse(id === collapse ? false : id);

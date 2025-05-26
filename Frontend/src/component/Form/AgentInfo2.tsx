@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import PropertyTextInput from "./PropertyTextInput2";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -6,14 +6,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAgents } from "@src/providers/AgentsProvider.context";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
-import { FileWithPath, useDropzone } from "react-dropzone";
 import prepareImageForUpload from "./prepareImageForUpload";
 import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
 import { v4 as uuidv4 } from 'uuid';
-import CircularProgressBarAgent from "./CircularProgressBarAgent";
-import { AgentFormType, createAgentSchema, createAgentSchemaType, updateAgentSchema, updateAgentSchemaType } from "@src/schemas/AgentSchema.CU";
 import { imagePurposes } from "@src/types/imagePurpose.types";
 import AgentImageInput from "./AgentImageInput";
+import useAgentSchema from "@src/schemas/useAgentSchema.CU";
+import { z } from "zod";
 
 
 
@@ -25,9 +24,17 @@ function PersonalInfo() {
   const { agents, refreshAgents } = useAgents();
   const { agentId } = useParams();
 
+  const { createAgentSchema, updateAgentSchema } = useAgentSchema();
+
+  type createAgentSchemaType = z.infer<typeof createAgentSchema>
+
+  type updateAgentSchemaType = z.infer<typeof updateAgentSchema>
+
+  type AgentFormType = createAgentSchemaType & Partial<updateAgentSchemaType>;
+
   const editMode = agentId ? true : false;
 
-  const { register, handleSubmit, formState: { errors, isSubmitting, }, watch, setError, clearErrors, setValue, getValues } =
+  const { register, handleSubmit, formState: { errors, isSubmitting, }, watch, setError, setValue, getValues } =
     useForm<AgentFormType>({
       // * it just works when u add any
       resolver: zodResolver((!editMode ? createAgentSchema : updateAgentSchema) as any),
@@ -64,19 +71,6 @@ function PersonalInfo() {
 
 
 
-
-  const { acceptedFiles: acceptedFilesMini, getRootProps: getRootPropsMini, getInputProps: getInputPropsMini } = useDropzone({
-    maxFiles: 1,
-    accept: { 'image/*': [], },
-    disabled: false,
-    maxSize: 5 * 1024 * 1024, // 5MB max file size
-
-  });
-
-  const [progressMain, setProgressMain] = useState<number>();
-  const [progressMini, setProgressMini] = useState<number>();
-
-
   const handleImageInput = async (uploadedImg: File, attr: "agentInfo.imageGallery.mainImage" | "agentInfo.imageGallery.miniImage", setProgress: Function, fileName?: string) => {
 
     const optimizedImg = await prepareImageForUpload(uploadedImg);
@@ -99,13 +93,7 @@ function PersonalInfo() {
 
 
 
-  useEffect(() => {
-    if (acceptedFilesMini.length > 0) {
 
-      handleImageInput(acceptedFilesMini[acceptedFilesMini.length - 1], "agentInfo.imageGallery.miniImage", (progress: any) => { setProgressMini(progress) });
-    };
-
-  }, [acceptedFilesMini])
 
   const onSubmit = (data: updateAgentSchemaType | createAgentSchemaType) => {
 

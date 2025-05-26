@@ -6,7 +6,7 @@ import { z } from 'zod';
 const useSubmitPropertySchema = () => {
 
 
-    const { t } = useTranslation();
+    const { t } = useTranslation(["errors"]);
 
 
     const SubmitPropertySchema = z.object({

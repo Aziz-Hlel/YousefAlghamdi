@@ -43,5 +43,15 @@
                 "description": "property deleted successfully"
             }
         }
+    },
+    "contactUs": {
+        "successAlert": {
+            "title": "success",
+            "text": "your inquiry has been received. An agent will contact you as soon as possible to provide further assistance." 
+        },
+        "errorAlert": {
+            "title": "error",
+            "description": "Message not sent! please try later"
+        }
     }
 }

@@ -81,9 +81,9 @@ function LatestPropertyCard({ property, style, classes, view, }: ILatestProperty
             </div> */}
 
             <div className=" flex justify-center items-center  [@media(min-width:500px)]:w-fit md:w-auto ">
-              {whatFor === "For sale" ?
-                <span className="homec-property__salebadge pr-0 mr-0">{whatFor}</span> :
-                <span className="  bg-violet-200 text-xs py-1 px-2 rounded-xl">{whatFor}</span>}
+              {property.listing_type.includes("sale") ?
+                <span className="homec-property__salebadge pr-0 mr-0">{capitalizePhrase(t(getText.data[property.listing_type as keyof typeof getText.data]))}</span> :
+                <span className="  bg-violet-200 text-xs py-1 px-2 rounded-xl">{capitalizePhrase(t(getText.data[property.listing_type as keyof typeof getText.data]))}</span>}
             </div>
 
           </div>
@@ -94,7 +94,7 @@ function LatestPropertyCard({ property, style, classes, view, }: ILatestProperty
           </h3>
           <div className="homec-property__text">
             <img src="/img/location-icon.svg" alt="#" />
-            <p>{`${property.city}, ${property.delegation}, ${property.addresse}`}</p>
+            <p>{`${capitalizePhrase(t(getText.data[property.city as keyof typeof getText.data]))}, ${capitalizePhrase(t(getText.data[property.delegation as keyof typeof getText.data]))}, ${property.addresse}`}</p>
           </div>
           {/* Property List */}
           <ul className="homec-property__list homec-border-top list-none ">

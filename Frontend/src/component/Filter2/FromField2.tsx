@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 function FromField({ name, options, state, setState }: { name: string, options: string[], state: string, setState: Function }) {
 
-  const { t } = useTranslation(["common", "data"]);
+  const { t } = useTranslation(["data", "common",]);
 
   console.log("xxxxxxxxx", (getText.data[options[0] as keyof typeof getText.data]));
 

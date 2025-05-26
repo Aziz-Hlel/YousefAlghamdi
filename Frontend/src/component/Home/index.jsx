@@ -11,7 +11,7 @@ import HomecHero from "../HomecHero2";
 import HomecHeroV2 from "../HomecHero2/HomecHeroV2";
 import LatestProperty from "../LatestProperty";
 import Preloader from "../Loader";
-import FaqSection from "../Faq/FaqSection";
+import FaqSection from "../Faq2/FaqSection";
 import LatestPropertyV2 from "../LatestProperty2/LatestPropertyV22";
 import Sponsors from "../Sponsors/Sponsors";
 import apiGateway from "@src/utils/apiGateway";

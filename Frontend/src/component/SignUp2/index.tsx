@@ -11,6 +11,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import companyInfo from "@src/data/companyInfo";
 import { useAuth } from "@src/providers/AuthProvider.context";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import useSignUpSchema from "@src/schemas/useSignUpSchema";
 
 
 
@@ -59,17 +63,20 @@ export type SignUpSchemaType = z.infer<typeof SignUpSchema>
 
 const SignUp = () => {
 
+  const SignUpSchema = useSignUpSchema();
+
   const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
 
-  const {  signup } = useAuth();
+  const { signup } = useAuth();
 
+  const { t } = useTranslation(["common", "login",]);
 
   const submitHandler: SubmitHandler<SignUpSchemaType> = async (data) => {
 
     const response = await signup(data);
-    
+
     response?.status === 200 && navigate("/");
-    response?.status === 409 && setError("email", { message: "Email already exists" })
+    response?.status === 409 && setError("email", { message: capitalizePhrase(t(getText.errors.signUp.email.alreadyExists)) })
     if (response && response?.status !== 200 && response?.status !== 409) {
       console.log(response.data.errors);
 
@@ -108,10 +115,10 @@ const SignUp = () => {
               <div className="ecom-wc__form">
                 <div className="ecom-wc__form-inner">
                   <h3 className="ecom-wc__form-title ecom-wc__form-title__one">
-                    Create Account
+                    {capitalizePhrase(t(getText.login.signUp.title))}
+
                     <span>
-                      Your email address will not be published. Required fields
-                      are marked *
+                      {capitalizePhrase(t(getText.common.noPublishPersonalInfo))}
                     </span>
                   </h3>
                   {/* Sign in Form  */}
@@ -123,7 +130,7 @@ const SignUp = () => {
                     <div className="row">
                       <PropertyTextInput
                         size="col-lg-6 col-md-6"
-                        title="First Name*"
+                        title={capitalizePhrase(t(getText.common.firstName))}
                         placeholder="Jhon"
                         margin="-10px"
                         fieldRegister={register('firstName')}
@@ -131,7 +138,7 @@ const SignUp = () => {
                       />
                       <PropertyTextInput
                         size="col-lg-6 col-md-6"
-                        title="Last Name*"
+                        title={capitalizePhrase(t(getText.common.lastName))}
                         placeholder="Doe"
                         margin="-10px"
                         fieldRegister={register('lastName')}
@@ -140,7 +147,7 @@ const SignUp = () => {
 
                       <PropertyTextInput
                         size="col-lg-6 col-md-6"
-                        title="Phone Number*"
+                        title={capitalizePhrase(t(getText.common.phoneNumber))}
                         placeholder={companyInfo.phone}
                         margin="-10px"
                         fieldRegister={register('phoneNumber')}
@@ -148,7 +155,7 @@ const SignUp = () => {
                       />
                       <PropertyTextInput
                         size="col-lg-6 col-md-6"
-                        title="Email Address*"
+                        title={capitalizePhrase(t(getText.common.emailAdress))}
                         placeholder="demo3243@gmail.com"
                         margin="-10px"
                         fieldRegister={register('email')}
@@ -156,7 +163,7 @@ const SignUp = () => {
                       />
                       <PropertyTextInput
                         size="col-lg-6 col-md-6"
-                        title="Password*"
+                        title={capitalizePhrase(t(getText.common.password))}
                         placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                         type="password"
                         margin="-10px"
@@ -165,7 +172,7 @@ const SignUp = () => {
                       />
                       <PropertyTextInput
                         size="col-lg-6 col-md-6"
-                        title="Confirm Password*"
+                        title={capitalizePhrase(t(getText.common.confirmPassword))}
                         placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                         type="password"
                         margin="-10px"
@@ -182,7 +189,7 @@ const SignUp = () => {
                           className="homec-btn homec-btn__second"
                           type="submit"
                         >
-                          <span>{isSubmitting ? "Loading" : "Sign up"}</span>
+                          <span>{isSubmitting ? capitalizePhrase(t(getText.common.loading)) : capitalizePhrase(t(getText.login.signUp.login))}</span>
                         </button>
                         {/* <button
                           className="homec-btn homec-btn__second homec-btn__social"
@@ -199,7 +206,7 @@ const SignUp = () => {
                     <div className="form-group mg-top-20">
                       <div className="ecom-wc__bottom">
                         <p className="ecom-wc__text">
-                          Already have an account ?<Link to="/login">Login</Link>
+                          {capitalizePhrase(t(getText.login.signUp.haveAccount))}<Link to="/login">{capitalizePhrase(t(getText.login.signUp.login))}</Link>
                         </p>
                       </div>
                     </div>

@@ -1,7 +1,5 @@
 import FooterList from "./FooterList";
-import SubscribeForm from "../Subscribe2";
 import { Link } from "react-router-dom";
-import logo_img from "@img/logo.png"
 import companyInfo from "@src/data/companyInfo";
 import companySocials from "@src/data/companySocials";
 import logo2 from "@img/logo2.png"
@@ -12,7 +10,7 @@ import { useTranslation } from "react-i18next";
 
 function Footer() {
 
-  const { t } = useTranslation(['home', 'common']);
+  const { t } = useTranslation(['data','home', 'common']);
   { capitalizePhrase(t(getText.common.test)) }
 
 
@@ -220,7 +218,7 @@ function Footer() {
                             </li>
                             <li>
                               <img src="/img/footer-location.png" alt="#" />
-                              <p>{companyInfo.address}</p>
+                              <p>{capitalizePhrase(t(getText.data.address))} </p>
                             </li>
 
                           </ul>

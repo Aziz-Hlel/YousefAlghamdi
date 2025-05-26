@@ -1,0 +1,41 @@
+{
+    "propertyInformation": {
+        "title": "معلومات العقار",
+        "propertyTitle": "عنوان العقار",
+        "category": "الفئة",
+        "subCategory": "الفئة الفرعية",
+        "propertyPrice": "سعر العقار",
+        "totalArea": "المساحة الإجمالية",
+        "rooms": "الغرف",
+        "bathrooms": "الحمامات",
+        "description": "الوصف"
+    },
+    "propertyLocation": {
+        "title": "موقع العقار",
+        "city": "المدينة",
+        "delegation": "المعتمدية",
+        "streetAdresse": "عنوان الشارع"
+    },
+    "nearestLocation": {
+        "title": "أقرب موقع",
+        "nearestLocation": "أقرب موقع",
+        "distance": "المسافة (كم)",
+        "nearestLocationPlaceholder": "برج خليفة",
+        "distancePlaceholder": "15"
+    },
+    "propertyImage": {
+        "title": "صورة العقار",
+        "thumbnaiImage": {
+            "title": "الصورة المصغرة",
+            "note": "يجب أن تكون الصورة بدقة عالية (1920x1080)"
+        },
+        "sliderImages": {
+            "title": "صور السلايدر",
+            "note": "يجب أن تكون الصورة بدقة عالية (1920x1080)"
+        }
+    },
+    "btns": {
+        "submit": "تقديم العقار الآن",
+        "cancel": "إلغاء"
+    }
+}

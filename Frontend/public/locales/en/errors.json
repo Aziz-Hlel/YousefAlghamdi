@@ -67,5 +67,111 @@
             "atLeast8": "Confirm password must be at least 8 characters",
             "doNotMatch": "Passwords do not match"
         }
+    },
+    "signUp": {
+        "root": {
+            "somethingWentWrong": "something went wrong"
+        },
+        "firstName": {
+            "required": "First name is required",
+            "min": "First name must be at least 2 characters long",
+            "max": "First name must be at most 25 characters long"
+        },
+        "lastName": {
+            "required": "Last name is required",
+            "min": "Last name must be at least 2 characters long",
+            "max": "Last name must be at most 25 characters long"
+        },
+        "emailAdress": {
+            "required": "Email address is required",
+            "email": "Email address is not valid",
+            "alreadyExists": "Email address already exists"
+        },
+        "phoneNumber": {
+            "required": "Phone number is required",
+            "min": "Phone number must be at least 5 characters long",
+            "max": "Phone number must be at most 17 characters long",
+            "regex": "Phone number must be a valid phone number"
+        },
+        "password": {
+            "required": "Password is required",
+            "atLeast8": "Password must be at least 8 characters"
+        },
+        "confirmPassword": {
+            "required": "Confirm password is required",
+            "atLeast8": "Confirm password must be at least 8 characters",
+            "doNotMatch": "Passwords do not match"
+        }
+    },
+    "login": {
+        "email": {
+            "required": "Email is required",
+            "invalidEmailAddress": "Email is not valid"
+        },
+        "password": {
+            "required": "Password is required",
+            "min": "Password must be at least 8 characters"
+        }
+    },
+
+    "profile":{
+        "root": {
+            "somethingWentWrong": "Something went wrong"
+        },
+        "firstName": {
+            "required": "First name is required",
+            "min": "First name must be at least 2 characters long",
+            "max": "First name must be at most 25 characters long"
+        },
+        "lastName": {
+            "required": "Last name is required",
+            "min": "Last name must be at least 2 characters long",
+            "max": "Last name must be at most 25 characters long"
+        },
+        "emailAdress": {
+            "required": "Email address is required",
+            "email": "Email address is not valid"
+        },
+        "phoneNumber": {
+            "required": "Phone number is required",
+            "min": "Phone number must be at least 5 characters long",
+            "max": "Phone number must be at most 17 characters long",
+            "regex": "Phone number must be a valid phone number"
+        },
+        "password": {
+            "required": "Password is required",
+            "min": "Password must be at least 8 characters"
+        },
+        "confirmPassword": {
+            "required": "Confirm password is required",
+            "min": "Confirm password must be at least 8 characters",
+            "doNotMatch": "Passwords do not match"
+        },
+        "agentInfo":{
+            "imageGallery":{
+                "folderId": "FolderId text is required",
+                "mainImage":{
+                    "key":"Key text is required",
+                    "url":"Url text is required"
+                },
+                "miniImage": {
+                    "key":"Key text is required",
+                    "url":"Url text is required"
+                }
+            }
+        },
+        "adminInfo":{
+                "imageGallery":{
+                "folderId": "FolderId text is required",
+                "mainImage":{
+                    "key":"Key text is required",
+                    "url":"Url text is required"
+                },
+                "miniImage": {
+                    "key":"Key text is required",
+                    "url":"Url text is required"
+                }
+            }
+        }
     }
 }

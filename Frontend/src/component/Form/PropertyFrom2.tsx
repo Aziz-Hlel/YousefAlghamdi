@@ -324,7 +324,7 @@ const PropertyFrom = () => {
                         additionalDetailsAttributes[propertyCategoryValue as keyof typeof additionalDetailsAttributes].map((item: string, index: number) =>
                           <CheckInput2
                             key={index}
-                            title={getText.data[item as keyof typeof getText.data] ? capitalizePhrase(t(getText.data[item as keyof typeof getText.data])) : item}
+                            title={item}
                             setAdditionalDetails={setAdditionalDetailsWrapper}
                             additionalDetails={additionalDetails}
                           />

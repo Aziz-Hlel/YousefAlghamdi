@@ -1,4 +1,7 @@
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -20,6 +23,7 @@ type SelectiveInputFormProps = {
 
 function SelectiveInputForm({ size, title, options, fieldRegister, fieldError }: SelectiveInputFormProps) {
 
+  const { t } = useTranslation(['data', 'common', 'submitProperty']);
 
 
 
@@ -35,7 +39,7 @@ function SelectiveInputForm({ size, title, options, fieldRegister, fieldError }:
             disabled={options.length === 0}
           >
             <option ></option>
-            {options.map((value: any) => <option key={value} value={value}>{value}</option>)}
+            {options.map((value: any) => <option key={value} value={value}>{capitalizePhrase(t(getText.data[value as keyof typeof getText.data]))}</option>)}
           </select>
         </div>
         <span className="text-red-600 p-2 inline-block">{fieldError?.message}</span>

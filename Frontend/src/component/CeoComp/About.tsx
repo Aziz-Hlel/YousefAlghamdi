@@ -48,8 +48,8 @@ function CEO() {
 
                 </div>
                 <h4 className="homec-ceo-quote__title">
-                  Narjiss Didi Alaoui
-                  <span>Ceo<a className=" text-sm font-extralight " href="tel:+971525002822" dir="ltr">+971 525002822</a></span>
+                  {capitalizePhrase(t(getText.home.CEO.ceoName))}
+                  <span>{capitalizePhrase(t(getText.home.CEO.ceo))}<a className=" text-sm font-extralight " href="tel:+971525002822" dir="ltr">+971 525002822</a></span>
 
                 </h4>
               </div>

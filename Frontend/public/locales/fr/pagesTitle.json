@@ -1,0 +1,14 @@
+{
+    "home": "accueil",
+    "latestProperties": "dernières Propriétés",
+    "aboutUs": "à propos de Nous",
+    "contactUs": "nous Contacter",
+    "dashboard": "tableau de Bord",
+    "myProperties": "mes Propriétés",
+    "allProperties": "toutes les Propriétés",
+    "pendingProperties": "propriétés en Attente",
+    "unavailableProperties": "propriétés Indisponibles",
+    "changePassword": "changer le Mot de Passe",
+    "submitProperty": "soumettre une Propriété",
+    "addProperty": "ajouter une Propriété"
+}
