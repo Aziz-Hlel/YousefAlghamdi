@@ -1,6 +1,4 @@
-import ProtoTypes from "prop-types";
 import UploadedImageCard from "../Cards/UploadedImageCard2";
-import CircularProgressBar from "./CircularProgressBar ";
 import UploadThumbnailCard from "./UploadThumbnailCard";
 import { FileWithPath } from "react-dropzone";
 import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";

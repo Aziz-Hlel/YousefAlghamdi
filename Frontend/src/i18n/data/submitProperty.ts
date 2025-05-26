@@ -6,8 +6,8 @@ const submitProperty = {
         subCategory: "submitProperty:propertyInformation.subCategory",
         propertyPrice: "submitProperty:propertyInformation.propertyPrice",
         totalArea: "submitProperty:propertyInformation.totalArea",
-        totalRooms: "submitProperty:propertyInformation.totalRooms",
-        totalBathrooms: "submitProperty:propertyInformation.totalBathrooms",
+        rooms: "submitProperty:propertyInformation.rooms",
+        bathrooms: "submitProperty:propertyInformation.bathrooms",
         description: "submitProperty:propertyInformation.description",
     },
     propertyLocation: {
@@ -36,7 +36,12 @@ const submitProperty = {
     },
     btns: {
         submit: "submitProperty:btns.submit",
-        cancel: "submitProperty:btns.cancel"
+        cancel: "submitProperty:btns.cancel",
+        updateProperty: "submitProperty:btns.updateProperty",
+        approveProperty: "submitProperty:btns.approveProperty",
+        deleteProperty: "submitProperty:btns.deleteProperty",
+        makePropertyUnavailable: "submitProperty:btns.makePropertyUnavailable",
+        declineRequest: "submitProperty:btns.declineRequest",
     }
 }
 

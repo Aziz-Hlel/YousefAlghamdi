@@ -55,6 +55,14 @@ const errors = {
             },
 
         },
+        imageGallery:{
+            folderId: "errors:submitProperty.imageGallery.folderId.required",
+            images:{
+                key:"errors:submitProperty.imageGallery.images.key.required",
+            }
+        },
+        listing_type:"errors:submitProperty.listing_type.required",
+        productTier: "errors:submitProperty.productTier.required",
 
 
     },

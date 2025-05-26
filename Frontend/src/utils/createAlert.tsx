@@ -26,7 +26,7 @@ export const ConfirmationAlertAsync = async (sweetAlertProps: SweetAlertResult) 
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
-        confirmButtonText: sweetAlertProps.confirmButtonText ?? 'Yes, delete it!',
+        confirmButtonText: sweetAlertProps.confirmButtonText ?? "Yes, i'm sure",
     });
 }
 

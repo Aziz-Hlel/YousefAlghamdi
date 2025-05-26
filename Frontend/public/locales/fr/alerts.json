@@ -1,0 +1,72 @@
+{
+    "unavailableProperty": {
+        "title": "Propriété indisponible",
+        "description": "Êtes-vous sûr de vouloir rendre cette propriété indisponible ?",
+        "confirmBtn": "Oui, la rendre indisponible",
+        "cancelBtn": "Annuler",
+        "confirmationAlert": {
+            "title": "Propriété indisponible",
+            "description": "La propriété est maintenant indisponible",
+            "btn": "Ok"
+        }
+    },
+    "availableProperty": {
+        "title ": "Propriété disponible",
+        "description ": "Êtes-vous sûr de vouloir rendre cette propriété disponible ?",
+        "confirmBtn ": "Oui, la rendre disponible",
+        "cancelBtn ": "Annuler",
+        "confirmationAlert": {
+            "title": "Propriété disponible",
+            "description": "La propriété est maintenant disponible",
+            "btn": "Ok"
+        }
+    },
+    "deleteProperty": {
+        "title": "Supprimer la propriété",
+        "description": "Êtes-vous sûr de vouloir supprimer cette propriété ?",
+        "confirmBtn": "Oui, la supprimer",
+        "cancelBtn": "Annuler",
+        "confirmationAlert": {
+            "title": "Propriété supprimée",
+            "description": "La propriété est maintenant supprimée",
+            "btn": "Ok"
+        }
+    },
+    "sponsors": {
+        "delete": {
+            "confimationAlert": {
+                "title": "supprimer le sponsor",
+                "description": "êtes-vous sûr de vouloir supprimer ce sponsor ?"
+            },
+            "sucsessAlert": {
+                "title": "propriété supprimée",
+                "description": "propriété supprimée avec succès"
+            }
+        }
+    },
+    "contactUs": {
+        "successAlert": {
+            "title": "succès",
+            "text": "votre demande a été reçue. Un agent vous contactera dès que possible pour vous fournir une assistance supplémentaire."
+        },
+        "errorAlert": {
+            "title": "erreur",
+            "description": "Message non envoyé ! veuillez réessayer plus tard"
+        }
+    },
+    "editProperty": {
+        "associateAgent": "Vous devez associer un agent au client avant d'approuver la propriété",
+        "needToBeAddedBefore": "Votre propriété doit être ajoutée avant de la mettre à jour",
+        "requestToDeletePropSend": "Une demande a été envoyée pour supprimer votre propriété",
+        "sureDeclineNDelete": "Êtes-vous sûr de vouloir refuser cette propriété et la supprimer ?",
+        "sureDeclineUpdate": "Êtes-vous sûr de vouloir refuser cette demande de mise à jour de propriété ?",
+        "sureDeclineDelete": "Êtes-vous sûr de vouloir refuser la demande de suppression ?"
+    },
+    "titles": {
+        "info": "info",
+        "error": "erreur",
+        "success": "succès",
+        "warning": "avertissement",
+        "DeclineRequest": "Refuser la demande"
+    }
+}

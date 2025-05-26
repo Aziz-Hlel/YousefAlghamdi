@@ -21,16 +21,12 @@ import { useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Alert } from "@src/utils/createAlert";
 import prepareImageForUpload from "./prepareImageForUpload";
-import SubmitPropertySchema from "@src/schemas/SubmitPropertySchema.zod";
 import { useTranslation } from "react-i18next";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import getText from "@src/i18n/data/getText";
 import useSubmitPropertySchema from "@src/schemas/useSubmitPropertySchema";
 
 
-
-
-export type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
 
 type imageArray = ({ url: string; key: string; } | null)[];
@@ -41,8 +37,9 @@ const PropertyFrom = () => {
   const { whatFor, } = useParams();
 
   const imgsFolderId = useRef<string>(uuidv4());
-  
+
   const { SubmitPropertySchema } = useSubmitPropertySchema();
+  type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
   const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting, }, setError } =
     useForm<SubmitPropertyType>({
@@ -252,7 +249,7 @@ const PropertyFrom = () => {
 
                     {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
                       size="col-lg-6 col-md-6"
-                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.totalRooms))}
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.rooms))}
                       fieldRegister={register('filterFields.rooms')}
                       fieldError={errors.filterFields?.rooms}
                       placeholder="2"
@@ -260,7 +257,7 @@ const PropertyFrom = () => {
 
                     {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
                       size="col-lg-6 col-md-6"
-                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.totalBathrooms))}
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.bathrooms))}
                       fieldRegister={register('filterFields.bathrooms')}
                       fieldError={errors.filterFields?.bathrooms}
                       placeholder="2"

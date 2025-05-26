@@ -23,15 +23,16 @@ import roles from "@src/types/roles.type";
 import { AxiosResponse } from "axios";
 import Swal from 'sweetalert2'
 import { Alert, ConfirmationAlertAsync } from "@src/utils/createAlert";
-import SubmitPropertySchema from "@src/schemas/SubmitPropertySchema.zod";
 import prepareImageForUpload from "./prepareImageForUpload";
 import ImageInput from "./ImageInput2";
 import useSubmitPropertySchema from "@src/schemas/useSubmitPropertySchema";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 
 
-export type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
 
 type imageArray = ({ url: string; key: string; } | null)[];
@@ -44,10 +45,13 @@ const PropertyFrom = () => {
   const imgsFolderId = useRef<string>("");
   const navigate = useNavigate();
 
+  const { t } = useTranslation(['data', 'common', 'submitProperty']);
+
+
   const { SubmitPropertySchema } = useSubmitPropertySchema();
+  type SubmitPropertyType = z.infer<typeof SubmitPropertySchema>;
 
-
-  const { register, watch, handleSubmit, setValue, reset, formState: { errors, isSubmitting, }, setError, clearErrors } =
+  const { register, watch, handleSubmit, setValue, reset, formState: { errors, isSubmitting, }, setError } =
     useForm<SubmitPropertyType>({
       resolver: zodResolver(SubmitPropertySchema),
     });
@@ -295,7 +299,7 @@ const PropertyFrom = () => {
       if (user?.role === roles.AGENT || user?.role === roles.ADMIN) {
 
         if (user?.role === roles.ADMIN && !property.agentId) {
-          Alert({ title: "Info", text: "You have to associate an agent to the client before approving the property", icon: "info" });
+          Alert({ title: capitalizePhrase(t(getText.alerts.titles.info)), text: capitalizePhrase(t(getText.alerts.editProperty.associateAgent)), icon: "info" });
         }
         else {
           updateAdditionalDetails(refinedData)
@@ -305,13 +309,13 @@ const PropertyFrom = () => {
           removeId(refinedData)
           const response = await Http.put(`${apiGateway.property.approve}/${property._id}`, refinedData);
           if (response?.status === 200) navigate("./../../");
-          else console.log(response);
+          else Alert({ title: "Error", text: "Something went wrong", icon: "warning" });
         }
 
       }
 
       else if (user?.role === roles.USER || user?.role === roles.CLIENT) {
-        Alert({ title: "Info", text: "Your property has to be added before updating it", icon: "info" });
+        Alert({ title: capitalizePhrase(t(getText.alerts.titles.info)), text: capitalizePhrase(t(getText.alerts.editProperty.needToBeAddedBefore)), icon: "info" });
       }
 
     }
@@ -331,7 +335,7 @@ const PropertyFrom = () => {
         if (response?.status === 200) navigate("./../../")
         else {
           console.log(response);
-          alert("something went wrong")
+          Alert({ title: "Error", text: "Something went wrong", icon: "warning" });
         }
       }
       // meaning user
@@ -340,7 +344,7 @@ const PropertyFrom = () => {
         if (response?.status === 200) navigate("./../../")
         else {
           console.log(response);
-          alert("something went wrong")
+          Alert({ title: "Error", text: "Something went wrong", icon: "warning" });
         }
       }
 
@@ -358,11 +362,11 @@ const PropertyFrom = () => {
         if (result.isConfirmed) {
           const response = await Http.delete(`${apiGateway.property.delete}/${property._id}`);
           if (response?.status === 200) navigate("./../../")
-          else alert("something went wrong");
+          else Alert({ title: "Error", text: "Something went wrong", icon: "warning" });
         }
       }
       else {
-        Alert({ title: "Info", text: "A request been sends to delete your property", icon: "info" });
+        Alert({ title: capitalizePhrase(t(getText.alerts.titles.info)), text: capitalizePhrase(t(getText.alerts.editProperty.requestToDeletePropSend)), icon: "info" });
       }
 
     }
@@ -399,7 +403,7 @@ const PropertyFrom = () => {
     // u prob gone notifications for this to inform the client 
     switch (propertyState) {
       case statesTypes.toBeAdded:
-        const result = await ConfirmationAlertAsync({ title: "Decline request", text: "Are you sure you want to decline this property and delete it?", icon: "warning" })
+        const result = await ConfirmationAlertAsync({ title: capitalizePhrase(t(getText.alerts.titles.DeclineRequest)), text: capitalizePhrase(t(getText.alerts.editProperty.sureDeclineNDelete)), icon: "warning" })
         if (result.isConfirmed) {
           const response = await Http.delete(`${apiGateway.property.delete}/${property._id}`);
           if (response?.status === 200) navigate("./../../")
@@ -408,7 +412,7 @@ const PropertyFrom = () => {
         break;
 
       case statesTypes.toBeUpdated:
-        const result2 = await ConfirmationAlertAsync({ title: "Decline request", text: "Are you sure you want to decline the update?", icon: "warning" })
+        const result2 = await ConfirmationAlertAsync({ title: capitalizePhrase(t(getText.alerts.titles.DeclineRequest)), text: capitalizePhrase(t(getText.alerts.editProperty.sureDeclineUpdate)), icon: "warning" })
         if (result2.isConfirmed) {
           const response = await Http.get(`${apiGateway.property.decline}/${property._id}`);
           if (response?.status === 200) navigate("./../../")
@@ -417,7 +421,7 @@ const PropertyFrom = () => {
         break;
 
       case statesTypes.toBeDeleted:
-        const result3 = await ConfirmationAlertAsync({ title: "Decline request", text: "Are you sure you want to decline the delete request?", icon: "warning" })
+        const result3 = await ConfirmationAlertAsync({ title: capitalizePhrase(t(getText.alerts.titles.DeclineRequest)), text: capitalizePhrase(t(getText.alerts.editProperty.sureDeclineDelete)), icon: "warning" })
         if (result3.isConfirmed) {
           const response = await Http.get(`${apiGateway.property.decline}/${property._id}`);
           if (response?.status === 200) navigate("./../../")
@@ -443,14 +447,14 @@ const PropertyFrom = () => {
 
               <div className="homec-submit-form">
                 <h4 className="homec-submit-form__title">
-                  Property Information
+                  {capitalizePhrase(t(getText.submitProperty.propertyInformation.title))}
                 </h4>
                 <div className="homec-submit-form__inner">
                   <div className="row">
 
                     <PropertyTextInput
 
-                      title="Property Title*"
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.propertyTitle))}
                       placeholder="Title"
                       fieldRegister={register('title')}
                       fieldError={errors.title}
@@ -459,7 +463,7 @@ const PropertyFrom = () => {
 
                     <SelectiveInputForm
                       size="col-lg-6 col-md-6"
-                      title={"Category"}
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.category))}
                       options={Object.keys(categoriesType)}
                       fieldRegister={register('category')}
                       fieldError={errors.category}
@@ -467,7 +471,7 @@ const PropertyFrom = () => {
 
                     <SelectiveInputForm
                       size="col-lg-6 col-md-6"
-                      title={"Sub Category"}
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.subCategory))}
                       options={propertyCategoryValue && Object.keys(categoriesType).includes(propertyCategoryValue) ? sub_categories[propertyCategoryValue as keyof typeof sub_categories] : []}
                       fieldRegister={register('sub_category')}
                       fieldError={errors.sub_category}
@@ -475,7 +479,7 @@ const PropertyFrom = () => {
 
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
-                      title="Property Price"
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.propertyPrice))}
                       placeholder="24345"
                       fieldRegister={register('filterFields.price')}
                       fieldError={errors.filterFields?.price}
@@ -483,7 +487,7 @@ const PropertyFrom = () => {
 
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"
-                      title="Total Area (sq:Mt)*"
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.totalArea))}
                       fieldRegister={register('filterFields.area')}
                       fieldError={errors.filterFields?.area}
                       placeholder="1200"
@@ -491,7 +495,7 @@ const PropertyFrom = () => {
 
                     {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
                       size="col-lg-6 col-md-6"
-                      title="Total Rooms*"
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.rooms))}
                       fieldRegister={register('filterFields.rooms')}
                       fieldError={errors.filterFields?.rooms}
                       placeholder="2"
@@ -499,14 +503,14 @@ const PropertyFrom = () => {
 
                     {propertyCategoryValue === ResidentialProperties && <PropertyTextInput
                       size="col-lg-6 col-md-6"
-                      title="Total Bathroom*"
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.bathrooms))}
                       fieldRegister={register('filterFields.bathrooms')}
                       fieldError={errors.filterFields?.bathrooms}
                       placeholder="2"
                     />}
 
                     <PropertyTextArea
-                      title="Description*"
+                      title={capitalizePhrase(t(getText.submitProperty.propertyInformation.description))}
                       fieldRegister={register('description')}
                       fieldError={errors.description}
                     />
@@ -517,13 +521,13 @@ const PropertyFrom = () => {
               </div>
 
               <div className="homec-submit-form mg-top-40">
-                <h4 className="homec-submit-form__title">Property Location</h4>
+                <h4 className="homec-submit-form__title">{capitalizePhrase(t(getText.submitProperty.propertyLocation.title))}</h4>
                 <div className="homec-submit-form__inner">
                   <div className="row ">
                     {/* Single Form Element   */}
                     <SelectiveInputForm
                       size="col-md-4 flex justify-center items-center mg-top-20"
-                      title={"City"}
+                      title={capitalizePhrase(t(getText.submitProperty.propertyLocation.city))}
                       options={Object.keys(cities)}
                       fieldRegister={register('city')}
                       fieldError={errors.city}
@@ -531,7 +535,7 @@ const PropertyFrom = () => {
 
                     <SelectiveInputForm
                       size="col-md-4 flex justify-center items-center mg-top-20"
-                      title={"Delegation"}
+                      title={capitalizePhrase(t(getText.submitProperty.propertyLocation.delegation))}
                       options={CityValueObserver && Object.keys(cities).includes(CityValueObserver) ? delegations[CityValueObserver as keyof typeof delegations] : []}
                       fieldRegister={register('delegation')}
                       fieldError={errors.delegation}
@@ -539,7 +543,7 @@ const PropertyFrom = () => {
 
                     <PropertyTextInput
                       size="col-md-4  flex justify-center items-center -mt-10"
-                      title="Street adresse"
+                      title={capitalizePhrase(t(getText.submitProperty.propertyLocation.streetAdresse))}
                       fieldRegister={register('addresse')}
                       fieldError={errors.addresse}
                       placeholder="Emirates Towers, Sheikh Zayed Road"
@@ -552,7 +556,7 @@ const PropertyFrom = () => {
 
               <div className="homec-submit-form mg-top-40">
                 <h4 className="homec-submit-form__title">
-                  Additional Details
+                  {capitalizePhrase(t(getText.data.additionalDetails))}
                 </h4>
                 <div className="homec-submit-form__inner">
                   <div className="row">
@@ -578,17 +582,17 @@ const PropertyFrom = () => {
 
 
               <div className="homec-submit-form mg-top-40">
-                <h4 className="homec-submit-form__title">Nearest Location</h4>
+                <h4 className="homec-submit-form__title">{capitalizePhrase(t(getText.submitProperty.nearestLocation.title))}</h4>
 
                 <KeyValueInput
                   list={NearestLocation}
                   handleAddOrDelete={handleAddOrDelete}
                   handleChange={handleKeyValueChange}
-                  filedTitle="Nearest Location*"
-                  filedTitleTwo="Distance(KM)*"
+                  filedTitle={capitalizePhrase(t(getText.submitProperty.nearestLocation.nearestLocation))}
+                  filedTitleTwo={capitalizePhrase(t(getText.submitProperty.nearestLocation.distance))}
 
-                  placeholderOne={"Burj khalifa"}
-                  placeholderTwo={"15"}
+                  placeholderOne={capitalizePhrase(t(getText.submitProperty.nearestLocation.nearestLocationPlaceholder))}
+                  placeholderTwo={capitalizePhrase(t(getText.submitProperty.nearestLocation.distancePlaceholder))}
                 />
 
               </div>
@@ -617,20 +621,20 @@ const PropertyFrom = () => {
 
                   <div className="col-12 d-flex flex-col items-center sm:flex-row justify-content-end mg-top-40 gap-2">
                     <button className="homec-btn  bg-red-500">
-                      <span onClick={handleCancel}>{isSubmitting ? "Loading..." : "Cancel"}</span>
+                      <span onClick={handleCancel}>{isSubmitting ? `${capitalizePhrase(t(getText.common.loading))}...` : capitalizePhrase(t(getText.common.cancel))}</span>
                     </button>
                     {(user?.role === roles.ADMIN || user?.role === roles.AGENT) &&
                       (property.advanced.state === statesTypes.toBeUpdated || property.advanced.state === statesTypes.toBeAdded
                         || property.advanced.state === statesTypes.toBeDeleted
                       ) && < button onClick={handleDecline} value={propertyState} className="homec-btn ">
-                        <span  >{isSubmitting ? "Loading..." : "Decline request"}</span>
+                        <span  >{isSubmitting ? `${capitalizePhrase(t(getText.common.loading))}...` : capitalizePhrase(t(getText.submitProperty.btns.declineRequest))}</span>
                       </button>}
                     <button type="submit" className="homec-btn homec-btn__second ">
-                      {propertyState === statesTypes.active && <span>{isSubmitting ? "Loading..." : "Update Property"}</span>}
-                      {propertyState === statesTypes.toBeAdded && <span>{isSubmitting ? "Loading..." : "Approve Property"}</span>}
-                      {propertyState === statesTypes.toBeUpdated && <span>{isSubmitting ? "Loading..." : "Update Property"}</span>}
-                      {propertyState === statesTypes.toBeDeleted && <span>{isSubmitting ? "Loading..." : "Delete Property"}</span>}
-                      {propertyState === statesTypes.unavailable && <span>{isSubmitting ? "Loading..." : "Make Property unavailable"}</span>}
+                      {propertyState === statesTypes.active && <span>{isSubmitting ? `${capitalizePhrase(t(getText.common.loading))}...` : capitalizePhrase(t(getText.submitProperty.btns.updateProperty))}</span>}
+                      {propertyState === statesTypes.toBeAdded && <span>{isSubmitting ? `${capitalizePhrase(t(getText.common.loading))}...` : capitalizePhrase(t(getText.submitProperty.btns.approveProperty))}</span>}
+                      {propertyState === statesTypes.toBeUpdated && <span>{isSubmitting ? `${capitalizePhrase(t(getText.common.loading))}...` : capitalizePhrase(t(getText.submitProperty.btns.updateProperty))}</span>}
+                      {propertyState === statesTypes.toBeDeleted && <span>{isSubmitting ? `${capitalizePhrase(t(getText.common.loading))}...` : capitalizePhrase(t(getText.submitProperty.btns.deleteProperty))}</span>}
+                      {propertyState === statesTypes.unavailable && <span>{isSubmitting ? `${capitalizePhrase(t(getText.common.loading))}...` : capitalizePhrase(t(getText.submitProperty.btns.makePropertyUnavailable))}</span>}
 
                     </button>
                   </div>

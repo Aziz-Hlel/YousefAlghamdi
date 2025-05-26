@@ -36,6 +36,12 @@
     },
     "btns": {
         "submit": "Submit Property Now",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "updateProperty": "Update Property",
+        "approveProperty": "Approve Property",
+        "deleteProperty": "Delete Property",
+        "makePropertyUnavailable": "Make Property Unavailable",
+        "declineRequest": "Decline Request"
+        
     }
 }

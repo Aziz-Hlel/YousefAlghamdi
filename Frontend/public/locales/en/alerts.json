@@ -47,11 +47,26 @@
     "contactUs": {
         "successAlert": {
             "title": "success",
-            "text": "your inquiry has been received. An agent will contact you as soon as possible to provide further assistance." 
+            "text": "your inquiry has been received. An agent will contact you as soon as possible to provide further assistance."
         },
         "errorAlert": {
             "title": "error",
             "description": "Message not sent! please try later"
         }
+    },
+    "editProperty": {
+        "associateAgent": "You have to associate an agent to the client before approving the property",
+        "needToBeAddedBefore": "Your property has to be added before updating it",
+        "requestToDeletePropSend": "A request been sends to delete your property",
+        "sureDeclineNDelete": "Are you sure you want to decline this property and delete it?",
+        "sureDeclineUpdate": "Are you sure you want to decline this property update request?",
+        "sureDeclineDelete": "Are you sure you want to decline the delete request?"
+    },
+    "titles": {
+        "info": "info",
+        "error": "error",
+        "success": "success",
+        "warning": "warning",
+        "DeclineRequest": "Decline Request"
     }
 }

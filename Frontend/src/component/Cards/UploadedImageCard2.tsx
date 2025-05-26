@@ -59,7 +59,7 @@ function UploadedImageCard({ img, handleImage, handleDelete, idx }: UploadedImag
 
   useEffect(() => { if (img && compDisplayed !== "img") setCompDisplayed("img") }, [img])
 
-  const onCropComplete = (croppedArea: Point, croppedAreaPixels: Area) => {
+  const onCropComplete = (_: Point, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
   }
 

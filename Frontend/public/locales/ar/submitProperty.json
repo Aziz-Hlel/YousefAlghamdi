@@ -7,13 +7,13 @@
         "propertyPrice": "سعر العقار",
         "totalArea": "المساحة الإجمالية",
         "rooms": "الغرف",
-        "bathrooms": "الحمامات",
+        "bathrooms": "دورات المياه",
         "description": "الوصف"
     },
     "propertyLocation": {
         "title": "موقع العقار",
         "city": "المدينة",
-        "delegation": "المعتمدية",
+        "delegation": "المحافظة",
         "streetAdresse": "عنوان الشارع"
     },
     "nearestLocation": {
@@ -27,15 +27,20 @@
         "title": "صورة العقار",
         "thumbnaiImage": {
             "title": "الصورة المصغرة",
-            "note": "يجب أن تكون الصورة بدقة عالية (1920x1080)"
+            "note": "يجب أن تكون الصورة عالية الدقة (1920x1080)"
         },
         "sliderImages": {
-            "title": "صور السلايدر",
-            "note": "يجب أن تكون الصورة بدقة عالية (1920x1080)"
+            "title": "صور العرض",
+            "note": "يجب أن تكون الصورة عالية الدقة (1920x1080)"
         }
     },
     "btns": {
-        "submit": "تقديم العقار الآن",
-        "cancel": "إلغاء"
+        "submit": "إرسال العقار الآن",
+        "cancel": "إلغاء",
+        "updateProperty": "تحديث العقار",
+        "approveProperty": "الموافقة على العقار",
+        "deleteProperty": "حذف العقار",
+        "makePropertyUnavailable": "جعل العقار غير متاح",
+        "declineRequest": "رفض الطلب"
     }
 }

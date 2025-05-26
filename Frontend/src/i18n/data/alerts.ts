@@ -54,6 +54,24 @@ const alerts = {
             text: "alerts:contactUs.errorAlert.text",
         }
     },
+    editProperty: {
+        associateAgent: "alerts:approveProperty.associateAgent",
+        needToBeAddedBefore: "alerts:approveProperty.needToBeAddedBefore",
+        requestToDeletePropSend: "alerts:approveProperty.requestToDeletePropSend",
+        sureDeclineNDelete: "alerts:approveProperty.sureDeclineDelete",
+        sureDeclineUpdate: "alerts:titles.sureDeclineUpdate",
+        sureDeclineDelete: "alerts:titles.sureDeclineDelete",
+
+    },
+
+    titles: {
+        info: "alerts:titles.info",
+        error: "alerts:titles.error",
+        success: "alerts:titles.success",
+        warning: "alerts:titles.warning",
+        DeclineRequest: "alerts:titles.DeclineRequest",
+    }
+
 }
 
 

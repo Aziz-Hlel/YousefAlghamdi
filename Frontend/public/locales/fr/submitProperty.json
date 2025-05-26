@@ -6,12 +6,12 @@
         "subCategory": "Sous-catégorie",
         "propertyPrice": "Prix de la propriété",
         "totalArea": "Superficie totale",
-        "rooms": "Pièces",
+        "rooms": "Chambres",
         "bathrooms": "Salles de bain",
         "description": "Description"
     },
     "propertyLocation": {
-        "title": "Emplacement de la propriété",
+        "title": "Localisation de la propriété",
         "city": "Ville",
         "delegation": "Délégation",
         "streetAdresse": "Adresse de la rue"
@@ -27,15 +27,20 @@
         "title": "Image de la propriété",
         "thumbnaiImage": {
             "title": "Image miniature",
-            "note": "L'image doit être en Full HD (1920x1080)"
+            "note": "L'image doit être en full HD (1920x1080)"
         },
         "sliderImages": {
-            "title": "Images du diaporama",
-            "note": "L'image doit être en Full HD (1920x1080)"
+            "title": "Images du carrousel",
+            "note": "L'image doit être en full HD (1920x1080)"
         }
     },
     "btns": {
         "submit": "Soumettre la propriété maintenant",
-        "cancel": "Annuler"
+        "cancel": "Annuler",
+        "updateProperty": "Mettre à jour la propriété",
+        "approveProperty": "Approuver la propriété",
+        "deleteProperty": "Supprimer la propriété",
+        "makePropertyUnavailable": "Rendre la propriété indisponible",
+        "declineRequest": "Refuser la demande"
     }
 }

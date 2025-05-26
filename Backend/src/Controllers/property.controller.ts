@@ -51,16 +51,18 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
         };
 
 
-        const property = new Property({
-
-            ...req.body,
-            clientId: clientId,
-            agentId: agentId
-
-        });
 
 
         try {
+
+            const property = new Property({
+
+                ...req.body,
+                clientId: clientId,
+                agentId: agentId
+
+            });
+
             Promise.all([
                 User.findByIdAndUpdate(
                     clientId,
@@ -71,7 +73,7 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
             ])
             res.status(statusCode.CREATED).json('Property created successful');
         } catch (error) {
-            next(error);
+            return next(error);
         }
     }
     else if (req.user?.role === roles.AGENT) {
@@ -84,14 +86,21 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
                 updated_version: {},
             };
 
-        const property = new Property({
-            ...req.body,
-            clientId: clientId,
-            agentId: clientId,
+        try {
 
-        });
+            const property = new Property({
+                ...req.body,
+                clientId: clientId,
+                agentId: clientId,
 
-        await property.save();
+            });
+
+            await property.save();
+
+        } catch (error) {
+            next(error);
+        }
+
 
         res.status(statusCode.CREATED).json('Property created successful');
 

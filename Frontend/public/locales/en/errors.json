@@ -51,7 +51,13 @@
                 "min": "Bathrooms must be at least 0",
                 "max": "Bathrooms must be at most 99",
                 "regex": "Bathrooms must be a number"
-            }
+            },
+            "imageGallery": {
+                "folderId": "FolderId text is required",
+                "key":"Key text is required"
+            },
+            "listing_type": "Listing type is required",
+            "productTier": "Product tier is required"
         }
     },
     "changePassword": {
@@ -113,8 +119,7 @@
             "min": "Password must be at least 8 characters"
         }
     },
-
-    "profile":{
+    "profile": {
         "root": {
             "somethingWentWrong": "Something went wrong"
         },
@@ -147,29 +152,29 @@
             "min": "Confirm password must be at least 8 characters",
             "doNotMatch": "Passwords do not match"
         },
-        "agentInfo":{
-            "imageGallery":{
+        "agentInfo": {
+            "imageGallery": {
                 "folderId": "FolderId text is required",
-                "mainImage":{
-                    "key":"Key text is required",
-                    "url":"Url text is required"
+                "mainImage": {
+                    "key": "Key text is required",
+                    "url": "Url text is required"
                 },
                 "miniImage": {
-                    "key":"Key text is required",
-                    "url":"Url text is required"
+                    "key": "Key text is required",
+                    "url": "Url text is required"
                 }
             }
         },
-        "adminInfo":{
-                "imageGallery":{
+        "adminInfo": {
+            "imageGallery": {
                 "folderId": "FolderId text is required",
-                "mainImage":{
-                    "key":"Key text is required",
-                    "url":"Url text is required"
+                "mainImage": {
+                    "key": "Key text is required",
+                    "url": "Url text is required"
                 },
                 "miniImage": {
-                    "key":"Key text is required",
-                    "url":"Url text is required"
+                    "key": "Key text is required",
+                    "url": "Url text is required"
                 }
             }
         }

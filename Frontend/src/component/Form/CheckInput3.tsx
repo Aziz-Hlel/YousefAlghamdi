@@ -1,7 +1,3 @@
-import ProtoTypes from "prop-types";
-import { IfilterProperty } from "src/models/filterProperty";
-import { useFormContext } from "../Property2/FilterProvider.context";
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import getText from "@src/i18n/data/getText";
 import { useTranslation } from "react-i18next";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";

@@ -1,0 +1,182 @@
+{
+    "submitProperty": {
+        "title": {
+            "required": "Le titre est requis",
+            "min": "Le titre doit contenir au moins 2 caractères",
+            "max": "Le titre doit contenir au maximum 25 caractères"
+        },
+        "description": {
+            "required": "La description est requise",
+            "min": "La description doit contenir au moins 2 caractères",
+            "max": "La description doit contenir au maximum 200 caractères"
+        },
+        "category": {
+            "required": "La catégorie est requise",
+            "min": "Le type doit contenir au moins 2 caractères",
+            "max": "Le type doit contenir au maximum 25 caractères"
+        },
+        "sub_category": {
+            "required": "La sous-catégorie est requise"
+        },
+        "city": {
+            "required": "La ville est requise"
+        },
+        "delegation": {
+            "required": "La délégation est requise"
+        },
+        "addresse": {
+            "required": "L'adresse est requise"
+        },
+        "filterFields": {
+            "price": {
+                "required": "Le prix est requis",
+                "min": "Le prix doit être au moins de 100",
+                "max": "Le prix doit être au maximum de 10000000",
+                "regex": "Le prix doit être un nombre"
+            },
+            "area": {
+                "required": "La superficie est requise",
+                "min": "La superficie doit être au moins de 1",
+                "max": "La superficie doit être au maximum de 100000",
+                "regex": "La superficie doit être un nombre"
+            },
+            "rooms": {
+                "required": "Le nombre de chambres est requis",
+                "min": "Le nombre de chambres doit être au moins de 0",
+                "max": "Le nombre de chambres doit être au maximum de 99",
+                "regex": "Le nombre de chambres doit être un nombre"
+            },
+            "bathrooms": {
+                "required": "Le nombre de salles de bain est requis",
+                "min": "Le nombre de salles de bain doit être au moins de 0",
+                "max": "Le nombre de salles de bain doit être au maximum de 99",
+                "regex": "Le nombre de salles de bain doit être un nombre"
+            },
+            "imageGallery": {
+                "folderId": "Le texte FolderId est requis",
+                "key": "Le texte Key est requis"
+            },
+            "listing_type": "Le type d'annonce est requis",
+            "productTier": "Le niveau de produit est requis"
+        }
+    },
+    "changePassword": {
+        "root": {
+            "somethingWentWrong": "quelque chose s'est mal passé"
+        },
+        "password": {
+            "required": "Le mot de passe est requis",
+            "atLeast8": "Le mot de passe doit contenir au moins 8 caractères"
+        },
+        "confirmPassword": {
+            "required": "La confirmation du mot de passe est requise",
+            "atLeast8": "La confirmation du mot de passe doit contenir au moins 8 caractères",
+            "doNotMatch": "Les mots de passe ne correspondent pas"
+        }
+    },
+    "signUp": {
+        "root": {
+            "somethingWentWrong": "quelque chose s'est mal passé"
+        },
+        "firstName": {
+            "required": "Le prénom est requis",
+            "min": "Le prénom doit contenir au moins 2 caractères",
+            "max": "Le prénom doit contenir au maximum 25 caractères"
+        },
+        "lastName": {
+            "required": "Le nom est requis",
+            "min": "Le nom doit contenir au moins 2 caractères",
+            "max": "Le nom doit contenir au maximum 25 caractères"
+        },
+        "emailAdress": {
+            "required": "L'adresse email est requise",
+            "email": "L'adresse email n'est pas valide",
+            "alreadyExists": "L'adresse email existe déjà"
+        },
+        "phoneNumber": {
+            "required": "Le numéro de téléphone est requis",
+            "min": "Le numéro de téléphone doit contenir au moins 5 caractères",
+            "max": "Le numéro de téléphone doit contenir au maximum 17 caractères",
+            "regex": "Le numéro de téléphone doit être un numéro de téléphone valide"
+        },
+        "password": {
+            "required": "Le mot de passe est requis",
+            "atLeast8": "Le mot de passe doit contenir au moins 8 caractères"
+        },
+        "confirmPassword": {
+            "required": "La confirmation du mot de passe est requise",
+            "atLeast8": "La confirmation du mot de passe doit contenir au moins 8 caractères",
+            "doNotMatch": "Les mots de passe ne correspondent pas"
+        }
+    },
+    "login": {
+        "email": {
+            "required": "L'email est requis",
+            "invalidEmailAddress": "L'email n'est pas valide"
+        },
+        "password": {
+            "required": "Le mot de passe est requis",
+            "min": "Le mot de passe doit contenir au moins 8 caractères"
+        }
+    },
+    "profile": {
+        "root": {
+            "somethingWentWrong": "Quelque chose s'est mal passé"
+        },
+        "firstName": {
+            "required": "Le prénom est requis",
+            "min": "Le prénom doit contenir au moins 2 caractères",
+            "max": "Le prénom doit contenir au maximum 25 caractères"
+        },
+        "lastName": {
+            "required": "Le nom est requis",
+            "min": "Le nom doit contenir au moins 2 caractères",
+            "max": "Le nom doit contenir au maximum 25 caractères"
+        },
+        "emailAdress": {
+            "required": "L'adresse email est requise",
+            "email": "L'adresse email n'est pas valide"
+        },
+        "phoneNumber": {
+            "required": "Le numéro de téléphone est requis",
+            "min": "Le numéro de téléphone doit contenir au moins 5 caractères",
+            "max": "Le numéro de téléphone doit contenir au maximum 17 caractères",
+            "regex": "Le numéro de téléphone doit être un numéro de téléphone valide"
+        },
+        "password": {
+            "required": "Le mot de passe est requis",
+            "min": "Le mot de passe doit contenir au moins 8 caractères"
+        },
+        "confirmPassword": {
+            "required": "La confirmation du mot de passe est requise",
+            "min": "La confirmation du mot de passe doit contenir au moins 8 caractères",
+            "doNotMatch": "Les mots de passe ne correspondent pas"
+        },
+        "agentInfo": {
+            "imageGallery": {
+                "folderId": "Le texte FolderId est requis",
+                "mainImage": {
+                    "key": "Le texte Key est requis",
+                    "url": "Le texte Url est requis"
+                },
+                "miniImage": {
+                    "key": "Le texte Key est requis",
+                    "url": "Le texte Url est requis"
+                }
+            }
+        },
+        "adminInfo": {
+            "imageGallery": {
+                "folderId": "Le texte FolderId est requis",
+                "mainImage": {
+                    "key": "Le texte Key est requis",
+                    "url": "Le texte Url est requis"
+                },
+                "miniImage": {
+                    "key": "Le texte Key est requis",
+                    "url": "Le texte Url est requis"
+                }
+            }
+        }
+    }
+}

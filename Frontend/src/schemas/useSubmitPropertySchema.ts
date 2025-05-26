@@ -13,8 +13,8 @@ const useSubmitPropertySchema = () => {
 
         _id: z.string().optional(),
         title: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.title.required)) })
-            .min(2, { message: capitalizePhrase(t(getText.errors.submitProperty.title.max)) })
-            .max(25, { message: capitalizePhrase(t(getText.errors.submitProperty.title.min)) }),
+            .min(2, { message: capitalizePhrase(t(getText.errors.submitProperty.title.min)) })
+            .max(25, { message: capitalizePhrase(t(getText.errors.submitProperty.title.max)) }),
 
         description: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.description.required)) })
             .min(2, { message: capitalizePhrase(t(getText.errors.submitProperty.description.min)) })
@@ -60,15 +60,15 @@ const useSubmitPropertySchema = () => {
         additionalDetails: z.array(z.string()).default([]),
         imageGallery: z.object({
 
-            folderId: z.string({ required_error: "Folder id is required" }),
+            folderId: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.imageGallery.folderId)) }),
 
             images: z.array(z.object({
-                key: z.string({ required_error: "Image key is required" }),
+                key: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.imageGallery.images.key)) }),
             })),
 
         }).optional(),
-        listing_type: z.string({ required_error: "Listing type is required" }),
-        productTier: z.string({ required_error: "Product tier is required" }).default("free"),
+        listing_type: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.listing_type)) }),
+        productTier: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.productTier)) }).default("free"),
         nearestPlaces: z.record(z.string(), z.string()).default({}),
 
     });
@@ -77,4 +77,4 @@ const useSubmitPropertySchema = () => {
 
 }
 
-export default useSubmitPropertySchema
+export default useSubmitPropertySchema;

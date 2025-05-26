@@ -1,0 +1,72 @@
+{
+    "unavailableProperty": {
+        "title": "العقار غير متاح",
+        "description": "هل أنت متأكد من أنك تريد جعل هذا العقار غير متاح؟",
+        "confirmBtn": "نعم، اجعله غير متاح",
+        "cancelBtn": "إلغاء",
+        "confirmationAlert": {
+            "title": "العقار غير متاح",
+            "description": "العقار أصبح غير متاح الآن",
+            "btn": "موافق"
+        }
+    },
+    "availableProperty": {
+        "title ": "العقار متاح",
+        "description ": "هل أنت متأكد من أنك تريد جعل هذا العقار متاحاً؟",
+        "confirmBtn ": "نعم، اجعله متاحاً",
+        "cancelBtn ": "إلغاء",
+        "confirmationAlert": {
+            "title": "العقار متاح",
+            "description": "العقار أصبح متاحاً الآن",
+            "btn": "موافق"
+        }
+    },
+    "deleteProperty": {
+        "title": "حذف العقار",
+        "description": "هل أنت متأكد من أنك تريد حذف هذا العقار؟",
+        "confirmBtn": "نعم، احذفه",
+        "cancelBtn": "إلغاء",
+        "confirmationAlert": {
+            "title": "تم حذف العقار",
+            "description": "تم حذف العقار الآن",
+            "btn": "موافق"
+        }
+    },
+    "sponsors": {
+        "delete": {
+            "confimationAlert": {
+                "title": "حذف الراعي",
+                "description": "هل أنت متأكد من أنك تريد حذف هذا الراعي؟"
+            },
+            "sucsessAlert": {
+                "title": "تم حذف العقار",
+                "description": "تم حذف العقار بنجاح"
+            }
+        }
+    },
+    "contactUs": {
+        "successAlert": {
+            "title": "نجح",
+            "text": "تم استلام استفسارك. سيتواصل معك وكيل في أقرب وقت ممكن لتقديم المساعدة الإضافية."
+        },
+        "errorAlert": {
+            "title": "خطأ",
+            "description": "لم يتم إرسال الرسالة! يرجى المحاولة لاحقاً"
+        }
+    },
+    "editProperty": {
+        "associateAgent": "يجب عليك ربط وكيل بالعميل قبل الموافقة على العقار",
+        "needToBeAddedBefore": "يجب إضافة العقار الخاص بك قبل تحديثه",
+        "requestToDeletePropSend": "تم إرسال طلب لحذف العقار الخاص بك",
+        "sureDeclineNDelete": "هل أنت متأكد من أنك تريد رفض هذا العقار وحذفه؟",
+        "sureDeclineUpdate": "هل أنت متأكد من أنك تريد رفض طلب تحديث هذا العقار؟",
+        "sureDeclineDelete": "هل أنت متأكد من أنك تريد رفض طلب الحذف؟"
+    },
+    "titles": {
+        "info": "معلومات",
+        "error": "خطأ",
+        "success": "نجح",
+        "warning": "تحذير",
+        "DeclineRequest": "رفض الطلب"
+    }
+}

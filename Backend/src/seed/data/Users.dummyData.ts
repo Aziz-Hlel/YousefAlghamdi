@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import { IUser, } from "../../Models/user.model";
 import roles from "../../types/roles.type";
 import hashPassword from "../hashPassword";
-import bcrypt from "bcrypt";
 
 
 

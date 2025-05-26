@@ -8,6 +8,9 @@ import { useMyPropertiesContext } from "../Dashboard2/MyProperties/MyPropertiesP
 import statesTypes from "@src/types/states.types";
 import Iproperty from "@src/models/property.type";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 type IDashboardPropertyCard = {
@@ -19,17 +22,19 @@ type IDashboardPropertyCard = {
   image: string;
   listing_type: string;
   title: string;
-  location: string;
 };
 
 
-function DashboardPropertyCard({ property, componentTitle, ownerId, state, image, listing_type, title, location, }: IDashboardPropertyCard) {
+function DashboardPropertyCard({ property, componentTitle, ownerId, state, image, listing_type, title, }: IDashboardPropertyCard) {
 
   const { user } = useAuth();
   const { fetchProperties } = useMyPropertiesContext()
   const navigate = useNavigate();
 
   const location2 = useLocation();
+  const { t } = useTranslation(['data','common', 'dashboard']);
+
+  const fullAddress = `${capitalizePhrase(t(getText.data[property.city as keyof typeof getText.data]))}, ${capitalizePhrase(t(getText.data[property.delegation as keyof typeof getText.data]))}, ${property.addresse}`
 
 
   useEffect(() => {
@@ -149,7 +154,7 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
             <h3 className="homec-dashboard-property__title">{title}</h3>
             <div className="homec-property__text">
               <img src="/img/location-icon.svg" alt="#" />
-              <p>{location}</p>
+              <p>{fullAddress}</p>
             </div>
             {
               user?.role === roles.ADMIN && componentTitle === "Pending Properties" && property?.agentId === null
@@ -321,7 +326,7 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
                   <div className=" mb-0  px-1">Phone :  </div>
                   <span>{`${property.clientId.phoneNumber}`}</span>
                 </div>
-                {!property.agentId && <span className="text-red-600">Not agent associated yet</span> }
+                {!property.agentId && <span className="text-red-600">Not agent associated yet</span>}
               </>
             }
 
