@@ -88,7 +88,7 @@ function Contact() {
                       <path d="M15.2923 6.18457C12.4818 6.18457 10.1953 8.47109 10.1953 11.2816C10.1953 14.0921 12.4818 16.3786 15.2923 16.3786C18.1028 16.3786 20.3893 14.0921 20.3893 11.2816C20.3893 8.47109 18.1028 6.18457 15.2923 6.18457ZM15.2923 14.3398C13.606 14.3398 12.2341 12.9679 12.2341 11.2816C12.2341 9.59528 13.606 8.22337 15.2923 8.22337C16.9786 8.22337 18.3505 9.59528 18.3505 11.2816C18.3505 12.9679 16.9786 14.3398 15.2923 14.3398Z" />
                     </svg>
                   </SingleContact>
-                  <SingleContact title={capitalizePhrase(t(getText.common.email))} text={companyInfo.email}>
+                  <SingleContact title={capitalizePhrase(t(getText.common.email))} text="sales@ygp.ae">
                     <svg
                       width="34"
                       height="34"
@@ -113,17 +113,6 @@ function Contact() {
               <div className=" mg-top-60 col-12">
                 <div className="col-12">
                   <div className="homec-gmap-canvas homec-gmap-canvas--map">
-                    {/* <iframe
-                      className=" w-full h-96"
-                      frameBorder={0}
-                      title="map"
-                      marginHeight={0}
-                      marginWidth={0}
-                      scrolling="no"
-                      src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
-                      style={{ filter: "" }}
-                      
-                    /> */}
                     <iframe
                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2145.429739769822!2d55.32074530635143!3d25.264921475882506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f4341e8d5ba51%3A0x1350007e85f2d67a!2sibis%20Dubai%20Al%20Rigga!5e0!3m2!1sen!2stn!4v1746459399938!5m2!1sen!2stn"
                       height="450" className=" w-full"

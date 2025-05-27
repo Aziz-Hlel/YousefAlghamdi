@@ -23,7 +23,7 @@ i18n
     .init({
 
 
-        lng: "en", // if you're using a language detector, do not define the lng option
+        // lng: "en", // if you're using a language detector, do not define the lng option
         fallbackLng: "en",
 
         ns: ['common', 'errors', 'home', 'aboutUs', 'addProperty', 'propertySingle', 'alerts', 'contactUs', 'dashboard', 'data', 'login', 'properties', 'submitProperty', 'errors'],
@@ -42,6 +42,9 @@ i18n
         react: {
             useSuspense: true
         }
+
+
+        
     });
 
 

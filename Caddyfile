@@ -1,3 +1,7 @@
+www.ygp.ae {
+    redir https://ygp.ae{uri} permanent
+}
+
 ygp.ae {  # Your domain
     root * /srv
     
