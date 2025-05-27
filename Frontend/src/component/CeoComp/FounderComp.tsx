@@ -24,14 +24,14 @@ const FounderComp = () => {
 
     return (
         <section className="text-gray-600 body-font overflow-hidden">
-            <div className="   flex  justify-center lg:w-5/6 py-24 lg:mx-auto px-6">
+            <div className="   flex  justify-center lg:w-5/6 py-24 lg:mx-auto ">
                 <div className="lg:w-4/5  flex flex-wrap">
                     <img
                         alt="ecommerce"
                         className="lg:w-6/12 w-full lg:h-auto h-64 object-cover object-center border  border-2 rounded-xl "
                         src={founderImg}
                     />
-                    <div className="lg:w-6/12 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 lg:flex flex-col justify-center">
+                    <div className="lg:w-6/12 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 lg:flex flex-col justify-center px-5">
                         <h3 className="text-sm title-font text-gray-500 tracking-widest">
                             {capitalizePhrase(t(getText.aboutUs.founder.founderBiref))}
 
@@ -74,7 +74,7 @@ const FounderComp = () => {
                                     </g>
                                 </svg>
 
-                                <span className=' mx-1 cursor-pointer' onClick={() => handleWhatsApp("+971505884220")} >
+                                <span className=' mx-1 cursor-pointer' onClick={() => handleWhatsApp("+971505884220")} dir='ltr'>
                                     +971 505884220
                                 </span>
 
@@ -82,9 +82,10 @@ const FounderComp = () => {
 
                         </div>
                         <div >
-                            <div className=' flex items-center'>
+                            <div className=' flex items-center' >
 
                                 <svg
+
                                     viewBox="0 0 24 24"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -115,10 +116,20 @@ const FounderComp = () => {
                                     </g>
                                 </svg>
 
-                                <span className=' mx-1 cursor-pointer' onClick={() => handleWhatsApp("+966558344770")} >
+                                <span className=' mx-1 cursor-pointer' onClick={() => handleWhatsApp("+966558344770")} dir='ltr' >
                                     +966 558344770
                                 </span>
 
+                            </div>
+                            <div className=' flex items-center  gap-2' >
+
+                                <svg viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" className=' w-5 h-5 cursor-pointer' >
+                                    <path
+                                        d="M0 1694.235h1920V226H0v1468.235zM112.941 376.664V338.94H1807.06v37.723L960 1111.233l-847.059-734.57zM1807.06 526.198v950.513l-351.134-438.89-88.32 70.475 378.353 472.998H174.042l378.353-472.998-88.32-70.475-351.134 438.89V526.198L960 1260.768l847.059-734.57z"
+                                        fillRule="evenodd"
+                                    />
+                                </svg>
+                                <a href='mailto:yousef@ygp.ae'>yousef@ygp.ae</a>
                             </div>
 
                         </div>

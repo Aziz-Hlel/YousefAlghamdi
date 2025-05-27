@@ -17,7 +17,7 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
 
 
     <div className={"homec-header__middle"}>
-      <div className={" 2xl:mx-[200px] mx-3.5 "}>
+      <div className={" 2xl:mx-[50px] mx-3.5 "}>
         <div className="row align-items-center">
           <div className="col-12 ">
             <div
