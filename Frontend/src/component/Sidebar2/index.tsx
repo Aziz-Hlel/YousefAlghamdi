@@ -14,7 +14,7 @@ const SideBar22 = () => {
 
   const { filterObject, updateEstate } = useFormContext();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { t } = useTranslation(['home', 'common']);
+  const { t } = useTranslation(['data','home', 'common']);
 
   const city = searchParams.get('city');
   const category = searchParams.get('category');
@@ -24,7 +24,7 @@ const SideBar22 = () => {
     setSearchParams(searchParams, { replace: true });
   }
 
-  if (category && categoriesList.includes(category as any)) {
+  if (category && !categoriesList.includes(category as any)) {
     searchParams.delete('category')
     setSearchParams(searchParams, { replace: true });
   }
