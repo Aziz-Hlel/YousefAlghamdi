@@ -6,6 +6,8 @@ import getText from "@src/i18n/data/getText";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@src/providers/AuthProvider.context";
+import CustomLanguageOption from "../Navbar/CustomLanguageOption";
+import MobileCustomLanguages from "./MobileCustomLanguages";
 
 interface ImobileMenu {
   handleSidebar: () => void;
@@ -116,6 +118,9 @@ const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
                   </Link>}
               </li>
 
+              <li>
+                <MobileCustomLanguages handleSidebar={handleSidebar} />
+              </li>
             </ul>
             {/* <!-- End Main Menu --> */}
           </nav>
