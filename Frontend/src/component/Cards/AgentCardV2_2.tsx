@@ -1,14 +1,14 @@
 import ProtoTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-function AgentCardV2_2({ agentId, img, name, position, detailsLink: phoneNumber }: { agentId: string, img: any, name: string, position: string, detailsLink: any }) {
+function AgentCardV2_2({ agentId, img, name, position, detailsLink: phoneNumber }: { agentId: string, img: string, name: string, position: string, detailsLink: any }) {
   return (
     <div className="group cursor-default" >
       <div className="relative overflow-hidden rounded-xl mb-4">
         <img
           src={img}
           alt="Team member"
-          className="w-full aspect-[3/4] object-cover object-center transform group-hover:scale-105 transition duration-300 ease-in-out"
+          className="w-96 aspect-[3/4] object-cover object-center transform group-hover:scale-105 transition duration-300 ease-in-out"
         />
 
       </div>
