@@ -2,6 +2,9 @@ import ProtoTypes from "prop-types";
 import PersonalInfo from "../Form/AgentInfo2";
 import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 
@@ -9,6 +12,7 @@ const CU_Agent = () => {
 
   const navigate = useNavigate();
 
+  const { t } = useTranslation(['data', 'common', 'dashboard']);
 
   const isModalOpen = true;
 
@@ -44,10 +48,8 @@ const CU_Agent = () => {
           </button>
           <div className="homec-modal__inner">
             <h3 className="ecom-wc__form-title ecom-wc__form-title__one">
-              Personals Info edit{" "}
-              <span>
-                Your email address will not be published. Required fields are marked *
-              </span>
+              {capitalizePhrase(t(getText.dashboard.personalInfo.editProfile.title))}
+          
             </h3>
             {/* Sign in Form  */}
             <PersonalInfo />

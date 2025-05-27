@@ -6,6 +6,9 @@ import apiGateway from "@src/utils/apiGateway";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useMyPropertiesContext } from "../Dashboard2/MyProperties/MyPropertiesProvider.context";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 type IUser = {
@@ -41,6 +44,8 @@ const UserView = () => {
   const [userInspected, setUserInspected] = useState<IUser>(initUser);
   const navigate = useNavigate();
   const { fetchProperties } = useMyPropertiesContext()
+  const { t } = useTranslation(['data', 'common', 'dashboard']);
+
 
   const toggleModal = async () => {
 
@@ -135,16 +140,16 @@ const UserView = () => {
               <div className="col-lg-12 col-md-12 col-12">
                 <ul className="homec-modal__list list-none">
                   <li>
-                    <span>first name:</span> {firstName}
+                    <span>{`${capitalizePhrase(t(getText.common.firstName))} : `}</span> {firstName}
                   </li>
                   <li>
-                    <span>last name:</span> {lastName}
+                    <span>{`${capitalizePhrase(t(getText.common.lastName))} : `}</span> {lastName}
                   </li>
                   <li>
-                    <span>Number:</span> {phoneNumber}
+                    <span>{`${capitalizePhrase(t(getText.common.phoneNumber))} : `}</span> {phoneNumber}
                   </li>
                   <li>
-                    <span>Email:</span> <a href={`mailto:${email}`}>{email}</a>
+                    <span>{`${capitalizePhrase(t(getText.common.email))} : `}</span> <a href={`mailto:${email}`}>{email}</a>
                   </li>
                   <li>
                     <span>Created at:</span> {createdAt}
@@ -152,7 +157,7 @@ const UserView = () => {
 
                   {user?.role === roles.ADMIN && userInspected?.role !== roles.AGENT &&
                     <li>
-                      <span>Sponsored agent: </span>
+                      <span>{`${capitalizePhrase(t(getText.common.sponsoredAgent))} : `} </span>
 
                       <select name="sponsoredAgent" value={currentAgent ?? ""} onChange={(e) => {
 
@@ -173,7 +178,7 @@ const UserView = () => {
                     <div className=" w-full  flex justify-end">
 
                       {user?.role === roles.ADMIN && <button type="button" className="homec-invoice-table--btn w-20 h-10" onClick={changeAgentOfUser} >
-                        save
+                        {capitalizePhrase(t(getText.common.save))}
                       </button>}
 
                     </div>

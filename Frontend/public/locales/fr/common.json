@@ -40,6 +40,12 @@
     "description": "description",
     "submitting": "Soumission",
     "addresse": "adresse",
+    "for": "pour",
+    "noAgentAssociated": "Pas d'agent associé",
+    "owner": "propriétaire",
+    "edit": "modifier",
+    "sponsoredAgent": "Agent Sponsorisé",
+    "save": "sauvegarder",
     "state": {
         "toBeDeleted": "àSupprimer",
         "toBeUpdated": "àMettre à Jour",

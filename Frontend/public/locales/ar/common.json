@@ -40,6 +40,12 @@
     "description": "الوصف",
     "submitting": "جاري الإرسال",
     "addresse": "العنوان",
+    "for": "لل",
+    "noAgentAssociated": "لا يوجد وكيل مرتبط",
+    "owner": "المالك",
+    "edit": "تعديل",
+    "sponsoredAgent": "الوكيل الممول",
+    "save": "حفظ",
     "state": {
         "toBeDeleted": "للحذف",
         "toBeUpdated": "للتحديث",

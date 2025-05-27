@@ -54,7 +54,6 @@ const App2 = () => {
 
                                 <Route path="" element={<Home />} />
                                 <Route path="home" element={<Home />} />
-                                {/* <Route path="property/:city" element={<Property />} /> */}
                                 <Route path="property" element={<Property />} />
 
 
@@ -87,8 +86,7 @@ const App2 = () => {
                                             <Route path="inspect-user/:userId" element={<UserView />} />
                                         </Route>
 
-                                        {
-                                            // * Admin only Routes 
+                                        {  // * Admin only Routes 
                                         }
                                         <Route element={<PrivilegedLayouts authorizedRoles={roles.ADMIN} />}>
 
@@ -96,8 +94,8 @@ const App2 = () => {
                                                 <Route path="inspect-user/:userId" element={<UserView />} />
                                             </Route>
                                             <Route path="sponsors" element={<SponsorsProvider> <SponsorsEdit /></SponsorsProvider>} >
-                                                <Route path="add-sponsor" element={<CU_Sponsor edit = {false} />} />
-                                                <Route path="edit-sponsor/:sponsorId" element={<CU_Sponsor edit = {true} />} />
+                                                <Route path="add-sponsor" element={<CU_Sponsor edit={false} />} />
+                                                <Route path="edit-sponsor/:sponsorId" element={<CU_Sponsor edit={true} />} />
                                             </Route>
 
                                             <Route path="agents" element={<AgentsTable />} >

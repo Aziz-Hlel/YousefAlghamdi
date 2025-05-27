@@ -41,6 +41,12 @@ const common = {
     subject: "common:subject",
     description: "common:description",
     submitting: "common:submitting",
+    for: "common:for",
+    noAgentAssociated: "common:noAgentAssociated",
+    owner: "common:owner",
+    edit: "common:edit",
+    sponsoredAgent: "common:sponsoredAgent",
+    save: "common:save",
     state: {
         toBeDeleted: 'common:state.toBeDeleted',
         toBeUpdated: 'common:state.toBeUpdated',

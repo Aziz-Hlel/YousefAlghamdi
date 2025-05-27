@@ -16,8 +16,8 @@ import DownloadApp from "../DownloadApp2";
 
 function Dashboard() {
   // Inner navigation
-  const [activeComponent, setActiveComponent] = useState("Dashboard");
   const { t } = useTranslation(['common', 'pagesTitle']);
+  const [activeComponent, setActiveComponent] = useState(capitalize(t(getText.pagesTitle.dashboard)));
 
 
   const logout = useAuth().logout

@@ -1,8 +1,11 @@
+import getText from "@src/i18n/data/getText";
 import { useAgents } from "@src/providers/AgentsProvider.context";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import { Alert, ConfirmationAlertAsync } from "@src/utils/createAlert";
 import ProtoTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 type ITableData = {
@@ -17,6 +20,9 @@ type ITableData = {
 function TableData({ _id, firstName, lastName, email, phone }: ITableData) {
 
   const { refreshAgents } = useAgents();
+
+  const { t } = useTranslation(['data', 'common', 'dashboard']);
+
 
   const handledelete = async () => {
 
@@ -45,7 +51,7 @@ function TableData({ _id, firstName, lastName, email, phone }: ITableData) {
       <td className="homec-invoice-table__column3">
         <p className="homec-invoice-table__text">{email}</p>
       </td>
-      <td className="homec-invoice-table__column4">
+      <td className="homec-invoice-table__column4" dir="ltr">
         <p className="homec-invoice-table__text">{phone}</p>
       </td>
       <td className="homec-invoice-table__column5 gap-2">
@@ -54,11 +60,11 @@ function TableData({ _id, firstName, lastName, email, phone }: ITableData) {
           data-bs-target="#invoice_view"
           className="homec-invoice-table--btn h-10"
         >
-          Edit
+          {capitalizePhrase(t(getText.common.edit))}
         </Link>
         <div onClick={handledelete}
           className=" h-10 text-white cursor-pointer hover:text-black  bg-red-500 rounded-md py-2 px-1">
-          Delete
+          {capitalizePhrase(t(getText.common.delete))}
         </div>
       </td>
 

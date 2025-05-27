@@ -45,7 +45,7 @@ const PropertyFrom = () => {
   const imgsFolderId = useRef<string>("");
   const navigate = useNavigate();
 
-  const { t } = useTranslation(['data', 'common', 'submitProperty']);
+  const { t } = useTranslation(['data', 'common', 'submitProperty','alerts']);
 
 
   const { SubmitPropertySchema } = useSubmitPropertySchema();
@@ -620,8 +620,8 @@ const PropertyFrom = () => {
 
 
                   <div className="col-12 d-flex flex-col items-center sm:flex-row justify-content-end mg-top-40 gap-2">
-                    <button className="homec-btn  bg-red-500">
-                      <span onClick={handleCancel}>{isSubmitting ? `${capitalizePhrase(t(getText.common.loading))}...` : capitalizePhrase(t(getText.common.cancel))}</span>
+                    <button className="homec-btn  bg-red-500" onClick={handleCancel}>
+                      <span >{isSubmitting ? `${capitalizePhrase(t(getText.common.loading))}...` : capitalizePhrase(t(getText.common.cancel))}</span>
                     </button>
                     {(user?.role === roles.ADMIN || user?.role === roles.AGENT) &&
                       (property.advanced.state === statesTypes.toBeUpdated || property.advanced.state === statesTypes.toBeAdded

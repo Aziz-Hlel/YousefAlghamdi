@@ -64,7 +64,7 @@ const PropertyFrom = () => {
 
   };
 
-  const { t } = useTranslation(['data', 'common', 'submitProperty']);
+  const { t } = useTranslation(['data', 'common', 'submitProperty','alerts']);
 
   useEffect(() => {
     setValue("additionalDetails", [])

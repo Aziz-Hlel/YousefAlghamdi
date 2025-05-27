@@ -32,7 +32,7 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
   const navigate = useNavigate();
 
   const location2 = useLocation();
-  const { t } = useTranslation(['data','common', 'dashboard']);
+  const { t } = useTranslation(['data', 'common', 'dashboard']);
 
   const fullAddress = `${capitalizePhrase(t(getText.data[property.city as keyof typeof getText.data]))}, ${capitalizePhrase(t(getText.data[property.delegation as keyof typeof getText.data]))}, ${property.addresse}`
 
@@ -144,13 +144,13 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
   return (
     <div className="">
       <div className="homec-dashboard-property mg-top-30">
-        <div className="homec-dashboard-property__label">{state}</div>
+        <div className="homec-dashboard-property__label">{capitalizePhrase(t(getText.data[state as keyof typeof getText.data]))}</div>
         {/* Property IMG */}
         <div className="homec-dashboard-property__img">
           <img src={image} alt="#" />
           {/* Property Content */}
           <div className="homec-dashboard-property__content">
-            <div className="homec-dashboard-property__badge">For {listing_type}</div>
+            <div className="homec-dashboard-property__badge">{listing_type}</div>
             <h3 className="homec-dashboard-property__title">{title}</h3>
             <div className="homec-property__text">
               <img src="/img/location-icon.svg" alt="#" />
@@ -158,7 +158,7 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
             </div>
             {
               user?.role === roles.ADMIN && componentTitle === "Pending Properties" && property?.agentId === null
-              && <div className="">No agent assigned to the client yet</div>
+              && <div className=" text-red-600">{capitalizePhrase(t(getText.common.noAgentAssociated))}</div>
             }
           </div>
         </div>
@@ -311,22 +311,22 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
           <div className=" border border-black w-full bg-[#f5f4ff]  lg:px-12 ">
 
             <div className="flex h-fit">
-              <h6 className=" mb-0">Owner :  </h6>
+              <h6 className=" mb-0">{`${capitalizePhrase(t(getText.common.owner))} :  `}</h6>
               <span>{`${property.clientId.firstName} ${property.clientId.lastName} (${property.clientId.role})`}</span>
             </div>
 
             {property.clientId.role !== roles.AGENT &&
               <>
                 <div className="flex h-fit">
-                  <div className=" mb-0 px-1 ">Email :  </div>
+                  <div className=" mb-0 px-1 ">{`${capitalizePhrase(t(getText.common.email))} :  `}</div>
                   <span>{`${property.clientId.email}`}</span>
                 </div>
 
                 <div className="flex h-fit">
-                  <div className=" mb-0  px-1">Phone :  </div>
+                  <div className=" mb-0  px-1">{`${capitalizePhrase(t(getText.common.phoneNumber))} :  `}</div>
                   <span>{`${property.clientId.phoneNumber}`}</span>
                 </div>
-                {!property.agentId && <span className="text-red-600">Not agent associated yet</span>}
+                {!property.agentId && <span className="text-red-600">{capitalizePhrase(t(getText.common.noAgentAssociated))}</span>}
               </>
             }
 

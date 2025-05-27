@@ -55,12 +55,12 @@ const alerts = {
         }
     },
     editProperty: {
-        associateAgent: "alerts:approveProperty.associateAgent",
-        needToBeAddedBefore: "alerts:approveProperty.needToBeAddedBefore",
-        requestToDeletePropSend: "alerts:approveProperty.requestToDeletePropSend",
-        sureDeclineNDelete: "alerts:approveProperty.sureDeclineDelete",
-        sureDeclineUpdate: "alerts:titles.sureDeclineUpdate",
-        sureDeclineDelete: "alerts:titles.sureDeclineDelete",
+        associateAgent: "alerts:editProperty.associateAgent",
+        needToBeAddedBefore: "alerts:editProperty.needToBeAddedBefore",
+        requestToDeletePropSend: "alerts:editProperty.requestToDeletePropSend",
+        sureDeclineNDelete: "alerts:editProperty.sureDeclineNDelete",
+        sureDeclineUpdate: "alerts:editProperty.sureDeclineUpdate",
+        sureDeclineDelete: "alerts:editProperty.sureDeclineDelete",
 
     },
 

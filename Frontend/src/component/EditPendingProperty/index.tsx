@@ -8,10 +8,14 @@ import { useEffect, useState } from "react";
 import { SinglePropertyProvider } from "@src/providers/SingleProperty.context";
 import { useParams } from "react-router-dom";
 import PropertyFrom from "../Form/PropertyFrom2.edit";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 const EditPendingProperty = () => {
   const [isLoading, setisLoadingg] = useState(true);
   const { propertyId } = useParams();
+  const { t } = useTranslation(['data', 'common', 'dashboard']);
 
   useEffect(() => {
     setisLoadingg(false);
@@ -25,7 +29,7 @@ const EditPendingProperty = () => {
       <>
 
         <Breadcrumbs
-          title="Edit Property"
+          title={capitalizePhrase(t(getText.pagesTitle.pendingProperties))}
           titlePosition="bottom"
           background="url(/img/bread-overlay.jpg)"
           overlay={false}
@@ -34,7 +38,7 @@ const EditPendingProperty = () => {
           <HistoryLinks link="/home" text="Home" isActive={false} />
           <HistoryLinks
             link="/edit-property"
-            text="Edit Property"  
+            text={capitalizePhrase(t(getText.pagesTitle.pendingProperties))}
             isActive={true}
           />
         </Breadcrumbs>

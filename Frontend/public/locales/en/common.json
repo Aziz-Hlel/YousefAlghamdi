@@ -40,6 +40,12 @@
     "description": "description",
     "submitting": "Submitting",
     "addresse": "addresse",
+    "for": "for",
+    "noAgentAssociated": "No agent assigned to the client yet",
+    "owner": "owner",
+    "edit": "edit",
+    "sponsoredAgent":"Sponsored Agent",
+    "save": "save",
     "state": {
         "toBeDeleted": "toBeDeleted",
         "toBeUpdated": "toBeUpdated",

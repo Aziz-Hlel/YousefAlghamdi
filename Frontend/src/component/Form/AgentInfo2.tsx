@@ -13,6 +13,9 @@ import { imagePurposes } from "@src/types/imagePurpose.types";
 import AgentImageInput from "./AgentImageInput";
 import useAgentSchema from "@src/schemas/useAgentSchema.CU";
 import { z } from "zod";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 
@@ -23,6 +26,8 @@ function PersonalInfo() {
 
   const { agents, refreshAgents } = useAgents();
   const { agentId } = useParams();
+
+  const { t } = useTranslation(['data', 'common', 'dashboard']);
 
   const { createAgentSchema, updateAgentSchema } = useAgentSchema();
 
@@ -164,8 +169,8 @@ function PersonalInfo() {
         <div className="col-6    ">
           <AgentImageInput props={mainImageInputConfig} />
           {/* {< span className=" text-red-600" > {fieldError?.message}</span >} */}
-          <span className=" text-gray-600 text-xs lg:text-base"> Main agent's image</span>
-          <div className="text-gray-600 text-xs lg:text-base">Photo resolution: 960 × 1280  </div>
+          <span className=" text-gray-600 text-xs lg:text-base"> {capitalizePhrase(t(getText.dashboard.agents.agentCU.mainAgentImage))}</span>
+          <div className="text-gray-600 text-xs lg:text-base">{capitalizePhrase(t(getText.dashboard.agents.agentCU.mainphotoResolution))}  </div>
 
         </div>
 
@@ -174,45 +179,45 @@ function PersonalInfo() {
           <AgentImageInput props={miniImageInputConfig} />
           {<span className=" text-red-600"> {errors.agentInfo?.imageGallery?.miniImage?.message}</span>}
 
-          <span className=" text-gray-600 text-xs lg:text-base"> Minimized agent's image</span>
-          <div className="text-gray-600 text-xs lg:text-base">Photo resolution: 200x200  </div>
+          <span className=" text-gray-600 text-xs lg:text-base"> {capitalizePhrase(t(getText.dashboard.agents.agentCU.minimizedAgentImage))}</span>
+          <div className="text-gray-600 text-xs lg:text-base">{capitalizePhrase(t(getText.dashboard.agents.agentCU.minimizePhotoResolution))}</div>
 
         </div>
         <PropertyTextInput
           size="col-lg-6 col-md-6"
-          title="First Name*"
+          title={capitalizePhrase(t(getText.common.firstName))}
           placeholder="Demo Name"
           fieldRegister={register("firstName")}
           fieldError={errors.firstName}
         />
         <PropertyTextInput
           size="col-lg-6 col-md-6"
-          title="Last Name*"
+          title={capitalizePhrase(t(getText.common.lastName))}
           placeholder="Demo Name"
           fieldRegister={register("lastName")}
           fieldError={errors.lastName}
         />
         <PropertyTextInput
-          title="Phone Number*"
+          title={capitalizePhrase(t(getText.common.phoneNumber))}
           placeholder="Phone Number"
           fieldRegister={register("phoneNumber")}
           fieldError={errors.phoneNumber}
         />
         <PropertyTextInput
-          title="Email Address*"
+          title={capitalizePhrase(t(getText.common.emailAdress))}
           placeholder="Email Address"
           fieldRegister={register("email")}
           fieldError={errors.email}
         />
         {!editMode && <PropertyTextInput
-          title="Password*"
+          title={capitalizePhrase(t(getText.common.password))}
           placeholder="Password"
           fieldRegister={register("password")}
           fieldError={errors.password}
           type="password"
         />}
         {!editMode && <PropertyTextInput
-          title="Confirm Password*"
+          title={capitalizePhrase(t(getText.common.confirmPassword))}
           placeholder="Confirm Password"
           fieldRegister={register("confirmPassword")}
           fieldError={errors.confirmPassword}
@@ -226,9 +231,9 @@ function PersonalInfo() {
       <div className="form-group form-mg-top25">
         <div className="ecom-wc__button ecom-wc__button--bottom">
           <button className="homec-btn homec-btn__second" type="submit" disabled={isSubmitting}>
-            <span>{!isSubmitting && editMode && "Update Profile"}</span>
-            <span>{!isSubmitting && !editMode && "Create Profile"}</span>
-            <span>{isSubmitting && "Submitting..."}</span>
+            <span>{!isSubmitting && editMode && capitalizePhrase(t(getText.dashboard.agents.agentCU.btns.updateAgent))}</span>
+            <span>{!isSubmitting && !editMode && capitalizePhrase(t(getText.dashboard.agents.agentCU.btns.addAgent))}</span>
+            <span>{isSubmitting && `${capitalizePhrase(t(getText.common.submitting))}...`}</span>
           </button>
         </div>
       </div>
