@@ -41,7 +41,7 @@ function Footer() {
                       </Link>
                     </div>
                     <p className="footer-about-text">
-                      {capitalizePhrase(t(getText.home.Footer.description))}
+                      {/* {capitalizePhrase(t(getText.home.Footer.description))} */}
 
                     </p>
                     {/* Social   */}
@@ -194,7 +194,6 @@ function Footer() {
                         <h3 className="widget-title">{capitalizePhrase(t(getText.home.Footer.important.title))}</h3>
                         <ul className="f-need-helps-inner list-none">
                           <FooterList link="/about" title={capitalizePhrase(t(getText.home.Footer.important.aboutUs))} />
-                          <FooterList link="/our-agents" title={capitalizePhrase(t(getText.home.Footer.important.ourAgents))} />
                           <FooterList link="/contact" title={capitalizePhrase(t(getText.home.Footer.important.contact))} />
                         </ul>
                       </div>

@@ -16,9 +16,12 @@ import LatestPropertyV2 from "../LatestProperty2/LatestPropertyV22";
 import Sponsors from "../Sponsors/Sponsors";
 import apiGateway from "@src/utils/apiGateway";
 import FeaturedPropertiesProvider from "../LatestProperty2/FeaturedPropertiesProvider.context";
+import CEOMobile from "../CeoComp/CEOMobile";
+import { useMediaQuery } from "@src/utils/useMediaQuery";
 
 function Home() {
   const [isLoading, setisLoadingg] = useState(true);
+  const isDesktop = useMediaQuery('(min-width: 768px)');
 
   useEffect(() => {
     setisLoadingg(false);
@@ -35,10 +38,10 @@ function Home() {
           <LatestPropertyV2 />
         </FeaturedPropertiesProvider>
 
-        <Sponsors />
+        {/* <Sponsors /> */}
 
         <Features2 />
-        <CEO />
+        {isDesktop ? <CEO /> : <CEOMobile />}
         <Agents />
         <FaqSection />
         <DownloadApp />
