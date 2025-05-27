@@ -8,7 +8,7 @@ const MobileCustomLanguages = ({ handleSidebar }: { handleSidebar: () => void })
 
     const handleLanguageChange = async (newLang: string) => {
 
-        await changeLanguage(newLang);
+        await changeLanguage(newLang as any);
     };
 
 

@@ -20,7 +20,7 @@ function DetailsTabFeatures({ title, property }: { title: string, property: any 
 
             <div key={index + Object.keys(item)[0]}>
               <span className="  mr-5 " style={{ fontWeight: "400px", fontSize: "14px" }}>{capitalizePhrase(t(getText.data[Object.keys(item)[0] as keyof typeof getText.data]))}:</span>
-              <span style={{ color: "#7e8ba0" }}>{item[Object.keys(item)[0]]}</span>
+              <span style={{ color: "#7e8ba0" }} className=" px-1">{item[Object.keys(item)[0]]}</span>
             </div>
 
 

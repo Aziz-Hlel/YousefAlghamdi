@@ -37,7 +37,7 @@ const CustomLanguageOption = () => {
     
     const handleLanguageChange = async (newLang: string) => {
 
-        await changeLanguage(newLang);
+        await changeLanguage(newLang as any);
     };
 
     return (
