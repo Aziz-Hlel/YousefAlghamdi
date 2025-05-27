@@ -21,12 +21,12 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
         <div className="row align-items-center">
           <div className="col-12 ">
             <div
-              className="homec-header__inside"
+              className="homec-header__inside"  
               style={{ background: secondNav && "transparent" }}>
 
               <div className="homec-header__group">
                 <div className="homec-header__logo">
-                  <Link to="/">
+                  <Link to="/" >
                     <img src="/img/logo.jpg" alt="#" />
                   </Link>
                 </div>

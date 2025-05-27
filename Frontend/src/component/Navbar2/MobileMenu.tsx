@@ -36,6 +36,7 @@ const MobileMenu = ({ handleSidebar, show }: ImobileMenu) => {
       style={{ display: "block", zIndex: show ? "" : "-1" }}
       aria-modal={true}
       role="dialog"
+      
       onClick={(e: any) => e.target.role === "dialog" && handleSidebar()}
     >
       <div className="modal-dialog offcanvas-dialog">

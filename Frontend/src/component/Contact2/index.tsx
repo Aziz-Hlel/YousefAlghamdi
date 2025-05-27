@@ -37,7 +37,8 @@ function Contact() {
         </Breadcrumbs>
         <section
           className="homec-contact-form homec-bg-cover pd-top-80 pd-btm-80 mg-top-100"
-          style={{ backgroundImage: `url(${contact_img})` }}
+          style={{ backgroundImage: `url(${contact_img})`,direction:"ltr" }}
+          
         >
           <div className="container">
             <div className="row">
