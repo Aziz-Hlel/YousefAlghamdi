@@ -11,7 +11,7 @@ import SelectiveInputForm from "./SelectiveInputForm";
 import { categoriesType, ResidentialProperties, sub_categories } from "@src/types/categories.subcategories.types";
 import { additionalDetailsAttributes } from "@src/types/additionalDetails.types";
 import { FileWithPath } from "react-dropzone";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { listing_typesValues } from "@src/types/listing_types.types";
 import { cities, delegations } from "@src/types/cities.delegations.types";
 import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
@@ -25,6 +25,7 @@ import { useTranslation } from "react-i18next";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import getText from "@src/i18n/data/getText";
 import useSubmitPropertySchema from "@src/schemas/useSubmitPropertySchema";
+import listing_period from "@src/types/listing_period.types";
 
 
 
@@ -49,7 +50,7 @@ const PropertyFrom = () => {
 
 
 
-  const navigate = useNavigate();
+
   const propertyCategoryValue = watch('category');
   const CityValueObserver = watch('city');
 
@@ -64,7 +65,7 @@ const PropertyFrom = () => {
 
   };
 
-  const { t } = useTranslation(['data', 'common', 'submitProperty','alerts']);
+  const { t } = useTranslation(['data', 'common', 'submitProperty', 'alerts']);
 
   useEffect(() => {
     setValue("additionalDetails", [])
@@ -166,11 +167,11 @@ const PropertyFrom = () => {
 
     (data as any).imgsFolderId = imgsFolderId.current
 
-
+    // if (data.listing_type.includes("rent")) delete (data as any).listing_period
 
     const response = await Http.post(apiGateway.property.create, data);
 
-    response?.status === 201 && navigate("/dashboard/my-properties")
+    // response?.status === 201 && navigate("/dashboard/my-properties")
     response?.status !== 201 && Alert({ title: "Error", text: "Something went wrong, cannot create property", icon: "error" })
     console.log(data);
 
@@ -187,6 +188,7 @@ const PropertyFrom = () => {
   console.log("whatFor", whatFor);
 
   if (whatFor && !listing_typesValues.includes(whatFor)) console.log("nnon ???");
+
 
   return (
     <section className="pd-top-80 pd-btm-80"  >
@@ -232,15 +234,25 @@ const PropertyFrom = () => {
                     />
 
                     <PropertyTextInput
-                      size="col-lg-6 col-md-6"
+                      size="col-lg-4 col-md-6"
                       title={capitalizePhrase(t(getText.submitProperty.propertyInformation.propertyPrice))}
                       placeholder="24345"
                       fieldRegister={register('filterFields.price')}
                       fieldError={errors.filterFields?.price}
                     />
 
+                    {
+                      whatFor?.includes("rent") && <SelectiveInputForm
+                        size="col-lg-4 col-md-6 flex items-center mt-3"
+                        title={capitalizePhrase(t(getText.submitProperty.propertyInformation.listing_period))}
+                        options={Object.values(listing_period)}
+                        fieldRegister={register('listing_period')}
+                        fieldError={errors.listing_period}
+                      />
+                    }
+
                     <PropertyTextInput
-                      size="col-lg-6 col-md-6"
+                      size="col-lg-4 col-md-6"
                       title={capitalizePhrase(t(getText.submitProperty.propertyInformation.totalArea))}
                       fieldRegister={register('filterFields.area')}
                       fieldError={errors.filterFields?.area}
@@ -268,6 +280,8 @@ const PropertyFrom = () => {
                       fieldRegister={register('description')}
                       fieldError={errors.description}
                     />
+
+
 
                   </div>
 

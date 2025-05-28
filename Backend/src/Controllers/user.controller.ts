@@ -199,7 +199,7 @@ export const updateAgentOfClient = async (req: AuthenticatedRequest, res: Respon
 
         await user.save();
 
-        Promise.all([
+        await Promise.all([
 
             user.save(),
 

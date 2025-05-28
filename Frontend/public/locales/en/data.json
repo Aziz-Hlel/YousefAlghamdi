@@ -108,6 +108,8 @@
     "sale": "sale",
     "commercial rent": "commercial rent",
     "commercial sale": "commercial sale",
-    "m2": "m²"
+    "m2": "m²",
+    "monthly": "monthly",
+    "yearly": "yearly"
 
 }

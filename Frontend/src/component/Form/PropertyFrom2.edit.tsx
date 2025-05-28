@@ -29,6 +29,7 @@ import useSubmitPropertySchema from "@src/schemas/useSubmitPropertySchema";
 import { useTranslation } from "react-i18next";
 import getText from "@src/i18n/data/getText";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import listing_period from "@src/types/listing_period.types";
 
 
 
@@ -45,7 +46,7 @@ const PropertyFrom = () => {
   const imgsFolderId = useRef<string>("");
   const navigate = useNavigate();
 
-  const { t } = useTranslation(['data', 'common', 'submitProperty','alerts']);
+  const { t } = useTranslation(['data', 'common', 'submitProperty', 'alerts']);
 
 
   const { SubmitPropertySchema } = useSubmitPropertySchema();
@@ -285,6 +286,11 @@ const PropertyFrom = () => {
       delete data._id
     }
 
+    const listing_period_Validation = (data: any) => {
+      if (!data.listing_type.includes("rent")) delete data.listing_period
+
+    }
+
     if (!InspectedProperty) return
 
 
@@ -307,6 +313,7 @@ const PropertyFrom = () => {
           updateImages(refinedData)
           checkProperVariables(refinedData)
           removeId(refinedData)
+          listing_period_Validation(refinedData)
           const response = await Http.put(`${apiGateway.property.approve}/${property._id}`, refinedData);
           if (response?.status === 200) navigate("./../../");
           else Alert({ title: "Error", text: "Something went wrong", icon: "warning" });
@@ -327,6 +334,7 @@ const PropertyFrom = () => {
       updateImages(refinedData)
       checkProperVariables(refinedData)
       removeId(refinedData)
+      listing_period_Validation(refinedData)
 
       let response: AxiosResponse<any, any> | undefined
 
@@ -484,6 +492,16 @@ const PropertyFrom = () => {
                       fieldRegister={register('filterFields.price')}
                       fieldError={errors.filterFields?.price}
                     />
+
+                    {
+                      property.listing_type.includes("rent") && <SelectiveInputForm
+                        size="col-lg-4 col-md-6 flex items-center mt-3"
+                        title={capitalizePhrase(t(getText.submitProperty.propertyInformation.listing_period))}
+                        options={Object.values(listing_period)}
+                        fieldRegister={register('listing_period')}
+                        fieldError={errors.listing_period}
+                      />
+                    }
 
                     <PropertyTextInput
                       size="col-lg-6 col-md-6"

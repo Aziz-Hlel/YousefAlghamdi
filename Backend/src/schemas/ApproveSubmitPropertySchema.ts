@@ -60,7 +60,6 @@ const ApproveSubmitPropertySchema = z.object({
     }),
 
     listing_type: z.string({ required_error: "Listing type is required" }),
-    productTier: z.string({ required_error: "Product tier is required" }).default("free"),
     nearestPlaces: z.record(z.string(), z.string()).default({}),
 
 

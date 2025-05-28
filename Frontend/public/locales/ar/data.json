@@ -108,5 +108,7 @@
     "sale": "بيع",
     "commercial rent": "إيجار تجاري",
     "commercial sale": "بيع تجاري",
-    "m2": "م²"
+    "m2": "م²",
+    "monthly": "شهريا",
+    "yearly": "سنويا"
 }

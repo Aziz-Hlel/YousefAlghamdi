@@ -2,6 +2,7 @@ import mongoose, { Schema } from "mongoose";
 import filterFieldsTypes from "./filterFields.type";
 
 export interface Iproperty {
+
     _id: mongoose.Types.ObjectId;
 
     title: string,
@@ -13,6 +14,8 @@ export interface Iproperty {
     city: string,
     delegation: string,
     addresse: string,
+
+
 
     imageGallery: {
         folderId: string,
@@ -32,13 +35,14 @@ export interface Iproperty {
 
     listing_type: string,
 
+    listing_period: string,
+
     additionalDetails: string[];
 
     nearestPlaces: {
         [key: string]: string;
     },
 
-    productTier: string,
 
     clientId: string,
     agentId?: string,
@@ -66,7 +70,7 @@ export interface Iproperty_model extends Document, Iproperty { }
 
 const imageSchema = new mongoose.Schema({
 
-    key: { type: String, required: true },
+    key: { type: String, default: "", required: true },
 
 
 }, { _id: false });
@@ -74,23 +78,23 @@ const imageSchema = new mongoose.Schema({
 
 const propertySchema = new mongoose.Schema({
 
-    title: { type: String, required: true, trim: true },
+    title: { type: String, required: true, default: " ", trim: true },
 
-    description: { type: String, required: true, trim: true, },
+    description: { type: String, required: true, default: " ", trim: true, },
 
-    category: { type: String, required: true, },
+    category: { type: String, default: " ", required: true, },
 
-    sub_category: { type: String, required: true, },
+    sub_category: { type: String, default: " ", required: true, },
 
-    city: { type: String, required: true, },
+    city: { type: String, default: " ", required: true, },
 
-    delegation: { type: String, required: true, },
+    delegation: { type: String, default: " ", required: true, },
 
-    addresse: { type: String, required: true, },
+    addresse: { type: String, default: " ", required: true, },
 
     imageGallery: {
 
-        folderId: { type: String, required: true },
+        folderId: { type: String, default: " ", required: true },
 
         images: [imageSchema],
 
@@ -98,18 +102,17 @@ const propertySchema = new mongoose.Schema({
 
     filterFields: filterFieldsTypes,
 
-    listing_type: { type: String, required: true, },
+    listing_type: { type: String, default: "", required: true, },
 
-    additionalDetails: { type: [String], },
+    listing_period: { type: String, },
 
-    nearestPlaces: { type: Map, of: String },
+    additionalDetails: { type: [String], default: [] },
 
-    productTier: { type: String, required: true, },
+    nearestPlaces: { type: Map, of: String, default: {} },
 
     clientId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', },
 
-    agentId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null, },
-
+    agentId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', },
 
     featured: { type: Boolean, default: false, },
 
@@ -120,6 +123,7 @@ const propertySchema = new mongoose.Schema({
         state: {
             type: String,
             required: true,
+            default: "",
         },
         available: {
             type: Date,
@@ -143,6 +147,6 @@ const propertySchema = new mongoose.Schema({
 );
 
 
-const Property = mongoose.model<Iproperty_model>('Estate', propertySchema);
+const Property = mongoose.model<Iproperty_model>('Property', propertySchema);
 
 export default Property;

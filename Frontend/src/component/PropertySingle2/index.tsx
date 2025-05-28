@@ -21,7 +21,7 @@ function PropertySingle() {
   const [isLoading, setIsLoading] = useState(true);
   const { propertyId } = useParams();
 
-  const { t } = useTranslation(['common','pagesTitle']);
+    const { t } = useTranslation(['common','pagesTitle']);
 
   useEffect(() => {
     propertyId && setIsLoading(false);

@@ -29,7 +29,7 @@ function SelectiveInputForm({ size, title, options, fieldRegister, fieldError }:
 
 
   return (
-    <div className={`property-sidebar__single  w-fit *:w-fit  ${size} `}>
+    <div className={`property-sidebar__single   w-fit    ${size} `}>
       <div className="">
         <h4 className={`homec-submit-form__heading ${options.length === 0 && "text-gray-300"}`}>{title}</h4>
         <div className="form-group homec-form-input w-fit">  {/*l mochkla f homec-form-input */}
@@ -39,7 +39,7 @@ function SelectiveInputForm({ size, title, options, fieldRegister, fieldError }:
             disabled={options.length === 0}
           >
             <option ></option>
-            {options.map((value: any) => <option key={value} value={value}>{capitalizePhrase(t(getText.data[value as keyof typeof getText.data]))}</option>)}
+            {options.map((value: any) => <option key={value} value={value}>{Object.keys(getText.data).includes(value) ? capitalizePhrase(t(getText.data[value as keyof typeof getText.data])) : value}</option>)}
           </select>
         </div>
         <span className="text-red-600 p-2 inline-block">{fieldError?.message}</span>

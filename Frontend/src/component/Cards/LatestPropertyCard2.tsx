@@ -18,21 +18,20 @@ const atrToImg = {
   square: "/img/size-icon.svg",
 
 }
-const listingTypeExprssion: { [key: string]: string; } = {
-  "rent": "For Rent",
-  "sale": "For Sale",
-  "commercial rent": "For Commercial Rent",
-  "commercial sale": "For Commercial Sale",
-}
+
 
 
 
 function LatestPropertyCard({ property, style, classes, view, }: ILatestPropertyCard) {
 
-  const whatFor = listingTypeExprssion[property.listing_type];
+
 
   const { t } = useTranslation(['data', 'home', 'common']);
 
+  let listingDisplay = capitalizePhrase(t(getText.data[property.listing_type as keyof typeof getText.data]))
+
+  // property.listing_type.includes("rent") && (listingDisplay += " " + t(getText.data[property.listing_period as keyof typeof getText.data]));
+  // property.listing_type.includes("rent") ? console.log("include rent ");
 
 
   return (
@@ -43,12 +42,13 @@ function LatestPropertyCard({ property, style, classes, view, }: ILatestProperty
       style={style}
     >
       {/* Single property */}
-      <div
+      < div
         className={`homec-property [@media(min-width:500px)]:w-fit md:w-auto ${view === "list" && "homec-property__list-style"
-          }`}
+          }`
+        }
       >
         {/* Property Head  */}
-        <div className="homec-property__head ">
+        < div className="homec-property__head " >
           <Link to={"/property-single/" + property._id}>
 
             <img src={property.imageGallery.images[0].url} alt="#" className="  w-fit" />
@@ -72,18 +72,19 @@ function LatestPropertyCard({ property, style, classes, view, }: ILatestProperty
             </div> */}
           </Link>
           {/* End Top Sticky  */}
-        </div>
+        </div >
         {/* Property Body */}
-        <div className="homec-property__body [@media(min-width:500px)]:w-fit md:w-auto">
+        < div className="homec-property__body [@media(min-width:500px)]:w-fit md:w-auto" >
           <div className="homec-property__topbar">
-            {/* <div className="homec-property__price">
-              ${property.filterFields.price} <span>{property.listing_type === "To rent" && "/" + "period"}qsd</span>
-            </div> */}
+            <div className="homec-property__price">
+              ${property.filterFields.price} <span>{property.listing_type.includes("rent") && "/" + t(getText.data[property.listing_period as keyof typeof getText.data])}</span>
+            </div>
 
             <div className=" flex justify-center items-center  [@media(min-width:500px)]:w-fit md:w-auto ">
               {property.listing_type.includes("sale") ?
-                <span className="homec-property__salebadge pr-0 mr-0">{capitalizePhrase(t(getText.data[property.listing_type as keyof typeof getText.data]))}</span> :
-                <span className="  bg-violet-200 text-xs py-1 px-2 rounded-xl">{capitalizePhrase(t(getText.data[property.listing_type as keyof typeof getText.data]))}</span>}
+                <span className="homec-property__salebadge pr-0 mr-0">{listingDisplay}</span> :
+                <span className="  bg-violet-200 text-xs py-1 px-2 rounded-xl">{listingDisplay}</span>}
+
             </div>
 
           </div>
@@ -126,8 +127,8 @@ function LatestPropertyCard({ property, style, classes, view, }: ILatestProperty
               </li>
             ))} */}
           </ul>
-        </div>
-      </div>
+        </div >
+      </div >
       {/* End Single property */}
     </div >
   );

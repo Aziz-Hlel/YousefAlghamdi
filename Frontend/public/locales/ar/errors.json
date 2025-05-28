@@ -27,6 +27,8 @@
         "addresse": {
             "required": "العنوان مطلوب"
         },
+        "listing_type": "نوع الإعلان مطلوب",
+        "listing_period": "فترة الإعلان مطلوبة",
         "filterFields": {
             "price": {
                 "required": "السعر مطلوب",
@@ -55,9 +57,7 @@
             "imageGallery": {
                 "folderId": "نص FolderId مطلوب",
                 "key": "نص Key مطلوب"
-            },
-            "listing_type": "نوع الإعلان مطلوب",
-            "productTier": "مستوى المنتج مطلوب"
+            }
         }
     },
     "changePassword": {

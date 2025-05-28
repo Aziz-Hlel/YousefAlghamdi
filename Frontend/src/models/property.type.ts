@@ -23,7 +23,7 @@ type Iproperty = {
     },
 
     listing_type: string,
-    productTier: string,
+    listing_period?: string,
 
     clientId: string | IUser,
     agentId?: string,

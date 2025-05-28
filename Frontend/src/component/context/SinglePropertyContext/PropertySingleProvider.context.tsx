@@ -4,6 +4,7 @@ import Http from '@src/services/Http';
 import apiGateway from '@src/utils/apiGateway';
 import { createContext, useContext, ReactNode, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 const initialProperty: Iproperty = {
   _id: "",
 
@@ -17,10 +18,12 @@ const initialProperty: Iproperty = {
   delegation: "",
   addresse: "",
 
-  imgs: [],
+  imageGallery: {
+    folderId: "",
+    images: [],
+  },
 
   listing_type: "",
-  productTier: "",
 
   clientId: "",
   agentId: "",
@@ -36,7 +39,7 @@ const initialProperty: Iproperty = {
   additionalDetails: [],
 
   active: false,
-
+  featured:false,
   advanced: {
     available: new Date(),
     state: "",

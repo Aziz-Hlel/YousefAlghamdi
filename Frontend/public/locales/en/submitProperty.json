@@ -4,6 +4,7 @@
         "propertyTitle": "Property Title",
         "category": "Category",
         "subCategory": "Sub Category",
+        "listing_period": "Rent Period",
         "propertyPrice": "Property Price",
         "totalArea": "Total Area",
         "rooms": "Rooms",

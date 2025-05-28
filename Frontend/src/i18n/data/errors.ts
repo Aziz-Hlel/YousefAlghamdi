@@ -62,7 +62,7 @@ const errors = {
             }
         },
         listing_type:"errors:submitProperty.listing_type.required",
-        productTier: "errors:submitProperty.productTier.required",
+        listing_period:"errors:submitProperty.listing_period",
 
 
     },

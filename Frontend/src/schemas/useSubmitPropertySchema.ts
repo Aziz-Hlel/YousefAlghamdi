@@ -67,10 +67,19 @@ const useSubmitPropertySchema = () => {
             })),
 
         }).optional(),
+
         listing_type: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.listing_type)) }),
-        productTier: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.productTier)) }).default("free"),
+        listing_period: z.string().optional(),
         nearestPlaces: z.record(z.string(), z.string()).default({}),
 
+    }).superRefine((data, ctx) => {
+        if (data.listing_type.toLowerCase().includes('rent') && !data.listing_period) {
+            ctx.addIssue({
+                path: ['listing_period'],
+                code: z.ZodIssueCode.custom,
+                message: capitalizePhrase(t(getText.errors.submitProperty.listing_period)), // Or a more specific message
+            });
+        }
     });
 
     return { SubmitPropertySchema }

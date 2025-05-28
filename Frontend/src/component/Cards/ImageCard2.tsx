@@ -1,7 +1,7 @@
 import ProtoTypes from "prop-types";
 
 interface IimageCard {
-  price: number|string;
+  price: number | string;
   duration?: string;
   title: string;
   text: string;
@@ -14,14 +14,14 @@ function ImageCard({ price, duration, title, text, img }: IimageCard) {
       <div className="homec-amount-card homec-amount-card__sticky">
         <h4 className="homec-amount-card__amount">
           ${price}
-          <span> {duration && ("Per" + duration)}</span>
+          <span> {duration && duration}</span>
         </h4>
       </div>
       {/* End Amount Card  */}
       <div className="homec-overlay ">
 
-</div>
-<img src={img} alt="#" className=" h-[400px] object- w-[1170px]" />
+      </div>
+      <img src={img} alt="#" className=" h-[400px] object- w-[1170px]" />
       <div className="homec-image-gallery__bottom">
         <div className="homec-image-gallery__content">
           <h3 className="homec-image-gallery__title">{title}</h3>

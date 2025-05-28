@@ -62,8 +62,7 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
                 agentId: agentId
 
             });
-
-            Promise.all([
+            await Promise.all([
                 User.findByIdAndUpdate(
                     clientId,
                     { role: roles.CLIENT },
@@ -98,7 +97,8 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
             await property.save();
 
         } catch (error) {
-            next(error);
+            console.log('t5l lel erorrr !!!!!!!!!!!!!!!!!!!!!!!!!')
+            return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request, error));
         }
 
 

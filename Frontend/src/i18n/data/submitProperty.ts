@@ -4,6 +4,7 @@ const submitProperty = {
         propertyTitle: "submitProperty:propertyInformation.propertyTitle",
         category: "submitProperty:propertyInformation.category",
         subCategory: "submitProperty:propertyInformation.subCategory",
+        listing_period:"submitProperty:propertyInformation.listing_period",
         propertyPrice: "submitProperty:propertyInformation.propertyPrice",
         totalArea: "submitProperty:propertyInformation.totalArea",
         rooms: "submitProperty:propertyInformation.rooms",

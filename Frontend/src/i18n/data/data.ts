@@ -131,6 +131,8 @@ const data = {
 
     "m2": "m2",
 
+    "monthly": "monthly",
+    "yearly": "yearly",
 }
 
 

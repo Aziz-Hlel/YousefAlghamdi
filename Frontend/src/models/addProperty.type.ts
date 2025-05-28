@@ -5,7 +5,6 @@ type IaddProperty = {
     imgs: string[],
     videos: string[],
     city: string,
-    productTier: string,
 
     filterFields: {
         price: number,

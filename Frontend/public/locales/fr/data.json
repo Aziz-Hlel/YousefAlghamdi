@@ -108,5 +108,7 @@
     "sale": "vente",
     "commercial rent": "location commerciale",
     "commercial sale": "vente commerciale",
-    "m2": "m²"
+    "m2": "m²",
+    "monthly": "mensuelle",
+    "yearly": "annuelle"
 }

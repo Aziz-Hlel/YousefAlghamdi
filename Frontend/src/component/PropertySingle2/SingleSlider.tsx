@@ -1,15 +1,16 @@
 import { responsiveSmallAgentsSlider } from "../../utils/responsiveSlider";
 import ImageCard from "../Cards/ImageCard2";
 import Carousel from "react-multi-carousel";
-import apiGateway from "@src/utils/apiGateway";
-import { pickRandomPhoto } from "@src/pickRandomPhoto";
 import { useSinglePropertyContext } from "@src/providers/SingleProperty.context";
-import useRandomPhoto from "@src/useRandomPhoto";
+import { useTranslation } from "react-i18next";
+import getText from "@src/i18n/data/getText";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 
 function SingleSlider() {
-  const randomPhoto = useRandomPhoto()
+
+  const { t } = useTranslation(['data','common', 'pagesTitle']);
 
   const { property } = useSinglePropertyContext();
   if (!property) return <></>
@@ -33,40 +34,12 @@ function SingleSlider() {
           <ImageCard
             key={index}
             price={property.filterFields.price}
-            duration={property.listing_type === "rent" || property.listing_type === "commercial rent" ? "Month" : ""}
+            duration={(property.listing_type.includes("rent") && property.listing_period) ? capitalizePhrase(t(getText.data[property.listing_period as keyof typeof getText.data])) : ""}
             title={property.title}
             text={property.addresse}
             img={img.url!} />
         )}
 
-      {/* <ImageCard
-        price="3,976"
-        duration="Month"
-        title="Modern House With Pool"
-        text="1901 Thornridge Cir. Shiloh, Hawaii 81063"
-        img="https://placehold.co/1170x600"
-      />
-      <ImageCard
-        price="3,976"
-        duration="Month"
-        title="Affordable Green Villa House"
-        text="1901 Thornridge Cir. Shiloh, Hawaii 81063"
-        img="https://placehold.co/1170x600"
-      />
-      <ImageCard
-        price="3,976"
-        duration="Month"
-        title="Modern House With Pool"
-        text="1901 Thornridge Cir. Shiloh, Hawaii 81063"
-        img="https://placehold.co/1170x600"
-      />
-      <ImageCard
-        price="3,976"
-        duration="Month"
-        title="Affordable Green Villa House"
-        text="1901 Thornridge Cir. Shiloh, Hawaii 81063"
-        img="https://placehold.co/1170x600"
-      /> */}
     </Carousel>
   );
 }

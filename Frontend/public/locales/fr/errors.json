@@ -27,6 +27,8 @@
         "addresse": {
             "required": "L'adresse est requise"
         },
+        "listing_type": "Le type d'annonce est requis",
+        "listing_period": "La durée de l'annonce est requise",
         "filterFields": {
             "price": {
                 "required": "Le prix est requis",
@@ -55,9 +57,7 @@
             "imageGallery": {
                 "folderId": "Le texte FolderId est requis",
                 "key": "Le texte Key est requis"
-            },
-            "listing_type": "Le type d'annonce est requis",
-            "productTier": "Le niveau de produit est requis"
+            }
         }
     },
     "changePassword": {

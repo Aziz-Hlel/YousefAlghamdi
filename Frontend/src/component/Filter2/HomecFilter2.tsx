@@ -32,11 +32,15 @@ function HomecFilter({ rentOrSale }: { rentOrSale: string }) {
     if (rentOrSale == "Sale" && commercial === commercialOrNot[0]) listing_type = listing_types.sale
 
 
+
+
     const query = new URLSearchParams({
       listingType: listing_type,
       city: city,
       category: category,
+
     });
+    if (rentOrSale == "Rent") query.set("listingPeriod", "monthly");
 
     const url = `/property?listingType=${listing_type}&city=${city}&category=${category}`
     console.log(url);

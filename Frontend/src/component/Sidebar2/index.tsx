@@ -14,10 +14,12 @@ const SideBar22 = () => {
 
   const { filterObject, updateEstate } = useFormContext();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { t } = useTranslation(['data','home', 'common']);
+  const { t } = useTranslation(['data', 'home', 'common']);
 
   const city = searchParams.get('city');
   const category = searchParams.get('category');
+  const listingType = searchParams.get('listingType');
+  const listingPeriod = searchParams.get('listingPeriod');
 
   if (city && !cities[city as citiesType]) {
     searchParams.delete('city')
@@ -43,6 +45,19 @@ const SideBar22 = () => {
 
   }, [category])
 
+
+  useEffect(() => {
+    listingType?.includes("sale") && searchParams.delete('listingPeriod')
+    if (listingType?.includes("rent")) {
+      console.log('t5l inclide rent');
+
+      searchParams.set('listingPeriod', "monthly");
+      setSearchParams(searchParams, { replace: true });
+    }
+    setSearchParams(searchParams, { replace: true });     // push to URL
+
+  }, [listingType])
+
   return (
     <div className="col-lg-4 col-12 mg-top-30">
       <div className="property-sidebar">
@@ -57,6 +72,32 @@ const SideBar22 = () => {
           classes="mg-top-20"
           formkey="listingType"
         />
+
+        {listingType?.includes("rent") && <div className="flex flex-col space-y-2 px-2 pt-2 ">
+          <label className="inline-flex items-center space-x-2">
+            <input
+              type="radio"
+              name="listingPeriod"
+              value="monthly"
+              checked={listingPeriod === "monthly"}
+              onChange={() => { searchParams.set('listingPeriod', "monthly"); setSearchParams(searchParams, { replace: true }); }}
+              className="form-radio text-blue-600"
+            />
+            <span>Monthly</span>
+          </label>
+
+          <label className="inline-flex items-center space-x-2">
+            <input
+              type="radio"
+              name="listingPeriod"
+              value="yearly"
+              checked={listingPeriod === "yearly"}
+              onChange={() => { searchParams.set('listingPeriod', "yearly"); setSearchParams(searchParams, { replace: true }); }}
+              className="form-radio text-blue-600"
+            />
+            <span>Yearly</span>
+          </label>
+        </div>}
 
         <SelectiveInput
           title={capitalizePhrase(t(getText.common.city))}

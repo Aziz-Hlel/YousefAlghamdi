@@ -27,6 +27,8 @@
         "addresse": {
             "required": "Addresse is required"
         },
+        "listing_type": "Listing type is required",
+        "listing_period": "Listing period is required",
         "filterFields": {
             "price": {
                 "required": "Price is required",
@@ -54,10 +56,8 @@
             },
             "imageGallery": {
                 "folderId": "FolderId text is required",
-                "key":"Key text is required"
-            },
-            "listing_type": "Listing type is required",
-            "productTier": "Product tier is required"
+                "key": "Key text is required"
+            }
         }
     },
     "changePassword": {
