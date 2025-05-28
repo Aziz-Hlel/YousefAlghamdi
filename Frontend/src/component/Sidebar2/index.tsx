@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 
 const SideBar22 = () => {
 
-  const { filterObject, updateEstate } = useFormContext();
+  const { filterObject, updateProperty } = useFormContext();
   const [searchParams, setSearchParams] = useSearchParams();
   const { t } = useTranslation(['data', 'home', 'common']);
 
@@ -47,13 +47,13 @@ const SideBar22 = () => {
 
 
   useEffect(() => {
-    listingType?.includes("sale") && searchParams.delete('listingPeriod')
+    !listingType?.includes("rent") && searchParams.delete('listingPeriod')
     if (listingType?.includes("rent")) {
-      console.log('t5l inclide rent');
 
       searchParams.set('listingPeriod', "monthly");
-      setSearchParams(searchParams, { replace: true });
+
     }
+
     setSearchParams(searchParams, { replace: true });     // push to URL
 
   }, [listingType])
@@ -83,7 +83,7 @@ const SideBar22 = () => {
               onChange={() => { searchParams.set('listingPeriod', "monthly"); setSearchParams(searchParams, { replace: true }); }}
               className="form-radio text-blue-600"
             />
-            <span>Monthly</span>
+            <span>{capitalizePhrase(t(getText.data.monthly))}</span>
           </label>
 
           <label className="inline-flex items-center space-x-2">
@@ -95,7 +95,7 @@ const SideBar22 = () => {
               onChange={() => { searchParams.set('listingPeriod', "yearly"); setSearchParams(searchParams, { replace: true }); }}
               className="form-radio text-blue-600"
             />
-            <span>Yearly</span>
+            <span>{capitalizePhrase(t(getText.data.yearly))}</span>
           </label>
         </div>}
 
@@ -181,7 +181,7 @@ const SideBar22 = () => {
 
         <RangeInput
           minRange={0}
-          maxRange={3000000}
+          maxRange={5000000}
           minValue={filterObject.minPrice}
           maxValue={filterObject.maxPrice}
           minKey={"minPrice"}
@@ -192,7 +192,7 @@ const SideBar22 = () => {
         />
 
         <div className="w-full flex flex-col justify-center items-center gap-2 pt-4">
-          <button className="homec-btn" onClick={() => updateEstate()}>
+          <button className="homec-btn" onClick={() => updateProperty()}>
             {capitalizePhrase(t(getText.common.applyFilter))}
           </button>
           {/* <div className="underline font-extralight hover:cursor-pointer " onClick={() => resetFilter()}>reset filter</div> */}

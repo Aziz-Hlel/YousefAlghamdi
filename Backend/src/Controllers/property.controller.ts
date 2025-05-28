@@ -11,6 +11,8 @@ import User from "../Models/user.model";
 import ApproveSubmitPropertySchema from "../schemas/ApproveSubmitPropertySchema";
 import { getCDN_SignedUrl } from "../imgHandler";
 
+import type { PipelineStage } from "mongoose";
+import { property } from "lodash";
 
 const addSignedUrl = (property: any) => {
     return {
@@ -117,64 +119,129 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
 
 const filterFunc = (minVal: any, maxVal: any, filterKeyName: string, filters: any) => {
     if (minVal && maxVal && !isNaN(Number(minVal)) && !isNaN(Number(maxVal))) {
-        filters[filterKeyName] = {};
-        filters[filterKeyName].$gte = Number(minVal);
-        filters[filterKeyName].$lte = Number(maxVal);
-    }
+        // Use MongoDB aggregation to convert string to number for comparison
+        // This is the cleanest approach when you can't change the schema
+        const minNum = Number(minVal);
+        const maxNum = Number(maxVal);
 
-}
+        // Add to aggregation pipeline instead of simple find filter
+        if (!filters.$expr) {
+            filters.$expr = { $and: [] };
+        }
+
+        filters.$expr.$and.push({
+            $and: [
+                { $gte: [{ $toDouble: `$${filterKeyName}` }, minNum] },
+                { $lte: [{ $toDouble: `$${filterKeyName}` }, maxNum] }
+            ]
+        });
+    }
+};
+
 
 export const listProperties = async (req: Request, res: Response, next: NextFunction) => {
-
-    const { city, delegation, category, sub_category, listingType, maxNumberOfRooms, minNumberOfRooms, maxNumberOfBathrooms, minNumberOfBathrooms, maxNumberOfSquareFeet, minNumberOfSquareFeet, minPrice, maxPrice, forRent, forSale } = req.query;
+    const {
+        listingType,
+        listingPeriod,
+        city,
+        delegation,
+        category,
+        sub_category,
+        maxNumberOfSquareFeet,
+        minNumberOfSquareFeet,
+        minPrice,
+        maxPrice
+    } = req.query;
 
     let filters: any = {};
-    // console.log(req.query)
-    filterFunc(minPrice, maxPrice, "filterFields.price", filters);
-    // filterFunc(minNumberOfRooms, maxNumberOfRooms, "filterFields.rooms", filters);
-    // filterFunc(minNumberOfBathrooms, maxNumberOfBathrooms, "filterFields.bathrooms", filters);
 
-
-
-
+    // Handle string-based exact matches first
     if (city) filters.city = city;
     if (delegation) filters.delegation = delegation;
     if (category) filters.category = category;
     if (sub_category) filters.sub_category = sub_category;
     if (listingType) filters.listing_type = listingType;
-    const page = req.query.page ? Number(req.query.page) : 1;
-    filters.active = true;
-    if (!page || isNaN(page)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
-
-    const limit = 6;
-    // console.log('filters', filters)
-    try {
-
-        const [properties, total] = await Promise.all([
-            Property.find(filters)
-                .limit(limit)
-                .skip((page - 1) * limit)
-                .sort({ createdAt: -1 }),
-            Property.countDocuments(filters)
-        ]);
-
-
-        const updatedProperties = properties.map((property) => addSignedUrl(property));
-
-
-        res.set("x-total-count", total.toString()); // Optional, useful for frontend
-
-        res.json({
-            result: updatedProperties,
-        })
-
-
-    } catch (error) {
-        console.log('fama 8alta !!!!')
-        next(errorHandler(error, "501"));
+    if (listingType && String(listingType).includes("rent")) {
+        filters["listing_period"] = listingPeriod;
     }
 
+    filters.active = true;
 
+    // Apply numeric range filters using $expr
+    filterFunc(minPrice, maxPrice, "filterFields.price", filters);
+    filterFunc(minNumberOfSquareFeet, maxNumberOfSquareFeet, "filterFields.area", filters);
+
+    const page = req.query.page ? Number(req.query.page) : 1;
+    const limit = req.query.limit ? Number(req.query.limit) : 6;
+
+    if (!page || isNaN(page)) {
+        return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+    }
+
+    console.log('filters', JSON.stringify(filters, null, 2));
+
+    try {
+        // Use aggregate instead of find when we have $expr conditions
+        const hasExpressions = filters.$expr;
+
+        if (hasExpressions) {
+            // Build aggregation pipeline
+
+            const pipeline: PipelineStage[] = [
+                { $match: filters },
+                { $sort: { createdAt: -1 as 1 | -1 } },
+                {
+                    $facet: {
+                        properties: [
+                            { $skip: (page - 1) * limit },
+                            { $limit: limit }
+                        ],
+                        totalCount: [
+                            { $count: "count" }
+                        ]
+                    }
+                }
+            ];
+
+            const result = await Property.aggregate(pipeline);
+            const properties = result[0].properties;
+            const total = result[0].totalCount[0]?.count || 0;
+
+            const updatedProperties = properties.map((property: any) => {
+                return {
+                    ...property, imageGallery: {
+                        ...(property.imageGallery as any),
+                        images: property.imageGallery.images.map((image: any) => ({ key: image.key, url: getCDN_SignedUrl(image.key) })),
+                    },
+                }
+            });
+
+
+            res.set("x-total-count", total.toString());
+            res.json({
+                result: updatedProperties,
+            });
+        } else {
+            // Fallback to simple find if no complex expressions
+            const [properties, total] = await Promise.all([
+                Property.find(filters)
+                    .limit(limit)
+                    .skip((page - 1) * limit)
+                    .sort({ createdAt: -1 }),
+                Property.countDocuments(filters)
+            ]);
+
+            const updatedProperties = properties.map((property) => addSignedUrl(property));
+            res.set("x-total-count", total.toString());
+            res.json({
+                result: updatedProperties,
+            });
+        }
+
+    } catch (error) {
+        console.error('Error in listProperties:', error);
+        next(errorHandler(error, "501"));
+    }
 };
 
 

@@ -39,12 +39,12 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
                         <NavBtn text={capitalizePhrase(t(getText.home.navigation.home))} link="/" />
 
 
-                        <NavBtn text={capitalizePhrase(t(getText.home.navigation.properties.properties))} link="#">
+                        <NavBtn text={capitalizePhrase(t(getText.home.navigation.properties.properties))} link="/property">
                           {/* <NavBtn link="/property" text="Properties" /> */}
 
-                          <NavBtn link={`/property?listingType=${listing_types.rent}`} text={capitalizePhrase(t(getText.common.rent))} />
+                          <NavBtn link={`/property?listingType=${listing_types.rent}&listingPeriod=monthly`} text={capitalizePhrase(t(getText.common.rent))} />
                           <NavBtn link={`/property?listingType=${listing_types.sale}`} text={capitalizePhrase(t(getText.common.sale))} />
-                          <NavBtn link={`/property?listingType=${listing_types.commercialRent}`} text={capitalizePhrase(t(getText.common.commercialRent))} />
+                          <NavBtn link={`/property?listingType=${listing_types.commercialRent}&listingPeriod=monthly`} text={capitalizePhrase(t(getText.common.commercialRent))} />
                           <NavBtn link={`/property?listingType=${listing_types.commercialSale}`} text={capitalizePhrase(t(getText.common.commercialSale))} />
 
 

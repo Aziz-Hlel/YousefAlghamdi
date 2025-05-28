@@ -8,16 +8,16 @@ import { useSearchParams } from "react-router-dom";
 
 export const defaultFilter: IfilterProperty = {
 
-    maxNumberOfRooms: 10,
-    minNumberOfRooms: 0,
+    // maxNumberOfRooms: 10,
+    // minNumberOfRooms: 0,
 
-    maxNumberOfBathrooms: 5,
-    minNumberOfBathrooms: 1,
+    // maxNumberOfBathrooms: 5,
+    // minNumberOfBathrooms: 1,
 
     maxNumberOfSquareFeet: 2000,
     minNumberOfSquareFeet: 1,
 
-    maxPrice: 3000000,
+    maxPrice: 5000000,
     minPrice: 1,
 
     page: 1,
@@ -31,7 +31,7 @@ interface IFormContext {
 
     updateField: (field: keyof IfilterProperty, value: any, mnin?: string) => void,
     resetFilter: () => void,
-    updateEstate: (page?: number) => void,
+    updateProperty: (page?: number) => void,
 
     listRef: RefObject<HTMLDivElement | null>
 
@@ -56,7 +56,8 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
     const updateField = (field: keyof IfilterProperty, value: any, mnin?: string) => {
 
-        
+
+        console.log("field", field, "value", value, "mnin", mnin);
 
 
         setFilter((prev) => ({
@@ -70,7 +71,7 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
     };
 
 
-    const updateEstate = async (page?: number) => {
+    const updateProperty = async (page?: number) => {
         if (listRef?.current) {
             const offset = 100; // Adjust this value to scroll a bit further
             const elementTop = listRef.current.getBoundingClientRect().top + window.pageYOffset;
@@ -93,23 +94,28 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
             setSearchParams(searchParams, { replace: true });
         };
 
+        Object.keys(filterObject).forEach(key => {
+            filter = { ...filter, [key]: filterObject[key as keyof IfilterProperty] }
+
+        });
+
 
         const response = await Http.get<any>(apiGateway.property.list, { params: filter });
         const properties: Iproperty[] = response?.data.result
         const totalCount = Number(response?.headers["x-total-count"]);
         setTotalCount(totalCount)
 
-        
+
         setProperties(properties);
     };
 
     useEffect(() => {
-        updateEstate();
+        updateProperty();
     }, []);
 
 
     return (
-        <FormContext.Provider value={{ properties, filterObject, totalCount, updateField, resetFilter, updateEstate, listRef }}>
+        <FormContext.Provider value={{ properties, filterObject, totalCount, updateField, resetFilter, updateProperty, listRef }}>
             {children}
         </FormContext.Provider>
     );

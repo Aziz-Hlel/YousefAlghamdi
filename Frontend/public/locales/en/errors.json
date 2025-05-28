@@ -81,12 +81,14 @@
         "firstName": {
             "required": "First name is required",
             "min": "First name must be at least 2 characters long",
-            "max": "First name must be at most 25 characters long"
+            "max": "First name must be at most 25 characters long",
+            "regex": "First name must be a valid name"
         },
         "lastName": {
             "required": "Last name is required",
             "min": "Last name must be at least 2 characters long",
-            "max": "Last name must be at most 25 characters long"
+            "max": "Last name must be at most 25 characters long",
+            "regex": "Last name must be a valid name"
         },
         "emailAdress": {
             "required": "Email address is required",

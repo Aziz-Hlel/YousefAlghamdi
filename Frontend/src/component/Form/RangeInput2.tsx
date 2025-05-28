@@ -44,7 +44,6 @@ function RangeSlider2({ title, minRange, minKey, minValue, maxValue, maxRange, m
               max={maxRange}
               value={[minValue, maxValue]}
               onInput={(values: any) => handleInput(values)}
-
             />
 
           </div>
@@ -61,46 +60,13 @@ function RangeSlider2({ title, minRange, minKey, minValue, maxValue, maxRange, m
             </div>
 
           </div>
-          {/* <div className="price_slider_amount">
-            <MultiRangeSlider
-              min={minRange}
-              max={maxRange}
-              step={1}
-              minValue={1}
-              maxValue={maxValue}
-              onInput={(e) => {
-                handleInput(e);
-              }}
-              baseClassName="range-slider"
-              ruler={false}
-              label={false}
-            />
-            <div className="price_slider_amount mg-top-30">
-              <div className=" flex flex-col  items-start  justify-start -center">
 
-                <div className="pl-2 cursor-default text-gray-400">
-                  {`${text ? text : ""} ${symbol ? symbol : ""
-                    }${minValue} ${standard ? standard : ""} - ${symbol ? symbol : ""
-                    }${maxValue} ${standard ? standard : ""}`}
-                </div>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>
   );
 }
 
-// RangeSlider.propTypes = {
-//   title: ProtoTypes.string.isRequired,
-//   minRange: ProtoTypes.number.isRequired,
-//   maxRange: ProtoTypes.number.isRequired,
-//   defaultMinRange: ProtoTypes.number,
-//   defaultMaxRange: ProtoTypes.number,
-//   standard: ProtoTypes.string,
-//   text: ProtoTypes.string,
-//   symbol: ProtoTypes.string,
-// };
+
 
 export default RangeSlider2;

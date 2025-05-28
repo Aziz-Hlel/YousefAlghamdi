@@ -13,13 +13,13 @@ const useSignUpSchema = () => {
         firstName: z.string({ required_error: capitalizePhrase(t(getText.errors.signUp.firstName.required)) })
             .min(2, { message: capitalizePhrase(t(getText.errors.signUp.firstName.min)) })
             .max(25, { message: capitalizePhrase(t(getText.errors.signUp.firstName.max)) })
-            .regex(/^[A-Za-z]+$/, { message: capitalizePhrase(t(getText.errors.signUp.firstName.regex)) }),
+            .regex(/^[A-Za-z\s]+$/, { message: capitalizePhrase(t(getText.errors.signUp.firstName.regex)) }),
 
 
         lastName: z.string({ required_error: capitalizePhrase(t(getText.errors.signUp.lastName.required)) })
             .min(1, { message: capitalizePhrase(t(getText.errors.signUp.lastName.min)) })
             .max(25, { message: capitalizePhrase(t(getText.errors.signUp.lastName.max)) })
-            .regex(/^[A-Za-z]+$/, { message: capitalizePhrase(t(getText.errors.signUp.lastName.regex)) }),
+            .regex(/^[A-Za-z\s]+$/, { message: capitalizePhrase(t(getText.errors.signUp.lastName.regex)) }),
 
 
         phoneNumber: z.string({ required_error: capitalizePhrase(t(getText.errors.signUp.phoneNumber.required)) })

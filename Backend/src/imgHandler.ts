@@ -159,6 +159,7 @@ const getSignedUrlFunc = async (req: AuthenticatedRequest, res: Response, next: 
 
 const imgHandlerRouter = express.Router()
 
+
 imgHandlerRouter.use('/', express.static(path.join(__dirname, '../public/images')));
 imgHandlerRouter.post('/getSignedUrl', protect, getSignedUrlFunc)
 imgHandlerRouter.post('/uploadImageToS3_SIMULATOR/:imgId', upload.single('image'), uploadImageToS3_SIMULATOR)

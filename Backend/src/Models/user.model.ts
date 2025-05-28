@@ -1,4 +1,4 @@
-import mongoose, {  Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
 import roles from "../types/roles.type";
 
@@ -33,7 +33,10 @@ export interface IAgent {
 
     };
 
-    savedProperties: string[]
+    savedProperties: string[],
+
+    resetPasswordToken: string,
+    resetPasswordExpires: Date,
 
 }
 
@@ -86,6 +89,10 @@ export interface IUser {
         },
 
     };
+
+    resetPasswordToken: string,
+    resetPasswordExpires: Date,
+
 
     savedProperties: string[]
 }
@@ -189,6 +196,14 @@ const userSchema = new Schema<IUser_model>({
     adminInfo: { type: adminInfoSchema, required: false, },
 
 
+    resetPasswordToken: {
+        type: String,
+        required: false,
+    },
+    resetPasswordExpires: {
+        type: Date,
+        required: false,
+    },
     savedProperties: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }]
 },
     {

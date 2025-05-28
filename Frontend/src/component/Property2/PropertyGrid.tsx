@@ -10,7 +10,7 @@ import { useSearchParams } from "react-router-dom";
 
 function PropertyGrid() {
 
-  const { properties, totalCount, updateEstate, listRef } = useFormContext();
+  const { properties, totalCount, updateProperty: updateEstate, listRef } = useFormContext();
 
   const [searchParams, setSearchParams] = useSearchParams();
 

@@ -4,8 +4,6 @@ import PropertyTextInput from "../Form/PropertyTextInput2";
 import Preloader from "../Loader";
 import { Link, useNavigate } from "react-router-dom";
 import logo_img from "@img/logo_sign_in.jpg"
-import Http from "@src/services/Http";
-import apiGateway from "@src/utils/apiGateway";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -25,13 +23,13 @@ const SignUpSchema = z.object({
     .min(1, { message: "First name is required" })  // Custom message for required field
     .min(2, { message: "First name must be at least 2 characters long" })
     .max(25, { message: "First name must be at most 25 characters long" })
-    .regex(/^[A-Za-z]+$/, { message: "First name can only contain letters" }),
+    .regex(/^[A-Za-z\s]+$/, { message: "First name can only contain letters" }),
 
 
   lastName: z.string({ required_error: "Last name is required" })
     .min(1, { message: "Last name must be at least 2 characters long" })
     .max(25, { message: "Last name must be at most 25 characters long" })
-    .regex(/^[A-Za-z]+$/, { message: "Last name can only contain letters" }),
+    .regex(/^[A-Za-z\s]+$/, { message: "Last name can only contain letters" }),
 
 
   phoneNumber: z.string({ required_error: "Phone number is required" })
@@ -69,7 +67,7 @@ const SignUp = () => {
 
   const { signup } = useAuth();
 
-  const { t } = useTranslation(["common", "login",]);
+  const { t } = useTranslation(["common", "login","errors"]);
 
   const submitHandler: SubmitHandler<SignUpSchemaType> = async (data) => {
 

@@ -1,4 +1,3 @@
-import { Imarate } from "@src/types/imarates";
 import { ICategory } from "@src/types/categories.subcategories.types";
 import { citiesType } from "@src/types/cities.delegations.types";
 
@@ -9,11 +8,11 @@ export type IfilterProperty = {
     category?: ICategory,
     sub_category?: string,
 
-    maxNumberOfRooms: number,
-    minNumberOfRooms: number,
+    // maxNumberOfRooms: number,
+    // minNumberOfRooms: number,
 
-    maxNumberOfBathrooms: number,
-    minNumberOfBathrooms: number,
+    // maxNumberOfBathrooms: number,
+    // minNumberOfBathrooms: number,
 
     maxNumberOfSquareFeet: number,
     minNumberOfSquareFeet: number,

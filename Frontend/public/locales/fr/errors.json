@@ -81,12 +81,14 @@
         "firstName": {
             "required": "Le prénom est requis",
             "min": "Le prénom doit contenir au moins 2 caractères",
-            "max": "Le prénom doit contenir au maximum 25 caractères"
+            "max": "Le prénom doit contenir au maximum 25 caractères",
+            "regex": "Le prénom doit contenir uniquement des lettres"
         },
         "lastName": {
             "required": "Le nom est requis",
             "min": "Le nom doit contenir au moins 2 caractères",
-            "max": "Le nom doit contenir au maximum 25 caractères"
+            "max": "Le nom doit contenir au maximum 25 caractères",
+            "regex": "Le nom doit contenir uniquement des lettres"
         },
         "emailAdress": {
             "required": "L'adresse email est requise",

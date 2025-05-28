@@ -11,7 +11,8 @@ import mongoose from "mongoose";
 import roles from "../types/roles.type";
 import Property from "../Models/property.model";
 import ENV from "../utils/ENV.variables";
-import { merge, pick } from 'lodash';
+import crypto from "crypto";
+import { sendResetEmail } from "../services/emailService";
 
 
 export const test = async (req: Request, res: Response) => {
@@ -23,13 +24,13 @@ const registerBodySchema = z.object({
         .min(1, { message: "First name is required" })  // Custom message for required field
         .min(2, { message: "First name must be at least 2 characters long" })
         .max(25, { message: "First name must be at most 25 characters long" })
-        .regex(/^[A-Za-z]+$/, { message: "First name can only contain letters" }),
+        .regex(/^[A-Za-z\s]+$/, { message: "First name can only contain letters" }),
 
 
     lastName: z.string({ required_error: "Last name is required" })
         .min(1, { message: "Last name must be at least 2 characters long" })
         .max(25, { message: "Last name must be at most 25 characters long" })
-        .regex(/^[A-Za-z]+$/, { message: "Last name can only contain letters" }),
+        .regex(/^[A-Za-z\s]+$/, { message: "Last name can only contain letters" }),
 
 
     phoneNumber: z.string({ required_error: "Phone number is required" })
@@ -319,3 +320,54 @@ export const changePassword = async (req: AuthenticatedRequest, res: Response, n
     // return next(errorHandler(statusCode.INTERNAL_SERVER_ERROR, errorMessages.INTERNAL_SERVER_ERROR));
 
 };
+
+
+
+export const deleteUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+    const userId = req.user?._id;
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    try {
+
+        await Promise.all([
+            User.findByIdAndDelete(userId),
+            Property.deleteMany({ clientId: userId })
+        ]);
+
+        res.status(statusCode.OK).json('User deleted successfully');
+    } catch (error) {
+        return next(error);
+    };
+
+    res.cookie("accessToken", '', { httpOnly: true, secure: ENV.NODE_ENV === "production", sameSite: 'strict' });
+    res.cookie("refreshToken", '', { httpOnly: true, secure: ENV.NODE_ENV === "production", sameSite: 'strict' });
+
+
+};
+
+
+
+
+
+export const requestResetPassword = async (req: Request, res: Response, next: NextFunction) => {
+    console.log('requestResetPassword');
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) return next(errorHandler(statusCode.OK, ""));
+
+    const token = crypto.randomBytes(32).toString("hex");
+    const hash = crypto.createHash("sha256").update(token).digest("hex");
+
+    user.resetPasswordToken = hash;
+    user.resetPasswordExpires = new Date(Date.now() + 1000 * 60 * 60); // 1 hour
+    await user.save();
+
+
+    const resetLink = `${ENV.FRONT_URL}/reset-password?token=${token}&email=${email}`;
+    await sendResetEmail({ email: user.email, resetUrl: resetLink });
+
+
+    res.status(statusCode.OK).json('Password reset link sent successfully');
+}

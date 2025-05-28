@@ -108,6 +108,8 @@ const PropertyFrom = () => {
       addresse: InspectedProperty.addresse,
 
       listing_type: InspectedProperty.listing_type,
+      listing_period: InspectedProperty.listing_period,
+
 
       filterFields: {
         price: String(InspectedProperty.filterFields.price),
