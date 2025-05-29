@@ -4,6 +4,8 @@ import roles from "../types/roles.type";
 
 
 
+
+
 export interface IAgent {
 
 
@@ -41,10 +43,66 @@ export interface IAgent {
 }
 
 
+export interface UserJSON {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    password: string;
+    role: string;
+
+    clientInfo?: {
+        agentId?: string,
+    };
+
+    agentInfo?: {
+
+        imageGallery: {
+            folderId: string,
+            mainImage: {
+                key: string,
+                url?: string,
+            },
+            miniImage: {
+                key: string,
+                url?: string,
+            }
+        },
+
+        clientsId: string[],
+
+    };
+
+    adminInfo?: {
+
+        imageGallery: {
+            folderId: string,
+            mainImage: {
+                key: string,
+                url?: string,
+            },
+            miniImage: {
+                key: string,
+                url?: string,
+            }
+        },
+
+    };
+
+    resetPasswordToken: string,
+    resetPasswordExpires: Date,
+
+
+    savedProperties: string[]
+}
+
+
 
 export interface IUser {
 
     _id: mongoose.Types.ObjectId;
+    id: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -167,7 +225,7 @@ const userSchema = new Schema<IUser_model>({
     password: {
         type: String,
         required: true,
-        select: false
+        select: false // 🚨 key line: exclude by default from queries
     },
 
     email: {
@@ -208,7 +266,19 @@ const userSchema = new Schema<IUser_model>({
 },
     {
         timestamps: true,
-        toJSON: { virtuals: true, versionKey: false, },
+        toJSON: {
+            virtuals: true,    // include virtuals like `fullName`
+            versionKey: false, // remove __v
+            transform(_, ret) {
+                // Remove sensitive and internal fields
+                delete ret._id;
+                delete ret.password;
+                delete ret.createdAt;
+                delete ret.updatedAt;
+                return ret;
+            }
+        },
+
         toObject: { virtuals: true },
     }
 

@@ -54,22 +54,23 @@ export async function sendMail({ name, email, phoneNumber, subject: userSubject,
 export async function sendResetEmail({ email, resetUrl }: { email: string, resetUrl: string, }): Promise<void> {
 
     const templatePath = join(__dirname, "./template/reset-password.html");
-    // let html = readFileSync(templatePath, "utf-8");
+    let html = readFileSync(templatePath, "utf-8");
 
     const defaultSubject = "Reset Your Password"
     const to = [email]
 
     const logoUrl = "http://localhost:5000/api/img/logo.png"
-    // html = html
-    //     .replace(/{{RESET_LINK}}/g, resetUrl)
-    //     .replace(/{{COMPANY_NAME}}/g, "YGP")
-    //     .replace(/{{LOGO_URL}}/g, logoUrl);
+    html = html
+        .replace(/{{RESET_LINK}}/g, resetUrl)
+        .replace(/{{COMPANY_NAME}}/g, "YGP")
+        .replace(/{{LOGO_URL}}/g, logoUrl);
 
- const html = `
-        <h1>New Message from Contact Us Form</h1>
-        <p><strong>resetUrl:</strong> ${resetUrl}</p>
-        <p><strong>Email:</strong> ${email}</p>
-    `;
+    //  const html = `
+    //         <h1>New Message from Contact Us Form</h1>
+    //         <p><strong>resetUrl:</strong> ${resetUrl}</p>
+    //         <p><strong>Email:</strong> ${email}</p>
+    //     `;
+    
     const mailOptions = {
         from: `"Message From Contact Us" <${ENV.EMAIL_USER}>`,
         to,
@@ -79,6 +80,6 @@ export async function sendResetEmail({ email, resetUrl }: { email: string, reset
 
     await transporter.sendMail(mailOptions);
 
-    
+
 
 }

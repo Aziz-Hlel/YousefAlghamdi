@@ -1,11 +1,10 @@
-
 import { NextFunction, Request, Response } from "express";
 import { errorHandler } from '../utils/error'
 import User from '../Models/user.model';
 import errorMessages from "../utils/errorMessages";
 import generateToken from "../utils/generateJWT";
 import statusCode from "../utils/statusCode";
-import z from "zod";
+import z, { any } from "zod";
 import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
 import mongoose from "mongoose";
 import roles from "../types/roles.type";
@@ -13,10 +12,11 @@ import Property from "../Models/property.model";
 import ENV from "../utils/ENV.variables";
 import crypto from "crypto";
 import { sendResetEmail } from "../services/emailService";
+import { TokenService } from "../utils/generateJWT2";
 
 
-export const test = async (req: Request, res: Response) => {
-    res.json({ message: 'API is working! ' });
+export const test = async (req: AuthenticatedRequest, res: Response) => {
+    res.json({ message: 'API is working! ', user: req.user });
 };
 
 const registerBodySchema = z.object({
@@ -75,19 +75,27 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
 
     if (userExist) return next(errorHandler(statusCode.CONFLICT, errorMessages.COMMON.User_Already_Exists));
 
-    const user = new User(newUser);
+    const userPreSave = new User(newUser);
+
 
     try {
-        const userr = await user.save();
 
-        generateToken(res, userr);
-        res.status(statusCode.OK).json({ result: userr });
+        const user = await userPreSave.save();
+
+        const accessToken = TokenService.generateAccessToken(user);
+        const refreshToken = TokenService.generateRefreshToken(user);
+
+        res.status(statusCode.OK).json({
+            user: user,
+            accessToken,
+            refreshToken,
+        });
     } catch (error) {
         next(error);
     }
 
-
 };
+
 
 
 const loginBodySchema = z.object({
@@ -123,16 +131,50 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     }
 
     user.set('password', undefined, { strict: false });
-    generateToken(res, user);
+
+
+    const accessToken = TokenService.generateAccessToken(user);
+    const refreshToken = TokenService.generateRefreshToken(user);
+
+    res.json({
+        user: user,
+        accessToken,
+        refreshToken
+    });
 
     res.status(statusCode.OK);
 
 }
 
 
+export const refresh = async (req: Request, res: Response, next: NextFunction) => {
+
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+
+    const userId = await TokenService.validateRefreshToken(refreshToken);
+
+
+    if (!userId) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+
+    const user = await User.findById(userId);
+
+    if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+
+    const newAccessToken = TokenService.generateAccessToken(user);
+    const newRefreshToken = TokenService.generateRefreshToken(user);
+
+    res.json({
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken
+    });
+
+}
+
 export const whoAmI = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
-    const userId = req.user?._id
+    const userId = req.user?.id
 
     if (!userId) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
 
@@ -141,12 +183,36 @@ export const whoAmI = async (req: AuthenticatedRequest, res: Response, next: Nex
     if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
 
 
+    res.status(statusCode.OK).json({
+        result: user,
+    });
+
+}
+
+
+export const me = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+
+console.log('t5l rabk')
+    const userId = (req.user as any)?.id
+
+    if (!userId) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+
+    const user = await User.findById(userId);
+
+    if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
+
+    console.log("user document ;;; ", user)
+    console.log("user json ;;; ", user.toJSON())
+
 
     res.status(statusCode.OK).json({
         result: user,
     });
 
 }
+
+
+
 
 
 export const logOut = async (req: Request, res: Response, next: NextFunction) => {
@@ -222,7 +288,7 @@ export const updateAgentOfClient = async (req: AuthenticatedRequest, res: Respon
 
 export const updateUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
-    const userId = req.user?._id;
+    const userId = req.user?.id;
 
     if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
@@ -299,7 +365,7 @@ export const changePassword = async (req: AuthenticatedRequest, res: Response, n
 
     if (password.length < 6) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
-    const userId = req.user?._id;
+    const userId = req.user?.id;
     if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     try {
@@ -325,7 +391,7 @@ export const changePassword = async (req: AuthenticatedRequest, res: Response, n
 
 export const deleteUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
-    const userId = req.user?._id;
+    const userId = req.user?.id;
     if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     try {

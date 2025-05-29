@@ -1,4 +1,4 @@
-import { IUser_model } from "./Models/user.model";
+import { IUser_model,UserJSON } from "./Models/user.model";
 
 
 declare global {
@@ -20,7 +20,7 @@ declare global {
 
     namespace Express {
         interface Request {
-            user?: IUser_model
+            user?: UserJSON
         }
     }
 

@@ -142,7 +142,20 @@ const propertySchema = new mongoose.Schema({
 },
 
 
-    { timestamps: true },
+    {
+        timestamps: true,
+        toJSON: {
+            virtuals: true,
+            versionKey: false,
+            transform(_, ret) {
+                // Remove sensitive and internal fields
+                delete ret._id;
+                delete ret.createdAt;
+                delete ret.updatedAt;
+                return ret;
+            }
+        }
+    },
 
 );
 

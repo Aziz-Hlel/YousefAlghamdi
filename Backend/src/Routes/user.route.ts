@@ -1,7 +1,8 @@
 import express from 'express';
-import { changePassword, deleteUser, getUser, login, logOut, register, requestResetPassword, test, updateAgentOfClient, updateUser, whoAmI } from '../Controllers/user.controller';
+import { changePassword, deleteUser, getUser, login, logOut, me, refresh, register, requestResetPassword, test, updateAgentOfClient, updateUser, whoAmI } from '../Controllers/user.controller';
 import protect, { adminAuth, adminOrAgentAuth } from '../Middlewares/auth.middleware';
 import { requireAuth } from '../Middlewares/auth2.middleware';
+import { authenticateToken } from '../services/auth/authenticateToken';
 
 
 
@@ -10,20 +11,23 @@ import { requireAuth } from '../Middlewares/auth2.middleware';
 const userRouter = express.Router();
 
 
-userRouter.get('/', protect, whoAmI)
+userRouter.get('/', authenticateToken, whoAmI);
+userRouter.get('/me', authenticateToken, me);
 userRouter.post('/register', register);
-userRouter.get('/test', test);
+userRouter.get('/test', authenticateToken, test);
 userRouter.post('/login', login);
-userRouter.post('/request-reset-password', requestResetPassword)
+userRouter.post('/refresh', refresh);
+
+userRouter.post('/request-reset-password', requestResetPassword);
 
 userRouter.get('/:userId', requireAuth, adminOrAgentAuth, getUser);
 userRouter.patch('/update-agent', requireAuth, adminAuth, updateAgentOfClient)
-userRouter.patch('/update-user/', protect, updateUser);
-userRouter.delete('/delete-user', protect, deleteUser);
+userRouter.patch('/update-user/', authenticateToken, updateUser);
+userRouter.delete('/delete-user', authenticateToken, deleteUser);
 
 userRouter.post('/log-out', logOut);
 
-userRouter.patch('/change-password', protect, changePassword)
+userRouter.patch('/change-password', authenticateToken, changePassword)
 
 
 

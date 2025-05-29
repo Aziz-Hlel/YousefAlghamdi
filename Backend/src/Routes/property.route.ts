@@ -2,6 +2,7 @@ import express from 'express';
 import { approveProperty, declinePropertyChanges, createProperty, deleteProperty, getPendingProperties, getProperty, getUserProperties, listProperties, updateProperty, getUnavailableProperties, unavailable, getAllProperties, featureProperty, getFeaturedProperties } from '../Controllers/property.controller';
 import protect, { adminAuth, adminOrAgentAuth } from '../Middlewares/auth.middleware';
 import { requireAuth } from '../Middlewares/auth2.middleware';
+import { authenticateToken } from '../services/auth/authenticateToken';
 
 
 
@@ -11,27 +12,27 @@ import { requireAuth } from '../Middlewares/auth2.middleware';
 const propertyRouter = express.Router();
 
 propertyRouter.get('/featured-properties', getFeaturedProperties);
-propertyRouter.get('/my-properties', protect, getUserProperties);
-propertyRouter.get('/pending-properties', requireAuth, adminOrAgentAuth, getPendingProperties);
-propertyRouter.get('/unavailable-properties', requireAuth, adminOrAgentAuth, getUnavailableProperties);
-propertyRouter.get('/all-properties', requireAuth, adminAuth, getAllProperties);
+propertyRouter.get('/my-properties', authenticateToken, getUserProperties);
+propertyRouter.get('/pending-properties', authenticateToken, adminOrAgentAuth, getPendingProperties);
+propertyRouter.get('/unavailable-properties', authenticateToken, adminOrAgentAuth, getUnavailableProperties);
+propertyRouter.get('/all-properties', authenticateToken, adminAuth, getAllProperties);
 
 
 
-propertyRouter.put('/approve/:propertyId', requireAuth, adminOrAgentAuth, approveProperty);
-propertyRouter.get('/decline/:propertyId', protect, declinePropertyChanges);
-propertyRouter.patch('/unavailable/:propertyId', protect, unavailable);
-propertyRouter.patch('/feature/:propertyId', requireAuth, adminAuth, featureProperty);
+propertyRouter.put('/approve/:propertyId', authenticateToken, adminOrAgentAuth, approveProperty);
+propertyRouter.get('/decline/:propertyId', authenticateToken, declinePropertyChanges);
+propertyRouter.patch('/unavailable/:propertyId', authenticateToken, unavailable);
+propertyRouter.patch('/feature/:propertyId', authenticateToken, adminAuth, featureProperty);
 
 
-propertyRouter.post('/', protect, createProperty);
+propertyRouter.post('/', authenticateToken, createProperty);
 propertyRouter.get('/', listProperties);
 
 
 
-propertyRouter.patch('/:propertyId', protect, updateProperty);
+propertyRouter.patch('/:propertyId', authenticateToken, updateProperty);
 propertyRouter.get('/:propertyId', getProperty);
-propertyRouter.delete('/:propertyId', protect, deleteProperty);
+propertyRouter.delete('/:propertyId', authenticateToken, deleteProperty);
 
 export default propertyRouter;
 

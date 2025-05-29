@@ -1,7 +1,7 @@
 import { IUser } from "@src/providers/AuthProvider.context";
 
 type Iproperty = {
-    _id: string
+    id: string
 
     title: string,
     description: string,

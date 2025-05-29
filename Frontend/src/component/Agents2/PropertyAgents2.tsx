@@ -28,9 +28,9 @@ function PropertyAgents({ image, name, position, phoneNumber, property }: {
 
 
     const message = encodeURIComponent(
-      `Hello, I'm interested in the property "${property.title}" (Ref: ${property._id}).` +
+      `Hello, I'm interested in the property "${property.title}" (Ref: ${property.id}).` +
       `\n\nI would like to request more information about this listing.` +
-      `\n\nProperty link: ${window.location.origin}/property-single/${property._id}` +
+      `\n\nProperty link: ${window.location.origin}/property-single/${property.id}` +
       `\n\nThank you.`
     );
 

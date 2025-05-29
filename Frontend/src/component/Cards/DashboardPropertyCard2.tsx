@@ -57,7 +57,7 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
       icon: "warning",
     })
     if (response.isConfirmed) {
-      const response = await Http.delete(`${apiGateway.property.delete}/${property._id}`);
+      const response = await Http.delete(`${apiGateway.property.delete}/${property.id}`);
       if (response?.status === 200) {
         (user?.role === roles.ADMIN || user?.role === roles.AGENT) ?
           Alert({
@@ -88,7 +88,7 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
       icon: "warning",
     })
     if (response.isConfirmed) {
-      const response = await Http.patch(`${apiGateway.property.unavailable}/${property._id}`, {});
+      const response = await Http.patch(`${apiGateway.property.unavailable}/${property.id}`, {});
       if (response?.status === 200) {
         (user?.role === roles.ADMIN || user?.role === roles.AGENT) ?
           Alert({
@@ -119,7 +119,7 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
       icon: "warning",
     })
     if (response.isConfirmed) {
-      const response = await Http.patch(`${apiGateway.property.feature.update}/${property._id}`, {});
+      const response = await Http.patch(`${apiGateway.property.feature.update}/${property.id}`, {});
       if (response?.status === 200) {
         (property.featured) ?
           Alert({
@@ -191,7 +191,7 @@ function DashboardPropertyCard({ property, componentTitle, ownerId, state, image
 
             <button className="homec-dashboard-property__btn px-2  homec-dashboard-property__btn--edit  flex justify-center items-center">
 
-              <Link to={`edit-property/${property._id}`}>
+              <Link to={`edit-property/${property.id}`}>
 
                 <div className="flex  justify-center  items-center">
 

@@ -57,7 +57,7 @@ function LatestPropertyV2() {
 
                   <LatestPropertyCard
                     property={property}
-                    key={property._id}
+                    key={property.id}
                     classes={""}
                     view="grid"
                     style={{ width: "95%", marginBottom: "60px" }}

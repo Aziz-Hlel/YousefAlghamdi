@@ -2,13 +2,15 @@ import { LoginFormFields } from "@src/component/Login2";
 import { SignUpSchemaType } from "@src/component/SignUp2";
 import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
+import { apiService } from "@src/utils/apiService";
+import { tokenManager } from "@src/utils/TokenManager";
 import { AxiosResponse } from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
 
 export type IUser = {
 
-    _id: string;
+    id: string;
 
     firstName: string;
     lastName: string;
@@ -74,21 +76,66 @@ const AuthContext = createContext<IAuthContext | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 
+
     const [user, setUser] = useState<IUser | null | undefined>(undefined);
 
+
+    const getCurrentUser = async () => {
+        return await Http.get<{ result: IUser }>(apiGateway.user.me);
+    }
+
+
     const whoAmI = async () => {
-        const response = await Http.get(apiGateway.user.whoAmI);
+
+
+        // tokenManager.setupInterceptors();    // set up axios interceptors
+        const response = await getCurrentUser();
         response?.status === 200 ? setUser(response.data.result) : setUser(null);
         response?.status !== 200 && setUser(null);
     }
 
+
     useEffect(() => {
+        const initializeAuth = async () => {
+            try {
+                // Load tokens from localStorage
+                tokenManager.loadTokensFromStorage();
+
+                if (!tokenManager.refreshTokenExist()) setUser(null)
+                else {
+                    // Try to get user profile to verify token is still valid
+                    const refreshToken = tokenManager.getRefreshToken();
 
 
-        whoAmI()
-        // console.log("user", user);
+                    const response = await apiService.post<{ accessToken: string, refreshToken: string }>(apiGateway.user.refresh, { refreshToken });
 
+                    if (response.data) {
+                        tokenManager.setTokens(response.data.accessToken, response.data.refreshToken);
+
+                        const userResponse = await getCurrentUser();
+
+                        if (userResponse?.data) setUser(userResponse.data.result);
+                        else setUser(null);
+
+                    } else {
+                        // Token invalid, clear it
+                        setUser(null);
+                        tokenManager.clearTokens();
+                    }
+                }
+
+
+            } catch (error) {
+                console.error('Auth initialization error:', error);
+                setUser(null);
+                tokenManager.clearTokens();
+            } 
+        };
+
+        initializeAuth();
     }, []);
+
+
 
     const signup = async (data: SignUpSchemaType): Promise<AxiosResponse<any, any> | undefined> => {
         const response = await Http.post(apiGateway.user.signUp, data);
@@ -100,8 +147,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const login = async (data: LoginFormFields): Promise<AxiosResponse<any, any> | undefined> => {
         const response = await Http.post(apiGateway.user.sigIn, data)
-        // console.log("response", response?.data.result);
-        response?.status === 200 ? setUser(response.data.result) : setUser(null);
+
+
+        if (response && response?.status === 200) {
+            const { accessToken, refreshToken, user } = response.data
+            tokenManager.setTokens(accessToken, refreshToken);
+
+
+            setUser(user)
+        }
+        else setUser(null);
+
         return response
     };
 

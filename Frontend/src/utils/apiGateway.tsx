@@ -12,8 +12,10 @@ const apiGateway = {
 
     user: {
         whoAmI: "/user/",
+        me:"/user/me",
         signUp: "/user/register",
         sigIn: "/user/login",
+        refresh: "/user/refresh",
         getById: "/user/",
         updateAgent: "/user/update-agent",
         update: "/user/update-user",

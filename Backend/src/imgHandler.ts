@@ -115,7 +115,7 @@ const getSignedUrlFunc = async (req: AuthenticatedRequest, res: Response, next: 
 
     if (!Object.values(imagePurposes).includes(purpose)) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
-    const userId = req.user!._id as any
+    const userId = req.user!.id as any
 
     const timestamp = Date.now(); // Get current timestamp in milliseconds
 

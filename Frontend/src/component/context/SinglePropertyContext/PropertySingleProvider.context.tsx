@@ -6,7 +6,7 @@ import { createContext, useContext, ReactNode, useEffect, useState } from 'react
 import { useParams } from 'react-router-dom';
 
 const initialProperty: Iproperty = {
-  _id: "",
+  id: "",
 
   title: "",
   description: "",
@@ -39,7 +39,7 @@ const initialProperty: Iproperty = {
   additionalDetails: [],
 
   active: false,
-  featured:false,
+  featured: false,
   advanced: {
     available: new Date(),
     state: "",
@@ -68,7 +68,7 @@ export function SinglePropertyProvider({ children }: { children: ReactNode }) {
 
     response && response.status === 200 && setProperty(() => ({
       ...initialProperty, // Spread the initial property to ensure all fields are included
-      _id: response.data.result._id,
+      id: response.data.result._id,
       title: response.data.result.title,
       description: response.data.result.description,
       category: response.data.result.category,

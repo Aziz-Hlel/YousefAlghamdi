@@ -11,7 +11,7 @@ const useSubmitPropertySchema = () => {
 
     const SubmitPropertySchema = z.object({
 
-        _id: z.string().optional(),
+        id: z.string().optional(),
         title: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.title.required)) })
             .min(2, { message: capitalizePhrase(t(getText.errors.submitProperty.title.min)) })
             .max(25, { message: capitalizePhrase(t(getText.errors.submitProperty.title.max)) }),

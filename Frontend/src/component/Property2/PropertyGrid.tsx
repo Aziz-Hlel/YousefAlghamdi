@@ -66,7 +66,7 @@ function PropertyGrid() {
                     <LatestPropertyCard
 
                       property={property}
-                      key={property._id}
+                      key={property.id}
                       classes={`${gridStyle === "grid"
                         ? "col-md-6 col-12 mg-top-30"
                         : "col-12 mg-top-30"

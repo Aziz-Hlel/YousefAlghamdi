@@ -10,9 +10,10 @@ import statesTypes from "../types/states.types";
 import User from "../Models/user.model";
 import ApproveSubmitPropertySchema from "../schemas/ApproveSubmitPropertySchema";
 import { getCDN_SignedUrl } from "../imgHandler";
-
 import type { PipelineStage } from "mongoose";
-import { property } from "lodash";
+
+
+
 
 const addSignedUrl = (property: any) => {
     return {
@@ -29,7 +30,7 @@ const addSignedUrl = (property: any) => {
 
 export const createProperty = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
-    const clientId = req.user?._id!;
+    const clientId = req.user?.id!;
     let agentId: string | undefined = req.user?.clientInfo?.agentId;
 
     if (req.user?.role === roles.CLIENT || req.user?.role === roles.USER) {
@@ -178,7 +179,6 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
         return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
     }
 
-    console.log('filters', JSON.stringify(filters, null, 2));
 
     try {
         // Use aggregate instead of find when we have $expr conditions
@@ -205,11 +205,14 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
 
             const result = await Property.aggregate(pipeline);
             const properties = result[0].properties;
+
             const total = result[0].totalCount[0]?.count || 0;
 
             const updatedProperties = properties.map((property: any) => {
                 return {
-                    ...property, imageGallery: {
+                    ...property,
+                    id: property._id?.toString(),
+                    imageGallery: {
                         ...(property.imageGallery as any),
                         images: property.imageGallery.images.map((image: any) => ({ key: image.key, url: getCDN_SignedUrl(image.key) })),
                     },
@@ -291,7 +294,7 @@ export const getFeaturedProperties = async (req: Request, res: Response, next: N
 
 export const getUserProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
-    const userId = req.user?._id;
+    const userId = req.user?.id;
     const page = Number(req.query.page) || 1;
     const limit = 6;
 
@@ -390,7 +393,7 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
 
 export const getPendingProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
-    const userId = req.user?._id;
+    const userId = req.user?.id;
     const role = req.user?.role;
     const page = Number(req.query.page) || 1;
     const limit = 6;
@@ -508,7 +511,7 @@ export const updateProperty = async (req: AuthenticatedRequest, res: Response, n
 
 export const getUnavailableProperties = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
-    const userId = req.user?._id;
+    const userId = req.user?.id;
     const role = req.user?.role;
     const page = Number(req.query.page) || 1;
     const limit = 6;
@@ -593,7 +596,7 @@ export const approveProperty = async (req: AuthenticatedRequest, res: Response, 
         // console.log("req.user", req.user)
         // console.log("property.agentId", property.agentId)
 
-        if (req.user && req.user.role === roles.AGENT && property.agentId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+        if (req.user && req.user.role === roles.AGENT && property.agentId?.toString() !== req.user.id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
 
         const validatedVersion: any = validBody.data;
         validatedVersion.active = true;
@@ -626,15 +629,15 @@ export const deleteProperty = async (req: AuthenticatedRequest, res: Response, n
     switch (role) {
 
         case roles.USER:
-            if (property.clientId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+            if (property.clientId?.toString() !== req.user.id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
             break;
 
         case roles.CLIENT:
-            if (property.clientId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+            if (property.clientId?.toString() !== req.user.id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
             break;
 
         case roles.AGENT:
-            if (property.agentId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+            if (property.agentId?.toString() !== req.user.id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
             break;
 
         case roles.ADMIN:
@@ -692,13 +695,13 @@ export const declinePropertyChanges = async (req: AuthenticatedRequest, res: Res
 
     switch (role) {
         case roles.USER:
-            if (property.clientId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+            if (property.clientId?.toString() !== req.user.id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
             break;
         case roles.CLIENT:
-            if (property.clientId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+            if (property.clientId?.toString() !== req.user.id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
             break;
         case roles.AGENT:
-            if (property.agentId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+            if (property.agentId?.toString() !== req.user.id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
             break;
         case roles.ADMIN:
             break;
@@ -737,11 +740,11 @@ export const unavailable = async (req: AuthenticatedRequest, res: Response, next
 
     const role = req.user.role;
     const popertyState = property.advanced.state;
-    // if (property.clientId !== req.user?._id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
+    // if (property.clientId !== req.user?.id.toString()) return next(errorHandler(statusCode.FORBIDDEN, errorMessages.COMMON.FORBIDDEN));
 
     switch (role) {
         case roles.AGENT:
-            if (property.agentId?.toString() !== req.user._id.toString()) return next(errorHandler(statusCode.TEAPOT, errorMessages.COMMON.FORBIDDEN));
+            if (property.agentId?.toString() !== req.user.id.toString()) return next(errorHandler(statusCode.TEAPOT, errorMessages.COMMON.FORBIDDEN));
             break;
         case roles.ADMIN:
             break;

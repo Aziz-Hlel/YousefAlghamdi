@@ -49,7 +49,7 @@ function LatestPropertyCard({ property, style, classes, view, }: ILatestProperty
       >
         {/* Property Head  */}
         < div className="homec-property__head " >
-          <Link to={"/property-single/" + property._id}>
+          <Link to={"/property-single/" + property.id}>
 
             <img src={property.imageGallery.images[0].url} alt="#" className="  w-fit" />
             {/* Top Sticky  */}
@@ -89,7 +89,7 @@ function LatestPropertyCard({ property, style, classes, view, }: ILatestProperty
 
           </div>
           <h3 className="homec-property__title">
-            <Link to={"/property-single/" + property._id}>
+            <Link to={"/property-single/" + property.id}>
               {property.title}
             </Link>
           </h3>

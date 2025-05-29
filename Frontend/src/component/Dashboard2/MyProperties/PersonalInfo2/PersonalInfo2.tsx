@@ -36,7 +36,7 @@ function PersonalInfo() {
               {/* <img src="https://placehold.co/360x390" alt="#" /> */}
 
               <div className=" w-8/12   h-72 object-fill flex  justify-center  items-center  bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-cover  bg-no-repeat "
-                style={{ backgroundImage: `url(${agents[user!._id].agentInfo!.imageGallery.mainImage.url})` }} />
+                style={{ backgroundImage: `url(${agents[user!.id].agentInfo!.imageGallery.mainImage.url})` }} />
             </div>
           </div>}
           <div className="col-lg-6 col-12">

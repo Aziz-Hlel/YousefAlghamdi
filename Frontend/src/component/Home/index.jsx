@@ -38,7 +38,7 @@ function Home() {
           <LatestPropertyV2 />
         </FeaturedPropertiesProvider>
 
-        {/* <Sponsors /> */}
+        <Sponsors />
 
         <Features2 />
         {isDesktop ? <CEO /> : <CEOMobile />}

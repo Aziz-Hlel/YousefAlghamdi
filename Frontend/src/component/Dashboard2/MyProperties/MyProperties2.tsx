@@ -13,7 +13,7 @@ function MyProperties({ title }: { title: "Pending Properties" | "My properties"
 
   const { properties, totalCount, fetchProperties, listRef } = useMyPropertiesContext();
 
-  const { t } = useTranslation(['data','common', 'dashboard']);
+  const { t } = useTranslation(['data', 'common', 'dashboard']);
 
   const [currentPage, setCurrentPage] = useState(1);
   const totalPage = Math.ceil(totalCount / 6)
@@ -41,9 +41,9 @@ function MyProperties({ title }: { title: "Pending Properties" | "My properties"
           <DashboardPropertyCard
             componentTitle={title}
             property={property}
-            _id={property._id}
-            ownerId={typeof property.clientId === "string" ? property.clientId : property.clientId._id}
-            key={property._id}
+            _id={property.id}
+            ownerId={typeof property.clientId === "string" ? property.clientId : property.clientId.id}
+            key={property.id}
             state={property.advanced.state}
             image={property.imageGallery.images[0]?.url ?? "#"}
             listing_type={capitalizePhrase(t(getText.data[property.listing_type as keyof typeof getText.data]))}

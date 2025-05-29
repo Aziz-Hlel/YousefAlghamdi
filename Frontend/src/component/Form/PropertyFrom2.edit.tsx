@@ -95,7 +95,7 @@ const PropertyFrom = () => {
     //walli na77i linspected property w3tih direct ml property
 
     reset({
-      _id: InspectedProperty._id,
+      id: InspectedProperty.id,
 
       title: InspectedProperty.title,
       description: InspectedProperty.description,
@@ -316,7 +316,7 @@ const PropertyFrom = () => {
           checkProperVariables(refinedData)
           removeId(refinedData)
           listing_period_Validation(refinedData)
-          const response = await Http.put(`${apiGateway.property.approve}/${property._id}`, refinedData);
+          const response = await Http.put(`${apiGateway.property.approve}/${property.id}`, refinedData);
           if (response?.status === 200) navigate("./../../");
           else Alert({ title: "Error", text: "Something went wrong", icon: "warning" });
         }
@@ -341,7 +341,7 @@ const PropertyFrom = () => {
       let response: AxiosResponse<any, any> | undefined
 
       if (user?.role === roles.AGENT || user?.role === roles.ADMIN) {
-        response = await Http.put(`${apiGateway.property.approve}/${property._id}`, refinedData);
+        response = await Http.put(`${apiGateway.property.approve}/${property.id}`, refinedData);
         if (response?.status === 200) navigate("./../../")
         else {
           console.log(response);
@@ -350,7 +350,7 @@ const PropertyFrom = () => {
       }
       // meaning user
       else {
-        response = await Http.patch(`${apiGateway.property.update}/${property._id}`, refinedData);
+        response = await Http.patch(`${apiGateway.property.update}/${property.id}`, refinedData);
         if (response?.status === 200) navigate("./../../")
         else {
           console.log(response);
@@ -370,7 +370,7 @@ const PropertyFrom = () => {
 
         const result = await createAlert()
         if (result.isConfirmed) {
-          const response = await Http.delete(`${apiGateway.property.delete}/${property._id}`);
+          const response = await Http.delete(`${apiGateway.property.delete}/${property.id}`);
           if (response?.status === 200) navigate("./../../")
           else Alert({ title: "Error", text: "Something went wrong", icon: "warning" });
         }
@@ -415,7 +415,7 @@ const PropertyFrom = () => {
       case statesTypes.toBeAdded:
         const result = await ConfirmationAlertAsync({ title: capitalizePhrase(t(getText.alerts.titles.DeclineRequest)), text: capitalizePhrase(t(getText.alerts.editProperty.sureDeclineNDelete)), icon: "warning" })
         if (result.isConfirmed) {
-          const response = await Http.delete(`${apiGateway.property.delete}/${property._id}`);
+          const response = await Http.delete(`${apiGateway.property.delete}/${property.id}`);
           if (response?.status === 200) navigate("./../../")
           else alert("something went wrong");
         }
@@ -424,7 +424,7 @@ const PropertyFrom = () => {
       case statesTypes.toBeUpdated:
         const result2 = await ConfirmationAlertAsync({ title: capitalizePhrase(t(getText.alerts.titles.DeclineRequest)), text: capitalizePhrase(t(getText.alerts.editProperty.sureDeclineUpdate)), icon: "warning" })
         if (result2.isConfirmed) {
-          const response = await Http.get(`${apiGateway.property.decline}/${property._id}`);
+          const response = await Http.get(`${apiGateway.property.decline}/${property.id}`);
           if (response?.status === 200) navigate("./../../")
           else alert("something went wrong");
         }
@@ -433,7 +433,7 @@ const PropertyFrom = () => {
       case statesTypes.toBeDeleted:
         const result3 = await ConfirmationAlertAsync({ title: capitalizePhrase(t(getText.alerts.titles.DeclineRequest)), text: capitalizePhrase(t(getText.alerts.editProperty.sureDeclineDelete)), icon: "warning" })
         if (result3.isConfirmed) {
-          const response = await Http.get(`${apiGateway.property.decline}/${property._id}`);
+          const response = await Http.get(`${apiGateway.property.decline}/${property.id}`);
           if (response?.status === 200) navigate("./../../")
           else alert("something went wrong");
         }

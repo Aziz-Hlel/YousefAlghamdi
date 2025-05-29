@@ -1,4 +1,5 @@
 import { baseUrl } from "@src/utils/apiGateway";
+import { apiService } from "@src/utils/apiService";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 
@@ -14,11 +15,13 @@ export const axiosInstance = axios.create({
 type HTTPRequestConfig = AxiosRequestConfig;
 
 
+
+
 const Http = {
 
     get: async <T>(url: string, config: HTTPRequestConfig = {}) => {
         try {
-            return await axiosInstance.get<T>(url, config);
+            return await apiService.get2<T>(url, config);
         } catch (e) {
             axios.isAxiosError(e) && console.log(e.response?.data);
             if (axios.isAxiosError(e)) return e.response
@@ -27,45 +30,33 @@ const Http = {
 
     post: async <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {
 
-        try {
-            return await axiosInstance.post<T>(url, body, config);
 
-        } catch (e) {
-            axios.isAxiosError(e) && console.log(e.response?.data);
-            if (axios.isAxiosError(e)) return e.response
-        }
+        return await apiService.post2<T>(url, body, config);
+
+
 
     },
 
     put: async <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {
-        try {
-            return await axiosInstance.put<T>(url, body, config);
 
-        } catch (e) {
-            axios.isAxiosError(e) && console.log(e.response?.data);
-            if (axios.isAxiosError(e)) return e.response
-        }
+        return await apiService.put2<T>(url, body, config);
+
+
     },
 
     patch: async <T>(url: string, body: unknown, config: HTTPRequestConfig = {}) => {
-        try {
-            return await axiosInstance.patch<T>(url, body, config);
 
-        } catch (e) {
-            axios.isAxiosError(e) && console.log(e.response?.data);
-            if (axios.isAxiosError(e)) return e.response
-        }
+        return await apiService.patch2<T>(url, body, config);
+
+
 
     },
 
     delete: async <T>(url: string, config: HTTPRequestConfig = {}) => {
-        try {
-            return await axiosInstance.delete<T>(url, config);
 
-        } catch (e) {
-            axios.isAxiosError(e) && console.log(e.response?.data);
-            if (axios.isAxiosError(e)) return e.response
-        }
+        return await apiService.delete2<T>(url, config);
+
+
     },
 
 }
