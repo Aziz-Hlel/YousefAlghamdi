@@ -46,6 +46,8 @@
     "edit": "modifier",
     "sponsoredAgent": "Agent Sponsorisé",
     "save": "sauvegarder",
+    "sendMessageNow": "Envoyer le Message maintenant",
+    "propertyAgent": "Agent de Propriété",
     "state": {
         "toBeDeleted": "àSupprimer",
         "toBeUpdated": "àMettre à Jour",

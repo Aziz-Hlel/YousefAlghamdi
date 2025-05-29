@@ -12,7 +12,7 @@ const apiGateway = {
 
     user: {
         whoAmI: "/user/",
-        me:"/user/me",
+        me: "/user/me",
         signUp: "/user/register",
         sigIn: "/user/login",
         refresh: "/user/refresh",
@@ -72,7 +72,8 @@ const apiGateway = {
 
 
     services: {
-        email: "/services/email",
+        emailContactUs: "/services/email/contact-us",
+        emailProperty: "/services/email/property",
     },
 
     images: baseUrl + "/images/",

@@ -2,7 +2,7 @@ import AOS from "aos";
 // import "aos/dist/aos.css";
 import { useEffect } from 'react';
 import Home from './component/Home/';
-import { Route, BrowserRouter as Router, Routes, useNavigate } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import AddProperty from "./component/AddProperty2";
 import Contact from "./component/Contact2";
 import Dashboard from "./component/Dashboard2";

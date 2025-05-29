@@ -20,10 +20,10 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-export async function sendMail({ name, email, phoneNumber, subject: userSubject, message }: { name: string, email: string, phoneNumber: string, subject: string, message: string }): Promise<void> {
+export async function sendContactUsMail({ name, email, phoneNumber, subject: userSubject, message }: { name: string, email: string, phoneNumber: string, subject: string, message: string }): Promise<void> {
 
 
-    const defaultSubject = "New Message from Contact Us Form"
+    const subject = "New Message from Contact Us Form"
     const to = [ENV.EMAIL_USER]
     const html = `
         <h1>New Message from Contact Us Form</h1>
@@ -36,7 +36,7 @@ export async function sendMail({ name, email, phoneNumber, subject: userSubject,
     const mailOptions = {
         from: `"Message From Contact Us" <${ENV.EMAIL_USER}>`,
         to,
-        defaultSubject,
+        subject,
         html,
     };
 
@@ -49,6 +49,30 @@ export async function sendMail({ name, email, phoneNumber, subject: userSubject,
 
 
 
+export async function sendPropertyMail({ firstName, lastName, email, subject: userSubject, message, propertyId }: { firstName: string, lastName: string, email: string, subject: string, message: string, propertyId: string }): Promise<void> {
+
+
+    const subject = "New Message from a client intrested of a property"
+    const to = [ENV.EMAIL_USER]
+    const html = `
+        <h1>Property Reference ${propertyId}  ,  url = http://ygp.ae/property-single/${propertyId} </h1>
+        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Subject:</strong> ${userSubject}</p>
+        <p><strong>Message:</strong> ${message}</p>
+    `;
+    const mailOptions = {
+        from: `New Message from an intrested client <${ENV.EMAIL_USER}>`,
+        to,
+        subject,
+        html,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+}
+
+
 
 
 export async function sendResetEmail({ email, resetUrl }: { email: string, resetUrl: string, }): Promise<void> {
@@ -56,7 +80,7 @@ export async function sendResetEmail({ email, resetUrl }: { email: string, reset
     const templatePath = join(__dirname, "./template/reset-password.html");
     let html = readFileSync(templatePath, "utf-8");
 
-    const defaultSubject = "Reset Your Password"
+    const subject = "Reset Your Password"
     const to = [email]
 
     const logoUrl = "http://localhost:5000/api/img/logo.png"
@@ -70,11 +94,11 @@ export async function sendResetEmail({ email, resetUrl }: { email: string, reset
     //         <p><strong>resetUrl:</strong> ${resetUrl}</p>
     //         <p><strong>Email:</strong> ${email}</p>
     //     `;
-    
+
     const mailOptions = {
         from: `"Message From Contact Us" <${ENV.EMAIL_USER}>`,
         to,
-        defaultSubject,
+        subject,
         html,
     };
 

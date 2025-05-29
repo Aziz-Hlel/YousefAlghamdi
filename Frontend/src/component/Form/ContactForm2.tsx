@@ -28,7 +28,7 @@ function ContactForm() {
     e.preventDefault();
     setSubmitting(true);
 
-    const response = await Http.post(apiGateway.services.email, { ...input });
+    const response = await Http.post(apiGateway.services.emailContactUs, { ...input });
     response?.status === 200 && Alert({ icon: "success", title: capitalizePhrase(t(getText.alerts.contactUs.successAlert.title)), text: capitalizePhrase(t(getText.alerts.contactUs.successAlert.text)) });
     response?.status === 200 && setInput({ name: "", email: "", phoneNumber: "", subject: "", message: "" });
     response?.status !== 200 && Alert({ icon: "error", title: capitalizePhrase(t(getText.alerts.contactUs.errorAlert.title)), text: capitalizePhrase(t(getText.alerts.contactUs.errorAlert.text)) });

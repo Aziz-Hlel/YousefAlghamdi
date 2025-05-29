@@ -46,6 +46,8 @@
     "edit": "edit",
     "sponsoredAgent":"Sponsored Agent",
     "save": "save",
+    "sendMessageNow": "Send Message Now",
+    "propertyAgent": "Property Agent",
     "state": {
         "toBeDeleted": "toBeDeleted",
         "toBeUpdated": "toBeUpdated",

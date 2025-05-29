@@ -47,6 +47,8 @@ const common = {
     edit: "common:edit",
     sponsoredAgent: "common:sponsoredAgent",
     save: "common:save",
+    sendMessageNow: "common:sendMessageNow",
+    propertyAgent: "common:propertyAgent",
     state: {
         toBeDeleted: 'common:state.toBeDeleted',
         toBeUpdated: 'common:state.toBeUpdated',

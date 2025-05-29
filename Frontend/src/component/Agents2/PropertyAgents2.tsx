@@ -1,7 +1,13 @@
+import getText from "@src/i18n/data/getText";
 import Iproperty from "@src/models/property.type";
 import { useAuth } from "@src/providers/AuthProvider.context";
+import Http from "@src/services/Http";
+import apiGateway from "@src/utils/apiGateway";
+import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import { Alert } from "@src/utils/createAlert";
 import ProtoTypes from "prop-types";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function PropertyAgents({ image, name, position, phoneNumber, property }: {
   image: string;
@@ -13,13 +19,15 @@ function PropertyAgents({ image, name, position, phoneNumber, property }: {
 
   const { user } = useAuth();
 
+  const { t } = useTranslation(['common']);
   const [input, setInput] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
+    firstName: user ? user.firstName : "",
+    lastName: user ? user.lastName : "",
+    email: user ? user.email : "",
     message: "",
     subject: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const handleChange = (e: any) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
@@ -40,6 +48,19 @@ function PropertyAgents({ image, name, position, phoneNumber, property }: {
 
   };
 
+  const handleEmail = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true)
+
+    const response = await Http.post(apiGateway.services.emailProperty, { ...input, propertyId: property.id });
+    response?.status === 200 && setInput({ firstName: user ? user.firstName : "", lastName: user ? user.lastName : "", email: user ? user.email : "", subject: "", message: "" });
+     response?.status === 200 && Alert({ icon: "success", title: capitalizePhrase(t(getText.alerts.contactUs.successAlert.title)), text: capitalizePhrase(t(getText.alerts.contactUs.successAlert.text)) });
+    response?.status !== 200 && Alert({ icon: "error", title: capitalizePhrase(t(getText.alerts.contactUs.errorAlert.title)), text: capitalizePhrase(t(getText.alerts.contactUs.errorAlert.text)) });
+
+    setIsSubmitting(false)
+
+  }
+
   return (
     <div className="col-lg-4 col-12">
       {/*  Property Agent Card  */}
@@ -47,7 +68,7 @@ function PropertyAgents({ image, name, position, phoneNumber, property }: {
         className="homec-property-ag homec-property-ag--side homec-bg-cover"
         style={{ backgroundImage: "url('/img/property-ag-bg.svg')" }}
       >
-        <h3 className="homec-property-ag__title">Property Agent</h3>
+        <h3 className="homec-property-ag__title">{capitalizePhrase(t(getText.common.propertyAgent))}</h3>
         {/*  Property Profile  */}
         <div className="homec-property-ag__author">
           <div className="homec-property-ag__author--img">
@@ -62,49 +83,53 @@ function PropertyAgents({ image, name, position, phoneNumber, property }: {
           </div>
         </div>
         {/* End Property Profile  */}
-        <form action="#" className="homec-property-ag__form">
+        <form action="#" className="homec-property-ag__form" onSubmit={handleEmail}>
           {
-            !user ?
-              <>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={input.firstName}
-                    onChange={(e) => handleChange(e)}
-                    placeholder="First name"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={input.lastName}
-                    onChange={(e) => handleChange(e)}
-                    placeholder="Last name"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Your email"
-                    value={input.email}
-                    onChange={(e) => handleChange(e)}
-                  />
-                </div>
-              </>
-              :
+            !user &&
+            <>
               <div className="form-group">
                 <input
-                  type="subject"
-                  name="subject"
-                  placeholder="Subject"
-                  value={input.subject}
+                  type="text"
+                  name="firstName"
+                  value={input.firstName}
+                  required
+                  onChange={(e) => handleChange(e)}
+                  placeholder="First name"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="lastName"
+                  value={input.lastName}
+                  required
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Last name"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your email"
+                  value={input.email}
+                  required
                   onChange={(e) => handleChange(e)}
                 />
               </div>
+
+            </>
+
           }
+          <div className="form-group">
+            <input
+              type="subject"
+              name="subject"
+              placeholder="Subject"
+              value={input.subject}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
           <div className="form-group">
             <textarea
               name="message"
@@ -118,8 +143,9 @@ function PropertyAgents({ image, name, position, phoneNumber, property }: {
             type="submit"
             className="homec-btn homec-btn__second homec-property-ag__button"
             style={{ zIndex: "0" }}
+            disabled={isSubmitting}
           >
-            <span>Send Message Now</span>
+            <span >{isSubmitting ? capitalizePhrase(t(getText.common.submitting)) : capitalizePhrase(t(getText.common.sendMessageNow))}</span>
           </button>
           <div className=" h-14 w-full cursor-pointer  gap-2 rounded-md bg-green-400 hover:bg-green-500 flex justify-center items-center text-white"
             onClick={() => handleWhatsApp(phoneNumber)}>
@@ -135,10 +161,7 @@ function PropertyAgents({ image, name, position, phoneNumber, property }: {
   );
 }
 
-PropertyAgents.propTypes = {
-  image: ProtoTypes.string.isRequired,
-  name: ProtoTypes.string.isRequired,
-  position: ProtoTypes.string.isRequired,
-};
+
+
 
 export default PropertyAgents;
