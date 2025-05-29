@@ -37,8 +37,8 @@ export interface IAgent {
 
     savedProperties: string[],
 
-    resetPasswordToken: string,
-    resetPasswordExpires: Date,
+    resetPasswordToken?: string,
+    resetPasswordExpires?: Date,
 
 }
 
@@ -90,8 +90,8 @@ export interface UserJSON {
 
     };
 
-    resetPasswordToken: string,
-    resetPasswordExpires: Date,
+    resetPasswordToken?: string,
+    resetPasswordExpires?: Date,
 
 
     savedProperties: string[]
@@ -102,7 +102,6 @@ export interface UserJSON {
 export interface IUser {
 
     _id: mongoose.Types.ObjectId;
-    id: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -148,8 +147,8 @@ export interface IUser {
 
     };
 
-    resetPasswordToken: string,
-    resetPasswordExpires: Date,
+    resetPasswordToken?: string,
+    resetPasswordExpires?: Date,
 
 
     savedProperties: string[]

@@ -13,7 +13,7 @@ export class TokenService {
     // Short-lived access token (15-30 minutes)
     static generateAccessToken(user: IUser): string {
         const payload: TokenPayload = {
-            id: user.id.toString(),
+            id: user._id.toString(),
             email: user.email,
             role: user.role
         };
@@ -26,7 +26,7 @@ export class TokenService {
     // Long-lived refresh token (7-30 days)
     static generateRefreshToken(user: IUser): string {
         const payload: TokenPayload = {
-            id: user.id.toString(),
+            id: user._id.toString(),
             email: user.email,
             role: user.role
         };
