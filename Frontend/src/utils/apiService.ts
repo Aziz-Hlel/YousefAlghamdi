@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { tokenManager } from "./TokenManager";
+import { baseUrl } from "./apiGateway";
 
 interface ApiResponse<T = any> {
     data?: T;
@@ -16,7 +17,7 @@ class ApiService {
 
     constructor() {
         this.api = axios.create({
-            baseURL: 'http://localhost:5000/api',
+            baseURL: baseUrl,
             timeout: 10000,
             headers: {
                 'Content-Type': 'application/json',
