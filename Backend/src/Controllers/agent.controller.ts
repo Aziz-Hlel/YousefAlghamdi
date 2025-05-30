@@ -2,7 +2,6 @@
 import { NextFunction, Request, Response } from "express";
 import User, { IAgent } from "../Models/user.model";
 import roles from "../types/roles.type";
-import { z } from "zod";
 import { errorHandler } from "../utils/error";
 import statusCode from "../utils/statusCode";
 import errorMessages from "../utils/errorMessages";

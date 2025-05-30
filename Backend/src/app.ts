@@ -45,7 +45,7 @@ app.use('/api/services', servicesRouter);
 // Serve static files                                   
 app.use('/api/',express.static(path.join(__dirname, "../public")));
 
-// app.use('/api/images', imgHandlerRouter);
+app.use('/api/images', imgHandlerRouter);
 
 
 app.get('/api/', (req, res) => {

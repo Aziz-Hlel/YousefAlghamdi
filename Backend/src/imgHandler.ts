@@ -11,8 +11,8 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl as S3_getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { getSignedUrl as CDN_getSignedUrl } from '@aws-sdk/cloudfront-signer';
 import AuthenticatedRequest from './Interfaces/AuthenticatedRequest.interface';
-import protect from './Middlewares/auth.middleware';
 import { imagePurposes, ImagePurposeType } from './types/imagePurpose.types';
+import { authenticateToken } from './services/auth/authenticateToken';
 
 
 
@@ -161,7 +161,7 @@ const imgHandlerRouter = express.Router()
 
 
 imgHandlerRouter.use('/', express.static(path.join(__dirname, '../public/images')));
-imgHandlerRouter.post('/getSignedUrl', protect, getSignedUrlFunc)
+imgHandlerRouter.post('/getSignedUrl', authenticateToken, getSignedUrlFunc)
 imgHandlerRouter.post('/uploadImageToS3_SIMULATOR/:imgId', upload.single('image'), uploadImageToS3_SIMULATOR)
 
 

@@ -1,6 +1,6 @@
 import express from 'express';
 import { changePassword, deleteUser, getUser, login, logOut, me, refresh, register, requestResetPassword, test, updateAgentOfClient, updateUser, whoAmI } from '../Controllers/user.controller';
-import protect, { adminAuth, adminOrAgentAuth } from '../Middlewares/auth.middleware';
+import { adminAuth, adminOrAgentAuth } from '../Middlewares/auth.middleware';
 import { requireAuth } from '../Middlewares/auth2.middleware';
 import { authenticateToken } from '../services/auth/authenticateToken';
 

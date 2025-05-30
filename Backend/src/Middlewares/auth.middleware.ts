@@ -31,38 +31,6 @@ const verifyRefreshToken = (refreshToken: string, req: AuthenticatedRequest, nex
 
 
 
-const protect = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-
-
-    const accessToken = req.cookies?.accessToken;
-
-    const refreshToken = req.cookies?.refreshToken;
-
-    
-    if (!accessToken) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
-    if (!refreshToken) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
-
-
-
-    
-    const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET as string;
-    jwt.verify(accessToken, JWT_ACCESS_SECRET, (err: any, decoded: any) => {
-        if (err) {
-            return verifyRefreshToken(refreshToken, req, next)
-        }
-
-        const userId = (decoded as any)._id
-        if (!isValidObjectId(userId)) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN))
-
-        req.user = (decoded as any);
-        next();
-
-    });
-
-
-};
-
-
 
 export const adminAuth = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
@@ -86,4 +54,3 @@ export const adminOrAgentAuth = (req: AuthenticatedRequest, res: Response, next:
 }
 
 
-export default protect;

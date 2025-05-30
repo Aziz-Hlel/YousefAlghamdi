@@ -2,9 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import { errorHandler } from '../utils/error'
 import User from '../Models/user.model';
 import errorMessages from "../utils/errorMessages";
-import generateToken from "../utils/generateJWT";
 import statusCode from "../utils/statusCode";
-import z, { any } from "zod";
+import z from "zod";
 import AuthenticatedRequest from "../Interfaces/AuthenticatedRequest.interface";
 import mongoose from "mongoose";
 import roles from "../types/roles.type";
@@ -192,7 +191,7 @@ export const whoAmI = async (req: AuthenticatedRequest, res: Response, next: Nex
 
 export const me = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
-console.log('t5l rabk')
+    console.log('t5l rabk')
     const userId = (req.user as any)?.id
 
     if (!userId) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
@@ -421,7 +420,7 @@ export const requestResetPassword = async (req: Request, res: Response, next: Ne
     const { email } = req.body;
     const user = await User.findOne({ email });
 
-    if (!user) return next(errorHandler(statusCode.OK, ""));
+    if (!user) return next(errorHandler(statusCode.OK, "Password reset link sent successfully"));
 
     const token = crypto.randomBytes(32).toString("hex");
     const hash = crypto.createHash("sha256").update(token).digest("hex");

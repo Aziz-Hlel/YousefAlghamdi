@@ -55,7 +55,7 @@ export async function sendPropertyMail({ firstName, lastName, email, subject: us
     const subject = "New Message from a client intrested of a property"
     const to = [ENV.EMAIL_USER]
     const html = `
-        <h1>Property Reference ${propertyId}  ,  url = http://ygp.ae/property-single/${propertyId} </h1>
+        <h1>Property Reference ${propertyId}  ,  url = https://ygp.ae/property-single/${propertyId} </h1>
         <p><strong>Name:</strong> ${firstName} ${lastName}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Subject:</strong> ${userSubject}</p>
@@ -83,7 +83,7 @@ export async function sendResetEmail({ email, resetUrl }: { email: string, reset
     const subject = "Reset Your Password"
     const to = [email]
 
-    const logoUrl = "http://localhost:5000/api/img/logo.png"
+    const logoUrl = "https://ygp.ae/api/img/logo.png"
     html = html
         .replace(/{{RESET_LINK}}/g, resetUrl)
         .replace(/{{COMPANY_NAME}}/g, "YGP")
