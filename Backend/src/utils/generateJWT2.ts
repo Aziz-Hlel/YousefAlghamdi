@@ -28,7 +28,7 @@ export class TokenService {
         const payload: TokenPayload = {
             id: user._id.toString(),
             email: user.email,
-            role: user.role
+            role: user.role 
         };
         return jwt.sign(payload, ENV.JWT_REFRESH_SECRET, {
             expiresIn: '60d'

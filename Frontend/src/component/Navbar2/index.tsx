@@ -7,12 +7,18 @@ import { listing_types } from "@src/types/listing_types.types";
 import getText from "@src/i18n/data/getText";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import { useTranslation } from "react-i18next";
+import { getCurrentLanguage } from "@src/i18n/i18n";
+import useMediaQuery from "@src/utils/useMediaQuery";
 
 const Navbar = ({ handleSidebar, secondNav }: any) => {
 
   const { user } = useAuth();
   const { t } = useTranslation(['home', 'common']);
+  const isDesktop = useMediaQuery('(min-width: 1400px)');
 
+  const currentLanguage = getCurrentLanguage();
+
+  const hideAddPropertyButton = currentLanguage === "fr" && !isDesktop
   return (
 
 
@@ -21,7 +27,7 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
         <div className="row align-items-center">
           <div className="col-12 ">
             <div
-              className="homec-header__inside"  
+              className="homec-header__inside"
               style={{ background: secondNav && "transparent" }}>
 
               <div className="homec-header__group">
@@ -90,24 +96,20 @@ const Navbar = ({ handleSidebar, secondNav }: any) => {
 
                 <CustomLanguageOption />
 
-                {secondNav ? (
+                {!hideAddPropertyButton &&
                   <Link
                     to="/add-property"
-                    className="homec-btn homec-btn__second"
+                    className="homec-btn homec-btn-primary-overlay hidden"
                   >
                     <span>{capitalizePhrase(t(getText.home.navigation.addProperty))}</span>
                   </Link>
-                ) : (
-                  <Link to="/add-property" className="homec-btn">
-                    <span>{capitalizePhrase(t(getText.home.navigation.addProperty))}</span>
-                  </Link>
-                )}
+                }
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
