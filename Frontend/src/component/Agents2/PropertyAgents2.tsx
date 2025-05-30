@@ -5,7 +5,6 @@ import Http from "@src/services/Http";
 import apiGateway from "@src/utils/apiGateway";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import { Alert } from "@src/utils/createAlert";
-import ProtoTypes from "prop-types";
 import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 

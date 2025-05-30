@@ -2,7 +2,6 @@ import { useAuth } from '@src/providers/AuthProvider.context';
 import { RoleType } from '@src/types/roles.type'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import notFoundImg from "@img/404.png"
 import ErrorPage from '@src/component/Error';
 
 

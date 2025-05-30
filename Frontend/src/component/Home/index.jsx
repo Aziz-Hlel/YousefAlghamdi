@@ -9,7 +9,6 @@ import Features2 from "../WhyUs";
 import Header from "../Header";
 import HomecHero from "../HomecHero2";
 import HomecHeroV2 from "../HomecHero2/HomecHeroV2";
-import LatestProperty from "../LatestProperty";
 import Preloader from "../Loader";
 import FaqSection from "../Faq2/FaqSection";
 import LatestPropertyV2 from "../LatestProperty2/LatestPropertyV22";

@@ -85,18 +85,19 @@ const generateKey = (fileName: string, fileType: string, purpose: ImagePurposeTy
     const baseName = path.basename(fileName, ext);
     const safeBase = baseName.replace(/[^a-zA-Z0-9-_]/g, '').slice(0, 50);
 
+    const initialFolder = ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"
 
-    if (purpose === imagePurposes.SPONSOR) {
+    if (purpose === imagePurposes.SPONSOR) 
         // ! added _test after purpose for testing , because purpose is the init state of the sponsors so i didnt want to change it or clean it each time
-        return `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${purpose}_test/${safeBase}--${timestamp}${ext}`
-    }
+        return `${initialFolder}/${purpose}_test/${safeBase}--${timestamp}${ext}`
+    
 
-    if (purpose === imagePurposes.PROFILE) {
+    if (purpose === imagePurposes.PROFILE) 
         // ! added _test after purpose for testing , because purpose is the init state of the sponsors so i didnt want to change it or clean it each time
-        return `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${purpose}_test/${safeBase}--${timestamp}${ext}`
-    }
+        return `${initialFolder}/${purpose}_test/${safeBase}--${timestamp}${ext}`
+    
 
-    return `${ENV.NODE_ENV === "production" ? "uploads" : "tmp_dev"}/${userId}/${purpose}/${folderId}/${safeBase}--${timestamp}${ext}`
+    return `${initialFolder}/${userId}/${purpose}/${folderId}/${safeBase}--${timestamp}${ext}`
 }
 
 

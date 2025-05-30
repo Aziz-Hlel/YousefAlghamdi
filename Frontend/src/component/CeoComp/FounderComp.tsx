@@ -1,4 +1,3 @@
-import React from 'react'
 import founderImg from "@img/about/founder2.jpg"
 import getText from '@src/i18n/data/getText';
 import { capitalizePhrase } from '@src/utils/capitalize_decapitalized';

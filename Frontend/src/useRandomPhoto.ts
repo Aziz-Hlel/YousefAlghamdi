@@ -1,7 +1,7 @@
 
 
 
-import React, { useRef, useState } from 'react'
+import { useState } from 'react'
 import { pickRandomPhoto } from './pickRandomPhoto'
 
 const useRandomPhoto = () => {

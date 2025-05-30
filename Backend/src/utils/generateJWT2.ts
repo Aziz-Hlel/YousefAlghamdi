@@ -19,7 +19,7 @@ export class TokenService {
         };
 
         return jwt.sign(payload, ENV.JWT_ACCESS_SECRET, {
-            expiresIn: '2d'
+            expiresIn: '2d',
         });
     }
 

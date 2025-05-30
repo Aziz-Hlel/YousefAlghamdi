@@ -14,7 +14,7 @@ export const imagePurposes = {
     PROPERTY,
     PROFILE,
     SPONSOR
-}
+} as const;
 
 
 
