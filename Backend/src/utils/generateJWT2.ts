@@ -19,7 +19,7 @@ export class TokenService {
         };
 
         return jwt.sign(payload, ENV.JWT_ACCESS_SECRET, {
-            expiresIn: '2m'
+            expiresIn: '2d'
         });
     }
 
@@ -31,7 +31,7 @@ export class TokenService {
             role: user.role
         };
         return jwt.sign(payload, ENV.JWT_REFRESH_SECRET, {
-            expiresIn: '10m'
+            expiresIn: '60d'
         });
     }
 
