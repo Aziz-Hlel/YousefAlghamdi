@@ -3,13 +3,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./component/Home";
-import AddProperty from "./component/AddProperty";
-import Dashboard from "./component/Dashboard";
-import NewsSingle from "./component/NewsSingle.jsx";
 import News from "./component/News";
-import OurAgents from "./component/OurAgents";
-import AboutUs from "./component/About";
-import Pricing from "./component/Pricing.jsx";
 import PaymentMethod from "./component/PaymentMethod";
 import Faq from "./component/Faq";
 import Login from "./component/Login";
@@ -29,36 +23,15 @@ function App() {
     },
 
  
-    {
-      path: "/add-property",
-      element: <AddProperty />,
-    },
 
-    {
-      path: "/dashboard",
-      element: <Dashboard />,
-    },
-    {
-      path: "/blog-single",
-      element: <NewsSingle />,
-    },
+
+
     {
       path: "/blog",
       element: <News />,
     },
 
-    {
-      path: "/our-agent",
-      element: <OurAgents />,
-    },
-    {
-      path: "/about",
-      element: <AboutUs />,
-    },
-    {
-      path: "/pricing",
-      element: <Pricing />,
-    },
+
     {
       path: "/payment-method",
       element: <PaymentMethod />,

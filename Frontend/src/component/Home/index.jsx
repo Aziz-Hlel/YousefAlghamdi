@@ -3,7 +3,6 @@ import Footer from "../Footer";
 import GoTopBtn from "../Button/GoTopBtn";
 import CEO from "../CeoComp/About";
 import Agents from "../Agents2";
-import Blog from "../Blog";
 import DownloadApp from "../DownloadApp2";
 import Features2 from "../WhyUs";
 import Header from "../Header";
