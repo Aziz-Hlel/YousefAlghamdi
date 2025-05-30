@@ -74,10 +74,9 @@ export async function sendPropertyMail({ firstName, lastName, email, subject: us
 
 
 
+export async function sendResetPasswordEmail({ email, resetUrl }: { email: string, resetUrl: string, }): Promise<void> {
 
-export async function sendResetEmail({ email, resetUrl }: { email: string, resetUrl: string, }): Promise<void> {
-
-    const templatePath = join(__dirname, "./template/reset-password.html");
+    const templatePath = join(__dirname, '../assets/templates/reset-password.html');
     let html = readFileSync(templatePath, "utf-8");
 
     const subject = "Reset Your Password"

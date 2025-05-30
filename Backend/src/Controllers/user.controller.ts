@@ -10,7 +10,7 @@ import roles from "../types/roles.type";
 import Property from "../Models/property.model";
 import ENV from "../utils/ENV.variables";
 import crypto from "crypto";
-import { sendResetEmail } from "../services/emailService";
+import { sendResetPasswordEmail } from "../services/emailService";
 import { TokenService } from "../utils/generateJWT2";
 
 
@@ -431,7 +431,13 @@ export const requestResetPassword = async (req: Request, res: Response, next: Ne
 
 
     const resetLink = `${ENV.FRONT_URL}/reset-password?token=${token}&email=${email}`;
-    await sendResetEmail({ email: user.email, resetUrl: resetLink });
+
+    try {
+        await sendResetPasswordEmail({ email: user.email, resetUrl: resetLink });
+
+    } catch (error) {
+        return next(error);
+    }
 
 
     res.status(statusCode.OK).json('Password reset link sent successfully');

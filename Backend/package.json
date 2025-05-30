@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && tsc",
+    "copy:static": "copyfiles -u 1 src/assets/**/* dist/assets",
+    "build": "rimraf dist && tsc && npm run copy:static",
     "start": "node dist/index.js",
     "dev": "nodemon",
     "comment": " --legacy-watch: This makes nodemon use polling, which works better with Docker-mounted volumes.",
@@ -41,6 +42,7 @@
     "@types/multer": "^1.4.12",
     "@types/node": "^22.13.9",
     "@types/nodemailer": "^6.4.17",
+    "copyfiles": "^2.4.1",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2",
