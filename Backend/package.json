@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "copy:static": "copyfiles -u 1 src/assets/**/* dist/assets",
+    "copy:static": "copyfiles -u 1 src/assets/**/* dist/",
     "build": "rimraf dist && tsc && npm run copy:static",
     "start": "node dist/index.js",
     "dev": "nodemon",
