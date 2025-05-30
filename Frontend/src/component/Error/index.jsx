@@ -1,12 +1,11 @@
 import Header from "../Header";
 import Breadcrumbs from "../Breadcrumbs2";
-import HistoryLinks from "../Breadcrumbs/HistoryLinks";
-import DownloadApp from "../DownloadApp";
+import HistoryLinks from "../Breadcrumbs2/HistoryLinks";
+import DownloadApp from "../DownloadApp2";
 import Footer from "../Footer";
 import GoTopBtn from "../Button/GoTopBtn";
 import { useEffect, useState } from "react";
 import Preloader from "../Loader";
-import notFoundImg from "@img/404.png"
 
 
 function ErrorPage() {
@@ -33,7 +32,7 @@ function ErrorPage() {
                 <div className="homec-error-inner">
                   {/* Error Content Image */}
                   <div className="homec-error-inner__img">
-                    <img src={notFoundImg} alt="#" />
+                    <img src="/images/404.png" alt="#" />
                   </div>
                   <h1 className="homec-error-inner__title">
                     Oops! Page Not Found.

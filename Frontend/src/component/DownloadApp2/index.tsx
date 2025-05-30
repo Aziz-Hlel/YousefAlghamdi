@@ -1,6 +1,5 @@
 import AboutShapeImg from "../About/AboutShapeImg";
 import DownloadAppBtn from "../Button/DownloadAppBtn";
-import screen_app from "../../assets/img/app-screen.png"
 import getText from "@src/i18n/data/getText";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import { useTranslation } from "react-i18next";
@@ -65,7 +64,7 @@ function DownloadApp() {
                 data-aos="fade-up"
                 data-aos-delay="700"
               >
-                <img src={screen_app} alt="#" />
+                <img src="/assets/app-screen.png" alt="#" />
               </div>
             </div>
           </div>

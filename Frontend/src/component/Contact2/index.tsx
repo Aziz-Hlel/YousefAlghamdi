@@ -1,11 +1,8 @@
-import Header from "../Header";
 import Breadcrumbs from "../Breadcrumbs2";
 import HistoryLinks from "../Breadcrumbs2/HistoryLinks";
-import Footer from "../Footer";
 import SingleContact from "./SingleContact";
 import Preloader from "../Loader";
 import { useEffect, useState } from "react";
-import contact_img from "/img/contact-bg.jpg"
 import companyInfo from "@src/data/companyInfo";
 import DownloadApp from "../DownloadApp2";
 import ContactForm from "../Form/ContactForm2";
@@ -37,7 +34,7 @@ function Contact() {
         </Breadcrumbs>
         <section
           className="homec-contact-form homec-bg-cover pd-top-80 pd-btm-80 mg-top-100"
-          style={{ backgroundImage: `url(${contact_img})`,direction:"ltr" }}
+          style={{ backgroundImage: `url('/img/contact-bg.jpg')`,direction:"ltr" }}
           
         >
           <div className="container">

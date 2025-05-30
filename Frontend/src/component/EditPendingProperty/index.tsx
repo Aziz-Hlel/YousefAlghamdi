@@ -1,6 +1,3 @@
-import Header from "../Header";
-import Footer from "../Footer";
-import DownloadApp from "../DownloadApp";
 import Breadcrumbs from "../Breadcrumbs2";
 import HistoryLinks from "../Breadcrumbs2/HistoryLinks";
 import Preloader from "../Loader";
@@ -11,6 +8,7 @@ import PropertyFrom from "../Form/PropertyFrom2.edit";
 import { useTranslation } from "react-i18next";
 import getText from "@src/i18n/data/getText";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import DownloadApp from "../DownloadApp2";
 
 const EditPendingProperty = () => {
   const [isLoading, setisLoadingg] = useState(true);

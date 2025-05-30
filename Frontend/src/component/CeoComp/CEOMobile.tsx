@@ -1,9 +1,7 @@
 import React from 'react';
-import ceo_img from "./../../assets/img/about/ceo_img.jpg"
 import getText from '@src/i18n/data/getText';
 import { capitalizePhrase } from '@src/utils/capitalize_decapitalized';
 import { useTranslation } from 'react-i18next';
-import about_img from "./../../assets/img/about/about_img.jpg"
 
 
 interface CEOWelcomeProps {
@@ -38,7 +36,7 @@ const CEOMobile: React.FC<CEOWelcomeProps> = () => {
             <div className="flex-shrink-0 self-stretch sm:flex-basis-40 md:flex-basis-50 xl:flex-basis-60">
               <div className="homec-image-group homec-image-group--v2">
                 <div className="homec-image-group__main">
-                  <img src={about_img} alt="#" />
+                  <img src="/images/about_img.jpg" alt="#" />
                   <div className="homec-experiences">
                     <h4 className="homec-experiences__title">
                       {capitalizePhrase(t(getText.home.CEO.NumbyearsOfExperience))} <span> {capitalizePhrase(t(getText.home.CEO.ofExperience))}</span>
@@ -49,7 +47,7 @@ const CEOMobile: React.FC<CEOWelcomeProps> = () => {
                   <div className="homec-ceo-quote__img">
                     <div className="homec-overlay"></div>
 
-                    <img src={ceo_img} alt="#" />
+                    <img src="/images/ceo_img.jpg" alt="#" />
 
                   </div>
                   <div className="homec-ceo-quote__title m-0 p-0  px-2 pb-2 text-xs font-extralight">

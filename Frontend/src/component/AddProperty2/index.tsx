@@ -1,7 +1,3 @@
-import Header from "../Header";
-import Footer from "../Footer";
-import Breadcrumbs from "../Breadcrumbs";
-import HistoryLinks from "../Breadcrumbs/HistoryLinks";
 import PropertyAddCard from "../Cards/PropertyAddCard2";
 import { useEffect, useState } from "react";
 import Preloader from "../Loader";
@@ -10,6 +6,8 @@ import { useTranslation } from "react-i18next";
 import getText from "@src/i18n/data/getText";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import DownloadApp from "../DownloadApp2";
+import Breadcrumbs from "../Breadcrumbs2";
+import HistoryLinks from "../Breadcrumbs2/HistoryLinks";
 
 const AddProperty = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,8 +24,8 @@ const AddProperty = () => {
     component = (
       <>
 
-        <Breadcrumbs title={capitalizePhrase(t(getText.pagesTitle.addProperty))} titlePosition="bottom" background={undefined} overlay={undefined}>
-          <HistoryLinks link="/home" text={capitalizePhrase(t(getText.pagesTitle.home))} isActive={undefined} />
+        <Breadcrumbs title={capitalizePhrase(t(getText.pagesTitle.addProperty))} titlePosition="bottom" >
+          <HistoryLinks link="/home" text={capitalizePhrase(t(getText.pagesTitle.home))} />
           <HistoryLinks
             link="/add-property"
             text={capitalizePhrase(t(getText.pagesTitle.addProperty))}

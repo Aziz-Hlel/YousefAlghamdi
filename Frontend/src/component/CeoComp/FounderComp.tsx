@@ -1,4 +1,3 @@
-import founderImg from "@img/about/founder2.jpg"
 import getText from '@src/i18n/data/getText';
 import { capitalizePhrase } from '@src/utils/capitalize_decapitalized';
 import { useTranslation } from 'react-i18next';
@@ -28,7 +27,7 @@ const FounderComp = () => {
                     <img
                         alt="ecommerce"
                         className="lg:w-6/12 w-full lg:h-auto h-64 object-cover object-center border rounded-xl "
-                        src={founderImg}
+                        src="/images/founder.jpg"
                     />
                     <div className="lg:w-6/12 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 lg:flex flex-col justify-center px-5">
                         <h3 className="text-sm title-font text-gray-500 tracking-widest">

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import According from "./According";
-import support_img from "@img/support/support_img.png";
 import { useTranslation } from "react-i18next";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import getText from "@src/i18n/data/getText";
@@ -85,7 +84,7 @@ function FaqSection() {
           >
             {/* Support Img   */}
             <div className="homec-support-img">
-              <img src={support_img} alt="#" />
+              <img src="/images/support_img.png" alt="#" />
               <div className="homec-support-img__content">
                 <img src="img/support-icon-white.svg" alt="#" />
                 <h4 className="homec-support-img__title">

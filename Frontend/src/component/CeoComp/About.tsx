@@ -1,7 +1,4 @@
-import AboutCard from "../Cards/AboutCard";
 import AboutShapeImg from "./AboutShapeImg";
-import about_img from "./../../assets/img/about/about_img.jpg"
-import ceo_img from "./../../assets/img/about/ceo_img.jpg"
 import getText from "@src/i18n/data/getText";
 import { useTranslation } from "react-i18next";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
@@ -33,7 +30,7 @@ function CEO() {
             {/* Homec Image Group */}
             <div className="homec-image-group homec-image-group--v2">
               <div className="homec-image-group__main">
-                <img src={about_img} alt="#" />
+                <img src="/images/about_img.jpg" alt="#" />
                 <div className="homec-experiences">
                   <h4 className="homec-experiences__title">
                     {capitalizePhrase(t(getText.home.CEO.NumbyearsOfExperience))} <span> {capitalizePhrase(t(getText.home.CEO.ofExperience))}</span>
@@ -44,7 +41,7 @@ function CEO() {
                 <div className="homec-ceo-quote__img">
                   <div className="homec-overlay"></div>
 
-                  <img src={ceo_img} alt="#" />
+                  <img src="/images/ceo_img.jpg" alt="#" />
 
                 </div>
                 <h4 className="homec-ceo-quote__title">

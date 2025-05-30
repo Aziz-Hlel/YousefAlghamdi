@@ -4,8 +4,6 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { responsiveHeroSlider } from "../../utils/responsiveSlider";
 import { CustomDot } from "../CustomDot/CustomDot";
-import property_featured from "@img/featured/property_featured.jpg"
-import property_featured2 from "@img/featured/property_featured2.jpg"
 import apiGateway from "@src/utils/apiGateway";
 
 

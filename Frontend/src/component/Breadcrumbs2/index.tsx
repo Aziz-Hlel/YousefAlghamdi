@@ -1,14 +1,12 @@
-import ProtoTypes from "prop-types";
-import bread_overlay from "./bread_overlay.jpg";
 import { ReactNode } from "react";
 
 
 interface IBreadcrumbs {
   title: string,
   children: ReactNode,
-  titlePosition: string,
-  background: string,
-  overlay: boolean
+  titlePosition?: string,
+  background?: string,
+  overlay?: boolean
 }
 
 
@@ -19,7 +17,7 @@ function Breadcrumbs({ title, children, titlePosition, background, overlay }: IB
       style={{
         backgroundImage: background
           ? background
-          : `url(${bread_overlay})`,
+          : `url('/images/bread_overlay.jpg')`,
       }}
     >
       {overlay && <div className="homec-overlay"></div>}

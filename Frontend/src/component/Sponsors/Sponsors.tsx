@@ -1,6 +1,5 @@
 import apiGateway from '@src/utils/apiGateway';
 import { useEffect, useRef, useState } from 'react';
-import logo from "@img/logo2.png"
 import Http from '@src/services/Http';
 import { Sponsor } from '../Dashboard2/SponsorsEdit/Sponsors.provider';
 import { useTranslation } from 'react-i18next';
@@ -119,32 +118,6 @@ const Sponsors = () => {
 
 
                             ))}
-
-                            {/* Old impl if the animation on the other fcked up revert to this one */}
-                            {/* {displaySponsors.map(sponsor => (
-                                <>
-                                    <a
-                                        href={sponsor.url}
-                                        key={`duplicate-${sponsor._id}`}
-                                        className="relative rounded-lg px-4 py-2 flex items-center justify-center  h-[100px] flex-shrink-0"
-                                    >
-                                        <img
-                                            src={sponsor.image.url}}
-                                            alt={sponsor.name}
-                                            className="max-w-[100px] max-h-[80px] object-contain"
-                                            title={sponsor.name}
-                                        />
-                                    </a>
-
-                                    <div className=" w-full h-full flex  justify-center  items-center p-15 bg-[#f7f7fd] cursor-pointer rounded-md overflow-hidden  bg-center  bg-contain  bg-no-repeat  mt-7"
-                                        style={{
-                                            backgroundImage: sponsor.image.url},
-                                        }}
-
-                                    >
-                                    </div>
-                                </>
-                            ))} */}
 
                         </div>
                     </div>

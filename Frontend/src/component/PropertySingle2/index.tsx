@@ -1,27 +1,22 @@
 import { useEffect, useState } from "react";
-import Header from "../Header";
-import Breadcrumbs from "../Breadcrumbs";
-import HistoryLinks from "../Breadcrumbs/HistoryLinks";
-import Footer from "../Footer";
 import Preloader from "../Loader";
 import SingleSlider from "./SingleSlider";
 import { useParams } from "react-router-dom";
-import Iproperty from "@src/models/property.type";
-import Http from "@src/services/Http";
-import apiGateway from "@src/utils/apiGateway";
 import ThumbnailsSlider from "./ThumbnilsSlider";
 import { SinglePropertyProvider } from "@src/providers/SingleProperty.context";
 import { useTranslation } from "react-i18next";
 import getText from "@src/i18n/data/getText";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 import PropertyDetails from "./PropertyDetails";
+import Breadcrumbs from "../Breadcrumbs2";
+import HistoryLinks from "../Breadcrumbs2/HistoryLinks";
 
 
 function PropertySingle() {
   const [isLoading, setIsLoading] = useState(true);
   const { propertyId } = useParams();
 
-    const { t } = useTranslation(['common','pagesTitle']);
+  const { t } = useTranslation(['common', 'pagesTitle']);
 
   useEffect(() => {
     propertyId && setIsLoading(false);
@@ -36,8 +31,8 @@ function PropertySingle() {
         <SinglePropertyProvider id={propertyId}>
 
           {/* <Header v2={null} /> */}
-          <Breadcrumbs title={capitalizePhrase(t(getText.pagesTitle.lastestProperties))} background={null} overlay={null} titlePosition={null}>
-            <HistoryLinks link="home" text={capitalizePhrase(t(getText.pagesTitle.home))} isActive={null} />
+          <Breadcrumbs title={capitalizePhrase(t(getText.pagesTitle.lastestProperties))} >
+            <HistoryLinks link="home" text={capitalizePhrase(t(getText.pagesTitle.home))} />
             <HistoryLinks
               link="property"
               text={capitalizePhrase(t(getText.pagesTitle.lastestProperties))}
