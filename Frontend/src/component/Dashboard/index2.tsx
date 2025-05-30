@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import Header from "../Header";
 import Breadcrumbs from "../Breadcrumbs";
 import HistoryLinks from "../Breadcrumbs/HistoryLinks";
 import DownloadApp from "../DownloadApp";
-import Footer from "../Footer";
 import Sidebar from "./Sidebar";
 import DashboardComp from "./DashboardComp";
 import MyProperties from "./MyProperties2";
@@ -44,9 +42,8 @@ function Dashboard() {
         <Breadcrumbs
           title={activeComponent}
           titlePosition="bottom"
-          overlay={true}
-        >
-          <HistoryLinks link="/home" text="Home" />
+          overlay={true} background={undefined}        >
+          <HistoryLinks link="/home" text="Home" isActive={undefined} />
           <HistoryLinks link="/dashboard" text="Dashboard" isActive={true} />
         </Breadcrumbs>
         <section className="homec-dashboard pd-top-100 pd-btm-100 homec-bg-third-color">
