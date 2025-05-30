@@ -10,8 +10,8 @@ const REFRESH_SECRET = ENV.JWT_REFRESH_SECRET
 export const NODE_ENV = ENV.NODE_ENV;
 
 
-const accessTokenLifeSpan = "1d";
-const refreshTokenLifeSpan = "60d";
+const accessTokenLifeSpan = "5m";
+const refreshTokenLifeSpan = "30m";
 
 
 const generateAccessToken = (payload: { [key: string]: any }) => {
