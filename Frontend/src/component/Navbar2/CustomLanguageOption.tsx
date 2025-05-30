@@ -1,14 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { ArabicSvg, EnglishSvg, FrenchSvg } from './languagesSvg';
-import { useTranslation } from 'react-i18next';
-import { changeLanguage, languages } from '@src/i18n/i18n';
+import { useEffect, useRef, useState } from 'react'
+import { changeLanguage, getCurrentLanguage, getCurrentLanguageIcon, languages } from '@src/i18n/i18n';
 
 
-const languagesOptions = [
-    { label: "English", value: "en", icon: EnglishSvg },
-    { label: "Arabic", value: "ar", icon: ArabicSvg },
-    { label: "French", value: "fr", icon: FrenchSvg },
-];
+
 
 const CustomLanguageOption = () => {
 
@@ -31,10 +25,10 @@ const CustomLanguageOption = () => {
 
 
 
-    const { i18n } = useTranslation();
-    const currentLanguage = i18n.language;
-    const currentLanguageIcon = languages[currentLanguage as keyof typeof languages]?.icon;
-    
+    const currentLanguage = getCurrentLanguage();
+    const currentLanguageIcon = getCurrentLanguageIcon();
+    console.log("currentLanguage", currentLanguage); // Will now log "en" not "en-US"
+
     const handleLanguageChange = async (newLang: string) => {
 
         await changeLanguage(newLang as any);
@@ -60,7 +54,7 @@ const CustomLanguageOption = () => {
                     className="absolute left-0 top-full mt-1 w-full bg-white border rounded-lg shadow-lg z-50"
                     style={{ position: "absolute", minWidth: "100%" }}
                 >
-                    {Object.entries(languages).map(([code, { nativeName, icon }]) => (
+                    {Object.entries(languages).map(([code, { icon }]) => (
                         <div
                             key={code}
                             className="flex items-center gap-2 p-2 hover:bg-gray-100 cursor-pointer"
