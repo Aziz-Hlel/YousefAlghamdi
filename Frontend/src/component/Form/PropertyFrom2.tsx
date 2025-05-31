@@ -11,7 +11,7 @@ import SelectiveInputForm from "./SelectiveInputForm";
 import { categoriesType, ResidentialProperties, sub_categories } from "@src/types/categories.subcategories.types";
 import { additionalDetailsAttributes } from "@src/types/additionalDetails.types";
 import { FileWithPath } from "react-dropzone";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { listing_typesValues } from "@src/types/listing_types.types";
 import { cities, delegations } from "@src/types/cities.delegations.types";
 import { uploadImageToS3_SIMULATOR } from "@src/utils/getSignedUrlUpload";
@@ -48,7 +48,7 @@ const PropertyFrom = () => {
 
     });
 
-
+const navigate = useNavigate();
 
 
   const propertyCategoryValue = watch('category');
@@ -171,7 +171,7 @@ const PropertyFrom = () => {
 
     const response = await Http.post(apiGateway.property.create, data);
 
-    // response?.status === 201 && navigate("/dashboard/my-properties")
+    response?.status === 201 && navigate("/dashboard/my-properties")
     response?.status !== 201 && Alert({ title: "Error", text: "Something went wrong, cannot create property", icon: "error" })
     console.log(data);
 
