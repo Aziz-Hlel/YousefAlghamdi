@@ -140,7 +140,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const signup = async (data: SignUpSchemaType): Promise<AxiosResponse<any, any> | undefined> => {
         const response = await Http.post(apiGateway.user.signUp, data);
 
-        response?.status === 200 ? setUser(response.data.result) : setUser(null);
+        response?.status === 200 ? setUser(response.data.user) : setUser(null);
         return response
 
     }
