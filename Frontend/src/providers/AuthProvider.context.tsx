@@ -129,7 +129,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 console.error('Auth initialization error:', error);
                 setUser(null);
                 tokenManager.clearTokens();
-            } 
+            }
         };
 
         initializeAuth();
@@ -140,7 +140,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const signup = async (data: SignUpSchemaType): Promise<AxiosResponse<any, any> | undefined> => {
         const response = await Http.post(apiGateway.user.signUp, data);
 
-        response?.status === 200 ? setUser(response.data.user) : setUser(null);
+        if (response && response?.status === 200) {
+            const { accessToken, refreshToken, user } = response.data
+            tokenManager.setTokens(accessToken, refreshToken);
+            setUser(user)
+        }
+        
+        else setUser(null);
         return response
 
     }

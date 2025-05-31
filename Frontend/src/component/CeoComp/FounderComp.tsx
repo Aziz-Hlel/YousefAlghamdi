@@ -25,7 +25,7 @@ const FounderComp = () => {
             <div className="   flex  justify-center lg:w-5/6 py-24 lg:mx-auto ">
                 <div className="lg:w-4/5  flex flex-wrap">
                     <img
-                        alt="ecommerce"
+                        alt=""
                         className="lg:w-6/12 w-full lg:h-auto h-64 object-cover object-center border rounded-xl "
                         src="/images/founder.jpg"
                     />
