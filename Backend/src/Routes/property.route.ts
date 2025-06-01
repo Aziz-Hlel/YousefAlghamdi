@@ -1,7 +1,6 @@
 import express from 'express';
 import { approveProperty, declinePropertyChanges, createProperty, deleteProperty, getPendingProperties, getProperty, getUserProperties, listProperties, updateProperty, getUnavailableProperties, unavailable, getAllProperties, featureProperty, getFeaturedProperties } from '../Controllers/property.controller';
 import { adminAuth, adminOrAgentAuth } from '../Middlewares/auth.middleware';
-import { requireAuth } from '../Middlewares/auth2.middleware';
 import { authenticateToken } from '../services/auth/authenticateToken';
 
 

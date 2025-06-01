@@ -1,7 +1,6 @@
 import express from 'express';
 import { changePassword, deleteUser, getUser, login, logOut, me, refresh, register, requestResetPassword, test, updateAgentOfClient, updateUser, whoAmI } from '../Controllers/user.controller';
 import { adminAuth, adminOrAgentAuth } from '../Middlewares/auth.middleware';
-import { requireAuth } from '../Middlewares/auth2.middleware';
 import { authenticateToken } from '../services/auth/authenticateToken';
 
 
@@ -20,8 +19,8 @@ userRouter.post('/refresh', refresh);
 
 userRouter.post('/request-reset-password', requestResetPassword);
 
-userRouter.get('/:userId', requireAuth, adminOrAgentAuth, getUser);
-userRouter.patch('/update-agent', requireAuth, adminAuth, updateAgentOfClient)
+userRouter.get('/:userId', authenticateToken, adminOrAgentAuth, getUser);
+userRouter.patch('/update-agent', authenticateToken, adminAuth, updateAgentOfClient)
 userRouter.patch('/update-user/', authenticateToken, updateUser);
 userRouter.delete('/delete-user', authenticateToken, deleteUser);
 

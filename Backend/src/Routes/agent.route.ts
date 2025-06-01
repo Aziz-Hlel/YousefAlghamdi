@@ -1,7 +1,6 @@
 import express from 'express';
 import { createAgent, deleteAgent, getAgents as listAgents, updateAgent } from '../Controllers/agent.controller';
 import { adminAuth } from '../Middlewares/auth.middleware';
-import { requireAuth } from '../Middlewares/auth2.middleware';
 import { authenticateToken } from '../services/auth/authenticateToken';
 
 

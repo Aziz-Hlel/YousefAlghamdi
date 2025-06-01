@@ -1,7 +1,6 @@
 import express from 'express';
 import { adminAuth } from '../Middlewares/auth.middleware';
 import { createSponsor, deleteSponsor, getAllSponsors, getSponsors, updateSponser } from '../Controllers/sponsors.controller';
-import { requireAuth } from '../Middlewares/auth2.middleware';
 import { authenticateToken } from '../services/auth/authenticateToken';
 
 
