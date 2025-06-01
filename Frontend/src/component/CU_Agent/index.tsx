@@ -12,7 +12,7 @@ import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
 
 
 type IUser = {
-  _id: string;
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -25,7 +25,7 @@ type IUser = {
 }
 
 const initUser = {
-  _id: "",
+  id: "",
   firstName: "",
   lastName: "",
   email: "",
@@ -90,7 +90,7 @@ const UserView = () => {
       navigate("../");
     else {
       await Http.patch(apiGateway.user.updateAgent, {
-        userId: userInspected._id,
+        userId: userInspected.id,
         agentId: currentAgent,
       })
       fetchProperties(1);
