@@ -23,6 +23,15 @@ services:
 
     restart: always
 
+
+    healthcheck:
+      test: ["CMD", "curl", "-fk", "https://127.0.0.1:443/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy-prod-data:/data
@@ -64,6 +73,13 @@ services:
         - EMAIL_PASS=${PROD___EMAIL_PASS}
 
 
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://server-stage:${STAGE___PORT}/health" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
     restart: always
 
     depends_on:
@@ -90,6 +106,15 @@ services:
 
     ports:
       - 27017:27017
+
+
+    healthcheck:
+      test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
 
     restart: always
 

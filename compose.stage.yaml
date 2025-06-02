@@ -14,7 +14,8 @@ services:
       args:
         - VITE_API_URL=${STAGE___VITE_API_URL}
         - VITE_API_NODE_ENV=${STAGE___VITE_API_NODE_ENV}
-    
+
+
     ports:
       - 8443:8443
     volumes:
@@ -22,9 +23,17 @@ services:
       - caddy-stage-data:/data
       - caddy-stage-config:/config
 
-      
+
+    healthcheck:
+      test: ["CMD", "curl", "-fk", "https://localhost:8443/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+
     restart: unless-stopped
-    
+
     networks:
       - app-network
 
@@ -37,29 +46,35 @@ services:
       dockerfile: Dockerfile.stage
 
     environment:
-        - PORT=${STAGE___PORT}
-        - JWT_ACCESS_SECRET=${STAGE___JWT_ACCESS_SECRET}
-        - JWT_REFRESH_SECRET=${STAGE___JWT_REFRESH_SECRET}
-        - ENVIOREMENT=${STAGE___ENVIOREMENT}
-        - NODE_ENV=${STAGE___NODE_ENV}
-        - FRONT_URL=${STAGE___FRONT_URL}
-        - MONGO_INITDB_ROOT_USERNAME=${STAGE___MONGO_INITDB_ROOT_USERNAME}
-        - MONGO_INITDB_ROOT_PASSWORD=${STAGE___MONGO_INITDB_ROOT_PASSWORD}
-        - MONGO_INITDB_DATABASE=${STAGE___MONGO_INITDB_DATABASE}
-        - BUCKET_NAME=${STAGE___BUCKET_NAME}
-        - BUCKET_REGION=${STAGE___BUCKET_REGION}
-        - BUCKET_ACCESS_KEY=${STAGE___BUCKET_ACCESS_KEY}
-        - BUCKET_SECRET_ACCESS_KEY=${STAGE___BUCKET_SECRET_ACCESS_KEY}
-        - CDN_DOMAIN=${STAGE___CDN_DOMAIN}
-        - CDN_PUBLIC_KEY_ID=${STAGE___CDN_PUBLIC_KEY_ID}
-        - CDN_PRIVATE_KEY=${STAGE___CDN_PRIVATE_KEY}       
-        - EMAIL_HOST=${STAGE___EMAIL_HOST}
-        - EMAIL_PORT=${STAGE___EMAIL_PORT}
-        - EMAIL_SECURE=${STAGE___EMAIL_SECURE}
-        - EMAIL_USER=${STAGE___EMAIL_USER}
-        - EMAIL_PASS=${STAGE___EMAIL_PASS}
+      - PORT=${STAGE___PORT}
+      - JWT_ACCESS_SECRET=${STAGE___JWT_ACCESS_SECRET}
+      - JWT_REFRESH_SECRET=${STAGE___JWT_REFRESH_SECRET}
+      - ENVIOREMENT=${STAGE___ENVIOREMENT}
+      - NODE_ENV=${STAGE___NODE_ENV}
+      - FRONT_URL=${STAGE___FRONT_URL}
+      - MONGO_INITDB_ROOT_USERNAME=${STAGE___MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${STAGE___MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${STAGE___MONGO_INITDB_DATABASE}
+      - BUCKET_NAME=${STAGE___BUCKET_NAME}
+      - BUCKET_REGION=${STAGE___BUCKET_REGION}
+      - BUCKET_ACCESS_KEY=${STAGE___BUCKET_ACCESS_KEY}
+      - BUCKET_SECRET_ACCESS_KEY=${STAGE___BUCKET_SECRET_ACCESS_KEY}
+      - CDN_DOMAIN=${STAGE___CDN_DOMAIN}
+      - CDN_PUBLIC_KEY_ID=${STAGE___CDN_PUBLIC_KEY_ID}
+      - CDN_PRIVATE_KEY=${STAGE___CDN_PRIVATE_KEY}
+      - EMAIL_HOST=${STAGE___EMAIL_HOST}
+      - EMAIL_PORT=${STAGE___EMAIL_PORT}
+      - EMAIL_SECURE=${STAGE___EMAIL_SECURE}
+      - EMAIL_USER=${STAGE___EMAIL_USER}
+      - EMAIL_PASS=${STAGE___EMAIL_PASS}
 
-        
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://server-stage:${STAGE___PORT}/health" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
     restart: unless-stopped
 
     depends_on:
@@ -81,14 +96,21 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=${STAGE___MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${STAGE___MONGO_INITDB_ROOT_PASSWORD}
       - MONGO_INITDB_DATABASE=${STAGE___MONGO_INITDB_DATABASE}
-    
+
     ports:
       - 27017:27017
 
-    command: mongod --logpath /dev/null  # For no logs at all
+    command: mongod --logpath /dev/null # For no logs at all
 
+    healthcheck:
+      test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
 
     restart: unless-stopped
+
     networks:
       - app-network
 
@@ -96,7 +118,6 @@ volumes:
   caddy-stage-data:
   caddy-stage-config:
   mongo-stage-data:
-  # frontend-stage-dist:
 
 
 networks:
