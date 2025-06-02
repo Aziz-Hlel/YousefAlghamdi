@@ -29,6 +29,7 @@ const errorMessages = {
     TEA_POT: "Teapot",
     SERVICES: {
         EMAIL: "Could not send email",
+        EXPIREDLINK: "Expired link",
     }
     // PERMISSION:{
     //     FORBIDDEN: "forbidden",

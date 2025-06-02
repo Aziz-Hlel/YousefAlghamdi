@@ -409,7 +409,7 @@ export const requestResetPassword = async (req: Request, res: Response, next: Ne
     const hash = crypto.createHash("sha256").update(token).digest("hex");
 
     user.resetPasswordToken = hash;
-    user.resetPasswordExpires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 1 hour
+    user.resetPasswordExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
     await user.save();
 
 
@@ -434,28 +434,28 @@ export const resetPassword = async (req: Request, res: Response, next: NextFunct
     const { password, confirmPassword } = req.body;
 
     if (!password || !confirmPassword) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
-    console.log('osulll1')
+
     if (password !== confirmPassword) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
-    console.log('osulll2')
+
     if (password.length < 6) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
-    console.log('osulll')
     const token = req.query.token as string;
     const email = req.query.email as string;
 
     if (!token || !email) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     const user = await User.findOne({ email });
+
     if (!user) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
     const hash = crypto.createHash("sha256").update(token).digest("hex");
 
     if (user.resetPasswordToken !== hash) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
 
-    if (!user.resetPasswordExpires || user.resetPasswordExpires.getTime() < Date.now()) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+    if (!user.resetPasswordExpires || user.resetPasswordExpires.getTime() < Date.now()) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.SERVICES.EXPIREDLINK));
 
-    (user as any).password = password;
-    await (user as any).save();
+    user.password = password;
+    await user.save();
 
     res.status(statusCode.OK).json('Password updated successfully');
 }

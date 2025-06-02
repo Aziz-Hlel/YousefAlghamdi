@@ -46,6 +46,7 @@ export class TokenService {
 
     // Validate and rotate refresh token
     static async validateRefreshToken(token: string): Promise<string | null> {
+        
         try {
             const decoded = jwt.verify(token, ENV.JWT_REFRESH_SECRET);
 
