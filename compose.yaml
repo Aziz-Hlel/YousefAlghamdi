@@ -15,22 +15,19 @@ services:
       args:
         - VITE_API_URL=${PROD___VITE_API_URL}
         - VITE_API_NODE_ENV=${PROD___VITE_API_NODE_ENV}
-    
+
     ports:
       - 443:443
       - 80:80
 
-
     restart: always
 
-
     healthcheck:
-      test: ["CMD", "curl", "-fk", "https://127.0.0.1:443/health"]
+      test: [ "CMD", "curl", "-fk", "https://127.0.0.1:443/health" ]
       interval: 30s
       timeout: 5s
       retries: 3
       start_period: 10s
-
 
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
@@ -40,8 +37,6 @@ services:
     networks:
       - app-network
 
-
-
   server:
 
     container_name: server
@@ -50,28 +45,27 @@ services:
       context: ./Backend
 
     environment:
-        - PORT=${PROD___PORT}
-        - JWT_ACCESS_SECRET=${PROD___JWT_ACCESS_SECRET}
-        - JWT_REFRESH_SECRET=${PROD___JWT_REFRESH_SECRET}
-        - ENVIOREMENT=${PROD___ENVIOREMENT}
-        - NODE_ENV=${PROD___NODE_ENV}
-        - FRONT_URL=${PROD___FRONT_URL}
-        - MONGO_INITDB_ROOT_USERNAME=${PROD___MONGO_INITDB_ROOT_USERNAME}
-        - MONGO_INITDB_ROOT_PASSWORD=${PROD___MONGO_INITDB_ROOT_PASSWORD}
-        - MONGO_INITDB_DATABASE=${PROD___MONGO_INITDB_DATABASE}
-        - BUCKET_NAME=${PROD___BUCKET_NAME}
-        - BUCKET_REGION=${PROD___BUCKET_REGION}
-        - BUCKET_ACCESS_KEY=${PROD___BUCKET_ACCESS_KEY}
-        - BUCKET_SECRET_ACCESS_KEY=${PROD___BUCKET_SECRET_ACCESS_KEY}
-        - CDN_DOMAIN=${PROD___CDN_DOMAIN}
-        - CDN_PUBLIC_KEY_ID=${PROD___CDN_PUBLIC_KEY_ID}
-        - CDN_PRIVATE_KEY=${PROD___CDN_PRIVATE_KEY}  
-        - EMAIL_HOST=${PROD___EMAIL_HOST}
-        - EMAIL_PORT=${PROD___EMAIL_PORT}
-        - EMAIL_SECURE=${PROD___EMAIL_SECURE}
-        - EMAIL_USER=${PROD___EMAIL_USER}
-        - EMAIL_PASS=${PROD___EMAIL_PASS}
-
+      - PORT=${PROD___PORT}
+      - JWT_ACCESS_SECRET=${PROD___JWT_ACCESS_SECRET}
+      - JWT_REFRESH_SECRET=${PROD___JWT_REFRESH_SECRET}
+      - ENVIOREMENT=${PROD___ENVIOREMENT}
+      - NODE_ENV=${PROD___NODE_ENV}
+      - FRONT_URL=${PROD___FRONT_URL}
+      - MONGO_INITDB_ROOT_USERNAME=${PROD___MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${PROD___MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${PROD___MONGO_INITDB_DATABASE}
+      - BUCKET_NAME=${PROD___BUCKET_NAME}
+      - BUCKET_REGION=${PROD___BUCKET_REGION}
+      - BUCKET_ACCESS_KEY=${PROD___BUCKET_ACCESS_KEY}
+      - BUCKET_SECRET_ACCESS_KEY=${PROD___BUCKET_SECRET_ACCESS_KEY}
+      - CDN_DOMAIN=${PROD___CDN_DOMAIN}
+      - CDN_PUBLIC_KEY_ID=${PROD___CDN_PUBLIC_KEY_ID}
+      - CDN_PRIVATE_KEY=${PROD___CDN_PRIVATE_KEY}
+      - EMAIL_HOST=${PROD___EMAIL_HOST}
+      - EMAIL_PORT=${PROD___EMAIL_PORT}
+      - EMAIL_SECURE=${PROD___EMAIL_SECURE}
+      - EMAIL_USER=${PROD___EMAIL_USER}
+      - EMAIL_PASS=${PROD___EMAIL_PASS}
 
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://server-stage:${STAGE___PORT}/health" ]
@@ -96,17 +90,16 @@ services:
 
     volumes:
       - mongo-prod-data:/data/db
-
+      - ./mongo_backups:/backup
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${PROD___MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${PROD___MONGO_INITDB_ROOT_PASSWORD}
       - MONGO_INITDB_DATABASE=${PROD___MONGO_INITDB_DATABASE}
 
-    command: mongod --logpath /dev/null  # For no logs at all
+    command: mongod --logpath /dev/null # For no logs at all
 
     ports:
       - 27017:27017
-
 
     healthcheck:
       test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
@@ -114,7 +107,6 @@ services:
       timeout: 10s
       retries: 5
       start_period: 10s
-
 
     restart: always
 
