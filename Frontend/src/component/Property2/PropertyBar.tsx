@@ -2,14 +2,19 @@
 import ShowingResult from "./ShowingResult";
 import ListBtn from "../Button/ListBtn";
 import { useFormContext } from "./FilterProvider.context";
+import { useSearchParams } from "react-router-dom";
 
 function PropertyBar({ gridStyle, handleGridStyle }: { gridStyle: any, handleGridStyle: any }) {
 
-  const { totalCount, filterObject } = useFormContext();
+  const { totalCount, } = useFormContext();
 
-  const idxFirstProperty = (filterObject.page - 1) * 6 + 1
+  const [searchParams] = useSearchParams();
 
-  const idxLastProperty = filterObject.page * 6 > totalCount ? totalCount : filterObject.page * 6
+  const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1
+
+  const idxFirstProperty = (page - 1) * 6 + 1
+
+  const idxLastProperty = page * 6 > totalCount ? totalCount : page * 6
   return (
     <div className="homec-property-bar">
       <div className="homec-property-bar__single">

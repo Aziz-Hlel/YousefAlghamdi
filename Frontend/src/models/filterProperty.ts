@@ -22,7 +22,6 @@ export type IfilterProperty = {
 
     listingType?: string,
 
-    page: number,
 
 
 };

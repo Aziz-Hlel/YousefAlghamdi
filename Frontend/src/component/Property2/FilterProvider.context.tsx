@@ -20,7 +20,6 @@ export const defaultFilter: IfilterProperty = {
     maxPrice: 5000000,
     minPrice: 1,
 
-    page: 1,
 }
 
 

@@ -10,7 +10,7 @@ import { useSearchParams } from "react-router-dom";
 
 function PropertyGrid() {
 
-  const { properties, totalCount, updateProperty: updateEstate, listRef } = useFormContext();
+  const { properties, totalCount, updateProperty, listRef } = useFormContext();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -29,7 +29,7 @@ function PropertyGrid() {
     console.log("haw 9addeh l pag :  ", searchParams.get("page"));
 
     // await updateField("page", page);
-    updateEstate(page);
+    updateProperty(page);
   };
 
 
