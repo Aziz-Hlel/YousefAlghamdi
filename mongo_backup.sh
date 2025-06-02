@@ -17,6 +17,7 @@ BACKUP_NAME="backup_${DATE}"
 docker exec mongo mongodump \
   --username="$PROD___MONGO_INITDB_ROOT_USERNAME" \
   --password="$PROD___MONGO_INITDB_ROOT_PASSWORD" \
+  --authenticationDatabase=admin \
   --db="$PROD___MONGO_INITDB_DATABASE" \
   --out="/tmp/$BACKUP_NAME"
 
