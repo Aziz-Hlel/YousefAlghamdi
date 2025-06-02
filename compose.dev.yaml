@@ -73,6 +73,7 @@ services:
     image: mongo:latest
     volumes:
       - mongo-dev-data:/data/db
+      - ./mongo_backups:/backup
     env_file:
       - ./Backend/.env
 
