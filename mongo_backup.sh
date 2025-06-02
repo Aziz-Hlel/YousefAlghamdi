@@ -4,7 +4,7 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKUP_DIR="$SCRIPT_DIR/mongo_backups"
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-CONTAINER_NAME="your_mongo_container_name"
+CONTAINER_NAME="mongo"
 DAYS_TO_KEEP=7
 BACKUP_FILE="$BACKUP_DIR/backup_$TIMESTAMP.archive.gz"
 
