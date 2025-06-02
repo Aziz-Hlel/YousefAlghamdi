@@ -34,9 +34,9 @@ if [ -f "$ENV_FILE" ]; then
   PROD___MONGO_INITDB_ROOT_PASSWORD=$(grep -E "^PROD___MONGO_INITDB_ROOT_PASSWORD=" "$ENV_FILE" | cut -d '=' -f2-)
 
   # Remove potential surrounding quotes (single or double) from the extracted values
-  PROD___MONGO_INITDB_DATABASE=$(echo "${PROD___MONGO_INITDB_DATABASE}" | sed -e "s/^'//" -e "s/'$//" -e 's/^"//' -e 's/"$//')
-  PROD___MONGO_INITDB_ROOT_USERNAME=$(echo "${PROD___MONGO_INITDB_ROOT_USERNAME}" | sed -e "s/^'//" -e "s/'$//" -e 's/^"//' -e 's/"$//')
-  PROD___MONGO_INITDB_ROOT_PASSWORD=$(echo "${PROD___MONGO_INITDB_ROOT_PASSWORD}" | sed -e "s/^'//" -e "s/'$//" -e 's/^"//' -e 's/"$//')
+  PROD___MONGO_INITDB_DATABASE=$(echo "${PROD___MONGO_INITDB_DATABASE}" | sed -e "s/^'//" -e "s/'$//" -e 's/^"//' -e 's/"$//' -e 's/\r$//')
+  PROD___MONGO_INITDB_ROOT_USERNAME=$(echo "${PROD___MONGO_INITDB_ROOT_USERNAME}" | sed -e "s/^'//" -e "s/'$//" -e 's/^"//' -e 's/"$//' -e 's/\r$//')
+  PROD___MONGO_INITDB_ROOT_PASSWORD=$(echo "${PROD___MONGO_INITDB_ROOT_PASSWORD}" | sed -e "s/^'//" -e "s/'$//" -e 's/^"//' -e 's/"$//' -e 's/\r$//')
 
 else
   echo "ERROR: .env file not found at ${ENV_FILE}."
