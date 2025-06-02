@@ -21,14 +21,16 @@ const useSubmitPropertySchema = () => {
             .max(200, { message: capitalizePhrase(t(getText.errors.submitProperty.description.max)) }),
 
         category: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.category.required)) })
+            .nonempty({ message: capitalizePhrase(t(getText.errors.submitProperty.category.required)) })
             .min(2, { message: capitalizePhrase(t(getText.errors.submitProperty.category.min)) })
             .max(25, { message: capitalizePhrase(t(getText.errors.submitProperty.category.max)) }),
 
-        sub_category: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.sub_category.required)) }),
+        sub_category: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.sub_category.required)) })
+            .nonempty({ message: capitalizePhrase(t(getText.errors.submitProperty.sub_category.required)) }),
 
-        city: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.city.required)) }),
-        delegation: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.delegation.required)) }),
-        addresse: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.addresse.required)) }).optional(),
+        city: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.city.required)) }).nonempty({ message: capitalizePhrase(t(getText.errors.submitProperty.city.required)) }),
+        delegation: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.delegation.required)) }).nonempty({ message: capitalizePhrase(t(getText.errors.submitProperty.delegation.required)) }),
+        addresse: z.string({ required_error: capitalizePhrase(t(getText.errors.submitProperty.addresse.required)) }).nonempty({ message: capitalizePhrase(t(getText.errors.submitProperty.addresse.required)) }),
 
         filterFields: z.object({
 

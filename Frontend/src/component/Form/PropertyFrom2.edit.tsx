@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CheckInput2 from "./CheckInput3";
 import SelectiveInputForm from "./SelectiveInputForm";
-import { categoriesType, ResidentialProperties, sub_categories } from "@src/types/categories.subcategories.types";
+import { categoriesType, commercialCategories, nonCommercialCategories, ResidentialProperties, sub_categories } from "@src/types/categories.subcategories.types";
 import { additionalDetailsAttributes } from "@src/types/additionalDetails.types";
 import { FileWithPath } from "react-dropzone";
 import { useNavigate } from "react-router-dom";
@@ -145,6 +145,11 @@ const PropertyFrom = () => {
 
   useEffect(() => {
     setValue("additionalDetails", [])
+
+    if (propertyCategoryValue && !sub_categories[propertyCategoryValue as keyof typeof sub_categories].includes(watch('sub_category'))) {
+      setValue('sub_category', "")
+    }
+
   }, [propertyCategoryValue])
 
 
@@ -474,7 +479,7 @@ const PropertyFrom = () => {
                     <SelectiveInputForm
                       size="col-lg-6 col-md-6"
                       title={capitalizePhrase(t(getText.submitProperty.propertyInformation.category))}
-                      options={Object.keys(categoriesType)}
+                      options={InspectedProperty?.listing_type.includes("commercial") ? commercialCategories : nonCommercialCategories}
                       fieldRegister={register('category')}
                       fieldError={errors.category}
                     />

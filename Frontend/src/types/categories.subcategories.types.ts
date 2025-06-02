@@ -17,6 +17,11 @@ export const categoriesType = {
     [LandAndPlots]: LandAndPlots,
 } as const;
 
+
+export const commercialCategories = [CommercialProperties, LandAndPlots] 
+export const nonCommercialCategories = [ResidentialProperties, LandAndPlots] 
+
+
 export type ICategory = keyof typeof categoriesType;
 
 
