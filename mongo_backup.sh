@@ -1,27 +1,32 @@
 #!/bin/bash
 
-# === Resolve the directory where this script lives ===
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BACKUP_DIR="$SCRIPT_DIR/mongo_backups"
-TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-DB_NAME="${PROD___MONGO_INITDB_DATABASE}"  # Uses your env variable
-USERNAME="${PROD___MONGO_INITDB_ROOT_USERNAME}"
-PASSWORD="${PROD___MONGO_INITDB_ROOT_PASSWORD}"
+# Simple MongoDB backup script
+# Put this file next to your compose.yaml file
 
-DAYS_TO_KEEP=7
-BACKUP_FILE="$BACKUP_DIR/backup_$TIMESTAMP.archive.gz"
+# Load your .env file
+source .env
 
-# === Create backup directory if it doesn't exist ===
-mkdir -p "$BACKUP_DIR"
+# Create backup folder
+mkdir -p mongo_backups
 
-# === Run compressed backup from Docker ===
-docker exec "$CONTAINER_NAME" sh -c \
-  "mongodump \
-    --username='$USERNAME' \
-    --password='$PASSWORD' \
-    --authenticationDatabase='admin' \
-    --db='$DB_NAME' \
-    --archive --gzip" > "$BACKUP_FILE"
+# Create backup with today's date
+DATE=$(date +%Y%m%d)
+BACKUP_NAME="backup_${DATE}"
 
-# === Cleanup old backups (older than 7 days) ===
-find "$BACKUP_DIR" -type f -name "*.gz" -mtime +$DAYS_TO_KEEP -exec rm {} \;
+# Do the backup
+docker exec mongo mongodump \
+  --username="$PROD___MONGO_INITDB_ROOT_USERNAME" \
+  --password="$PROD___MONGO_INITDB_ROOT_PASSWORD" \
+  --db="$PROD___MONGO_INITDB_DATABASE" \
+  --out="/tmp/$BACKUP_NAME"
+
+# Copy backup from container to your computer
+docker cp mongo:/tmp/$BACKUP_NAME ./mongo_backups/
+
+# Delete backups older than 7 days
+find ./mongo_backups -type f -mtime +7 -delete
+
+# Clean up container
+docker exec mongo rm -rf "/tmp/$BACKUP_NAME"
+
+echo "Backup done: mongo_backups/$BACKUP_NAME"
