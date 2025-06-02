@@ -71,7 +71,7 @@ const ForgotPassword = () => {
               <div className="ecom-wc__form">
                 <div className="ecom-wc__form-inner">
                   <h3 className="ecom-wc__form-title ecom-wc__form-title__one">
-                    {capitalizePhrase(t(getText.login.login.title))}
+                    {capitalizePhrase(t(getText.login.forgotPassword.title))}
 
                   </h3>
                   {/* Sign in Form  */}
@@ -96,7 +96,7 @@ const ForgotPassword = () => {
                           type="submit"
                           disabled={isSubmitting}
                         >
-                          <span>{isSubmitting ? capitalizePhrase(t(getText.common.loading)) : "send email"}</span>
+                          <span>{isSubmitting ? capitalizePhrase(t(getText.common.loading)) : capitalizePhrase(t(getText.common.sendMail)) }</span>
                         </button>
 
                       </div>

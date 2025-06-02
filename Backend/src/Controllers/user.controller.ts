@@ -175,7 +175,7 @@ export const refresh = async (req: Request, res: Response, next: NextFunction) =
 
 export const me = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 
-    console.log('t5l rabk')
+
     const userId = (req.user as any)?.id
 
     if (!userId) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
@@ -183,10 +183,6 @@ export const me = async (req: AuthenticatedRequest, res: Response, next: NextFun
     const user = await User.findById(userId);
 
     if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
-
-    console.log("user document ;;; ", user)
-    console.log("user json ;;; ", user.toJSON())
-
 
     res.status(statusCode.OK).json({
         result: user,

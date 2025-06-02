@@ -4,6 +4,7 @@ const login={
         description: "login:login.description",
         noAccount: "login:login.noAccount",
         cretaeAccount: "login:login.cretaeAccount",
+        forgotPassword: "login:login.forgotPassword",
         allRightsReserved: "login:login.allRightsReserved"
     },
     signUp: {
@@ -13,6 +14,9 @@ const login={
         btn: "login:signUp.btn",
         login: "login:signUp.login",
         allRightsReserved: "login:signUp.allRightsReserved"
+    },
+    forgotPassword: {
+        title: "login:forgotPassword.title"
     }
 }
 

@@ -49,6 +49,7 @@ const common = {
     save: "common:save",
     sendMessageNow: "common:sendMessageNow",
     propertyAgent: "common:propertyAgent",
+    sendMail:"common:sendMail",
     state: {
         toBeDeleted: 'common:state.toBeDeleted',
         toBeUpdated: 'common:state.toBeUpdated',

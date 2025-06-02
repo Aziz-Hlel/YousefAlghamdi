@@ -4,6 +4,7 @@
         "description": "لن يتم نشر عنوان بريدك الإلكتروني. الحقول المطلوبة محددة بـ *",
         "noAccount": "ليس لديك حساب ؟",
         "cretaeAccount": "إنشاء حساب",
+        "forgotPassword": "نسيت كلمة المرور ؟",
         "allRightsReserved": "© 2025 Yousef Alghamdi Properties. جميع الحقوق محفوظة لـ"
     },
     "signUp": {
@@ -13,5 +14,8 @@
         "btn": "التسجيل",
         "login": "تسجيل الدخول",
         "allRightsReserved": "© 2025 Yousef Alghamdi Properties. جميع الحقوق محفوظة لـ"
+    },
+    "forgotPassword": {
+        "title": "نسيت كلمة المرور"
     }
 }

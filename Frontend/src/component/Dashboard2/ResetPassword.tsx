@@ -67,7 +67,6 @@ function ResetPassword() {
           <div className=" md:w-1/2 ">
             <h3 className="ecom-wc__form-title homec-dashboard__password">
               {capitalizePhrase(t(getText.dashboard.changePassword.title))}
-
             </h3>
             {/* Sign in Form */}
             <form

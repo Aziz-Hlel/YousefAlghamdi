@@ -132,7 +132,7 @@ const Login = () => {
                           <Link to="/signup">{capitalizePhrase(t(getText.login.login.cretaeAccount))}</Link>
 
                         </p>
-                        <p className="ecom-wc__text"><Link to={"/forgot-password"}>Forgot Password ?</Link> </p>
+                        <p className="ecom-wc__text"><Link to={"/forgot-password"}>{capitalizePhrase(t(getText.login.login.forgotPassword))}</Link> </p>
                       </div>
                     </div>
                   </form>

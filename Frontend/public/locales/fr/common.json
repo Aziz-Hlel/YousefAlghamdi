@@ -48,6 +48,7 @@
     "save": "sauvegarder",
     "sendMessageNow": "Envoyer le Message maintenant",
     "propertyAgent": "Agent de Propriété",
+    "sendMail": "Envoyer un Email",
     "state": {
         "toBeDeleted": "àSupprimer",
         "toBeUpdated": "àMettre à Jour",

@@ -42,7 +42,6 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response, n
                 if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
                 agentId = user?.clientInfo?.agentId;
             } catch (e) {
-                console.log(e)
                 next(e);
             }
         }

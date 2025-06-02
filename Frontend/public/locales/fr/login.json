@@ -4,6 +4,7 @@
         "description": "Votre adresse email ne sera pas publiée. Les champs obligatoires sont indiqués avec *",
         "noAccount": "Vous n'avez pas de compte ?",
         "cretaeAccount": "Créer un compte",
+        "forgotPassword": "Mot de passe oublié ?",
         "allRightsReserved": "© 2025 Yousef Alghamdi Properties. Tous droits réservés par"
     },
     "signUp": {
@@ -13,5 +14,8 @@
         "btn": "S'inscrire",
         "login": "Connexion",
         "allRightsReserved": "© 2025 Yousef Alghamdi Properties. Tous droits réservés par"
+    },
+    "forgotPassword": {
+        "title": "Mot de passe oublié"
     }
 }

@@ -48,6 +48,7 @@
     "save": "حفظ",
     "sendMessageNow": "ارسل الرسالة الان",
     "propertyAgent": "وكيل العقار",
+    "sendMail": "ارسل بريد",
     "state": {
         "toBeDeleted": "للحذف",
         "toBeUpdated": "للتحديث",

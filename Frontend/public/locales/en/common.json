@@ -48,6 +48,7 @@
     "save": "save",
     "sendMessageNow": "Send Message Now",
     "propertyAgent": "Property Agent",
+    "sendMail": "Send Mail",
     "state": {
         "toBeDeleted": "toBeDeleted",
         "toBeUpdated": "toBeUpdated",
