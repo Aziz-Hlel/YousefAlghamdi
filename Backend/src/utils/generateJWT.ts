@@ -1,74 +1,64 @@
-import { Response } from "express";
-import jwt from "jsonwebtoken";
-import { IUser_model } from "../Models/user.model";
-import ENV from "./ENV.variables";
+// services/tokenService.ts
+import jwt from 'jsonwebtoken';
+import { IUser } from '../Models/user.model';
+import ENV from './ENV.variables';
 
-
-
-const ACCESS_SECRET = ENV.JWT_ACCESS_SECRET
-const REFRESH_SECRET = ENV.JWT_REFRESH_SECRET
-export const NODE_ENV = ENV.NODE_ENV;
-
-
-const accessTokenLifeSpan = "5m";
-const refreshTokenLifeSpan = "30m";
-
-
-const generateAccessToken = (payload: { [key: string]: any }) => {
-
-    return jwt.sign(payload, ACCESS_SECRET, { expiresIn: accessTokenLifeSpan });
-
-};
-
-
-const generateRefreshToken = (payload: { [key: string]: any }) => {
-
-    return jwt.sign(payload, REFRESH_SECRET, { expiresIn: refreshTokenLifeSpan });
-
-};
-
-
-
-
-
-const generateToken = (res: Response, user: IUser_model) => {
-
-    const payload = {
-        _id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        savedProperties: user.savedProperties,
-        role: user.role,
-        clientInfo: user.clientInfo,
-        agentInfo: user.agentInfo,
-        adminInfo: user.adminInfo,
-
-    };
-
-    const accessToken = generateAccessToken(payload);
-    const refreshToken = generateRefreshToken(payload);
-
-    res.cookie("accessToken", accessToken, {
-        httpOnly: true,
-        secure: NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-
-    });
-
-    res.cookie("refreshToken", refreshToken, {
-        httpOnly: true,
-        secure: NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-
-
-    res.json({ result: payload });
-
+interface TokenPayload {
+    id: string;
+    email: string;
+    role?: string;
 }
 
+export class TokenService {
+    // Short-lived access token (15-30 minutes)
+    static generateAccessToken(user: IUser): string {
+        const payload: TokenPayload = {
+            id: user._id.toString(),
+            email: user.email,
+            role: user.role
+        };
 
-export default generateToken;
+        return jwt.sign(payload, ENV.JWT_ACCESS_SECRET, {
+            expiresIn: '2d',
+        });
+    }
+
+    // Long-lived refresh token (7-30 days)
+    static generateRefreshToken(user: IUser): string {
+        const payload: TokenPayload = {
+            id: user._id.toString(),
+            email: user.email,
+            role: user.role 
+        };
+        return jwt.sign(payload, ENV.JWT_REFRESH_SECRET, {
+            expiresIn: '60d'
+        });
+    }
+
+    // Store refresh token in database (critical for security)
+    //   static async storeRefreshToken(userId: string, refreshToken: string): Promise<void> {
+    //     await RefreshToken.create({
+    //       userId,
+    //       token: refreshToken,
+    //       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 days
+    //     });
+    //   }
+
+    // Validate and rotate refresh token
+    static async validateRefreshToken(token: string): Promise<string | null> {
+        try {
+            const decoded = jwt.verify(token, ENV.JWT_REFRESH_SECRET);
+
+            return (decoded as any).id;
+            // const storedToken = await RefreshToken.findOne({ token });
+
+            // if (!storedToken || storedToken.expiresAt < new Date()) {
+            //     return null;
+            // }
+
+            // return storedToken.userId;
+        } catch {
+            return null;
+        }
+    }
+}

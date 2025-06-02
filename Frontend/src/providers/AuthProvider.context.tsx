@@ -145,13 +145,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             tokenManager.setTokens(accessToken, refreshToken);
             setUser(user)
         }
-        
+
         else setUser(null);
         return response
 
     }
 
     const login = async (data: LoginFormFields): Promise<AxiosResponse<any, any> | undefined> => {
+
+        
         const response = await Http.post(apiGateway.user.sigIn, data)
 
 
@@ -162,7 +164,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
             setUser(user)
         }
-        else setUser(null);
+
 
         return response
     };
@@ -170,8 +172,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const logout = async () => {
         console.log("🔥💀🚀🛸🔥💀🚀🛸 logoutaaaaaaaaaaaaaa!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-        await Http.post(apiGateway.user.logOut, {})
         setUser(null);
+        tokenManager.clearTokens();
+
     };
 
     const contextValue: IAuthContext = {

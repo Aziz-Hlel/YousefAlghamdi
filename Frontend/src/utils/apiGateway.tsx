@@ -11,7 +11,6 @@ const apiGateway = {
     baseUrl: baseUrl,
 
     user: {
-        whoAmI: "/user/",
         me: "/user/me",
         signUp: "/user/register",
         sigIn: "/user/login",
@@ -20,6 +19,8 @@ const apiGateway = {
         updateAgent: "/user/update-agent",
         update: "/user/update-user",
         logOut: "/user/log-out",
+        requestResetPassword: "/user/request-reset-password",
+        resetPassword: "/user/reset-password",
         changePassword: "/user/change-password",
     },
 

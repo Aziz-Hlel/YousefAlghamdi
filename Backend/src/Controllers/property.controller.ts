@@ -243,7 +243,7 @@ export const listProperties = async (req: Request, res: Response, next: NextFunc
 
     } catch (error) {
         console.error('Error in listProperties:', error);
-        next(errorHandler(error, "501"));
+        return next(errorHandler(error, "501"));
     }
 };
 

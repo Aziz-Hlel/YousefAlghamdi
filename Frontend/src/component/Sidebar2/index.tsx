@@ -3,7 +3,7 @@ import RangeInput from "../Form/RangeInput2";
 import { useFormContext } from "../Property2/FilterProvider.context";
 import { useSearchParams } from "react-router-dom";
 import { listing_typesValues } from "@src/types/listing_types.types";
-import { categoriesList, categoriesType, commercialCategories, ICategory, nonCommercialCategories, sub_categories } from "@src/types/categories.subcategories.types";
+import { categoriesList, commercialCategories, ICategory, nonCommercialCategories, sub_categories } from "@src/types/categories.subcategories.types";
 import { cities, citiesType, delegations } from "@src/types/cities.delegations.types";
 import { useEffect } from "react";
 import getText from "@src/i18n/data/getText";

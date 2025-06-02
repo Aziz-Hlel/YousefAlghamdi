@@ -22,6 +22,6 @@ export const authenticateToken = (req: AuthRequest, res: Response, next: NextFun
         req.user = decoded;
         next();
     } catch (error) {
-        next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN))
+        return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN))
     }
 };

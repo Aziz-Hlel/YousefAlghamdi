@@ -16,7 +16,7 @@ type SidebarProps = {
 
 const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
 
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
 
   const { t } = useTranslation(['home', 'dashboard']);
   { capitalizePhrase(t(getText.common.test)) }
@@ -206,9 +206,9 @@ const Sidebar = ({ activeComponent, setComponent }: SidebarProps) => {
         }
         <DashboardSidebarBtn
           active={activeComponent}
-          handleActive={setComponent}
+          handleActive={(_:string) => logout()}
           title={capitalizePhrase(t(getText.dashboard.logout))}
-          path="../../"
+          path="../../../"
         >
           <svg
             width="18"

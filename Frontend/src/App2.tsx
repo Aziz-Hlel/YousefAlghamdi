@@ -32,6 +32,8 @@ import roles from "./types/roles.type.js";
 import CU_Sponsor from "./component/Dashboard2/SponsorsEdit/CU_Sponsor.js";
 import AboutUs from "./component/CeoComp/index.js";
 import FloatingContactButton from "./component/FloatingContactButton/FloatingContactButton.js";
+import ResetPassword from "./component/Dashboard2/ResetPassword.js";
+import ForgotPassword from "./component/Forgot Password/index.js";
 
 
 
@@ -60,7 +62,7 @@ const App2 = () => {
                                 <Route path="home" element={<Home />} />
                                 <Route path="property" element={<Property />} />
 
-
+                                <Route path="reset-password" element={<ResetPassword />} />
                                 <Route path="property-single/:propertyId" element={<PropertySingle />} />
 
 
@@ -123,6 +125,7 @@ const App2 = () => {
 
                             </Route>
 
+                            <Route path="forgot-password" element={<ForgotPassword />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/signup" element={<SignUp />} />
 

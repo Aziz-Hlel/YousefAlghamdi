@@ -82,7 +82,7 @@ export async function sendResetPasswordEmail({ email, resetUrl }: { email: strin
     const subject = "Reset Your Password"
     const to = [email]
 
-    const logoUrl = "https://ygp.ae/api/img/logo.png"
+    const logoUrl = "https://ygp.ae/api/img/logo2.png"
     html = html
         .replace(/{{RESET_LINK}}/g, resetUrl)
         .replace(/{{COMPANY_NAME}}/g, "YGP")

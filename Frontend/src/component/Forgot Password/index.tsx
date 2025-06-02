@@ -5,24 +5,23 @@ import Preloader from "../Loader";
 import { Link, useNavigate } from "react-router-dom";
 import logo_img from "@img/logo_sign_in.jpg"
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useAuth } from "@src/providers/AuthProvider.context";
 import { useTranslation } from "react-i18next";
 import getText from "@src/i18n/data/getText";
 import { capitalizePhrase } from "@src/utils/capitalize_decapitalized";
+import Http from "@src/services/Http";
+import apiGateway from "@src/utils/apiGateway";
+import { Alert } from "@src/utils/createAlert";
 
 export type LoginFormFields = {
   email: string;
-  password: string;
 };
 
 
-const Login = () => {
+const ForgotPassword = () => {
 
 
-  const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<LoginFormFields>();
-  const { login } = useAuth();
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginFormFields>();
   const { t } = useTranslation(["common", "errors",]);
-  const navigate = useNavigate();
 
   const emailRegister = register("email", {
     required: capitalizePhrase(t(getText.errors.login.email.required)),
@@ -34,29 +33,16 @@ const Login = () => {
     },
   });
 
-  const passwordRegister = register("password", {
-    required: capitalizePhrase(t(getText.errors.login.password.required)),
-    minLength: {
-      value: 1,
-      message: capitalizePhrase(t(getText.errors.login.email.invalidEmailAddress)),
-
-    }
-
-  });
 
 
 
   const onSubmit: SubmitHandler<LoginFormFields> = async (data) => {
 
-    // const response = await Http.post(apiGateway.user.sigIn, data)
-    const response = await login(data)
+    const response = await Http.post(apiGateway.user.requestResetPassword, data)
+    response?.status === 200 && Alert({ title: "Success", text: "Password reset link has been sent to your email", icon: "success" })
+    response?.status === 200 && navigate("/login");
+    if (response?.status !== 200) Alert({ title: "Error", text: "Something went wrong, cannot create property", icon: "error" })
 
-    response?.status === 200 ? navigate("/") : console.log(response);
-    if (response?.status !== 200) {
-      setError("email", { message: "" })
-      setError("password", { message: "" })
-      setError("root", { message: capitalizePhrase(t(getText.errors.login.invalidCredentials)) })
-    }
 
   }
 
@@ -67,6 +53,7 @@ const Login = () => {
     setisLoadingg(false);
   }, []);
 
+  const navigate = useNavigate();
 
 
   let component = undefined;
@@ -86,9 +73,6 @@ const Login = () => {
                   <h3 className="ecom-wc__form-title ecom-wc__form-title__one">
                     {capitalizePhrase(t(getText.login.login.title))}
 
-                    <span>
-                      {capitalizePhrase(t(getText.common.noPublishPersonalInfo))}
-                    </span>
                   </h3>
                   {/* Sign in Form  */}
                   <form
@@ -101,13 +85,6 @@ const Login = () => {
                       fieldError={errors.email}
                       placeholder="demo3243@gmail.com"
                     />
-                    <PropertyTextInput
-                      title={capitalizePhrase(t(getText.common.password))}
-                      fieldRegister={passwordRegister}
-                      fieldError={errors.password}
-                      placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-                      type="password"
-                    />
 
                     {errors.root && <span className="pl-2 text-red-600 ">{errors.root.message}</span>}
 
@@ -119,7 +96,7 @@ const Login = () => {
                           type="submit"
                           disabled={isSubmitting}
                         >
-                          <span>{isSubmitting ? capitalizePhrase(t(getText.common.loading)) : capitalizePhrase(t(getText.login.login.title))}</span>
+                          <span>{isSubmitting ? capitalizePhrase(t(getText.common.loading)) : "send email"}</span>
                         </button>
 
                       </div>
@@ -128,11 +105,8 @@ const Login = () => {
                     <div className="form-group mg-top-20">
                       <div className="ecom-wc__bottom">
                         <p className="ecom-wc__text">
-                          {capitalizePhrase(t(getText.login.login.noAccount))}
-                          <Link to="/signup">{capitalizePhrase(t(getText.login.login.cretaeAccount))}</Link>
-
+                          <Link to="/login">{capitalizePhrase(t(getText.common.cancel))}</Link>
                         </p>
-                        <p className="ecom-wc__text"><Link to={"/forgot-password"}>Forgot Password ?</Link> </p>
                       </div>
                     </div>
                   </form>
@@ -159,4 +133,4 @@ const Login = () => {
   return component;
 }
 
-export default Login;
+export default ForgotPassword;

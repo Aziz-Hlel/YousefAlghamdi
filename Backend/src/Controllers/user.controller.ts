@@ -11,7 +11,7 @@ import Property from "../Models/property.model";
 import ENV from "../utils/ENV.variables";
 import crypto from "crypto";
 import { sendResetPasswordEmail } from "../services/emailService";
-import { TokenService } from "../utils/generateJWT2";
+import { TokenService } from "../utils/generateJWT";
 
 
 export const test = async (req: AuthenticatedRequest, res: Response) => {
@@ -171,22 +171,6 @@ export const refresh = async (req: Request, res: Response, next: NextFunction) =
 
 }
 
-export const whoAmI = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-
-    const userId = req.user?.id
-
-    if (!userId) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
-
-    const user = await User.findById(userId).select("-password");
-
-    if (!user) return next(errorHandler(statusCode.UNAUTHORIZED, errorMessages.AUTH.INVALID_TOKEN));
-
-
-    res.status(statusCode.OK).json({
-        result: user,
-    });
-
-}
 
 
 export const me = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
@@ -405,8 +389,6 @@ export const deleteUser = async (req: AuthenticatedRequest, res: Response, next:
         return next(error);
     };
 
-    res.cookie("accessToken", '', { httpOnly: true, secure: ENV.NODE_ENV === "production", sameSite: 'strict' });
-    res.cookie("refreshToken", '', { httpOnly: true, secure: ENV.NODE_ENV === "production", sameSite: 'strict' });
 
 
 };
@@ -416,7 +398,8 @@ export const deleteUser = async (req: AuthenticatedRequest, res: Response, next:
 
 
 export const requestResetPassword = async (req: Request, res: Response, next: NextFunction) => {
-    console.log('requestResetPassword');
+
+
     const { email } = req.body;
     const user = await User.findOne({ email });
 
@@ -426,7 +409,7 @@ export const requestResetPassword = async (req: Request, res: Response, next: Ne
     const hash = crypto.createHash("sha256").update(token).digest("hex");
 
     user.resetPasswordToken = hash;
-    user.resetPasswordExpires = new Date(Date.now() + 1000 * 60 * 60); // 1 hour
+    user.resetPasswordExpires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 1 hour
     await user.save();
 
 
@@ -441,4 +424,38 @@ export const requestResetPassword = async (req: Request, res: Response, next: Ne
 
 
     res.status(statusCode.OK).json('Password reset link sent successfully');
+}
+
+
+
+
+export const resetPassword = async (req: Request, res: Response, next: NextFunction) => {
+
+    const { password, confirmPassword } = req.body;
+
+    if (!password || !confirmPassword) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+    console.log('osulll1')
+    if (password !== confirmPassword) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+    console.log('osulll2')
+    if (password.length < 6) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    console.log('osulll')
+    const token = req.query.token as string;
+    const email = req.query.email as string;
+
+    if (!token || !email) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    const user = await User.findOne({ email });
+    if (!user) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    const hash = crypto.createHash("sha256").update(token).digest("hex");
+
+    if (user.resetPasswordToken !== hash) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    if (!user.resetPasswordExpires || user.resetPasswordExpires.getTime() < Date.now()) return next(errorHandler(statusCode.BAD_REQUEST, errorMessages.COMMON.BAD_Request));
+
+    (user as any).password = password;
+    await (user as any).save();
+
+    res.status(statusCode.OK).json('Password updated successfully');
 }

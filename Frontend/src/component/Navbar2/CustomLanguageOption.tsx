@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { changeLanguage, getCurrentLanguage, getCurrentLanguageIcon, languages } from '@src/i18n/i18n';
+import { changeLanguage, getCurrentLanguageIcon, languages } from '@src/i18n/i18n';
 
 
 
@@ -25,9 +25,7 @@ const CustomLanguageOption = () => {
 
 
 
-    const currentLanguage = getCurrentLanguage();
     const currentLanguageIcon = getCurrentLanguageIcon();
-    console.log("currentLanguage", currentLanguage); // Will now log "en" not "en-US"
 
     const handleLanguageChange = async (newLang: string) => {
 
