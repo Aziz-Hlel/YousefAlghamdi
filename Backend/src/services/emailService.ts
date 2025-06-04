@@ -95,7 +95,7 @@ export async function sendResetPasswordEmail({ email, resetUrl }: { email: strin
     //     `;
 
     const mailOptions = {
-        from: `"Message From Contact Us" <${ENV.EMAIL_USER}>`,
+        from: `"YGP Team" <${ENV.EMAIL_USER}>`,
         to,
         subject,
         html,

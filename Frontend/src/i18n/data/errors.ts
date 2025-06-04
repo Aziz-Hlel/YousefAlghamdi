@@ -73,11 +73,11 @@ const errors = {
         },
         password: {
             required: "errors:changePassword.password.required",
-            atLeast8: "errors:changePassword.password.atLeast8",
+            atLeast6: "errors:changePassword.password.atLeast6",
         },
         confirmPassword: {
             required: "errors:changePassword.confirmPassword.required",
-            atLeast8: "errors:changePassword.confirmPassword.atLeast8",
+            atLeast6: "errors:changePassword.confirmPassword.atLeast6",
             doNotMatch: "errors:changePassword.confirmPassword.doNotMatch"
         },
 

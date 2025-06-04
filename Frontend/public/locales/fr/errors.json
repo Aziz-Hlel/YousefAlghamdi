@@ -66,11 +66,11 @@
         },
         "password": {
             "required": "Le mot de passe est requis",
-            "atLeast8": "Le mot de passe doit contenir au moins 8 caractères"
+            "atLeast6": "Le mot de passe doit contenir au moins 6 caractères"
         },
         "confirmPassword": {
             "required": "La confirmation du mot de passe est requise",
-            "atLeast8": "La confirmation du mot de passe doit contenir au moins 8 caractères",
+            "atLeast6": "La confirmation du mot de passe doit contenir au moins 6 caractères",
             "doNotMatch": "Les mots de passe ne correspondent pas"
         }
     },

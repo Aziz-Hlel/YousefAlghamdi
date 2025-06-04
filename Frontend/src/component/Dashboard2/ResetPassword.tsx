@@ -25,7 +25,7 @@ function ResetPassword() {
   const { t } = useTranslation(["common", "dashboard", "errors"]);
   const passwordRegister = register("password", {
     required: capitalizePhrase(t(getText.errors.changePassword.password.required)),
-    minLength: { value: 8, message: capitalizePhrase(t(getText.errors.changePassword.password.atLeast8)) },
+    minLength: { value: 6, message: capitalizePhrase(t(getText.errors.changePassword.password.atLeast6)) },
 
   });
 
@@ -34,7 +34,7 @@ function ResetPassword() {
 
     required: capitalizePhrase(t(getText.errors.changePassword.confirmPassword.required)),
 
-    minLength: { value: 8, message: capitalizePhrase(t(getText.errors.changePassword.confirmPassword.atLeast8)) }
+    minLength: { value: 6, message: capitalizePhrase(t(getText.errors.changePassword.confirmPassword.atLeast6)) }
 
   });
 

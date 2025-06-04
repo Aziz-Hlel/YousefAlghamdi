@@ -66,11 +66,11 @@
         },
         "password": {
             "required": "Password is required",
-            "atLeast8": "Password must be at least 8 characters"
+            "atLeast6": "Password must be at least 6 characters"
         },
         "confirmPassword": {
             "required": "Confirm password is required",
-            "atLeast8": "Confirm password must be at least 8 characters",
+            "atLeast6": "Confirm password must be at least 6 characters",
             "doNotMatch": "Passwords do not match"
         }
     },
