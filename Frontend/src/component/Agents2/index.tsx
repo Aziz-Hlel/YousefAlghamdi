@@ -41,11 +41,11 @@ const Agents = () => {
         {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"> */}
         <div className="lg:flex gap-8  lg:justify-center  grid grid-cols-1 sm:grid-cols-2
       ">
-          {agents && Object.keys(agents)?.map((agentId, index) => {
+          {agents && Object.keys(agents)?.map((agentId, _) => {
             const agent = agents[agentId];
             return <AgentCardV2_2
-              key={agent._id}
-              agentId={agent._id}
+              key={agent.id}
+              agentId={agent.id}
               img={agent.agentInfo.imageGallery.mainImage.url}
               name={`${agent.firstName} ${agent.lastName}`}
               position={capitalizePhrase(t(getText.home.Agents.realEstateBroker))}

@@ -7,7 +7,7 @@ export type IAgent = {
     firstName: string;
     lastName: string;
     email: string;
-    _id: string;
+    id: string;
     role: string;
     phoneNumber: string;
 
