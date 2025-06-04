@@ -60,6 +60,7 @@ const ApproveSubmitPropertySchema = z.object({
     }),
 
     listing_type: z.string({ required_error: "Listing type is required" }),
+    listing_period: z.string({ required_error: "Listing period is required" }),
     nearestPlaces: z.record(z.string(), z.string()).default({}),
 
 

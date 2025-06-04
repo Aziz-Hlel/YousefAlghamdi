@@ -513,7 +513,7 @@ export const updateProperty = async (req: AuthenticatedRequest, res: Response, n
     }
     catch (error) {
         // console.log(error)
-        next(error);
+        return next(error);
     };
 
 

@@ -74,7 +74,7 @@ const PropertyFrom = () => {
 
     if (!property) return
     //walli na77i linspected property w3tih direct ml property
-    if ([statesTypes.active, statesTypes.toBeAdded, statesTypes.toBeDeleted].includes(property.advanced.state))
+    if ([statesTypes.active, statesTypes.toBeAdded, statesTypes.toBeDeleted, statesTypes.unavailable].includes(property.advanced.state))
       setInspectedProperty(property)
 
 
