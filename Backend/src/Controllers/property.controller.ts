@@ -317,9 +317,14 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
 
             // the statesTypes.ToBeUpdate have a signed Url too for 7amma
             const updatedProperties2 = updatedProperties.map((propertyWithSignedUrls: any) => {
-                if (propertyWithSignedUrls.advanced.state === statesTypes.toBeUpdated) {
+                try {
 
-                    propertyWithSignedUrls.advanced.updated_version.imageGallery.images = propertyWithSignedUrls.advanced.updated_version.imageGallery.images.map((image: any) => ({ key: image.key, url: getCDN_SignedUrl(image.key) }))
+                    if (propertyWithSignedUrls.advanced.state === statesTypes.toBeUpdated) {
+
+                        propertyWithSignedUrls.advanced.updated_version.imageGallery.images = propertyWithSignedUrls.advanced.updated_version.imageGallery.images.map((image: any) => ({ key: image.key, url: getCDN_SignedUrl(image.key) }))
+                    }
+                } catch (error) {
+                    console.log(error)
                 }
                 return propertyWithSignedUrls
 
