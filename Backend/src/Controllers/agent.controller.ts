@@ -103,7 +103,7 @@ export const getAgents = async (req: Request, res: Response, next: NextFunction)
             User.countDocuments({ role: roles.AGENT })
         ]);
 
-        const updatedAgents = agents.map((agent) => addSignedUrlToAgent(agent.toObject() as IAgent));
+        const updatedAgents = agents.map((agent) => addSignedUrlToAgent(agent.toJSON() as IAgent));
 
         res.set("x-total-count", agentsCount.toString());
         res.json({

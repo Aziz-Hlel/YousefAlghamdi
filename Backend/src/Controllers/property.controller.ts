@@ -315,11 +315,22 @@ export const getUserProperties = async (req: AuthenticatedRequest, res: Response
 
             const updatedProperties = properties.map((property) => addSignedUrl(property));
 
+            // the statesTypes.ToBeUpdate have a signed Url too for 7amma
+            const updatedProperties2 = updatedProperties.map((propertyWithSignedUrls: any) => {
+                if (propertyWithSignedUrls.advanced.state === statesTypes.toBeUpdated) {
+
+                    propertyWithSignedUrls.advanced.updated_version.imageGallery.images = propertyWithSignedUrls.advanced.updated_version.imageGallery.images.map((image: any) => ({ key: image.key, url: getCDN_SignedUrl(image.key) }))
+                }
+                return propertyWithSignedUrls
+
+            })
+
+
             res.set("x-total-count", total.toString()); // Optional, useful for frontend
 
             res.json({
 
-                result: updatedProperties,
+                result: updatedProperties2,
 
             });
 
