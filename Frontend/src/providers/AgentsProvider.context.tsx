@@ -58,10 +58,11 @@ export const AgentsProvider = ({ children }: { children: React.ReactNode }) => {
         const response = await Http.get(apiGateway.agent.list);
         const agentDic: IAgentDic = {}
         response?.data.result.map((agent: any) => {
-            agentDic[agent._id] = agent;
+            agentDic[agent.id] = agent;
         })
 
         setAgents(agentDic);
+console.log("agentttt",agentDic);
 
     }
 
