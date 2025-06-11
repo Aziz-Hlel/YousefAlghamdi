@@ -62,7 +62,7 @@ export const AgentsProvider = ({ children }: { children: React.ReactNode }) => {
         })
 
         setAgents(agentDic);
-console.log("agentttt",agentDic);
+        console.log("agentttt",agentDic);
 
     }
 

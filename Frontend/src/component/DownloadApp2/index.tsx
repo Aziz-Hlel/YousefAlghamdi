@@ -32,7 +32,7 @@ function DownloadApp() {
                   data-aos-delay="400"
                 >
                   <h2 className="homec-section__title">
-                   { capitalizePhrase(t(getText.home.DownloadApp.title)) }
+                    {capitalizePhrase(t(getText.home.DownloadApp.title))}
                   </h2>
                   <p className="sec-head__text">
                     {/* { capitalizePhrase(t(getText.home.DownloadApp.description)) } */}
@@ -45,14 +45,14 @@ function DownloadApp() {
                   data-aos-delay="500"
                 >
                   <DownloadAppBtn
-                    link="#"
-                    download={ capitalizePhrase(t(getText.home.DownloadApp.download.downloadOnTHe)) }
-                    location={ capitalizePhrase(t(getText.home.DownloadApp.download.appStore)) }
+                    link="https://apps.apple.com/app/id6746794779"
+                    download={capitalizePhrase(t(getText.home.DownloadApp.download.downloadOnTHe))}
+                    location={capitalizePhrase(t(getText.home.DownloadApp.download.appStore))}
                   />
                   <DownloadAppBtn
-                    link="#"
-                    download={ capitalizePhrase(t(getText.home.DownloadApp.download.getItOn)) }
-                    location={ capitalizePhrase(t(getText.home.DownloadApp.download.googlePlay)) }
+                    link="https://play.google.com/store/apps/details?id=com.techno.ygp_app"
+                    download={capitalizePhrase(t(getText.home.DownloadApp.download.getItOn))}
+                    location={capitalizePhrase(t(getText.home.DownloadApp.download.googlePlay))}
                   />
                 </div>
 
@@ -64,7 +64,7 @@ function DownloadApp() {
                 data-aos="fade-up"
                 data-aos-delay="700"
               >
-                <img src="/assets/app-screen.png" alt="#" />
+                <img src="/assets/app-screen2.png" alt="#" />
               </div>
             </div>
           </div>

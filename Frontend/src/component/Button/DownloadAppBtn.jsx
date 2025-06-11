@@ -5,6 +5,8 @@ function DownloadAppBtn({ link, download, location }) {
     <a
       href={link}
       className="homec-btn homec-btn-primary-overlay homec-btn__download"
+      target="_blank"
+      rel="noreferrer"
     >
       <div className="homec-btn__inside">
         <i className="fa-brands fa-apple"></i>
