@@ -22,14 +22,12 @@ const registerBodySchema = z.object({
     firstName: z.string({ required_error: "First name is required" })
         .min(1, { message: "First name is required" })  // Custom message for required field
         .min(2, { message: "First name must be at least 2 characters long" })
-        .max(25, { message: "First name must be at most 25 characters long" })
-        .regex(/^[A-Za-z\s]+$/, { message: "First name can only contain letters" }),
+        .max(25, { message: "First name must be at most 25 characters long" }),
 
 
     lastName: z.string({ required_error: "Last name is required" })
         .min(1, { message: "Last name must be at least 2 characters long" })
-        .max(25, { message: "Last name must be at most 25 characters long" })
-        .regex(/^[A-Za-z\s]+$/, { message: "Last name can only contain letters" }),
+        .max(25, { message: "Last name must be at most 25 characters long" }),
 
 
     phoneNumber: z.string({ required_error: "Phone number is required" })
