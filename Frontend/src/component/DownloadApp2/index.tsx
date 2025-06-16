@@ -64,7 +64,7 @@ function DownloadApp() {
                 data-aos="fade-up"
                 data-aos-delay="700"
               >
-                <img src="/assets/app-screen2.png" alt="#" />
+                <img src="/assets/app-screen3.png" alt="#" />
               </div>
             </div>
           </div>
