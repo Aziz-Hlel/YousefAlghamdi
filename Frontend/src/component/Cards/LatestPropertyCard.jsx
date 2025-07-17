@@ -63,7 +63,7 @@ function LatestPropertyCard({
         <div className="homec-property__body">
           <div className="homec-property__topbar">
             <div className="homec-property__price">
-              ${price} <span>/{period}</span>
+              $ {price} <span>/{period}</span>
             </div>
 
             <div className=" flex justify-center items-center gap-2 ">
