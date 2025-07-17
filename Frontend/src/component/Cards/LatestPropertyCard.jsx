@@ -63,6 +63,7 @@ function LatestPropertyCard({
         <div className="homec-property__body">
           <div className="homec-property__topbar">
             <div className="homec-property__price">
+              <img src="/UAE_Dirham_Symbol.svg" alt="" />
               $ {price} <span>/{period}</span>
             </div>
 

@@ -50,6 +50,8 @@ services:
         - EMAIL_SECURE=${DEV___EMAIL_SECURE}
         - EMAIL_USER=${DEV___EMAIL_USER}
         - EMAIL_PASS=${DEV___EMAIL_PASS}
+        - CHOKIDAR_USEPOLLING=true
+        - WATCHPACK_POLLING=true
   
     ports:
       - 5000:5000
