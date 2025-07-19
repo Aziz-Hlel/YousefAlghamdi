@@ -60,7 +60,7 @@ const ApproveSubmitPropertySchema = z.object({
     }),
 
     listing_type: z.string({ required_error: "Listing type is required" }),
-    listing_period: z.string({ required_error: "Listing period is required" }),
+    listing_period: z.string({ required_error: "Listing period is required" }).optional(),
     nearestPlaces: z.record(z.string(), z.string()).default({}),
 
 
@@ -69,7 +69,15 @@ const ApproveSubmitPropertySchema = z.object({
     clientId: z.string({ required_error: "Client id is required" }),
     agentId: z.string({ required_error: "Agent id is required" }),
 
-});
+}).superRefine((data, ctx) => {
+    if (data.listing_type.toLowerCase().includes('rent') && !data.listing_period) {
+        ctx.addIssue({
+            path: ['listing_period'],
+            code: z.ZodIssueCode.custom,
+            message: "Listing period is required", // Or a more specific message
+        });
+    }
+});;
 
 
 export default ApproveSubmitPropertySchema;
