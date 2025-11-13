@@ -7,7 +7,7 @@
 services:
 
   proxy:
-    container_name: proxy-stage
+
     build:
       context: ./Frontend
       dockerfile: Dockerfile.stage
@@ -34,12 +34,8 @@ services:
 
     restart: unless-stopped
 
-    networks:
-      - app-network
 
   server:
-
-    container_name: server-stage
 
     build:
       context: ./Backend
@@ -80,17 +76,14 @@ services:
     depends_on:
       - mongo
 
-    networks:
-      - app-network
 
   mongo:
-
-    container_name: mongo-stage
 
     image: mongo:latest
 
     volumes:
       - mongo-stage-data:/data/db
+      - ./backups:/backups
 
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${STAGE___MONGO_INITDB_ROOT_USERNAME}
@@ -103,23 +96,36 @@ services:
     command: mongod --logpath /dev/null # For no logs at all
 
     healthcheck:
-      test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
-      interval: 30s
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
       timeout: 10s
       retries: 5
       start_period: 10s
 
     restart: unless-stopped
 
-    networks:
-      - app-network
+
+  db-backup:
+    container_name: db-backup
+    build:
+      context: .
+      dockerfile: Dockerfile.dbBackup
+    environment:
+      DB_HOST: ${STAGE___MONGO_INITDB_ROOT_USERNAME}
+      DB_USER: ${STAGE___MONGO_INITDB_ROOT_USERNAME}
+      DB_PASS: ${STAGE___MONGO_INITDB_ROOT_PASSWORD}
+      DB_NAME: ${STAGE___MONGO_INITDB_DATABASE}
+
+    volumes:
+      - ./backups:/backups
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: unless-stopped
+
+
 
 volumes:
   caddy-stage-data:
   caddy-stage-config:
   mongo-stage-data:
-
-
-networks:
-  app-network:
-    driver: bridge

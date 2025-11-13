@@ -14,7 +14,7 @@ docker exec mongo mongodump \
 
 
 
-docker exec mongo find /backup \
+docker exec mongo find /mongo_backups \
   -maxdepth 1 \
   -type d \
   -name "backup_*" \

@@ -7,9 +7,6 @@
 services:
 
   proxy:
-
-    container_name: proxy
-
     build:
       context: ./Frontend
       args:
@@ -34,13 +31,8 @@ services:
       - caddy-prod-data:/data
       - caddy-prod-config:/config
 
-    networks:
-      - app-network
 
   server:
-
-    container_name: server
-
     build:
       context: ./Backend
 
@@ -79,13 +71,8 @@ services:
     depends_on:
       - mongo
 
-    networks:
-      - app-network
 
   mongo:
-
-    container_name: mongo
-
     image: mongo:latest
 
     volumes:
@@ -102,23 +89,17 @@ services:
       - 27017:27017
 
     healthcheck:
-      test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
-      interval: 30s
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
       timeout: 10s
       retries: 5
       start_period: 10s
 
     restart: always
 
-    networks:
-      - app-network
 
 volumes:
   caddy-prod-data:
   caddy-prod-config:
   mongo-prod-data:
 
-
-networks:
-  app-network:
-    driver: bridge
