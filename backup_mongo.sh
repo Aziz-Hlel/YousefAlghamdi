@@ -20,3 +20,7 @@ docker exec mongo find /mongo_backups \
   -name "backup_*" \
   -mtime +7 \
   -exec rm -rf {} \;
+
+
+
+docker exec -i d8fb4f1a1b39 mongorestore --username admin --password ilovemihyar --authenticationDatabase admin --db mydb --drop --gzip /backup/backup_20251113020001/mydb

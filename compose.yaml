@@ -7,15 +7,15 @@
 services:
 
   proxy:
+    container_name: ygp-resverse-proxy
     build:
       context: ./Frontend
       args:
         - VITE_API_URL=${PROD___VITE_API_URL}
         - VITE_API_NODE_ENV=${PROD___VITE_API_NODE_ENV}
 
-    ports:
-      - 443:443
-      - 80:80
+    expose:
+      - 8000
 
     restart: always
 
@@ -118,7 +118,7 @@ services:
 
 
 volumes:
-  caddy-prod-data:
-  caddy-prod-config:
-  mongo-prod-data:
+  ygp-caddy-data:  #  kenou caddy-prod-data:
+  ygp-caddy-config:  #  kenou caddy-prod-config:
+  ygp-mongo-data:  #  kenou mongo-prod-data:
 

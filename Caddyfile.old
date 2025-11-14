@@ -1,0 +1,48 @@
+www.ygp.ae {
+    redir https://ygp.ae{uri} permanent
+}
+
+ygp.ae {  # Your domain
+    root * /srv
+    
+    # Log configuration (simplified)
+    log {
+        output file /var/log/caddy/access.log
+    }
+    
+    # API reverse proxy - keeping this simple
+    @api path /api/*
+    reverse_proxy @api server:5000
+    
+    # Important: Handle SPA routing 
+    @spa {
+        not path /api/*
+        not file
+    }
+    rewrite @spa /index.html
+    
+    # Serve files with appropriate cache control
+    @assets {
+        path *.js *.css *.png *.jpg *.jpeg *.gif *.ico *.svg *.woff *.woff2
+    }
+    
+    # This prevents CSS caching issues by using versioning validation
+    header @assets Cache-Control "public, max-age=3600, must-revalidate"
+    
+    # For HTML files - no caching
+    @html {
+        path *.html
+    }
+    header @html Cache-Control "no-store, no-cache, must-revalidate"
+    
+    # File server directive
+    file_server
+    
+    # Compression (keeping it simple)
+    encode gzip
+    
+    # TLS configuration (simplified)
+    tls {
+        protocols tls1.2 tls1.3
+    }
+}

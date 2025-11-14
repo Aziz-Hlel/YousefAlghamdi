@@ -1,8 +1,6 @@
-www.ygp.ae {
-    redir https://ygp.ae{uri} permanent
-}
 
-ygp.ae {  # Your domain
+
+:5001 {  # Your domain
     root * /srv
     
     # Log configuration (simplified)
