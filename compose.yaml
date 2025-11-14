@@ -80,7 +80,7 @@ services:
     image: mongo:latest
 
     volumes:
-      - ygp-mongo-data:/data/db
+      - mongo-prod-data:/data/db
       - ./mongo_backups:/backup
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${PROD___MONGO_INITDB_ROOT_USERNAME}
