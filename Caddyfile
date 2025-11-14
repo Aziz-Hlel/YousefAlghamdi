@@ -39,8 +39,4 @@
     # Compression (keeping it simple)
     encode gzip
     
-    # TLS configuration (simplified)
-    tls {
-        protocols tls1.2 tls1.3
-    }
 }
