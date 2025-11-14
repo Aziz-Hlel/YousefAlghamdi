@@ -15,7 +15,7 @@ services:
         - VITE_API_NODE_ENV=${PROD___VITE_API_NODE_ENV}
 
     expose:
-      - 8000
+      - 5001
 
     restart: always
 
