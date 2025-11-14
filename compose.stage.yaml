@@ -106,7 +106,7 @@ services:
 
 
   db-backup:
-    container_name: db-backup
+    container_name: ygp-stage-db-backup
     build:
       context: .
       dockerfile: Dockerfile.dbBackup
@@ -122,7 +122,6 @@ services:
       mongo:
         condition: service_healthy
     restart: unless-stopped
-
 
 
 volumes:

@@ -98,6 +98,25 @@ services:
     restart: always
 
 
+  db-backup:
+    container_name: ygp-db-backup
+    build:
+      context: .
+      dockerfile: Dockerfile.dbBackup
+    environment:
+      DB_HOST: ${PROD___MONGO_INITDB_ROOT_USERNAME}
+      DB_USER: ${PROD___MONGO_INITDB_ROOT_USERNAME}
+      DB_PASS: ${PROD___MONGO_INITDB_ROOT_PASSWORD}
+      DB_NAME: ${PROD___MONGO_INITDB_DATABASE}
+
+    volumes:
+      - ./backups:/backups
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: unless-stopped
+
+
 volumes:
   caddy-prod-data:
   caddy-prod-config:
