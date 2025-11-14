@@ -23,4 +23,4 @@ docker exec mongo find /mongo_backups \
 
 
 
-docker exec -i d8fb4f1a1b39 mongorestore --username admin --password ilovemihyar --authenticationDatabase admin --db mydb --drop --gzip /backup/backup_20251113020001/mydb
+# docker exec -i d8fb4f1a1b39 mongorestore --username admin --password ilovemihyar --authenticationDatabase admin --db mydb --drop --gzip /backup/backup_20251113020001/mydb
