@@ -28,8 +28,8 @@ services:
 
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy-prod-data:/data
-      - caddy-prod-config:/config
+      - ygp-caddy-data:/data
+      - ygp-caddy-config:/config
 
 
   server:
@@ -76,7 +76,7 @@ services:
     image: mongo:latest
 
     volumes:
-      - mongo-prod-data:/data/db
+      - ygp-mongo-data:/data/db
       - ./mongo_backups:/backup
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${PROD___MONGO_INITDB_ROOT_USERNAME}
