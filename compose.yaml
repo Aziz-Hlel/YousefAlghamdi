@@ -128,7 +128,7 @@ services:
 volumes:
   ygp-caddy-data:  #  kenou caddy-prod-data:
   ygp-caddy-config:  #  kenou caddy-prod-config:
-  ygp-mongo-data:  #  kenou mongo-prod-data:
+  mongo-prod-data:  #  kenou mongo-prod-data:
 
 networks:
   default:
