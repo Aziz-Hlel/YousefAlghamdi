@@ -30,6 +30,8 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ygp-caddy-data:/data
       - ygp-caddy-config:/config
+    networks:
+      - default
 
 
   server:
@@ -70,6 +72,8 @@ services:
 
     depends_on:
       - mongo
+    networks:
+      - default
 
 
   mongo:
@@ -96,6 +100,8 @@ services:
       start_period: 10s
 
     restart: always
+    networks:
+      - default
 
 
   db-backup:
@@ -115,6 +121,8 @@ services:
       mongo:
         condition: service_healthy
     restart: unless-stopped
+    networks:
+      - default
 
 
 volumes:
@@ -122,3 +130,6 @@ volumes:
   ygp-caddy-config:  #  kenou caddy-prod-config:
   ygp-mongo-data:  #  kenou mongo-prod-data:
 
+networks:
+  default:
+    name: ygp-network
