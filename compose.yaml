@@ -16,6 +16,8 @@ services:
 
     expose:
       - 5001
+    ports:
+      - 3040:5001
 
     restart: always
 
